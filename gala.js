@@ -7,25 +7,27 @@
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote br{animation:load 1s;-webkit-animation:load 1s}\
+style.textContent = 'blockquote, #de-txt-panel{animation:load 1s;-webkit-animation:load 1s}\
 .de-video-obj{display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe;}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
-.markup-button a{font-size:13px;text-decoration:none}\
+.markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
 @keyframes load{\
-	50% {opacity:0}\
+	0% {opacity:0}\
 }\
 @-webkit-keyframes load{\
-	50% {opacity:0}\
+	0% {opacity:0}\
 }';
 document.head.appendChild(style);
 (function() {
 	var postNode = 'td.reply, td.highlight, div[de-post]',
 		wh = 'width="360" height="270"';
-	addMarkupButtons = function(val) {
+	addMarkupButtons = function(el) {
 		var textArea = document.getElementById('msgbox');
-		if (val == 2) {
+		if (el.lastChild.id === 'markup-buttons-panel')
+			el.lastChild.remove();
+		if (el.querySelector('.de-abtn')) {
 			b = '<a href="#" onclick="return false;">';
 			e = '</a></span>&nbsp;\|&nbsp;';
 		} else {
@@ -33,7 +35,7 @@ document.head.appendChild(style);
 			e = '" type="button"></span>';
 		}
 		var c = 'class="markup-button"'
-		$('#de-txt-panel').html('<span id="markup-buttons-panel">'+
+		el.insertAdjacentHTML('beforeend', '<span id="markup-buttons-panel">'+
 			'<span '+c+' id="bold"    onclick="htmlTag(\'b\')"              title="Жирный">'        +b+'B'  +e+
 			'<span '+c+' id="italic"  onclick="htmlTag(\'i\')"              title="Курсивный">'     +b+'i'  +e+
 			'<span '+c+' id="u"       onclick="htmlTag(\'u\')"              title="Подчеркнутый">'  +b+'U'  +e+
@@ -68,6 +70,7 @@ document.head.appendChild(style);
 			} else
 				markedText = cont[1] + openTag + cont[2] + closeTag + cont[3];
 			textArea.value = textArea.value.substring(0, start) + markedText + textArea.value.substring(end);
+			textArea.className = 'ta-inact';
 			textArea.focus();
 			sOfs = '';
 			eOfs = markedText.length;
@@ -124,7 +127,7 @@ document.head.appendChild(style);
 				var embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
 				loadMediaContainer(this, 'video', /(.+)/g, embed);
 			});
-		} else
+		}
 		/********* HTML5 Audio *********/
 		if (AF.indexOf(EXT) != -1) {
 			$(el).each(function() {
@@ -133,7 +136,7 @@ document.head.appendChild(style);
 				var embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
 				loadMediaContainer(this, 'audio', /(.+)/g, embed);
 			});
-		} else
+		}
 		/********* Image File *********/
 		if (IF.indexOf(EXT) != -1) {
 			$(el).each(function() {
@@ -144,15 +147,15 @@ document.head.appendChild(style);
 				var embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="200" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'200\' ? \'85%\' : \'200\')" >';
 				loadMediaContainer(this, 'image', /(.+)/g, embed);
 			});
-		} else
+		}
 		/************************** SoundCloud *************************/
 		if (el.href.contains("soundcloud.com/")) {
 			$(el).each(function() {
 				var sc = $(this);
 				$(this).closest(postNode).find('.postcontent').append(sc);
-				$(sc).addClass("sc-player")//.scPlayer();
+				$(sc).addClass("sc-player").scPlayer();
 			});
-		} else
+		}
 		/*************************** Простоплеер **************************/
 		if (el.href.contains("pleer.com/tracks/")) {
 			$(el).html(function(i, html) {
@@ -165,7 +168,7 @@ document.head.appendChild(style);
 					html: this.innerHTML
 				});
 			});
-		} else
+		}
 		/******************** YouTube (playlist) ********************/
 		if (el.href.contains("youtube.com/playlist?")) {
 			$(el).each(function() {
@@ -173,7 +176,7 @@ document.head.appendChild(style);
 				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
 				oEmbedMedia('', '//youtube.com/favicon.ico', this, 1, 'video', regex, embed);
 			});
-		} else
+		}
 		/************************** Coub *************************/
 		if (el.href.contains("coub.com/view/")) {
 			$(el).each(function() {
@@ -181,7 +184,7 @@ document.head.appendChild(style);
 				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
 				oEmbedMedia('', "//coub.com/favicon.ico", this, 1, 'video', regex, embed);
 			});
-		} else
+		}
 		/************************* RuTube *************************/
 		if (el.href.contains("rutube.ru/video/")) {
 			$(el).each(function() {
@@ -189,13 +192,13 @@ document.head.appendChild(style);
 				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
 				oEmbedMedia('', "//rutube.ru/static/img/btn_play.png", this, 1, 'video', regex, embed);
 			});
-		} else
+		}
 		/************************* Яндекс.Видео *************************/
 		if (el.href.contains("video.yandex.ru/users/")) {
 			$(el).each(function() {
 				oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", this, 2, 'video', /(.+)/, '');
 			});
-		} else
+		}
 		/************************* VK.com ************************/
 		if (el.href.contains("vk.com/video")) {
 			$(el).each(function() {
@@ -211,7 +214,7 @@ document.head.appendChild(style);
 					oEmbedMedia('', '', this, 1, 'video', /(.+)/, embed);
 				}
 			});
-		} else
+		}
 		/************************* Pastebin *************************/
 		if (el.href.contains("pastebin.com/")) {
 			$(el).each(function() {
@@ -219,7 +222,7 @@ document.head.appendChild(style);
 				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 				oEmbedMedia('', '/test/src/140593041526.png', this, 1, 'pastebin', regex, embed);
 			});
-		} else
+		}
 		/************************* Custom iframe ************************/
 		if (el.href.contains("/iframe/") || el.href.contains("/embed/")) {
 			$(el).each(function() {
@@ -229,11 +232,11 @@ document.head.appendChild(style);
 				$(this).attr("href", mediaUrl);
 				oEmbedMedia('', '', this, 1, 'video', /(.+)/g, embed);
 			});
-		} else
-		/***************************************************************/
+		}
+		/**************************************************************
 		if ($(el).not('.cm-link, .de-video-link, [target="_blank"]')) {
 			$(el).each(function() { oEmbedMedia('', '', this, 0, '', '', '') });
-		}
+		}*/
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
 		var src = $(obj).attr("src");
@@ -338,19 +341,26 @@ document.head.appendChild(style);
 	}
 	var insertListener = function(event){
 		if (event.animationName == "load") {
-			var bquote = event.target.parentNode,
-				dnb = bquote.parentNode.querySelector('span[id^="dnb-"]');
-			if (!bquote.parentNode.querySelector('.postcontent'))
-				$(bquote).before('<span class="postcontent"></span>');
-			if (dnb && dnb.nextElementSibling.tagName !== 'BR')
-				$(dnb).after('<br>');
-			$(bquote.parentNode).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
-				var file = this.href;
-				var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
-				return $(vtag);
-			});
-			for(i = 0, a = bquote.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
-				addEmbed(link, '');
+			var et = event.target,
+				etp = et.parentNode,
+				dnb = etp.querySelector('span[id^="dnb-"]');
+			if (et.id === 'de-txt-panel')
+				addMarkupButtons(et);
+			else {
+				setTimeout(function(){
+					if (!etp.querySelector('.postcontent'))
+						$(et).before('<span class="postcontent"></span>');
+					if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR')
+						$(dnb).after('<br>');
+					$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
+						var file = this.href;
+						var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
+						return $(vtag);
+					});
+					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
+						addEmbed(link, '');
+					}
+				}, 250)
 			}
 		}
 	}
