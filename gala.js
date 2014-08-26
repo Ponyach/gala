@@ -7,12 +7,13 @@
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote, #de-txt-panel{animation:load 1s;-webkit-animation:load 1s}\
+style.textContent = 'blockquote, #de-txt-panel, .de-menu.de-imgmenu{animation:load 1s;-webkit-animation:load 1s}\
 .de-video-obj{display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe;}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
+.de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 @keyframes load{\
 	0% {opacity:0}\
 }\
@@ -113,7 +114,7 @@ document.head.appendChild(style);
 		}
 	}
 	
-	addEmbed = function(el) {
+	parseLinks = function(el) {
 		var iframe = '<iframe '+wh+' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
 		var EXT = el.href.split('.').pop().toLowerCase();
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
@@ -127,6 +128,7 @@ document.head.appendChild(style);
 				var embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
 				loadMediaContainer(this, 'video', /(.+)/g, embed);
 			});
+			return true;
 		}
 		/********* HTML5 Audio *********/
 		if (AF.indexOf(EXT) != -1) {
@@ -136,6 +138,7 @@ document.head.appendChild(style);
 				var embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
 				loadMediaContainer(this, 'audio', /(.+)/g, embed);
 			});
+			return true;
 		}
 		/********* Image File *********/
 		if (IF.indexOf(EXT) != -1) {
@@ -147,6 +150,7 @@ document.head.appendChild(style);
 				var embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="200" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'200\' ? \'85%\' : \'200\')" >';
 				loadMediaContainer(this, 'image', /(.+)/g, embed);
 			});
+			return true;
 		}
 		/************************** SoundCloud *************************/
 		if (el.href.contains("soundcloud.com/")) {
@@ -155,6 +159,7 @@ document.head.appendChild(style);
 				$(this).closest(postNode).find('.postcontent').append(sc);
 				$(sc).addClass("sc-player").scPlayer();
 			});
+			return true;
 		}
 		/*************************** Простоплеер **************************/
 		if (el.href.contains("pleer.com/tracks/")) {
@@ -168,6 +173,7 @@ document.head.appendChild(style);
 					html: this.innerHTML
 				});
 			});
+			return true;
 		}
 		/******************** YouTube (playlist) ********************/
 		if (el.href.contains("youtube.com/playlist?")) {
@@ -176,6 +182,7 @@ document.head.appendChild(style);
 				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
 				oEmbedMedia('', '//youtube.com/favicon.ico', this, 1, 'video', regex, embed);
 			});
+			return true;
 		}
 		/************************** Coub *************************/
 		if (el.href.contains("coub.com/view/")) {
@@ -184,6 +191,7 @@ document.head.appendChild(style);
 				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
 				oEmbedMedia('', "//coub.com/favicon.ico", this, 1, 'video', regex, embed);
 			});
+			return true;
 		}
 		/************************* RuTube *************************/
 		if (el.href.contains("rutube.ru/video/")) {
@@ -192,12 +200,14 @@ document.head.appendChild(style);
 				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
 				oEmbedMedia('', "//rutube.ru/static/img/btn_play.png", this, 1, 'video', regex, embed);
 			});
+			return true;
 		}
 		/************************* Яндекс.Видео *************************/
 		if (el.href.contains("video.yandex.ru/users/")) {
 			$(el).each(function() {
 				oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", this, 2, 'video', /(.+)/, '');
 			});
+			return true;
 		}
 		/************************* VK.com ************************/
 		if (el.href.contains("vk.com/video")) {
@@ -206,12 +216,13 @@ document.head.appendChild(style);
 				var url = escapeUrl(this.href);
 				var m = regex.exec(url);
 				if (m == null || m[3] == null) {
-					return;
+					return false;
 				} else {
 					var mediaUrl = 'https://vk.com/video'+m[1]+'_'+m[2]+'?'+m[3]+'&'+m[4]+'&'+m[5];
 					var embed = iframe +' src="http://vk.com/video_ext.php?oid='+m[1]+'&id='+m[2]+'&'+m[3]+'&'+m[4]+'&'+m[5]+'">';
 					$(this).attr("href", mediaUrl);
 					oEmbedMedia('', '', this, 1, 'video', /(.+)/, embed);
+					return true;
 				}
 			});
 		}
@@ -222,6 +233,7 @@ document.head.appendChild(style);
 				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 				oEmbedMedia('', '/test/src/140593041526.png', this, 1, 'pastebin', regex, embed);
 			});
+			return true;
 		}
 		/************************* Custom iframe ************************/
 		if (el.href.contains("/iframe/") || el.href.contains("/embed/")) {
@@ -232,11 +244,8 @@ document.head.appendChild(style);
 				$(this).attr("href", mediaUrl);
 				oEmbedMedia('', '', this, 1, 'video', /(.+)/g, embed);
 			});
+			return true;
 		}
-		/**************************************************************
-		if ($(el).not('.cm-link, .de-video-link, [target="_blank"]')) {
-			$(el).each(function() { oEmbedMedia('', '', this, 0, '', '', '') });
-		}*/
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
 		var src = $(obj).attr("src");
@@ -344,9 +353,11 @@ document.head.appendChild(style);
 			var et = event.target,
 				etp = et.parentNode,
 				dnb = etp.querySelector('span[id^="dnb-"]');
-			if (et.id === 'de-txt-panel')
+			if (et.id === 'de-txt-panel') {
 				addMarkupButtons(et);
-			else {
+			} else if ($(et).is('.de-imgmenu')) {
+				$(et).append('<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
+			} else {
 				setTimeout(function(){
 					if (!etp.querySelector('.postcontent'))
 						$(et).before('<span class="postcontent"></span>');
@@ -357,10 +368,11 @@ document.head.appendChild(style);
 						var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
 						return $(vtag);
 					});
-					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
-						addEmbed(link, '');
+					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.de-preflink):not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
+						if (parseLinks(link, '') !== true)
+							oEmbedMedia('', '', link, 0, '', '', '');
 					}
-				}, 250)
+				}, 200)
 			}
 		}
 	}
