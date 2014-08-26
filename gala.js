@@ -1,7 +1,7 @@
 /* 
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
-	: based on friendscripts https://github.com/OpenA/Friendscripts/tree/master/Ponyach
+	: Code Repositiry https://github.com/Ponyach/gala
 	: version 1.0
 								© magicode
 	
@@ -14,6 +14,7 @@ style.textContent = 'blockquote, #de-txt-panel, .de-menu.de-imgmenu{animation:lo
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
+.ta-inact::-moz-selection{background:rgba(99,99,99,.3);}.ta-inact::selection{background:rgba(99,99,99,.3);}\
 @keyframes load{\
 	0% {opacity:0}\
 }\
