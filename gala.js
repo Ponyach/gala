@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.1.01
+	: version 1.1.02
 								© magicode
 	
 */
@@ -121,7 +121,7 @@ document.head.appendChild(style);
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		String.prototype.contains = function(s, i) { return this.indexOf(s, i) != -1; }
+		var $hel = $(el).attr('href');
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) != -1) {
 			$(el).each(function() {
@@ -155,7 +155,7 @@ document.head.appendChild(style);
 			return true;
 		}
 		/************************** SoundCloud *************************/
-		if (el.href.contains("soundcloud.com/")) {
+		if ($hel.contains("soundcloud.com/")) {
 			$(el).each(function() {
 				var sc = $(this);
 				$(this).closest(postNode).find('.postcontent').append(sc);
@@ -164,7 +164,7 @@ document.head.appendChild(style);
 			return true;
 		}
 		/*************************** Простоплеер **************************/
-		if (el.href.contains("pleer.com/tracks/")) {
+		if ($hel.contains("pleer.com/tracks/")) {
 			$(el).html(function(i, html) {
 				var regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
 				var embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1"></embed>';
@@ -178,7 +178,7 @@ document.head.appendChild(style);
 			return true;
 		}
 		/******************** YouTube (playlist) ********************/
-		if (el.href.contains("youtube.com/playlist?")) {
+		if ($hel.contains("youtube.com/playlist?")) {
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
 				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
@@ -192,7 +192,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************** Coub *************************/
-		if (el.href.contains("coub.com/view/")) {
+		if ($hel.contains("coub.com/view/")) {
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
 				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
@@ -206,7 +206,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************* RuTube *************************/
-		if (el.href.contains("rutube.ru/video/")) {
+		if ($hel.contains("rutube.ru/video/")) {
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
 				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
@@ -220,7 +220,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************* Яндекс.Видео *************************/
-		if (el.href.contains("video.yandex.ru/users/")) {
+		if ($hel.contains("video.yandex.ru/users/")) {
 			$(el).each(function() {
 				if (!(/(\/view\/)/).exec(this.href)) {
 					return false;
@@ -231,7 +231,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************* VK.com ************************/
-		if (el.href.contains("vk.com/video")) {
+		if ($hel.contains("vk.com/video")) {
 			$(el).each(function() {
 				var regex = /(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?.?(hd=\d+)?.?(t=\d+)?/g;
 				var url = escapeUrl(this.href);
@@ -248,7 +248,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************* Pastebin *************************/
-		if (el.href.contains("pastebin.com/")) {
+		if ($hel.contains("pastebin.com/")) {
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
 				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
@@ -262,7 +262,7 @@ document.head.appendChild(style);
 			});
 		}
 		/************************* Custom iframe ************************/
-		if (el.href.contains("/iframe/") || el.href.contains("/embed/")) {
+		if ($hel.contains("/iframe/") || $hel.contains("/embed/")) {
 			$(el).each(function() {
 				var embedUrl = this.href;
 				var mediaUrl = embedUrl.replace(/embed\//, "");
@@ -273,7 +273,7 @@ document.head.appendChild(style);
 			return true;
 		}
 		/****************************************************************/
-		if (el.textContent.contains('>>'))
+		if ($(el).text().contains('>>'))
 			return true;
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
