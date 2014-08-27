@@ -9,12 +9,12 @@
 var style = document.createElement("style");
 style.textContent = 'blockquote, #de-txt-panel, .de-menu.de-imgmenu{animation:load .6s;-webkit-animation:load .6s}\
 .de-video-obj{display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
-.pastebin-container{overflow:auto;resize:both;background-color:#fefefe;}\
+.pastebin-container{overflow:auto;resize:both;background-color:#fefefe}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
-.ta-inact::-moz-selection{background:rgba(99,99,99,.3);}.ta-inact::selection{background:rgba(99,99,99,.3);}\
+.ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
 @keyframes load{\
 	0% {opacity:0}\
 }\
@@ -184,7 +184,8 @@ document.head.appendChild(style);
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
 				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
-				if (!regex.exec(this.href)[1]) {
+				var m = regex.exec(this.href);
+				if (!m || !m[1]) {
 					return false;
 				} else {
 					oEmbedMedia('', '//youtube.com/favicon.ico', this, 1, 'video', regex, embed);
@@ -197,7 +198,8 @@ document.head.appendChild(style);
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
 				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
-				if (!regex.exec(this.href)[1]) {
+				var m = regex.exec(this.href);
+				if (!m || !m[1]) {
 					return false;
 				} else {
 					oEmbedMedia('', "//coub.com/favicon.ico", this, 1, 'video', regex, embed);
@@ -210,7 +212,8 @@ document.head.appendChild(style);
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
 				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
-				if (!regex.exec(this.href)[1]) {
+				var m = regex.exec(this.href);
+				if (!m || !m[1]) {
 					return false;
 				} else {
 					oEmbedMedia('', "//rutube.ru/static/img/btn_play.png", this, 1, 'video', regex, embed);
@@ -221,7 +224,7 @@ document.head.appendChild(style);
 		/************************* Яндекс.Видео *************************/
 		if (el.href.contains("video.yandex.ru/users/")) {
 			$(el).each(function() {
-				if (!(/(\/view\/)/).exec(this.href)[1]) {
+				if (!(/(\/view\/)/).exec(this.href)) {
 					return false;
 				} else {
 					oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", this, 2, 'video', /(.+)/, '');
@@ -235,7 +238,7 @@ document.head.appendChild(style);
 				var regex = /(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?.?(hd=\d+)?.?(t=\d+)?/g;
 				var url = escapeUrl(this.href);
 				var m = regex.exec(url);
-				if (m == null || m[3] == null) {
+				if (!m || !m[3]) {
 					return false;
 				} else {
 					var mediaUrl = 'https://vk.com/video'+m[1]+'_'+m[2]+'?'+m[3]+'&'+m[4]+'&'+m[5];
@@ -251,7 +254,8 @@ document.head.appendChild(style);
 			$(el).each(function() {
 				var regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
 				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
-				if (!regex.exec(this.href)[1]) {
+				var m = regex.exec(this.href);
+				if (!m || !m[1]) {
 					return false;
 				} else {
 					oEmbedMedia('', '/test/src/140593041526.png', this, 1, 'pastebin', regex, embed);
