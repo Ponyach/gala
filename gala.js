@@ -7,7 +7,7 @@
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote, #de-txt-panel, .de-menu.de-imgmenu{animation:load .6s;-webkit-animation:load .6s}\
+style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{animation:load .6s;-webkit-animation:load .6s}\
 .de-video-obj{display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
@@ -25,9 +25,6 @@ document.head.appendChild(style);
 (function() {
 	var postNode = 'td.reply, td.highlight, div[de-post]',
 		wh = 'width="360" height="270"';
-	String.prototype.contains = function(s, i) {
-		return this.indexOf(s, i) != -1;
-	}
 	addMarkupButtons = function(el) {
 		var textArea = document.getElementById('msgbox');
 		if (el.lastChild.id === 'markup-buttons-panel')
@@ -406,7 +403,7 @@ document.head.appendChild(style);
 						if (parseLinks(link, '') !== true)
 							oEmbedMedia('', '', link, 0, '', '', '');
 					}
-				}, 200)
+				}, 700)
 			}
 		}
 	}
