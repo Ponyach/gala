@@ -7,7 +7,7 @@
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{animation:load .6s} blockquote, #de-txt-panel, .de-menu.de-imgmenu{-webkit-animation:load .6s}\
+style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load .3s;animation:load .3s}\
 .de-video-obj{display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
@@ -159,7 +159,7 @@ document.head.appendChild(style);
 			$(el).each(function() {
 				var sc = $(this);
 				$(this).closest(postNode).find('.postcontent').append(sc);
-				$(sc).addClass("sc-player").scPlayer();
+				$(sc).addClass("sc-player");
 			});
 			return true;
 		}
@@ -387,21 +387,21 @@ document.head.appendChild(style);
 			} else if ($(et).is('.de-imgmenu')) {
 				$(et).append('<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
 			} else {
-				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"]'); link = a[i++];) {
+				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR')
+					$(dnb).after('<br>');
+				$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
+					var file = this.href;
+					var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
+					return $(vtag);
+				});
+				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"], a[href*="soundcloud.com/"]'); link = a[i++];) {
 					parseLinks(link, '')
 				}
 				setTimeout(function(){
 					if (!etp.querySelector('.postcontent'))
 						$(et).before('<span class="postcontent"></span>');
-					if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR')
-						$(dnb).after('<br>');
-					$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
-						var file = this.href;
-						var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
-						return $(vtag);
-					});
 					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
-						if (parseLinks(link, '') !== true)
+						if (!parseLinks(link, ''))
 							oEmbedMedia('', '', link, 0, '', '', '');
 					}
 				}, 700)
