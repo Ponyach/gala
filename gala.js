@@ -130,7 +130,6 @@ document.head.appendChild(style);
 				var embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
 				loadMediaContainer(this, 'video', /(.+)/g, embed);
 			});
-			return true;
 		}
 		/********* HTML5 Audio *********/
 		if (AF.indexOf(EXT) != -1) {
@@ -140,7 +139,6 @@ document.head.appendChild(style);
 				var embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
 				loadMediaContainer(this, 'audio', /(.+)/g, embed);
 			});
-			return true;
 		}
 		/********* Image File *********/
 		if (IF.indexOf(EXT) != -1) {
@@ -152,7 +150,6 @@ document.head.appendChild(style);
 				var embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="200" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'200\' ? \'85%\' : \'200\')" >';
 				loadMediaContainer(this, 'image', /(.+)/g, embed);
 			});
-			return true;
 		}
 		/************************** SoundCloud *************************/
 		if ($hel.contains("soundcloud.com/")) {
@@ -161,7 +158,6 @@ document.head.appendChild(style);
 				$(this).closest(postNode).find('.postcontent').append(sc);
 				$(sc).addClass("sc-player").scPlayer();
 			});
-			return true;
 		}
 		/*************************** Простоплеер **************************/
 		if ($hel.contains("pleer.com/tracks/")) {
@@ -175,7 +171,6 @@ document.head.appendChild(style);
 					html: this.innerHTML
 				});
 			});
-			return true;
 		}
 		/******************** YouTube (playlist) ********************/
 		if ($hel.contains("youtube.com/playlist?")) {
@@ -184,10 +179,9 @@ document.head.appendChild(style);
 				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
 				var m = regex.exec(this.href);
 				if (!m || !m[1]) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					oEmbedMedia('', '//youtube.com/favicon.ico', this, 1, 'video', regex, embed);
-					return true;
 				}
 			});
 		}
@@ -198,10 +192,9 @@ document.head.appendChild(style);
 				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
 				var m = regex.exec(this.href);
 				if (!m || !m[1]) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					oEmbedMedia('', "//coub.com/favicon.ico", this, 1, 'video', regex, embed);
-					return true;
 				}
 			});
 		}
@@ -212,10 +205,9 @@ document.head.appendChild(style);
 				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
 				var m = regex.exec(this.href);
 				if (!m || !m[1]) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					oEmbedMedia('', "//rutube.ru/static/img/btn_play.png", this, 1, 'video', regex, embed);
-					return true;
 				}
 			});
 		}
@@ -223,10 +215,9 @@ document.head.appendChild(style);
 		if ($hel.contains("video.yandex.ru/users/")) {
 			$(el).each(function() {
 				if (!(/(\/view\/)/).exec(this.href)) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", this, 2, 'video', /(.+)/, '');
-					return true;
 				}
 			});
 		}
@@ -237,13 +228,12 @@ document.head.appendChild(style);
 				var url = escapeUrl(this.href);
 				var m = regex.exec(url);
 				if (!m || !m[3]) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					var mediaUrl = 'https://vk.com/video'+m[1]+'_'+m[2]+'?'+m[3]+'&'+m[4]+'&'+m[5];
 					var embed = iframe +' src="http://vk.com/video_ext.php?oid='+m[1]+'&id='+m[2]+'&'+m[3]+'&'+m[4]+'&'+m[5]+'">';
 					$(this).attr("href", mediaUrl);
 					oEmbedMedia('', '', this, 1, 'video', /(.+)/, embed);
-					return true;
 				}
 			});
 		}
@@ -254,10 +244,9 @@ document.head.appendChild(style);
 				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 				var m = regex.exec(this.href);
 				if (!m || !m[1]) {
-					return false;
+					oEmbedMedia('', '', this, 0, '', '', '');
 				} else {
 					oEmbedMedia('', '/test/src/140593041526.png', this, 1, 'pastebin', regex, embed);
-					return true;
 				}
 			});
 		}
@@ -270,11 +259,11 @@ document.head.appendChild(style);
 				$(this).attr("href", mediaUrl);
 				oEmbedMedia('', '', this, 1, 'video', /(.+)/g, embed);
 			});
-			return true;
 		}
 		/****************************************************************/
-		if ($(el).text().contains('>>'))
-			return true;
+		if (!$(el).text().contains('>>')) {
+			oEmbedMedia('', '', this, 0, '', '', '');
+		}
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
 		var src = $(obj).attr("src");
@@ -385,30 +374,23 @@ document.head.appendChild(style);
 			if (et.id === 'de-txt-panel') {
 				addMarkupButtons(et);
 			} else if ($(et).is('.de-imgmenu')) {
-				$(et).append('<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
+				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
 			} else {
-				var pcont = '<span class="postcontent"></span>';
 				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR')
-					$(dnb).after('<br>');
+					dnb.insertAdjacentHTML('afterend', '<br>');
 				$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
 					var file = this.href;
 					var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
 					return $(vtag);
 				});
-				if (!etp.querySelector('.postcontent')) {
-					var devobj = etp.querySelector('.de-video-obj')
-					if (devobj)
-						$(devobj).after(pcont);
-					else
-						$(et).before(pcont);
-				}
-				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"], a[href*="soundcloud.com/"]'); link = a[i++];) {
+				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"]'); link = a[i++];) {
 					parseLinks(link, '')
 				}
 				setTimeout(function(){
+					if (!etp.querySelector('.postcontent'))
+						et.insertAdjacentHTML('beforebegin', '<span class="postcontent"></span>');
 					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
-						if (!parseLinks(link, ''))
-							oEmbedMedia('', '', link, 0, '', '', '');
+						parseLinks(link, '');
 					}
 				}, 700)
 			}
