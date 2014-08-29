@@ -2,14 +2,14 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.1.03
+	: version 1.2.00
 								© magicode
 	
 */
 var style = document.createElement("style");
 style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load .3s;animation:load .3s}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
-.pastebin-container{overflow:auto;resize:both;background-color:#fefefe}\
+.pastebin-container{overflow:auto;resize:both;background-color:#fefefe}.pastebin-container body{color:transparent}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
@@ -23,7 +23,8 @@ style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmen
 }';
 document.head.appendChild(style);
 (function() {
-	var postNode = 'td.reply, td.highlight, div[de-post]',
+	if (getlSValue('mLinks') === undefined) setlSValue('mLinks', true);
+	var postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div',
 		wh = 'width="360" height="270"';
 	addMarkupButtons = function(el) {
 		var textArea = document.getElementById('msgbox');
@@ -117,50 +118,38 @@ document.head.appendChild(style);
 	
 	parseLinks = function(el) {
 		var iframe = '<iframe '+wh+' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
-		var EXT = el.href.split('.').pop().toLowerCase();
+		var href = escapeUrl(el.href);
+		var EXT = href.split('.').pop().toLowerCase();
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		var $hel = $(el).attr('href');
+		var P = getlSValue('mLinks'), endpoint, regex, embed, fav, i = 1, type = 'video';
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) != -1) {
-			$(el).each(function() {
-				attachFile(this);
-			}).on("click", function() {
-				var embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
-				loadMediaContainer(this, 'video', /(.+)/g, embed);
-			});
+			embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
+			P = attachFile(el, 'video', embed);
 		}
 		/********* HTML5 Audio *********/
 		if (AF.indexOf(EXT) != -1) {
-			$(el).each(function() {
-				attachFile(this);
-			}).on("click", function() {
-				var embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
-				loadMediaContainer(this, 'audio', /(.+)/g, embed);
-			});
+			embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
+			P = attachFile(el, 'audio', embed);
 		}
 		/********* Image File *********/
 		if (IF.indexOf(EXT) != -1) {
-			$(el).each(function() {
-				attachFile(this, 'img');
-			}).on("click", function() {
-				var name = getElementName(this.getAttribute('src'));
-				var fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
-				var embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="200" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'200\' ? \'85%\' : \'200\')" >';
-				loadMediaContainer(this, 'image', /(.+)/g, embed);
-			});
+			var name = getElementName(href);
+			var fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
+			embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >';
+			P = attachFile(el, 'image', embed);
 		}
 		/************************** SoundCloud *************************/
-		if ($hel.contains("soundcloud.com/")) {
-			$(el).each(function() {
-				var sc = $(this);
-				$(this).closest(postNode).find('.postcontent').append(sc);
-				$(sc).addClass("sc-player").scPlayer();
-			});
+		if (href.indexOf("soundcloud.com/") != -1) {
+			if (el.nextElementSibling.tagName === 'BR') el.nextElementSibling.remove();
+			var sc = $(el);
+			$(el).closest(postNode).find('.postcontent').append(sc);
+			$(sc).addClass("sc-player").scPlayer();
 		}
 		/*************************** Простоплеер **************************/
-		if ($hel.contains("pleer.com/tracks/")) {
+		if (href.indexOf("pleer.com/tracks/") != -1) {
 			$(el).html(function(i, html) {
 				var regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
 				var embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1"></embed>';
@@ -173,102 +162,66 @@ document.head.appendChild(style);
 			});
 		}
 		/******************** YouTube (playlist) ********************/
-		if ($hel.contains("youtube.com/playlist?")) {
-			$(el).each(function() {
-				var regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
-				var embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
-				var m = regex.exec(this.href);
-				if (!m || !m[1]) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					oEmbedMedia('', '//youtube.com/favicon.ico', this, 1, 'video', regex, embed);
-				}
-			});
+		if (href.indexOf("youtube.com/playlist?") != -1) {
+			regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
+			embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
+			fav = '//youtube.com/favicon.ico';
 		}
 		/************************** Coub *************************/
-		if ($hel.contains("coub.com/view/")) {
-			$(el).each(function() {
-				var regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
-				var embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
-				var m = regex.exec(this.href);
-				if (!m || !m[1]) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					oEmbedMedia('', "//coub.com/favicon.ico", this, 1, 'video', regex, embed);
-				}
-			});
+		if (href.indexOf("coub.com/view/") != -1) {
+			regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
+			embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
+			fav = "//coub.com/favicon.ico";
 		}
 		/************************* RuTube *************************/
-		if ($hel.contains("rutube.ru/video/")) {
-			$(el).each(function() {
-				var regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
-				var embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
-				var m = regex.exec(this.href);
-				if (!m || !m[1]) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					oEmbedMedia('', "//rutube.ru/static/img/btn_play.png", this, 1, 'video', regex, embed);
-				}
-			});
+		if (href.indexOf("rutube.ru/video/") != -1) {
+			regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
+			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
+			fav = "//rutube.ru/static/img/btn_play.png";
 		}
 		/************************* Яндекс.Видео *************************/
-		if ($hel.contains("video.yandex.ru/users/")) {
-			$(el).each(function() {
-				if (!(/(\/view\/)/).exec(this.href)) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", this, 2, 'video', /(.+)/, '');
-				}
-			});
+		if (href.indexOf("video.yandex.ru/users/") != -1) {
+			if ((/\/view\/(\d+)/).exec(href)) {
+				oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", el, 2, 'video', /(.+)/, '');
+				P = false;
+			}
 		}
 		/************************* VK.com ************************/
-		if ($hel.contains("vk.com/video")) {
-			$(el).each(function() {
-				var regex = /(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?.?(hd=\d+)?.?(t=\d+)?/g;
-				var url = escapeUrl(this.href);
-				var m = regex.exec(url);
-				if (!m || !m[3]) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					var mediaUrl = 'https://vk.com/video'+m[1]+'_'+m[2]+'?'+m[3]+'&'+m[4]+'&'+m[5];
-					var embed = iframe +' src="http://vk.com/video_ext.php?oid='+m[1]+'&id='+m[2]+'&'+m[3]+'&'+m[4]+'&'+m[5]+'">';
-					$(this).attr("href", mediaUrl);
-					oEmbedMedia('', '', this, 1, 'video', /(.+)/, embed);
-				}
-			});
+		if (href.indexOf("vk.com/video") != -1) {
+			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
+			embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
+			el.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
+			i = 3;
 		}
 		/************************* Pastebin *************************/
-		if ($hel.contains("pastebin.com/")) {
-			$(el).each(function() {
-				var regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
-				var embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
-				var m = regex.exec(this.href);
-				if (!m || !m[1]) {
-					oEmbedMedia('', '', this, 0, '', '', '');
-				} else {
-					oEmbedMedia('', '/test/src/140593041526.png', this, 1, 'pastebin', regex, embed);
-				}
-			});
+		if (href.indexOf("pastebin.com/") != -1) {
+			regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
+			embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
+			fav = '/test/src/140593041526.png';
+			type = 'pastebin';
 		}
 		/************************* Custom iframe ************************/
-		if ($hel.contains("/iframe/") || $hel.contains("/embed/")) {
-			$(el).each(function() {
-				var embedUrl = this.href;
-				var mediaUrl = embedUrl.replace(/embed\//, "");
-				var embed =  iframe +' src="'+ embedUrl +'">';
-				$(this).attr("href", mediaUrl);
-				oEmbedMedia('', '', this, 1, 'video', /(.+)/g, embed);
-			});
+		if (href.indexOf("/iframe/") != -1 || href.indexOf("/embed/") != -1) {
+			regex = /(.+)/g;
+			embed =  iframe +' src="'+ href +'">';
+			el.setAttribute("href", href.replace(/embed\//, ""));
+			i = 0;
 		}
 		/****************************************************************/
-		if (!$(el).text().contains('>>')) {
-			oEmbedMedia('', '', this, 0, '', '', '');
+		if ($(el).text().contains('>>') || P === false) {
+			return;
+		}
+		var m = !regex ? '' : regex.exec(href);
+		if (!m || !m[i]) {
+			oEmbedMedia('', '', el, 0, '', '', '');
+		} else {
+			oEmbedMedia(endpoint, fav, el, 1, type, regex, embed);
 		}
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
-		var src = $(obj).attr("src");
+		var src = obj.getAttribute("src");
 		var csEl = type+'-container';
-		var idEl = type +'_'+ getElementName(src);
+		var idEl = type +'_'+ btoa(getElementName(src));
 		var cont = '<div class="'+csEl+'" id="'+idEl+'" >'+src+'</div>';
 		var contEl = document.getElementsByClassName(csEl)[0];
 		if (!contEl || contEl.id != idEl) {
@@ -290,7 +243,7 @@ document.head.appendChild(style);
 	oEmbedMedia = function (endpoint, fav, obj, arg, type, regex, embed) {
 		var mediaUrl = escapeUrl(obj.href);
 		var $obj = obj;
-		endpoint = endpoint === '' ? 'http://api.embed.ly/1/oembed?url=' : endpoint;
+		endpoint = !endpoint ? 'http://api.embed.ly/1/oembed?url=' : endpoint;
 		$.getJSON(endpoint + mediaUrl + '&format=json', function(data) {
 			if (data) {
 				var loc = getLocation(mediaUrl),
@@ -336,14 +289,30 @@ document.head.appendChild(style);
 		var elName = getElName(elUrl) == '' ? slcElName(elUrl) : getElName(elUrl);
 		return decodeURIComponent(elName);
 	}
-	attachFile = function(obj, type) {
+	attachFile = function(obj, type, embed) {
 		var mediaUrl = escapeUrl(obj.href);
-		var fileName = getElementName(mediaUrl);
-		$(obj).html('<u style="margin-left:20px;">'+ (type === 'img' ? 'Expand: ' : 'Play: ') + fileName +'</u>').attr({
-			src: mediaUrl,
-			class: 'cm-link',
-			style: 'background:url(/test/src/'+ (type === 'img' ? '140896790568.png' : '139981404639.png') +')left / 16px no-repeat'
-		}).removeAttr('href');
+		tryUrl(mediaUrl, function() {
+			var result = this.getResponseHeader('content-type');
+			if (!result) {
+				var fileName = getElementName(mediaUrl);
+				$(obj).html('<u style="margin-left:20px;">'+ (type === 'image' ? 'Expand: ' : 'Play: ') + fileName +'</u>').attr({
+					src: mediaUrl,
+					class: 'cm-link',
+					style: 'background:url(/test/src/'+ (type === 'image' ? '140896790568.png' : '139981404639.png') +')left / 16px no-repeat'
+				}).removeAttr('href');
+				obj.onclick = function() {
+					loadMediaContainer(this, type, /(.+)/g, embed);
+				}
+			} else
+				oEmbedMedia('', '', obj, 0, '', '', '');
+		});
+		return false;
+	}
+	tryUrl = function(url, Fn) {
+		var http = new XMLHttpRequest();
+		http.open('HEAD', url, true);
+		http.send(null);
+		http.onreadystatechange = Fn;
 	}
 	//-- Replace special characters from text
 	escapeHtml = function(text) {
@@ -366,7 +335,18 @@ document.head.appendChild(style);
 		var imgSrc = $(el).attr('src');
 		$('<form method="post" action="https://derpibooru.org/search/reverse" target="_blank" enctype="multipart/form-data" hidden><input id="url" name="url" type="text" value="'+imgSrc+'"><input id="fuzziness" name="fuzziness" type="text" value="0.25"></form>').appendTo('body').submit().remove();
 	}
-	var insertListener = function(event){
+	function getlSValue(name, def) {
+		if (name in localStorage) {
+			var v = localStorage.getItem(name);
+			v = v == 'false' ? false : 
+				v == 'true' ? true : v;
+			return v;
+		} else return def;
+	}
+	function setlSValue(name, value) {
+		localStorage.setItem(name, value)
+	}
+	insertListener = function(event){
 		if (event.animationName == "load") {
 			var et = event.target,
 				etp = et.parentNode,
@@ -383,7 +363,7 @@ document.head.appendChild(style);
 					var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
 					return $(vtag);
 				});
-				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"]'); link = a[i++];) {
+				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"], a[href$=".jpg"], a[href$=".png"], a[href$=".gif"], a[href$=".mp3"] '); link = a[i++];) {
 					parseLinks(link, '')
 				}
 				setTimeout(function(){
