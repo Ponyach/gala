@@ -2,12 +2,12 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.00
+	: version 1.2.01
 								© magicode
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load .3s;animation:load .3s}\
+style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe}.pastebin-container body{color:transparent}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
@@ -16,10 +16,10 @@ style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmen
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 .ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
 @keyframes load{\
-	0% {opacity:0}\
+	50% {opacity:0}\
 }\
 @-webkit-keyframes load{\
-	0% {opacity:0}\
+	50% {opacity:0}\
 }';
 document.head.appendChild(style);
 (function() {
@@ -125,31 +125,31 @@ document.head.appendChild(style);
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
 		var P = getlSValue('mLinks'), endpoint, regex, embed, fav, i = 1, type = 'video';
 		/********* HTML5 Video *********/
-		if (VF.indexOf(EXT) != -1) {
+		if (VF.indexOf(EXT) >= 0) {
 			embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
 			P = attachFile(el, 'video', embed);
 		}
 		/********* HTML5 Audio *********/
-		if (AF.indexOf(EXT) != -1) {
+		if (AF.indexOf(EXT) >= 0) {
 			embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
 			P = attachFile(el, 'audio', embed);
 		}
 		/********* Image File *********/
-		if (IF.indexOf(EXT) != -1) {
+		if (IF.indexOf(EXT) >= 0) {
 			var name = getElementName(href);
 			var fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
 			embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >';
 			P = attachFile(el, 'image', embed);
 		}
 		/************************** SoundCloud *************************/
-		if (href.indexOf("soundcloud.com/") != -1) {
+		if (href.indexOf("soundcloud.com/") >= 0) {
 			if (el.nextElementSibling.tagName === 'BR') el.nextElementSibling.remove();
 			var sc = $(el);
 			$(el).closest(postNode).find('.postcontent').append(sc);
 			$(sc).addClass("sc-player").scPlayer();
 		}
 		/*************************** Простоплеер **************************/
-		if (href.indexOf("pleer.com/tracks/") != -1) {
+		if (href.indexOf("pleer.com/tracks/") >= 0) {
 			$(el).html(function(i, html) {
 				var regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
 				var embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1"></embed>';
@@ -162,53 +162,53 @@ document.head.appendChild(style);
 			});
 		}
 		/******************** YouTube (playlist) ********************/
-		if (href.indexOf("youtube.com/playlist?") != -1) {
+		if (href.indexOf("youtube.com/playlist?") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
 			embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
 			fav = '//youtube.com/favicon.ico';
 		}
 		/************************** Coub *************************/
-		if (href.indexOf("coub.com/view/") != -1) {
+		if (href.indexOf("coub.com/view/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
 			embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
 			fav = "//coub.com/favicon.ico";
 		}
 		/************************* RuTube *************************/
-		if (href.indexOf("rutube.ru/video/") != -1) {
+		if (href.indexOf("rutube.ru/video/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
 			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
 			fav = "//rutube.ru/static/img/btn_play.png";
 		}
 		/************************* Яндекс.Видео *************************/
-		if (href.indexOf("video.yandex.ru/users/") != -1) {
+		if (href.indexOf("video.yandex.ru/users/") >= 0) {
 			if ((/\/view\/(\d+)/).exec(href)) {
 				oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", el, 2, 'video', /(.+)/, '');
 				P = false;
 			}
 		}
 		/************************* VK.com ************************/
-		if (href.indexOf("vk.com/video") != -1) {
+		if (href.indexOf("vk.com/video") >= 0) {
 			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
 			embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
 			el.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
 			i = 3;
 		}
 		/************************* Pastebin *************************/
-		if (href.indexOf("pastebin.com/") != -1) {
+		if (href.indexOf("pastebin.com/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
 			embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 			fav = '/test/src/140593041526.png';
 			type = 'pastebin';
 		}
 		/************************* Custom iframe ************************/
-		if (href.indexOf("/iframe/") != -1 || href.indexOf("/embed/") != -1) {
+		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") != -1) {
 			regex = /(.+)/g;
 			embed =  iframe +' src="'+ href +'">';
 			el.setAttribute("href", href.replace(/embed\//, ""));
 			i = 0;
 		}
 		/****************************************************************/
-		if ($(el).text().contains('>>') || P === false) {
+		if (el.textContent.indexOf('>>') >= 0 || P === false) {
 			return;
 		}
 		var m = !regex ? '' : regex.exec(href);
@@ -248,7 +248,7 @@ document.head.appendChild(style);
 			if (data) {
 				var loc = getLocation(mediaUrl),
 					slnk = ['tinyurl.com', 'bit.ly', 'goo.gl'],
-					host = slnk.indexOf(loc.hostname) != -1 ? data.provider_url : loc.hostname,
+					host = slnk.indexOf(loc.hostname) >= 0 ? data.provider_url : loc.hostname,
 					icon = !fav ? '//www.google.com/s2/favicons?domain='+ host : fav,
 					name = !data.title ? getElementName(mediaUrl) +'&nbsp;&middot;&nbsp;❨'+ data.provider_name +'❩' : escapeHtml(data.title).replace(/\ -\ YouTube/, "").replace(/\ -\ Pastebin\.com/, "");
 				if (arg == 0 && data.html && data.type != "link")
@@ -376,6 +376,17 @@ document.head.appendChild(style);
 			}
 		}
 	}
-	document.addEventListener("animationstart", insertListener, false); // standard + firefox
-	document.addEventListener("webkitAnimationStart", insertListener, false); // Chrome + Safari
+	
+	var pfx = ["webkit", "moz", "MS", "o", ""];
+	// animation listener events
+	PrefixedEvent("AnimationStart", insertListener);
+	PrefixedEvent("AnimationIteration", insertListener);
+	PrefixedEvent("AnimationEnd", insertListener);
+	// apply prefixed event handlers
+	function PrefixedEvent(type, callback) {
+		for (var p = 0; p < pfx.length; p++) {
+			if (!pfx[p]) type = type.toLowerCase();
+			document.addEventListener(pfx[p]+type, callback, false);
+		}
+	}
 })();
