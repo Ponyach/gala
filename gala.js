@@ -43,6 +43,23 @@ document.head.appendChild(style);
 			setlSValue(val, '');
 		}
 	}
+	addMenuButtons = function() {
+		var a = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_', s = '<span>', sls = '</span></label></span>';
+		var buttons = '<div class="hide-buttons-menu">'+
+			a +'b" '+ (!getlSValue('bold', '')      ? 'checked' : '') +' value="bold">     '+s+'B'   +sls+
+			a +'i" '+ (!getlSValue('italic', '')    ? 'checked' : '') +' value="italic">   '+s+'i'   +sls+
+			a +'u" '+ (!getlSValue('underline', '') ? 'checked' : '') +' value="underline">'+s+'U'   +sls+
+			a +'s" '+ (!getlSValue('strike', '')    ? 'checked' : '') +' value="strike">   '+s+'S'   +sls+
+			a +'sp"'+ (!getlSValue('spoiler', '')   ? 'checked' : '') +' value="spoiler">  '+s+'%%'  +sls+
+			a +'c" '+ (!getlSValue('code', '')      ? 'checked' : '') +' value="code">     '+s+'C'   +sls+
+			a +'up"'+ (!getlSValue('sup', '')       ? 'checked' : '') +' value="sup">      '+s+'Sup' +sls+
+			a +'sb"'+ (!getlSValue('sub', '')       ? 'checked' : '') +' value="sub">      '+s+'Sub' +sls+
+			a +'a" '+ (!getlSValue('attent', '')    ? 'checked' : '') +' value="attent">   '+s+'!A'  +sls+
+			a +'d" '+ (!getlSValue('dice', '')      ? 'checked' : '') +' value="dice">     '+s+'#D'  +sls+
+			a +'q" '+ (!getlSValue('quote', '')     ? 'checked' : '') +' value="quote">    '+s+'&gt;'+sls+
+			'</div>';
+		return buttons;
+	}
 	addMarkupButtons = function(el) {
 		var textArea = document.getElementById('msgbox');
 		if (el.lastChild.id === 'markup-buttons-panel')
@@ -54,19 +71,19 @@ document.head.appendChild(style);
 			b = '<input value="';
 			e = '" type="button"></span>';
 		}
-		var c = 'class="markup-button"'
+		var c = '<span class="markup-button"'
 		el.insertAdjacentHTML('beforeend', '<span id="markup-buttons-panel">'+
-			'<span '+c+' id="bold"      onclick="htmlTag(\'b\')"              style="'+getlSValue('bold', '')      +'" title="Жирный">'        +b+'B'  +e+
-			'<span '+c+' id="italic"    onclick="htmlTag(\'i\')"              style="'+getlSValue('italic', '')    +'" title="Курсивный">'     +b+'i'  +e+
-			'<span '+c+' id="underline" onclick="htmlTag(\'u\')"              style="'+getlSValue('underline', '') +'" title="Подчеркнутый">'  +b+'U'  +e+
-			'<span '+c+' id="strike"    onclick="htmlTag(\'s\')"              style="'+getlSValue('strike', '')    +'" title="Зачеркнутый">'   +b+'S'  +e+
-			'<span '+c+' id="spoiler"   onclick="insTag(\'spoiler\', \'%%\')" style="'+getlSValue('spoiler', '')   +'" title="Спойлер">'       +b+'%%' +e+
-			'<span '+c+' id="code"      onclick="insTag(\'code\', \'    \')"  style="'+getlSValue('code', '')      +'" title="Код">'           +b+'C'  +e+
-			'<span '+c+' id="sup"       onclick="htmlTag(\'sup\')"            style="'+getlSValue('sup', '')       +'" title="Верхний индекс">'+b+'Sup'+e+
-			'<span '+c+' id="sub"       onclick="htmlTag(\'sub\')"            style="'+getlSValue('sub', '')       +'" title="Нижний индекс">' +b+'Sub'+e+
-			'<span '+c+' id="attent"    onclick="wmarkTag(\'!!\')"            style="'+getlSValue('attent', '')    +'" title="!Attention">'    +b+'!A' +e+
-			'<span '+c+' id="dice"      onclick="wmarkTag(\'##\')"            style="'+getlSValue('dice', '')      +'" title="#dice">'         +b+'#D' +e+
-			'<span '+c+' id="quote"     onclick="qlTag(\'>\')"                style="'+getlSValue('quote', '')     +'" title="Цитировать">'    +b+'\>' +e+
+			c+' id="bold"      onclick="htmlTag(\'b\')"              style="'+getlSValue('bold', '')      +'" title="Жирный">'        +b+'B'  +e+
+			c+' id="italic"    onclick="htmlTag(\'i\')"              style="'+getlSValue('italic', '')    +'" title="Курсивный">'     +b+'i'  +e+
+			c+' id="underline" onclick="htmlTag(\'u\')"              style="'+getlSValue('underline', '') +'" title="Подчеркнутый">'  +b+'U'  +e+
+			c+' id="strike"    onclick="htmlTag(\'s\')"              style="'+getlSValue('strike', '')    +'" title="Зачеркнутый">'   +b+'S'  +e+
+			c+' id="spoiler"   onclick="insTag(\'spoiler\', \'%%\')" style="'+getlSValue('spoiler', '')   +'" title="Спойлер">'       +b+'%%' +e+
+			c+' id="code"      onclick="insTag(\'code\', \'    \')"  style="'+getlSValue('code', '')      +'" title="Код">'           +b+'C'  +e+
+			c+' id="sup"       onclick="htmlTag(\'sup\')"            style="'+getlSValue('sup', '')       +'" title="Верхний индекс">'+b+'Sup'+e+
+			c+' id="sub"       onclick="htmlTag(\'sub\')"            style="'+getlSValue('sub', '')       +'" title="Нижний индекс">' +b+'Sub'+e+
+			c+' id="attent"    onclick="wmarkTag(\'!!\')"            style="'+getlSValue('attent', '')    +'" title="!Attention">'    +b+'!A' +e+
+			c+' id="dice"      onclick="wmarkTag(\'##\')"            style="'+getlSValue('dice', '')      +'" title="#dice">'         +b+'#D' +e+
+			c+' id="quote"     onclick="qlTag(\'>\')"                style="'+getlSValue('quote', '')     +'" title="Цитировать">'    +b+'\>' +e+
 			'</span>');
 		markText = function(openTag, closeTag, type) {
 			var regex = /^(\s*)(.*?)(\s*)$/;
