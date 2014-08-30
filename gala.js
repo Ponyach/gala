@@ -2,17 +2,17 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.01
+	: version 1.2.10
 								© magicode
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
+style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe}.pastebin-container body{color:transparent}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
 .audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
-.markup-button a{font-size:13px;text-decoration:none}span[de-bb]{display:none!important}\
+.markup-button a{font-size:13px;text-decoration:none}span[de-bb]{position:absolute;visibility:hidden}\
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 .ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
 @keyframes load{\
@@ -23,9 +23,26 @@ style.textContent = 'blockquote:before, #de-txt-panel:before, .de-menu.de-imgmen
 }';
 document.head.appendChild(style);
 (function() {
-	if (getlSValue('mLinks') === undefined) setlSValue('mLinks', true);
 	var postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div',
 		wh = 'width="360" height="270"';
+	hideMarkupButton = function(e) {
+		var val = e.value,
+			x = document.getElementById(val),
+			h = 'display:none'
+			r = getlSValue(val, function() {
+				setlSValue(val, '');
+				return '';
+			});
+		if (!r) {
+			if (x)
+				x.setAttribute('style', h);
+			setlSValue(val, h);
+		} else {
+			if (x)
+				x.setAttribute('style', '');
+			setlSValue(val, '');
+		}
+	}
 	addMarkupButtons = function(el) {
 		var textArea = document.getElementById('msgbox');
 		if (el.lastChild.id === 'markup-buttons-panel')
@@ -39,49 +56,51 @@ document.head.appendChild(style);
 		}
 		var c = 'class="markup-button"'
 		el.insertAdjacentHTML('beforeend', '<span id="markup-buttons-panel">'+
-			'<span '+c+' id="bold"    onclick="htmlTag(\'b\')"              title="Жирный">'        +b+'B'  +e+
-			'<span '+c+' id="italic"  onclick="htmlTag(\'i\')"              title="Курсивный">'     +b+'i'  +e+
-			'<span '+c+' id="u"       onclick="htmlTag(\'u\')"              title="Подчеркнутый">'  +b+'U'  +e+
-			'<span '+c+' id="strike"  onclick="htmlTag(\'s\')"              title="Зачеркнутый">'   +b+'S'  +e+
-			'<span '+c+' id="spoiler" onclick="insTag(\'spoiler\', \'%%\')" title="Спойлер">'       +b+'%%' +e+
-			'<span '+c+' id="code"    onclick="insTag(\'code\', \'    \')"  title="Код">'           +b+'C'  +e+
-			'<span '+c+' id="sup"     onclick="htmlTag(\'sup\')"            title="Верхний индекс">'+b+'Sup'+e+
-			'<span '+c+' id="sub"     onclick="htmlTag(\'sub\')"            title="Нижний индекс">' +b+'Sub'+e+
-			'<span '+c+' id="attent"  onclick="wmarkTag(\'!!\')"            title="!Attention">'    +b+'!A' +e+
-			'<span '+c+' id="roll"    onclick="wmarkTag(\'##\')"            title="#roll">'         +b+'#R' +e+
-			'<span '+c+' id="quote"   onclick="qlTag(\'>\')"                title="Цитировать">'    +b+'\>' +e+
+			'<span '+c+' id="bold"      onclick="htmlTag(\'b\')"              style="'+getlSValue('bold', '')      +'" title="Жирный">'        +b+'B'  +e+
+			'<span '+c+' id="italic"    onclick="htmlTag(\'i\')"              style="'+getlSValue('italic', '')    +'" title="Курсивный">'     +b+'i'  +e+
+			'<span '+c+' id="underline" onclick="htmlTag(\'u\')"              style="'+getlSValue('underline', '') +'" title="Подчеркнутый">'  +b+'U'  +e+
+			'<span '+c+' id="strike"    onclick="htmlTag(\'s\')"              style="'+getlSValue('strike', '')    +'" title="Зачеркнутый">'   +b+'S'  +e+
+			'<span '+c+' id="spoiler"   onclick="insTag(\'spoiler\', \'%%\')" style="'+getlSValue('spoiler', '')   +'" title="Спойлер">'       +b+'%%' +e+
+			'<span '+c+' id="code"      onclick="insTag(\'code\', \'    \')"  style="'+getlSValue('code', '')      +'" title="Код">'           +b+'C'  +e+
+			'<span '+c+' id="sup"       onclick="htmlTag(\'sup\')"            style="'+getlSValue('sup', '')       +'" title="Верхний индекс">'+b+'Sup'+e+
+			'<span '+c+' id="sub"       onclick="htmlTag(\'sub\')"            style="'+getlSValue('sub', '')       +'" title="Нижний индекс">' +b+'Sub'+e+
+			'<span '+c+' id="attent"    onclick="wmarkTag(\'!!\')"            style="'+getlSValue('attent', '')    +'" title="!Attention">'    +b+'!A' +e+
+			'<span '+c+' id="dice"      onclick="wmarkTag(\'##\')"            style="'+getlSValue('dice', '')      +'" title="#dice">'         +b+'#D' +e+
+			'<span '+c+' id="quote"     onclick="qlTag(\'>\')"                style="'+getlSValue('quote', '')     +'" title="Цитировать">'    +b+'\>' +e+
 			'</span>');
-		markText = function(openTag, closeTag) {
+		markText = function(openTag, closeTag, type) {
+			var regex = /^(\s*)(.*?)(\s*)$/;
 			var len = textArea.value.length;
 			var end = textArea.selectionEnd;
 			var start = textArea.selectionStart;
 			var selected = textArea.value.substring(start, end);
-			cont = new RegExp(/^(\s*)(.*?)(\s*)$/gm).exec(selected);
-			if (closeTag.slice(0, 1) == '\n')
-				markedText = openTag + (start === end ? window.getSelection().toString() : selected).replace(/\n/gm, closeTag);
-			else if (cont == null && openTag != '##')
-				markedText = openTag + (start === end ? window.getSelection().toString() : selected) + closeTag;
-			else if (closeTag.slice(1, 2) == '/')
+			var getext = start === end ? window.getSelection().toString() : selected;
+			var wmark = type === 'wmark';
+			var dice = openTag === '##';
+			var html = type === 'html';
+			var ql = type === 'ql';
+			cont = regex.exec(selected);
+			if (ql)
+				markedText = openTag + getext.replace(/\n/gm, closeTag);
+			if (html)
 				markedText = openTag + selected + closeTag;
-			else if (openTag == '##') {
-				if (isNaN(cont[2]))
-					markedText = cont[1] + cont[2] + ' ' + openTag + '1d2' + closeTag + cont[3];
-				else if (cont[2] == '')
-					markedText = cont[1] + openTag + '1d2' + closeTag + cont[3];
-				else
-					markedText = cont[1] + openTag + '1d' + cont[2] + closeTag + cont[3];
-			} else
-				markedText = cont[1] + openTag + cont[2] + closeTag + cont[3];
+			if (wmark && !dice)
+				markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
+			if (dice) {
+				var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
+				markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : cont[1] + cont[2] + s + OdT;
+			}
 			textArea.value = textArea.value.substring(0, start) + markedText + textArea.value.substring(end);
 			textArea.className = 'ta-inact';
 			textArea.focus();
 			sOfs = '';
 			eOfs = markedText.length;
-			if (openTag == '[spoiler]' || openTag == '[code]' || cont != null && cont[2] == '' && openTag != '##' && closeTag.slice(0, 1) != '\n') {
+			if (openTag == '[spoiler]' || openTag == '[code]' || cont && !cont[2] && !dice && !ql) {
 				sOfs = openTag.length;
 				eOfs = sOfs + selected.length;
-			} else if (openTag == '##')
-				sOfs = eOfs - 1;
+			}
+			if (dice)
+				sOfs = eOfs;
 			textArea.setSelectionRange(start + sOfs, start + eOfs);
 			textArea.onclick = function() { this.removeAttribute('class') }
 			window.onkeypress = function() {
@@ -93,26 +112,19 @@ document.head.appendChild(style);
 			}
 		}
 		htmlTag = function(tag) {
-			markText('['+tag+']', '[/'+tag+']');
+			markText('['+tag+']', '[/'+tag+']', 'html');
 		}
 		wmarkTag = function(tag) {
-			markText(tag, tag);
+			markText(tag, tag, 'wmark');
 		}
 		qlTag = function(tag) {
-			markText(tag+' ', '\n'+tag+' ');
+			markText(tag+' ', '\n'+tag+' ', 'ql');
 		}
 		insTag = function(htag, wtag) {
 			count = function (string, substring) { return string.split (substring).length - 1 };
 			var s = textArea.value.substring(0, textArea.selectionStart);
 			var active = count (s, '['+htag+']') <= count (s, '[/'+htag+']');
-			if (active)
-				htmlTag(htag);
-			else if (!active) {
-				if (htag == 'code')
-					qlTag(wtag);
-				else
-					wmarkTag(wtag);
-			}
+			!active ? (htag === 'code' ? qlTag(wtag) : wmarkTag(wtag)) : htmlTag(htag);
 		}
 	}
 	
@@ -123,7 +135,7 @@ document.head.appendChild(style);
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		var P = getlSValue('mLinks'), endpoint, regex, embed, fav, i = 1, type = 'video';
+		var P = getlSValue('mLinks', true), endpoint, regex, embed, fav, i = 1, type = 'video';
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) >= 0) {
 			embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
@@ -351,8 +363,8 @@ document.head.appendChild(style);
 			var et = event.target,
 				etp = et.parentNode,
 				dnb = etp.querySelector('span[id^="dnb-"]');
-			if (et.id === 'de-txt-panel') {
-				addMarkupButtons(et);
+			if (etp.id === 'de-txt-panel') {
+				addMarkupButtons(etp);
 			} else if ($(et).is('.de-imgmenu')) {
 				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
 			} else {
