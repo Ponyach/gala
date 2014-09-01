@@ -30,7 +30,7 @@ function addGalaSettings() {
 	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+ getVSize('value') +'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
 	return settings_panel;
 }
-function setlSValue(name, value, param) {
+function setlSValue(name, value) {
 	if (typeof name === "object") {
 		for (var key in name) {
 			localStorage.setItem(key, name[key]);
