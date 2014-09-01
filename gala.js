@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.10
+	: version 1.2.15
 								© magicode
 	
 */
@@ -15,6 +15,7 @@ style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{position:absolute;visibility:hidden}\
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 .ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
+#hide-buttons-panel > .menubuttons {width: 40px;margin: 0 2px}#vsize-textbox{font-family:monospace;opacity:.6}\
 @keyframes load{\
 	50% {opacity:0}\
 }\
@@ -22,140 +23,161 @@ style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:
 	50% {opacity:0}\
 }';
 document.head.appendChild(style);
+var textArea, wh, postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div';
+function addGalaSettings() {
+	var settings_panel = '<table><tbody><tr><td>Скрывать кнопки разметки:</td><td id="hide-buttons-panel">'+ addMarkupButtons('menu') +'</td></tr>' +
+	'<tr><td>Живые ссылки:</td><td class="menubuttons"><label><input onclick="setlSValue(\'LiveLinks\', this.checked ? true : false)" type="checkbox" name="disable_ll" value=""><span>&Xi;</span></label></td></tr>'+
+	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+getVSize('value')+'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
+	return settings_panel;
+}
+function setlSValue(name, value, param) {
+	if (typeof name === "object") {
+		for (var key in name) {
+			localStorage.setItem(key, name[key]);
+		}
+	} else {
+		localStorage.setItem(name, value);
+	}
+}
+function getlSValue(name, def) {
+	if (name in localStorage) {
+		var v = localStorage.getItem(name);
+		v = v == 'false' ? false : 
+			v == 'true' ? true : v;
+		return v;
+	} else {
+		localStorage.setItem(name, def);
+		return def;
+	}
+}
+String.prototype.allReplace = function(obj) {
+	var retStr = this;
+	for (var x in obj) {
+		retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
+	}
+	return retStr
+}
+function $setup(obj, attr, events) {
+	var el = typeof obj === "string" ? document.createElement(obj) : obj;
+	if (attr) {
+		for (var key in attr) {
+			key === 'html' ? el.innerHTML = attr[key] :
+			key === 'text' ? el.textContent = attr[key] :
+			key === 'value' ? el.value = attr[key] :
+			el.setAttribute(key, attr[key]);
+		}
+	}
+	if (events) {
+		for (var key in events) {
+			el.addEventListener(key, events[key], false);
+		}
+	}
+	return el;
+}
+
 (function() {
-	var postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div',
-		wh = 'width="360" height="270"';
 	hideMarkupButton = function(e) {
-		var val = e.value,
-			x = document.getElementById(val),
-			h = 'display:none'
-			r = getlSValue(val, function() {
-				setlSValue(val, '');
-				return '';
-			});
+		var val = e.value, r = getlSValue(val)
+			x = document.getElementById(val);
 		if (!r) {
-			if (x)
-				x.setAttribute('style', h);
-			setlSValue(val, h);
+			if (x) x.setAttribute('style', '');
+			setlSValue(val, true);
 		} else {
-			if (x)
-				x.setAttribute('style', '');
-			setlSValue(val, '');
+			if (x) x.setAttribute('style', 'display:none');
+			setlSValue(val, false);
 		}
 	}
-	addMenuButtons = function() {
-		var a = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_', s = '<span>', sls = '</span></label></span>';
-		var buttons = '<div class="hide-buttons-menu">'+
-			a +'b" '+ (!getlSValue('bold', '')      ? 'checked' : '') +' value="bold">     '+s+'B'   +sls+
-			a +'i" '+ (!getlSValue('italic', '')    ? 'checked' : '') +' value="italic">   '+s+'i'   +sls+
-			a +'u" '+ (!getlSValue('underline', '') ? 'checked' : '') +' value="underline">'+s+'U'   +sls+
-			a +'s" '+ (!getlSValue('strike', '')    ? 'checked' : '') +' value="strike">   '+s+'S'   +sls+
-			a +'sp"'+ (!getlSValue('spoiler', '')   ? 'checked' : '') +' value="spoiler">  '+s+'%%'  +sls+
-			a +'c" '+ (!getlSValue('code', '')      ? 'checked' : '') +' value="code">     '+s+'C'   +sls+
-			a +'up"'+ (!getlSValue('sup', '')       ? 'checked' : '') +' value="sup">      '+s+'Sup' +sls+
-			a +'sb"'+ (!getlSValue('sub', '')       ? 'checked' : '') +' value="sub">      '+s+'Sub' +sls+
-			a +'a" '+ (!getlSValue('attent', '')    ? 'checked' : '') +' value="attent">   '+s+'!A'  +sls+
-			a +'d" '+ (!getlSValue('dice', '')      ? 'checked' : '') +' value="dice">     '+s+'#D'  +sls+
-			a +'q" '+ (!getlSValue('quote', '')     ? 'checked' : '') +' value="quote">    '+s+'&gt;'+sls+
-			'</div>';
-		return buttons;
-	}
-	addMarkupButtons = function(el) {
-		var textArea = document.getElementById('msgbox');
-		if (el.lastChild.id === 'markup-buttons-panel')
-			el.lastChild.remove();
-		if (el.querySelector('.de-abtn')) {
-			b = '<a href="#" onclick="return false;">';
-			e = '</a></span>&nbsp;\|&nbsp;';
+	addMarkupButtons = function(type) {
+		var chk, mbuttons, mbutton_tamplate;
+		if (type === 'menu') {
+			chk = 'checked',
+			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" r{x} name="hide_r{n}" value="r{v}"><span title="r{T}" >r{N}</span></label></span>';
 		} else {
-			b = '<input value="';
-			e = '" type="button"></span>';
+			chk = 'display:none', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="htmlTag(\'r{n}\')" style="r{x}" title="r{T}">'+
+				(type === 'text' ? '<a href="#" onclick="return false;">r{N}</a></span>&nbsp;\|&nbsp;' : '<input value="r{N}" type="button"></span>');
 		}
-		var c = '<span class="markup-button"'
-		el.insertAdjacentHTML('beforeend', '<span id="markup-buttons-panel">'+
-			c+' id="bold"      onclick="htmlTag(\'b\')"              style="'+getlSValue('bold', '')      +'" title="Жирный">'        +b+'B'  +e+
-			c+' id="italic"    onclick="htmlTag(\'i\')"              style="'+getlSValue('italic', '')    +'" title="Курсивный">'     +b+'i'  +e+
-			c+' id="underline" onclick="htmlTag(\'u\')"              style="'+getlSValue('underline', '') +'" title="Подчеркнутый">'  +b+'U'  +e+
-			c+' id="strike"    onclick="htmlTag(\'s\')"              style="'+getlSValue('strike', '')    +'" title="Зачеркнутый">'   +b+'S'  +e+
-			c+' id="spoiler"   onclick="insTag(\'spoiler\', \'%%\')" style="'+getlSValue('spoiler', '')   +'" title="Спойлер">'       +b+'%%' +e+
-			c+' id="code"      onclick="insTag(\'code\', \'    \')"  style="'+getlSValue('code', '')      +'" title="Код">'           +b+'C'  +e+
-			c+' id="sup"       onclick="htmlTag(\'sup\')"            style="'+getlSValue('sup', '')       +'" title="Верхний индекс">'+b+'Sup'+e+
-			c+' id="sub"       onclick="htmlTag(\'sub\')"            style="'+getlSValue('sub', '')       +'" title="Нижний индекс">' +b+'Sub'+e+
-			c+' id="attent"    onclick="wmarkTag(\'!!\')"            style="'+getlSValue('attent', '')    +'" title="!Attention">'    +b+'!A' +e+
-			c+' id="dice"      onclick="wmarkTag(\'##\')"            style="'+getlSValue('dice', '')      +'" title="#dice">'         +b+'#D' +e+
-			c+' id="quote"     onclick="qlTag(\'>\')"                style="'+getlSValue('quote', '')     +'" title="Цитировать">'    +b+'\>' +e+
-			'</span>');
-		markText = function(openTag, closeTag, type) {
-			var regex = /^(\s*)(.*?)(\s*)$/;
-			var len = textArea.value.length;
-			var end = textArea.selectionEnd;
-			var start = textArea.selectionStart;
-			var selected = textArea.value.substring(start, end);
-			var getext = start === end ? window.getSelection().toString() : selected;
-			var wmark = type === 'wmark';
-			var dice = openTag === '##';
-			var html = type === 'html';
-			var ql = type === 'ql';
-			cont = regex.exec(selected);
-			if (ql)
-				markedText = openTag + getext.replace(/\n/gm, closeTag);
-			if (html)
-				markedText = openTag + selected + closeTag;
-			if (wmark && !dice)
-				markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
-			if (dice) {
-				var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
-				markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : cont[1] + cont[2] + s + OdT;
+		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',  'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',    'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline', 'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',    'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sp', 'r{N}': '%%',   'r{v}': 'spoiler',   'r{T}': 'Спойлер',        'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'c',  'r{N}': 'C',    'r{v}': 'code',      'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'up', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sb', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'a',  'r{N}': '!A',   'r{v}': 'attent',    'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'd',  'r{N}': '#D',   'r{v}': 'dice',      'r{T}': '#dice',          'r{x}': (getlSValue('dice', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'q',  'r{N}': '&gt;', 'r{v}': 'quote',     'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
+		return mbuttons;
+	}
+	function markText(openTag, closeTag, type) {
+		var regex = /^(\s*)(.*?)(\s*)$/;
+		var len = textArea.value.length;
+		var end = textArea.selectionEnd;
+		var start = textArea.selectionStart;
+		var selected = textArea.value.substring(start, end);
+		var getext = start === end ? window.getSelection().toString() : selected;
+		var wmark = type === 'wmark';
+		var dice = openTag === '##';
+		var html = type === 'html';
+		var ql = type === 'ql';
+		cont = regex.exec(selected);
+		if (ql)
+			markedText = openTag + getext.replace(/\n/gm, closeTag);
+		if (html)
+			markedText = openTag + selected + closeTag;
+		if (wmark && !dice)
+			markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
+		if (dice) {
+			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
+			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : cont[1] + cont[2] + s + OdT;
+		}
+		textArea.value = textArea.value.substring(0, start) + markedText + textArea.value.substring(end);
+		textArea.className = 'ta-inact';
+		textArea.focus();
+		sOfs = '';
+		eOfs = markedText.length;
+		if (openTag == '[spoiler]' || openTag == '[code]' || cont && !cont[2] && !dice && !ql) {
+			sOfs = openTag.length;
+			eOfs = sOfs + selected.length;
+		}
+		if (dice)
+			sOfs = eOfs;
+		textArea.setSelectionRange(start + sOfs, start + eOfs);
+		textArea.onclick = function() { this.removeAttribute('class') }
+		window.onkeypress = function() {
+			if (textArea.getAttribute('class') == 'ta-inact') {
+				var sEn = textArea.selectionEnd;
+				textArea.setSelectionRange(sEn, sEn);
+				textArea.removeAttribute('class');
 			}
-			textArea.value = textArea.value.substring(0, start) + markedText + textArea.value.substring(end);
-			textArea.className = 'ta-inact';
-			textArea.focus();
-			sOfs = '';
-			eOfs = markedText.length;
-			if (openTag == '[spoiler]' || openTag == '[code]' || cont && !cont[2] && !dice && !ql) {
-				sOfs = openTag.length;
-				eOfs = sOfs + selected.length;
-			}
-			if (dice)
-				sOfs = eOfs;
-			textArea.setSelectionRange(start + sOfs, start + eOfs);
-			textArea.onclick = function() { this.removeAttribute('class') }
-			window.onkeypress = function() {
-				if (textArea.getAttribute('class') == 'ta-inact') {
-					var sEn = textArea.selectionEnd;
-					textArea.setSelectionRange(sEn, sEn);
-					textArea.removeAttribute('class');
-				}
-			}
-		}
-		htmlTag = function(tag) {
-			markText('['+tag+']', '[/'+tag+']', 'html');
-		}
-		wmarkTag = function(tag) {
-			markText(tag, tag, 'wmark');
-		}
-		qlTag = function(tag) {
-			markText(tag+' ', '\n'+tag+' ', 'ql');
-		}
-		insTag = function(htag, wtag) {
-			count = function (string, substring) { return string.split (substring).length - 1 };
-			var s = textArea.value.substring(0, textArea.selectionStart);
-			var active = count (s, '['+htag+']') <= count (s, '[/'+htag+']');
-			!active ? (htag === 'code' ? qlTag(wtag) : wmarkTag(wtag)) : htmlTag(htag);
 		}
 	}
-	
+	htmlTag = function(tag) {
+		markText('['+tag+']', '[/'+tag+']', 'html');
+	}
+	wmarkTag = function(tag) {
+		markText(tag, tag, 'wmark');
+	}
+	qlTag = function(tag) {
+		markText(tag+' ', '\n'+tag+' ', 'ql');
+	}
+	insTag = function(htag, wtag) {
+		count = function (string, substring) { return string.split (substring).length - 1 };
+		var s = textArea.value.substring(0, textArea.selectionStart);
+		var active = count (s, '['+htag+']') <= count (s, '[/'+htag+']');
+		!active ? (htag === 'code' ? qlTag(wtag) : wmarkTag(wtag)) : htmlTag(htag);
+	}
 	parseLinks = function(el) {
-		var iframe = '<iframe '+wh+' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
+		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
 		var href = escapeUrl(el.href);
 		var EXT = href.split('.').pop().toLowerCase();
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		var P = getlSValue('mLinks', true), endpoint, regex, embed, fav, i = 1, type = 'video';
+		var P = getlSValue('LiveLinks', true), endpoint, regex, embed, fav, i = 1, type = 'video';
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) >= 0) {
-			embed = '<video '+wh+' controls="true" poster=""><source src="$1"></source></video>';
+			embed = '<video r{wh} controls="true" poster=""><source src="$1"></source></video>';
 			P = attachFile(el, 'video', embed);
 		}
 		/********* HTML5 Audio *********/
@@ -190,11 +212,23 @@ document.head.appendChild(style);
 				});
 			});
 		}
-		/******************** YouTube (playlist) ********************/
-		if (href.indexOf("youtube.com/playlist?") >= 0) {
-			regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/playlist\?(list=[\w_-]*)/g;
-			embed = iframe + ' src="//www.youtube.com/embed/?$1&autohide=1&wmode=opaque&enablejsapi=1&html5=1&rel=0">';
+		/************************* YouTube *************************/
+		if (href.indexOf("youtu") >= 0) {
+			embed = iframe + ' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&wmode=opaque&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
+			if (href.indexOf("youtube.com") >= 0)
+				regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/(?:watch|playlist)\?.*?(?:v=([\w_-]*)|(list=[\w_-]*))(?:.*?v=([\w_-]*)|.*?(list=[\w_-]*)+)?(?:.*?t=(\d+))?/g;
+			if (href.indexOf("youtu.be") >= 0) {
+				regex = /(?:https?:)?\/\/(?:www\.)?youtu\.be\/([\w_-]*)\?(list=[\w_-]*)?(?:.*?t=([\w_-]*))?/g;
+			}
 			fav = '//youtube.com/favicon.ico';
+			if (href.indexOf("list=") >= 0)
+				i = 2;
+		}
+		/************************** Vimeo **************************/
+		if (href.indexOf("vimeo") >= 0) {
+			regex = /(?:https?:)?\/\/(?:www\.)?vimeo\.com\/(?:.*?\/)?(\d+)(?:.*?t=(\d+))?/g;
+			embed = iframe + ' src="//player.vimeo.com/video/$1?badge=0&color=ccc5a7#t=$2"></iframe>';
+			fav = '//f.vimeocdn.com/images_v6/favicon_32.ico';
 		}
 		/************************** Coub *************************/
 		if (href.indexOf("coub.com/view/") >= 0) {
@@ -205,7 +239,7 @@ document.head.appendChild(style);
 		/************************* RuTube *************************/
 		if (href.indexOf("rutube.ru/video/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
-			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=22547a">';
+			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=fefefe">';
 			fav = "//rutube.ru/static/img/btn_play.png";
 		}
 		/************************* Яндекс.Видео *************************/
@@ -230,10 +264,10 @@ document.head.appendChild(style);
 			type = 'pastebin';
 		}
 		/************************* Custom iframe ************************/
-		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") != -1) {
+		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") >= 0) {
 			regex = /(.+)/g;
 			embed =  iframe +' src="'+ href +'">';
-			el.setAttribute("href", href.replace(/embed\//, ""));
+			el.setAttribute("href", href.replace(/embed\//, "").replace(/be\.com/, ".be"));
 			i = 0;
 		}
 		/****************************************************************/
@@ -242,6 +276,7 @@ document.head.appendChild(style);
 		}
 		var m = !regex ? '' : regex.exec(href);
 		if (!m || !m[i]) {
+			console.log(m[0])
 			oEmbedMedia('', '', el, 0, '', '', '');
 		} else {
 			oEmbedMedia(endpoint, fav, el, 1, type, regex, embed);
@@ -263,7 +298,7 @@ document.head.appendChild(style);
 				$(obj).before(cont);
 			}
 			$('.'+ csEl).html(function(i, html) {
-				return html.replace(regex, embed);
+				return html.replace(regex, embed.replace('r{wh}', getVSize('html')));
 			});
 		} else if (contEl.id == idEl) {
 			contEl.remove();
@@ -306,6 +341,28 @@ document.head.appendChild(style);
 		}).fail(function() {
 			$(obj).attr('target', "_blank");
 		});
+	}
+	setVSize = function (slider) {
+		var p = slider.value;
+		function size(w, h) {
+			var played = document.querySelector('.video-container > iframe');
+			setlSValue({'VWidth': w, 'VHeight': h});
+			slider.nextElementSibling.textContent = '('+w+'x'+h+')';
+			if (played) played.width = w, played.height = h;
+		}
+		p == 1 ? size(360, 270) : p == 2 ? size(480, 360) :
+		p == 3 ? size(720, 480) : p == 4 ? size(854, 576) : slider.textContent = 'gay :D';
+	}
+	getVSize = function (i) {
+		var w = getlSValue('VWidth', 360), h = getlSValue('VHeight', 270),
+			val = w == 360 ? 1 : w == 480 ? 2 : w == 720 ? 3 : w == 854 ? 4 : 0;
+			whtml = 'width="'+w+'" height="'+h+'"';
+		if (i === 'html')
+			return whtml;
+		if (i === 'value')
+			return val;
+		if (i === 'text')
+			return w+'x'+h;
 	}
 	getElementName = function(elUrl) {
 		function getElName(a) {
@@ -364,24 +421,16 @@ document.head.appendChild(style);
 		var imgSrc = $(el).attr('src');
 		$('<form method="post" action="https://derpibooru.org/search/reverse" target="_blank" enctype="multipart/form-data" hidden><input id="url" name="url" type="text" value="'+imgSrc+'"><input id="fuzziness" name="fuzziness" type="text" value="0.25"></form>').appendTo('body').submit().remove();
 	}
-	function getlSValue(name, def) {
-		if (name in localStorage) {
-			var v = localStorage.getItem(name);
-			v = v == 'false' ? false : 
-				v == 'true' ? true : v;
-			return v;
-		} else return def;
-	}
-	function setlSValue(name, value) {
-		localStorage.setItem(name, value)
-	}
 	insertListener = function(event){
 		if (event.animationName == "load") {
 			var et = event.target,
 				etp = et.parentNode,
 				dnb = etp.querySelector('span[id^="dnb-"]');
 			if (etp.id === 'de-txt-panel') {
-				addMarkupButtons(etp);
+				textArea = document.getElementById('msgbox');
+				var mbp = $setup('span', {'id': 'markup-buttons-panel', 'html': addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
+				if (etp.lastChild.id != 'markup-buttons-panel')
+					etp.appendChild(mbp);
 			} else if ($(et).is('.de-imgmenu')) {
 				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
 			} else {
@@ -389,13 +438,13 @@ document.head.appendChild(style);
 					dnb.insertAdjacentHTML('afterend', '<br>');
 				$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
 					var file = this.href;
-					var vtag = '<video class="webm" '+wh+' controls="true" poster=""><source src="'+ file +'"></source></video>';
+					var vtag = '<video class="webm" '+ getVSize('html') +' controls="true" poster=""><source src="'+ file +'"></source></video>';
 					return $(vtag);
 				});
 				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"], a[href$=".jpg"], a[href$=".png"], a[href$=".gif"], a[href$=".mp3"] '); link = a[i++];) {
 					parseLinks(link, '')
 				}
-				setTimeout(function(){
+				setTimeout(function() {
 					if (!etp.querySelector('.postcontent'))
 						et.insertAdjacentHTML('beforebegin', '<span class="postcontent"></span>');
 					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
