@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.15
+	: version 1.2.16
 								© magicode
 	
 */
@@ -23,11 +23,11 @@ style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:
 	50% {opacity:0}\
 }';
 document.head.appendChild(style);
-var textArea, wh, postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div';
+var textArea, postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div';
 function addGalaSettings() {
 	var settings_panel = '<table><tbody><tr><td>Скрывать кнопки разметки:</td><td id="hide-buttons-panel">'+ addMarkupButtons('menu') +'</td></tr>' +
-	'<tr><td>Живые ссылки:</td><td class="menubuttons"><label><input onclick="setlSValue(\'LiveLinks\', this.checked ? true : false)" type="checkbox" name="disable_ll" value=""><span>&Xi;</span></label></td></tr>'+
-	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+getVSize('value')+'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
+	'<tr><td>Живые ссылки:</td><td class="menubuttons"><label><input onclick="setlSValue(\'LiveLinks\', this.checked ? true : false)" '+ (!getlSValue('LiveLinks', true) ? '' : 'checked') +' type="checkbox" name="disable_ll" value=""><span>&Xi;</span></label></td></tr>'+
+	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+ getVSize('value') +'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
 	return settings_panel;
 }
 function setlSValue(name, value, param) {
@@ -174,7 +174,7 @@ function $setup(obj, attr, events) {
 		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
 		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		var P = getlSValue('LiveLinks', true), endpoint, regex, embed, fav, i = 1, type = 'video';
+		var P = getlSValue('LiveLinks'), endpoint, regex, embed, fav, i = 1, type = 'video';
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) >= 0) {
 			embed = '<video r{wh} controls="true" poster=""><source src="$1"></source></video>';
@@ -220,27 +220,27 @@ function $setup(obj, attr, events) {
 			if (href.indexOf("youtu.be") >= 0) {
 				regex = /(?:https?:)?\/\/(?:www\.)?youtu\.be\/([\w_-]*)\?(list=[\w_-]*)?(?:.*?t=([\w_-]*))?/g;
 			}
-			fav = '//youtube.com/favicon.ico';
-			if (href.indexOf("list=") >= 0)
+			if (href.indexOf("playlist?") >= 0)
 				i = 2;
+			fav = '//youtube.com/favicon.ico'; P = true;
 		}
 		/************************** Vimeo **************************/
 		if (href.indexOf("vimeo") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?vimeo\.com\/(?:.*?\/)?(\d+)(?:.*?t=(\d+))?/g;
 			embed = iframe + ' src="//player.vimeo.com/video/$1?badge=0&color=ccc5a7#t=$2"></iframe>';
-			fav = '//f.vimeocdn.com/images_v6/favicon_32.ico';
+			fav = '//f.vimeocdn.com/images_v6/favicon_32.ico'; P = true;
 		}
 		/************************** Coub *************************/
 		if (href.indexOf("coub.com/view/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
 			embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&amp;autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
-			fav = "//coub.com/favicon.ico";
+			fav = "//coub.com/favicon.ico"; P = true;
 		}
 		/************************* RuTube *************************/
 		if (href.indexOf("rutube.ru/video/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
 			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=fefefe">';
-			fav = "//rutube.ru/static/img/btn_play.png";
+			fav = "//rutube.ru/static/img/btn_play.png"; P = true;
 		}
 		/************************* Яндекс.Видео *************************/
 		if (href.indexOf("video.yandex.ru/users/") >= 0) {
@@ -254,21 +254,21 @@ function $setup(obj, attr, events) {
 			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
 			embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
 			el.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
-			i = 3;
+			i = 3; P = true;
 		}
 		/************************* Pastebin *************************/
 		if (href.indexOf("pastebin.com/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
 			embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 			fav = '/test/src/140593041526.png';
-			type = 'pastebin';
+			type = 'pastebin'; P = true;
 		}
 		/************************* Custom iframe ************************/
 		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") >= 0) {
 			regex = /(.+)/g;
 			embed =  iframe +' src="'+ href +'">';
 			el.setAttribute("href", href.replace(/embed\//, "").replace(/be\.com/, ".be"));
-			i = 0;
+			i = 0; P = true;
 		}
 		/****************************************************************/
 		if (el.textContent.indexOf('>>') >= 0 || P === false) {
@@ -276,7 +276,6 @@ function $setup(obj, attr, events) {
 		}
 		var m = !regex ? '' : regex.exec(href);
 		if (!m || !m[i]) {
-			console.log(m[0])
 			oEmbedMedia('', '', el, 0, '', '', '');
 		} else {
 			oEmbedMedia(endpoint, fav, el, 1, type, regex, embed);
@@ -357,12 +356,9 @@ function $setup(obj, attr, events) {
 		var w = getlSValue('VWidth', 360), h = getlSValue('VHeight', 270),
 			val = w == 360 ? 1 : w == 480 ? 2 : w == 720 ? 3 : w == 854 ? 4 : 0;
 			whtml = 'width="'+w+'" height="'+h+'"';
-		if (i === 'html')
-			return whtml;
-		if (i === 'value')
-			return val;
-		if (i === 'text')
-			return w+'x'+h;
+		if (i === 'html') return whtml;
+		if (i === 'value') return val;
+		if (i === 'text') return w+'x'+h;
 	}
 	getElementName = function(elUrl) {
 		function getElName(a) {
