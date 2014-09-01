@@ -91,22 +91,22 @@ function $setup(obj, attr, events) {
 		var chk, mbuttons, mbutton_tamplate;
 		if (type === 'menu') {
 			chk = 'checked',
-			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" r{x} name="hide_r{n}" value="r{v}"><span title="r{T}" >r{N}</span></label></span>';
+			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" r{x} name="hide_r{v}" value="r{v}"><span title="r{T}" >r{N}</span></label></span>';
 		} else {
-			chk = 'display:none', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="htmlTag(\'r{n}\')" style="r{x}" title="r{T}">'+
+			chk = 'display:none', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="r{t}Tag(\'r{n}\')" style="r{x}" title="r{T}">'+
 				(type === 'text' ? '<a href="#" onclick="return false;">r{N}</a></span>&nbsp;\|&nbsp;' : '<input value="r{N}" type="button"></span>');
 		}
-		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',  'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',    'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline', 'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',    'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sp', 'r{N}': '%%',   'r{v}': 'spoiler',   'r{T}': 'Спойлер',        'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'c',  'r{N}': 'C',    'r{v}': 'code',      'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'up', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sb', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'a',  'r{N}': '!A',   'r{v}': 'attent',    'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'd',  'r{N}': '#D',   'r{v}': 'dice',      'r{T}': '#dice',          'r{x}': (getlSValue('dice', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'q',  'r{N}': '&gt;', 'r{v}': 'quote',     'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
+		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',   'r{t}': 'html', 'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',     'r{t}': 'html', 'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html', 'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html', 'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'spoiler', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',        'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'code',  'r{N}': 'C',    'r{v}': 'code',    'r{t}': 'ins', 'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html', 'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html', 'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': '!!',  'r{N}': '!A',   'r{v}': 'attent',    'r{t}': 'wmark', 'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': '##',  'r{N}': '#D',   'r{v}': 'dice',      'r{t}': 'wmark', 'r{T}': '#dice',          'r{x}': (getlSValue('dice', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': '>',   'r{N}': '&gt;', 'r{v}': 'quote',     'r{t}': 'ql', 'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
 		return mbuttons;
 	}
 	function markText(openTag, closeTag, type) {
