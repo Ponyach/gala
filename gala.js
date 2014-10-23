@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.16
+	: version 1.2.17
 								© magicode
 	
 */
@@ -30,23 +30,25 @@ function addGalaSettings() {
 	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+ getVSize('value') +'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
 	return settings_panel;
 }
-function setlSValue(name, value) {
+function setlSValue(name, value, sess) {
+	var stor = sess ? sessionStorage : localStorage;
 	if (typeof name === "object") {
 		for (var key in name) {
-			localStorage.setItem(key, name[key]);
+			stor.setItem(key, name[key]);
 		}
 	} else {
-		localStorage.setItem(name, value);
+		stor.setItem(name, value);
 	}
 }
-function getlSValue(name, def) {
-	if (name in localStorage) {
-		var v = localStorage.getItem(name);
+function getlSValue(name, def, sess) {
+	var stor = sess ? sessionStorage : localStorage;
+	if (name in stor) {
+		var v = stor.getItem(name);
 		v = v == 'false' ? false : 
 			v == 'true' ? true : v;
 		return v;
 	} else {
-		localStorage.setItem(name, def);
+		stor.setItem(name, def);
 		return def;
 	}
 }
@@ -58,9 +60,10 @@ String.prototype.allReplace = function(obj) {
 	return retStr
 }
 function $setup(obj, attr, events) {
-	var el = typeof obj === "string" ? document.createElement(obj) : obj;
+	var el = typeof obj == "string" ? document.createElement(obj) : obj;
 	if (attr) {
 		for (var key in attr) {
+			attr[key] === undefined ? el.removeAttribute(key) :
 			key === 'html' ? el.innerHTML = attr[key] :
 			key === 'text' ? el.textContent = attr[key] :
 			key === 'value' ? el.value = attr[key] :
@@ -96,31 +99,31 @@ function $setup(obj, attr, events) {
 			chk = 'display:none', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="r{t}Tag(\'r{n}\')" style="r{x}" title="r{T}">'+
 				(type === 'text' ? '<a href="#" onclick="return false;">r{N}</a></span>&nbsp;\|&nbsp;' : '<input value="r{N}" type="button"></span>');
 		}
-		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',   'r{t}': 'html', 'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',     'r{t}': 'html', 'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html', 'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html', 'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'spoiler', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',        'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'code',  'r{N}': 'C',    'r{v}': 'code',    'r{t}': 'ins', 'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html', 'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html', 'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
+		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',   'r{t}': 'html',  'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',     'r{t}': 'html',  'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html',  'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html',  'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'spoiler %%', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',       'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'code 	', 'r{N}': 'C', 'r{v}': 'code',      'r{t}': 'ins',   'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'rp •', 'r{N}': 'RP',  'r{v}': 'roleplay',  'r{t}': 'ins',   'r{T}': 'Ролеплей',       'r{x}': (getlSValue('rp', true)        ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html',  'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html',  'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': '!!',  'r{N}': '!A',   'r{v}': 'attent',    'r{t}': 'wmark', 'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': '##',  'r{N}': '#D',   'r{v}': 'dice',      'r{t}': 'wmark', 'r{T}': '#dice',          'r{x}': (getlSValue('dice', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': '>',   'r{N}': '&gt;', 'r{v}': 'quote',     'r{t}': 'ql', 'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
+			mbutton_tamplate.allReplace({'r{n}': '>',   'r{N}': '&gt;', 'r{v}': 'quote',     'r{t}': 'ql',    'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
 		return mbuttons;
 	}
 	function markText(openTag, closeTag, type) {
-		var regex = /^(\s*)(.*?)(\s*)$/;
-		var len = textArea.value.length;
-		var end = textArea.selectionEnd;
-		var start = textArea.selectionStart;
-		var selected = textArea.value.substring(start, end);
-		var getext = start === end ? window.getSelection().toString() : selected;
-		var wmark = type === 'wmark';
-		var dice = openTag === '##';
-		var html = type === 'html';
-		var ql = type === 'ql';
-		cont = regex.exec(selected);
+		var val = textArea.value,
+			end = textArea.selectionEnd,
+			start = textArea.selectionStart,
+			selected = val.substring(start, end),
+			getext = start === end ? window.getSelection().toString() : selected,
+			cont = (/^(\s*)(.*?)(\s*)$/).exec(selected),
+			wmark = type === 'wmark',
+			dice = openTag === '##',
+			html = type === 'html',
+			ql = type === 'ql';
 		if (ql)
 			markedText = openTag + getext.replace(/\n/gm, closeTag);
 		if (html)
@@ -131,11 +134,11 @@ function $setup(obj, attr, events) {
 			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
 			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : cont[1] + cont[2] + s + OdT;
 		}
-		textArea.value = textArea.value.substring(0, start) + markedText + textArea.value.substring(end);
-		textArea.className = 'ta-inact';
+		$setup(textArea, {'class': 'ta-inact', 'value': val.substring(0, start) + markedText + val.substring(end)}, {
+			'click': function(e) { this.removeAttribute('class') }
+		});
 		textArea.focus();
-		sOfs = '';
-		eOfs = markedText.length;
+		eOfs = markedText.length, sOfs = '';
 		if (openTag == '[spoiler]' || openTag == '[code]' || cont && !cont[2] && !dice && !ql) {
 			sOfs = openTag.length;
 			eOfs = sOfs + selected.length;
@@ -143,9 +146,8 @@ function $setup(obj, attr, events) {
 		if (dice)
 			sOfs = eOfs;
 		textArea.setSelectionRange(start + sOfs, start + eOfs);
-		textArea.onclick = function() { this.removeAttribute('class') }
 		window.onkeypress = function() {
-			if (textArea.getAttribute('class') == 'ta-inact') {
+			if (textArea.className === 'ta-inact') {
 				var sEn = textArea.selectionEnd;
 				textArea.setSelectionRange(sEn, sEn);
 				textArea.removeAttribute('class');
@@ -161,11 +163,12 @@ function $setup(obj, attr, events) {
 	qlTag = function(tag) {
 		markText(tag+' ', '\n'+tag+' ', 'ql');
 	}
-	insTag = function(htag, wtag) {
-		count = function (string, substring) { return string.split (substring).length - 1 };
-		var s = textArea.value.substring(0, textArea.selectionStart);
-		var active = count (s, '['+htag+']') <= count (s, '[/'+htag+']');
-		!active ? (htag === 'code' ? qlTag(wtag) : wmarkTag(wtag)) : htmlTag(htag);
+	insTag = function(tag) {
+		var htag = tag.split(/\s/)[0], wtag = tag.split(/\s/)[1],
+			count = function(str, sbstr) { return str.split(sbstr).length - 1 },
+			s = textArea.value.substring(0, textArea.selectionStart),
+			active = count(s, '['+htag+']') <= count(s, '[/'+htag+']');
+		!active ? (wtag === '%%' ? wmarkTag(wtag) : qlTag(wtag)) : htmlTag(htag);
 	}
 	parseLinks = function(el) {
 		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
