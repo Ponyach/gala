@@ -104,7 +104,7 @@ function $setup(obj, attr, events) {
 			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html',  'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html',  'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'spoiler %%', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',       'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'code 	', 'r{N}': 'C', 'r{v}': 'code',      'r{t}': 'ins',   'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'code 		', 'r{N}': 'C',  'r{v}': 'code',    'r{t}': 'ins', 'r{T}': 'Код',           'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'rp •', 'r{N}': 'RP',  'r{v}': 'roleplay',  'r{t}': 'ins',   'r{T}': 'Ролеплей',       'r{x}': (getlSValue('rp', true)        ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html',  'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html',  'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
@@ -119,7 +119,8 @@ function $setup(obj, attr, events) {
 			start = textArea.selectionStart,
 			selected = val.substring(start, end),
 			getext = start === end ? window.getSelection().toString() : selected,
-			cont = (/^(\s*)(.*?)(\s*)$/).exec(selected),
+			regex = /^(\s*)(.*?)(\s*)$/,
+			cont = regex.exec(selected),
 			wmark = type === 'wmark',
 			dice = openTag === '##',
 			html = type === 'html',
@@ -139,7 +140,7 @@ function $setup(obj, attr, events) {
 		});
 		textArea.focus();
 		eOfs = markedText.length, sOfs = '';
-		if (openTag == '[spoiler]' || openTag == '[code]' || cont && !cont[2] && !dice && !ql) {
+		if (openTag == '[spoiler]' || openTag == '[code]' || openTag == '[rp]' || cont && !cont[2] && !dice && !ql) {
 			sOfs = openTag.length;
 			eOfs = sOfs + selected.length;
 		}
