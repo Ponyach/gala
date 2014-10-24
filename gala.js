@@ -2,12 +2,12 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.17
+	: version 1.2.18
 								© magicode
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:before{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
+style.textContent = 'blockquote:after, span[de-bb]:after, .de-menu.de-imgmenu:after{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .pastebin-container{overflow:auto;resize:both;background-color:#fefefe}.pastebin-container body{color:transparent}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
@@ -16,12 +16,7 @@ style.textContent = 'blockquote:before, span[de-bb]:before, .de-menu.de-imgmenu:
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 .ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
 #hide-buttons-panel > .menubuttons {width: 40px;margin: 0 2px}#vsize-textbox{font-family:monospace;opacity:.6}\
-@keyframes load{\
-	50% {opacity:0}\
-}\
-@-webkit-keyframes load{\
-	50% {opacity:0}\
-}';
+@keyframes load{50% {opacity:0}} @-webkit-keyframes load{50% {opacity:0}}';
 document.head.appendChild(style);
 var textArea, postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div';
 function addGalaSettings() {
@@ -80,23 +75,22 @@ function $setup(obj, attr, events) {
 
 (function() {
 	hideMarkupButton = function(e) {
-		var val = e.value, r = getlSValue(val)
-			x = document.getElementById(val);
-		if (!r) {
-			if (x) x.setAttribute('style', '');
-			setlSValue(val, true);
-		} else {
-			if (x) x.setAttribute('style', 'display:none');
+		var val = e.value, x = document.getElementById(val);
+		if (getlSValue(val)) {
+			if (x) x.setAttribute('hidden', '');
 			setlSValue(val, false);
+		} else {
+			if (x) x.removeAttribute('hidden');
+			setlSValue(val, true);
 		}
 	}
 	addMarkupButtons = function(type) {
 		var chk, mbuttons, mbutton_tamplate;
 		if (type === 'menu') {
 			chk = 'checked',
-			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" r{x} name="hide_r{v}" value="r{v}"><span title="r{T}" >r{N}</span></label></span>';
+			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_r{v}" value="r{v}"><span title="r{T}" r{x}>r{N}</span></label></span>';
 		} else {
-			chk = 'display:none', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="r{t}Tag(\'r{n}\')" style="r{x}" title="r{T}">'+
+			chk = 'hidden', mbutton_tamplate = '<span class="markup-button" id="r{v}" onclick="r{t}Tag(\'r{n}\')" title="r{T}" r{x}>'+
 				(type === 'text' ? '<a href="#" onclick="return false;">r{N}</a></span>&nbsp;\|&nbsp;' : '<input value="r{N}" type="button"></span>');
 		}
 		mbuttons = mbutton_tamplate.allReplace({'r{n}': 'b',  'r{N}': 'B', 'r{v}': 'bold',   'r{t}': 'html',  'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
@@ -104,8 +98,8 @@ function $setup(obj, attr, events) {
 			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html',  'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html',  'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'spoiler %%', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',       'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'code 		', 'r{N}': 'C',  'r{v}': 'code',    'r{t}': 'ins', 'r{T}': 'Код',           'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'rp •', 'r{N}': 'RP',  'r{v}': 'roleplay',  'r{t}': 'ins',   'r{T}': 'Ролеплей',       'r{x}': (getlSValue('rp', true)        ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'code \	', 'r{N}': 'C',  'r{v}': 'code',    'r{t}': 'ins', 'r{T}': 'Код',           'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'rp •', 'r{N}': 'RP',  'r{v}': 'roleplay',  'r{t}': 'ins',   'r{T}': 'Ролеплей',       'r{x}': (getlSValue('roleplay', true)  ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html',  'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html',  'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': '!!',  'r{N}': '!A',   'r{v}': 'attent',    'r{t}': 'wmark', 'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
@@ -140,7 +134,7 @@ function $setup(obj, attr, events) {
 		});
 		textArea.focus();
 		eOfs = markedText.length, sOfs = '';
-		if (openTag == '[spoiler]' || openTag == '[code]' || openTag == '[rp]' || cont && !cont[2] && !dice && !ql) {
+		if (openTag.indexOf(['[spoiler]', '[code]', '[rp]']) >= 0 || cont && !cont[2] && !dice && !ql) {
 			sOfs = openTag.length;
 			eOfs = sOfs + selected.length;
 		}
