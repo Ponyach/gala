@@ -2,34 +2,56 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.18
+	: version 1.2.48
 								© magicode
 	
 */
 var style = document.createElement("style");
 style.textContent = 'blockquote:after, span[de-bb]:after, .de-menu.de-imgmenu:after{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
-.pastebin-container{overflow:auto;resize:both;background-color:#fefefe}.pastebin-container body{color:transparent}\
+.document-container{overflow:auto;resize:both;background-color:#fefefe} .document-container > iframe{width:100%;height:100%;resize:none}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
-.audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}\
+.audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}.image-container{display:inline-block}\
 .markup-button a{font-size:13px;text-decoration:none}span[de-bb]{position:absolute;visibility:hidden}\
 .de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
 .ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
 #hide-buttons-panel > .menubuttons {width: 40px;margin: 0 2px}#vsize-textbox{font-family:monospace;opacity:.6}\
 @keyframes load{50% {opacity:0}} @-webkit-keyframes load{50% {opacity:0}}';
 document.head.appendChild(style);
-var textArea, postNode = 'td.reply, td.highlight, .pstnode[de-thread] > div';
+var textArea, deCfg = JSON.parse(getlSValue('DESU_Config'))[window.location.host];
 function addGalaSettings() {
 	var settings_panel = '<table><tbody><tr><td>Скрывать кнопки разметки:</td><td id="hide-buttons-panel">'+ addMarkupButtons('menu') +'</td></tr>' +
 	'<tr><td>Живые ссылки:</td><td class="menubuttons"><label><input onclick="setlSValue(\'LiveLinks\', this.checked ? true : false)" '+ (!getlSValue('LiveLinks', true) ? '' : 'checked') +' type="checkbox" name="disable_ll" value=""><span>&Xi;</span></label></td></tr>'+
 	'<tr><td>Размер видеоплеера:</td><td><input onchange="setVSize(this)" min="1" value="'+ getVSize('value') +'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+getVSize('text')+')</span></td></tr></tbody></table>';
 	return settings_panel;
 }
+function jumpCont(node) {
+	while (node) {
+		if (node.tagName === 'BLOCKQUOTE') {
+			if (!node.parentNode.querySelector('.postcontent'))
+				node.insertAdjacentHTML('beforebegin', '<span class="postcontent"></span>')
+			return node.parentNode.querySelector('.postcontent');
+		}
+		node = node.parentNode;
+	}
+}
+String.prototype.allReplace = function(obj) {
+	var retStr = this;
+	for (var x in obj) {
+		retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
+	}
+	return retStr
+}
+if(!String.prototype.contains) {
+	String.prototype.contains = function(s, i) {
+		return this.indexOf(s, i) != -1;
+	}
+}
 function setlSValue(name, value, sess) {
 	var stor = sess ? sessionStorage : localStorage;
 	if (typeof name === "object") {
 		for (var key in name) {
-			stor.setItem(key, name[key]);
+			stor.setItem(key, (name[key] === null ? value : name[key]));
 		}
 	} else {
 		stor.setItem(name, value);
@@ -46,13 +68,6 @@ function getlSValue(name, def, sess) {
 		stor.setItem(name, def);
 		return def;
 	}
-}
-String.prototype.allReplace = function(obj) {
-	var retStr = this;
-	for (var x in obj) {
-		retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
-	}
-	return retStr
 }
 function $setup(obj, attr, events) {
 	var el = typeof obj == "string" ? document.createElement(obj) : obj;
@@ -71,6 +86,20 @@ function $setup(obj, attr, events) {
 		}
 	}
 	return el;
+}
+function $placeNode(p, el, node) {
+	var To, In = el.parentNode;
+	if (p === 'append') {
+		for(var i = 0, len = node.length; i < len; i++) {
+			if (node[i])
+				el.appendChild(node[i]);
+		}
+	} else {
+		if (p === 'after') To = el.nextSibling;
+		if (p === 'before') To = el;
+		if (p === 'prepend') To = el.childNodes[0], In = el;
+		In.insertBefore(node, To);
+	}
 }
 
 (function() {
@@ -165,68 +194,64 @@ function $setup(obj, attr, events) {
 			active = count(s, '['+htag+']') <= count(s, '[/'+htag+']');
 		!active ? (wtag === '%%' ? wmarkTag(wtag) : qlTag(wtag)) : htmlTag(htag);
 	}
-	parseLinks = function(el) {
-		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen';
-		var href = escapeUrl(el.href);
-		var EXT = href.split('.').pop().toLowerCase();
-		var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
-		var AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"];
-		var IF = ["jpeg", "jpg", "png", "svg", "gif"];
-		var P = getlSValue('LiveLinks'), endpoint, regex, embed, fav, i = 1, type = 'video';
+	initLinks = function(link) {
+		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen',
+			endp = 'http://api.embed.ly/1/oembed?url=', file, regex, embed, fav, i = 1, type = 'video';
+			href = escapeUrl(link.href),
+			EXT = href.split('.').pop().toLowerCase(),
+			VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v', 'flv', "3gp"],
+			AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"],
+			IF = ["jpeg", "jpg", "png", "svg", "gif"],
+			P = getlSValue('LiveLinks');
 		/********* HTML5 Video *********/
 		if (VF.indexOf(EXT) >= 0) {
-			embed = '<video r{wh} controls="true" poster=""><source src="$1"></source></video>';
-			P = attachFile(el, 'video', embed);
+			embed = '<video r{wh} id="html5_video" controls="true" poster=""><source src="$1"></source></video>';
+			P = attachFile(link, 'video', embed);
 		}
 		/********* HTML5 Audio *********/
 		if (AF.indexOf(EXT) >= 0) {
 			embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="$1"></source></video>';
-			P = attachFile(el, 'audio', embed);
+			P = attachFile(link, 'audio', embed);
 		}
 		/********* Image File *********/
 		if (IF.indexOf(EXT) >= 0) {
-			var name = getElementName(href);
-			var fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
+			var name = getElementName(href),
+				fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
 			embed = '<img style="border:medium none;cursor:pointer" src="$1" class="thumb" alt="'+ name +'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >';
-			P = attachFile(el, 'image', embed);
+			P = attachFile(link, 'image', embed);
 		}
 		/************************** SoundCloud *************************/
 		if (href.indexOf("soundcloud.com/") >= 0) {
-			if (el.nextElementSibling.tagName === 'BR') el.nextElementSibling.remove();
-			var sc = $(el);
-			$(el).closest(postNode).find('.postcontent').append(sc);
-			$(sc).addClass("sc-player").scPlayer();
+			link.className = "sc-player";
+			if (link.nextElementSibling.tagName === 'BR')
+				link.nextElementSibling.remove();
+			jumpCont(link).appendChild(link);
+			$(link).scPlayer();
+			P = false;
 		}
 		/*************************** Простоплеер **************************/
 		if (href.indexOf("pleer.com/tracks/") >= 0) {
-			$(el).html(function(i, html) {
-				var regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
-				var embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1"></embed>';
-				return html.replace(regex, embed);
-			}).replaceWith(function() {
-				return $('<object/>', {
-					class: 'pleer-track',
-					html: this.innerHTML
-				});
-			});
+			regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
+			embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1"></embed>';
+			pleer = $setup('object', {'class': 'pleer-track', 'html': href.replace(regex, embed)}, null)
+			link.parentNode.replaceChild(pleer, link); P = false;
 		}
 		/************************* YouTube *************************/
 		if (href.indexOf("youtu") >= 0) {
 			embed = iframe + ' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&wmode=opaque&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
-			if (href.indexOf("youtube.com") >= 0)
+			if (href.indexOf("youtube.com/watch?") >= 0 || href.indexOf("youtube.com/playlist?") >= 0)
 				regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/(?:watch|playlist)\?.*?(?:v=([\w_-]*)|(list=[\w_-]*))(?:.*?v=([\w_-]*)|.*?(list=[\w_-]*)+)?(?:.*?t=(\d+))?/g;
-			if (href.indexOf("youtu.be") >= 0) {
+			if (href.indexOf("youtu.be") >= 0)
 				regex = /(?:https?:)?\/\/(?:www\.)?youtu\.be\/([\w_-]*)\?(list=[\w_-]*)?(?:.*?t=([\w_-]*))?/g;
-			}
 			if (href.indexOf("playlist?") >= 0)
 				i = 2;
-			fav = '//youtube.com/favicon.ico'; P = true;
+			fav = '//youtube.com/favicon.ico'; P = deCfg['addYouTube'] ? false : true;;
 		}
 		/************************** Vimeo **************************/
 		if (href.indexOf("vimeo") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?vimeo\.com\/(?:.*?\/)?(\d+)(?:.*?t=(\d+))?/g;
 			embed = iframe + ' src="//player.vimeo.com/video/$1?badge=0&color=ccc5a7#t=$2"></iframe>';
-			fav = '//f.vimeocdn.com/images_v6/favicon_32.ico'; P = true;
+			fav = '//f.vimeocdn.com/images_v6/favicon_32.ico'; P = deCfg['addVimeo'] ? false : true;
 		}
 		/************************** Coub *************************/
 		if (href.indexOf("coub.com/view/") >= 0) {
@@ -243,23 +268,24 @@ function $setup(obj, attr, events) {
 		/************************* Яндекс.Видео *************************/
 		if (href.indexOf("video.yandex.ru/users/") >= 0) {
 			if ((/\/view\/(\d+)/).exec(href)) {
-				oEmbedMedia('http://video.yandex.ru/oembed.json?url=', "//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico", el, 2, 'video', /(.+)/, '');
-				P = false;
+				endp = 'http://video.yandex.ru/oembed.json?url='
+				fav = '//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico';
+				P = true;
 			}
 		}
 		/************************* VK.com ************************/
 		if (href.indexOf("vk.com/video") >= 0) {
 			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
 			embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
-			el.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
+			link.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
 			i = 3; P = true;
 		}
 		/************************* Pastebin *************************/
 		if (href.indexOf("pastebin.com/") >= 0) {
 			regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
-			embed = '<iframe style="width:98%;height:100%;resize:none" frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
+			embed = '<iframe frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
 			fav = '/test/src/140593041526.png';
-			type = 'pastebin'; P = true;
+			type = 'document'; P = true;
 		}
 		/************************* Custom iframe ************************/
 		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") >= 0) {
@@ -269,80 +295,62 @@ function $setup(obj, attr, events) {
 			i = 0; P = true;
 		}
 		/****************************************************************/
-		if (el.textContent.indexOf('>>') >= 0 || P === false) {
+		if (link.textContent.indexOf('>>') >= 0 || href.indexOf("/res/") >= 0 || P === false)
 			return;
-		}
 		var m = !regex ? '' : regex.exec(href);
-		if (!m || !m[i]) {
-			oEmbedMedia('', '', el, 0, '', '', '');
-		} else {
-			oEmbedMedia(endpoint, fav, el, 1, type, regex, embed);
-		}
+		oEmbedMedia(endp, fav, link, (!m || !m[i] ? 0 : 1), type, regex, embed);
 	}
 	loadMediaContainer = function (obj, type, regex, embed) {
 		var src = obj.getAttribute("src");
-		var csEl = type+'-container';
-		var idEl = type +'_'+ btoa(getElementName(src));
-		var cont = '<div class="'+csEl+'" id="'+idEl+'" >'+src+'</div>';
-		var contEl = document.getElementsByClassName(csEl)[0];
+			csEl = type +'-container',
+			TYPES = ['document', 'audio'],
+			idEl = type +'_'+ btoa(getElementName(src)),
+			contEl = document.getElementsByClassName(csEl)[0],
+			cont = $setup('div', {'id': idEl, 'class': csEl, 'html': src.replace(
+				regex, embed.replace('r{wh}', getVSize('html'))
+			)}, null);
+		if (type === 'image')
+			contEl = document.getElementById(idEl);
 		if (!contEl || contEl.id != idEl) {
 			if (contEl)
 				contEl.remove();
-			if (type == 'video' || type == 'image') {
-				var rp = $(obj).closest(postNode);
-				rp.find('.postcontent').prepend(cont);
-			} else {
-				$(obj).before(cont);
-			}
-			$('.'+ csEl).html(function(i, html) {
-				return html.replace(regex, embed.replace('r{wh}', getVSize('html')));
-			});
-		} else if (contEl.id == idEl) {
-			contEl.remove();
-		}
+			if (TYPES.indexOf(type) >= 0)
+				$placeNode('before', obj, cont);
+			else
+				$placeNode('prepend', jumpCont(obj), cont);
+		} else contEl.remove();
 	}
-	oEmbedMedia = function (endpoint, fav, obj, arg, type, regex, embed) {
-		var mediaUrl = escapeUrl(obj.href);
-		var $obj = obj;
-		endpoint = !endpoint ? 'http://api.embed.ly/1/oembed?url=' : endpoint;
-		$.getJSON(endpoint + mediaUrl + '&format=json', function(data) {
-			if (data) {
+	oEmbedMedia = function (endpoint, fav, link, arg, type, regex, embed) {
+		var mediaUrl = escapeUrl(link.href);
+		getDataResponse(endpoint + mediaUrl + '&format=json', function(status, sText, data, xhr) {
+			if (status !== 200 || !data) {
+				$setup(link, {'target': '_blank'}, null);
+			} else {
 				var loc = getLocation(mediaUrl),
 					slnk = ['tinyurl.com', 'bit.ly', 'goo.gl'],
 					host = slnk.indexOf(loc.hostname) >= 0 ? data.provider_url : loc.hostname,
 					icon = !fav ? '//www.google.com/s2/favicons?domain='+ host : fav,
-					name = !data.title ? getElementName(mediaUrl) +'&nbsp;&middot;&nbsp;❨'+ data.provider_name +'❩' : escapeHtml(data.title).replace(/\ -\ YouTube/, "").replace(/\ -\ Pastebin\.com/, "");
-				if (arg == 0 && data.html && data.type != "link")
-					arg = 2;
-				$($obj).replaceWith(function() {
-					if (arg > 0) {
-						var src = mediaUrl;
-					} else {
-						var href = mediaUrl;
-					} return $('<a/>', {
-						rel: "nofollow",
-						class: 'cm-link',
-						title: host == 'pastebin.com' ? data.description.split(' | ').pop() : escapeHtml(data.description),
-						style: 'background:url('+ icon +')left / 16px no-repeat',
-						html: '<u style="margin-left:20px">'+ name +'</u>',
-						href: href,
-						src: src
-					}).on("click", function() {
-						if (arg == 1)
-							loadMediaContainer(this, type, regex, embed);
-						if (arg == 2)
-							loadMediaContainer(this, data.type, /(.+)/g, data.html);
+					name = !data.title ? getElementName(mediaUrl) +'&nbsp;&middot;&nbsp;❨'+ data.provider_name +'❩' : escapeHtml(data.title).replace(/\ -\ YouTube/, "").replace(/\ -\ Pastebin\.com/, ""),
+					title = host == 'pastebin.com' ? data.description.split(' | ').pop() : escapeHtml(data.description);
+				if (arg > 0 || arg === 0 && data.html && data.type != "link") {
+					if (data.provider_name === "Google Docs")
+						type = 'document';
+					$setup(link, {'href': undefined, 'src': mediaUrl}, {
+						'click': function(e) {
+							loadMediaContainer(e.target.parentNode, (!type ? data.type : type), (!regex ? /(.+)/g : regex), (!embed ? data.html : embed))
+						}
 					});
-				});
+				}
+				$setup(link, {'class': 'cm-link', 'rel': 'nofollow', 'title': title, 'style': 'background:url('+ icon +')left / 16px no-repeat',
+					'html': '<u style="margin-left:20px">'+ name +'</u>'
+				}, null);
 			}
-		}).fail(function() {
-			$(obj).attr('target', "_blank");
 		});
 	}
 	setVSize = function (slider) {
 		var p = slider.value;
 		function size(w, h) {
-			var played = document.querySelector('.video-container > iframe');
+			var played = document.querySelector('.video-container > iframe, #html5_video');
 			setlSValue({'VWidth': w, 'VHeight': h});
 			slider.nextElementSibling.textContent = '('+w+'x'+h+')';
 			if (played) played.width = w, played.height = h;
@@ -359,40 +367,42 @@ function $setup(obj, attr, events) {
 		if (i === 'text') return w+'x'+h;
 	}
 	getElementName = function(elUrl) {
-		function getElName(a) {
-			return a.substring(a.lastIndexOf("/") + 1);
-		};
-		function slcElName(a) {
-			var s = a.slice(0, -1);
-			return getElName(s);
-		};
-		var elName = getElName(elUrl) == '' ? slcElName(elUrl) : getElName(elUrl);
+		var getElName = function(a) { return a.substring(a.lastIndexOf("/") + 1) },
+			slcElName = function (a) { return getElName(a.slice(0, -1)) },
+			elName = getElName(elUrl) === '' ? slcElName(elUrl) : getElName(elUrl);
 		return decodeURIComponent(elName);
 	}
 	attachFile = function(obj, type, embed) {
-		var mediaUrl = escapeUrl(obj.href);
-		tryUrl(mediaUrl, function() {
-			var result = this.getResponseHeader('content-type');
-			if (!result) {
-				var fileName = getElementName(mediaUrl);
-				$(obj).html('<u style="margin-left:20px;">'+ (type === 'image' ? 'Expand: ' : 'Play: ') + fileName +'</u>').attr({
-					src: mediaUrl,
-					class: 'cm-link',
-					style: 'background:url(/test/src/'+ (type === 'image' ? '140896790568.png' : '139981404639.png') +')left / 16px no-repeat'
-				}).removeAttr('href');
-				obj.onclick = function() {
-					loadMediaContainer(this, type, /(.+)/g, embed);
-				}
-			} else
-				oEmbedMedia('', '', obj, 0, '', '', '');
+		var fileUrl = escapeUrl(obj.href),
+			fileName = getElementName(fileUrl);
+		$setup(obj, {'class': 'cm-link', 'href': undefined, 'src': fileUrl, 
+			'style':'background:url(/test/src/'+ (type === 'image' ? '140896790568.png' : '139981404639.png') +')left / 16px no-repeat',
+			'html': '<u style="margin-left:20px;">'+ (type === 'image' ? 'Expand: ' : 'Play: ') + fileName +'</u>'}, {'click': function(e) {
+				loadMediaContainer(e.target.parentNode, type, /(.+)/g, embed);
+			}
 		});
 		return false;
 	}
-	tryUrl = function(url, Fn) {
-		var http = new XMLHttpRequest();
-		http.open('HEAD', url, true);
-		http.send(null);
-		http.onreadystatechange = Fn;
+	getDataResponse = function(uri, Fn) {
+		var xhReq = new XMLHttpRequest();
+		xhReq.open('GET', uri, true);
+		xhReq.send(null);
+		xhReq.onreadystatechange = function() {
+			if(xhReq.readyState !== 4)
+				return;
+			if(xhReq.status === 304) {
+				alert('304 ' + xhReq.statusText);
+			} else {
+				try {
+					var json = JSON.parse(xhReq.responseText);
+				} catch(e) {
+					Fn(1, e.toString(), null, this);
+				} finally {
+					Fn(xhReq.status, xhReq.statusText, (!json ? xhReq.responseText : json), this);
+					Fn = null;
+				}
+			}
+		}
 	}
 	//-- Replace special characters from text
 	escapeHtml = function(text) {
@@ -406,53 +416,48 @@ function $setup(obj, attr, events) {
 	}
 	//-- Get host name {getLocation(url).hostname} and path name {getLocation(url).pathname} from Url Links
 	getLocation = function(url) {
-		var a = document.createElement("a");
-		a.href = url;
-		return a;
+		return $setup('a', {'rel': 'nofollow', 'href': url}); 
 	}
 	//-- Derpibooroo Reverse Search 
 	revSearch = function(el) {
-		var imgSrc = $(el).attr('src');
-		$('<form method="post" action="https://derpibooru.org/search/reverse" target="_blank" enctype="multipart/form-data" hidden><input id="url" name="url" type="text" value="'+imgSrc+'"><input id="fuzziness" name="fuzziness" type="text" value="0.25"></form>').appendTo('body').submit().remove();
+		var form = $setup('form', {'method': "post", 'action': "https://derpibooru.org/search/reverse", 'target': "_blank", 'enctype': "multipart/form-data", 'hidden': "",
+			'html': '<input id="url" name="url" type="text" value="'+ el.getAttribute('src') +'"><input id="fuzziness" name="fuzziness" type="text" value="0.25">'}, null);
+		document.body.appendChild(form).submit(); form.remove();
 	}
 	insertListener = function(event){
 		if (event.animationName == "load") {
-			var et = event.target,
-				etp = et.parentNode,
-				dnb = etp.querySelector('span[id^="dnb-"]');
+			var et = event.target, etp = et.parentNode, a, i,
+				dnb = etp.querySelector('span[id^="dnb-"]'),
+				webm = etp.querySelector('td > a[href$=".webm"], div > a[href$=".webm"]');
 			if (etp.id === 'de-txt-panel') {
 				textArea = document.getElementById('msgbox');
 				var mbp = $setup('span', {'id': 'markup-buttons-panel', 'html': addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
 				if (etp.lastChild.id != 'markup-buttons-panel')
 					etp.appendChild(mbp);
-			} else if ($(et).is('.de-imgmenu')) {
-				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(this);return false;" src="'+ (/url\=(.+)/).exec(et.lastChild.href)[1] +'" target="_blank">Поиск по Derpibooru</a>');
+			} else if (et.classList.contains('de-imgmenu')) {
+				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch('+ (/url\=(.+)/).exec(et.lastChild.href)[1] +');return false;" target="_blank">Поиск по Derpibooru</a>');
 			} else {
-				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR')
-					dnb.insertAdjacentHTML('afterend', '<br>');
-				$(etp).find('a[href$=".webm"]:not(.filesize > a[href$=".webm"], blockquote > a[href$=".webm"])').replaceWith(function() {
-					var file = this.href;
-					var vtag = '<video class="webm" '+ getVSize('html') +' controls="true" poster=""><source src="'+ file +'"></source></video>';
-					return $(vtag);
-				});
-				for(i = 0, a = et.querySelectorAll('a[href*="pleer.com/tracks/"], a[href$=".jpg"], a[href$=".png"], a[href$=".gif"], a[href$=".mp3"] '); link = a[i++];) {
-					parseLinks(link, '')
+				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR' && dnb.nextElementSibling.tagName !== 'LABEL')
+					dnb.insertAdjacentHTML('afterend', '<label style="display:block">');
+				if (webm) {
+					webm.insertAdjacentHTML('afterend', '<video class="webm" '+ getVSize('html') +' controls="true" poster=""><source src="'+ webm.href +'"></source></video>');
+					webm.remove();
+				}
+				for(i = 0, a = et.querySelectorAll('a:not([href*="soundcloud.com/"])'); link = a[i++];) {
+					initLinks(link)
 				}
 				setTimeout(function() {
-					if (!etp.querySelector('.postcontent'))
-						et.insertAdjacentHTML('beforebegin', '<span class="postcontent"></span>');
-					for(i = 0, a = et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.de-video-link):not([target="_blank"])'); link = a[i++];) {
-						parseLinks(link, '');
+					for(i = 0, a = et.querySelectorAll('a[href*="soundcloud.com/"]'); link = a[i++];) {
+						initLinks(link);
 					}
 				}, 700)
 			}
 		}
 	}
-	
 	var pfx = ["webkit", "moz", "MS", "o", ""];
 	// animation listener events
-	PrefixedEvent("AnimationStart", insertListener);
-	PrefixedEvent("AnimationIteration", insertListener);
+	//PrefixedEvent("AnimationStart", insertListener);
+	//PrefixedEvent("AnimationIteration", insertListener);
 	PrefixedEvent("AnimationEnd", insertListener);
 	// apply prefixed event handlers
 	function PrefixedEvent(type, callback) {
