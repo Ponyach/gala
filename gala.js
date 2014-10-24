@@ -127,14 +127,14 @@ function $setup(obj, attr, events) {
 			markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
 		if (dice) {
 			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
-			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : cont[1] + cont[2] + s + OdT;
+			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : (/^\d+|\d+d\d+$/).test(selected) ? OdT : cont[1] + cont[2] + s + OdT;
 		}
 		$setup(textArea, {'class': 'ta-inact', 'value': val.substring(0, start) + markedText + val.substring(end)}, {
 			'click': function(e) { this.removeAttribute('class') }
 		});
 		textArea.focus();
 		eOfs = markedText.length, sOfs = '';
-		if (openTag.indexOf(['[spoiler]', '[code]', '[rp]']) >= 0 || cont && !cont[2] && !dice && !ql) {
+		if (['[spoiler]', '[code]', '[rp]'].indexOf(openTag) >= 0 || cont && !cont[2] && !dice && !ql) {
 			sOfs = openTag.length;
 			eOfs = sOfs + selected.length;
 		}
