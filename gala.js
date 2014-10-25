@@ -2,12 +2,12 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.48
+	: version 1.2.49
 								© magicode
 	
 */
 var style = document.createElement("style");
-style.textContent = 'blockquote:after, span[de-bb]:after, .de-menu.de-imgmenu:after{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
+style.textContent = 'blockquote:after, #de-txt-panel:after, .de-menu.de-imgmenu:after{content:"";-webkit-animation:load 1s linear 2;animation:load 1s linear 2}\
 .de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{padding:0 16px 0 0;margin:0 4px;cursor:pointer}\
 .document-container{overflow:auto;resize:both;background-color:#fefefe} .document-container > iframe{width:100%;height:100%;resize:none}\
 .webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
@@ -41,11 +41,6 @@ String.prototype.allReplace = function(obj) {
 		retStr = retStr.replace(new RegExp(x, 'g'), obj[x])
 	}
 	return retStr
-}
-if(!String.prototype.contains) {
-	String.prototype.contains = function(s, i) {
-		return this.indexOf(s, i) != -1;
-	}
 }
 function setlSValue(name, value, sess) {
 	var stor = sess ? sessionStorage : localStorage;
@@ -424,25 +419,33 @@ function $placeNode(p, el, node) {
 			'html': '<input id="url" name="url" type="text" value="'+ el.getAttribute('src') +'"><input id="fuzziness" name="fuzziness" type="text" value="0.25">'}, null);
 		document.body.appendChild(form).submit(); form.remove();
 	}
-	insertListener = function(event){
+	insertListenerS = function(event){
 		if (event.animationName == "load") {
-			var et = event.target, etp = et.parentNode, a, i,
+			var et = event.target, etp = et.parentNode,
 				dnb = etp.querySelector('span[id^="dnb-"]'),
 				webm = etp.querySelector('td > a[href$=".webm"], div > a[href$=".webm"]');
-			if (etp.id === 'de-txt-panel') {
+			if (et.id === 'de-txt-panel') {
 				textArea = document.getElementById('msgbox');
 				var mbp = $setup('span', {'id': 'markup-buttons-panel', 'html': addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
-				if (etp.lastChild.id != 'markup-buttons-panel')
-					etp.appendChild(mbp);
-			} else if (et.classList.contains('de-imgmenu')) {
+				if (et.lastChild.id != 'markup-buttons-panel')
+					et.appendChild(mbp);
+			}
+			if (et.className.split(' ').indexOf('de-imgmenu') >= 0)
 				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch('+ (/url\=(.+)/).exec(et.lastChild.href)[1] +');return false;" target="_blank">Поиск по Derpibooru</a>');
-			} else {
+			if (et.tagName === 'BLOCKQUOTE') {
 				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR' && dnb.nextElementSibling.tagName !== 'LABEL')
 					dnb.insertAdjacentHTML('afterend', '<label style="display:block">');
 				if (webm) {
 					webm.insertAdjacentHTML('afterend', '<video class="webm" '+ getVSize('html') +' controls="true" poster=""><source src="'+ webm.href +'"></source></video>');
 					webm.remove();
 				}
+			}
+		}
+	}
+	insertListenerE = function(event){
+		if (event.animationName == "load") {
+			var a, i, et = event.target;
+			if (et.tagName === 'BLOCKQUOTE') {
 				for(i = 0, a = et.querySelectorAll('a:not([href*="soundcloud.com/"])'); link = a[i++];) {
 					initLinks(link)
 				}
@@ -456,9 +459,9 @@ function $placeNode(p, el, node) {
 	}
 	var pfx = ["webkit", "moz", "MS", "o", ""];
 	// animation listener events
-	//PrefixedEvent("AnimationStart", insertListener);
+	PrefixedEvent("AnimationStart", insertListenerS);
 	//PrefixedEvent("AnimationIteration", insertListener);
-	PrefixedEvent("AnimationEnd", insertListener);
+	PrefixedEvent("AnimationEnd", insertListenerE);
 	// apply prefixed event handlers
 	function PrefixedEvent(type, callback) {
 		for (var p = 0; p < pfx.length; p++) {
