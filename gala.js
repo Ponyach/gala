@@ -234,13 +234,13 @@ function $placeNode(p, el, node) {
 		/************************* YouTube *************************/
 		if (href.indexOf("youtu") >= 0) {
 			embed = iframe + ' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&wmode=opaque&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
+			fav = '//youtube.com/favicon.ico'; P = deCfg['addYouTube'] ? false : true;
 			if (href.indexOf("youtube.com/watch?") >= 0 || href.indexOf("youtube.com/playlist?") >= 0)
 				regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/(?:watch|playlist)\?.*?(?:v=([\w_-]*)|(list=[\w_-]*))(?:.*?v=([\w_-]*)|.*?(list=[\w_-]*)+)?(?:.*?t=(\d+))?/g;
 			if (href.indexOf("youtu.be") >= 0)
 				regex = /(?:https?:)?\/\/(?:www\.)?youtu\.be\/([\w_-]*)\?(list=[\w_-]*)?(?:.*?t=([\w_-]*))?/g;
 			if (href.indexOf("playlist?") >= 0)
-				i = 2;
-			fav = '//youtube.com/favicon.ico'; P = deCfg['addYouTube'] ? false : true;;
+				P = true, i = 2;
 		}
 		/************************** Vimeo **************************/
 		if (href.indexOf("vimeo") >= 0) {
@@ -260,6 +260,12 @@ function $placeNode(p, el, node) {
 			embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=fefefe">';
 			fav = "//rutube.ru/static/img/btn_play.png"; P = true;
 		}
+		/************************* Видео m@il.ru  *************************/
+		if (href.indexOf("mail.ru/") >= 0 && href.indexOf("/video/") >= 0) {
+			regex = /(?:https?:)?\/\/(?:my\.)?(?:mail\.ru\/mail\/)([\w_-]*)(?:\/video)\/([\w_-]*\/\d+\.html)/g;
+			embed = iframe +' src="http://videoapi.my.mail.ru/videos/embed/mail/$1/$2">';
+			P = true;
+		}
 		/************************* Яндекс.Видео *************************/
 		if (href.indexOf("video.yandex.ru/users/") >= 0) {
 			if ((/\/view\/(\d+)/).exec(href)) {
@@ -270,10 +276,10 @@ function $placeNode(p, el, node) {
 		}
 		/************************* VK.com ************************/
 		if (href.indexOf("vk.com/video") >= 0) {
-			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
+			regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(-?\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
 			embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
 			link.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
-			i = 3; P = true;
+			fav = '//vk.com/images/faviconnew.ico'; i = 3; P = true;
 		}
 		/************************* Pastebin *************************/
 		if (href.indexOf("pastebin.com/") >= 0) {
@@ -286,11 +292,12 @@ function $placeNode(p, el, node) {
 		if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") >= 0) {
 			regex = /(.+)/g;
 			embed =  iframe +' src="'+ href +'">';
-			el.setAttribute("href", href.replace(/embed\//, "").replace(/be\.com/, ".be"));
+			if (href.indexOf("/html/") < 0)
+				link.setAttribute("href", href.allReplace({'embed/': "", 'be.com': ".be"}));
 			i = 0; P = true;
 		}
 		/****************************************************************/
-		if (link.textContent.indexOf('>>') >= 0 || href.indexOf("/res/") >= 0 || P === false)
+		if (link.textContent.indexOf('>>') >= 0 || ['cm-link', 'irc-reflink'].indexOf(link.classList[0]) >= 0 || href.indexOf("/res/") >= 0 || P === false)
 			return;
 		var m = !regex ? '' : regex.exec(href);
 		oEmbedMedia(endp, fav, link, (!m || !m[i] ? 0 : 1), type, regex, embed);
