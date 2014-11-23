@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.85
+	: version 1.2.86
 								© magicode
 	
 */
