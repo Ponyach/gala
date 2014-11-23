@@ -172,9 +172,9 @@ function revSearch(imageUrl) {
 		LinksMap: JSON.parse(getlSValue('LinksCache', '{}', true)),
 		URL: parseUrl()},
 	KeyCodes = {
-		symbs: ['"|50', '^|54', '*|56', '(|57', '\\|220', '"|222'],
-		quots: ['*|106', '>|190'],
-		doubs: ['!|42', '!|49', '#|51', '%|53']},
+		symbs: ['"', '^', '*', '(', '\\'],
+		doubs: ['!', '#', '%'],
+		quots: ['@', '>']},
 	textArea, contentFrame = $setup('div', {'class': 'content-window hidup', 'html':
 		'<div id="shadow-box"></div><label id="close-content-window"></label>'}, {
 		'click': function(e) {
