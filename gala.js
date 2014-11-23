@@ -346,15 +346,18 @@ function revSearch(imageUrl) {
 			regex = /^(\s*)(.*?)(\s*)$/,
 			cont = regex.exec(selected),
 			wmark = type === 'wmark',
-			dice = closeTag === '##',
+			dice = openTag === '##',
+			scrn = openTag === '\\',
 			html = type === 'html',
 			ql = type === 'ql';
 		if (ql)
 			markedText = openTag + getext.replace(/\n/gm, closeTag);
 		if (html)
 			markedText = openTag + selected + closeTag;
-		if (wmark && !dice)
+		if (wmark && !dice && !scrn)
 			markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
+		if (scrn)
+			markedText = selected.replace(/(%%|\^|!!|\*)/gm, openTag +'$1');
 		if (dice) {
 			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
 			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : (/^\d+|\d+d\d+$/).test(selected) ? OdT : cont[1] + cont[2] + s + OdT;
@@ -368,39 +371,52 @@ function revSearch(imageUrl) {
 		textArea.setSelectionRange(start + sOfs, start + eOfs);
 	}
 	function keyMarks(e) {
-		var key = e.key || escapeUChar(e.keyIdentifier), kcode = key +'|'+ e.keyCode,
-			val = textArea.value, flag = true,
+		var TA = e.target.tagName === 'TEXTAREA',
+		 	key = String.fromCharCode(e.charCode),
+			val = textArea.value, 
 			end = textArea.selectionEnd,
 			start = textArea.selectionStart,
 			selected = val.substring(start, end),
-			active = selected.length > 0,
-			autoselect = function() {
+			active = selected.length > 0;
+			function autoselect() {
 				if (!active) {
 					var fw = val.substring(start, val.length).match(/^(.*?)(?:\s|$)/);
 					return (fw[1] ? false : true);
 				} else return true;
-			};
-		if (KeyCodes.doubs.indexOf(kcode) >= 0) {
+			}
+			function callback(e) {
+				if (e.preventDefault)
+					e.preventDefault();
+				else
+					e.returnValue = false;
+			}
+		if (TA && KeyCodes.doubs.indexOf(key) >= 0) {
 			if (Gala.LastKey === key || active){
 				markText(key + (active ? key : ''), key + key, 'wmark')
 				Gala.LastKey = null;
-				flag = false;
+				return callback(e);
 			}
 		}
-		if (KeyCodes.symbs.indexOf(kcode) >= 0) {
+		if (TA && KeyCodes.symbs.indexOf(key) >= 0) {
 			if (autoselect()) {
+				if (key == '\\' && !active) return;
 				markText(key, (key === '(' ? ')' : key), 'wmark')
-				flag = false;
+				return callback(e)
 			}
 		}
-		if (KeyCodes.quots.indexOf(kcode) >= 0) {
+		if (KeyCodes.quots.indexOf(key) >= 0) {
 			selected = val.substring(start - 1, start);
 			if (!selected.match(/[^.]/) || selected === '\n') {
-				qlTag(key === '*' ? '•' : key);
-				flag = false;
+				qlTag(key === '@' ? '•' : key);
+				return callback(e)
 			}
 		}
-		return flag;
+		if (TA) { Gala.LastKey = key;
+			if (textArea.className === 'ta-inact') {
+				textArea.setSelectionRange(end, end);
+				textArea.removeAttribute('class');
+			}
+		}
 	}
 	function parseLinks(link) {
 		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen',
@@ -589,24 +605,16 @@ function revSearch(imageUrl) {
 		if (event.animationName == "init") {
 			var et = event.target, etp = et.parentNode,
 				dnb = etp.querySelector('span[id^="dnb-"]'),
+				mbp = $setup('span', {'id': 'markup-buttons-panel', 'html':
+					addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
 				webm = etp.querySelector('td > a[href$=".webm"], div > a[href$=".webm"]');
 			if (et.id === 'de-txt-panel') {
 				if(!textArea) {
-					textArea = document.getElementById('msgbox');
-					window.onkeydown = keyMarks;
-					$setup(textArea, {}, {
-						'click': function(e) { this.removeAttribute('class') },
-						'keypress': function(e) {
-							Gala.LastKey = e.key || escapeUChar(e.keyIdentifier);
-							if (this.className === 'ta-inact') {
-								var sEn = this.selectionEnd;
-								this.setSelectionRange(sEn, sEn);
-								this.removeAttribute('class');
-							}
-						}
+					textArea = $setup(document.getElementById('msgbox'), {}, {
+						'click': function(e) {this.removeAttribute('class')}
 					});
+					window.addEventListener('keypress', keyMarks, false);
 				}
-				var mbp = $setup('span', {'id': 'markup-buttons-panel', 'html': addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
 				if (et.lastChild.id != 'markup-buttons-panel')
 					et.appendChild(mbp);
 			}
