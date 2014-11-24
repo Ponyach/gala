@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.86
+	: version 1.2.87
 								© magicode
 	
 */
@@ -59,6 +59,8 @@ function $placeNode(p, el, node) {
 		$each(el, function(node) {
 			node.parentNode.removeChild(node);
 		});
+	} else if (p === 'replace') {
+		In.replaceChild(node, el);
 	} else {
 		if (p === 'after') To = el.nextSibling;
 		if (p === 'before') To = el;
@@ -126,12 +128,10 @@ String.prototype.allReplace = function(obj, r) {
 	}
 	return retStr
 }
-//-- Get  Resource name from url links
-function getElementName(elUrl) {
-	var getElName = function(a) { return a.substring(a.lastIndexOf("/") + 1) },
-		slcElName = function (a) { return getElName(a.slice(0, -1)) },
-		elName = getElName(elUrl) === '' ? slcElName(elUrl) : getElName(elUrl);
-	return decodeURIComponent(elName);
+//-- Get Page name from Url
+function getPageName(url) {
+	var a = url.split('/'), p = a.pop();
+	return decodeURIComponent((!p ? a.pop() : p));
 }
 //-- Replace special characters from text
 function escapeHtml(text) {
@@ -198,6 +198,8 @@ function revSearch(imageUrl) {
 /*-----[ GLOBAL Functions ]-----*/
 	addGalaSettings = function() {
 		return '<table><tbody><tr><td>Скрывать кнопки разметки:</td><td id="hide-buttons-panel">'+ addMarkupButtons('menu') +
+		'<span class="menubuttons"><label><input onclick="setupOption(this, \'KeyMarks\')" '+ (!getlSValue('KeyMarks', true) ? '' : 'checked') +
+		' type="checkbox" name="set_km" value=""><span title="Вкл/Выкл Gala KeyMarks &middot; % ^ * ( &quot; @ &#92; ! # &gt;">&Xi;</span></label></span>'+
 		'</td></tr><tr><td>Обробатывать ссылки:</td><td><ul class="nav navbar-nav" onclick="setPMode(event)"><li class="dropdown"><span class="dropdown-toggle '+
 			Gala.Embeds +'"></span><ul class="dropdown-menu hidout"><li><span class="set refOnly"></span></li><li><span class="set justPlayers"></span></li><li><span class="set All"></span></li></ul></li></ul></td></tr>'+
 		'<tr><td>Положение видеоплеера:</td><td><span onchange="placeMedia(event)"><input name="cont_p" value="windowFrame" type="radio" '+
@@ -222,7 +224,7 @@ function revSearch(imageUrl) {
 			vsset.classList.remove('hidout');
 			if (cont) {
 				$placeNode('prepend', jumpCont(Gala.VActive[0]), $setup(cont, {'class': 'video-container', 'id': 'video_'+cont.id.split('_')[1]}, null));
-				$setup(cont.firstChild, {'class': 'full-size', 'width': getlSValue('VWidth'), 'height': getlSValue('VHeight')}, null);
+				$setup(cont.firstChild, {'class': '', 'width': getVSize('w'), 'height': getVSize('h')}, null);
 				contMarker.classList.add('hidout');
 				contentFrame.classList.add('hidup');
 			}
@@ -263,10 +265,17 @@ function revSearch(imageUrl) {
 		p == 1 ? size(360, 270) : p == 2 ? size(480, 360) :
 		p == 3 ? size(720, 480) : p == 4 ? size(854, 576) : slider.textContent = 'gay :D';
 	}
+	setupOption = function (obj, option) {
+		if (obj.type === 'checkbox')
+			val = obj.checked;
+		if (obj.tagName === 'SELECT')
+			val = obj.value;
+		setlSValue(option, val);
+	}
 	loadMediaContainer = function (el) {
 		var cont, src = el.getAttribute("src"),
 			type = Gala.LinksMap[src].Type,
-			hash = btoa(getElementName(src));
+			hash = btoa(getPageName(src));
 		if (Gala.MC === 0 && ['img', 'audio'].indexOf(type) < 0) {
 			var last = contentFrame.lastChild;
 				cont = $setup('div', {'class': 'content-frame '+ type, 'id': 'content_'+ hash,
@@ -319,7 +328,7 @@ function revSearch(imageUrl) {
 		var chk, mbutton_tamplate;
 		if (type === 'menu') {
 			chk = 'checked',
-			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_r{v}" value="r{v}"><span title="r{T}" r{x}>r{N}</span></label></span>';
+			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_r{v}" value="r{v}" r{x}><span title="r{T}">r{N}</span></label></span>';
 		} else {
 			chk = 'hidden', mbutton_tamplate = '<span id="r{v}" onclick="r{t}Tag(\'r{n}\')" title="r{T}" r{x} class="markup-button'+
 				(type === 'text' ? ' text"><a href="#" onclick="return false;">r{N}</a>' : '"><input value="r{N}" type="button">') +'</span>';
@@ -346,7 +355,7 @@ function revSearch(imageUrl) {
 			regex = /^(\s*)(.*?)(\s*)$/,
 			cont = regex.exec(selected),
 			wmark = type === 'wmark',
-			dice = openTag === '##',
+			dice = closeTag === '##',
 			scrn = openTag === '\\',
 			html = type === 'html',
 			ql = type === 'ql';
@@ -357,7 +366,7 @@ function revSearch(imageUrl) {
 		if (wmark && !dice && !scrn)
 			markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
 		if (scrn)
-			markedText = selected.replace(/(%%|\^|!!|\*)/gm, openTag +'$1');
+			markedText = selected.length > 0 ? selected.replace(/(%%|\^|!!|\*)/gm, openTag +'$1') : closeTag;
 		if (dice) {
 			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
 			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : (/^\d+|\d+d\d+$/).test(selected) ? OdT : cont[1] + cont[2] + s + OdT;
@@ -372,6 +381,7 @@ function revSearch(imageUrl) {
 	}
 	function keyMarks(e) {
 		var TA = e.target.tagName === 'TEXTAREA',
+			KM = getlSValue('KeyMarks'),
 		 	key = String.fromCharCode(e.charCode),
 			val = textArea.value, 
 			end = textArea.selectionEnd,
@@ -390,21 +400,20 @@ function revSearch(imageUrl) {
 				else
 					e.returnValue = false;
 			}
-		if (TA && KeyCodes.doubs.indexOf(key) >= 0) {
+		if (KM && TA && KeyCodes.doubs.indexOf(key) >= 0) {
 			if (Gala.LastKey === key || active){
 				markText(key + (active ? key : ''), key + key, 'wmark')
 				Gala.LastKey = null;
 				return callback(e);
 			}
 		}
-		if (TA && KeyCodes.symbs.indexOf(key) >= 0) {
+		if (KM && TA && KeyCodes.symbs.indexOf(key) >= 0) {
 			if (autoselect()) {
-				if (key == '\\' && !active) return;
 				markText(key, (key === '(' ? ')' : key), 'wmark')
 				return callback(e)
 			}
 		}
-		if (KeyCodes.quots.indexOf(key) >= 0) {
+		if (KM && KeyCodes.quots.indexOf(key) >= 0) {
 			selected = val.substring(start - 1, start);
 			if (!selected.match(/[^.]/) || selected === '\n') {
 				qlTag(key === '@' ? '•' : key);
@@ -448,23 +457,9 @@ function revSearch(imageUrl) {
 				'text': Gala.LinksMap[href].Name
 			}, null);
 		} else {
-			/********* HTML5 Video *********/
-			if (VF.indexOf(EXT) >= 0) {
-				embed = '<video r{wh} id="html5_video" controls="true" poster=""><source src="'+href+'"></source></video>';
-				return attachFile(link, 'video', embed);
-			}
-			/********* HTML5 Audio *********/
-			if (AF.indexOf(EXT) >= 0) {
-				embed = '<video width="300" height="150" controls="" poster="/test/src/139957920577.png"><source src="'+href+'"></source></video>';
-				return attachFile(link, 'audio', embed);
-			}
-			/********* Image File *********/
-			if (IF.indexOf(EXT) >= 0) {
-				var name = getElementName(href),
-					fShN = name.length > 17 ? name.substring(0, 17) + '...' : name;
-				embed = '<img style="border:medium none;cursor:pointer" src="'+ href+ '" class="thumb" alt="'+ name +
-					'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >';
-				return attachFile(link, 'img', embed);
+			/********* HTML5 Audio/Video & Images *********/
+			if (VF.concat(AF.concat(IF)).indexOf(EXT) >= 0) {
+				return attachFile(link, (IF.indexOf(EXT) >= 0 ? 'img' : AF.indexOf(EXT) >= 0 ? 'audio' : 'video'));
 			}
 			/************************** SoundCloud *************************/
 			if (href.indexOf("soundcloud.com/") >= 0) {
@@ -479,11 +474,11 @@ function revSearch(imageUrl) {
 				regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
 				embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1">';
 				pleer = $setup('object', {'class': 'pleer-track', 'html': href.replace(regex, embed)}, null)
-				link.parentNode.replaceChild(pleer, link); P = false;
+				$placeNode('replace', link, pleer); P = false;
 			}
 			/************************* YouTube *************************/
 			if (href.indexOf("youtu") >= 0) {
-				embed = iframe +' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&wmode=opaque&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
+				embed = iframe +' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
 				fav = '//youtube.com/favicon.ico'; P = Gala.deCfg['addYouTube'] ? false : true;
 				if (href.indexOf("youtube.com/watch?") >= 0 || href.indexOf("youtube.com/playlist?") >= 0)
 					regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/(?:watch|playlist)\?.*?(?:v=([\w_-]*)|(list=[\w_-]*))(?:.*?v=([\w_-]*)|.*?(list=[\w_-]*)+)?(?:.*?t=(\d+))?/g;
@@ -551,10 +546,14 @@ function revSearch(imageUrl) {
 			oEmbedMedia(link, type, href.replace(regex, embed), fav, endp, (regex.exec(href)[i] != undefined));
 		}
 	}
-	function attachFile(el, type, embed) {
+	function attachFile(el, type, lR) {
 		var fileUrl = escapeUrl(el.href),
-			fileName = (type === 'img' ? 'Expand: ' : 'Play: ') + getElementName(fileUrl),
+			fileName = (type === 'img' ? 'Expand: ' : 'Play: ') + getPageName(fileUrl),
 			fileIcon = '/test/src/'+ (type === 'img' ? '140896790568.png' : '139981404639.png'),
+			embed = type === 'img' ? '<img style="border:medium none;cursor:pointer" src="'+ fileUrl +'" class="thumb" alt="'+ fileName +
+				'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >' :
+				'<video '+ (type === 'audio' ? 'width="300" height="150" poster="/test/src/139957920577.png"' : 'r{wh}') +
+			' controls><source src="'+ fileUrl +'"></source></video>',
 			attach = function(e) {
 				$setup(el, {'class': 'cm-link', 'rel': 'nofollow', 'href': undefined, 'src': fileUrl, 
 					'style':'background:url('+ fileIcon +')left / 16px no-repeat', 'text': fileName,
@@ -562,8 +561,9 @@ function revSearch(imageUrl) {
 				Gala.LinksMap[fileUrl] = {Name: fileName, Title: '', Embed: embed, Favicon: fileIcon, Type: type};
 				setlSValue('LinksCache', JSON.stringify(Gala.LinksMap), true);
 			};
-		$setup(type, {'src': fileUrl}, {'load': attach, 'loadeddata': attach,
-			'error': function(e) { oEmbedMedia(el) }
+		$setup(type, {'src': fileUrl, 'width': getVSize('w'), 'height': getVSize('h'), 'controls': ''}, {'load': attach,
+			'loadeddata': function(e){ lR ? $placeNode('replace', el, this) : attach(e)},
+			'error': function(e) { lR ? el.setAttribute('target', '_blank') : oEmbedMedia(el) }
 		});
 	}
 	function oEmbedMedia(link, type, embed, fav, endpoint, arg) {
@@ -578,7 +578,7 @@ function revSearch(imageUrl) {
 					host = slnk.indexOf(loc.hostname) >= 0 ? data.provider_url : 'http://'+ loc.hostname,
 					icon = !fav ? '//www.google.com/s2/favicons?domain='+ host : fav,
 					title = host == 'pastebin.com' ? data.description.split(' | ').pop() : data.description,
-					name = !data.title ? getElementName(mediaUrl) +' ・ ❨'+ data.provider_name +'❩' : data.title.allReplace({' - YouTube': "", ' - Pastebin.com': ""}, true);
+					name = !data.title ? getPageName(mediaUrl) +' ・ ❨'+ data.provider_name +'❩' : data.title.allReplace({' - YouTube': "", ' - Pastebin.com': ""}, true);
 				if (arg || !arg && data.html && data.type != "link") {
 					if (!embed && data.html)
 						embed = data.html;
@@ -596,10 +596,10 @@ function revSearch(imageUrl) {
 	function getVSize(i) {
 		var w = getlSValue('VWidth', 360), h = getlSValue('VHeight', 270),
 			val = w == 360 ? 1 : w == 480 ? 2 : w == 720 ? 3 : w == 854 ? 4 : 0;
-			whtml = 'width="'+w+'" height="'+h+'"';
-		if (i === 'html') return whtml;
+		if (i === 'html') return 'width="'+w+'" height="'+h+'"';
 		if (i === 'value') return val;
 		if (i === 'text') return w+'x'+h;
+		return (i == 'w' ? w : i == 'h' ? h : 0);
 	}
 	function insertListenerS(event){
 		if (event.animationName == "init") {
@@ -607,7 +607,6 @@ function revSearch(imageUrl) {
 				dnb = etp.querySelector('span[id^="dnb-"]'),
 				mbp = $setup('span', {'id': 'markup-buttons-panel', 'html':
 					addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
-				webm = etp.querySelector('td > a[href$=".webm"], div > a[href$=".webm"]');
 			if (et.id === 'de-txt-panel') {
 				if(!textArea) {
 					textArea = $setup(document.getElementById('msgbox'), {}, {
@@ -621,13 +620,10 @@ function revSearch(imageUrl) {
 			if (et.className.split(' ').indexOf('de-imgmenu') >= 0)
 				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch('+ (/url\=(.+)/).exec(et.lastChild.href)[1] +');return false;" target="_blank">Поиск по Derpibooru</a>');
 			if (et.tagName === 'BLOCKQUOTE') {
-				$each(et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.irc-reflink):not([href*="soundcloud.com/"])'), parseLinks);
+				$each(etp.querySelectorAll('td > a[href$=".webm"]:not([target="_blank"]), div > a[href$=".webm"]:not([target="_blank"])'), function(el) { attachFile(el, 'video', true) });
 				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR' && dnb.nextElementSibling.tagName !== 'LABEL')
 					dnb.insertAdjacentHTML('afterend', '<label style="display:block">');
-				if (webm) {
-					webm.insertAdjacentHTML('afterend', '<video class="webm" '+ getVSize('html') +' controls="true" poster=""><source src="'+ webm.href +'"></source></video>');
-					webm.remove();
-				}
+				$each(et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.irc-reflink):not([href*="soundcloud.com/"])'), parseLinks);
 			}
 			if(!document.querySelector('.content-window'))
 				$placeNode('append', document.body, [contentFrame, contMarker]);
