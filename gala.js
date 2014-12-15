@@ -2,7 +2,7 @@
 			«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.87
+	: version 1.2.88
 								© magicode
 	
 */
@@ -124,9 +124,9 @@ function getDataResponse(uri, Fn) {
 String.prototype.allReplace = function(obj, r) {
 	var retStr = this;
 	for (var x in obj) {
-		retStr = retStr.replace((r ? x : new RegExp(x, 'g')), obj[x])
+		retStr = retStr.replace((r ? x : new RegExp(x, 'g')), obj[x]);
 	}
-	return retStr
+	return retStr;
 }
 //-- Get Page name from Url
 function getPageName(url) {
@@ -156,10 +156,11 @@ function parseUrl(url) {
 	return m ? {host: m[1], board: m[2], page: m[3], thread: m[4], desk: m[5], pointer: m[6], pid: m[7]} : {};
 }
 //-- Derpibooroo Reverse Search 
-function revSearch(imageUrl) {
+function revSearch(imgSrc) {
 	var form = $setup('form', {'method': "post", 'action': "https://derpibooru.org/search/reverse", 'target': "_blank", 'enctype': "multipart/form-data", 'hidden': "",
-		'html': '<input id="url" name="url" type="text" value="'+ imageUrl +'"><input id="fuzziness" name="fuzziness" type="text" value="0.25">'}, null);
-	document.body.appendChild(form).submit(); form.remove();
+		'html': '<input id="url" name="url" type="text" value="'+ imgSrc +'"><input id="fuzziness" name="fuzziness" type="text" value="0.25">'}, null);
+	document.body.appendChild(form).submit();
+	return form.remove();
 }
 
 (function() {
@@ -174,7 +175,8 @@ function revSearch(imageUrl) {
 	KeyCodes = {
 		symbs: ['"', '^', '*', '(', '\\'],
 		doubs: ['!', '#', '%'],
-		quots: ['@', '>']},
+		quots: ['@', '>'],
+		specl: [8, 86]},
 	textArea, contentFrame = $setup('div', {'class': 'content-window hidup', 'html':
 		'<div id="shadow-box"></div><label id="close-content-window"></label>'}, {
 		'click': function(e) {
@@ -338,7 +340,7 @@ function revSearch(imageUrl) {
 			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html',  'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html',  'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'spoiler %%', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',       'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'code •', 'r{N}': 'C', 'r{v}': 'code',      'r{t}': 'ins',   'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
+			mbutton_tamplate.allReplace({'r{n}': 'code 	', 'r{N}': 'C', 'r{v}': 'code',      'r{t}': 'ins',   'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'rp',  'r{N}': 'RP',   'r{v}': 'roleplay',  'r{t}': 'html',  'r{T}': 'Ролеплей',       'r{x}': (getlSValue('roleplay', true)  ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html',  'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
 			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html',  'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
@@ -420,7 +422,7 @@ function revSearch(imageUrl) {
 				return callback(e)
 			}
 		}
-		if (TA) { Gala.LastKey = key;
+		if (TA && e.keyCode != 8) { Gala.LastKey = key;
 			if (textArea.className === 'ta-inact') {
 				textArea.setSelectionRange(end, end);
 				textArea.removeAttribute('class');
@@ -448,14 +450,8 @@ function revSearch(imageUrl) {
 						'onclick': 'return highlight("'+ pid +'", true)', 'class': 'de-preflink ref|'+ brd +'|'+ tid +'|'+ pid + op}, null);
 			}
 		}
-		if (P === null)
+		if (P === null) {
 			return setlSValue('LinksCache', '{}', true);
-		if (Gala.LinksMap[href]) {
-			if (Gala.LinksMap[href].Embed)
-				$setup(link, {'href': undefined, 'src': href, 'onclick': 'loadMediaContainer(event.target)'}, null);
-			$setup(link, {'class': 'cm-link', 'rel': 'nofollow', 'title': Gala.LinksMap[href].Title, 'style': 'background:url('+ Gala.LinksMap[href].Favicon +')left / 16px no-repeat',
-				'text': Gala.LinksMap[href].Name
-			}, null);
 		} else {
 			/********* HTML5 Audio/Video & Images *********/
 			if (VF.concat(AF.concat(IF)).indexOf(EXT) >= 0) {
@@ -467,14 +463,14 @@ function revSearch(imageUrl) {
 				if (link.nextElementSibling.tagName === 'BR')
 					link.nextElementSibling.remove();
 				jumpCont(link).appendChild(link);
-				$(link).scPlayer(); P = false;
+				return $(link).scPlayer();
 			}
 			/*************************** Простоплеер **************************/
 			if (href.indexOf("pleer.com/tracks/") >= 0) {
 				regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
 				embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1">';
 				pleer = $setup('object', {'class': 'pleer-track', 'html': href.replace(regex, embed)}, null)
-				$placeNode('replace', link, pleer); P = false;
+				return $placeNode('replace', link, pleer);
 			}
 			/************************* YouTube *************************/
 			if (href.indexOf("youtu") >= 0) {
@@ -508,15 +504,13 @@ function revSearch(imageUrl) {
 			/************************* Видео m@il.ru  *************************/
 			if (href.indexOf("mail.ru/") >= 0 && href.indexOf("/video/") >= 0) {
 				regex = /(?:https?:)?\/\/(?:my\.)?(?:mail\.ru\/mail\/)([\w_-]*)(?:\/video)\/([\w_-]*\/\d+\.html)/g;
-				embed = iframe +' src="http://videoapi.my.mail.ru/videos/embed/mail/$1/$2">';
-				P = true;
+				embed = iframe +' src="http://videoapi.my.mail.ru/videos/embed/mail/$1/$2">'; P = true;
 			}
 			/************************* Яндекс.Видео *************************/
 			if (href.indexOf("video.yandex.ru/users/") >= 0) {
 				if ((/\/view\/(\d+)/).exec(href)) {
-					endp = 'http://video.yandex.ru/oembed.json?url='
+					endp = 'http://video.yandex.ru/oembed.json?url='; P = true;
 					fav = '//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico';
-					P = true;
 				}
 			}
 			/************************* VK.com ************************/
@@ -541,9 +535,14 @@ function revSearch(imageUrl) {
 				i = 0; P = true;
 			}
 			/****************************************************************/
-			if (P === false)
-				return;
-			oEmbedMedia(link, type, href.replace(regex, embed), fav, endp, (regex.exec(href)[i] != undefined));
+			if (P && Gala.LinksMap[href]) {
+				if (Gala.LinksMap[href].Embed)
+					$setup(link, {'href': undefined, 'src': href, 'onclick': 'loadMediaContainer(event.target)'}, null);
+				$setup(link, {'class': 'cm-link', 'title': Gala.LinksMap[href].Title, 'text': Gala.LinksMap[href].Name,
+					'rel': 'nofollow', 'style': 'background:url('+ Gala.LinksMap[href].Favicon +')left / 16px no-repeat'
+				}, null);
+			} else if (P)
+				oEmbedMedia(link, type, href.replace(regex, embed), fav, endp, (regex.exec(href)[i] != undefined));
 		}
 	}
 	function attachFile(el, type, lR) {
@@ -610,7 +609,10 @@ function revSearch(imageUrl) {
 			if (et.id === 'de-txt-panel') {
 				if(!textArea) {
 					textArea = $setup(document.getElementById('msgbox'), {}, {
-						'click': function(e) {this.removeAttribute('class')}
+						'click': function(e) {this.removeAttribute('class')},
+						'keydown': function(e) {
+							if (KeyCodes.specl.indexOf(e.keyCode) >= 0)
+								keyMarks(e)}
 					});
 					window.addEventListener('keypress', keyMarks, false);
 				}
@@ -618,7 +620,7 @@ function revSearch(imageUrl) {
 					et.appendChild(mbp);
 			}
 			if (et.className.split(' ').indexOf('de-imgmenu') >= 0)
-				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch('+ (/url\=(.+)/).exec(et.lastChild.href)[1] +');return false;" target="_blank">Поиск по Derpibooru</a>');
+				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(\''+ et.lastChild.href.split('=')[1] +'\')" target="_blank">Поиск по Derpibooru</a>');
 			if (et.tagName === 'BLOCKQUOTE') {
 				$each(etp.querySelectorAll('td > a[href$=".webm"]:not([target="_blank"]), div > a[href$=".webm"]:not([target="_blank"])'), function(el) { attachFile(el, 'video', true) });
 				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR' && dnb.nextElementSibling.tagName !== 'LABEL')
