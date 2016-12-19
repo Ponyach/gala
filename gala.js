@@ -1,649 +1,1246 @@
 /* 
-			«Gala the Boardscript»
+	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 1.2.88
-								© magicode
+	: version 2.0
+	© magicode
 	
 */
-var style = $setup('style', {'text': 'blockquote:after, #de-txt-panel:after, .de-menu.de-imgmenu:after{content:"";-webkit-animation:init 1s linear 2;animation:init 1s linear 2}\
-.de-video-obj,.postcontent{position:relative;display:inline-block!important}.cm-link{cursor:pointer;margin:0 4px}.cm-link:before{content:"";margin-left:20px}\
-.markup-button.text:after{content:" | "}#quote.markup-button.text:after{content:""}.refOnly:after{content:"Конвертируемые в рефлинки"}.justPlayers:after{content:"Содержащие плееры"}.All:after{content:"Все имеющиеся"}\
-.document-container,.content-frame.document{overflow:auto;resize:both;background-color:#fefefe} .document-container > iframe, .full-size, #shadow-box, .content-window{width:100%;height:100%}\
-.webm, .video-container{display:inline-block;background-color:black;margin:0 9px;margin-bottom:5px;position:relative;cursor:pointer;z-index:2}\
-.audio-container{margin:5px 0;position:relative;cursor:pointer;z-index:2}.img-container{display:inline-block}.ta-inact::-moz-selection{background:rgba(99,99,99,.3)}.ta-inact::selection{background:rgba(99,99,99,.3)}\
-.markup-button a{font-size:13px;text-decoration:none}span[de-bb]{position:absolute;visibility:hidden}.de-src-derpibooru:before{content:"";padding:0 16px 0 0;margin:0 4px;background-image:url(/test/src/140903588031.png)}\
-#hide-buttons-panel > .menubuttons {width: 40px;margin: 0 2px}#vsize-textbox{font-family:monospace;opacity:.6}input[type="range"]{border:0!important;background:none!important}\
-.content-window{position:fixed;left:0;top:0;z-index:2999}#shadow-box{position:absolute;background-color:rgba(33, 33, 33, .8);z-index:2999}\
-.content-frame{background-color:#fefefe}.content-frame.video{background-color:#000}.content-frame.img{position:background-color:transparent}\
-.hidup{top:-9999px!important}.hidout{display:none!important}.content-frame{position:absolute;top:10%;left:12%;right:18%;bottom:20%;box-shadow:5px 5px 10px rgba(0,0,0,.4);z-index:3000}\
-#close-content-window,#show-content-window{transition:.5s ease;opacity:.4;width:29px;height:29px;background-image:url(/test/src/141665751261.png);cursor:pointer;position:absolute;top:20px;right:20px;z-index:3000}\
-#show-content-window{right:52%;position:fixed;background-image:url(/test/src/141667895174.png);border-radius:100%;box-shadow:0 1px 0 rgba(0,0,0,.4),-1px 1px 0 rgba(0,0,0,.4)}#close-content-window:hover,#show-content-window:hover{opacity:.8}\
-.navbar-nav,.dropdown-menu{padding-left:0;list-style:outside none none}.dropdown-toggle:before{content:" ▼ ";padding-right:8px}.dropdown-menu span{padding:0 40px}.dropdown-toggle{display:table;padding:2px 8px;border:1px solid #33B5E5;border-radius:2px;}\
-.ins-act,.dropdown-menu{display:table;border:1px solid #222;box-shadow:0 6px 12px rgba(0,0,0,.2);background-clip:padding-box;background-color:#222;}.ins-act{border-radius:4px 4px 0 0}.dropdown-menu{border-radius:0 4px 4px 4px}.navbar-nav span{cursor:pointer}\
-.dropdown-menu {color:#eee;position:absolute;z-index:1000;min-width:160px;font-size:14px;line-height:1.8;}.dropdown-menu li:hover{color:#FFF;background:#555;-moz-user-select:none;transition:#6363CE .2s ease,color .2s ease}\
-.dropdown-toggle:hover{background:#1c96c3;color:#000}.dropdown-toggle.ins-act{color:#33B5E5}.dropdown-toggle.ins-act:hover{background:#222}\
-@keyframes init{50% {opacity:0}} @-webkit-keyframes init{50% {opacity:0}}'}, null);
-document.head.appendChild(style);
 
-/*-----[ Utilites ]-----*/
-function $each(obj, Fn){
-	Array.prototype.slice.call(obj, 0).forEach(Fn)
+/* ---{ Remove Depricated Storage Keys }--- */
+['VWidth', 'VHeight', 'EmbedIn', 'EmbedLinks', 'bold', 'italic', 'underline', 'strike', 'spoiler', 'code', 'roleplay', 'sup', 'sub', 'attent', 'dice', 'quote'].forEach(function(key) {
+      localStorage.removeItem(key);
+}); sessionStorage.removeItem('LinksCache');
+// add Settings
+function addGalaSettings() {
+	return '<label><input onclick="localStorage.setItem(&quot;KeyMarks&quot;, this.checked)" '+ (!localStorage.getItem('KeyMarks') ? '' : 'checked') +' type="checkbox" name="set_km" value=""><span title="Вкл/Выкл Gala KeyMarks &middot; % ^ * ( &quot; @ &#92; ! # &gt;">Автодополнение разметки</span></label>';
 }
-function $setup(obj, attr, events) {
-	var el = typeof obj == "string" ? document.createElement(obj) : obj;
-	if (attr) {
-		for (var key in attr) {
-			attr[key] === undefined ? el.removeAttribute(key) :
-			key === 'html' ? el.innerHTML = attr[key] :
-			key === 'text' ? el.textContent = attr[key] :
-			key === 'value' ? el.value = attr[key] :
-			el.setAttribute(key, attr[key]);
+
+/* SpelzZ - a lightweight Node Work Tool */
+(function(){
+	var _z = {
+		each : $each,
+		setup: $setup,
+		route: $route,
+		fall: fallback,
+		sessionS: $storeItem('session'), localS: $storeItem('local'),
+		append: function(el, nodes) { $nodeUtil('append', el, nodes) },
+		prepend: function(el, nodes) { $nodeUtil('prepend', el, nodes) },
+		after: function(el, nodes) { $nodeUtil('after', el, nodes) },
+		before: function(el, nodes) { $nodeUtil('before', el, nodes) },
+		replace: function(el, nodes) { $nodeUtil('replace', el, nodes) },
+		remove: function(el) {
+			$each(el, function(child) {
+				child.parentNode.removeChild(child);
+			});
 		}
 	}
-	if (events) {
-		for (var key in events) {
-			el.addEventListener(key, events[key], false);
+	function $each(arr, Fn) {
+		if (typeof arr === 'string') {
+			arr = document.querySelectorAll(arr);
 		}
-	}
-	return el;
-}
-function $placeNode(p, el, node) {
-	var i, To, In = el.parentNode;
-	if (p === 'append') {
-		for (i = 0, len = node.length; i < len; i++) {
-			if (node[i])
-				el.appendChild(node[i]);
-		}
-	} else if (p === 'remove') {
-		$each(el, function(node) {
-			node.parentNode.removeChild(node);
+		Array.prototype.slice.call(arr, 0).forEach(function(el, i) {
+			Fn(el, (i + 1 === arr.length))
 		});
-	} else if (p === 'replace') {
-		In.replaceChild(node, el);
-	} else {
-		if (p === 'after') To = el.nextSibling;
-		if (p === 'before') To = el;
-		if (p === 'prepend') To = el.childNodes[0], In = el;
-		In.insertBefore(node, To);
 	}
-}
-function jumpCont(node) {
-	while (node) {
-		if (node.tagName === 'BLOCKQUOTE') {
-			if (!node.parentNode.querySelector('.postcontent'))
-				node.insertAdjacentHTML('beforebegin', '<span class="postcontent"></span>')
-			return node.parentNode.querySelector('.postcontent');
+	function $setup(el, _Attrs, _Events) {
+		if (el) {
+			if (typeof el === 'string') {
+				el = document.createElement(el);
+			}
+			if (_Attrs) {
+				for (var key in _Attrs) {
+					_Attrs[key] === undefined ? el.removeAttribute(key) :
+					key === 'html'    ? el.innerHTML   = _Attrs[key] :
+					key === 'text'    ? el.textContent = _Attrs[key] :
+					key in el       && (el[key]        = _Attrs[key] ) == _Attrs[key]
+					                &&  el[key]      === _Attrs[key] || el.setAttribute(key, _Attrs[key]);
+				}
+			}
+			if (_Events) {
+				if ('remove' in _Events) {
+					for (var type in _Events['remove']) {
+						if (_Events['remove'][type].forEach) {
+							_Events['remove'][type].forEach(function(fn) {
+								el.removeEventListener(type, fn, false);
+							});
+						} else {
+							el.removeEventListener(type, _Events['remove'][type], false);
+						}
+					}
+					delete _Events['remove'];
+				}
+				for (var type in _Events) {
+					el.addEventListener(type, _Events[type], false);
+				}
+			}
 		}
-		node = node.parentNode;
+		return el;
 	}
-}
-function setlSValue(name, value, sess) {
-	var stor = sess ? sessionStorage : localStorage;
-	if (typeof name === "object") {
-		for (var key in name) {
-			stor.setItem(key, (name[key] === null ? value : name[key]));
+	function $nodeUtil(p, el, nodes) {
+		if (el) {
+			var i, node, meth = p.toLowerCase(), Child, Parent;
+				el = typeof el === 'string' ? document.querySelector(el) : el;
+				nodes = nodes && !Array.isArray(nodes) ? [nodes] : nodes;
+				Parent = el.parentNode;
+			switch (meth) {
+				case 'append':
+					for (i = 0; node = nodes[i++];) {
+						el.appendChild(node);
+					}
+					break;
+				case 'replace':
+					Parent.replaceChild(nodes[0], el);
+					break;
+				default:
+					switch (meth) {
+						case 'after': Child = el.nextSibling;
+							break;
+						case 'before': Child = el;
+							break;
+						case 'prepend': Child = el.childNodes[0], Parent = el;
+					}
+					for (i = 0; node = nodes[i++];) {
+						Parent.insertBefore(node, Child);
+					}
+			}
 		}
-	} else {
-		stor.setItem(name, value);
 	}
-}
-function getlSValue(name, def, sess) {
-	var stor = sess ? sessionStorage : localStorage;
-	if (name in stor) {
-		var v = stor.getItem(name);
-		v = v == 'false' ? false : 
-			v == 'true' ? true : v;
-		return v;
-	} else {
-		stor.setItem(name, def);
-		return def;
+	function $route(el, Fn) {
+		var pat, tun;
+		if (typeof Fn === 'string') {
+			var pat = Fn;
+			Fn = function() {
+				el.querySelector(pat)
+			}
+		}
+		while (el) {
+			if ((tun = Fn(el))) {
+				return (tun instanceof Element ? tun : el);
+			}
+			if ((el = el.parentNode) === document.firstElementChild) {
+				return;
+			}
+		}
 	}
-}
+	function $storeItem(locate) {
+		var Store = locate === 'session' ? sessionStorage : localStorage,
+			probeStore = function(name, val) {
+				try {
+					Store.setItem(name, val);
+				} catch(e) {
+					Store.removeItem(name);
+					Store.setItem(name, val);
+				}
+			}
+		return {
+			rm: function(names) {
+					if (typeof names === 'string')
+						names = [names];
+					for (var name, i = 0; name = names[i++];) {
+						Store.removeItem(name); 
+					}
+				},
+			set: function(name, value) {
+					if (typeof name === 'object') {
+						for (var key in name) {
+							probeStore(key, (name[key] === null ? value : name[key]));
+						}
+					} else {
+						probeStore(name, value);
+					}
+				},
+			get: function(name, def) {
+					if (name in Store) {
+						def = Store.getItem(name);
+					} else {
+						probeStore(name, def);
+					}
+					return (def == 'false' ? false : def == 'true' ? true : def);
+				}
+		}
+	}
+	function fallback(e) {
+		if (e.preventDefault)
+			e.preventDefault();
+		else
+			e.returnValue = false;
+	}
+	window._z = _z;
+})();/* ===> end <=== */
+
+/* ---{ Soundcloud Player Engine (Custom build) }--- */
+(function() {
+	
+	var SC = {
+		'APIKey': 'htuiRd1JP11Ww0X72T1C3g',
+		'Global': true,
+		'Volume': 1.0,
+		'Tracks': {},
+		'Object': {}
+	}
+	
+	var _Current_ = {
+		
+		TrackLoaded: null,
+		SelectTrack: null,
+		PlayerNode : null,
+		AudioDevice: createAudioDevice(),
+		/* Complex */
+		set 'Player Volume'  (vol) {
+			this.AudioDevice.volume = vol;
+			this.PlayerNode['_volume_'].firstElementChild.style['width'] = (vol * 100) +'%';
+		},
+		get 'Player Volume'  () {
+			return this.PlayerNode['_volume_'].firstElementChild.style['width'];
+		},
+		
+		set 'Track Duration' (sec) {
+			this.TrackLoaded.duration = sec;
+			this.PlayerNode['_duration_'].textContent = (sec = timeCalc(sec));
+			this.SelectTrack['_duration_'].textContent = sec;
+		},
+		get 'Track Duration' () {
+			return this.SelectTrack['_duration_'].textContent;
+		},
+		
+		set 'Track Progress' (sec) {
+			this.PlayerNode['_position_'].textContent = timeCalc(sec);
+			this.PlayerNode['_progress_'].style['width'] = (sec / this.AudioDevice.duration * 100) +'%';
+		},
+		get 'Track Progress' () {
+			return this.PlayerNode['_progress_'].style['width'];
+		},
+		
+		set 'Track Buffered' (buf) {
+			this.PlayerNode['_buffer_'].style['width'] = buf +'%';
+		},
+		get 'Track Buffered' () {
+			return this.PlayerNode['_buffer_'].style['width'];
+		},
+		
+		connect: function(player_node, track_node) {
+			
+			if (player_node && player_node !== this.PlayerNode) {
+				if (this.PlayerNode) {
+					this.PlayerNode[ '_volume_' ].onmousedown = null;
+					this.PlayerNode['_waveform_'].onmousedown = null;
+				}
+				this.PlayerNode = ('_trackslist_' in player_node ? player_node : catchKeyElements('player', player_node));
+				this.PlayerNode[ '_volume_' ].onmousedown = barChanger;
+				this.PlayerNode['_waveform_'].onmousedown = barChanger;
+				this['Player Volume'] = SC['Global'] ? SC.Volume : SC['Object'][player_node.id.split('_')[1]];
+			}
+			
+			if (!track_node) {
+				track_node = this.PlayerNode.querySelector('.sc-track.active') || this.PlayerNode['_trackslist_'].firstElementChild;
+			}
+				
+			if (track_node && track_node !== this.SelectTrack) {
+				(this.PlayerNode.querySelector('.sc-track.active') || {}).className = 'sc-track';
+				track_node.className = 'sc-track active';
+				
+				this.SelectTrack = ('_duration_' in track_node ? track_node : catchKeyElements('track', track_node));
+				this.TrackLoaded = SC['Tracks'][track_node.id.split('_')[2]];
+				
+				this['Track Progress'] = 0;
+				this['Track Buffered'] = 0;
+				
+				updateTrackInfo(this.PlayerNode, this.TrackLoaded);
+				this['AudioDevice'].loadTrack(this.TrackLoaded);
+			}
+		}
+	}
+	
+	if (SC['Global']) {
+		window.addEventListener('click', onClickHandler, false);
+	}
+	
+	window.SCPurePlayer = {
+		create: _scCreate,
+		createGroup: _scCreateGroup
+	}
+	document.addEventListener("DOMContentLoaded", onDOMReady);
+	
+	function $getTracks(url, callback, errorback) {
+		if (!url || typeof callback !== 'function') {
+			return;
+		}
+		var protocol = (document.location.protocol === 'https:' ? 'https:' : 'http:'),
+			resolve = protocol +'//api.soundcloud.com/resolve?url=',
+			apiUrl = url.replace(/^https?:/, protocol),
+			params = 'format=json&consumer_key='+ SC.APIKey,
+			$bound = function(data) {
+				if (data.error)
+					return errorback(data.error);
+				if (data) {
+					if (data.tracks) {
+						// log('data.tracks', data.tracks);
+						callback(data.tracks);
+					} else if (Array.isArray(data)) {
+						callback(data);
+					} else if (data.duration){
+						// a secret link fix, till the SC API returns permalink with secret on secret response
+						data.permalink_url = url;
+						// if track, add to player
+						callback([data]);
+					} else if (data.creator || data.username) {
+						// get user or group tracks, or favorites
+						getDataResponse(data.uri + (data.username && url.indexOf('favorites') >= 0 ? '/favorites' : '/tracks') +'?'+ params, $bound);
+					}
+				}
+			}
+		// check if it's already a resolved api url
+		if ((/api\.soundcloud\.com/).test(url)) {
+			apiUrl += '?' + params;
+		} else {
+			apiUrl = resolve + apiUrl + '&' + params;
+		}
+		getDataResponse(apiUrl, $bound);
+	}
+	function _scCreateGroup(links) {
+		var hash = genGroupId(),
+			node = createPlayerDOM(hash, links.length),
+			ibx  = links.length, exp, i;
+		
+		for (i = 0; i < links.length; i++) {
+			exp = { hash: hash, node: node, it: i };
+			
+			$getTracks(links[i].href, function(tracks) {
+				var _$     = this,
+					tNode  = createTrackDOM(tracks[0], _$.hash),
+					tChild = _$.node['_trackslist_'].children['ft_'+ _$.hash +'_'+ _$.it];
+				
+				_$.node['_trackslist_'].replaceChild(tNode, tChild); ibx--;
+				
+				if (_$.it == 0) {
+					updateTrackInfo(_$.node, tracks[0]);
+					tNode.className += ' active';
+				}
+				
+				for (var n = 1; n < tracks.length; n++) {
+					tChild = tNode.nextSibling;
+					tNode  = createTrackDOM(tracks[n], _$.hash);
+					_$.node['_trackslist_'].insertBefore(tNode, tChild);
+				}
+			}.bind(exp), function(error) {
+				ibx--;
+				    this.node['_trackslist_'].children['ft_'+ this.hash +'_'+ this.it].remove();
+				if (this.node['_trackslist_'].children.length == 0 && ibx == 0)
+				    this.node.removeAttribute('id');
+			}.bind(exp));
+		}
+		
+		return node;
+	}
+	
+	function _scCreate(link) {
+		var hash = genGroupId(),
+			node = createPlayerDOM(hash),
+			exp = { hash: hash, node: node };
+		
+		$getTracks(link.href, function(tracks){
+			var _$ = this;
+			tracks.forEach(function(track, j) {
+				var tNode = createTrackDOM(track, _$.hash);
+				
+				_$.node['_trackslist_'].insertBefore(tNode, _$.node['_trackslist_'].childNodes[j]);
+				
+				if (j == 0) {
+					updateTrackInfo(_$.node, track);
+					tNode.className += ' active';
+				}
+			});
+		}.bind(exp), function(error) {
+			this.node.removeAttribute('id');
+		}.bind(exp));
+		
+		return node;
+	}
+	
+	function onDOMReady(e) {
+		Array.prototype.slice.call(this.getElementsByClassName('sc-player'), 0).forEach(function(scp) {
+			var node, links;
+			if (scp.href) {
+				node = _scCreate(scp);
+			} else if ((links = scp.querySelectorAll('a[href*="soundcloud.com/"]')).length > 0) {
+				node = _scCreateGroup(links);
+			} else
+				node = createPlayerDOM(null);
+			scp.parentNode.replaceChild(node, scp);
+		});
+		if (_Current_['AudioDevice'].tagName === 'OBJECT') {
+			var engineContainer = this.createElement('scont');
+				engineContainer.className = 'sc-engine-container';
+				engineContainer.setAttribute('style', 'position: absolute; left: -9000px');
+				engineContainer.appendChild(_Current_['AudioDevice']);
+			this.body.appendChild(engineContainer);
+		}
+	}
+	function onEnd(e) {
+		 var play_next;
+		if ((play_next = _Current_.SelectTrack.nextElementSibling)) {
+			_Current_.connect(null, play_next);
+		} else {
+			_Current_.PlayerNode['_button_'].className = 'sc-play';
+			_Current_.PlayerNode['_button_'].textContent = 'Play';
+			_Current_.PlayerNode.className = 'sc-player';
+			_Current_.SelectTrack.className = 'sc-track';
+			_Current_.PlayerNode['_trackslist_'].children[0].className = 'sc-track active';
+			if ((play_next = _Current_.PlayerNode.nextElementSibling) &&
+				 play_next.className.substring(0, 9) === 'sc-player') {
+					_Current_.connect(play_next);
+			}
+		}
+	}
+	function onTimeUpdate(e) {
+		_Current_['Track Progress'] = e.target.currentTime;
+	}
+	function onBufferLoad(e) {
+		if (_Current_['Track Buffered'] !== '100%') {
+			_Current_['Track Buffered'] = this.bytesPercent;
+		}
+	}
+	function onClickHandler(e) {
+		if (e.button != 0 || !e.target.className || !e.target.className.slice)
+			return;
+		if (e.target.className.slice(0, 3) === 'sc-') {
+			var $target   = e.target,
+				classList = $target.className.split(' '),
+				$sc       = classList[0].split('-');
+				_z.fall(e);
+			switch ($sc[1]) {
+				case 'info':
+					if ($sc[2] === 'close') {
+						$target.parentNode.className = 'sc-info';
+					} else if ($sc[2] === 'toggle') {
+						$target.parentNode.children[1].className = 'sc-info active';
+					}
+					break;
+				case 'track':
+					var $player = $target.parentNode.parentNode, $Id, $track;
+					if ($sc[2]) {
+						$player = $player.parentNode;
+						$target = $target.parentNode;
+					}
+					_Current_.connect($player, $target);
+					break;
+				case 'play':
+					var $player = !SC['Global'] ? this : $target.parentNode.parentNode;
+					if (!$player.id)
+						return;
+					_Current_.connect($player);
+				case 'pause':
+					_Current_.AudioDevice[$sc[1]]();
+			}
+		}
+	}
+	function onPlayerAction(e) {
+		for (var i = 0, el = document.querySelectorAll(
+			'.sc-pause, .sc-player.played, .sc-player.paused'
+		); i < el.length; i++) {
+			if (el[i].className === 'sc-pause') {
+				el[i].className   = 'sc-play';
+				el[i].textContent = 'Play'   ;
+			} else {
+				el[i].className = 'sc-player';
+			}
+		}
+		var ype = (e.type === 'play' ? 'ause' : 'lay')
+		_Current_.PlayerNode['_button_'].className   = 'sc-p'+ ype;
+		_Current_.PlayerNode['_button_'].textContent = 'P'   + ype;
+		_Current_.PlayerNode.className = 'sc-player '+ e.type + (e.type === 'play' ? 'ed' : 'd');
+	}
+	function barChanger(e) {
+		if (e.button !== 0) {
+			return;
+		}
+		_z.fall(e);
+		switch ( e.type ) {
+			case 'mousedown':
+				this.bound = barChanger.bind(this);
+				window.addEventListener('mousemove', this.bound, false);
+				window.addEventListener('mouseup', this.bound, false);
+				this.rect = this.getBoundingClientRect();
+				this.rect.width || (this.rect.width = this.rect.right - this.rect.left);
+			case 'mousemove':
+				var x = (e.clientX - this.rect.left) / this.rect.width * 100;
+				if (this === _Current_.PlayerNode['_waveform_']) {
+					var maxs = _Current_['AudioDevice'].duration,
+						seek = x > 100 ? maxs : x < 0 ? 0 : Math.floor(maxs * x * 10000) / 1000000;
+					_Current_['AudioDevice'].ontimeupdate = null;
+					_Current_['Track Progress'] = (this.seek = seek);
+				}
+				if (this === _Current_.PlayerNode['_volume_']) {
+					var vol = x > 100 ? 1 : x < 0 ? 0 : Math.round(x / 10) / 10;
+					_Current_['Player Volume'] = (SC.Volume = vol);
+				}
+				break;
+			case 'mouseup':
+				if (this === _Current_.PlayerNode['_waveform_']) {
+					_Current_['AudioDevice'].currentTime  = this.seek;
+					_Current_['AudioDevice'].ontimeupdate = onTimeUpdate;
+				}
+				window.removeEventListener('mousemove', this.bound, false);
+				window.removeEventListener('mouseup', this.bound, false);
+		}
+	}
+	
+	function createAudioDevice(url) {
+		var audio, html5, flash;
+		if (typeof HTMLAudioElement !== 'undefined') {
+			audio = new Audio();
+			html5 = audio.canPlayType && (/maybe|probably/).test(audio.canPlayType('audio/mpeg'));
+		}
+		if (!html5) {
+			audio = document.createElement('object');
+			audio.id     = 'scPlayerEngine';
+			audio.height = '1';
+			audio.width  = '1';
+			audio.type   = "application/x-shockwave-flash"
+			audio.data   = "/lib/javascript/player_mp3_js.swf"
+			audio.innerHTML = '<param name="movie" value="/lib/javascript/player_mp3_js.swf" /><param name="AllowScriptAccess" value="always" /><param name="FlashVars" value="listener=flashBack2343191116fr_scEngine&interval=500" />';
+			
+			flash = (window['flashBack2343191116fr_scEngine'] = new Object());
+			flash.onInit = function() {
+				Object.defineProperties(audio, {
+					loadTrack   : { value: function(trk) {
+						this.SetVariable("method:setUrl",
+							trk.stream_url + (trk.stream_url.indexOf('?') >= 0 ? '&' : '?') +'consumer_key='+ SC.APIKey);
+						this.play(); }},
+					play        : { value: function()    {
+						flash.status = 'process';
+						this.SetVariable("method:play", "");
+						this.SetVariable("enabled", "true");
+						onPlayerAction({type: 'play'}); }},
+					pause       : { value: function()    {
+						flash.status = 'waiting';
+						this.SetVariable("method:pause", "");
+						onPlayerAction({type: 'pause'}); }},
+					stop        : { value: function()  { this.SetVariable("method:stop", "") }},
+					ended       : { get: function()    { return flash.status === 'ended' }},
+					playing     : { get: function()    { return JSON.parse(flash.isPlaying); }},
+					duration    : { get: function()    { return Number(flash.duration) / 1000 || 0 }},
+					currentTime : { get: function()    { return Number(flash.position) / 1000 || 0 },
+								    set: function(rel) { this.SetVariable("method:setPosition", (rel * 1000)) }},
+					volume      : { get: function()    { return Number(flash.volume) / 100 },
+								    set: function(vol) { this.SetVariable("method:setVolume", (vol * 100)) }},
+					ontimeupdate: { set: function(fn)  { flash.onTimeUpdate = fn || function(){} }}
+				});
+				audio['volume'] = SC.Volume;
+				this.position = 0;
+			};
+			flash.onTimeUpdate = onTimeUpdate;
+			flash.onBufferLoad = onBufferLoad;
+			flash.onUpdate = function() {
+				switch (this.status) {
+					case 'process':
+						this.onTimeUpdate({target: audio});
+						if (this.position == '0' && this.isPlaying == 'false') {
+							this.status = 'ended';
+							onEnd();
+						}
+					case 'waiting':
+						this.onBufferLoad();
+				}
+			};
+		} else {
+			Object.defineProperties(audio, {
+				stop      : { value: function()    { this.pause(); this.currentTime = 0; }},
+				bytesPercent: { get: function()    { return ((this.buffered.length && this.buffered.end(0)) / this.duration) * 100; }},
+				loadTrack : { value: function(trk) {
+					this.pause();
+					this.src = trk.stream_url + (trk.stream_url.indexOf('?') >= 0 ? '&' : '?') +'consumer_key='+ SC.APIKey;
+					this.play();
+				}}
+			});
+			audio['volume'] = SC.Volume;
+			audio['onplay'] = audio['onpause'] = onPlayerAction;
+			audio['onended'] = onEnd;
+			audio['ontimeupdate'] = onTimeUpdate;
+			audio.addEventListener('timeupdate', onBufferLoad, false);
+			audio['onprogress'] = onBufferLoad;
+			audio['onloadedmetadata'] = function(e) {
+				if (_Current_.TrackLoaded.duration !== this.duration) {
+					_Current_['Track Duration'] = this.duration;
+				}
+			};
+		}
+		return audio;
+	}
+	function createTrackDOM(track, hash) {
+		SC['Tracks'][track.id] = track;
+		var li = document.createElement('li');
+			li.id = 'sc-t_'+ hash +'_'+ track.id;
+			li.className = 'sc-track';
+			li.appendChild((
+				li['_title_'] = document.createElement('a')));
+				li['_title_'].href = track.permalink_url;
+				li['_title_'].className = 'sc-track-title';
+				li['_title_'].textContent = track.title;
+			li.appendChild((
+				li['_duration_'] = document.createElement('span')));
+				li['_duration_'].className = 'sc-track-duration';
+				li['_duration_'].textContent = timeCalc((track.duration /= 1000));
+		return  li;
+	}
+	function _li(h, l) {
+		var li ='', i;
+		for (i = 0; i < l; i++)
+			li += '<span id="ft_'+h+'_'+i+'"></span>';
+		return li;
+	}
+	function createPlayerDOM(hash, len) {
+		var div = document.createElement('div');
+			div.className = 'sc-player loading';
+			div.innerHTML = '<ol class="sc-artwork-list"></ol>\n'+
+				'<div class="sc-info"><h3></h3><h4></h4><p></p>\n'+
+				'	<a href="#x" class="sc-info-close">X</a>\n'+
+				'</div>\n'+
+				'<div class="sc-controls">\n'+
+				'	<a href="#control" class="sc-play">Play</a>\n'+
+				'</div>\n'+
+				'<ol class="sc-trackslist">'+ _li(hash, len) +'</ol>\n'+
+				'<a href="#info" class="sc-info-toggle">Info</a>\n'+
+				'<div class="sc-time-indicators">\n'+
+				'	<span class="sc-position"></span>&nbsp;|&nbsp;<span class="sc-duration"></span>\n'+
+				'</div>\n'+
+				'<div class="sc-scrubber">\n'+
+				'	<div class="sc-volume-slider">\n'+
+				'		<span class="sc-volume-status" style="width: '+ (SC.Volume * 100) +'%;"></span>\n'+
+				'	</div>\n'+
+				'	<div class="sc-time-span">\n'+
+				'		<div class="sc-buffer"></div>\n'+
+				'		<div class="sc-played"></div>\n'+
+				'		<div class="sc-waveform-container"></div>\n'+
+				'	</div>\n'+
+				'</div>';
+		if (hash) {
+			div.id = 'sc-obj_'+ hash;
+			if (!SC['Global']) {
+				SC['Object'][hash] = { volume: SC.Volume }
+				div.addEventListener('click', onClickHandler, false);
+			}
+		}
+		return catchKeyElements('player', div);
+	}
+	
+	function catchKeyElements(name, _CN_) {
+		switch(name) {
+			case 'player':
+				_CN_['_artwork_']    = _CN_.querySelector('.sc-artwork-list');
+				_CN_['_info_']       = _CN_.querySelector('.sc-info');
+				_CN_['_button_']     = _CN_.querySelector('.sc-controls').firstElementChild;
+				_CN_['_trackslist_'] = _CN_.querySelector('.sc-trackslist');
+				_CN_['_volume_']     = _CN_.querySelector('.sc-volume-slider');
+				_CN_['_waveform_']   = _CN_.querySelector('.sc-waveform-container');
+				_CN_['_buffer_']     = _CN_.querySelector('.sc-buffer');
+				_CN_['_progress_']   = _CN_.querySelector('.sc-played');
+				_CN_['_duration_']   = _CN_.querySelector('.sc-duration');
+				_CN_['_position_']   = _CN_.querySelector('.sc-position');
+				break;
+			case 'track':
+				_CN_['_duration_']   = _CN_.querySelector('.sc-track-duration');
+				_CN_['_title_']      = _CN_.querySelector('.sc-track-title');
+		}
+		
+		return _CN_;
+	}
+	
+	function updateTrackInfo(node, track) {
+		var artwork = track.artwork_url || track.user.avatar_url;
+		if (artwork && artwork.indexOf('avatars-000044695144-c5ssgx-large.jpg') < 0){
+			var img = node['_artwork_'].firstElementChild || document.createElement('img');
+			if (node['_artwork_'].clientWidth > 100) {
+				var s = findBestMatch([200, 250, 300, 500], node['_artwork_'].clientWidth);
+				artwork = artwork.replace('-large', '-t'+ s +'x'+ s +'')
+			}
+			img.src = artwork;
+			node['_artwork_'].appendChild(img);
+		}
+		node['_info_'].children[0].innerHTML = '<a href="' + track.permalink_url +'">' + track.title + '</a>';
+		node['_info_'].children[1].innerHTML = 'by <a href="' + track.user.permalink_url +'">' + track.user.username + '</a>';
+		node['_info_'].children[2].innerHTML = (track.description || 'no Description');
+		// update the track duration in the progress bar
+		node['_duration_'].textContent = timeCalc(track.duration);
+		node['_position_'].textContent = '0.00';
+		// put the waveform into the progress bar
+		var wave = node['_waveform_'].firstElementChild || document.createElement('img');
+			wave.src = track.waveform_url;
+		node['_waveform_'].appendChild(wave);
+	}
+	
+	function findBestMatch(list, toMatch) {
+		for (var item, i = 0; i < list.length; i++) {
+			if ((item = list[i]) >= toMatch) {
+				return item;
+			}
+		}
+		return item;
+	}
+	function timeCalc(secn) {
+		var s, m, h;
+			s = Math.floor(secn) % 60;
+			m = Math.floor(secn / 60) % 60;
+			h = Math.floor(secn / (60 * 60));
+			
+		return (h > 0 ? h +'.' : '') + (m > 9 || m == 0 ? m : '0'+ m) +'.'+ (s > 9 ? s : '0'+ s);
+	}
+	function genGroupId() {
+		var n = Math.round(Math.random() * 12345679);
+		while (n in SC['Object']) n++;
+		return (SC['Object'][n] = n);
+	}
+})();/* ===> end <=== */
+
+/* ---{ Universal Functions (dependencies) }--- */
 function getDataResponse(uri, Fn) {
 	var xhReq = new XMLHttpRequest();
 	xhReq.open('GET', uri, true);
-	xhReq.send(null);
 	xhReq.onreadystatechange = function() {
-		if(xhReq.readyState !== 4)
+		if (this.readyState !== 4)
 			return;
-		if(xhReq.status === 304) {
-			alert('304 ' + xhReq.statusText);
-		} else {
+		if (this.status === 200) {
 			try {
-				var json = JSON.parse(xhReq.responseText);
-			} catch(e) {
-				Fn(1, e.toString(), null, this);
+				var json = JSON.parse(this.responseText);
 			} finally {
-				Fn(xhReq.status, xhReq.statusText, (!json ? xhReq.responseText : json), this);
-				Fn = null;
+				Fn((json || this.responseText), this.responseURL);
 			}
+		} else {
+			Fn({error: { status: this.status, message: this.statusText }}, this.responseURL);
 		}
 	}
-}
-String.prototype.allReplace = function(obj, r) {
-	var retStr = this;
-	for (var x in obj) {
-		retStr = retStr.replace((r ? x : new RegExp(x, 'g')), obj[x]);
-	}
-	return retStr;
-}
-//-- Get Page name from Url
-function getPageName(url) {
-	var a = url.split('/'), p = a.pop();
-	return decodeURIComponent((!p ? a.pop() : p));
-}
-//-- Replace special characters from text
-function escapeHtml(text) {
-	return text.allReplace({'\"': "&#34;", '\'': "&#39;", '\<': "&lt;", '\>': "&gt;"});
-}
-//-- Remove Zero whitespaces and invalid characters (like ") from Url Links
-function escapeUrl(url) {
-	var eUrl = encodeURI(url).allReplace({'%2?5?E2%2?5?80%2?5?8B': '', '%2?5?3C/?\\w*%2?5?3E': '', '%2?5?22': ''});
-	return decodeURI(eUrl);
-}
-//-- Convert UTF8 charcodes to symbols
-function escapeUChar(char) {
-	return char.allReplace({'U+0021': '!', 'U+0022': '"', 'U+0025': '%', 'U+0028': '(', 'U+002A': '*', 'U+0033': '#', 'U+003E': '>', 'U+005C': '\\', 'U+005E': '^'}, true);
-}
-//-- Get host name {getLocation(url).hostname} and path name {getLocation(url).pathname} from Url Links
-function getLocation(url) {
-	return $setup('a', {'rel': 'nofollow', 'href': url});
-}
-//-- Universal Imageboard Url Parser
-function parseUrl(url) {
-	m = (url || document.location.href).match(/(?:https?:\/\/([^\/]+))?\/([^\/]+)\/(?:(\d+)|res\/(\d+)|(\w+))(?:\.x?html)?(#i?(\d+))?/);
-	return m ? {host: m[1], board: m[2], page: m[3], thread: m[4], desk: m[5], pointer: m[6], pid: m[7]} : {};
-}
-//-- Derpibooroo Reverse Search 
-function revSearch(imgSrc) {
-	var form = $setup('form', {'method': "post", 'action': "https://derpibooru.org/search/reverse", 'target': "_blank", 'enctype': "multipart/form-data", 'hidden': "",
-		'html': '<input id="url" name="url" type="text" value="'+ imgSrc +'"><input id="fuzziness" name="fuzziness" type="text" value="0.25">'}, null);
-	document.body.appendChild(form).submit();
-	return form.remove();
+	xhReq.send();
+}/* ===> end <=== */
+
+try {
+	
+var gala_inline_style = document.createElement('style');
+	gala_inline_style.textContent = 'blockquote:after, .de-menu:after, #de-txt-panel:after, #postform:after{ content:""; -webkit-animation: init 1s linear 2; animation: init 1s linear 2; }\
+span[de-bb]{ position: absolute; visibility: hidden; } input, textarea { outline: none; }\
+.mv-frame{position: absolute; background-color: rgba(0,0,0,.7); color: white; cursor: pointer; width: 40px; line-height: 40px; text-align: center; border-radius: 0 0 10px 0; opacity: .5;} .mv-frame:hover{ opacity: 1; } .mv-frame.to-win:before { content: "[ ↑ ]"; } .mv-frame.to-post:before { content: "[ ↓ ]"; }\
+.de-src-derpibooru:before{ content:""; padding-right: 16px; margin-right: 4px; background: url(/test/src/140903588031.png) center / contain no-repeat; }\
+.hidup{ top:-9999px!important; } .hidout{ display:none!important; }\
+.mediacontent > .video-container { display: inline-block; background-color: #212121; margin: 0 9px; margin-bottom: 5px;  max-height: 360px; max-width: 480px;}\
+.document-container{ overflow: auto; resize: both; background-color:#fefefe; }\
+.content-window{ position: fixed; left: 0; top: 0; z-index: 2999; }\
+#content-frame { position: absolute; top: 10%; left: 0; right: 0; bottom: 20%; z-index:3000; max-width: 100%;}\
+#content-frame > * { left: 0; right: 0; margin: auto; box-shadow: 5px 5px 10px rgba(0,0,0,.4); position: absolute;}\
+#content-frame > .pdf-container { top: -9%; bottom: -19%; margin: auto 10%; background-color:#D1D1D1; }\
+#content-frame > .video-container { max-height: 100%; max-width: 100%; background-color: #212121; }\
+#shadow-box{ position: absolute; background-color: rgba(33,33,33,.8); z-index: 2999;}\
+#close-content-window, #show-content-window{ transition: .5s ease; opacity: .4; width: 29px; height: 29px; cursor: pointer; top: 20px; z-index: 3000; }\
+#close-content-window { right: 20px; position: absolute; background-image: url(/test/src/141665751261.png); }\
+#show-content-window  { right: 52%;  position: fixed;    background-image: url(/test/src/141667895174.png); border-radius: 100%; box-shadow: 0 1px 0 rgba(0,0,0,.4), -1px 1px 0 rgba(0,0,0,.4); }\
+#close-content-window:hover, #show-content-window:hover { opacity: .8; }\
+.ta-inact::-moz-selection{ background: rgba(99,99,99,.3); } .ta-inact::selection{ background: rgba(99,99,99,.3); }\
+.buttons-style-standart > .markup-button > *:not(input), .buttons-style-text > .markup-button >  *:not(a) { display: none; }\
+.markup-button > a{ font-size:13px; text-decoration: none; }\
+.buttons-style-text > .markup-button:not(#mr_quote):after{ content:" | "; cursor: default; }\
+.document-container > iframe, .document > iframe, .full-size, #shadow-box, .content-window{ width:100%; height:100%; }\
+.audio-container { display: block; }\
+.image-attach{ display: inline-block; border: medium none; cursor: pointer; margin: 2px 20px; } .image-attach:not(.expanded){ max-width: 290px; max-height: 290px; } .image-attach.expanded{ max-width: 100%px; max-height: auto; }\
+.cm-button{ text-decoration: none; background: transparent left / 16px no-repeat; } .cm-button:before{ content:""; margin-left: 20px;}\
+.cm-pastebin{ font: 12px monospace; padding: 2px 0; background-image: url(/test/src/140593041526.png); }\
+.cm-image{ background-image: url(/test/src/140896790568.png); } .cm-image:before{ content: "Expand: "; } .cm-image.attached:before{ content: "Unexpand: "; }\
+.cm-play{ background-image: url(/test/src/139981404639.png); } .cm-play:before{ content: "Play: "; }\
+.cm-stop{ background-image: url(/test/src/148214537312/7673443634.png); } .cm-stop:before{ content: "Stop: "; }\
+@keyframes init{ 50% {opacity:0} } @-webkit-keyframes init{ 50% {opacity:0} }';
+document.head.appendChild(gala_inline_style);
+	
+	Gala(); //start
+	
+} catch(log) {
+	console.error(log);
 }
 
-(function() {
-	var Gala = {
-		MC: ['windowFrame', 'postContent'].indexOf(getlSValue('EmbedIn', 'postContent')),
-		deCfg: JSON.parse(getlSValue('DESU_Config'))[window.location.host],
-		Embeds: getlSValue('EmbedLinks', 'All'),
-		VActive: [],
-		LastKey: null,
-		LinksMap: JSON.parse(getlSValue('LinksCache', '{}', true)),
-		URL: parseUrl()},
-	KeyCodes = {
-		symbs: ['"', '^', '*', '(', '\\'],
-		doubs: ['!', '#', '%'],
-		quots: ['@', '>'],
-		specl: [8, 86]},
-	textArea, contentFrame = $setup('div', {'class': 'content-window hidup', 'html':
-		'<div id="shadow-box"></div><label id="close-content-window"></label>'}, {
-		'click': function(e) {
-			var et = e.target, hide = et.id === 'shadow-box', 
-				close = et.id === 'close-content-window';
-			if (close || hide) contentFrame.classList.add('hidup');
-			if (hide) contMarker.classList.remove('hidout');
-			if (close) {
-				et.nextElementSibling.remove();
-				Gala.VActive = [];
+/* ---{ Gala ponyach.ru Extension }--- */
+function Gala() {
+	var _Form_, _TextArea_,
+		_EmbedField_ = localStorage.getItem('EmbedField') || 0,
+	MarkupButtons = _z.setup('span', {'id': 'markup-buttons-panel', 'html':
+		'<span id="mr_bold" mktag="b" title="Жирный" class="markup-button">'+
+			'<input value="B" type="button"><a href="#">B</a></span>'+
+		'<span id="mr_italic" mktag="i" title="Курсивный" class="markup-button">'+
+			'<input value="i" type="button"><a href="#">i</a></span>'+
+		'<span id="mr_underline" mktag="u" title="Подчеркнутый" class="markup-button">'+
+			'<input value="U" type="button"><a href="#">U</a></span>'+
+		'<span id="mr_strike" mktag="s" title="Зачеркнутый" class="markup-button">'+
+			'<input value="S" type="button"><a href="#">S</a></span>'+
+		'<span id="mr_spoiler" mktag="spoiler" title="Спойлер" class="markup-button">'+
+			'<input value="%%" type="button"><a href="#">%%</a></span>'+
+		'<span id="mr_code" mktag="code" title="Код" class="markup-button">'+
+			'<input value="C" type="button"><a href="#">C</a></span>'+
+		'<span id="mr_roleplay" mktag="rp" title="Ролеплей" class="markup-button">'+
+			'<input value="RP" type="button"><a href="#">RP</a></span>'+
+		'<span id="mr_sup" mktag="sup" title="Верхний индекс" class="markup-button">'+
+			'<input value="Sup" type="button"><a href="#">Sup</a></span>'+
+		'<span id="mr_sub" mktag="sub" title="Нижний индекс" class="markup-button">'+
+			'<input value="Sub" type="button"><a href="#">Sub</a></span>'+
+		'<span id="mr_attent" mktag="!!" title="Attention" class="markup-button">'+
+			'<input value="!A" type="button"><a href="#">!A</a></span>'+
+		'<span id="mr_dice" mktag="##" title="#dice" class="markup-button">'+
+			'<input value="#D" type="button"><a href="#">#D</a></span>'+
+		'<span id="mr_quote" mktag=">" title="Цитировать" class="markup-button">'+
+			'<input value=">" type="button"><a href="#">&gt;</a></span>'}, {'click': markupText }),
+	Container = {
+		zIndex: 1,
+		Audio: _z.setup((HTMLAudioElement ? 'audio' : 'object'), {'class': 'audio-container', 'controls': true}),
+		Video: _z.setup((HTMLMediaElement ? 'video' : 'object'), {'class': 'video-container', 'controls': true}),
+		OVERLAY: _z.setup('div', {'class': 'content-window hidup', 'html': '<div id="shadow-box"></div><label id="close-content-window"></label><div id="content-frame"></div>'}, {
+			'click': function(e) {
+				switch (e.target.id) {
+					case 'close-content-window':
+						_z.remove([this, Container['Marker']]);
+						_z.remove(this.lastElementChild.childNodes);
+						break;
+					case 'content-frame':
+					case 'shadow-box':
+						this.classList.add('hidup');
+						Container['Marker'].classList.remove('hidout');
+				}
+			}, 'mousedown': function(e) {
+				if (e.target.className && e.target.className.indexOf('-container') >= 0)
+					e.target.style['z-index'] = Container.zIndex++;
 			}
-		}
-	}),
-	contMarker = $setup('label', {'id': 'show-content-window', 'class': 'hidout'}, {
-		'click': function(e) {
-			contentFrame.classList.remove('hidup');
-			this.classList.add('hidout');
-		}
-	});
-	
-/*-----[ GLOBAL Functions ]-----*/
-	addGalaSettings = function() {
-		return '<table><tbody><tr><td>Скрывать кнопки разметки:</td><td id="hide-buttons-panel">'+ addMarkupButtons('menu') +
-		'<span class="menubuttons"><label><input onclick="setupOption(this, \'KeyMarks\')" '+ (!getlSValue('KeyMarks', true) ? '' : 'checked') +
-		' type="checkbox" name="set_km" value=""><span title="Вкл/Выкл Gala KeyMarks &middot; % ^ * ( &quot; @ &#92; ! # &gt;">&Xi;</span></label></span>'+
-		'</td></tr><tr><td>Обробатывать ссылки:</td><td><ul class="nav navbar-nav" onclick="setPMode(event)"><li class="dropdown"><span class="dropdown-toggle '+
-			Gala.Embeds +'"></span><ul class="dropdown-menu hidout"><li><span class="set refOnly"></span></li><li><span class="set justPlayers"></span></li><li><span class="set All"></span></li></ul></li></ul></td></tr>'+
-		'<tr><td>Положение видеоплеера:</td><td><span onchange="placeMedia(event)"><input name="cont_p" value="windowFrame" type="radio" '+
-			(Gala.MC == 0 ? 'checked' : '') +'>\nВ окне\n<input name="cont_p" value="postContent" type="radio" '+
-			(Gala.MC == 1 ? 'checked' : '') +'>\nВ посте</span>\n<label class="vsset'+ (Gala.MC == 0 ? ' hidout' : '') +'"><input onchange="setVSize(this)" min="1" value="'+
-			getVSize('value') +'" step="1" max="4" type="range" name="v_size"><span id="vsize-textbox">('+ getVSize('text') +')</span></label></td></tr></tbody></table>';
-	}
-	hideMarkupButton = function(e) {
-		var val = e.value, x = document.getElementById(val);
-		if (getlSValue(val)) {
-			if (x) x.setAttribute('hidden', '');
-			setlSValue(val, false);
-		} else {
-			if (x) x.removeAttribute('hidden');
-			setlSValue(val, true);
-		}
-	}
-	placeMedia = function(e) {
-		var val = e.target.value, cont = Gala.VActive[1],
-			vsset = e.target.parentNode.nextElementSibling;
-		if (val === 'postContent') { Gala.MC = 1;
-			vsset.classList.remove('hidout');
-			if (cont) {
-				$placeNode('prepend', jumpCont(Gala.VActive[0]), $setup(cont, {'class': 'video-container', 'id': 'video_'+cont.id.split('_')[1]}, null));
-				$setup(cont.firstChild, {'class': '', 'width': getVSize('w'), 'height': getVSize('h')}, null);
-				contMarker.classList.add('hidout');
-				contentFrame.classList.add('hidup');
+		}),
+		Marker: _z.setup('label', {'id': 'show-content-window', 'class': 'hidout'}, {
+			'click': function(e) {
+				Container['OVERLAY'].classList.remove('hidup');
+				this.classList.add('hidout');
 			}
-		}
-		if (val === 'windowFrame') { Gala.MC = 0;
-			vsset.classList.add('hidout');
-			if (cont) {
-				contentFrame.appendChild($setup(cont, {'class': 'content-frame video', 'id': 'content_'+cont.id.split('_')[1]}, null));
-				$setup(cont.firstChild, {'width':'100%', 'height': '100%'}, null);
-				contMarker.classList.remove('hidout');
-			}
-		}
-		setlSValue('EmbedIn', val)
-	}
-	setPMode = function(e) {
-		var et = e.target, name = et.classList[0];
-		if (name == 'dropdown-toggle') {
-			et.classList.toggle('ins-act')
-			et.nextElementSibling.classList.toggle('hidout');
-		}
-		if (name == 'set') {
-			var txt = et.classList[1], sel = et.parentNode.parentNode;
-			sel.previousElementSibling.className = 'dropdown-toggle '+ txt;
-			sel.classList.toggle('hidout'); Gala.Embeds = txt;
-			if (txt != 'refOnly' && getlSValue('EmbedLinks') != 'All')
-				$each(document.querySelectorAll('blockquote a[href*="//"]:not(.cm-link):not(.irc-reflink)'), parseLinks);
-			setlSValue('EmbedLinks', txt);
-		}
-	}
-	setVSize = function (slider) {
-		var p = slider.value;
-		function size(w, h) {
-			var played = document.querySelector('.video-container > iframe, #html5_video');
-			setlSValue({'VWidth': w, 'VHeight': h});
-			slider.nextElementSibling.textContent = '('+w+'x'+h+')';
-			if (played) played.width = w, played.height = h;
-		}
-		p == 1 ? size(360, 270) : p == 2 ? size(480, 360) :
-		p == 3 ? size(720, 480) : p == 4 ? size(854, 576) : slider.textContent = 'gay :D';
-	}
-	setupOption = function (obj, option) {
-		if (obj.type === 'checkbox')
-			val = obj.checked;
-		if (obj.tagName === 'SELECT')
-			val = obj.value;
-		setlSValue(option, val);
-	}
-	loadMediaContainer = function (el) {
-		var cont, src = el.getAttribute("src"),
-			type = Gala.LinksMap[src].Type,
-			hash = btoa(getPageName(src));
-		if (Gala.MC === 0 && ['img', 'audio'].indexOf(type) < 0) {
-			var last = contentFrame.lastChild;
-				cont = $setup('div', {'class': 'content-frame '+ type, 'id': 'content_'+ hash,
-					'html': Gala.LinksMap[src].Embed.allReplace({'r{wh}': 'class="full-size"', '(width|height)="\\d+"': '$1="100%"'})
-				}, null);
-			if (last.id != 'content_'+ hash) {
-				if (last.classList[0] === 'content-frame') {
-					contentFrame.replaceChild(cont, last);
-					contMarker.classList.add('hidout');
-				} else
-					contentFrame.appendChild(cont)
-			} else contMarker.classList.add('hidout');
-			contentFrame.classList.remove('hidup');
-		} else {
-			var csEl = type +'-container', idEl = type +'_'+ hash,
-				contEl = document.getElementsByClassName(csEl)[0];
-				cont = $setup('div', {'id': idEl, 'class': csEl, 'html':
-					Gala.LinksMap[src].Embed.replace('r{wh}', getVSize('html'))
-				}, null);
-			if (type === 'img')
-				contEl = document.getElementById(idEl);
-			if (!contEl || contEl.id != idEl) {
-				if (contEl)
-					contEl.remove();
-				else if (['document', 'audio'].indexOf(type) >= 0)
-					$placeNode('before', el, cont);
-				else
-					$placeNode('prepend', jumpCont(el), cont);
+		}),
+		loadFrame: function(frame) {
+			var exist = this['OVERLAY'].lastElementChild.children[frame.id];
+			if (!this['OVERLAY'].parentNode)
+				_z.append(document.body, [this['OVERLAY'], this['Marker']]);
+			if (!exist) {
+				if ((exist = this['OVERLAY'].lastElementChild.querySelector('.'+ frame.className))) {
+					this['OVERLAY'].lastElementChild.replaceChild(frame, exist);
+				} else {
+					this.zIndex++;
+					frame.style['z-index'] = this.zIndex;
+					this['OVERLAY'].lastElementChild.appendChild(frame);
+				}
 			} else {
-				contEl.remove();
-				cont = [];
+				this.zIndex++;
+				frame.style['z-index'] = this.zIndex;
+			}
+			this['Marker'].classList.add('hidout');
+			this['OVERLAY'].classList.remove('hidup');
+		},
+		testMedia: function(name, el) {
+			(this[name]['_test_'] || (this[name]['_test_'] = [])).push(el);
+			if (!this[name].oncanplay) {
+				this[name].oncanplay = _onCanplayHandle;
+				this[name].onerror = _onUnsupportedHandle;
+				this[name].src = el.href;
 			}
 		}
-		if (type === 'video')
-			Gala.VActive = [el, cont];
 	}
-	wmarkTag = function(tag) { markText(tag, tag, 'wmark') }
-	htmlTag = function(tag) { markText('['+tag+']', '[/'+tag+']', 'html') }
-	qlTag = function(tag) { markText(tag+' ', '\n'+tag+' ', 'ql') }
-	insTag = function(tag) {
-		var htag = tag.split(/\s/)[0], wtag = tag.split(/\s/)[1],
-			count = function(str, sbstr) { return str.split(sbstr).length - 1 },
-			s = textArea.value.substring(0, textArea.selectionStart),
-			active = count(s, '['+htag+']') <= count(s, '[/'+htag+']');
-		!active ? (wtag === '%%' ? wmarkTag(wtag) : qlTag(wtag)) : htmlTag(htag);
+	function _onCanplayHandle(e) {
+		var $t = e.target;
+		_z.setup($t['_test_'][0], {'class': 'cm-button cm-play', 'id': $t.tagName[0].toLowerCase() +'flnk_'+ hashCodeURL($t.src), 'rel': 'nofollow', 'text': getFileName($t.src)});
+		_onUnsupportedHandle(e);
+	}
+	function _onUnsupportedHandle(e) {
+		var $t = e.target;
+		delete $t['_test_'][0];
+		$t['_test_'].splice(0, 1);
+		
+		if (!$t['_test_'][0]) {
+			$t.oncanplay = $t.onerror = null;
+		} else {
+			$t.src = $t['_test_'][0].href;
+		}
 	}
 	
-/*-----[ Local Functions ]-----*/
-	function addMarkupButtons(type) {
-		var chk, mbutton_tamplate;
-		if (type === 'menu') {
-			chk = 'checked',
-			mbutton_tamplate = '<span class="menubuttons"><label><input onclick="hideMarkupButton(this)" type="checkbox" name="hide_r{v}" value="r{v}" r{x}><span title="r{T}">r{N}</span></label></span>';
-		} else {
-			chk = 'hidden', mbutton_tamplate = '<span id="r{v}" onclick="r{t}Tag(\'r{n}\')" title="r{T}" r{x} class="markup-button'+
-				(type === 'text' ? ' text"><a href="#" onclick="return false;">r{N}</a>' : '"><input value="r{N}" type="button">') +'</span>';
-		}
-		return mbutton_tamplate.allReplace({'r{n}': 'b', 'r{N}': 'B', 'r{v}': 'bold',    'r{t}': 'html',  'r{T}': 'Жирный',         'r{x}': (getlSValue('bold', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'i',  'r{N}': 'i',    'r{v}': 'italic',     'r{t}': 'html',  'r{T}': 'Курсивный',      'r{x}': (getlSValue('italic', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'u',  'r{N}': 'U',    'r{v}': 'underline',  'r{t}': 'html',  'r{T}': 'Подчеркнутый',   'r{x}': (getlSValue('underline', true) ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 's',  'r{N}': 'S',    'r{v}': 'strike',     'r{t}': 'html',  'r{T}': 'Зачеркнутый',    'r{x}': (getlSValue('strike', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'spoiler %%', 'r{N}': '%%', 'r{v}': 'spoiler', 'r{t}': 'ins', 'r{T}': 'Спойлер',       'r{x}': (getlSValue('spoiler', true)   ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'code 	', 'r{N}': 'C', 'r{v}': 'code',      'r{t}': 'ins',   'r{T}': 'Код',            'r{x}': (getlSValue('code', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'rp',  'r{N}': 'RP',   'r{v}': 'roleplay',  'r{t}': 'html',  'r{T}': 'Ролеплей',       'r{x}': (getlSValue('roleplay', true)  ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sup', 'r{N}': 'Sup',  'r{v}': 'sup',       'r{t}': 'html',  'r{T}': 'Верхний индекс', 'r{x}': (getlSValue('sup', true)       ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': 'sub', 'r{N}': 'Sub',  'r{v}': 'sub',       'r{t}': 'html',  'r{T}': 'Нижний индекс',  'r{x}': (getlSValue('sub', true)       ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': '!!',  'r{N}': '!A',   'r{v}': 'attent',    'r{t}': 'wmark', 'r{T}': 'Attention',      'r{x}': (getlSValue('attent', true)    ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': '##',  'r{N}': '#D',   'r{v}': 'dice',      'r{t}': 'wmark', 'r{T}': '#dice',          'r{x}': (getlSValue('dice', true)      ? '' : chk)}) +
-			mbutton_tamplate.allReplace({'r{n}': '>',   'r{N}': '&gt;', 'r{v}': 'quote',     'r{t}': 'ql',    'r{T}': 'Цитировать',     'r{x}': (getlSValue('quote', true)     ? '' : chk)});
+	//--> Derpibooroo Reverse Search
+	var _DerpForm;
+	function DerpSearch(event) {
+		var imgSrc = decodeURIComponent(event.target.previousElementSibling.href.split('=')[1]);
+		if (!_DerpForm) {
+			_DerpForm = _z.setup('form', {'method': "post", 'accept-charset': "UTF-8", 'action': "https://www.derpibooru.org/search/reverse", 'target': "_blank", 'enctype': "multipart/form-data", 'hidden': '',
+				'html': '<input id="scraper_url" name="scraper_url" type="url" value="'+ imgSrc +'"><input name="fuzziness" id="fuzziness" value="0.25" min="0" max="1" step="0.01" class="input" type="number">'});
+		} else
+			_DerpForm.firstElementChild.value = imgSrc;
+		document.body.appendChild(_DerpForm).submit();
+		_DerpForm.remove();
+	} //<---*
+	
+	function jumpCont(node, name, cont) {
+		do {
+			if (node.tagName === 'BLOCKQUOTE') {
+				if (!(cont = node.parentNode.querySelector('.'+ name))) {
+					cont = _z.setup('span', {'class': name});
+					switch (name) {
+						case 'mediacontent':
+							_z.before(node, cont);
+							break;
+						case 'imagecontent':
+							_z.prepend(node.parentNode, cont);
+					}
+				}
+				return cont;
+			}
+		} while (
+			(node = node.parentNode)
+		);
 	}
-	function markText(openTag, closeTag, type) {
-		var val = textArea.value, 
-			end = textArea.selectionEnd,
-			start = textArea.selectionStart,
-			selected = val.substring(start, end),
-			getext = start === end ? window.getSelection().toString() : selected,
-			regex = /^(\s*)(.*?)(\s*)$/,
-			cont = regex.exec(selected),
-			wmark = type === 'wmark',
-			dice = closeTag === '##',
-			scrn = openTag === '\\',
-			html = type === 'html',
-			ql = type === 'ql';
-		if (ql)
-			markedText = openTag + getext.replace(/\n/gm, closeTag);
-		if (html)
-			markedText = openTag + selected + closeTag;
-		if (wmark && !dice && !scrn)
-			markedText = selected.replace((cont === null ? /^(\s*)(.*?)(\s*)$/gm : regex), '$1'+ openTag +'$2'+ closeTag +'$3');
-		if (scrn)
-			markedText = selected.length > 0 ? selected.replace(/(%%|\^|!!|\*)/gm, openTag +'$1') : closeTag;
-		if (dice) {
-			var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext), OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
-			markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT : (/^\d+|\d+d\d+$/).test(selected) ? OdT : cont[1] + cont[2] + s + OdT;
+	
+	//-- Get File name from Url
+	function getFileName(url) {
+		var m = /(?:\/|#|\?|&)(([^?\/#&]*)\.\w\w\w\w?)$/.exec(url);
+		return decodeURIComponent(m && m[2] ? m[1] : url.split('/').pop());
+	}
+	function isContain(arr, word) {
+		return (arr ? arr.indexOf(word) >= 0 : false);
+	}
+	function hashCodeURL(uri) {
+		var hash = 0, i = 0, chr, len,
+			str = uri.replace(/^https?:\/\//, '');
+		for(len   = str.length; i < len; i++) {
+			chr   = str.charCodeAt(i);
+			hash  = ((hash << 5) - hash) + chr;
+			hash |= 0; // Convert to 32bit integer
 		}
-		var sOfs = 0, eOfs = markedText.length;
-		if (dice)
-			sOfs = eOfs;
-		else if (['[spoiler]', '[code]'].indexOf(openTag) >= 0 || cont && !cont[2] && !ql)
-			sOfs = openTag.length, eOfs = sOfs + selected.length;
-		$setup(textArea, {'class': 'ta-inact', 'value': val.substring(0, start) + markedText + val.substring(end)}, null).focus();
-		textArea.setSelectionRange(start + sOfs, start + eOfs);
+		return hash;
+	}
+	function getInsetR(str, sbstr) {
+		return str.split(sbstr).length - 1;
+	}
+	
+	function markupText(e, tag) {
+		if ((tag = e.target.parentNode.getAttribute('mktag'))) {
+			try { _z.fall(e);
+				switch (tag) {
+					case 'spoiler':
+					case 'code':
+						var o = '['+ tag +']', c = '[/'+ tag +']',
+							s = _TextArea_.value.substring(0, _TextArea_.selectionStart);
+						if (getInsetR(s, o) <= getInsetR(s, c)) {
+							markText(o, c, 'html', true);
+						} else if (tag === 'spoiler') {
+							markText('%%', '%%', 'mdwn');
+						} else if (tag === 'code') {
+							markText('   ', '\n   ', 'ql');
+						}
+						break;
+					case '>':
+						markText(tag, '\n'+ tag, 'ql');
+						break;
+					case '##':
+						markText(tag, tag, 'dice');
+						break;
+					case '!!':
+						markText(tag, tag, 'mdwn');
+						break;
+					case 's': case 'u': case 'i': case 'b': case 'rp': case 'sup': case 'sub':
+						 markText('['+tag+']', '[/'+tag+']', 'html');
+				}
+			} catch(log) {
+				console.error(log);
+			}
+		}
+	}
+	function markText(openTag, closeTag, CASM, inset) {
+		var val = _TextArea_.value,
+			end = _TextArea_.selectionEnd,
+			start = _TextArea_.selectionStart,
+			selected = val.substring(start, end),
+			ws = window.getSelection().toString(),
+			getext = start === end ? ws : selected,
+			typex = function (gmi) {return new RegExp('^(\\s*)(.*?)(\\s*)$', (gmi || ''))},
+			cont = typex().exec(selected), offsetS = 0, offsetE, markedText;
+		switch (CASM) {
+			case 'html':
+				markedText = openTag + selected + closeTag;
+				if (inset || cont != null && !cont[2]) {
+					offsetS = openTag.length;
+					offsetE = openTag.length + selected.length;
+				}
+				break;
+			case 'ql':
+				if (ws && ws != getext) {
+					start = end = _TextArea_.value.length;
+					getext = ws;
+					openTag = closeTag;
+				}
+				markedText = openTag + getext.replace(/\n/gm, closeTag);
+				break;
+			case 'mdwn':
+				markedText = selected.replace(typex((cont === null ? 'gm' : '')), '$1'+ openTag +'$2'+ closeTag +'$3');
+				if (cont != null && !cont[2]) {
+					offsetS = openTag.length;
+					offsetE = openTag.length + selected.length;
+				}
+				break;
+			case 'scrn':
+				markedText = selected.length > 0 ? selected.replace(/(%%|\^|!!|\*)/gm, openTag +'$1') : closeTag;
+				break;
+			case 'dice':
+				var s = ' ', d = (/(\d+)(d\d+)?/).exec(getext),
+					OdT = openTag + (d && d[2] ? d[0] : d && d[1] ? '1d'+ d[1] : '1d2') + closeTag + s;
+				markedText = cont === null ? selected + s + OdT : !cont[2] ? cont[1] + OdT :
+					(/^\d+|\d+d\d+$/).test(selected) ? OdT : cont[1] + cont[2] + s + OdT;
+				offsetS = markedText.length;
+		}
+		_z.setup(_TextArea_, {'class': 'ta-inact', 'value': val.substring(0, start) + markedText + val.substring(end)}).focus();
+		_TextArea_.setSelectionRange(start + offsetS, start + (offsetE || markedText.length));
+	}
+	var KeyChars = {
+		code: ['{', '[', '(', '\'', '"'],
+		edoc: ['}', ']', ')', '\'', '"'],
+		symbs: ['"', '^', '*', '(', '\\', '!', '#', '%'],
+		doubs: ['"', '^', '*', ')', '\\', '!!', '##', '%%'],
+		quots: ['@', '>'],
+		complex: 0
 	}
 	function keyMarks(e) {
-		var TA = e.target.tagName === 'TEXTAREA',
-			KM = getlSValue('KeyMarks'),
-		 	key = String.fromCharCode(e.charCode),
-			val = textArea.value, 
-			end = textArea.selectionEnd,
-			start = textArea.selectionStart,
-			selected = val.substring(start, end),
-			active = selected.length > 0;
-			function autoselect() {
-				if (!active) {
-					var fw = val.substring(start, val.length).match(/^(.*?)(?:\s|$)/);
-					return (fw[1] ? false : true);
-				} else return true;
+		try {
+			var _TA_ = e.target.tagName === 'TEXTAREA',
+				_KM_ = _z.localS.get('KeyMarks', true),
+				start = _TextArea_.selectionStart,
+				end = _TextArea_.selectionEnd;
+			if (_KM_) {
+				var key = String.fromCharCode(e.charCode),
+					val = _TextArea_.value,
+					prev = val.substring(start - 1, start),
+					fpart = val.substring(0, start),
+					selected = val.substring(start, end),
+					c, exit = true;
+					
+				if (_TA_ && getInsetR(fpart, '[code]') > getInsetR(fpart, '[/code]')) {
+					if ((c = KeyChars.code.indexOf(key)) != -1) {
+						markText(KeyChars.code[c], KeyChars.edoc[c], 'mdwn');
+						KeyChars.complex = -1;
+					} else {
+						switch (e.keyCode * KeyChars.complex) {
+							case 9:
+							case -9:
+								markText('   ', '\n   ', 'ql');
+								break;
+							case -8:
+								var offset = start - 1;
+								_TextArea_.value = val.slice(0, offset) + val.slice(end + 1);
+								_TextArea_.setSelectionRange(offset, offset);
+								break;
+							case -13:
+								var ls = fpart.split('\n'),
+									pan = (new RegExp('(?:^|\\n)([\\s]*)'+ prev, '').exec(ls[ls.length - 1])|| { 1:'' })[1],
+									fc = '\n   ' + pan, sc = '\n' + pan,
+									offset = start + fc.length - 1;
+								
+								_TextArea_.value = fpart + fc + sc + val.substring(end);
+								_TextArea_.setSelectionRange(offset, offset);
+								break;
+							default:
+								exit = false;
+						}
+						KeyChars.complex = 1;
+					}
+				} else if (_TA_ && selected.length > 0 && (c = KeyChars.symbs.indexOf(key)) !== -1) {
+					markText(
+						(key === '(' ?  key  : KeyChars.doubs[c]), KeyChars.doubs[c], (
+						 key === '#' ? 'dice':
+						 key === '\\'? 'scrn': 'mdwn'));
+				} else if (
+					(window.getSelection().toString() || selected).length > 0 &&
+					(c = KeyChars.quots.indexOf(key)) != -1 &&
+					(prev == '\n' || prev == '' || selected.indexOf('\n') != -1)) {
+						key === '@' ? markText('• ', '\n• ', 'ql') :
+						              markText(key +' ', '\n'+ key +' ', 'ql');
+				} else
+					exit = false;
+				if (exit)
+					return _z.fall(e);
 			}
-			function callback(e) {
-				if (e.preventDefault)
-					e.preventDefault();
-				else
-					e.returnValue = false;
+			if (_TA_ && e.keyCode != 8 && _TextArea_.className === 'ta-inact') {
+				_TextArea_.setSelectionRange(end, end);
+				_TextArea_.removeAttribute('class');
 			}
-		if (KM && TA && KeyCodes.doubs.indexOf(key) >= 0) {
-			if (Gala.LastKey === key || active){
-				markText(key + (active ? key : ''), key + key, 'wmark')
-				Gala.LastKey = null;
-				return callback(e);
-			}
-		}
-		if (KM && TA && KeyCodes.symbs.indexOf(key) >= 0) {
-			if (autoselect()) {
-				markText(key, (key === '(' ? ')' : key), 'wmark')
-				return callback(e)
-			}
-		}
-		if (KM && KeyCodes.quots.indexOf(key) >= 0) {
-			selected = val.substring(start - 1, start);
-			if (!selected.match(/[^.]/) || selected === '\n') {
-				qlTag(key === '@' ? '•' : key);
-				return callback(e)
-			}
-		}
-		if (TA && e.keyCode != 8) { Gala.LastKey = key;
-			if (textArea.className === 'ta-inact') {
-				textArea.setSelectionRange(end, end);
-				textArea.removeAttribute('class');
-			}
+		} catch(log) {
+			console.error(log);
 		}
 	}
-	function parseLinks(link) {
-		var iframe = '<iframe r{wh} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen',
-			P = Gala.Embeds === 'refOnly' ? null : Gala.Embeds === 'All' ? true : false,
-			endp, file, regex = /.+/, embed = '', fav, i = 1, type = 'video',
-			VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v', 'flv', "3gp"],
-			AF = ["flac", "alac", "wav", "m4a", "m4r", "aac", "ogg", "mp3"],
-			IF = ["jpeg", "jpg", "png", "svg", "gif"],
-			href = escapeUrl(link.href),
-			EXT = href.split('.').pop().toLowerCase();
-		/************************* Reflinks ************************/
-		if (href.indexOf("pony") >= 0 && href.indexOf("/res/") >= 0) {
-			var targ = parseUrl(href);
-			if (targ != null && targ.thread) {
-				var brd = targ.board, tid = targ.thread,
-					pid = !targ.pid ? tid : targ.pid,
-					op = pid === tid ? ' de-opref' : '',
-					diffb = brd === Gala.URL.board;
-				return $setup(link, {'href': href.replace(/(?:https?:)\/\/pony(?:a)?(?:\.)?ch(?:an)?(?:\.\w+)?/, ''), 'text': '>>'+ (diffb ? '' : '/'+ brd +'/') + pid, 
-						'onclick': 'return highlight("'+ pid +'", true)', 'class': 'de-preflink ref|'+ brd +'|'+ tid +'|'+ pid + op}, null);
-			}
+	
+	var DF = ['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'xps', 'rtf'];
+	var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
+	var AF = ["wav", "m4a", "m4r", "aac", "ogg", "mp3", 'opus'];
+	var IF = ["jpeg", "jpg", "png", "svg", "gif"];
+	
+	function handleLinks(a) {
+		var f_ext, m_id;
+		if (a.host === 'pastebin.com' && (m_id = /\/([\w_-]+)/.exec(a.pathname))) {
+			_z.setup(a, {'class': 'cm-button cm-pastebin', 'id': 'pblnk_'+ m_id[1], 'text': 'PASTEBIN: '+ m_id[1], 'rel': 'nofollow' });
+		} else
+		if (isContain(IF, (f_ext = a.href.split('.').pop()))) {
+			var _fn = function(e) {
+				var hash = hashCodeURL(a.href),
+					name = getFileName(a.href);
+				e.target.onerror = IF.freeImg = e.target.onload =  null;
+				_z.setup(a, {'class': 'cm-button cm-image', 'id': 'imglnk_'+ hash, 'rel': 'nofollow', 'text': name,
+					'title': f_ext.toUpperCase() +', '+ e.target.naturalWidth +'x'+ e.target.naturalHeight });
+				a.wImage = _z.setup(e.target, {'class': 'image-attach', 'id': 'image_'+ hash, 'alt': name, 'onclick': 'this.classList.toggle(\'expanded\')'});
+			},
+			_img = (IF.freeImg || _z.setup('img', {'onerror': function(e) {IF.freeImg = e.target;}}));
+			_img.onload = _fn;
+			_img.src = a.href;
+		} else
+		if (isContain(VF, f_ext)) {
+			Container.testMedia('Video', a);
+		} else
+		if (isContain(AF, f_ext)) {
+			Container.testMedia('Audio', a);
+		} else
+		if (isContain(DF, f_ext)) {
+			m_id = hashCodeURL(a.href);
+			_z.setup(a, {'class': 'cm-button cm-pastebin', 'id': 'pdflnk_'+ m_id, 'text': 'Document: '+ getFileName(a.href), 'rel': 'nofollow' });
 		}
-		if (P === null) {
-			return setlSValue('LinksCache', '{}', true);
-		} else {
-			/********* HTML5 Audio/Video & Images *********/
-			if (VF.concat(AF.concat(IF)).indexOf(EXT) >= 0) {
-				return attachFile(link, (IF.indexOf(EXT) >= 0 ? 'img' : AF.indexOf(EXT) >= 0 ? 'audio' : 'video'));
-			}
-			/************************** SoundCloud *************************/
-			if (href.indexOf("soundcloud.com/") >= 0) {
-				link.className = "sc-player";
-				if (link.nextElementSibling.tagName === 'BR')
-					link.nextElementSibling.remove();
-				jumpCont(link).appendChild(link);
-				return $(link).scPlayer();
-			}
-			/*************************** Простоплеер **************************/
-			if (href.indexOf("pleer.com/tracks/") >= 0) {
-				regex = /(?:https?:)?\/\/(?:www\.)?pleer\.com\/tracks\/([\w_-]*)/g;
-				embed = '<embed class="prosto-pleer" width="410" height="40" type="application/x-shockwave-flash" src="http://embed.pleer.com/track?id=$1">';
-				pleer = $setup('object', {'class': 'pleer-track', 'html': href.replace(regex, embed)}, null)
-				return $placeNode('replace', link, pleer);
-			}
-			/************************* YouTube *************************/
-			if (href.indexOf("youtu") >= 0) {
-				embed = iframe +' src="//www.youtube.com/embed/$1$3?$2$4&autohide=1&enablejsapi=1&theme=light&html5=1&rel=0&start=$5">';
-				fav = '//youtube.com/favicon.ico'; P = Gala.deCfg['addYouTube'] ? false : true;
-				if (href.indexOf("youtube.com/watch?") >= 0 || href.indexOf("youtube.com/playlist?") >= 0)
-					regex = /(?:https?:)?\/\/(?:www\.)?youtube\.com\/(?:watch|playlist)\?.*?(?:v=([\w_-]*)|(list=[\w_-]*))(?:.*?v=([\w_-]*)|.*?(list=[\w_-]*)+)?(?:.*?t=(\d+))?/g;
-				if (href.indexOf("youtu.be") >= 0)
-					regex = /(?:https?:)?\/\/(?:www\.)?youtu\.be\/([\w_-]*)(?:.*?(list=[\w_-]*))?(?:.*?t=([\w_-]*))?/g;
-				if (href.indexOf("playlist?") >= 0)
-					P = true, i = 2;
-			}
-			/************************** Vimeo **************************/
-			if (href.indexOf("vimeo") >= 0) {
-				regex = /(?:https?:)?\/\/(?:www\.)?vimeo\.com\/(?:.*?\/)?(\d+)(?:.*?t=(\d+))?/g;
-				embed = iframe +' src="//player.vimeo.com/video/$1?badge=0&color=ccc5a7#t=$2">';
-				fav = '//f.vimeocdn.com/images_v6/favicon_32.ico'; P = Gala.deCfg['addVimeo'] ? false : true;
-			}
-			/************************** Coub *************************/
-			if (href.indexOf("coub.com/view/") >= 0) {
-				regex = /(?:https?:)?\/\/(?:www\.)?(?:coub\.com)\/(?:view)\/([\w_-]*)/g;
-				embed = iframe +'="true" src="http://coub.com/embed/$1?muted=false&autostart=false&originalSize=false&hideTopBar=false&noSiteButtons=false&startWithHD=false">';
-				fav = "//coub.com/favicon.ico"; P = true;
-			}
-			/************************* RuTube *************************/
-			if (href.indexOf("rutube.ru/video/") >= 0) {
-				regex = /(?:https?:)?\/\/(?:www\.)?(?:rutube\.ru)\/(?:video)\/([\w_-]*)\/?/g;
-				embed = iframe +' src="http://rutube.ru/video/embed/$1?autoStart=false&isFullTab=true&skinColor=fefefe">';
-				fav = "//rutube.ru/static/img/btn_play.png"; P = true;
-			}
-			/************************* Видео m@il.ru  *************************/
-			if (href.indexOf("mail.ru/") >= 0 && href.indexOf("/video/") >= 0) {
-				regex = /(?:https?:)?\/\/(?:my\.)?(?:mail\.ru\/mail\/)([\w_-]*)(?:\/video)\/([\w_-]*\/\d+\.html)/g;
-				embed = iframe +' src="http://videoapi.my.mail.ru/videos/embed/mail/$1/$2">'; P = true;
-			}
-			/************************* Яндекс.Видео *************************/
-			if (href.indexOf("video.yandex.ru/users/") >= 0) {
-				if ((/\/view\/(\d+)/).exec(href)) {
-					endp = 'http://video.yandex.ru/oembed.json?url='; P = true;
-					fav = '//yastatic.net/islands-icons/_/ScXmk_CH9cCtdXl0Gzdpgx5QjdI.ico';
+	}
+	
+	function cmButtonHandler(e) {
+		if (e.button != 0 || !e.target.className || !e.target.className.indexOf)
+			return;
+		if (isContain(e.target.className, 'cm-button')) {
+			try { _z.fall(e);
+				var $btn = e.target, $Id = $btn.id.split('_');
+				switch ($Id[0]) {
+					case 'pblnk':
+						if (!$btn._container) {
+							$btn._container = $btn.nextElementSibling.id === 'document_'+ $Id[1] ? $btn.nextElementSibling : _z.setup('div', {'class': 'document-container', 'id': 'document_'+ $Id[1],
+								'html': '<span class="mv-frame to-win"></span><iframe frameborder="0" src="//pastebin.com/embed_iframe.php?i='+ $Id[1] +'">'});
+						}
+						if ($btn._container.inwin) {
+							Container.loadFrame($btn._container);
+						} else if ($btn.nextElementSibling === $btn._container) {
+							$btn._container.remove();
+						} else
+							_z.after($btn, $btn._container);
+						break;
+					case 'aflnk':
+						_z.each('.cm-stop', function($cm) { $cm.className = 'cm-button cm-play'; })
+						if ($btn.nextElementSibling && $btn.nextElementSibling.id === 'audio_'+ $Id[1]) {
+							$btn.nextElementSibling.remove();
+						} else {
+							$btn.className = 'cm-button cm-stop';
+							_z.after($btn, Container['Audio']);
+							Container['Audio'].id = 'audio_'+ $Id[1];
+							Container['Audio'].src = $btn.href;
+							Container['Audio'].play();
+						}
+						break;
+					case 'vflnk':
+						if (Container['Video'].src !== $btn.href)
+							Container['Video'].src = $btn.href;
+						if (_EmbedField_ === 0) {
+							Container.loadFrame(_z.setup(Container['Video'], {'id': 'video_'+ $Id[1]}));
+						} else {
+							var $pcont = jumpCont($btn, 'mediacontent'),
+								$video = $pcont.querySelector('#video_'+ $Id[1]);
+							if ($video) {
+								$btn.className = 'cm-button cm-play';
+								$video.remove();
+							} else {
+								$btn.className = 'cm-button cm-stop';
+								$video = _z.setup(Container['Video'], {'id': 'video_'+ $Id[1]});
+								$pcont.appendChild($video);
+								$video.play();
+							}
+						}
+						break;
+					case 'imglnk':
+						var $icont = jumpCont($btn, 'imagecontent'),
+							$image = $icont.querySelector('#image_'+ $Id[1]);
+						if (!$btn.wImage)
+							$btn.wImage = ($image || _z.setup(e.target, {'class': 'image-attach thumb', 'id': 'image_'+ $Id[1], 'alt': $btn.textContent, 'onclick': 'this.classList.toggle(\'full-size\')'}));
+						if ($image) {
+							$image.remove();
+							$btn.classList.remove('attached');
+						} else {
+							$icont.appendChild($btn.wImage);
+							$btn.classList.add('attached');
+						}
+						break;
+					case 'pdflnk':
+						if (!Container['PDF']) {
+							Container['PDF'] = _z.setup('div', {'class': 'pdf-container', 'html': '<iframe frameborder="0" scrolling="auto" width="100%" height="100%">'});
+						}
+						if (Container['PDF'].id !== 'pdf_'+ $Id[1]) {
+							Container['PDF'].firstElementChild.src = '//docs.google.com/gview?embedded=true&url='+ $btn.href;
+							Container['PDF'].id = 'pdf_'+ $Id[1]
+						}
+						Container.loadFrame(Container['PDF']);
+						break;
 				}
+			} catch(log) {
+				console.error(log);
 			}
-			/************************* VK.com ************************/
-			if (href.indexOf("vk.com/video") >= 0) {
-				regex = /(?:https?:)?\/\/vk\.com\/video(?:_ext\.php\?oid=)?(-?\d+)(?:&id=|_)(\d+).?(hash=[\w_-]*)?(.*?hd=-?\d+)?(.*?t=[\w_-]*)?/g;
-				embed = iframe +' src="http://vk.com/video_ext.php?oid=$1&id=$2&$3$4$5">';
-				link.setAttribute('href', href.replace(regex, 'https://vk.com/video$1_$2?$3$4$5'));
-				fav = '//vk.com/images/faviconnew.ico'; i = 3; P = true;
-			}
-			/************************* Pastebin *************************/
-			if (href.indexOf("pastebin.com/") >= 0) {
-				regex = /(?:https?:)?\/\/(?:www\.)?(?:pastebin\.com)\/([\w_-]*)/g;
-				embed = '<iframe frameborder="0" src="http://pastebin.com/embed_js.php?i=$1">';
-				fav = '/test/src/140593041526.png';
-				type = 'document'; P = true;
-			}
-			/************************* Custom iframe ************************/
-			if (href.indexOf("/iframe/") >= 0 || href.indexOf("/embed/") >= 0) {
-				embed =  iframe +' src="'+ href +'">';
-				if (href.indexOf("/html/") < 0)
-					link.setAttribute("href", href.allReplace({'embed/': "", 'be.com': ".be"}));
-				i = 0; P = true;
-			}
-			/****************************************************************/
-			if (P && Gala.LinksMap[href]) {
-				if (Gala.LinksMap[href].Embed)
-					$setup(link, {'href': undefined, 'src': href, 'onclick': 'loadMediaContainer(event.target)'}, null);
-				$setup(link, {'class': 'cm-link', 'title': Gala.LinksMap[href].Title, 'text': Gala.LinksMap[href].Name,
-					'rel': 'nofollow', 'style': 'background:url('+ Gala.LinksMap[href].Favicon +')left / 16px no-repeat'
-				}, null);
-			} else if (P)
-				oEmbedMedia(link, type, href.replace(regex, embed), fav, endp, (regex.exec(href)[i] != undefined));
-		}
-	}
-	function attachFile(el, type, lR) {
-		var fileUrl = escapeUrl(el.href),
-			fileName = (type === 'img' ? 'Expand: ' : 'Play: ') + getPageName(fileUrl),
-			fileIcon = '/test/src/'+ (type === 'img' ? '140896790568.png' : '139981404639.png'),
-			embed = type === 'img' ? '<img style="border:medium none;cursor:pointer" src="'+ fileUrl +'" class="thumb" alt="'+ fileName +
-				'" width="290" onclick="this.setAttribute(\'width\', this.getAttribute(\'width\') == \'290\' ? \'85%\' : \'290\')" >' :
-				'<video '+ (type === 'audio' ? 'width="300" height="150" poster="/test/src/139957920577.png"' : 'r{wh}') +
-			' controls><source src="'+ fileUrl +'"></source></video>',
-			attach = function(e) {
-				$setup(el, {'class': 'cm-link', 'rel': 'nofollow', 'href': undefined, 'src': fileUrl, 
-					'style':'background:url('+ fileIcon +')left / 16px no-repeat', 'text': fileName,
-					'onclick': 'loadMediaContainer(event.target)'}, null);
-				Gala.LinksMap[fileUrl] = {Name: fileName, Title: '', Embed: embed, Favicon: fileIcon, Type: type};
-				setlSValue('LinksCache', JSON.stringify(Gala.LinksMap), true);
-			};
-		$setup(type, {'src': fileUrl, 'width': getVSize('w'), 'height': getVSize('h'), 'controls': ''}, {'load': attach,
-			'loadeddata': function(e){ lR ? $placeNode('replace', el, this) : attach(e)},
-			'error': function(e) { lR ? el.setAttribute('target', '_blank') : oEmbedMedia(el) }
-		});
-	}
-	function oEmbedMedia(link, type, embed, fav, endpoint, arg) {
-		var mediaUrl = escapeUrl(link.href);
-		getDataResponse((!endpoint ? 'http://api.embed.ly/1/oembed?url=' : endpoint) + mediaUrl +'&format=json',
-		function(status, sText, data, xhr) {
-			if (status !== 200 || !data) {
-				$setup(link, {'target': '_blank'}, null);
+		} else if (isContain(e.target.className, 'mv-frame')) {
+			if (!e.target.parentNode.inwin) {
+				e.target.className = 'mv-frame to-post';
+				Container.loadFrame(e.target.parentNode);
+				if(!e.target.parentNode.style['width'] && !e.target.parentNode.style['height']) {
+					e.target.parentNode.style['width']  = '60%';
+					e.target.parentNode.style['height'] = '85%';
+				}
 			} else {
-				var loc = getLocation(mediaUrl),
-					slnk = ['tinyurl.com', 'bit.ly', 'goo.gl'],
-					host = slnk.indexOf(loc.hostname) >= 0 ? data.provider_url : 'http://'+ loc.hostname,
-					icon = !fav ? '//www.google.com/s2/favicons?domain='+ host : fav,
-					title = host == 'pastebin.com' ? data.description.split(' | ').pop() : data.description,
-					name = !data.title ? getPageName(mediaUrl) +' ・ ❨'+ data.provider_name +'❩' : data.title.allReplace({' - YouTube': "", ' - Pastebin.com': ""}, true);
-				if (arg || !arg && data.html && data.type != "link") {
-					if (!embed && data.html)
-						embed = data.html;
-					if (data.provider_name === "Google Docs")
-						type = 'document';
-					$setup(link, {'href': undefined, 'src': mediaUrl, 'onclick': 'loadMediaContainer(event.target)'}, null);
-				}
-				$setup(link, {'class': 'cm-link', 'rel': 'nofollow', 'title': title, 'text': name,
-					'style': 'background:url('+ icon +')left / 16px no-repeat'}, null);
-				Gala.LinksMap[mediaUrl] = {Name: name, Title: title, Embed: embed, Favicon: icon, Type: type};
-				setlSValue('LinksCache', JSON.stringify(Gala.LinksMap), true);
+				e.target.className = 'mv-frame to-win';
+				_z.after(document.getElementById('pblnk_'+ e.target.parentNode.id.split('_')[1]), e.target.parentNode);
+				Container['Marker'].classList.remove('hidout');
+				Container['OVERLAY'].classList.add('hidup');
 			}
-		});
+			e.target.parentNode.inwin = e.target.classList[1] === 'to-post';
+		}
 	}
-	function getVSize(i) {
-		var w = getlSValue('VWidth', 360), h = getlSValue('VHeight', 270),
-			val = w == 360 ? 1 : w == 480 ? 2 : w == 720 ? 3 : w == 854 ? 4 : 0;
-		if (i === 'html') return 'width="'+w+'" height="'+h+'"';
-		if (i === 'value') return val;
-		if (i === 'text') return w+'x'+h;
-		return (i == 'w' ? w : i == 'h' ? h : 0);
-	}
+	
 	function insertListenerS(event){
 		if (event.animationName == "init") {
-			var et = event.target, etp = et.parentNode,
-				dnb = etp.querySelector('span[id^="dnb-"]'),
-				mbp = $setup('span', {'id': 'markup-buttons-panel', 'html':
-					addMarkupButtons(et.querySelector('.de-abtn') ? 'text' : 'btn')}, null);
-			if (et.id === 'de-txt-panel') {
-				if(!textArea) {
-					textArea = $setup(document.getElementById('msgbox'), {}, {
-						'click': function(e) {this.removeAttribute('class')},
-						'keydown': function(e) {
-							if (KeyCodes.specl.indexOf(e.keyCode) >= 0)
-								keyMarks(e)}
-					});
-					window.addEventListener('keypress', keyMarks, false);
-				}
-				if (et.lastChild.id != 'markup-buttons-panel')
-					et.appendChild(mbp);
-			}
-			if (et.className.split(' ').indexOf('de-imgmenu') >= 0)
-				et.insertAdjacentHTML('beforeend', '<a class="de-menu-item de-imgmenu de-src-derpibooru" onclick="revSearch(\''+ et.lastChild.href.split('=')[1] +'\')" target="_blank">Поиск по Derpibooru</a>');
-			if (et.tagName === 'BLOCKQUOTE') {
-				$each(etp.querySelectorAll('td > a[href$=".webm"]:not([target="_blank"]), div > a[href$=".webm"]:not([target="_blank"])'), function(el) { attachFile(el, 'video', true) });
-				if (dnb && etp.tagName !== 'DIV' && dnb.nextElementSibling.tagName !== 'BR' && dnb.nextElementSibling.tagName !== 'LABEL')
-					dnb.insertAdjacentHTML('afterend', '<label style="display:block">');
-				$each(et.querySelectorAll('a[href*="//"]:not(.cm-link):not(.irc-reflink):not([href*="soundcloud.com/"])'), parseLinks);
-			}
-			if(!document.querySelector('.content-window'))
-				$placeNode('append', document.body, [contentFrame, contMarker]);
-		}
-	}
-	function insertListenerE(event) {
-		if (event.animationName == "init") {
-			var et = event.target;
-			if (et.tagName === 'BLOCKQUOTE') {
-				setTimeout(function() { $each(et.querySelectorAll('a[href*="soundcloud.com/"]'), parseLinks) }, 700)
+			var $element, $target = event.target;
+			switch ($target.id) {
+				case 'de-txt-panel':
+					if ($target.lastElementChild !== MarkupButtons) {
+						MarkupButtons.className = 'buttons-style-'+ ($target.querySelector('.de-abtn') ? 'text' : 'standart');
+						$target.appendChild(MarkupButtons);
+					}
+					break;
+				case 'postform':
+					if (!_TextArea_) {
+						_TextArea_ = _z.setup(document.getElementById('msgbox'), {}, {
+							'click': function(e) {this.removeAttribute('class')}
+						});
+					}
+					break;
+				default:
+					if ($target.className === 'reply de-menu') {
+						$element = _z.setup('a', {'class': 'de-menu-item de-src-derpibooru', 'target': '_blank', 'text': 'Поиск по Derpibooru'}, {'click': DerpSearch});
+						$target.appendChild($element);
+					} else if ($target.tagName === 'BLOCKQUOTE') {
+						var scp = $target.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
+						if (scp.length > 0) {
+							jumpCont($target, 'mediacontent').appendChild(SCPurePlayer.createGroup(scp));
+							_z.each(scp, function(a) {
+								if (a.nextElementSibling.tagName === 'BR')
+									a.nextElementSibling.remove();
+								a.remove();
+							});
+						}
+						_z.each($target.querySelectorAll('a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink):not([href*="soundcloud.com"])'), handleLinks);
+					}
 			}
 		}
 	}
+	
+	_z.setup(window, null, {
+		'click': cmButtonHandler,
+		'keypress': keyMarks
+	});
+	
 	var pfx = ["webkit", "moz", "MS", "o", ""];
 	// animation listener events
 	PrefixedEvent("AnimationStart", insertListenerS);
-	//PrefixedEvent("AnimationIteration", insertListener);
-	PrefixedEvent("AnimationEnd", insertListenerE);
+	//PrefixedEvent("AnimationIteration", insertListenerI);
+	//PrefixedEvent("AnimationEnd", insertListenerE);
 	// apply prefixed event handlers
 	function PrefixedEvent(type, callback) {
 		for (var p = 0; p < pfx.length; p++) {
@@ -651,4 +1248,4 @@ function revSearch(imgSrc) {
 			document.addEventListener(pfx[p]+type, callback, false);
 		}
 	}
-})();
+}/* ===> end <=== */
