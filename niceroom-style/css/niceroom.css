@@ -1,0 +1,282 @@
+html, body {
+	background: url('/css/niceroom.img/linen.png') repeat #e2e7ee;
+	font-family: "Trebuchet MS",Trebuchet,tahoma,serif;
+	color: #8b91a5;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.7);
+}
+
+body {
+	margin: auto 1%;
+}
+
+.logo {
+	clear:both;
+	text-align:left;
+	font-size:2em;
+	font-weight:bold;
+}
+
+center {
+	padding: 1px;
+}
+
+.postblock, .doubledash, .modalDialog {
+	display: none;
+}
+
+hr {
+	border-style: none none solid;
+	border-color: #b9bfcb;
+	box-shadow: 0 1px 1px #fff;
+}
+
+.postform {
+	padding-left: 5%;
+}
+
+.postertrip {
+	color: #09b3b8;
+}
+
+a {
+	color: #00aff2;
+}
+
+.spoiler, .spoiler a, .spoiler .rcv, .spoiler .dice,
+.spoiler .unkfunc0, .spoiler .unkfunc1, .spoiler .unkfunc2, 
+.spoiler .unkfunc3, .spoiler .unkfunc4, .spoiler .unkfunc5  {
+	background: #f1f2f1;
+	color: transparent;
+	transition:all 0.2s ease;
+	box-shadow: 0px 1px 2px #a7acb3;
+	text-shadow: none;
+	
+}
+
+.spoiler:hover, .spoiler a:hover, .spoiler:hover .rcv, .spoiler:hover .dice, 
+.spoiler:hover .unkfunc0, .spoiler:hover .unkfunc1, .spoiler:hover .unkfunc2, 
+.spoiler:hover .unkfunc3, .spoiler:hover .unkfunc4, .spoiler:hover .unkfunc5  {
+	background: none;
+    box-shadow: none;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.spoiler:hover {
+	color: #8b91a5;
+}
+
+a:hover, .spoiler a:hover {
+	color: #00d0ff;
+}
+
+.rcv, .spoiler:hover .rcv {
+	color: #ced7e3;
+	text-shadow: 1px 1px 1px #fff, -1px -1px 1px rgba(0,0,0,0.5);
+}
+
+.dice, .spoiler:hover .dice {
+	color: #6aab52;
+}
+
+.unkfunc, .unkfunc0, .unkfunc0 .spoiler:hover, .spoiler:hover .unkfunc0 {
+	color: #59a997;
+}
+
+.unkfunc1, .unkfunc1 .spoiler:hover, .spoiler:hover .unkfunc1 {
+	color: #499987;
+}
+
+.unkfunc2, .unkfunc2 .spoiler:hover, .spoiler:hover .unkfunc2 {
+	color: #398977;
+}
+
+.unkfunc3, .unkfunc3 .spoiler:hover, .spoiler:hover .unkfunc3 {
+	color: #297967;
+}
+
+.unkfunc4, .unkfunc4 .spoiler:hover, .spoiler:hover .unkfunc4 {
+	color: #196957;
+}
+
+.unkfunc5, .unkfunc5 .spoiler:hover, .spoiler:hover .unkfunc5 {
+	color: #095947;
+}
+
+strike, strike .spoiler:hover, s {
+	text-shadow: 0 0 2px #f1f2f1;
+}
+
+.coma-colormark {
+	border-radius: 100px !important;
+	border-style: none !important;
+	box-shadow: 0 1px 0 #fff, inset 0 1px 1px #3e3f3e;
+}
+
+input {
+	text-shadow: 0 1px 0 #fff;
+	line-height: 1.5;
+}
+
+.reply, textarea, input, tbody tr th {
+	padding: 6px;
+	border: none !important;
+	box-shadow: 1px 1px 1px #b9bfcb, inset -1px 1px 1px -1px #fff, inset -1px -1px 1px -1px #fff;
+}
+
+.highlight {
+    border: 2px dashed #b9bfcb;
+	box-shadow: 3px 3px 25px -4px rgba(81,80,81,0.6);
+	padding: 6px;
+}
+
+textarea, input[type="text"], input[type="password"] {
+	text-shadow: none;
+	font: 12px "Trebuchet MS";
+	line-height: 18px;
+}
+
+input[type="password"] {
+	margin-bottom: 5px;
+}
+
+input[type="button"], input[type="submit"] {
+	background-color: #f0f0f0;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover {
+	background-color: #c0c0c0!important;
+}
+
+input[type="button"]:active, input[type="submit"]:active {
+	box-shadow: 0px 0px 1px #b9bfcb, inset -1px 1px 1px -1px #fff, inset -1px -1px 1px -1px #fff;
+	text-shadow: none;
+}
+
+#de-txt-resizer {
+	background: url('/css/niceroom.img/resizer.png') no-repeat;
+	border: none !important;
+	height: 5px;
+}
+
+.thumb, .de-img-full, center img {
+	border-style: groove !important;
+	border-color: transparent !important;
+	box-shadow: 0px 1px 2px #a7acb3;
+	-webkit-transform: rotate(-1deg);
+	-moz-transform: rotate(-1deg);
+	-ms-transform: rotate(-1deg);
+	-o-transform: rotate(-1deg);
+	transform: rotate(-1deg);
+}
+
+.nomagic, .de-pview, .de-img-center, .de-ytube-obj, #de-panel {
+ 	border: none !important;
+ 	box-shadow: 7px 6px 25px rgba(81,80,81,0.6), inset 0px 0px 0px rgba(0,0,0,1) !important;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+}
+
+center img {
+	box-shadow: 0px 3px 5px -1px #444;
+	border: none !important;
+}
+
+.de-ytube-obj {
+	display: table;
+	background-color: black !important;
+}
+
+.nomagic-content, .de-pview, .de-img-center, .de-cfg-body, 
+#de-cfg-btns, #de-content-fav, #de-alert, #de-menu, #de-content-hid {
+	background: url('/css/niceroom.img/linen-h.png') repeat #dee2e8;
+	border-color: #b9bfcb !important;
+}
+
+.nomagic-header, .nomagic-switcher, .de-cfg-tab, 
+#de-cfg-head, #de-spell-rowmeter, #de-menu:hover {
+	text-shadow: none;
+}
+
+.filesize {
+	font-size: 13px;
+	font-family: tahoma;
+}
+
+#lok {
+	font-style: italic;
+}
+
+.filetitle {
+	font: small-caps bold 20px serif;
+	color: #7d85aa;
+}
+
+.de-btn-fav, .de-btn-fav-sel, .de-btn-expthr, .de-btn-rep, 
+.de-btn-hide, .de-btn-hide-user, .de-btn-src, .de-btn-sage {
+	color: transparent !important;
+	text-shadow: none !important;
+	padding: 0 8px;
+	width: 0;
+}
+
+.de-btn-fav {
+	background: url('/css/niceroom.img/fav.svg') no-repeat top center;
+}
+
+.de-btn-fav-sel {
+	background: url('/css/niceroom.img/fav-sel.svg') no-repeat top center;
+}
+
+.de-btn-expthr {
+	background: url('/css/niceroom.img/expthr.svg') no-repeat top center;
+}
+
+.de-btn-rep {
+	background: url('/css/niceroom.img/rep.svg') no-repeat top center;
+}
+
+.de-btn-hide, .de-btn-hide-user {
+	background: url('/css/niceroom.img/hide.svg') no-repeat top center;
+}
+
+.de-btn-src {
+	background: url('/css/niceroom.img/src.svg') no-repeat center;
+	width: 4px;
+}
+
+.de-btn-sage {
+	background: url('/css/niceroom.img/sage.svg') no-repeat top center;
+}
+
+.extrabtns {
+	background: url('/css/niceroom.img/paperclip.svg') no-repeat;
+}
+
+.extrabtns img {
+	opacity: 0;
+}
+
+.backnext, .backnext td, table, tbody tr td {
+	border: none;
+}
+
+.footer, .footer a {
+	text-align:center;
+	font: small-caps 18px mlp-font;
+	margin:1em;
+	letter-spacing: 1px;
+	text-decoration: none;
+}
+
+@font-face{
+	font-family: 'mlp-font';
+	src: url('/images/fonts/mlp-font.eot');
+	src: url('/images/fonts/mlp-font.ttf') format('truetype'), 
+	url('images/fonts/mlp-font.woff') format('woff'), 
+	url('fonts/mlp-font.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
