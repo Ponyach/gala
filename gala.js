@@ -1336,7 +1336,7 @@ function Gala() {
 							_GalaForm.elements['message'].textMark('>>'+ (m[3] || m[2]), '\r\n', 'ijct');
 							_GalaForm.children['gala-replytitle'].lastElementChild.textContent = (document.querySelector('#reply'+ m[2] +' .filetitle') || { textContent: '(без названия) №.'+ m[2] }).textContent;
 						}
-						return (el.classList.contains('psttable') || el.classList.contains('oppost') || el.classList.contains('de-pview'));
+						return (el.classList.contains('psttable') || el.classList.contains('oppost')) ? el : el.classList.contains('de-pview') ? el.lastElementChild : null;
 					}), _GalaForm);
 					break;
 				case 'sc-info-toggle':
