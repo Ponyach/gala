@@ -1,27 +1,34 @@
-html,body {
-    background-color: #1f201f;
-    color: #7C7C7C;
-    font-family: serif;
+html, body {
+	color: #7C7C7C;
+	font-family: "Trebuchet MS",Trebuchet,tahoma,serif;
 }
 
 body {
 	margin: auto 1%;
 }
 
-.logo {
-	clear:both;
-	text-align:left;
-	font-size:2em;
-	font-weight:bold;
+html, body, .fixed-header, .modal__inner {
+	background-color: #1f201f; 
 }
 
-.doubledash,.modalDialog {
+#passcode-button {
+  margin-right: 35px !important;
+}
+
+.logo {
+	clear: both;
+	text-align: left;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.doubledash, .modalDialog {
 	display: none;
 }
 
 hr {
 	border-color: #151515;
-	box-shadow: 0 0 1px rgba(87, 87, 87, 0.4);
+	box-shadow: 0 0 1px rgba(87,87,87,.4);
 	border-style: solid;
 }
 
@@ -43,8 +50,8 @@ a:hover, .spoiler a:hover {
 
 .reply, .de-pview {
 	background-color: #181818;
-	border-top: 1px solid rgba(77, 77, 77, 0.1);
-	border-left: 1px solid rgba(77, 77, 77 , 0.1);
+	border-top: 1px solid rgba(77,77,77,.1);
+	border-left: 1px solid rgba(77,77,77,.1);
 }
 
 .reply, .highlight {
@@ -52,27 +59,26 @@ a:hover, .spoiler a:hover {
 	padding: 2px 4px;
 }
 
-.nomagic, .de-pview, .de-img-center, .de-ytube-obj {
+.gala-freestyle, .de-pview, .de-video-obj, #de-panel {
 	border: none !important;
 	box-shadow: 1px 1px 8px 1px black;
+}
+
+.thumb, .de-img-center, .de-img-full {
+	box-shadow: 0 0 20px -8px black;
 }
 
 .de-img-center, .highlight {
 	background-color: #2c2c2c!important;
 }
 
-.de-ytube-obj {
-	display: table;
-	background-color: black !important;
-}
-
 .spoiler, .spoiler a, .spoiler .rcv, .spoiler .dice,
 .spoiler .unkfunc0, .spoiler .unkfunc1, .spoiler .unkfunc2, 
 .spoiler .unkfunc3, .spoiler .unkfunc4, .spoiler .unkfunc5 {
-    color: transparent;
-    background: none;
-    text-shadow: 0 3px 3px #181818, 0 1px 4px #111, 1px -1px 5px #7C7C7C;
-    transition:all 0.5s ease;
+	color: transparent;
+	background: none;
+	text-shadow: 0 3px 3px #181818, 0 1px 4px #111, 1px -1px 5px #7C7C7C;
+	transition: all .5s ease;
 }
 
 .spoiler a {
@@ -91,8 +97,8 @@ a:hover, .spoiler a:hover {
 .spoiler:hover, .spoiler a:hover, .spoiler:hover .rcv, .spoiler:hover .dice, 
 .spoiler:hover .unkfunc0, .spoiler:hover .unkfunc1, .spoiler:hover .unkfunc2, 
 .spoiler:hover .unkfunc3, .spoiler:hover .unkfunc4, .spoiler:hover .unkfunc5 {
-    text-shadow: none;
-    font-weight: normal;
+	text-shadow: none;
+	font-weight: normal;
 }
 
 .spoiler:hover {
@@ -104,9 +110,9 @@ a:hover, .spoiler a:hover {
 }
 
 .rcv, .spoiler:hover .rcv {
-  color: transparent;
-  text-shadow: 0 0 rgba(124, 124, 124, 0.5), -1px -1px 0 black, 0 1px 1px rgba(124, 124, 124, 0.2);
-  font-weight: bold;
+	color: transparent;
+	text-shadow: 0 0 rgba(124,124,124,.5), -1px -1px 0 black, 0 1px 1px rgba(124,124,124,.2);
+	font-weight: bold;
 }
 
 .unkfunc, .unkfunc0, .unkfunc0 .spoiler:hover, .spoiler:hover .unkfunc0 {
@@ -129,9 +135,9 @@ a:hover, .spoiler a:hover {
 }
 
 textarea, input, a.nomagic-header {
-    border: 1px inset rgba(99, 99, 99, 0.1);
-    background-color: #2c2c2c;
-    color: #999;
+	border: 1px inset rgba(99,99,99,.1);
+	background-color: #2c2c2c;
+	color: #999;
 }
 
 textarea, input[type="text"], input[type="password"] {
@@ -146,19 +152,19 @@ input[type="password"] {
 input[type="file"], tbody tr th, a.nomagic-header {
 	background-color: #292929;
 	box-shadow: inset 0 0 8px #111;
-	border: 1px inset rgba(99, 99, 99, 0.1);
+	border: 1px inset rgba(99,99,99,.1);
 }
 
 input[type="button"], input[type="submit"] {
 	box-shadow: 0 0 4px #111, inset 0 0 8px #111!important;
-	border: 1px inset rgba(99, 99, 99, 0.1)!important;
+	border: 1px inset rgba(99,99,99,.1)!important;
 	background-color: #3d3e3f!important;
 	color: #aaa!important;
 }
 
 input[type="button"]:hover, input[type="submit"]:hover {
-    background: #78532e!important;
-    color: #ddd!important;
+	background: #78532e!important;
+	color: #ddd!important;
 }
 
 input[type="button"]:active, input[type="submit"]:active {
@@ -167,7 +173,7 @@ input[type="button"]:active, input[type="submit"]:active {
 	color: #ddd!important;
 }
 
-.coma-colormark  {
+.coma-colormark, .settings-section {
 	box-shadow: inset 0 0 8px #111!important;
 	border: 1px solid #2d2d2d!important;
 	border-top-color: #111!important;
@@ -180,9 +186,8 @@ input[type="button"]:active, input[type="submit"]:active {
 	font: small-caps 1.1em "Trebuchet MS";
 }
 
-.filesize, #lok {
-	font-size: 12px;
-	font-family: "Georgia";
+.fake_filesize, #lok {
+	font-size: .8em;
 }
 
 #lok {
@@ -194,16 +199,8 @@ input[type="button"]:active, input[type="submit"]:active {
 	text-shadow: none;
 }
 
-img, #de-panel {
-	box-shadow:  0px 0px 20px -8px black;
-}
-
-.nomagic img {
-	box-shadow: none;
-}
-
 #de-txt-resizer {
-	background: url('/css/niceroom.img/resizer.png') no-repeat;
+	background: url('/css/images/niceroom.img/resizer.png') no-repeat;
 	border: none!important;
 	height: 5px;
 }
@@ -213,44 +210,45 @@ img, #de-panel {
 }
 
 .de-btn-fav, .de-btn-fav-sel, .de-btn-expthr, .de-btn-rep, 
-.de-btn-hide, .de-btn-hide-user, .de-btn-src, .de-btn-sage {
+.de-btn-hide, .de-btn-hide-user, .de-btn-src, .de-btn-sage,
+.de-btn-unhide-user, .de-btn-stick-on, .de-btn-stick, .gcall-write-reply {
 	color: transparent !important;
 	text-shadow: none !important;
-	padding: 0 7px;
-	opacity: 0.5;
-	width: 0;
+	fill: transparent !important;
 }
 .de-btn-fav {
-	background: url('/css/darktile.img/fav.png') no-repeat top center;
+	background:url('/css/images/darktile.img/fav.png') no-repeat top center;
 }
 .de-btn-fav-sel {
-	background: url('/css/darktile.img/fav-sel.png') no-repeat top center;
+	background: url('/css/images/darktile.img/fav-sel.png') no-repeat top center;
 }
 .de-btn-expthr {
-	background: url('/css/darktile.img/expthr.png') no-repeat top center;
+	background: url('/css/images/darktile.img/expthr.png') no-repeat top center;
 }
-.de-btn-rep {
-	background: url('/css/darktile.img/rep.png') no-repeat top center;
+.de-btn-rep, .gcall-write-reply {
+	background: url('/css/images/darktile.img/rep.png') no-repeat top center;
 }
 .de-btn-hide, .de-btn-hide-user {
-	background: url('/css/darktile.img/hide.png') no-repeat top center;
+	background: url('/css/images/darktile.img/hide.png') no-repeat top center;
 }
-.de-post-hid .de-btn-hide-user {
-	background: url('/css/darktile.img/show.png') no-repeat top center;
+.de-btn-unhide-user {
+	background: url('/css/images/darktile.img/show.png') no-repeat top center;
 }
 .de-btn-src {
-	background: url('/css/darktile.img/src.png') no-repeat bottom center;
-	width: 4px;
+	background: url('/css/images/darktile.img/src.png') no-repeat bottom center;
 }
 .de-btn-sage {
-	background: url('/css/darktile.img/sage.png') no-repeat top center;
+	background: url('/css/images/darktile.img/sage.png') no-repeat top center;
 }
-.extrabtns {
-	background: url('/css/darktile.img/attach.png') no-repeat;
-	opacity: 0.5;
+.extrabtns, .de-btn-stick-on, .de-btn-stick {
+	background: url('/css/images/darktile.img/attach.png') no-repeat;
+}
+
+.extrabtns, .de-btn-stick {
+	opacity: .6;
 }
 .extrabtns img {
-	opacity: 0;
+	visibility: hidden;
 }
 
 .backnext, .backnext td, table, tbody tr td {
@@ -258,9 +256,9 @@ img, #de-panel {
 }
 
 .footer, .footer a {
-	text-align:center;
+	text-align: center;
 	font: small-caps bold 18px "Times New Roman";
-	margin:1em;
+	margin: 1em;
 	letter-spacing: 1px;
 	text-decoration: none;
 }
