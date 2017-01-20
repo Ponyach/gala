@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 2.5
+	: version 2.6
 	© magicode
 	
 */
@@ -771,6 +771,11 @@ var gala_inline_style = document.createElement("style");
 .file-cover { padding: 0 10px; cursor: default; } .S:after { content: "[S]"; } .C:after { content: "[C]"; } .A:after { content: "[A]"; } .file-cover.N { padding-top: 13px; }\
 .file-cover:hover { color: #fff!important; } .file-cover-label.S:after,.file-cover.S:hover { background-color: #8C60B1; } .file-cover-label.C:after,.file-cover.C:hover { background-color: #E65278; } .file-cover-label.A:after,.file-cover.A:hover { background-color: #3B60AE; } .file-cover-label.N:after,.file-cover.N:hover { background-color: #777; }\
 \
+select#default_img_ratings { background: none; border: none; color: inherit; -webkit-appearance: none; -moz-appearance: none; text-overflow: ""; } select#default_img_ratings > option { background-color: #fefefe; }\
+option.rating-N:checked, option.rating-N:hover { box-shadow: 0 0 0 99px #777 inset; } option.rating-N { color: transparent; }\
+option.rating-C:checked, option.rating-C:hover { box-shadow: 0 0 0 99px #E65278 inset;}\
+option.rating-S:checked, option.rating-S:hover { box-shadow: 0 0 0 99px #8C60B1 inset;}\
+\
 .dropdown-toggle.ins-act:before { content: " ▲ "; padding: 0 5px 15px; border-radius: 4px 4px 0 0; line-height: 1.6; }\
 .ins-act:before, .dropdown-menu { font-size: 14px; line-height: 1.8; color: #eee; position: absolute; z-index: 1000; border: 1px solid #222; box-shadow: 0 6px 12px rgba(0,0,0,.2); background-clip: padding-box; background-color: #222; border-radius: 4px; left: 0; }\
 .dropdown-menu { border-radius: 0 0 4px 4px; line-height: 1.8; min-width: 160px; display: none; margin: 0; } .ins-act > .dropdown-menu { display: list-item; }\
@@ -1019,8 +1024,8 @@ function Gala() {
 				pins = (arguments[3] || start === end);
 		}
 		this.value = val.substring(0, start) + markedText + val.substring(end);
-		if (this.safe_text)
-			_z.sessionS.set('SafeText', JSON.stringify(this.value));
+		if (this.safeValue)
+			this.safeValue();
 		if (wins) {
 			this.selectionStart = this.selectionEnd = this.value.length;
 		} else {
@@ -1119,6 +1124,11 @@ function Gala() {
 	
 	function handleLinks(a) {
 		var f_ext, m_id;
+		if (a.host === 'soundcloud.com' && /\/[\w_-]+/.test(a.pathname)) {
+			if (a.nextElementSibling.tagName === 'BR')
+				a.nextElementSibling.remove();
+			a.remove();
+		} else
 		if (a.host === 'pastebin.com' && (m_id = /\/([\w_-]+)/.exec(a.pathname))) {
 			_z.setup(a, {'class': 'cm-button cm-pastebin', 'id': 'PBlnk_'+ m_id[1], 'text': 'PASTEBIN: '+ m_id[1], 'rel': 'nofollow' });
 		} else
@@ -1451,47 +1461,59 @@ function Gala() {
 				base64 += this.encodings[a] + this.encodings[b] + this.encodings[c] + '='
 			}
 			return base64
-		},
-		jpegStripExtra: function (input/*, typeout*/) {
-			// Decode the dataURL
-			var binary = atob(input.split(',')[1]);
-			// Create 8-bit unsigned array
-			var array = [];
-			for (var i = 0; i < binary.length; i++) {
-				array.push(binary.charCodeAt(i));
-			}
-			var orig = new Uint8Array(array),
-				outData = new ArrayBuffer(orig.byteLength),
-				output = new Uint8Array(outData);
-			var posO = 2,
-				posT = 2;
-			output[0] = orig[0];
-			output[1] = orig[1];
-			while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
-				if (orig[posO] === 0xFF && orig[posO + 1] === 0xFE) {
-					posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
-				} else if (orig[posO] === 0xFF && (orig[posO + 1] >> 4) === 0xE) {
-					posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
-				} else if (orig[posO] === 0xFF && orig[posO + 1] === 0xDA) {
-					var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
-					for (var i = 0; i < l; i++) {
-						output[posT++] = orig[posO++];
-					}
-					while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
-						output[posT++] = orig[posO++];
-					}
-				} else {
-					var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
-					for (var i = 0; i < l; i++) {
-						output[posT++] = orig[posO++];
-					}
+		}
+	}
+	
+	function jpegStripExtra(binary/*, typeout*/) {
+		// Create 8-bit unsigned array
+		var array = [];
+		for (var i = 0; i < binary.length; i++) {
+			array.push(binary.charCodeAt(i));
+		}
+		var orig = new Uint8Array(array),
+			outData = new ArrayBuffer(orig.byteLength),
+			output = new Uint8Array(outData);
+		var posO = 2,
+			posT = 2;
+		output[0] = orig[0];
+		output[1] = orig[1];
+		while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
+			if (orig[posO] === 0xFF && orig[posO + 1] === 0xFE) {
+				posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
+			} else if (orig[posO] === 0xFF && (orig[posO + 1] >> 4) === 0xE) {
+				posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
+			} else if (orig[posO] === 0xFF && orig[posO + 1] === 0xDA) {
+				var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
+				for (var i = 0; i < l; i++) {
+					output[posT++] = orig[posO++];
+				}
+				while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
+					output[posT++] = orig[posO++];
+				}
+			} else {
+				var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
+				for (var i = 0; i < l; i++) {
+					output[posT++] = orig[posO++];
 				}
 			}
-			output[posT] = orig[posO];
-			output[posT + 1] = orig[posO + 1];
-			output = new Uint8Array(outData, 0, posT + 2);
-			return arguments[1] == 'Blob' ? new Blob([output], { type: 'image/jpeg' }) : 'data:image/jpeg;base64,'+ this.encode(output);
 		}
+		output[posT] = orig[posO];
+		output[posT + 1] = orig[posO + 1];
+		output = new Uint8Array(outData, 0, posT + 2);
+		return (arguments[1] == 'Blob' ? new Blob([output], { type: 'image/jpeg' }) :
+				arguments[1] == 'dataURL' ? 'data:image/jpeg;base64,'+ Base64String.encode(output) : output);
+	}
+	
+	function convertToBinaryString(uint8) {
+		var binaryString = '';
+		if (typeof TextDecoder !== 'undefined') {
+			binaryString = new TextDecoder('x-user-defined').decode(uint8);
+		} else {
+			for (var i = 0, len = uint8.byteLength; i < len; i++) {
+				binaryString += String.fromCharCode(uint8[i]);
+			}
+		}
+		return binaryString;
 	}
 	
 	function bytesMagnitude(bytes) {
@@ -1538,6 +1560,9 @@ function Gala() {
 								'</label>'+
 								'<label title="Удалять данные Exif из JPEG">'+
 									'<input id="remove_jpeg_exif" type="checkbox"'+ (!opts.remove_jpeg_exif ? '' : ' checked') +' hidden><span class="feckbox">EXIF</span>'+
+								'</label>'+
+								'<label title="Рейтинг картинок по умолчанию">'+
+									'<select id="default_img_ratings"><option class="rating-N">N</option><option class="rating-A">A</option><option class="rating-C">C</option><option class="rating-S">S</option></select>'+
 								'</label>'+
 							'</div>'+
 							'<label class="files-add">'+
@@ -1586,17 +1611,20 @@ function Gala() {
 			tempForm.querySelector('.new-thr').className = 'new-thr-chx greenmk inactive';
 		}
 		if (opts.place != 2) {
+			var gala_safe = JSON.parse(_z.sessionS.get('GalaSafe', '{}'));
 			tempForm.className = (opts.place == 0 ? 'reply gala-freestyle' : 'reply');
-			tempForm.elements['message'].safe_text = true;
-			_z.setup(tempForm.elements['message'], {
-				'value': JSON.parse(_z.sessionS.get('SafeText', "\"\""))
-			}, {'input': function(e) {
-				var val = this.value;
+			tempForm.elements['default_img_ratings'].value = sessionStorage.getItem('default_img_ratings') || 'N';
+			tempForm.elements['message'].safeValue = safeValue;
+			_z.setup(tempForm.elements['name'], {'value': (gala_safe.name || '')}, {'input': safeValue});
+			_z.setup(tempForm.elements['message'], {'value': (gala_safe.message || '')}, {'input': safeValue});
+			function safeValue() {
+				var name = this.name;
+				gala_safe[name] = this.value;
 				clearTimeout(this.safe_timer);
 				this.safe_timer = setTimeout(function() {
-					_z.sessionS.set('SafeText', JSON.stringify(val));
+					_z.sessionS.set('GalaSafe',  JSON.stringify(gala_safe));
 				}, 800);
-			}});
+			}
 		}
 		Object.defineProperties(tempForm, {
 			MAX_FILES_LIMIT: {
@@ -1639,16 +1667,17 @@ function Gala() {
 				return;
 			try {
 				var files = data.files,
-					fileURL = data.getData ? data.getData(data.effectAllowed === 'copyLink' ? 'Text' : 'URL') : null;
+					fileURL = data.getData ? data.getData(data.effectAllowed === 'copyLink' ? 'Text' : 'URL') : null,
+					defaultR = this.elements['default_img_ratings'].value;
 				if (files.length === 0 && fileURL) {
-					this.get_url_file(fileURL);
+					this.get_url_file(fileURL, defaultR);
 				} else {
 					for (var i = 0; i < files.length && !this.MAX_FILES_LIMIT; i++) {
 						var FiD = files[i].type +';'+ files[i].size;
 						if (FiD in this.files || !isFileValid(files[i], this.elements['board'].value))
 							continue;
 						this.files.push(
-							(this.files[FiD] = makeGalaFile(files[i], FiD))
+							(this.files[FiD] = makeGalaFile(files[i], FiD, defaultR))
 						);
 						this['FileArea'].classList.add('hold');
 						this['FileArea'].appendChild(this.files[FiD]);
@@ -1661,6 +1690,7 @@ function Gala() {
 		tempForm.clear_all = function() {
 			this.elements['g-recaptcha-response'].value = '';
 			this.children['gala-error-msg'].textContent = '';
+			this.elements['subject'].value = '';
 			this.elements['message'].value = '';
 			this['FileArea'].classList.remove('hold');
 			this.files.splice(0, this.files.length);
@@ -1702,7 +1732,7 @@ function Gala() {
 				}
 			}.bind(this));
 		}
-		tempForm.params = opts;
+		tempForm.localParams = opts;
 		
 		return tempForm;
 	}
@@ -1712,11 +1742,15 @@ function Gala() {
 			case 'dumb_file_field':
 				this.add_files(e.target);
 				break;
+			case 'default_img_ratings':
+				if (this.localParams['place'] != 2)
+					sessionStorage.setItem('default_img_ratings', e.target.value);
+				break;
 			case 'clear_files_name':
 			case 'remove_jpeg_exif':
-				this.params[e.target.id] = e.target.checked;
-				if (this.params['place'] != 2)
-					localStorage.setItem('GalaForm', JSON.stringify(this.params));
+				this.localParams[e.target.id] = e.target.checked;
+				if (this.localParams['place'] != 2)
+					localStorage.setItem('GalaForm', JSON.stringify(this.localParams));
 		}
 	}
 	
@@ -1734,6 +1768,7 @@ function Gala() {
 		var gview, fnode;
 		var type = file.type.split('/');
 		var size = bytesMagnitude(file.size);
+		var blobURL = (window.URL || window.webkitURL).createObjectURL(file);
 		
 		fnode = _z.setup('div', {'id': 'gala-file_'+ FiD, 'class': 'file-gox', 'html': '<span class="file-remove"></span><div class="file-cover-label '+ (R || 'N') +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'}, {
 			'click': function(e) {
@@ -1751,32 +1786,38 @@ function Gala() {
 		
 		switch (type[0]) {
 			case 'video':
-				var blobURL = (window.URL || window.webkitURL).createObjectURL(file);
-				gview = _z.setup('video', {'src': blobURL, 'muted': true, 'class': 'file-gview'});
+				gview = _z.setup('video', {'src': blobURL, 'muted': true, 'class': 'file-gview',
+					'onloadedmetadata': function() {
+						var sec = Math.floor(this.duration) % 60;
+						var min = Math.floor(this.duration / 60);
+						this.title = type[1].toUpperCase() +', '+ this.videoWidth +'×'+ this.videoHeight +', '+ min+':'+sec  +', '+ size;
+					}
+				});
 				gview.onmouseover = gview.onmouseout = function(e) {
 					this[ e.type == 'mouseover' ? 'play' : 'pause' ]();
 				}
 				break;
 			case 'image':
-				gview = _z.setup('img', {'class': 'file-gview', 'style': 'visibility: hidden'});
-				gview.onload = function() {
-					this.title = type[1].toUpperCase() +', '+ this.naturalWidth +'×'+ this.naturalHeight +', '+ size;
-					this.onload = null;
-					
-					if (type[1] === 'gif') {
-						var canvas = _z.setup('canvas', {'width': this.width, 'height': this.height}),
-							ctx = canvas.getContext("2d");
-						function staticDraw() {
-							ctx.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, this.width, this.height);
-							this.src = canvas.toDataURL('image/png');
-						}; staticDraw.bind(this)();
-						this.onmouseover = function() {
-							this.src = fnode.dataURL;
+				gview = _z.setup('img', {'src': blobURL, 'class': 'file-gview', 'style': 'visibility: hidden',
+					'onload': function() {
+						this.title = type[1].toUpperCase() +', '+ this.naturalWidth +'×'+ this.naturalHeight +', '+ size;
+						this.onload = null;
+						
+						if (type[1] === 'gif') {
+							var canvas = _z.setup('canvas', {'width': this.width, 'height': this.height}),
+								ctx = canvas.getContext('2d');
+								ctx.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, this.width, this.height);
+								
+							this['ld_mouseover'] = blobURL;
+							this['ld_mouseout' ] = this.src = canvas.toDataURL('image/png');
+							
+							this.onmouseout = this.onmouseover = function(e) {
+								this.src = this['ld_'+ e.type];
+							}
 						}
-						this.onmouseout = staticDraw;
+						this.style['visibility'] = 'visible';
 					}
-					this.style['visibility'] = 'visible';
-				}
+				});
 		}
 		fnode.insertBefore(gview, fnode.lastElementChild);
 		
@@ -1784,13 +1825,14 @@ function Gala() {
 			reader.onload = function() {
 				if (this.readyState !== FileReader['DONE'])
 					return;
-				if (type[0] == 'image')
-					gview.src = fnode.dataURL = this.result;
+				if (type[1] === 'jpeg') {
+					fnode.dataStriped = jpegStripExtra(this.result);
+				}
 				if (typeof rstr_md5 === 'function') {
-					var filestring = atob(this.result.split(',')[1]);
+					var filestring = this.result;
 					var stringLength = filestring.length;
 					var i = 1;
-					var lastChar = filestring.charAt(stringLength - i); 
+					var lastChar = filestring.charAt(stringLength - i);
 					if (!isNaN(lastChar)) { // is number
 						do {
 							i++;
@@ -1800,15 +1842,23 @@ function Gala() {
 					}
 					
 					fnode.md5 = rstr2hex(rstr_md5(filestring));
-					
 					//always send sha512 of file for passcode records
 					//field will be sent only if user have cookie with real passcode
-					getDataResponse(document.location.origin +'/chkmd5.php?x=' + fnode.md5, function(y) {
-						fnode.exist = !!y;
+					getDataResponse(document.location.origin +'/chkmd5.php?x='+ fnode.md5, function(y) {
+						if (!(fnode.exist = !!y) && fnode.dataStriped) {
+							var striped = convertToBinaryString(fnode.dataStriped),
+								strip_md5 = rstr2hex(rstr_md5(striped));
+							getDataResponse(document.location.origin +'/chkmd5.php?x='+ strip_md5, function(_y) {
+								if (!!_y) {
+									fnode.exist = true;
+									fnode.md5 = strip_md5;
+								}
+							});
+						}
 					});
 				}
 			}
-			reader.readAsDataURL(file);
+			reader.readAsBinaryString(file);
 		
 		return fnode;
 	}
@@ -1850,16 +1900,16 @@ function Gala() {
 			case 'toggleform':
 				if (this.classList.contains('gala-freestyle')) {
 					this.onmousedown = null;
-					this.params['place'] = 1;
+					this.localParams['place'] = 1;
 				} else {
 					var coords = this.getBoundingClientRect();
 					this.style['left'] = coords.left +'px';
 					this.style['top' ] = coords.top  +'px';
 					this.onmousedown = mousedownGFlistener;
-					this.params['place'] = 0;
+					this.localParams['place'] = 0;
 				}
 				this.classList.toggle('gala-freestyle');
-				localStorage.setItem('GalaForm', JSON.stringify(this.params));
+				localStorage.setItem('GalaForm', JSON.stringify(this.localParams));
 				break;
 			case 'gmark-btn':
 				var tag = e.target.classList[1],
@@ -1909,8 +1959,8 @@ function Gala() {
 						$t.elements['g-recaptcha-response'].value = token;
 					}
 				}
-				alertify.alert('<div id="catcha-widget'+ this.params.place +'" style="text-align: center;"></div>');
-				grecaptcha.render('catcha-widget'+ this.params.place, {
+				alertify.alert('<div id="catcha-widget'+ this.localParams.place +'" style="text-align: center;"></div>');
+				grecaptcha.render('catcha-widget'+ this.localParams.place, {
 					'sitekey': '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
 					'expired-callback': callback,
 					'callback': callback,
@@ -1940,27 +1990,32 @@ function Gala() {
 	
 	function submitGFlistener(e) {
 		try { _z.fall(e);
-			var form = e.target, i,
+			var form = e.target, i, n, len, exists = {},
 				desk = form.elements['board'].value,
 				thread_id = form.elements['replythread'].value,
 				formData = new FormData();
-			for (i = form.elements.length - 1; i >= 0; i--) {
+			for (i = form.elements.length; i > 0;) {
+				 i--;
 				if (!form.elements[i].name || !form.elements[i].value || form.elements[i].type == 'checkbox' && !form.elements[i].checked) {
 					continue;
 				}
 				formData.append(form.elements[i].name, form.elements[i].value);
 			}
-			for (i = 0; i < form.files.length; i++) {
+			for (n = 1, len = form.files.length; i < len; i++) {
 				if (form.files[i].exist) {
-					formData.append('md5-'+ (i + 1), form.files[i].md5);
-				} else {
-					if (form.params['remove_jpeg_exif'] && form.files[i].blob.type == 'image/jpeg')
-						form.files[i].blob = Base64String['jpegStripExtra'](form.files[i].dataURL, 'Blob');
-					if (form.params['clear_files_name'])
-						form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
-					formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
+					exists[i] = form.files[i];
+					continue;
 				}
-				formData.append('upload-rating-'+ (i + 1), form.files[i].rating);
+				if (form.localParams['remove_jpeg_exif'] && form.files[i].blob.type == 'image/jpeg')
+					form.files[i].blob = new Blob([form.files[i].dataStriped], {type: 'image/jpeg'});
+				if (form.localParams['clear_files_name'])
+					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
+				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
+				formData.append('upload-rating-'+ (n++), form.files[i].rating);
+			}
+			for (var k in exists) {
+				formData.append('md5-'+ n, exists[k].md5);
+				formData.append('upload-rating-'+ (n++), exists[k].rating);
 			}
 			
 			form.elements['submit_this_form'].disabled = true;
@@ -1985,8 +2040,8 @@ function Gala() {
 								form.remove();
 								form.clear_all();
 								
-								if (form.elements['message'].safe_text)
-									_z.sessionS.set('SafeText', "\"\"");
+								if (form.elements['message'].safeValue)
+									form.elements['message'].safeValue();
 								if (!thread_id) {
 									document.location.href = document.location.origin +'/'+ desk +'/res/'+ json.id +'.html';
 								} else if ((json.thread = document.querySelector('.oppost#reply'+ thread_id))) {
@@ -2088,29 +2143,27 @@ function Gala() {
 	
 	function handlePostNode(bquot) {
 		var reply = bquot.parentNode.parentNode;
-		var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
-		if (_GalaForm) {
-			if (dollchan) {
-				_z.setup(reply.querySelector('.de-btn-rep'), {'class': 'gcall-write-reply de-btn-rep'});
-			} else {
-				_z.after(reply.querySelector('.reflink'), _z.setup('a', {'html': '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#de-symbol-post-rep"></use></svg>'}));
-			}
-			_z.replace(reply.querySelector('.dast-hide-tr'), _z.setup('span', {'class': 'dropdown-toggle',
-				'html': '<a class="dropdown-arrow">▼</a><ul class="dropdown-menu"><li class="gala-show-dialogs from-'+ reply.id.slice(5) +'">Диалоги</li><li class="gala-edit-post">Редактировать</li></ul>'})
-			);
-		}
-		if (sclnks.length > 0) {
-			jumpCont(bquot, 'mediacontent').appendChild(_SC.createGroup(sclnks));
-			_z.each(sclnks, function(a) {
-				if (a.nextElementSibling.tagName === 'BR')
-					a.nextElementSibling.remove();
-				a.remove();
-			});
-		}
 		if (bquot.parentNode.previousElementSibling.childElementCount > 3) {
 			bquot.style['clear'] = 'both';
 		}
-		_z.each(bquot.querySelectorAll('a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink):not([href*="soundcloud.com"])'), handleLinks);
+		if (!reply['_handled_']) {
+			if (_GalaForm) {
+				if (dollchan) {
+					_z.setup(reply.querySelector('.de-btn-rep'), {'class': 'gcall-write-reply de-btn-rep'});
+				} else {
+					_z.after(reply.querySelector('.reflink'), _z.setup('a', {'html': '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#de-symbol-post-rep"></use></svg>'}));
+				}
+				_z.replace(reply.querySelector('.dast-hide-tr'), _z.setup('span', {'class': 'dropdown-toggle',
+					'html': '<a class="dropdown-arrow">▼</a><ul class="dropdown-menu"><li class="gala-show-dialogs from-'+ reply.id.slice(5) +'">Диалоги</li><li class="gala-edit-post">Редактировать</li></ul>'})
+				);
+			}
+			var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
+			if (sclnks.length > 0) {
+				jumpCont(bquot, 'mediacontent').appendChild(_SC.createGroup(sclnks));
+			}
+		}
+		_z.each(bquot.querySelectorAll('a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)'), handleLinks);
+		reply['_handled_'] = true;
 	}
 	
 	_z.setup(window, null, {
