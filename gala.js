@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 2.6
+	: version 2.6.4
 	© magicode
 	
 */
@@ -1534,7 +1534,8 @@ function Gala() {
 		},
 		COUNT: {
 			default: 5, // b, cafe, d, r34, test and other else
-			'cafe': 1
+			'cafe': 1,
+			'd': 2
 		},
 		TYPES: /video\/webm|image\/(?:jpeg|jpg|png|gif)/i  // for the /regexp/.test(file_mime)
 	}
