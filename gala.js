@@ -796,7 +796,7 @@ option.rating-S:checked, option.rating-S:hover { box-shadow: 0 0 0 99px #8C60B1 
 \
 .buttons-style-standart > .markup-button > *:not(input), .buttons-style-text > .markup-button >  *:not(a) { display: none; }\
 .markup-button > a{ font-size:13px; text-decoration: none; }\
-.buttons-style-text > .markup-button:not(.quote):after, .sep:after{ content:"\xA0|\xA0"; cursor: default; }\
+.buttons-style-text > .markup-button:not(.quote):after, .sep:after{ content:"\xA0|\xA0"; cursor: default; opacity: .3; }\
 \
 .gmark-btn, .new-thr-chx{ cursor: pointer; } .gmark-btn, .sep { display: table-cell; }\
 .gmark-btn.bold:before{ content: "жирный"; } .bold { font-weight: bold; }\
@@ -1987,21 +1987,28 @@ function Gala() {
 	
 	var dynamicCSS = _z.setup('style', {'id': 'gala_dynamic_css', 'text': '.you-lnk { content: " (You)" }'});
 	var myPostsMap = JSON.parse(_z.localS.get('de-myposts', '{}'));
+	var content_error = 'Нельзя отправлять сообщения без файлов и текста';
 	
 	function submitGFlistener(e) {
 		try { _z.fall(e);
-			var form = e.target, i, n, len, exists = {},
-				desk = form.elements['board'].value,
-				thread_id = form.elements['replythread'].value,
-				formData = new FormData();
+			var form = e.target;
+			var flen = e.target.files.length;
+			if (flen == 0 && !form.elements['message'].value) {
+				form.children['gala-error-msg'].textContent = content_error;
+				return;
+			}
+			var i, n, exists = {};
+			var desk = form.elements['board'].value;
+			var thread_id = form.elements['replythread'].value;
+			var formData = new FormData();
 			for (i = form.elements.length; i > 0;) {
 				 i--;
-				if (!form.elements[i].name || !form.elements[i].value || form.elements[i].type == 'checkbox' && !form.elements[i].checked) {
+				if (!form.elements[i].name) {
 					continue;
 				}
 				formData.append(form.elements[i].name, form.elements[i].value);
 			}
-			for (n = 1, len = form.files.length; i < len; i++) {
+			for (n = 1; i < flen; i++) {
 				if (form.files[i].exist) {
 					exists[i] = form.files[i];
 					continue;
@@ -2028,41 +2035,66 @@ function Gala() {
 				postReq.onreadystatechange = function() {
 					if (this.readyState !== 4)
 						return;
+					var msg_error = '';
 					if (this.status === 200) {
-						try {
-							var json = /<meta http-equiv=\"\w+\" content=\"\d+;url=\/\w+\/\">/.test(this.responseText) ? { error: 'Неизвестная ошибка (попробуйте отправить пост с текстом)'} : JSON.parse(this.responseText);
-						} finally {
-							if (json && json.error == null) {
-								(myPostsMap[desk] || (myPostsMap[desk] = [])).push(json.id);
-								dynamicCSS.textContent = '.de-link-pref[href$="#'+ json.id +'"]:after,'+ dynamicCSS.textContent;
-								_z.localS.set('de-myposts', JSON.stringify(myPostsMap));
-						
-								form.remove();
-								form.clear_all();
-								
-								if (form.elements['message'].safeValue)
-									form.elements['message'].safeValue();
-								if (!thread_id) {
-									document.location.href = document.location.origin +'/'+ desk +'/res/'+ json.id +'.html';
-								} else if ((json.thread = document.querySelector('.oppost#reply'+ thread_id))) {
-									if (!json.thread._UpdateBtn) {
-										if (json.thread.parentNode.nextElementSibling.className === 'de-thread-buttons') {
-											json.thread._UpdateBtn = json.thread.parentNode.nextElementSibling.firstElementChild.firstElementChild;
-										} else if (json.thread.parentNode.lastElementChild.className === 'de-thread-buttons') {
-											json.thread._UpdateBtn = json.thread.parentNode.lastElementChild.firstElementChild;
-										} else json.thread._UpdateBtn = _z.setup('div');
-									}
-									_z.simulate('click', json.thread._UpdateBtn);
-								}
-							} else {
-								form.children['gala-error-msg'].textContent = json ? json.error : this.responseText;
+						var data = (function(json, o) {
+							try {
+								o = /<meta http-equiv=\"\w+\" content=\"\d+;url=\/\w+\/\">/.test(json) ? { error: content_error } : JSON.parse(json);
+							} catch (g) {
+								o = { error: json };
 							}
-						}
+							return o;
+						})(this.responseText);
+						if (data.error === null) {
+							if (data.id) {
+								(myPostsMap[desk] || (myPostsMap[desk] = [])).push(data.id);
+								dynamicCSS.textContent = '.de-link-pref[href$="#'+ data.id +'"]:after,'+ dynamicCSS.textContent;
+								_z.localS.set('de-myposts', JSON.stringify(myPostsMap));
+							}
+						
+							form.remove();
+							form.clear_all();
+							
+							if (form.elements['message'].safeValue)
+								form.elements['message'].safeValue();
+							if (!thread_id) {
+								document.location.href = document.location.origin +'/'+ desk +'/res/'+ data.id +'.html';
+							} else if ((data.thread = document.querySelector('.oppost#reply'+ thread_id))) {
+								if (!data.thread._UpdateBtn) {
+									if (data.thread.parentNode.nextElementSibling.className === 'de-thread-buttons') {
+										data.thread._UpdateBtn = data.thread.parentNode.nextElementSibling.firstElementChild.firstElementChild;
+									} else if (data.thread.parentNode.lastElementChild.className === 'de-thread-buttons') {
+										data.thread._UpdateBtn = data.thread.parentNode.lastElementChild.firstElementChild;
+									} else data.thread._UpdateBtn = _z.setup('div');
+								}
+								_z.simulate('click', data.thread._UpdateBtn);
+							}
+						} else
+							msg_error = data.error;
+					} else {
+						msg_error = this.status +' '+ this.statusText;
 					}
-					form.elements['submit_this_form'].disabled = false;
-					form.elements['submit_this_form'].value = 'Отправить';
-					if (form.children['gala-error-msg'].textContent.includes('неправильный код подтверждения'))
-						form.captcha_needed();
+					form.children['gala-error-msg'].textContent = msg_error;
+					switch (msg_error) {
+						case 'Ты отправляешь сообщения слишком быстро':
+							form.elements['submit_this_form'].value = 'Ждите 9';
+							var i = 8, timr = setInterval(function(){
+								if (i == 0) {
+									clearInterval(timr);
+									form.elements['submit_this_form'].disabled = false;
+									form.elements['submit_this_form'].value = 'Отправить';
+								} else
+									form.elements['submit_this_form'].value = 'Ждите '+ (i--);
+							}, 1100);
+							break;
+						case 'Введен неправильный код подтверждения':
+							form.elements['submit_this_form'].disabled = false;
+							form.captcha_needed();
+							break;
+						default:
+							form.elements['submit_this_form'].disabled = false;
+							form.elements['submit_this_form'].value = 'Отправить';
+					}
 				};
 				postReq.open('POST', form.action, true);
 				postReq.send(formData);
