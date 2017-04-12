@@ -2222,12 +2222,12 @@ var SCPurePlayer = (function() {
 			
 			if (player_node && player_node !== this.PlayerNode) {
 				if (this.PlayerNode) {
-					this.PlayerNode[ '_volume_' ][_handler] = null;
-					this.PlayerNode['_waveform_'][_handler] = null;
+					this.PlayerNode[ '_volume_' ]['on'+_handler.start] = null;
+					this.PlayerNode['_waveform_']['on'+_handler.start] = null;
 				}
 				this.PlayerNode = ('_trackslist_' in player_node ? player_node : catchKeyElements('player', player_node));
-				this.PlayerNode[ '_volume_' ][_handler] = barChanger;
-				this.PlayerNode['_waveform_'][_handler] = barChanger;
+				this.PlayerNode[ '_volume_' ]['on'+_handler.start] = barChanger;
+				this.PlayerNode['_waveform_']['on'+_handler.start] = barChanger;
 				this['Player Volume'] = SC.Volume;
 			}
 			
