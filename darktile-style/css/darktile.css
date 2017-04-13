@@ -7,12 +7,12 @@ body {
 	margin: auto 1%;
 }
 
-html, body, .fixed-header, .modal__inner {
+html, body, .fixed-header {
 	background-color: #1f201f; 
 }
 
 #passcode-button {
-  margin-right: 35px !important;
+	margin-right: 35px !important;
 }
 
 .logo {
@@ -48,7 +48,7 @@ a:hover, .spoiler a:hover {
 	color: #78532e;
 }
 
-.reply, .de-pview {
+.reply, .de-pview, .modal__inner {
 	background-color: #181818;
 	border-top: 1px solid rgba(77,77,77,.1);
 	border-left: 1px solid rgba(77,77,77,.1);
@@ -59,7 +59,7 @@ a:hover, .spoiler a:hover {
 	padding: 2px 4px;
 }
 
-.gala-freestyle, .de-pview, .de-video-obj, #de-panel {
+.gala-freestyle, .de-pview, .de-video-obj, #de-panel, .modal__inner {
 	border: none !important;
 	box-shadow: 1px 1px 8px 1px black;
 }

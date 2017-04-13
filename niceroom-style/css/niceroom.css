@@ -8,7 +8,7 @@ html, body, .reply {
 	background: url('/css/images/niceroom.img/linen.png') repeat #e2e7ee;
 }
 
-.fixed-header, .modal__inner {
+.fixed-header {
 	background-color: #e2e7ee; 
 }
 
@@ -122,9 +122,13 @@ input {
 }
 
 .reply, textarea, input, tbody tr th {
-	padding: 6px;
+	padding: 4px 6px;
 	border: none !important;
 	box-shadow: 1px 1px 1px #b9bfcb, inset -1px 1px 1px -1px #fff, inset -1px -1px 1px -1px #fff;
+}
+
+input[name="search"] {
+	padding: 3px 6px;
 }
 
 .highlight {
@@ -173,7 +177,7 @@ input[type="button"]:active, input[type="submit"]:active {
 	transform: rotate(-1deg);
 }
 
-.gala-freestyle, .reply.ui-draggable, .de-img-center .de-img-full, .de-pview, .de-win, #de-panel {
+.gala-freestyle, .reply.ui-draggable, .de-img-center .de-img-full, .de-pview, .de-win, #de-panel, .modal__inner {
 	border: none !important;
 	box-shadow: 7px 6px 25px rgba(81,80,81,.6), inset 0 0 0 rgba(0,0,0,1) !important;
 	-webkit-transform: none;
@@ -189,7 +193,7 @@ center img {
 }
 
 .gala-freestyle, .reply.ui-draggable, .de-pview, .de-img-center, .de-cfg-body, .de-win,
-#de-cfg-btns, #de-content-fav, #de-alert, .de-menu, #de-content-hid {
+#de-cfg-btns, #de-content-fav, #de-alert, .de-menu, #de-content-hid, .modal__inner {
 	background: url('/css/images/niceroom.img/linen-h.png') repeat #dee2e8;
 	border-color: #b9bfcb !important;
 }
@@ -210,6 +214,14 @@ center img {
 .filetitle {
 	font: small-caps bold 20px serif;
 	color: #7d85aa;
+}
+
+.de-cfg-tab  {
+	color: #515151;
+}
+
+.modal__close:before, .modal__close:after {
+	background-color: #666;
 }
 
 .de-btn-fav, .de-btn-fav-sel, .de-btn-expthr, .de-btn-rep, 
