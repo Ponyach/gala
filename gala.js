@@ -1687,11 +1687,9 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				var links = this.head.querySelectorAll('link[title]'),
 					length = links.length, sSheets = new Array(length);
 				for (var i = 0; i < length; i++) {
-					if (!links[i].disabled) {
-						links[i].disabled = links[i].title !== key;
-					}
 					sSheets[i] = links[i].title;
 					sSheets[links[i].title] = links[i];
+					links[i].disabled = true;
 				}
 				sSheets[''] = {};
 				if (key in sSheets) {
