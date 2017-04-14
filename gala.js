@@ -37,7 +37,7 @@ if (MAIN_SETTINGS === null) {
 	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 }
 // уведомления о новых тредах и постах
-var DATA_NOTS = JSON.parse(localStorage.getItem('data_nots')) || {};
+var DATA_NOTS = JSON.parse(localStorage.getItem('data_nots')) || { init: true };
 // распознавание тач-ориентированных устройств
 var IS_TOUCH_DEVICE = 'dast_enable' in MAIN_SETTINGS ? MAIN_SETTINGS['dast_enable'] : 'ontouchstart' in window;
 
@@ -1482,6 +1482,9 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 						var data = arr[i].split(/=|:/g),
 							name = display_name = data[0];
 						
+						if (DATA_NOTS.init) {
+							DATA_NOTS[name] = name == 'changelog' ? Number(data[2]) : { posts: Number(data[1]), threads: Number(data[2]), mute: 0 }
+						} else
 						if (name == 'changelog') {
 							var changes = Number(data[2]);
 							DATA_NOTS[name] = LOCATION_PATH.board === 'changelog' ? changes : (DATA_NOTS[name] || 0);
@@ -1513,6 +1516,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 							}
 						}
 					}
+					delete DATA_NOTS['init'];
 					localStorage.setItem('data_nots', JSON.stringify(DATA_NOTS));
 					
 					t_int = 15;
