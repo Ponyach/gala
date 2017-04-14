@@ -2,10 +2,12 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.0.0
+	: version 3.0.1
 	© magicode
 	
 */
+
+var ku_boardspath = location.origin;
 
 // основные настройки пользователя
 var MAIN_SETTINGS = JSON.parse(localStorage.getItem('main_settings'));
@@ -59,7 +61,7 @@ var MAX_FILE = {
 }
 
 var es6 = (function(s) {
-	try { s.eval('var foo = (x)=>x+1'); }
+	try { s.eval('class test123 { static ok (a){ return a } }'); }
 	catch (x) { return false; }
 	return true;
 })(self);
@@ -801,7 +803,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		}
 		// этот стиль лучше бы перенести в глобальный css
 		var ext_style = document.head.appendChild(document.createElement('style'));
-			ext_style.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru [name] { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 20px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: attr(rate); position: absolute; margin-top: -17px; font-size: .8em; } .editfield > .buttons-style-text, .editfield > .buttons-style-standart { float: right; }';
+			ext_style.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru [name] { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: attr(rate); position: absolute; margin-top: -17px; font-size: .8em; } .editfield > .buttons-style-text, .editfield > .buttons-style-standart { float: right; }';
 		
 		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
 		var ponyaba = document.querySelector('.footer > a');
@@ -1438,11 +1440,12 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 	function _RebuildFileSizeInfo() {
 		// переработанная логика подмены информации о файле
 		Array.prototype.slice.call(                              // вместо перерисовывания верхней строки по наведению на файлы,
-			document.getElementsByClassName('fake_filesize'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
+			document.querySelectorAll('[id^="fake_filesize_"]'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
 		.forEach(function(fk, i) {                               // функцией show_filesize делаем видимый целевой, а предыдущий скрываем.
 			var fs_inf = fk.parentNode.getElementsByClassName('filesize');
 				fs_inf[0].style['display'] = 'inline';         // + меньше тревожим DOM, меньше сообщений ловим в MutationObserver, быстрей работа
 			for (var i = 0, len = fs_inf.length; i < len; i++){// + не нужно изобретать костыли для переноса изменений вносимых куклой
+				fs_inf[i].className += ' fake_filesize'
 				fk.parentNode.insertBefore(fs_inf[i], fk);
 			}
 			fk.remove();
@@ -1793,6 +1796,11 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			}
 			return false;
 		};
+	}
+	if (!NodeList.prototype.forEach) {
+		NodeList.prototype.forEach = function(fun) {
+			Array.prototype.slice.call(this, 0).forEach(fun);
+		}
 	}
 }());
 
