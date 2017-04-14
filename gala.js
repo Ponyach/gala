@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.0.1
+	: version 3.0.2
 	© magicode
 	
 */
@@ -167,7 +167,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		// собираем куклоскрипт  ~  добавляем на страницу
 		var dollchan_script      = document.head.appendChild( document.createElement('script') );
 			dollchan_script.type = 'application/javascript';
-			dollchan_script.src  = '/lib/javascript/Dollchan_Extension_Tools.'+ (es6 ? 'es6.user.js' : '.user.js');
+			dollchan_script.src  = '/lib/javascript/Dollchan_Extension_Tools.'+ (es6 ? 'es6.user.js' : 'user.js');
 			/* es6 версия более заточена на новые браузеры
 			  https://rawgit.com/SthephanShinkufag/Dollchan-Extension-Tools/b39fa2a003e4a300a1a779d3d6f6be4dbb8eb46c/Dollchan_Extension_Tools.user.js
 			   - v16.3.9.0.f6f7f30 (оригинальный комит которому соответствует boardscript_20161027223649.js)
@@ -1053,73 +1053,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					dbThumbRender({target: { response: sessionStorage.db_last_page } });
 				}
 			
-			function updatesq() {
-				clearTimeout(_db_.timr);
-				_db_.timr = setTimeout(function(){
-					var s = dbSEARCH.value.trim();
-					var j = dbPAGE.value;
-			
-					if (s.length === 0) {
-						dbINFO.textContent = 'Введите поисковой запрос';
-					} else if (s in _db_.page && j in _db_.page[s]) {
-						var $page = $(_db_.page[s][j]).hide();
-						dbIMGPLACE[(dbIMGPLACE.childNodes.length == 0 ? 'append' : 'replace') +'Child'](
-							$page[0], dbIMGPLACE.childNodes[0]
-						);
-						$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
-						$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
-						$page.show('slow');
-					} else {
-						dbINFO.textContent = 'Загрузка...';
-						$GET('/getdb.php?q='+ s.replace(/\s/g, '%2B') +'&page='+ j +'&apikey='+ _db_.apiKey, dbThumbRender);
-					}
-				}, 500);
-			}
-			
-			function dbThumbRender(e) {
-				try {
-					// building preview with thumbs
-					var jr = JSON.parse((sessionStorage.db_last_page = e.target.response));
-					
-					if (jr.total > 0) {
-						dbINFO.textContent = '';
-						dbPAGE.pagesCount = jr.total / 15;
-						
-						var imgdev = document.createElement('div');
-							imgdev.className = 'imgdiv';
-							imgdev.id = 'pagedb_'+ dbPAGE.value;
-						
-						dbIMGPLACE[(dbIMGPLACE.childNodes.length == 0 ? 'append' : 'replace') +'Child'](
-							imgdev, dbIMGPLACE.childNodes[0]
-						);
-						
-						for (var i = 0, jrl = jr.search.length; i < jrl; i++) {
-							
-							var image = imgdev.appendChild( document.createElement('img') );
-								image.className = 'imagedb';
-								image.id = 'imgdb_'+ (i + 1) +'_'+ jr.search[i].id;
-								image.style.display = 'none';
-								image.src = jr.search[i].representations.thumb;
-								image.onload = function() {
-									$(this).show('slow');
-								}
-							_db_.pic[jr.search[i].id] = jr.search[i];
-						}
-						_db_.save(dbSEARCH.value, dbPAGE.value, imgdev);
-						
-						$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
-						$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
-						$(dbPAGE).show('slow');
-					} else {
-						$(dbIMGPLACE.childNodes[0]).hide();
-						$('#next, #prev, .nextbutton, .prevbutton').hide();
-						dbINFO.textContent = 'Ничего не найдено';
-					}
-				} catch(trace) {
-					// console.error(e.target, trace);
-					dbINFO.textContent = 'Некорректный запрос';
-				}
-			}
 			window.next = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); }
 			window.prev = function() { dbPAGE.value = Math.max(1, dbPAGE.valueAsNumber - 1); updatesq(); }
 		}
@@ -1137,6 +1070,74 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				}
 			}
 		});
+		
+		function updatesq() {
+			clearTimeout(_db_.timr);
+			_db_.timr = setTimeout(function(){
+				var s = dbSEARCH.value.trim();
+				var j = dbPAGE.value;
+		
+				if (s.length === 0) {
+					dbINFO.textContent = 'Введите поисковой запрос';
+				} else if (s in _db_.page && j in _db_.page[s]) {
+					var $page = $(_db_.page[s][j]).hide();
+					dbIMGPLACE[(dbIMGPLACE.childNodes.length == 0 ? 'append' : 'replace') +'Child'](
+						$page[0], dbIMGPLACE.childNodes[0]
+					);
+					$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
+					$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
+					$page.show('slow');
+				} else {
+					dbINFO.textContent = 'Загрузка...';
+					$GET('/getdb.php?q='+ s.replace(/\s/g, '%2B') +'&page='+ j +'&apikey='+ _db_.apiKey, dbThumbRender);
+				}
+			}, 500);
+		}
+		
+		function dbThumbRender(e) {
+			try {
+				// building preview with thumbs
+				var jr = JSON.parse((sessionStorage.db_last_page = e.target.response));
+				
+				if (jr.total > 0) {
+					dbINFO.textContent = '';
+					dbPAGE.pagesCount = jr.total / 15;
+					
+					var imgdev = document.createElement('div');
+						imgdev.className = 'imgdiv';
+						imgdev.id = 'pagedb_'+ dbPAGE.value;
+					
+					dbIMGPLACE[(dbIMGPLACE.childNodes.length == 0 ? 'append' : 'replace') +'Child'](
+						imgdev, dbIMGPLACE.childNodes[0]
+					);
+					
+					for (var i = 0, jrl = jr.search.length; i < jrl; i++) {
+						
+						var image = imgdev.appendChild( document.createElement('img') );
+							image.className = 'imagedb';
+							image.id = 'imgdb_'+ (i + 1) +'_'+ jr.search[i].id;
+							image.style.display = 'none';
+							image.src = jr.search[i].representations.thumb;
+							image.onload = function() {
+								$(this).show('slow');
+							}
+						_db_.pic[jr.search[i].id] = jr.search[i];
+					}
+					_db_.save(dbSEARCH.value, dbPAGE.value, imgdev);
+					
+					$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
+					$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
+					$(dbPAGE).show('slow');
+				} else {
+					$(dbIMGPLACE.childNodes[0]).hide();
+					$('#next, #prev, .nextbutton, .prevbutton').hide();
+					dbINFO.textContent = 'Ничего не найдено';
+				}
+			} catch(trace) {
+				// console.error(e.target, trace);
+				dbINFO.textContent = 'Некорректный запрос';
+			}
+		}
 	}
 	
 	function fileError(n, msg) {
@@ -2111,12 +2112,10 @@ var _z = (function(){
 	}
 	// apply prefixed event handlers
 	function __prefixed_listener(fun, type, callback) {
-		var low = type.toLowerCase();
-			type = 'on'+ low in document ? low : ('onwebkitfullscreenchange' in document ?
-				'webkit' :'onmozfullscreenchange' in document ?
-				'moz' :  'onmsfullscreenchange' in document ?
-				'MS' : '') + type;
-		document[fun +'EventListener'](type, callback, false);
+		document[fun +'EventListener'](type.toLowerCase(), callback, false);
+		document[fun +'EventListener']('webkit'+ type, callback, false);
+		document[fun +'EventListener']('moz'+ type, callback, false);
+		document[fun +'EventListener']('MS'+ type, callback, false);
 	}
 	
 	return {
@@ -3770,8 +3769,22 @@ function Gala() {
 	}
 	
 	var dynamicCSS = _z.setup('style', { id: 'gala_dynamic_css' });
-	var myPostsMap = JSON.parse(localStorage.getItem('de-myposts')) || {};
 	var content_error = 'Нельзя отправлять сообщения без файлов и текста';
+	var myPostsMap = (function(_My, _F) {
+		for (var b in _My) {
+			var a = _My[b];
+			if (Array.isArray(a)) {
+				_F = true;
+				_My[b] = {};
+				for (var i = 0; i < a.length; i++) {
+					a[i] && (_My[b][a[i]] = [0,0,true]);
+				}
+			}
+		}
+		if (_F)
+			localStorage.setItem('de-myposts', JSON.stringify(_My));
+		return _My;
+	})(JSON.parse(localStorage.getItem('de-myposts')) || {});
 	
 	function submitGFlistener(e) {
 		try { e.preventDefault();
@@ -3834,8 +3847,8 @@ function Gala() {
 							form.remove();
 							form.clear_all();
 							
-							Array.isArray(myPostsMap[desk] || (myPostsMap[desk] = {})) ? myPostsMap[desk].push(data.id) :
-								(myPostsMap[desk][data.id] = [ new Date().getTime(), (!thread_id ? data.id : Number(thread_id)), true ]);
+							(myPostsMap[desk] || (myPostsMap[desk] = {}))[data.id] = [
+								new Date().getTime(), (!thread_id ? data.id : Number(thread_id)), true ];
 							dynamicCSS.appendChild(document.createTextNode('.post-body a[href$="#'+ data.id +
 								'"]:after{content:" (You)";} .de-ref-op[href$="#'+ data.id +'"]:after{content:" (OP)(You)";}'));
 							localStorage.setItem('de-myposts', JSON.stringify(myPostsMap));
