@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.0.2
+	: version 3.1.0
 	© magicode
 	
 */
@@ -1720,8 +1720,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		});
 	}
 	// полифил c упрощенной реализацией classList
-	if (!('classList1' in Element.prototype)) {
-		Object.defineProperty(Element.prototype, 'classList1', {
+	if (!('classList' in Element.prototype)) {
+		Object.defineProperty(Element.prototype, 'classList', {
 			configurable: false,
 			enumerable: true,
 			get: function() {
@@ -1809,7 +1809,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 	}
 }());
 
-window.getCookie = function getCookie(name) {
+function getCookie(name) {
 	var out = decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*'+ encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&') +'\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || 0;
 	switch (out) {
 		case 'enabled':
@@ -1825,7 +1825,7 @@ window.getCookie = function getCookie(name) {
 	return out;
 }
 
-window.setCookie = function setCookie(name, value, days) {
+function setCookie(name, value, days) {
 	if (!name) {
 		return;
 	}
@@ -1846,7 +1846,7 @@ window.setCookie = function setCookie(name, value, days) {
 	}
 }
 
-window.show_filesize = function show_filesize(pid, num) {
+function show_filesize(pid, num) {
 	var fid = 'fs_'+pid+'_'+num;
 	$forEachClass('fs_'+pid, function(fs, i) {
 		fs.style['display'] = fs.id === fid ? 'inline' : 'none';
@@ -1890,7 +1890,8 @@ function isInsideATag(str, sp, ep) {
 	return (str.split(sp).length - 1) > (str.split(ep).length - 1);
 }
 function parseBoardURL(path) {
-	var m = path.match(/^https?:\/\/[^\/]+\/(\w+)\/?(?:(?:res\/(0\d\d)?(\d+)|(\d+))\.html)?(?:#(\d+))?$/);
+	var m = path.match(/^https?:\/\/[^\/]+\/(\w+)\/?(?:(?:res\/(0\d\d)?(\d+)|(\d+))\.html)?(?:#(\d+))?$/) ||
+			path.match(/^https?:\/\/[^\/]+\/html\/(\w+)/);
 		m.board = m[1] || ''; m.lastCount = Number(m[2]); m.thread = m[3] || ''; m.page = m[4] || ''; m.post = m[5] || '';
 	return m;
 }
