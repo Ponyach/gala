@@ -2,9 +2,8 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.1.0
+	: version 3.1.5
 	© magicode
-	
 */
 
 var ku_boardspath = location.origin;
@@ -59,12 +58,6 @@ var MAX_FILE = {
 		get: function(b) { return b in this ? this[b] : this.default }
 	}
 }
-
-var es6 = (function(s) {
-	try { s.eval('class test123 { static ok (a){ return a } }'); }
-	catch (x) { return false; }
-	return true;
-})(self);
 
 var isCaptchaNeeded; $GET('/recaptchav2.php?c=isnd', function() {
 	isCaptchaNeeded = this.responseText == '1';
@@ -167,7 +160,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		// собираем куклоскрипт  ~  добавляем на страницу
 		var dollchan_script      = document.head.appendChild( document.createElement('script') );
 			dollchan_script.type = 'application/javascript';
-			dollchan_script.src  = '/lib/javascript/Dollchan_Extension_Tools.'+ (es6 ? 'es6.user.js' : 'user.js');
+			dollchan_script.src  = '/lib/javascript/boardscript.js';
 			/* es6 версия более заточена на новые браузеры
 			  https://rawgit.com/SthephanShinkufag/Dollchan-Extension-Tools/b39fa2a003e4a300a1a779d3d6f6be4dbb8eb46c/Dollchan_Extension_Tools.user.js
 			   - v16.3.9.0.f6f7f30 (оригинальный комит которому соответствует boardscript_20161027223649.js)
@@ -180,23 +173,29 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				$DOMReady(function() {
 					_HiP.forEach(hideEmptyRefmap);
 				
-					var deFiles = document.getElementsByClassName('de-file'), dbTHMB = {};
-					if (deFiles.length > 0) {
-						deFiles[0].parentNode.appendChild(passcode_up);
-						deFiles[0].parentNode.appendChild(dbpic_vi);
-					}
+					var deFiles = document.getElementsByClassName('de-file'),
+						dbTHMB = {},
+						modal = (deFiles.length > 0 ? deFiles[0] : document.getElementById('dollchan_send')).parentNode;
+						modal.appendChild(passcode_up);
+						modal.appendChild(dbpic_vi);
 					
 					de_rpiChange = function(k, src) {
-						if (!dbTHMB[k]) {
-							dbTHMB[k] = document.createElement('div');
-							dbTHMB[k].className = 'de-rpiStub';
+						var slot;
+						
+						if (deFiles.length > 0) {
+							if (!dbTHMB[k]) {
+								dbTHMB[k] = document.createElement('div');
+								dbTHMB[k].className = 'de-rpiStub';
+							}
+							slot = dbTHMB[k];
+							if (src) {
+								dbTHMB[k].style['background-image'] = 'url('+ src +')';
+								deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
+							} else
+								dbTHMB[k].remove();
 						}
-						if (src) {
-							dbTHMB[k].style['background-image'] = 'url('+ src +')';
-							deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
-						} else
-							dbTHMB[k].remove();
-						return dbTHMB[k];
+						
+						return slot;
 					}
 				
 					addButtons = function(target, n) {
@@ -233,14 +232,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			if ('postform' in document.forms) {
 				postform = document.forms.postform;
 				
-				if ('name' in postform.elements) {
-					postform.elements['name'].value = getCookie('name') || '';
-					//postform.elements['name'].onchange = function(e) { setCookie(e.target.name, e.target.value, 365) };
-				}
-				if ('em' in postform.elements) {
-					postform.elements['em'].value = getCookie('em') || '';
-					//postform.elements['em'].onchange = function(e) { setCookie(e.target.name, e.target.value, 365) };
-				}
 				postform.elements['message'].onkeydown = function(e) {
 					if (!MAIN_SETTINGS['ctrlenoff'] && (e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.altKey)) {
 						postform.submit();
@@ -838,6 +829,13 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			postform = document.forms.postform;
 			postform.elements['msgbox'].textMark = galamarK;
 			
+			if ('name' in postform.elements) {
+				postform.elements['name'].value = getCookie('name') || '';
+			}
+			if ('em' in postform.elements) {
+				postform.elements['em'].value = getCookie('em') || '';
+			}
+			
 			// уточняем максимальный размер файла на доске
 			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
 			// фикс для корректного отображения строки с file_error
@@ -871,59 +869,19 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE.COUNT[postform.elements['board'].value] = i - 1;
 			
-			var dismissPostprocess, startPostprocess;
-			
 			postform.addEventListener('submit', function(event){
 				// убираем поле для детекта отправки через кукловский ctrl+enter
 				this.elements['dollchan_send'].value = '0';
 			});
+			
+			postform.addEventListener('deSuccessUpload', startPostprocess, false);
+			postform.addEventListener('deErrorUpload', startPostprocess, false);
 			
 			window.postform_submit = function() {
 				// отключаем кнопку что бы по ней не щелкали
 				postform.elements['go'].disabled = true;
 				postform.elements['go'].value = 'Работаем...';
 				
-				var wrap = document.getElementById('de-wrapper-popup');
-				if (wrap) {
-					(dismissPostprocess || (
-						dismissPostprocess = new MutationObserver(function(mut) {
-							for (var _msg_ = 'postprocess dismissmised!', l = mut.length - 1; l >= 0; l--) {
-								// определяем по повидению кукловых всплывающих сообщений успешно отправилась форма или простаивает с ошибкой
-								switch ( mut[l].target.classList[2] ) {
-									case 'de-close':
-										// delete edit field
-										'editpost' in postform.elements && postform.elements['editpost'].parentNode.remove();
-										// clear db file samples
-										$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
-										// reset file inputs
-										for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
-											postform.elements['md5-'+ i].value = postform.elements['md5passcode-'+ i].value = postform.elements['upload-image-'+ i].value = '';
-											'upload-rating-'+ i in postform.elements && (postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
-										}
-										_FileArea.sha512 = new Array(0);
-										// check captcha needed
-										$GET('/recaptchav2.php?c=isnd', function() {
-											var recapt2 = postform.querySelector('#recapt-2');
-											isCaptchaNeeded = this.responseText == '1';
-											!isCaptchaNeeded && recapt2 && recapt2.remove();
-										});
-										passcode_refresh && passcode_refresh();
-										_msg_ = 'postform cleaned!';
-									case 'de-blink':
-										// обрываем ослеживание сообщений
-										dismissPostprocess.disconnect();
-										// разблокируем кнопку
-										postform.elements['go'].disabled = false;
-										postform.elements['go'].value = 'Отправить';
-										// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
-										postform.elements['dollchan_send'].value = '1';
-										console.info( _msg_ );
-										return;
-								}
-							}
-						})
-					)).observe(wrap, { attributes: true, subtree: true });
-				}
 				var clickEvent = document.createEvent('MouseEvents');
 					clickEvent.initEvent('click', true, true);
 				postform.elements['fake_go'].dispatchEvent(clickEvent);
@@ -1092,6 +1050,38 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					$GET('/getdb.php?q='+ s.replace(/\s/g, '%2B') +'&page='+ j +'&apikey='+ _db_.apiKey, dbThumbRender);
 				}
 			}, 500);
+		}
+		
+		function startPostprocess(e) {
+			var _msg_ = 'postprocess dismissmised!'
+			switch ( e.type ) {
+				case 'deSuccessUpload':
+					// delete edit field
+					'editpost' in postform.elements && postform.elements['editpost'].parentNode.remove();
+					// clear db file samples
+					$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
+					// reset file inputs
+					for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
+						postform.elements['md5-'+ i].value = postform.elements['md5passcode-'+ i].value = postform.elements['upload-image-'+ i].value = '';
+						'upload-rating-'+ i in postform.elements && (postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
+					}
+					_FileArea.sha512 = new Array(0);
+					// check captcha needed
+					$GET('/recaptchav2.php?c=isnd', function() {
+						var recapt2 = postform.querySelector('#recapt-2');
+						isCaptchaNeeded = this.responseText == '1';
+						!isCaptchaNeeded && recapt2 && recapt2.remove();
+					});
+					passcode_refresh && passcode_refresh();
+					_msg_ = 'postform cleaned!';
+				case 'deErrorUpload':
+					// разблокируем кнопку
+					postform.elements['go'].disabled = false;
+					postform.elements['go'].value = 'Отправить';
+					// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
+					postform.elements['dollchan_send'].value = '1';
+					console.info( _msg_ );
+			}
 		}
 		
 		function dbThumbRender(e) {
@@ -1837,11 +1827,7 @@ function setCookie(name, value, days) {
 			date.setTime(date.getTime() + (days*24*60*60*1000));
 		expires += '; expires='+ date.toGMTString();
 	}
-	if (/^(?:name|em|show_spoiler_\d+)$/.test(name)) {
-		document.cookie = name +'='+ encodeURIComponent(value) + expires;
-	} else if (/^lazyload_disable$/.test(name)) {
-		document.cookie = name +'='+ (value + 0) + expires;
-	}
+	document.cookie = name +'='+ encodeURIComponent(value) + expires;
 }
 
 function show_filesize(pid, num) {
