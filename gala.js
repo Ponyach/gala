@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.1.5
+	: version 3.2.0
 	© magicode
 */
 
@@ -878,10 +878,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			postform.addEventListener('deErrorUpload', startPostprocess, false);
 			
 			window.postform_submit = function() {
-				// отключаем кнопку что бы по ней не щелкали
-				postform.elements['go'].disabled = true;
-				postform.elements['go'].value = 'Работаем...';
-				
 				var clickEvent = document.createEvent('MouseEvents');
 					clickEvent.initEvent('click', true, true);
 				postform.elements['fake_go'].dispatchEvent(clickEvent);
@@ -1075,9 +1071,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					passcode_refresh && passcode_refresh();
 					_msg_ = 'postform cleaned!';
 				case 'deErrorUpload':
-					// разблокируем кнопку
-					postform.elements['go'].disabled = false;
-					postform.elements['go'].value = 'Отправить';
 					// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
 					postform.elements['dollchan_send'].value = '1';
 					console.info( _msg_ );
@@ -2201,7 +2194,7 @@ var SCPurePlayer = (function() {
 		
 		set 'Track Progress' (sec) {
 			this.PlayerNode['_position_'].textContent = timeCalc(sec);
-			this.PlayerNode['_progress_'].style['width'] = (sec / this.AudioDevice.duration * 100) +'%';
+			this.PlayerNode['_progress_'].style['width'] = (sec / this.TrackLoaded.duration * 100) +'%';
 		},
 		get 'Track Progress' () {
 			return this.PlayerNode['_progress_'].style['width'];
@@ -2403,11 +2396,12 @@ var SCPurePlayer = (function() {
 			x = (coords.x - rect.left) / ('width' in rect ? rect.width : (rect.width = rect.right - rect.left));
 			
 		if (this === _Current_.PlayerNode['_waveform_']) {
-			maxs = _Current_['AudioDevice'].duration;
-			seek = Math.max(0, Math.min(Math.floor(maxs * x * 1000000) / 1000000, maxs));
+			maxs = _Current_.TrackLoaded.duration;
+			seek = x > 1 ? maxs : x < 0 ? 0 : Math.floor(maxs * x * 1000000) / 1000000;
 			barMove = function(eM) {
+				maxs = _Current_.TrackLoaded.duration;
 				x = (_handler.getCoords(eM).x - rect.left) / rect.width;
-				seek = Math.max(0, Math.min(Math.floor(maxs * x * 1000000) / 1000000, maxs));
+				seek = x > 1 ? maxs : x < 0 ? 0 : Math.floor(maxs * x * 1000000) / 1000000;
 				_Current_['AudioDevice'].ontimeupdate = null;
 				_Current_['Track Progress'] = seek;
 			}
@@ -2419,10 +2413,10 @@ var SCPurePlayer = (function() {
 				window.removeEventListener(eE.type, barEnd, false);
 			}
 		} else if (this === _Current_.PlayerNode['_volume_']) {
-			vol = Math.max(0, Math.min(Math.round(x * 100) / 100, 1));
+			vol = x > 1 ? 1 : x < 0 ? 0 : Math.round(x * 10) / 10;
 			barMove = function(eM) {
 				x = (_handler.getCoords(eM).x - rect.left) / rect.width;
-				vol = Math.max(0, Math.min(Math.round(x * 100) / 100, 1));
+				vol = x > 1 ? 1 : x < 0 ? 0 : Math.round(x * 10) / 10;
 				_Current_['Player Volume'] = SC.Volume = vol;
 			}
 			barEnd = function(eE) {
@@ -2620,7 +2614,7 @@ var SCPurePlayer = (function() {
 			m = Math.floor(secn / 60) % 60;
 			h = Math.floor(secn / (60 * 60));
 			
-		return (h > 0 ? h +'.' : '') + (m > 9 || m == 0 ? m : '0'+ m) +'.'+ (s > 9 ? s : '0'+ s);
+		return (h > 0 ? h +'.' : '') + (m < 9 && m >= 0 ? '0'+ m : m) +'.'+ (s < 9 && s >= 0 ? '0'+ s : s);
 	}
 	function genGroupId() {
 		var n = Math.round(Math.random() * 12345679);
@@ -2675,7 +2669,7 @@ option.rating-S:checked, option.rating-S:hover { box-shadow: 0 0 0 99px #8C60B1 
 .text-line-ic, .text-line-ic > * { vertical-align: middle; } .text-line-ic > input[type="text"] { min-width: 240px; }\
 .text-line-ic > input[name="subject"] { margin-left: 8px; } #submit_this_form { margin-left: -10px; font-variant: small-caps; }\
 #submit_this_form:disabled:hover, #submit_this_form:disabled { color: inherit!important; background: transparent!important; left: 0; }\
-#gala-error-msg { text-align: center; color: white; background-color: #E04000; }\
+#gala-error-msg { text-align: center; color: white; }\
 #gala-replytitle > .filetitle { font-variant: small-caps; font-size: small; vertical-align: super; }\
 .pin-buttons { position: absolute; left: 0; } .inverted, .gala-freestyle .toggleform { transform: rotate(180deg); }\
 .ls-de-svg { margin: 0 2px -3px; cursor: pointer; width: 16px; height: 16px; }\
@@ -3097,8 +3091,7 @@ function Gala() {
 													(/R\:\s*\[(\w)\]/i.exec(fs.childNodes[0]) || {1:'N'})[1], n);
 											});
 											_EditForm.children['gala-error-msg'].textContent = data.error;
-											_EditForm.children['gala-error-msg'].style['background-color'] = ({
-												0: '#04A13D', 3: '#E04000'})[data.status];
+											_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
 											_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
 											_EditForm.elements['board'].value = res.board;
 											_EditForm.elements['replythread'].value = res.thread;
@@ -3758,7 +3751,7 @@ function Gala() {
 	}
 	
 	var dynamicCSS = _z.setup('style', { id: 'gala_dynamic_css' });
-	var content_error = 'Нельзя отправлять сообщения без файлов и текста';
+	var content_error = 'Нельзя отправлять сообщения без файлов и текста.';
 	var myPostsMap = (function(_My, _F) {
 		for (var b in _My) {
 			var a = _My[b];
@@ -3781,6 +3774,7 @@ function Gala() {
 			var flen = e.target.files.length;
 			if (flen == 0 && !form.elements['message'].value) {
 				form.children['gala-error-msg'].textContent = content_error;
+				form.children['gala-error-msg'].style['background-color'] = '#E04000';
 				return;
 			}
 			var i, n, exists = {};
@@ -3855,17 +3849,20 @@ function Gala() {
 					} else {
 						msg_error = this.status +' '+ this.statusText;
 					}
+					
 					form.children['gala-error-msg'].textContent = msg_error;
+					form.children['gala-error-msg'].style['background-color'] = '#E04000';
+					
 					switch (msg_error) {
 						case 'Ты отправляешь сообщения слишком быстро':
 							form.elements['submit_this_form'].value = 'Ждите 9';
-							var i = 8, timr = setInterval(function(){
-								if (i == 0) {
+							var t = 8, timr = setInterval(function(){
+								if (t == 0) {
 									clearInterval(timr);
 									form.elements['submit_this_form'].disabled = false;
 									form.elements['submit_this_form'].value = 'Отправить';
 								} else
-									form.elements['submit_this_form'].value = 'Ждите '+ (i--);
+									form.elements['submit_this_form'].value = 'Ждите '+ (t--);
 							}, 1100);
 							break;
 						case 'Введен неправильный код подтверждения':
@@ -3896,8 +3893,12 @@ function Gala() {
 		var reply = /reply\d+/.test(pst.id) ? pst : pst.querySelector('.pstnode > *[id^="reply"]');
 		
 		if (reply && reply.getAttribute('handled') !== 'ok') {
-			var bquot = reply.querySelector('.post-body > blockquote'),
-				files = reply.querySelectorAll('.file');
+			var bquot = reply.querySelector('.post-body > blockquote');
+			var files = reply.querySelectorAll('.file');
+			var pid = reply.getAttribute('data-num');
+			if (myPostsMap[LOCATION_PATH.board] && pid in myPostsMap[LOCATION_PATH.board]) {
+				reply.classList.add('de-mypost');
+			}
 			if (files.length > 1) {
 				bquot.className = 'clearancent';
 			}
@@ -3906,7 +3907,7 @@ function Gala() {
 					html: '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#gala-rep-arrow"></use></svg>'}));
 				_z.replace(reply.querySelector('.dast-hide-tr'), _z.setup('span', { class: 'dropdown-toggle',
 					html: '<a class="dropdown-arrow">▼</a><ul class="dropdown-menu"><li class="gala-show-dialogs from-'+
-						reply.id.slice(5) +'">Диалоги</li><li class="gala-edit-post">Редактировать</li></ul>'})
+						pid +'">Диалоги</li><li class="gala-edit-post">Редактировать</li></ul>'})
 				);
 			}
 			var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
@@ -3980,11 +3981,3 @@ function Gala() {
 		document.body.appendChild(dynamicCSS);
 	});
 } /* ===> end <=== */
-
-// чистка --Е
-for (var _k_ in localStorage) {
-	switch (_k_.substring(0,10)) {
-		case 'last_post_': case 'last_threa':  case 'default_ti': case 'dollchanFi': case 'userinputn': case 'ifchangeds': case 'currentsty': case 'GalaForm': case 'KeyMarks': localStorage.removeItem(_k_);
-	}
-}
-// --Е
