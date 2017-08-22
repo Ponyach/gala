@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.3.1
+	: version 3.3.2
 	© magicode
 */
 
@@ -532,7 +532,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			(MAIN_SETTINGS['show_doubledash'] ? 'inline' : 'none') +'!important; } .de-thread-buttons { display: '+
 			(MAIN_SETTINGS['show_de-thread-buttons'] ? 'inline' : 'none') +'!important; float: left; } .roleplay { display: '+
 			(MAIN_SETTINGS['hide_roleplay'] ? 'none' : 'inline') +'!important; } .file ~ .file { display: '+
-			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent { clear: right!important; }' : 'inline!important; }');
+			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent > blockquote { clear: right!important; }' : 'inline!important; }');
 	
 	var markup_buttons = document.createElement('span');
 		markup_buttons.onclick = deMarkupButtons;
@@ -589,7 +589,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			});
 		});
 		
-		document.querySelectorAll('body, body > form[action="/board.php"], body > form[action="/board.php"] *[id^="thread"]').forEach(function(target) {
+		document.querySelectorAll(
+			'body, body > form[action="/board.php"], body > form[action="/board.php"] *[id^="thread"]').forEach(function(target) {
 			observer.observe(target, { childList: true });
 		});
 		
@@ -1349,9 +1350,9 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 						new RegExp('.'+ keyW[1] +' { display: \\w+'), '.'+ keyW[1] +' { display: '+ (MAIN_SETTINGS[name] ? 'none' : 'inline'));
 					if (keyW[1] === 'file') {
 						if (MAIN_SETTINGS['hide_file_multi']) {
-							inline_style.textContent += '.clearancent { clear: right!important; }';
+							inline_style.textContent += '.clearancent > blockquote { clear: right!important; }';
 						} else
-							inline_style.textContent = inline_style.textContent.replace('.clearancent { clear: right!important; }', '');
+							inline_style.textContent = inline_style.textContent.replace('.clearancent > blockquote { clear: right!important; }', '');
 					}
 				case 'ctrlenoff': case 'keymarks': case '!':
 					break;
@@ -1446,11 +1447,15 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		Array.prototype.slice.call(                              // вместо перерисовывания верхней строки по наведению на файлы,
 			document.querySelectorAll('[id^="fake_filesize_"]'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
 		.forEach(function(fk, i) {                               // функцией show_filesize делаем видимый целевой, а предыдущий скрываем.
-			var fs_inf = fk.parentNode.getElementsByClassName('filesize');
+			var pfiles = fk.parentNode,
+				fs_inf = pfiles.getElementsByClassName('filesize');
 				fs_inf[0].style['display'] = 'inline';         // + меньше тревожим DOM, меньше сообщений ловим в MutationObserver, быстрей работа
 			for (var i = 0, len = fs_inf.length; i < len; i++){// + не нужно изобретать костыли для переноса изменений вносимых куклой
 				fs_inf[i].className += ' fake_filesize'
-				fk.parentNode.insertBefore(fs_inf[i], fk);
+				pfiles.insertBefore(fs_inf[i], fk);
+			}
+			if (len > 1) { // выравнивание блока с текстом
+				pfiles.parentNode.querySelector('.post-body').className = 'post-body clearancent';
 			}
 			fk.remove();
 		});
@@ -2726,7 +2731,7 @@ option.rating-A:checked, option.rating-A:hover, .PONY_rate-A { box-shadow: 0 0 0
 .gmark-btn.unkfunc0:before{ content: "> цит"; }\
 \
 .reply .mediacontent, .reply .de-video-obj, .reply .imagecontent, .reply > .post-files > .file, .embedmedia { float: left; }\
-.mediacontent ~ blockquote, .de-video-obj ~ blockquote, .imagecontent ~ blockquote, .clearancent { clear: both; }\
+.mediacontent ~ blockquote, .de-video-obj ~ blockquote, .imagecontent ~ blockquote, .clearancent > blockquote { clear: both; }\
 \
 span[de-bb]{ position: absolute; visibility: hidden; } input, textarea { outline: none; }\
 .mv-frame { position: absolute; background-color: rgba(0,0,0,.7); color: white; cursor: pointer; width: 40px; line-height: 40px; text-align: center; border-radius: 0 0 10px 0; opacity: .5;} .mv-frame:hover { opacity: 1; } .mv-frame.to-win:before { content: "[ ↑ ]"; } .mv-frame.to-post:before { content: "[ ↓ ]"; }\
@@ -3929,13 +3934,9 @@ function Gala() {
 		
 		if (reply && reply.getAttribute('handled') !== 'ok') {
 			var bquot = reply.querySelector('.post-body > blockquote');
-			var files = reply.querySelectorAll('.file');
 			var pid = reply.getAttribute('data-num');
 			if (myPostsMap[LOCATION_PATH.board] && pid in myPostsMap[LOCATION_PATH.board]) {
 				reply.classList.add('de-mypost');
-			}
-			if (files.length > 1) {
-				bquot.className = 'clearancent';
 			}
 			if (_GalaForm) {
 				_z.before(reply.querySelector('.extrabtns').previousSibling, _z.setup('a', {
