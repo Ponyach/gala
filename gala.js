@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.2.0
+	: version 3.3.1
 	© magicode
 */
 
@@ -41,6 +41,8 @@ var DATA_NOTS = JSON.parse(localStorage.getItem('data_nots')) || { init: true };
 var IS_TOUCH_DEVICE = 'dast_enable' in MAIN_SETTINGS ? MAIN_SETTINGS['dast_enable'] : 'ontouchstart' in window;
 
 var LOCATION_PATH = parseBoardURL(location.href); // то find { board: w, thread: n, page: n, etc }
+
+var PONY_RATE = { 9: 'S', 10: 'C', 11: 'A', '': 'N' };
 
 var VALID_FILE_TYPES = /video\/webm|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
 
@@ -93,9 +95,11 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
 	
 	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, trashObj = {parentNode:{}},
-		de_rpiChange = function(){},
-		_FileArea = { sha512: [] },
-		_Count = {
+		de_rpiChange = function(){};
+		
+	var _FileArea = { sha512: [], clearBtn: {} };
+	
+	var _Count = {
 			__m: {}, origTitle: {},
 			set: function(desk, display_name, title) {
 				var _m = this.__m[desk];
@@ -179,42 +183,19 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 						modal.appendChild(passcode_up);
 						modal.appendChild(dbpic_vi);
 					
-					de_rpiChange = function(k, src) {
-						var slot;
-						
+					de_rpiChange = function(k, src, title, rate) {
 						if (deFiles.length > 0) {
 							if (!dbTHMB[k]) {
 								dbTHMB[k] = document.createElement('div');
-								dbTHMB[k].className = 'de-rpiStub';
 							}
-							slot = dbTHMB[k];
 							if (src) {
 								dbTHMB[k].style['background-image'] = 'url('+ src +')';
+								dbTHMB[k].title = title;
+								dbTHMB[k].className = 'de-rpiStub '+ PONY_RATE[rate];
 								deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
 							} else
 								dbTHMB[k].remove();
 						}
-						
-						return slot;
-					}
-				
-					addButtons = function(target, n) {
-						var input = target.form.elements,
-							rate = input['upload-rating-'+ n],
-							def = deFiles[n - 1];
-							
-						rate && def.appendChild(rate);
-						
-						setTimeout(function() {
-							(_FileArea[n].file_clear = def.querySelector('.de-file-del')) && (
-								_FileArea[n].file_clear.onclick = function() {
-									_FileArea[n].className = 'file-area-empty';
-									_FileArea.sha512.splice(_FileArea.sha512.indexOf(input['md5passcode-'+ n].value), 1);
-									(rate || trashObj).value = MAIN_SETTINGS['UploadRating_default'];
-									input['md5passcode-'+ n].value = input['md5-'+ n].value = target.value = '';
-								}
-							)
-						},100);
 					}
 				});
 			});
@@ -289,11 +270,14 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		
 		if (!MAIN_SETTINGS['ponymapoff']) {
 			// востановленные понирефлинки, попытка сделать универсальный интерфейсм всплывающих окон для устройств с тачем и десктопа
-			var handler = 'ontouchstart' in window ? { over: 'ontouchstart', out: 'ontouchend' } : { over: 'onmouseenter', out: 'onmouseleave' };
+			var handler = 'ontouchstart' in window ? {
+				over: 'ontouchstart', out: 'ontouchend', down: 'ontouchstart' } : {
+				over: 'onmouseenter', out: 'onmouseleave', down: 'onmousedown'
+			};
 			
 			_PONY = {
-				zIndex: 3, scrollTop: [], scrollBot: [],
-				clearPopups: function(popup){
+				zIndex: 3, scrollTop: [], scrollBot: [], showDelay: null,
+				clearPopups: function(popup) {
 					popup.parentNode.removeAttribute('style');
 					popup.classList.remove('PONY_popup');
 					popup.onmousedown = popup.style['max-width'] = popup.style['z-index'] = popup.style['left'] = popup.style['top'] = null;
@@ -317,60 +301,68 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 							);
 						
 						if (isOutScrn) {
+							clearTimeout(_PONY.showDelay);
 							
-							if (!reply.classList.contains('PONY_popup')) {
-								var elemY = reply.parentNode.getBoundingClientRect().y + pageYOffset;
+							_PONY.showDelay = setTimeout(function() {
 							
-								reply.parentNode.setAttribute('style', 'display: block; padding-top: '+ rHeight +'px');
-								reply.classList.add('PONY_popup');
-							
-								if (pageYOffset < elemY) {
-									_PONY.scrollBot.push({ y: Math.round(elemY - window.innerHeight), target: reply });
-								} else {
-									_PONY.scrollTop.push({ y: Math.round(elemY + rHeight), target: reply });
-								}
-							
-								reply[handler.over] = function() {
-									this.style['z-index'] = (_PONY.zIndex++);
-								}
-							
-								if (!reply.PONY_buttons) {
-									reply.PONY_buttons = reply.appendChild(document.createElement('div'));
-									reply.PONY_buttons.className = 'PONY_buttons';
-									reply.PONY_buttons.innerHTML = '<div title="Убрать" class="clos-pop this-popup"></div><div title="Убрать все" class="clos-pop all-popups"></div>';
-									reply.PONY_buttons.onclick = function(e) {
-										switch (e.target.className) {
-											case 'clos-pop all-popups':
-												$forEachClass('PONY_popup', _PONY.clearPopups);
-												_PONY.zIndex = 3;
-												break;
-											case 'clos-pop this-popup':
-												_PONY.clearPopups(reply);
-										}
+								if (!reply.classList.contains('PONY_popup')) {
+									var elemY = reply.parentNode.getBoundingClientRect().y + pageYOffset;
+								
+									reply.parentNode.setAttribute('style', 'display: block; padding-top: '+ rHeight +'px');
+									reply.classList.add('PONY_popup');
+								
+									if (pageYOffset < elemY) {
+										_PONY.scrollBot.push({ y: Math.round(elemY - window.innerHeight), target: reply });
+									} else {
+										_PONY.scrollTop.push({ y: Math.round(elemY + rHeight), target: reply });
 									}
-								} else
-									reply.PONY_buttons.style['display'] = null;
+								
+									reply[handler.down] = function() {
+										this.style['z-index'] = (_PONY.zIndex++);
+									}
+								
+									if (!reply.PONY_buttons) {
+										reply.PONY_buttons = reply.appendChild(document.createElement('div'));
+										reply.PONY_buttons.className = 'PONY_buttons';
+										reply.PONY_buttons.innerHTML = '<div title="Убрать" class="clos-pop this-popup"></div><div title="Убрать все" class="clos-pop all-popups"></div>';
+										reply.PONY_buttons.onclick = function(e) {
+											switch (e.target.className) {
+												case 'clos-pop all-popups':
+													$forEachClass('PONY_popup', _PONY.clearPopups);
+													_PONY.zIndex = 3;
+													break;
+												case 'clos-pop this-popup':
+													_PONY.clearPopups(reply);
+											}
+										}
+									} else
+										reply.PONY_buttons.style['display'] = null;
+								}
+								
+								var pageW = document.documentElement.clientWidth;
+								var pageH = document.documentElement.clientHeight;
+								var lnkRect = lnk.getBoundingClientRect(),
+									lnkTop = Math.round(lnkRect.top),
+									fullH = reply.clientHeight,
+									offsetX = Math.round(lnkRect.left + pageXOffset + lnk.offsetWidth / 2),
+									offsetY = lnkTop + pageYOffset,
+									Yd = Math.round(fullH / 3),
+									isTop = Yd + lnkTop < pageH && map[0] === 'bot' ||
+											Yd * -1 > lnkTop - fullH || pageYOffset === 0 && fullH > lnkTop,
+									left = offsetX < Math.round(pageW / 3) ? offsetX : offsetX - Math.min(rWidth, offsetX - 10);
+								
+								reply.style['max-width'] = (pageW - left - 10) +'px';
+								reply.style['z-index']   = _PONY.zIndex++;
+								reply.style['left']      = left +'px';
+								reply.style['top']       = (isTop ? offsetY + lnk.offsetHeight : offsetY - fullH) +'px';
+							
+							}, 400);
+							
+							lnk[handler.out] = function() {
+								clearTimeout(_PONY.showDelay);
 							}
-							
-							var pageW = document.documentElement.clientWidth;
-							var pageH = document.documentElement.clientHeight;
-							var lnkRect = lnk.getBoundingClientRect(),
-								lnkTop = Math.round(lnkRect.top),
-								fullH = reply.clientHeight,
-								offsetX = Math.round(lnkRect.left + pageXOffset + lnk.offsetWidth / 2),
-								offsetY = lnkTop + pageYOffset,
-								Yd = Math.round(fullH / 3),
-								isTop = Yd + lnkTop < pageH && map[0] === 'bot' ||
-										Yd * -1 > lnkTop - fullH || pageYOffset === 0 && fullH > lnkTop,
-								left = offsetX < Math.round(pageW / 3) ? offsetX : offsetX - Math.min(rWidth, offsetX - 10);
-							
-							reply.style['max-width'] = (pageW - left - 10) +'px';
-							reply.style['z-index']   = _PONY.zIndex++;
-							reply.style['left']      = left +'px';
-							reply.style['top']       = (isTop ? offsetY + lnk.offsetHeight : offsetY - fullH) +'px';
-							
 						} else {
-							reply.classList.add('PONY_backlight')
+							reply.classList.add('PONY_backlight');
 							lnk[handler.out] = function() {
 								reply.classList.remove('PONY_backlight');
 							}
@@ -440,7 +432,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		// создаем заглушку и перегораживаем ей экран
 		var whitescreen       = document.documentElement.appendChild( document.createElement('div') );
 			whitescreen.id    = 'whitescreen';
-			whitescreen.style = 'position: fixed; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;';
+			whitescreen.style = 'position: fixed; top: 0; left: 0; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;';
 			whitescreen.innerHTML = '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>';
 		
 		$DOMReady(function() {
@@ -569,25 +561,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				'<input value="#D" type="button"><a href="#">#D</a></span>'+
 			'<span class="markup-button quote" gmk=">" title="Цитировать">'+
 				'<input value=">" type="button"><a href="#">&gt;</a></span>';
-	
-	var addButtons = function (target, n) {
-		if (!('file_clear' in _FileArea[n])) {
-			var passcode = target.form.elements['md5passcode-'+ n];
-			var md5 = target.form.elements['md5-'+ n];
-			var _R = target.form.elements['upload-rating-'+ n] || trashObj;
-			_FileArea[n].file_clear = document.createElement('a');
-			_FileArea[n].file_clear.textContent = '\n[X]';
-			_FileArea[n].file_clear.className = 'textbutton';
-			_FileArea[n].file_clear.onclick = function() {
-				_FileArea[n].className = 'file-area-empty';
-				_FileArea.sha512.splice(_FileArea.sha512.indexOf(passcode.value), 1);
-				_R.value = MAIN_SETTINGS['UploadRating_default'];
-				passcode.value = md5.value = target.value = '';
-				this.remove();
-			}
-		}
-		target.parentNode.insertBefore(_FileArea[n].file_clear, target);
-	}
 	
 	// отслеживание изменений в DOM (вступает в работу после загрузки всех скриптов)
 	window.addEventListener('load', function() {
@@ -794,7 +767,11 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		}
 		// этот стиль лучше бы перенести в глобальный css
 		var ext_style = document.head.appendChild(document.createElement('style'));
-			ext_style.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru [name] { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: attr(rate); position: absolute; margin-top: -17px; font-size: .8em; } .editfield > .buttons-style-text, .editfield > .buttons-style-standart { float: right; }';
+			ext_style.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; } .editfield > .buttons-style-text, .editfield > .buttons-style-standart { float: right; }\
+.modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
+.modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
+.modal__prev:before { top: 3px; transform: rotate(25deg); }.modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); }.modal__next:after { bottom: 3px; transform: rotate(25deg);}.modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
+.modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }';
 		
 		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
 		var ponyaba = document.querySelector('.footer > a');
@@ -838,54 +815,99 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			
 			// уточняем максимальный размер файла на доске
 			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
-			// фикс для корректного отображения строки с file_error
-			postform.elements['msgbox'].parentNode.style['position'] = 'relative';
-			postform.elements['msgbox'].parentNode.insertBefore(editfield, postform.elements['msgbox'].parentNode.childNodes[0]);
+			// добавляем поле редактирования
+			postform.elements['msgbox'].parentNode.insertBefore(editfield, postform.elements['msgbox']);
 			
 			for (var i = 1, input; input = postform.elements['upload-image-'+ i]; i++) {
 			
 				_FileArea[i] = postform.elements['token'].parentNode.appendChild(document.createElement('div'));
-				_FileArea[i].className = 'file-area-empty';
 				
-				_FileArea[i].appendChild(postform.elements['md5-'+ i]).value = '';
-				_FileArea[i].appendChild(postform.elements['md5passcode-'+ i]).value = '';
-			
-				var ratingsel = postform.elements['upload-rating-'+ i];
-				if (ratingsel) {
-					_FileArea[i].appendChild(ratingsel).removeAttribute('onchange');
-					ratingsel.removeAttribute('style');
+				var md5 = _FileArea[i].appendChild(postform.elements['md5-'+ i]);
+				var passcode = _FileArea[i].appendChild(postform.elements['md5passcode-'+ i]);
+				var rating = postform.elements['upload-rating-'+ i];
+				
+				if (rating) {
+					input.parentNode.insertBefore(rating, input).removeAttribute('onchange');
+					rating.removeAttribute('style');
 				}
 			
 				postform.elements['token'].parentNode.removeChild(postform.elements['file-clear-'+ i]);
 			
 				input.removeAttribute('style');
 				_FileArea[i].appendChild(input.parentNode);
+				
+				_FileArea.clearBtn[i] = document.createElement('a');
+				_FileArea.clearBtn[i].textContent = '\n[X]';
+				_FileArea.clearBtn[i].className = 'textbutton';
+				_FileArea.clearBtn[i].id = 'clear-file-'+ i;
+				_FileArea.clearBtn[i].onclick = cleanInputs;
 			
 				if (input.files.length > 0) {
 					_FileArea[i].className = 'file-area';
-					addButtons(input, i);
+					_FileArea.sha512.push(passcode.value);
+					input.parentNode.insertBefore(_FileArea.clearBtn[i], input);
+				} else {
+					_FileArea[i].className = 'file-area-empty';
+					passcode.value = md5.value = '';
 				}
 			}
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE.COUNT[postform.elements['board'].value] = i - 1;
 			
-			postform.addEventListener('submit', function(event){
-				// убираем поле для детекта отправки через кукловский ctrl+enter
-				this.elements['dollchan_send'].value = '0';
+			// добавляем свой код через DollchanAPI
+			window.addEventListener('message', function(e){
+				if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
+					this.removeEventListener('message', arguments.callee, false);
+					e.ports[0].onmessage = function(deApi) {
+						var result = deApi.data.data;
+						switch (deApi.data.name) {
+							case 'submitform':
+								if (result.success) {
+									// delete edit field
+									'editpost' in postform.elements && postform.elements['editpost'].parentNode.remove();
+									// clear db file samples
+									$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
+									// reset file inputs
+									for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
+										postform.elements['md5-'+ i].value = '';
+										postform.elements['md5passcode-'+ i].value = '';
+										postform.elements['upload-image-'+ i].value = '';
+										'upload-rating-'+ i in postform.elements && (
+											postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
+										_FileArea[i].className = 'file-area-empty';
+									}
+									_FileArea.sha512 = new Array(0);
+									// check captcha needed
+									$GET('/recaptchav2.php?c=isnd', function() {
+										var recapt2 = postform.querySelector('#recapt-2');
+										isCaptchaNeeded = this.responseText == '1';
+										!isCaptchaNeeded && recapt2 && recapt2.remove();
+									});
+									passcode_refresh && passcode_refresh();
+								}
+								// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
+								postform.elements['dollchan_send'].value = 1;
+								break;
+							/* case '...': */
+						}
+					};
+					// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
+					e.ports[0].postMessage({ name: 'registerapi', data: ['submitform'/*, 'newpost'*/] });
+				}
 			});
-			
-			postform.addEventListener('deSuccessUpload', startPostprocess, false);
-			postform.addEventListener('deErrorUpload', startPostprocess, false);
+			window.postMessage('de-request-api-message', '*');
 			
 			window.postform_submit = function() {
 				var clickEvent = document.createEvent('MouseEvents');
 					clickEvent.initEvent('click', true, true);
+				// убираем поле для детекта отправки через кукловский ctrl+enter
+				postform.elements['dollchan_send'].value = 0;
 				postform.elements['fake_go'].dispatchEvent(clickEvent);
 			}
 			
 			window.handleFileSelect = handleFileSelect;
 			
-			//grab free file slots
+			// grab free file slots
 			var fileSlots = postform.getElementsByClassName('file-area-empty');
 			
 			// passcode uploader
@@ -921,7 +943,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			
 			// derpibooru uploader
 			var _db_ = {
-				version : '2.8.1',
+				version : '2.8.2',
 				apiKey  : localStorage.getItem('derpibooru_api_key') || '',
 				timr    : null, page: {}, pic: {},
 				save    : function(kword, index, dev) {
@@ -1007,8 +1029,12 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					dbThumbRender({target: { response: sessionStorage.db_last_page } });
 				}
 			
-			window.next = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); }
-			window.prev = function() { dbPAGE.value = Math.max(1, dbPAGE.valueAsNumber - 1); updatesq(); }
+			var dbPREV = dbPREVIEW.parentNode.appendChild(document.createElement('label'));
+				dbPREV.className = 'modal__prev';
+				dbPREV.onclick = function() { dbPAGE.value = Math.max(1, dbPAGE.valueAsNumber - 1); updatesq(); };
+			var dbNEXT = dbPREVIEW.parentNode.appendChild(document.createElement('label'));
+				dbNEXT.className = 'modal__next';
+				dbNEXT.onclick = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); };
 		}
 		// animation listener events
 		_z.documentListener.add('AnimationStart', function (event) {
@@ -1019,7 +1045,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				} else
 				if (event.target.classList.contains('de-src-iqdb')) {
 					event.target.parentNode.insertBefore((_DerpBtn || (
-						_DerpBtn = _z.setup('a', { class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: DerpSearch }))
+						_DerpBtn = _z.setup('a', {
+							class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: DerpSearch }))
 					), event.target.nextSibling);
 				}
 			}
@@ -1038,43 +1065,14 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					dbIMGPLACE[(dbIMGPLACE.childNodes.length == 0 ? 'append' : 'replace') +'Child'](
 						$page[0], dbIMGPLACE.childNodes[0]
 					);
-					$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
-					$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
+					$(dbPREV)[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
+					$(dbNEXT)[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
 					$page.show('slow');
 				} else {
 					dbINFO.textContent = 'Загрузка...';
 					$GET('/getdb.php?q='+ s.replace(/\s/g, '%2B') +'&page='+ j +'&apikey='+ _db_.apiKey, dbThumbRender);
 				}
 			}, 500);
-		}
-		
-		function startPostprocess(e) {
-			var _msg_ = 'postprocess dismissmised!'
-			switch ( e.type ) {
-				case 'deSuccessUpload':
-					// delete edit field
-					'editpost' in postform.elements && postform.elements['editpost'].parentNode.remove();
-					// clear db file samples
-					$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
-					// reset file inputs
-					for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
-						postform.elements['md5-'+ i].value = postform.elements['md5passcode-'+ i].value = postform.elements['upload-image-'+ i].value = '';
-						'upload-rating-'+ i in postform.elements && (postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
-					}
-					_FileArea.sha512 = new Array(0);
-					// check captcha needed
-					$GET('/recaptchav2.php?c=isnd', function() {
-						var recapt2 = postform.querySelector('#recapt-2');
-						isCaptchaNeeded = this.responseText == '1';
-						!isCaptchaNeeded && recapt2 && recapt2.remove();
-					});
-					passcode_refresh && passcode_refresh();
-					_msg_ = 'postform cleaned!';
-				case 'deErrorUpload':
-					// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
-					postform.elements['dollchan_send'].value = '1';
-					console.info( _msg_ );
-			}
 		}
 		
 		function dbThumbRender(e) {
@@ -1108,12 +1106,12 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					}
 					_db_.save(dbSEARCH.value, dbPAGE.value, imgdev);
 					
-					$('#prev, .prevbutton')[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
-					$('#next, .nextbutton')[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
+					$(dbPREV)[( dbPAGE.valueAsNumber > 1 ? 'show' : 'hide' )]('slow');
+					$(dbNEXT)[( dbPAGE.valueAsNumber < dbPAGE.pagesCount ? 'show' : 'hide' )]('slow');
 					$(dbPAGE).show('slow');
 				} else {
 					$(dbIMGPLACE.childNodes[0]).hide();
-					$('#next, #prev, .nextbutton, .prevbutton').hide();
+					$(dbPREV).hide(); $(dbNEXT).hide();
 					dbINFO.textContent = 'Ничего не найдено';
 				}
 			} catch(trace) {
@@ -1123,24 +1121,34 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		}
 	}
 	
-	function fileError(n, msg) {
-		var eNode = (postform.elements['file_error'] || postform.querySelector('#file_error')).appendChild(document.createElement('div'));
-			eNode.textContent = msg; eNode.className = 'e-msg';
-			eNode.onclick = function(){ this.remove() };
-		_FileArea[n].className = 'file-area-empty';
-		_FileArea[n].file_clear && _FileArea[n].file_clear.remove();
-		(postform.elements['upload-rating-'+ n] || trashObj).value = MAIN_SETTINGS['UploadRating_default'];
-		postform.elements['upload-image-'+ n].value = postform.elements['md5-'+ n].value = postform.elements['md5passcode-'+ n].value = '';
+	function cleanInputs(e) {
+		var k = this.id.slice(-1),
+			r = postform.elements['upload-rating-'+ k];
+			r && (r.value = MAIN_SETTINGS['UploadRating_default']);
+		var x = _FileArea.sha512.indexOf(postform.elements['md5passcode-'+ k].value);
+			x !== -1 && _FileArea.sha512.splice(x, 1);
+		_FileArea[k].className = 'file-area-empty';
+		postform.elements['md5passcode-'+ k].value = '';
+		postform.elements['upload-image-'+ k].value = '';
+		postform.elements['md5-'+ k].value = '';
+		this.remove();
 	}
 	
-	function handleFileSelect(n) {
+	function fileError(n, msg) {
+		_FileArea.clearBtn[n].click();
+		alertify.error(msg);
+	}
+	
+	function handleFileSelect(n, _f, _resolve) {
 		var target = postform.elements['upload-image-'+ n],
-			file = target.files[0], smax;
-			
+			file = target.files[0] || _f, smax;
+		
 		if (!VALID_FILE_TYPES.test(file.type)) {
-			fileError(n, 'Неподдерживаемый формат\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
+			fileError(n,
+				'Неподдерживаемый формат\n<br>\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
 		} else if (file.size > (smax = MAX_FILE.SIZE.get(postform.elements['board']))) {
-			fileError(n, 'Слишком большой файл\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
+			fileError(n,
+				'Слишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
 		} else {
 			var reader = new FileReader();
 				reader.onload = function() {
@@ -1166,8 +1174,9 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 							});
 							// field will be sent only if user have cookie with real passcode
 							_FileArea[n].className = 'file-area';
-							addButtons(target, n);
+							target.parentNode.insertBefore(_FileArea.clearBtn[n], target);
 							_FileArea.sha512.push((passcode.value = md5));
+							_resolve && _resolve(file);
 						}
 					}
 				}
@@ -1216,27 +1225,28 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				rating = postform.elements['upload-rating-'+ n];
 		
 			postform.elements['md5-'+ n].value = hash;
+			
 			file_slot.className = 'file-booru';
-		
-			var file_stub = de_rpiChange(n, img_selected.src) || file_slot;
-				file_stub.setAttribute('title', title);
-		
+			file_slot.setAttribute('title', title);
+			
+			de_rpiChange(n, img_selected.src, title, rating.value);
+				
 			var prepreview = preview_area.children[ _p_ +'-prefile-'+ n ];
 		
 			if (!prepreview) {
 				prepreview = preview_area.appendChild(document.createElement('div'));
 				prepreview.className = 'pre-sample';
 				prepreview.id = _p_ +'-prefile-'+ n;
-				rating && (prepreview.innerHTML = '<select class="rating_select"><option value=""></option><option value="9">[S]</option><option value="10">[C]</option><option value="11">[A]</option></select>');
+				rating && (prepreview.innerHTML = '<select class="rating_select">'+ rating.innerHTML +'</select>');
 			}
 		
 			if (rating) {
 				prepreview.firstElementChild.value = rating.value = MAIN_SETTINGS['UploadRating_default'];
 				prepreview.firstElementChild.onchange = function() {
-					rating.value = this.value;
-					file_stub.setAttribute('rate', 'R: '+ this.selectedOptions[0].textContent +'\n');
+					file_slot.setAttribute('rate', 'R: '+ this.selectedOptions[0].textContent +'\n');
+					de_rpiChange(n, img_selected.src, title, (rating.value = this.value));
 				}
-				file_stub.setAttribute('rate', 'R: '+ rating.selectedOptions[0].textContent +'\n');
+				file_slot.setAttribute('rate', 'R: '+ rating.selectedOptions[0].textContent +'\n');
 			}
 			
 			prepreview.style = 'background-image: url('+ img_selected.src +')';
@@ -1247,7 +1257,7 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				img_selected.classList.remove('idb-selected');
 				img_selected.onclick = null;
 				postform.elements['md5-'+ n].value = '';
-				$(file_stub).removeAttr('title rate');
+				$(file_slot).removeAttr('title rate');
 				de_rpiChange(n);
 			}
 			img_selected.classList.add('idb-selected');
@@ -1303,6 +1313,16 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					break;
 				case 'UploadRating':
 					$forEachClass('rating_select', function(rs) { rs.value = _Input.value; });
+					$forEachClass('de-file-rate', function(dr) {
+						var dF = dr.parentNode.parentNode;
+							dr.value = _Input.value;
+						if (
+							(dF.classList[0] === 'de-file' ? dF : (dF = dF.querySelector('.de-file-txt-input') || dF)) &&
+							!dF.classList.contains('de-file-off')
+						) {
+							_PonyRateHiglight(dF, _Input.value);
+						}
+					});
 					break;
 				case 'fixedHeader':
 					toggleHeaderOnTop();
@@ -1830,6 +1850,12 @@ function show_filesize(pid, num) {
 	});
 }
 
+function _PonyRateHiglight(el, val) {
+	el.className = el.className.replace(
+		/\s?PONY_rate-(?:\w*)|$/, ' PONY_rate-'+ PONY_RATE[val]
+	);
+}
+
 function $forEachClass(name, func) {
 	Array.prototype.slice.call(
 		document.getElementsByClassName(name), 0)
@@ -1869,7 +1895,7 @@ function isInsideATag(str, sp, ep) {
 function parseBoardURL(path) {
 	var m = path.match(/^https?:\/\/[^\/]+\/(\w+)\/?(?:(?:res\/(0\d\d)?(\d+)|(\d+))\.html)?(?:#(\d+))?$/) ||
 			path.match(/^https?:\/\/[^\/]+\/html\/(\w+)/);
-		m.board = m[1] || ''; m.lastCount = Number(m[2]); m.thread = m[3] || ''; m.page = m[4] || ''; m.post = m[5] || '';
+		m.board = m[1] || ''; m.lastCount = Number(m[2]); m.thread = m[3] || 0; m.page = m[4] || ''; m.post = m[5] || '';
 	return m;
 }
 function hashString(str) {
@@ -2530,7 +2556,7 @@ var SCPurePlayer = (function() {
 		var div = document.createElement('div');
 			div.className = 'sc-player loading';
 			div.innerHTML = '<ol class="sc-artwork-list"></ol>\n'+
-				'<div class="sc-info"><h3></h3><h4></h4><p></p>\n'+
+				'<div class="sc-info"><h3></h3><h4></h4><p></p><a class="sc-download">—=&gt;Download&lt;=—</a>\n'+
 				'	<a href="#x" class="sc-info-close">X</a>\n'+
 				'</div>\n'+
 				'<div class="sc-controls">\n'+
@@ -2593,9 +2619,11 @@ var SCPurePlayer = (function() {
 		node['_info_'].children[0].innerHTML = '<a href="' + track.permalink_url +'">' + track.title + '</a>';
 		node['_info_'].children[1].innerHTML = 'by <a href="' + track.user.permalink_url +'">' + track.user.username + '</a>';
 		node['_info_'].children[2].innerHTML = (track.description || 'no Description');
+		node['_info_'].children[3].href = track.download_url +'?consumer_key='+ SC.APIKey;
+		node['_info_'].children[3].hidden = !track.downloadable;
 		// update the track duration in the progress bar
 		node['_duration_'].textContent = timeCalc(track.duration);
-		node['_position_'].textContent = '0.00';
+		node['_position_'].textContent = '00.00';
 		// put the waveform into the progress bar
 		var wave = node['_waveform_'].firstElementChild || document.createElement('img');
 			wave.src = track.waveform_url;
@@ -2614,7 +2642,7 @@ var SCPurePlayer = (function() {
 			m = Math.floor(secn / 60) % 60;
 			h = Math.floor(secn / (60 * 60));
 			
-		return (h > 0 ? h +'.' : '') + (m < 9 && m >= 0 ? '0'+ m : m) +'.'+ (s < 9 && s >= 0 ? '0'+ s : s);
+		return (h > 0 ? h +'.' : '') + (m < 10 && m > -1 ? '0'+ m : m) +'.'+ (s < 10 && s > -1 ? '0'+ s : s);
 	}
 	function genGroupId() {
 		var n = Math.round(Math.random() * 12345679);
@@ -2649,13 +2677,17 @@ var gala_inline_style = document.head.appendChild(document.createElement("style"
 .file-remove { background-color: black; border-radius: 100%; width: 14px; height: 14px; top: 2px; left: 2px; color: white; } .file-remove:before { content: "×"; }\
 .file-cover-label { bottom: 2px; right: 0; } .file-cover-label:after { font-weight: bold; border-radius: 7px; padding: 1px 5px; color: white; margin: 0 6px; } .file-cover-label.N:after { content: "[\xA0]"; }\
 .file-cover-select, .dropdown-menu { padding-left: 0; list-style: outside none none; } .file-cover-select { display: none; background-color: #fefefe; margin: 0; } .active > .file-cover-select { display: inherit; }\
-.file-cover { padding: 0 10px; cursor: default; } .S:after { content: "[S]"; } .C:after { content: "[C]"; } .A:after { content: "[A]"; } .file-cover.N { padding-top: 13px; }\
-.file-cover:hover { color: #fff!important; } .file-cover-label.S:after,.file-cover.S:hover { background-color: #8C60B1; } .file-cover-label.C:after,.file-cover.C:hover { background-color: #E65278; } .file-cover-label.A:after,.file-cover.A:hover { background-color: #3B60AE; } .file-cover-label.N:after,.file-cover.N:hover { background-color: #777; }\
+.file-cover { padding: 0 10px; cursor: default; } .S:after { content: "[S]"; } .C:after { content: "[C]"; } .A:after { content: "[A]"; } .file-cover.N { padding-top: 13px; } .file-cover:hover { color: #fff!important; }\
+.file-cover-label.S:after,.file-cover.S:hover, .de-rpiStub.S:before, .de-rpiStub.S:after { background-color: #8C60B1; }\
+.file-cover-label.C:after,.file-cover.C:hover, .de-rpiStub.C:before, .de-rpiStub.C:after { background-color: #E65278; }\
+.file-cover-label.A:after,.file-cover.A:hover, .de-rpiStub.A:before, .de-rpiStub.A:after { background-color: #3B60AE; }\
+.file-cover-label.N:after,.file-cover.N:hover { background-color: #777; }\
 \
 select#default_file_rating { background: none; border: none; color: inherit; -webkit-appearance: none; -moz-appearance: none; text-overflow: ""; } select#default_file_rating > option { background-color: #fefefe; }\
 option.rating-N:checked, option.rating-N:hover { box-shadow: 0 0 0 99px #777 inset; } option.rating-N { color: transparent; }\
-option.rating-C:checked, option.rating-C:hover { box-shadow: 0 0 0 99px #E65278 inset;}\
-option.rating-S:checked, option.rating-S:hover { box-shadow: 0 0 0 99px #8C60B1 inset;}\
+option.rating-C:checked, option.rating-C:hover, .PONY_rate-C { box-shadow: 0 0 0 99px #E65278 inset; }\
+option.rating-S:checked, option.rating-S:hover, .PONY_rate-S { box-shadow: 0 0 0 99px #8C60B1 inset; }\
+option.rating-A:checked, option.rating-A:hover, .PONY_rate-A { box-shadow: 0 0 0 99px #3B60AE inset; }\
 \
 .dropdown-toggle.ins-act:before { content: " ▲ "; padding: 0 5px 15px; border-radius: 4px 4px 0 0; line-height: 1.6; }\
 .ins-act:before, .dropdown-menu { font-size: 14px; line-height: 1.8; color: #eee; position: absolute; z-index: 1000; border: 1px solid #222; box-shadow: 0 6px 12px rgba(0,0,0,.2); background-clip: padding-box; background-color: #222; border-radius: 4px; left: 0; }\
@@ -3143,6 +3175,9 @@ function Gala() {
 								rp.classList.contains('de-pview') ? rp.lastElementChild : null;
 					}), _GalaForm);
 					break;
+				case 'sc-download':
+					window.open(e.target.href, '_blank', 'width=400,height=200');
+					break;
 				case 'sc-info-toggle':
 					e.target.parentNode.children[1].classList.add('active');
 					break;
@@ -3422,7 +3457,7 @@ function Gala() {
 				dynamicCSS.textContent += this.transfer_info;
 			},
 			'dragleave': function(e) {
-				this.leave_timer = setTimeout(closeDBOX, 200);
+				this.leave_timer = setTimeout(closeDBOX, 80);
 			},
 			'drop': function(e) {
 				tempForm.add_files(e.dataTransfer);
@@ -3734,7 +3769,7 @@ function Gala() {
 				break;
 			case 'new-thr-chx':
 				e.target.classList.toggle('inactive');
-				this.elements['replythread'].value = (e.target.classList.contains('inactive') ? LOCATION_PATH.thread : '');
+				this.elements['replythread'].value = (e.target.classList.contains('inactive') ? LOCATION_PATH.thread : '0');
 				break;
 			case 'file-cover-label':
 				e.target.classList.toggle('active');
@@ -3946,7 +3981,7 @@ function Gala() {
 		if ('postform' in document.forms && _GalaForm) {
 			var globalform_area = _z.setup('div', { class: 'gala-globalform-area', html: '<div>[<a class="gala-globalform-open"></a>]</div><div style="text-align: left; display: none;"></div><hr>'});
 			_z.after(_z.setup(document.querySelector('.postarea'), { style: 'display:block!important;' }), globalform_area);
-			_z.after(document.getElementById('delform'), globalform_area.cloneNode(true));
+			_z.after((document.forms.delform || document.querySelector('form[de-form]')), globalform_area.cloneNode(true));
 			document.body.appendChild(
 				_z.setup('div', { style: 'height: 0; width: 0; position: fixed;', html: 
 					'<style>.de-parea, #de-main > hr, .postarea > #postform, .de-btn-rep { display: none; } .de-svg-back { fill: inherit; stroke: none; } .de-svg-fill { stroke: none; fill: currentColor; } .de-svg-stroke { stroke: currentColor; fill: none; } .de-btn-sage { margin: 0 2px -3px; cursor: pointer; width: 12px; height: 16px; } .rep-arrow-svg{ margin: 0 2px -4px 3px; cursor: pointer; width: 20px; height: 16px; }</style>'+
