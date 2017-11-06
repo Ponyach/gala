@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.5.0
+	: version 3.5.1
 	© magicode
 */
 
@@ -67,8 +67,7 @@ var EXT_STYLE = document.createElement('style');
 .modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
 .modal__prev:before { top: 3px; transform: rotate(25deg); } .modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); } .modal__next:after { bottom: 3px; transform: rotate(25deg);} .modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
 .modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
-.de-refmap, .PONY_refmap { margin: 0 4px; overflow: hidden; line-height: 0!important; }\
-.de-refmap > *:last-child { color: transparent; } .de-refmap > *:last-child, .PONY_refmap > *:last-child { display: inline-block; margin-top: 10px; margin-bottom: 4px; line-height: 15px; }';
+.de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }';
 
 var isCaptchaNeeded; $GET('/recaptchav2.php?c=isnd', function() {
 	isCaptchaNeeded = this.responseText == '1';
@@ -109,7 +108,7 @@ Object.defineProperty(window, 'isMobileScreen', {
 				Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' })
 			}
 		}
-	})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; }')
+	})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }')
 });
 
 function _RebuildFileSizeInfo() {
@@ -459,7 +458,7 @@ function _RebuildFileSizeInfo() {
 						}
 					}
 				},
-				css: EXT_STYLE.appendChild(document.createTextNode('.PONY_refmap { font: 80% mlp-font; } .PONY_refmap > a { text-decoration: none; } .PONY_refmap > a:before { color: grey; cursor: default; } .PONY_refmap > a + a:before { content: ","; margin-right: 4px; } .PONY_refmap:before { content: "Ответы:"; margin-right: 4px; } .PONY_backlight, .oppost.PONY_popup { background: cornsilk; color: darkolivegreen; } .PONY_popup { position: absolute; display: block; } .PONY_buttons { clear: both; } .clos-pop { cursor: pointer; display: inline-block; padding: 5px; margin: 0 5px; background: no-repeat center / 100%; } .all-popups {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiM2NjYiIGQ9Ik0zMS4xNSAyOC45OGwtMi41IDIuNS0xMy4wMi0xMy4wMkwyLjYgMzEuNDhsLTIuNDgtMi41IDEzLjAyLTEzLjAyTC4xMiAyLjk0IDIuNi40NWwxMy4wMyAxMy4wM0wyOC42NS40NWwyLjUgMi40OS0xMy4wMiAxMy4wMiAxMy4wMiAxMy4wMnoiLz48Y2lyY2xlIGN4PSIxNS45MSIgY3k9IjE1LjkxIiByPSIxMSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjMiLz48L2c+PC9zdmc+)} .this-popup {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjNjY2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMi4xODggMzJoLTQuNTcyTDE2LjE4OCAyMC43MTQgNC45MDIgMzJILjE4N3YtNC41N0wxMS40NzMgMTYgLjE4NyA0LjcxNFYwaDQuNzE1bDExLjI4NSAxMS4yODZMMjcuNjE3IDBoNC41N3Y0LjcxNEwyMC45MDIgMTZsMTEuMjg1IDExLjI4NlYzMnoiLz48L3N2Zz4=)}'))
+				css: EXT_STYLE.appendChild(document.createTextNode('.PONY_refmap { margin: 1em 4px 0; font: 80% mlp-font; } .PONY_refmap > a { text-decoration: none; } .PONY_refmap > a:before { color: grey; cursor: default; } .PONY_refmap > a + a:before { content: ","; margin-right: 4px; } .PONY_refmap:before { content: "Ответы:"; margin-right: 4px; } .PONY_backlight, .oppost.PONY_popup { background: cornsilk; color: darkolivegreen; } .PONY_popup { position: absolute; display: block; } .PONY_buttons { clear: both; } .clos-pop { cursor: pointer; display: inline-block; padding: 5px; margin: 0 5px; background: no-repeat center / 100%; } .all-popups {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiM2NjYiIGQ9Ik0zMS4xNSAyOC45OGwtMi41IDIuNS0xMy4wMi0xMy4wMkwyLjYgMzEuNDhsLTIuNDgtMi41IDEzLjAyLTEzLjAyTC4xMiAyLjk0IDIuNi40NWwxMy4wMyAxMy4wM0wyOC42NS40NWwyLjUgMi40OS0xMy4wMiAxMy4wMiAxMy4wMiAxMy4wMnoiLz48Y2lyY2xlIGN4PSIxNS45MSIgY3k9IjE1LjkxIiByPSIxMSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjMiLz48L2c+PC9zdmc+)} .this-popup {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjNjY2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMi4xODggMzJoLTQuNTcyTDE2LjE4OCAyMC43MTQgNC45MDIgMzJILjE4N3YtNC41N0wxMS40NzMgMTYgLjE4NyA0LjcxNFYwaDQuNzE1bDExLjI4NSAxMS4yODZMMjcuNjE3IDBoNC41N3Y0LjcxNEwyMC45MDIgMTZsMTEuMjg1IDExLjI4NlYzMnoiLz48L3N2Zz4=)}'))
 			}
 			window.addEventListener('scroll', function(e) {
 				_PONY.scrollTop.forEach(function($t) {
