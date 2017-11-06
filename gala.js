@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.3.2
+	: version 3.5.0
 	© magicode
 */
 
@@ -48,55 +48,110 @@ var VALID_FILE_TYPES = /video\/webm|image\/(?:jpeg|jpg|png|gif)/i // for the /re
 
 var MAX_FILE = {
 	SIZE: {
-		default: 30000000, // b, cafe, and other else
+		default: 30000000, // b, and other else
 		'r34': 30582912,
 		'd': 20000000,
 		get: function(b) { return b in this ? this[b] : this.default }
 	},
 	COUNT: {
-		default: 5, // b, r34, test and other else
-		'cafe': 1,
+		default: 5, // b, r34 and other else
+		'test': 20,
 		'd': 2,
 		get: function(b) { return b in this ? this[b] : this.default }
 	}
 }
+// этот стиль лучше бы перенести в глобальный css
+var EXT_STYLE = document.createElement('style');
+	EXT_STYLE.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
+.modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
+.modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
+.modal__prev:before { top: 3px; transform: rotate(25deg); } .modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); } .modal__next:after { bottom: 3px; transform: rotate(25deg);} .modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
+.modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
+.de-refmap, .PONY_refmap { margin: 0 4px; overflow: hidden; line-height: 0!important; }\
+.de-refmap > *:last-child { color: transparent; } .de-refmap > *:last-child, .PONY_refmap > *:last-child { display: inline-block; margin-top: 10px; margin-bottom: 4px; line-height: 15px; }';
 
 var isCaptchaNeeded; $GET('/recaptchav2.php?c=isnd', function() {
 	isCaptchaNeeded = this.responseText == '1';
 });
 
 // MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
-var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth) < 701 ? function() {
-	$forEachClass('mobile_date', function(el, i) {
-		el.textContent = el.textContent
-		.replace('Понидельник', 'Пн')
-		.replace('Вторник',     'Вт')
-		.replace('Среда',       'Ср')
-		.replace('Четверг',     'Чт')
-		.replace('Пятница',     'Пт')
-		.replace('Суббота',     'Сб')
-		.replace('Воскресенье', 'Вс');
-	});
-	$forEachClass('thumb', function(el, i) {
-		if (el.width > 180 || el.height > 180) {
-			var ratio = el.height / el.width;
-			if (ratio >= 1) {
-				el.height = 180;
-				el.width = 180 / ratio;
-			} else {
-				el.width = 180;
-				el.height = 180 * ratio;
+Object.defineProperty(window, 'isMobileScreen', {
+	configurable: false,
+	get: (function(sW, s700, s500) {
+		if ('matchMedia' in window) {
+			EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
+@media screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
+@media screen and (max-width: 500px) { '+ s500 +' }'));
+			return function() {
+				document.querySelectorAll('.mobile_date').forEach(function(dd) {
+					dd.classList.remove('mobile_date');
+					dd.innerHTML = dd.textContent.replace(
+						/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
+				});
+			}
+		} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
+			EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
+			return function() {
+				document.querySelectorAll('.dast-date').forEach(function(dd) {
+					dd.classList.remove('dast-date');
+					dd.textContent = dd.textContent
+					.replace('Понидельник', 'Пн')
+					.replace('Вторник',     'Вт')
+					.replace('Среда',       'Ср')
+					.replace('Четверг',     'Чт')
+					.replace('Пятница',     'Пт')
+					.replace('Суббота',     'Сб')
+					.replace('Воскресенье', 'Вс');
+				});
+			}
+		} else {
+			return function() {
+				Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' })
 			}
 		}
+	})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; }')
+});
+
+function _RebuildFileSizeInfo() {
+	// переработанная логика подмены информации о файле
+	Array.prototype.slice.call(                              // вместо перерисовывания верхней строки по наведению на файлы,
+		document.querySelectorAll('[id^="fake_filesize_"]'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
+	.forEach(function(fk, i) {                               // функцией show_filesize делаем видимый целевой, а предыдущий скрываем.
+		var pfiles = fk.parentNode,
+			fs_inf = pfiles.getElementsByClassName('filesize');
+			fs_inf[0].style['display'] = 'inline';         // + меньше тревожим DOM, меньше сообщений ловим в MutationObserver, быстрей работа
+		for (var i = 0, len = fs_inf.length; i < len; i++){// + не нужно изобретать костыли для переноса изменений вносимых куклой
+			fs_inf[i].className += ' fake_filesize'
+			pfiles.insertBefore(fs_inf[i], fk);
+		}
+		if (len > 1) { // выравнивание блока с текстом
+			pfiles.parentNode.querySelector('.post-body').classList.add('clearancent');
+		}
+		fk.remove();
 	});
-} : false;
+	window.isMobileScreen;
+}
 
 !(function() {
 	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
 	
-	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, trashObj = {parentNode:{}},
-		de_rpiChange = function(){};
+	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15,
+		trashObj = {parentNode:{}}, de_rpiChange = function(){};
 		
+	// динамически загружаемый снежный буран
+	var snowstorm_engine = function() {
+		var script      = document.head.appendChild(document.createElement('script'));
+			script.src  = '/lib/javascript/snowstorm_20161027223649.js';
+			script.type = 'application/javascript';
+			script.onload = function(e) {
+				snowStorm.freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
+				snowStorm.start();
+			};
+		snowstorm_engine = function() {
+			snowStorm[(MAIN_SETTINGS['snowStorm_enable'] ? 'resume' : 'freeze')]()
+		};
+	}
+	
 	var _FileArea = { sha512: [], clearBtn: {} };
 	
 	var _Count = {
@@ -175,7 +230,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				          однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
 				*/
 				$DOMReady(function() {
-					_HiP.forEach(hideEmptyRefmap);
 				
 					var deFiles = document.getElementsByClassName('de-file'),
 						dbTHMB = {},
@@ -220,13 +274,14 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				}
 				postform.elements['upload-image-1'].parentNode.appendChild(passcode_up);
 				postform.elements['upload-image-1'].parentNode.appendChild(dbpic_vi);
-				
-				editfield.appendChild(markup_buttons).className = 'buttons-style-text';
+				// добавляем поле редактирования
+				postform.elements['msgbox'].parentNode.appendChild(
+					markup_buttons).className       = 'buttons-style-text';
+					markup_buttons.style['display'] = 'block';
 				
 				window.insert = 'setSelectionRange' in HTMLInputElement.prototype ? insertLS : insertIE;
 			}
 			if (_PONY) {
-				document.body.appendChild(ponyrefmap_css);
 				_PONY.genRefmap();
 			}
 		});
@@ -403,7 +458,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 							});
 						}
 					}
-				}
+				},
+				css: EXT_STYLE.appendChild(document.createTextNode('.PONY_refmap { font: 80% mlp-font; } .PONY_refmap > a { text-decoration: none; } .PONY_refmap > a:before { color: grey; cursor: default; } .PONY_refmap > a + a:before { content: ","; margin-right: 4px; } .PONY_refmap:before { content: "Ответы:"; margin-right: 4px; } .PONY_backlight, .oppost.PONY_popup { background: cornsilk; color: darkolivegreen; } .PONY_popup { position: absolute; display: block; } .PONY_buttons { clear: both; } .clos-pop { cursor: pointer; display: inline-block; padding: 5px; margin: 0 5px; background: no-repeat center / 100%; } .all-popups {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiM2NjYiIGQ9Ik0zMS4xNSAyOC45OGwtMi41IDIuNS0xMy4wMi0xMy4wMkwyLjYgMzEuNDhsLTIuNDgtMi41IDEzLjAyLTEzLjAyTC4xMiAyLjk0IDIuNi40NWwxMy4wMyAxMy4wM0wyOC42NS40NWwyLjUgMi40OS0xMy4wMiAxMy4wMiAxMy4wMiAxMy4wMnoiLz48Y2lyY2xlIGN4PSIxNS45MSIgY3k9IjE1LjkxIiByPSIxMSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjMiLz48L2c+PC9zdmc+)} .this-popup {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjNjY2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMi4xODggMzJoLTQuNTcyTDE2LjE4OCAyMC43MTQgNC45MDIgMzJILjE4N3YtNC41N0wxMS40NzMgMTYgLjE4NyA0LjcxNFYwaDQuNzE1bDExLjI4NSAxMS4yODZMMjcuNjE3IDBoNC41N3Y0LjcxNEwyMC45MDIgMTZsMTEuMjg1IDExLjI4NlYzMnoiLz48L3N2Zz4=)}'))
 			}
 			window.addEventListener('scroll', function(e) {
 				_PONY.scrollTop.forEach(function($t) {
@@ -419,8 +475,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					}
 				});
 			});
-			var ponyrefmap_css = document.createElement('style');
-				ponyrefmap_css.textContent = '.PONY_refmap { margin: 1em 4px 0; font: 80% mlp-font; } .PONY_refmap > a { text-decoration: none; } .PONY_refmap > a:before { color: grey; cursor: default; } .PONY_refmap > a + a:before { content: ","; margin-right: 4px; } .PONY_refmap:before { content: "Ответы:"; margin-right: 4px; } .PONY_backlight, .oppost.PONY_popup { background: cornsilk; color: darkolivegreen; } .PONY_popup { position: absolute; display: block; } .PONY_buttons { clear: both; } .clos-pop { cursor: pointer; display: inline-block; padding: 5px; margin: 0 5px; background: no-repeat center / 100%; } .all-popups {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiM2NjYiIGQ9Ik0zMS4xNSAyOC45OGwtMi41IDIuNS0xMy4wMi0xMy4wMkwyLjYgMzEuNDhsLTIuNDgtMi41IDEzLjAyLTEzLjAyTC4xMiAyLjk0IDIuNi40NWwxMy4wMyAxMy4wM0wyOC42NS40NWwyLjUgMi40OS0xMy4wMiAxMy4wMiAxMy4wMiAxMy4wMnoiLz48Y2lyY2xlIGN4PSIxNS45MSIgY3k9IjE1LjkxIiByPSIxMSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjMiLz48L2c+PC9zdmc+)} .this-popup {background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48cGF0aCBmaWxsPSIjNjY2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMi4xODggMzJoLTQuNTcyTDE2LjE4OCAyMC43MTQgNC45MDIgMzJILjE4N3YtNC41N0wxMS40NzMgMTYgLjE4NyA0LjcxNFYwaDQuNzE1bDExLjI4NSAxMS4yODZMMjcuNjE3IDBoNC41N3Y0LjcxNEwyMC45MDIgMTZsMTEuMjg1IDExLjI4NlYzMnoiLz48L3N2Zz4=)}';
 		}
 	}
 	
@@ -434,7 +488,12 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			whitescreen.id    = 'whitescreen';
 			whitescreen.style = 'position: fixed; top: 0; left: 0; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;';
 			whitescreen.innerHTML = '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>';
-		
+		// загружаем дополнительные модули
+		for (var j = 0, len = MAIN_SETTINGS['require_modules'].length; j < len; j++) {
+			var module = document.head.appendChild(document.createElement('script'));
+				module.src = '/lib/javascript/modules/'+ MAIN_SETTINGS['require_modules'][j] +'.user.js';
+				module.type = 'application/javascript';
+		}
 		$DOMReady(function() {
 			// устанавливаем выбранный пользователем стиль
 			document.selectedStyleSheetSet = (localStorage.getItem('main_style') || 'Photon');
@@ -479,12 +538,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				used_style.parentNode.className = 'list-item-checked';
 				styles_panel.addEventListener('click', setStylesheet, false);
 			}
-			// загружаем дополнительные модули
-			for (var j = 0, len = MAIN_SETTINGS['require_modules'].length; j < len; j++) {
-				var module = document.head.appendChild(document.createElement('script'));
-					module.src = '/lib/javascript/modules/'+ MAIN_SETTINGS['require_modules'][j] +'.user.js';
-					module.type = 'application/javascript';
-			}
 			// фикс строки с информацией о файле(ах), можно перенести то что он делает потом в html 
 			_RebuildFileSizeInfo();
 			
@@ -500,7 +553,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 						logo0.style = 'margin-top: '+ (logo0.offsetTop - 8) +'px;';
 						fixed_header.className = 'fixed-header-placeholder fixed-header';
 						fixed_header.style = 'top: 0; padding: 4px 0;';
-						inline_style.textContent += '.';
 						toggleBorderTop();
 						document.addEventListener('scroll', toggleBorderTop, false);
 					} else {
@@ -516,23 +568,15 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		});
 //> }
 	
-	// динамически загружаемый снежный буран
-	var snowstorm_engine      = document.createElement('script');
-		snowstorm_engine.src  = '/lib/javascript/snowstorm_20161027223649.js';
-		snowstorm_engine.type = 'application/javascript';
-		snowstorm_engine.onload = function(e) {
-			snowStorm.freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
-			snowStorm.start();
-		};
-	
 	// создаем динамически изменяемый стиль
-	var inline_style = document.createElement('style'),
-		apply_msg = '#settings-main:before { content: "требуется перезагрузка"; display: block; text-align: center; color: brown; font-size: small; }';
-		inline_style.textContent = ' .hempty, .hiptable { display: none; } .doubledash { display: '+
+	var apply_msg = '#settings-main:before { content: "требуется перезагрузка"; display: block; text-align: center; color: brown; font-size: small; }',
+		inline_style = EXT_STYLE.appendChild(document.createTextNode(
+'.hempty { display: none!important; } .hmref { content: "(HIDDEN)"; display: inline!important; opacity: 0.7; } .doubledash { display: '+
 			(MAIN_SETTINGS['show_doubledash'] ? 'inline' : 'none') +'!important; } .de-thread-buttons { display: '+
 			(MAIN_SETTINGS['show_de-thread-buttons'] ? 'inline' : 'none') +'!important; float: left; } .roleplay { display: '+
 			(MAIN_SETTINGS['hide_roleplay'] ? 'none' : 'inline') +'!important; } .file ~ .file { display: '+
-			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent > blockquote { clear: right!important; }' : 'inline!important; }');
+			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent > blockquote { clear: right!important; }' : 'inline!important; }')
+		));
 	
 	var markup_buttons = document.createElement('span');
 		markup_buttons.onclick = deMarkupButtons;
@@ -562,48 +606,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			'<span class="markup-button quote" gmk=">" title="Цитировать">'+
 				'<input value=">" type="button"><a href="#">&gt;</a></span>';
 	
-	// отслеживание изменений в DOM (вступает в работу после загрузки всех скриптов)
-	window.addEventListener('load', function() {
-		this.removeEventListener('load', arguments.callee, false);
-		var observer = new MutationObserver(function(mutations) {
-			mutations.forEach(function(record, i) {
-				var thread, nodes = record.addedNodes;
-				if (nodes.length > 0) {
-					if (record.target === document.body && nodes[0].tagName === 'FORM') {
-						observer.observe(nodes[0], { childList: true });
-						nodes[0].querySelectorAll('*[id^="thread"]').forEach(function(thread) {
-							observer.observe(thread, { childList: true });
-						});
-						nodes = nodes[0].querySelectorAll('.oppost[id^="reply"], .psttable *[id^="reply"]');
-					}
-					if (nodes[0].className === 'psttable' || nodes[0].className === 'oppost' || nodes[0].classList.contains('de-pview')) {
-						_PONY && _PONY.genRefmap();
-						_RebuildFileSizeInfo();
-						isMobileScreen && isMobileScreen();
-						MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
-						document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
-							detail: nodes
-						}));
-					}
-				}
-			});
-		});
-		
-		document.querySelectorAll(
-			'body, body > form[action="/board.php"], body > form[action="/board.php"] *[id^="thread"]').forEach(function(target) {
-			observer.observe(target, { childList: true });
-		});
-		
-		if (isCaptchaNeeded && postform) {
-			postform.elements['go'].disabled = true;
-			renderCaptcha(
-				postform.querySelector('#recapt-2'), function(pass) {
-					postform.elements['go'].disabled = !pass;
-					postform.elements['g-recaptcha-response'].value = pass || '';
-				});
-		}
-	});
-	
 	// кроссбраузерный аналог $(document).ready()
 	$DOMReady(onDocReadyHandler);
 	
@@ -611,12 +613,10 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		// скрываем неугодных
 		MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
 		// подкладываем динамический стиль
-		document.head.appendChild(inline_style);
-		// режем элементы под узкие экраны
-		isMobileScreen && isMobileScreen();
+		document.body.appendChild(EXT_STYLE);
 		// добавляем снегопад ( если включен в настройках )
 		if (MAIN_SETTINGS['snowStorm_enable']) {
-			document.head.appendChild(snowstorm_engine);
+			snowstorm_engine();
 		}
 		// запуск обновления счетчиков
 		var brd_link = document.querySelectorAll('*[id^="board_link_"]'),
@@ -706,8 +706,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 					'<label class="menu-checkboxes"><input class="set-local" name="hide_file_multi" type="checkbox">Не показывать 2-5 картинки в постах</label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="show_de-thread-buttons" type="checkbox">Включить кнопку получения новых постов</label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="fixedHeader_enable" type="checkbox">Зафиксировать хедер</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="snowStorm_enable" type="checkbox">Включить снег</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="snowStorm_freeze" type="checkbox">Не останавливать снег в неактивной вкладке</label>'+
+					'<label class="menu-checkboxes"><input class="set-local" name="snowStorm_enable" type="checkbox">Включить снег'+
+					'<span style="font-style: italic; font-size: 75%; margin-left: 10px;">|<input class="set-local" name="snowStorm_freeze" type="checkbox">Всегда Вкл. |</span></label>'+
 					'<p>Скрывать уведомления о новых постах/тредах</p>'+
 					'<div class="menu-group">'+ not_sets_html +'</div><br>'+
 					'<div>Скрытие по имени</div>'+
@@ -766,13 +766,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				}, 4000);
 			}, false);
 		}
-		// этот стиль лучше бы перенести в глобальный css
-		var ext_style = document.head.appendChild(document.createElement('style'));
-			ext_style.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; } .editfield > .buttons-style-text, .editfield > .buttons-style-standart { float: right; }\
-.modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
-.modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
-.modal__prev:before { top: 3px; transform: rotate(25deg); }.modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); }.modal__next:after { bottom: 3px; transform: rotate(25deg);}.modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
-.modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }';
 		
 		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
 		var ponyaba = document.querySelector('.footer > a');
@@ -816,8 +809,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			
 			// уточняем максимальный размер файла на доске
 			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
-			// добавляем поле редактирования
-			postform.elements['msgbox'].parentNode.insertBefore(editfield, postform.elements['msgbox']);
 			
 			for (var i = 1, input; input = postform.elements['upload-image-'+ i]; i++) {
 			
@@ -889,14 +880,57 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 								// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
 								postform.elements['dollchan_send'].value = 1;
 								break;
+							case 'filechange':
+								//mepr.files = mrFiles = result;
+								break;
+							case 'newpost':
+								_PONY && _PONY.genRefmap();
+								MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
+								document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
+									detail: result.map(function(num) { return document.getElementById('reply'+ num) })
+								}));
 							/* case '...': */
 						}
 					};
 					// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
-					e.ports[0].postMessage({ name: 'registerapi', data: ['submitform'/*, 'newpost'*/] });
+					e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'filechange', 'newpost'] });
 				}
 			});
 			window.postMessage('de-request-api-message', '*');
+			
+			// отслеживание изменений в DOM
+			var observer = new MutationObserver(function(mutations) {
+				mutations.forEach(function(record, i) {
+					if (record.addedNodes.length) {
+						var nodes = record.addedNodes;
+						if (record.target === document.body && nodes[0].tagName === 'FORM') {
+							observer.observe(nodes[0], { childList: true });
+							nodes = nodes[0].querySelectorAll('.oppost[id^="reply"], .psttable *[id^="reply"]');
+						}
+						if (/psttable|oppost|de-pview/.test(nodes[0].className)) {
+							_PONY && _PONY.genRefmap();
+							MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
+							document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
+								detail: nodes
+							}));
+						}
+					}
+				});
+			});
+		
+			document.querySelectorAll(
+				'body, body > form[action="/board.php"]').forEach(function(target) {
+				observer.observe(target, { childList: true });
+			});
+		
+			if (isCaptchaNeeded) {
+				postform.elements['go'].disabled = true;
+				renderCaptcha(
+					postform.querySelector('#recapt-2'), function(pass) {
+						postform.elements['go'].disabled = !pass;
+						postform.elements['g-recaptcha-response'].value = pass || '';
+					});
+			}
 			
 			window.postform_submit = function() {
 				var clickEvent = document.createEvent('MouseEvents');
@@ -1331,10 +1365,8 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 				case 'snowStorm':
 					if (keyW[1] === 'freeze') {
 						(snowStorm || trashObj).freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
-					} else if (typeof snowStorm === 'undefined') {
-						document.head.appendChild(snowstorm_engine);
 					} else
-						snowStorm[(MAIN_SETTINGS['snowStorm_enable'] ? 'resume' : 'freeze')]();
+						snowstorm_engine();
 					break;
 				case 'muteNots':
 					_Count.set(name,
@@ -1386,78 +1418,22 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		for (var n = 0; n < xpath.snapshotLength; n++) {
 			var psttable = xpath.snapshotItem(n),
 				pstid = psttable.firstElementChild.firstElementChild.lastElementChild.id.substring(5);
-			psttable.className = 'hiptable huser-'+ hashString(name);
-			inline_style.textContent = inline_style.textContent.replace('.hempty', 'a[href$="#'+ pstid +'"], a[href$="#'+ pstid +'"] + a:before, a[href$="#'+ pstid +'"] + .de-refcomma, .hempty');
+			psttable.className = 'hempty huser-'+ hashString(name);
+			inline_style.textContent = inline_style.textContent
+				.replace('.hempty', 'a[href$="#'+ pstid +'"], a[href="#'+ pstid +'"] + :before, a[href="#'+ pstid +'"] + :not(a), .hempty')
+				.replace('.hmref', 'a[onclick$=", '+ pstid +');"], a[onclick$=", '+ pstid +');"]:after, .hmref');
 			_HiP.push(pstid);
-			hideEmptyRefmap(pstid);
 		}
-	}
-	
-	function hideEmptyRefmap(pstid) {
-		// скрытие пустых строк "Ответы:"
-		document.querySelectorAll('.PONY_refmap:not(.hempty) > a[href="#'+ pstid +'"], .de-refmap:not(.hempty) > a[href="#'+ pstid +'"]').forEach(
-			function(hl) {
-				var parnt = hl.parentNode,
-					a = parnt.getElementsByTagName('a');
-					
-				for (var l = a.length - 1; 0 < l; --l) {
-					if (_HiP.indexOf(a[l].hash.substring(1)) == -1)
-						return;
-				}
-				
-				if (!('_observer_' in parnt)) {
-					parnt['_observer_'] = new MutationObserver(function(mutations) {
-						mutations.forEach(function(record, i) {
-							if (record.addedNodes.length > 0) {
-								// раскрываем скрытое поле "Ответы: " если в него добавились ссылки на нескрытые посты.
-								for (var l = a.length - 1; l >= 0; l--) {
-									if (_HiP.indexOf(a[l].hash.substring(1)) == -1) {
-										record.target.classList.remove('hempty');
-										record.target['_observer_'].disconnect();
-										break;
-									}
-								}
-							}
-						});
-					});
-				}
-				
-				parnt['_observer_'].observe(parnt, { childList: true });
-				parnt.classList.add('hempty');
-			});
 	}
 	
 	function unhideUserPosts(name) {
 		$forEachClass('huser-'+ hashString(name), function(psttable, i) {
-			var pstid = psttable.firstElementChild.firstElementChild.lastElementChild.id.substring(5),
-				oc_h = document.querySelectorAll('.hempty > a[href="#'+ pstid +'"]');
-			psttable.className = 'psttable';
-			inline_style.textContent = inline_style.textContent.replace('a[href$="#'+ pstid +'"], a[href$="#'+ pstid +'"] + a:before, a[href$="#'+ pstid +'"] + .de-refcomma, ', '');
+			var pstid = psttable.firstElementChild.firstElementChild.lastElementChild.id.substring(5);
+				psttable.className = 'psttable';
+			inline_style.textContent = inline_style.textContent
+				.replace('a[href$="#'+ pstid +'"], a[href="#'+ pstid +'"] + :before, a[href="#'+ pstid +'"] + :not(a), ', '')
+				.replace('a[onclick$=", '+ pstid +');"], a[onclick$=", '+ pstid +');"]:after, ', '');
 			_HiP.splice(_HiP.indexOf(pstid), 1);
-			for (var l = oc_h.length - 1; l >= 0; l--) {
-				var parnt = oc_h[l].parentNode
-				parnt.classList.remove('hempty');
-				'_observer_' in parnt && parnt['_observer_'].disconnect();
-			}
-		});
-	}
-	
-	function _RebuildFileSizeInfo() {
-		// переработанная логика подмены информации о файле
-		Array.prototype.slice.call(                              // вместо перерисовывания верхней строки по наведению на файлы,
-			document.querySelectorAll('[id^="fake_filesize_"]'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
-		.forEach(function(fk, i) {                               // функцией show_filesize делаем видимый целевой, а предыдущий скрываем.
-			var pfiles = fk.parentNode,
-				fs_inf = pfiles.getElementsByClassName('filesize');
-				fs_inf[0].style['display'] = 'inline';         // + меньше тревожим DOM, меньше сообщений ловим в MutationObserver, быстрей работа
-			for (var i = 0, len = fs_inf.length; i < len; i++){// + не нужно изобретать костыли для переноса изменений вносимых куклой
-				fs_inf[i].className += ' fake_filesize'
-				pfiles.insertBefore(fs_inf[i], fk);
-			}
-			if (len > 1) { // выравнивание блока с текстом
-				pfiles.parentNode.querySelector('.post-body').className = 'post-body clearancent';
-			}
-			fk.remove();
 		});
 	}
 	function setStylesheet(event) {
@@ -1596,60 +1572,19 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 		passcode_up.style['background-image'] = 'url(https://ponyach.ru/images/fsto.ico)';
 		passcode_up.setAttribute('for', 'modal-2');
 		passcode_up.className = dbpic_vi.className = 'modal-btn';
-	
-	var editfield = document.createElement('div');
-		editfield.className = 'editfield';
 		
 	// переработанное post-menu, лучше собирать здесь и вытаскивать на страничку динамически, а из html убрать вообще.
-	var postmenu = document.createElement('ul'), temppost;
+	var postmenu = document.createElement('ul');
 		postmenu.innerHTML = '<li class="show-irc post-menu-item de-menu-item">Диалоги</li><li class="edit-post post-menu-item de-menu-item">Редактировать</li>'
 		postmenu.className = 'post-menu reply de-menu';
 		postmenu.onmouseenter = function(e) { clearTimeout(this.closetimer) };
 		postmenu.onmouseleave = function(e) { this.closetimer = setTimeout(function(){postmenu.remove()}, 500) };
-		postmenu.onclick = function(e) {
-			var clss = e.target.classList[0];
-			switch (clss) {
-				case 'show-irc':
-					$forEachClass('irc-reflink-from-'+ temppost, function(irc, i) {
-						irc.style['display'] = irc.style['display'] == 'inline' ? 'none' : 'inline';
-					});
-					break;
-				case 'edit-post':
-					var post = document.getElementById('reply'+ temppost) || document.getElementById('thread'+ temppost + LOCATION_PATH.board);
-					if (post) {
-						// если целевой пост найден
-						var btn = post.querySelector('.de-btn-rep') || post.querySelector('.reflink > a:nth-child(2)');
-						if (btn) {
-							// если куклоскрипт включен и работает || стандартная форма ответа
-							$GET((ku_boardspath + '/get_raw_post.php?b='+ LOCATION_PATH.board +'&p='+ temppost), function() {
-								var data = JSON.parse(this.responseText);
-								if (data.status == 0) {
-									// зелёный свет на редактирование
-									var postform = document.forms.postform.elements;
-									var clickEvent = document.createEvent('MouseEvents');
-										clickEvent.initEvent('click', true, true);
-									btn.dispatchEvent(clickEvent);
-								
-									postform['message'].value = data.raw_message;
-									postform['subject'].value = data.subject;
-									postform['name'].value = data.name;
-									postform['em'].value = data.email;
-									editfield.insertBefore(document.createElement('span'), editfield.childNodes[0]).innerHTML = 'Редактировать пост №'+ temppost +
-										' <a class="textbutton" onclick="this.parentNode.remove()">[x]</a><input type="hidden" name="editpost" value="'+ temppost +'">';
-								} else {
-									alertify.alert(('raw_message' in data || data.status == 2 ? data.error : 'Нельзя редактировать чужой пост.'));
-								}
-							});
-						}
-					}
-					break;
-			}
-		};
 	
 	window.showpostmenu = function showpostmenu(pid) {
-		var menubtn = document.getElementById('postmenuclick'+ (temppost = pid)),
+		var menubtn = document.getElementById('postmenuclick'+ pid),
 			position = menubtn.getBoundingClientRect();
 		
+		postmenu.setAttribute('data-num', pid);
 		postmenu.style['top' ] = (position.top  + pageYOffset  + menubtn.offsetHeight) +'px';
 		postmenu.style['left'] = (position.left + pageXOffset) +'px';
 		
@@ -1769,7 +1704,6 @@ var isMobileScreen = (window.screen.width < window.outerWidth ? window.screen.wi
 			this.cancelBubble = true;
 		};
 	}
-	
 	if (!String.prototype.includes) {
 		String.prototype.includes = function() {
 			'use strict';
@@ -1893,12 +1827,11 @@ function do_token() {
 		}
 	xmlHttp.send(null);
 }
-
 function isInsideATag(str, sp, ep) {
 	return (str.split(sp).length - 1) > (str.split(ep).length - 1);
 }
 function parseBoardURL(path) {
-	var m = path.match(/^https?:\/\/[^\/]+\/(\w+)\/?(?:(?:res\/(0\d\d)?(\d+)|(\d+))\.html)?(?:#(\d+))?$/) ||
+	var m = path.match(/^https?:\/\/[^\/]+\/(\w+)\/?(?:(?:res\/(0\d\d)?(\d+)|(\d+))\.html)?(?:#(\d+)|#.*?)?$/) ||
 			path.match(/^https?:\/\/[^\/]+\/html\/(\w+)/);
 		m.board = m[1] || ''; m.lastCount = Number(m[2]); m.thread = m[3] || 0; m.page = m[4] || ''; m.post = m[5] || '';
 	return m;
@@ -2317,21 +2250,20 @@ var SCPurePlayer = (function() {
 			exp = { hash: hash, node: node, it: i };
 			
 			$getTracks(links[i].href, function(tracks) {
-				var _$     = this,
-					tNode  = createTrackDOM(tracks[0], _$.hash),
-					tChild = _$.node['_trackslist_'].children['ft_'+ _$.hash +'_'+ _$.it];
+				var tNode  = createTrackDOM(tracks[0], this.hash),
+					tChild = this.node['_trackslist_'].children['ft_'+ this.hash +'_'+ this.it];
 				
-				_$.node['_trackslist_'].replaceChild(tNode, tChild); ibx--;
+				this.node['_trackslist_'].replaceChild(tNode, tChild); ibx--;
 				
-				if (_$.it == 0 || !_$.node['_trackslist_'].querySelector('.active') && ibx == 0) {
-					updateTrackInfo(_$.node, tracks[0]);
+				if (this.it == 0 || !this.node['_trackslist_'].querySelector('.active') && ibx == 0) {
+					updateTrackInfo(this.node, tracks[0]);
 					tNode.className += ' active';
 				}
 				
 				for (var n = 1; n < tracks.length; n++) {
 					tChild = tNode.nextSibling;
-					tNode  = createTrackDOM(tracks[n], _$.hash);
-					_$.node['_trackslist_'].insertBefore(tNode, tChild);
+					tNode  = createTrackDOM(tracks[n], this.hash);
+					this.node['_trackslist_'].insertBefore(tNode, tChild);
 				}
 			}.bind(exp), function(error) {
 				ibx--;
@@ -2469,8 +2401,8 @@ var SCPurePlayer = (function() {
 		if (!html5) {
 			audio = document.createElement('object');
 			audio.id     = 'scPlayerEngine';
-			audio.height = '1';
-			audio.width  = '1';
+			audio.height = 1;
+			audio.width  = 1;
 			audio.type   = 'application/x-shockwave-flash';
 			audio.data   = '/lib/javascript/player_mp3_js.swf';
 			audio.innerHTML = '<param name="movie" value="/lib/javascript/player_mp3_js.swf" /><param name="AllowScriptAccess" value="always" /><param name="FlashVars" value="listener=flashBack2343191116fr_scEngine&interval=500" />';
@@ -2487,7 +2419,6 @@ var SCPurePlayer = (function() {
 						flash.status = 'waiting';
 						this.SetVariable('method:pause', '');
 						onPlayerAction({type: 'pause'}); }},
-					//stop        : { value: function()  { this.SetVariable('method:stop', '') }},
 					src         : { get: function()    { return this.url },
 								    set: function(url) { this.SetVariable('method:setUrl', url) }},
 					ended       : { get: function()    { return flash.status === 'ended' }},
@@ -2518,7 +2449,6 @@ var SCPurePlayer = (function() {
 			};
 		} else {
 			Object.defineProperties(audio, {
-				//stop      : { value: function()    { this.pause(); this.currentTime = 0; }},
 				bytesPercent: { get: function()    { return ((this.buffered.length && this.buffered.end(0)) / this.duration) * 100; }}
 			});
 			audio['volume'] = SC.Volume;
@@ -2664,8 +2594,7 @@ var SCPurePlayer = (function() {
 
 try {
 	
-var gala_inline_style = document.head.appendChild(document.createElement("style"));
-	gala_inline_style.textContent = '.de-src-iqdb:after, #de-txt-panel:after { content:""; -webkit-animation: init 1s linear 2; animation: init 1s linear 2; }\
+	EXT_STYLE.appendChild(document.createTextNode('.de-src-iqdb:after, #de-txt-panel:after { content:""; -webkit-animation: init 1s linear 2; animation: init 1s linear 2; }\
 \
 .greenmk:not(.inactive):before { content: "✓ "; color: green; }\
 .feckbox { font-size: small; margin-right: 5px; font-variant-caps: all-petite-caps; } input:checked + .feckbox { text-decoration: line-through; }\
@@ -2758,7 +2687,7 @@ span[de-bb]{ position: absolute; visibility: hidden; } input, textarea { outline
 .cm-image{ background-image: url(/test/src/140896790568.png); } .cm-image:before{ content: "Expand: "; } .cm-image.attached:before{ content: "Unexpand: "; }\
 .cm-play{ background-image: url(/test/src/139981404639.png); } .cm-play:before{ content: "Play: "; }\
 .cm-stop{ background-image: url(/test/src/148214537312/7673443634.png); } .cm-stop:before{ content: "Stop: "; }\
-@keyframes init{ 50% {opacity:0} } @-webkit-keyframes init{ 50% {opacity:0} }';
+@keyframes init{ 50% {opacity:0} } @-webkit-keyframes init{ 50% {opacity:0} }'));
 	
 	Gala(); //start
 	
@@ -2774,9 +2703,9 @@ function Gala() {
 	
 	_Container = {
 		zIndex: 1,
-		Audio: _z.setup('audio', {'class': 'audio-container', 'controls': true}),
-		Video: _z.setup('video', {'class': 'video-container', 'controls': true}),
-		OVERLAY: _z.setup('div', {'class': 'content-window hidup', 'html': '<div id="shadow-box"></div><label id="close-content-window"></label><div id="content-frame"></div>'}, {
+		Audio: _z.setup('audio', { class: 'audio-container', controls: true}),
+		Video: _z.setup('video', { class: 'video-container', controls: true}),
+		OVERLAY: _z.setup('div', { class: 'content-window hidup', html: '<div id="shadow-box"></div><label id="close-content-window"></label><div id="content-frame"></div>'}, {
 			'click': function(e) {
 				switch (e.target.id) {
 					case 'close-content-window':
@@ -3102,55 +3031,46 @@ function Gala() {
 					}
 					e.target.parentNode.inwin = e.target.classList[1] === 'to-post';
 					break;
-				case 'gala-show-dialogs':
-					_z.each(document.getElementsByClassName('irc-reflink-'+ e.target.classList[1]), function(irc) {
+				case 'show-irc':
+					_z.each('.irc-reflink-from-'+ $btn.parentNode.getAttribute('data-num'), function(irc) {
 						irc.style['display'] = (irc.style['display'] == 'inline' ? 'none' : 'inline');
 					});
 					break;
-				case 'gala-edit-post':
-					_z.route(($btn = $btn.parentNode), function(el, o) {
-						if ( /reply\d+/.test(el.id) ) {
-							var res = parseBoardURL(el.querySelector('.reflink a').href);
-								o = true;
-							getDataResponse(location.origin +'/get_raw_post.php?b='+ res.board +'&p='+ res.post, function(data) {
-								switch (data.status) {
-									case 2:
-										alertify.alert(data.error);
-										break;
-									default:
-										if (!('raw_message' in data)) {
-											alertify.alert('Нельзя редактировать чужой пост.');
-										} else {
-											(_EditForm || (_EditForm = makeGalaForm(null))).clear_all();
-											_z.each(el.getElementsByClassName('fs_'+ res.post), function(fs, n) {
-												_EditForm.get_url_file(
-													encodeURI(fs.querySelector('a[href^="/'+ res.board +'/src/"]').href), 
-													(/R\:\s*\[(\w)\]/i.exec(fs.childNodes[0]) || {1:'N'})[1], n);
-											});
-											_EditForm.children['gala-error-msg'].textContent = data.error;
-											_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
-											_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
-											_EditForm.elements['board'].value = res.board;
-											_EditForm.elements['replythread'].value = res.thread;
-											_EditForm.elements['editpost'].value = res.post;
-											_EditForm.elements['message'].value = data.raw_message;
-											_EditForm.elements['subject'].value = data.subject;
-											_EditForm.elements['name'].value = data.name;
-											_EditForm.elements['em'].value = data.email;
-											_z.prepend(el, _EditForm);
-										}
-								}
-							});
-						}
-						return o;
-					});
-				case 'dropdown-arrow':
-					$btn = $btn.parentNode;
-				case 'dropdown-toggle':
-					$btn.classList.toggle('ins-act');
-					if ($btn.onmouseleave == null) {
-						$btn.onmouseleave = function(e){ this.timer_id = setTimeout(function() { $btn.classList.remove('ins-act') }, 500) };
-						$btn.onmouseenter = function(e){ clearTimeout(this.timer_id) };
+				case 'edit-post':
+					var pid = $btn.parentNode.getAttribute('data-num'),
+						el  = document.getElementById('reply'+ pid) || document.getElementById('thread'+ pid + LOCATION_PATH.board);
+					if (el) {
+						var res  = parseBoardURL(el.querySelector('.reflink a').href),
+							trip = el.querySelector('.postertrip') && getCookie('name');
+						getDataResponse(location.origin +'/get_raw_post.php?b='+ res.board +'&p='+ res.post, function(data) {
+							switch (data.status) {
+								case 2:
+									alertify.alert(data.error);
+									break;
+								default:
+									if (!('raw_message' in data)) {
+										alertify.alert('Нельзя редактировать чужой пост.');
+									} else {
+										(_EditForm || (_EditForm = makeGalaForm(null))).clear_all();
+										el.querySelectorAll('.fs_'+ res.post).forEach(function(fs, n) {
+											_EditForm.get_url_file(
+												encodeURI(fs.querySelector('a[href^="/'+ res.board +'/src/"]').href), 
+												(/R\:\s*\[(\w)\]/i.exec(fs.textContent) || {1:'N'})[1], n);
+										});
+										_EditForm.children['gala-error-msg'].textContent = data.error;
+										_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
+										_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
+										_EditForm.elements['board'].value = res.board;
+										_EditForm.elements['replythread'].value = res.thread;
+										_EditForm.elements['editpost'].value = res.post;
+										_EditForm.elements['message'].value = data.raw_message;
+										_EditForm.elements['subject'].value = data.subject;
+										_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
+										_EditForm.elements['em'].value = data.email;
+										_z.prepend(el, _EditForm);
+									}
+							}
+						});
 					}
 					break;
 				case 'gala-globalform-close':
@@ -3532,7 +3452,7 @@ function Gala() {
 						this['FileArea'].classList.add('hold');
 						switch (typeof idx) {
 							case 'number':
-								var gox = this['FileArea'].getElementsByClassName('file-gox');
+								var gox = this['FileArea'].querySelectorAll('.file-gox');
 								if (gox[idx]) {
 									this['FileArea'].insertBefore(this.files[FiD], gox[idx]);
 									break;
@@ -3774,7 +3694,7 @@ function Gala() {
 				break;
 			case 'new-thr-chx':
 				e.target.classList.toggle('inactive');
-				this.elements['replythread'].value = (e.target.classList.contains('inactive') ? LOCATION_PATH.thread : '0');
+				this.elements['replythread'].value = (e.target.classList.contains('inactive') ? LOCATION_PATH.thread : 0);
 				break;
 			case 'file-cover-label':
 				e.target.classList.toggle('active');
@@ -3871,7 +3791,7 @@ function Gala() {
 							form.clear_all();
 							
 							(myPostsMap[desk] || (myPostsMap[desk] = {}))[data.id] = [
-								new Date().getTime(), (!thread_id ? data.id : Number(thread_id)), true ];
+								Date.now(), (!thread_id ? data.id : Number(thread_id)), true ];
 							dynamicCSS.appendChild(document.createTextNode('.post-body a[href$="#'+ data.id +
 								'"]:after{content:" (You)";} .de-ref-op[href$="#'+ data.id +'"]:after{content:" (OP)(You)";}'));
 							localStorage.setItem('de-myposts', JSON.stringify(myPostsMap));
@@ -3941,10 +3861,6 @@ function Gala() {
 			if (_GalaForm) {
 				_z.before(reply.querySelector('.extrabtns').previousSibling, _z.setup('a', {
 					html: '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#gala-rep-arrow"></use></svg>'}));
-				_z.replace(reply.querySelector('.dast-hide-tr'), _z.setup('span', { class: 'dropdown-toggle',
-					html: '<a class="dropdown-arrow">▼</a><ul class="dropdown-menu"><li class="gala-show-dialogs from-'+
-						pid +'">Диалоги</li><li class="gala-edit-post">Редактировать</li></ul>'})
-				);
 			}
 			var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
 			if (sclnks.length > 0) {
@@ -3976,6 +3892,7 @@ function Gala() {
 	});
 	_z.setup(document, null, {
 		'hasNewPostsComing': function(e) {
+			_RebuildFileSizeInfo();
 			e.detail.forEach(handlePostNode);
 		}});
 	$DOMReady(function(e) {
