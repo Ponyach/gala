@@ -67,52 +67,50 @@ var EXT_STYLE = document.createElement('style');
 .modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
 .de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }';
 
-Object.defineProperties(window, {
-	'isCaptchaNeeded': {
-		value: function(/* no, yes */) {
-			var exec = arguments;
-			$GET('/recaptchav2.php?c=isnd', function() {
-				(exec = exec[this.responseText]) instanceof Function && exec();
-			});
-		}
-	},
-	// MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
-	'isMobileScreen': {
-		get: (function(sW, s700, s500) {
-			if ('matchMedia' in window) {
-				EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
-@med	ia screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
-@med	ia screen and (max-width: 500px) { '+ s500 +' }'));
-				return function() {
-					document.querySelectorAll('.mobile_date').forEach(function(dd) {
-						dd.classList.remove('mobile_date');
-						dd.innerHTML = dd.textContent.replace(
-							/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
-					});
-				}
-			} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
-				EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
-				return function() {
-					document.querySelectorAll('.mobile_date').forEach(function(dd) {
-						dd.classList.remove('mobile_date');
-						dd.textContent = dd.textContent
-						.replace('Понидельник', 'Пн')
-						.replace('Вторник',     'Вт')
-						.replace('Среда',       'Ср')
-						.replace('Четверг',     'Чт')
-						.replace('Пятница',     'Пт')
-						.replace('Суббота',     'Сб')
-						.replace('Воскресенье', 'Вс');
-					});
-				}
-			} else {
-				return function() {
-					Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' })
-				}
-			}
-		})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }')
+Object.defineProperty(window, 'isCaptchaNeeded', {
+	value: function(/* no, yes */) {
+		var exec = arguments;
+		$GET('/recaptchav2.php?c=isnd', function() {
+			(exec = exec[this.responseText]) instanceof Function && exec();
+		});
 	}
 });
+// MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
+(function(sW, s700, s500) {
+	if ('matchMedia' in window) {
+		EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
+@media screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
+@media screen and (max-width: 500px) { '+ s500 +' }'));
+		Object.defineProperty(window, 'isMobileScreen', {
+			get: function() {
+				document.querySelectorAll('.mobile_date').forEach(function(dd) {
+					dd.classList.remove('mobile_date');
+					dd.innerHTML = dd.textContent.replace(
+						/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
+				});
+			}
+		});
+	} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
+		EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
+		Object.defineProperty(window, 'isMobileScreen', {
+			get: function() {
+				document.querySelectorAll('.mobile_date').forEach(function(dd) {
+					dd.classList.remove('mobile_date');
+					dd.textContent = dd.textContent
+					.replace('Понидельник', 'Пн')
+					.replace('Вторник',     'Вт')
+					.replace('Среда',       'Ср')
+					.replace('Четверг',     'Чт')
+					.replace('Пятница',     'Пт')
+					.replace('Суббота',     'Сб')
+					.replace('Воскресенье', 'Вс');
+				});
+			}
+		});
+	} else {
+		Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' });
+	}
+})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }');
 
 function _RebuildFileSizeInfo() {
 	// переработанная логика подмены информации о файле
