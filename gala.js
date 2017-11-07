@@ -2,11 +2,9 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.5.1
+	: version 3.5.4
 	© magicode
 */
-
-var ku_boardspath = location.origin;
 
 // основные настройки пользователя
 var MAIN_SETTINGS = JSON.parse(localStorage.getItem('main_settings'));
@@ -62,53 +60,58 @@ var MAX_FILE = {
 }
 // этот стиль лучше бы перенести в глобальный css
 var EXT_STYLE = document.createElement('style');
-	EXT_STYLE.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + * { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
+	EXT_STYLE.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
 .modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
 .modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
 .modal__prev:before { top: 3px; transform: rotate(25deg); } .modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); } .modal__next:after { bottom: 3px; transform: rotate(25deg);} .modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
 .modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
 .de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }';
 
-var isCaptchaNeeded; $GET('/recaptchav2.php?c=isnd', function() {
-	isCaptchaNeeded = this.responseText == '1';
-});
-
-// MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
-Object.defineProperty(window, 'isMobileScreen', {
-	configurable: false,
-	get: (function(sW, s700, s500) {
-		if ('matchMedia' in window) {
-			EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
-@media screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
-@media screen and (max-width: 500px) { '+ s500 +' }'));
-			return function() {
-				document.querySelectorAll('.mobile_date').forEach(function(dd) {
-					dd.classList.remove('mobile_date');
-					dd.innerHTML = dd.textContent.replace(
-						/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
-				});
-			}
-		} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
-			EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
-			return function() {
-				document.querySelectorAll('.dast-date').forEach(function(dd) {
-					dd.classList.remove('dast-date');
-					dd.textContent = dd.textContent
-					.replace('Понидельник', 'Пн')
-					.replace('Вторник',     'Вт')
-					.replace('Среда',       'Ср')
-					.replace('Четверг',     'Чт')
-					.replace('Пятница',     'Пт')
-					.replace('Суббота',     'Сб')
-					.replace('Воскресенье', 'Вс');
-				});
-			}
-		} else {
-			return function() {
-				Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' })
-			}
+Object.defineProperties(window, {
+	'isCaptchaNeeded': {
+		value: function(/* no, yes */) {
+			var exec = arguments;
+			$GET('/recaptchav2.php?c=isnd', function() {
+				(exec = exec[this.responseText]) instanceof Function && exec();
+			});
 		}
-	})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }')
+	},
+	// MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
+	'isMobileScreen': {
+		get: (function(sW, s700, s500) {
+			if ('matchMedia' in window) {
+				EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
+@med	ia screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
+@med	ia screen and (max-width: 500px) { '+ s500 +' }'));
+				return function() {
+					document.querySelectorAll('.mobile_date').forEach(function(dd) {
+						dd.classList.remove('mobile_date');
+						dd.innerHTML = dd.textContent.replace(
+							/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
+					});
+				}
+			} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
+				EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
+				return function() {
+					document.querySelectorAll('.mobile_date').forEach(function(dd) {
+						dd.classList.remove('mobile_date');
+						dd.textContent = dd.textContent
+						.replace('Понидельник', 'Пн')
+						.replace('Вторник',     'Вт')
+						.replace('Среда',       'Ср')
+						.replace('Четверг',     'Чт')
+						.replace('Пятница',     'Пт')
+						.replace('Суббота',     'Сб')
+						.replace('Воскресенье', 'Вс');
+					});
+				}
+			} else {
+				return function() {
+					Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' })
+				}
+			}
+		})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }')
+	}
 });
 
 function _RebuildFileSizeInfo() {
@@ -134,7 +137,7 @@ function _RebuildFileSizeInfo() {
 !(function() {
 	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
 	
-	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15,
+	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, recapt2,
 		trashObj = {parentNode:{}}, de_rpiChange = function(){};
 		
 	// динамически загружаемый снежный буран
@@ -169,6 +172,7 @@ function _RebuildFileSizeInfo() {
 				}
 			}
 		};
+		
 	// проверяем включена ли кукла в настройках
 	if (MAIN_SETTINGS['dollchanScript_enable']) {
 		
@@ -219,17 +223,15 @@ function _RebuildFileSizeInfo() {
 		var dollchan_script      = document.head.appendChild( document.createElement('script') );
 			dollchan_script.type = 'application/javascript';
 			dollchan_script.src  = '/lib/javascript/boardscript.js';
-			/* es6 версия более заточена на новые браузеры
-			  https://rawgit.com/SthephanShinkufag/Dollchan-Extension-Tools/b39fa2a003e4a300a1a779d3d6f6be4dbb8eb46c/Dollchan_Extension_Tools.user.js
-			   - v16.3.9.0.f6f7f30 (оригинальный комит которому соответствует boardscript_20161027223649.js)
-			*/
 			dollchan_script.addEventListener('load', function(e) {
-				/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
-				   @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
-				          однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
-				*/
+		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
+		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
+		         однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
+		*/
 				$DOMReady(function() {
-				
+					// регестрируем функции в API куклоскрипта
+					window.postMessage('de-request-api-message', '*');
+					
 					var deFiles = document.getElementsByClassName('de-file'),
 						dbTHMB = {},
 						modal = (deFiles.length > 0 ? deFiles[0] : document.getElementById('dollchan_send')).parentNode;
@@ -255,7 +257,6 @@ function _RebuildFileSizeInfo() {
 		
 	} else {
 		// действия которые с включенной куклой делать не требуется
-		
 		$DOMReady(function() {
 			// check highlight
 			if (location.hash) {
@@ -283,6 +284,8 @@ function _RebuildFileSizeInfo() {
 			if (_PONY) {
 				_PONY.genRefmap();
 			}
+			// на случай если подключена внешняя кукла - регестрируемся в ней
+			window.postMessage('de-request-api-message', '*');
 		});
 		
 		//reader need this function and onclick elements on thumbs
@@ -335,7 +338,7 @@ function _RebuildFileSizeInfo() {
 					popup.parentNode.removeAttribute('style');
 					popup.classList.remove('PONY_popup');
 					popup.onmousedown = popup.style['max-width'] = popup.style['z-index'] = popup.style['left'] = popup.style['top'] = null;
-					popup.PONY_buttons.style['display'] = 'none';
+					popup.PONY_buttons.hidden = true;
 				},
 				openPopup: function(e) {
 					e.preventDefault();
@@ -390,7 +393,7 @@ function _RebuildFileSizeInfo() {
 											}
 										}
 									} else
-										reply.PONY_buttons.style['display'] = null;
+										reply.PONY_buttons.hidden = false;
 								}
 								
 								var pageW = document.documentElement.clientWidth;
@@ -604,6 +607,60 @@ function _RebuildFileSizeInfo() {
 				'<input value="#D" type="button"><a href="#">#D</a></span>'+
 			'<span class="markup-button quote" gmk=">" title="Цитировать">'+
 				'<input value=">" type="button"><a href="#">&gt;</a></span>';
+	
+	// добавляем свой код через DollchanAPI
+	window.addEventListener('message', function(e) {
+		if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
+			this.removeEventListener('message', arguments.callee, false);
+			e.ports[0].onmessage = function(deApi) {
+				var result = deApi.data.data;
+				switch (deApi.data.name) {
+					case 'submitform':
+						if (result.success) {
+							// clear db file samples
+							$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
+							// reset file inputs
+							for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
+								postform.elements['md5-'+ i].value = '';
+								postform.elements['md5passcode-'+ i].value = '';
+								postform.elements['upload-image-'+ i].value = '';
+								'upload-rating-'+ i in postform.elements && (
+									postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
+								_FileArea[i].className = 'file-area-empty';
+							}
+							_FileArea.sha512 = new Array(0);
+							passcode_refresh && passcode_refresh();
+						}
+						// check captcha needed
+						window.isCaptchaNeeded(function() {
+							postform.elements['go'].disabled = recapt2.hidden = false;
+						}, function() {
+							postform.elements['go'].disabled = recapt2.hidden = true;
+							renderCaptcha(
+								recapt2, function(pass) {
+									postform.elements['go'].disabled = !pass;
+									postform.elements['g-recaptcha-response'].value = pass || '';
+								});
+						});
+						// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
+						postform.elements['dollchan_send'].value = 1;
+						break;
+					case 'filechange':
+						//mepr.files = mrFiles = result;
+						break;
+					case 'newpost':
+						_PONY && _PONY.genRefmap();
+						MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
+						document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
+							detail: result.map(function(num) { return document.getElementById('reply'+ num) })
+						}));
+					/* case '...': */
+				}
+			};
+			// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
+			e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost'/*, 'filechange'*/] });
+		}
+	});
 	
 	// кроссбраузерный аналог $(document).ready()
 	$DOMReady(onDocReadyHandler);
@@ -845,58 +902,6 @@ function _RebuildFileSizeInfo() {
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE.COUNT[postform.elements['board'].value] = i - 1;
 			
-			// добавляем свой код через DollchanAPI
-			window.addEventListener('message', function(e){
-				if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
-					this.removeEventListener('message', arguments.callee, false);
-					e.ports[0].onmessage = function(deApi) {
-						var result = deApi.data.data;
-						switch (deApi.data.name) {
-							case 'submitform':
-								if (result.success) {
-									// delete edit field
-									'editpost' in postform.elements && postform.elements['editpost'].parentNode.remove();
-									// clear db file samples
-									$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
-									// reset file inputs
-									for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
-										postform.elements['md5-'+ i].value = '';
-										postform.elements['md5passcode-'+ i].value = '';
-										postform.elements['upload-image-'+ i].value = '';
-										'upload-rating-'+ i in postform.elements && (
-											postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
-										_FileArea[i].className = 'file-area-empty';
-									}
-									_FileArea.sha512 = new Array(0);
-									// check captcha needed
-									$GET('/recaptchav2.php?c=isnd', function() {
-										var recapt2 = postform.querySelector('#recapt-2');
-										isCaptchaNeeded = this.responseText == '1';
-										!isCaptchaNeeded && recapt2 && recapt2.remove();
-									});
-									passcode_refresh && passcode_refresh();
-								}
-								// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
-								postform.elements['dollchan_send'].value = 1;
-								break;
-							case 'filechange':
-								//mepr.files = mrFiles = result;
-								break;
-							case 'newpost':
-								_PONY && _PONY.genRefmap();
-								MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
-								document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
-									detail: result.map(function(num) { return document.getElementById('reply'+ num) })
-								}));
-							/* case '...': */
-						}
-					};
-					// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
-					e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'filechange', 'newpost'] });
-				}
-			});
-			window.postMessage('de-request-api-message', '*');
-			
 			// отслеживание изменений в DOM
 			var observer = new MutationObserver(function(mutations) {
 				mutations.forEach(function(record, i) {
@@ -917,20 +922,11 @@ function _RebuildFileSizeInfo() {
 				});
 			});
 		
-			document.querySelectorAll(
-				'body, body > form[action="/board.php"]').forEach(function(target) {
+			document.querySelectorAll('body, body > form[action="/board.php"]').forEach(function(target) {
 				observer.observe(target, { childList: true });
 			});
 		
-			if (isCaptchaNeeded) {
-				postform.elements['go'].disabled = true;
-				renderCaptcha(
-					postform.querySelector('#recapt-2'), function(pass) {
-						postform.elements['go'].disabled = !pass;
-						postform.elements['g-recaptcha-response'].value = pass || '';
-					});
-			}
-			
+			window.handleFileSelect = handleFileSelect;
 			window.postform_submit = function() {
 				var clickEvent = document.createEvent('MouseEvents');
 					clickEvent.initEvent('click', true, true);
@@ -938,8 +934,6 @@ function _RebuildFileSizeInfo() {
 				postform.elements['dollchan_send'].value = 0;
 				postform.elements['fake_go'].dispatchEvent(clickEvent);
 			}
-			
-			window.handleFileSelect = handleFileSelect;
 			
 			// grab free file slots
 			var fileSlots = postform.getElementsByClassName('file-area-empty');
@@ -1069,6 +1063,19 @@ function _RebuildFileSizeInfo() {
 			var dbNEXT = dbPREVIEW.parentNode.appendChild(document.createElement('label'));
 				dbNEXT.className = 'modal__next';
 				dbNEXT.onclick = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); };
+			
+			recapt2 = document.getElementById('recapt-2')
+			
+			window.isCaptchaNeeded(function() {
+				postform.elements['go'].disabled = false;
+			}, function() {
+				postform.elements['go'].disabled = true;
+				renderCaptcha(
+					recapt2, function(pass) {
+						postform.elements['go'].disabled = !pass;
+						postform.elements['g-recaptcha-response'].value = pass || '';
+					});
+			});
 		}
 		// animation listener events
 		_z.documentListener.add('AnimationStart', function (event) {
@@ -1619,6 +1626,8 @@ function _RebuildFileSizeInfo() {
 	
 	//затычки --X
 	window.expandimg = window.insert = window.handleFileSelect = window.next = window.prev = window.postform_submit = window.highlight = function() {return 0;}
+
+	window.ku_boardspath = location.origin;
 	// X-- затычки
 	
 	// полифил для реализации selectedStyleSheetSet - родного метода для переключения html5 стилей link[rel="stylesheet alternate"]
@@ -1745,6 +1754,16 @@ function _RebuildFileSizeInfo() {
 		NodeList.prototype.forEach = function(fun) {
 			Array.prototype.slice.call(this, 0).forEach(fun);
 		}
+	}
+	if (!('hidden' in HTMLElement.prototype)) {
+		Object.defineProperty(HTMLElement.prototype, 'hidden', {
+			get: function () {
+				return this.hasAttribute('hidden');
+			},
+			set: function (value) {
+				this[(value ? 'set' : 'remove') +'Attribute']('hidden', '');
+			}
+		})
 	}
 }());
 
@@ -3842,9 +3861,7 @@ function Gala() {
 	
 	if (MAIN_SETTINGS.galaform) {
 		_GalaForm = makeGalaForm(MAIN_SETTINGS.galaform);
-		if (isCaptchaNeeded) {
-			_GalaForm.captcha_needed();
-		}
+		window.isCaptchaNeeded(null, _GalaForm.captcha_needed);
 	}
 	
 	function handlePostNode(pst) {
