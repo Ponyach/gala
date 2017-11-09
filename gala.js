@@ -2,9 +2,10 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.5.4
+	: version 3.6.1
 	© magicode
 */
+var _z = _z();
 
 // основные настройки пользователя
 var MAIN_SETTINGS = JSON.parse(localStorage.getItem('main_settings'));
@@ -59,13 +60,12 @@ var MAX_FILE = {
 	}
 }
 // этот стиль лучше бы перенести в глобальный css
-var EXT_STYLE = document.createElement('style');
-	EXT_STYLE.textContent = '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
+var EXT_STYLE = _z.setup('style', { text: '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
 .modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
 .modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
 .modal__prev:before { top: 3px; transform: rotate(25deg); } .modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); } .modal__next:after { bottom: 3px; transform: rotate(25deg);} .modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
 .modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
-.de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }';
+.de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }'});
 
 Object.defineProperty(window, 'isCaptchaNeeded', {
 	value: function(/* no, yes */) {
@@ -129,47 +129,36 @@ function _RebuildFileSizeInfo() {
 		}
 		fk.remove();
 	});
-	window.isMobileScreen;
+	isMobileScreen;
 }
 
 !(function() {
 	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
 	
 	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, recapt2,
-		trashObj = {parentNode:{}}, de_rpiChange = function(){};
-		
-	// динамически загружаемый снежный буран
-	var snowstorm_engine = function() {
-		var script      = document.head.appendChild(document.createElement('script'));
-			script.src  = '/lib/javascript/snowstorm_20161027223649.js';
-			script.type = 'application/javascript';
-			script.onload = function(e) {
-				snowStorm.freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
-				snowStorm.start();
-			};
-		snowstorm_engine = function() {
-			snowStorm[(MAIN_SETTINGS['snowStorm_enable'] ? 'resume' : 'freeze')]()
-		};
-	}
+		trashObj = {parentNode:'stb',fn:function(){}}, de_rpiChange = trashObj.fn;
 	
-	var _FileArea = { sha512: [], clearBtn: {} };
+	var _BlobStor = [];
+	var _SHA512   = [];
+	var _DelBtn   = {};
+	var _FileArea = {};
 	
 	var _Count = {
-			__m: {}, origTitle: {},
-			set: function(desk, display_name, title) {
-				var _m = this.__m[desk];
-				for (var key in _m) {
-					_m[key].textContent = display_name;
-					_m[key].title = title;
-				}
-			},
-			get: function(desk, prop) {
-				var _m = this.__m[desk];
-				for (var key in _m) {
-					return _m[key][prop];
-				}
+		__m: {}, origTitle: {},
+		set: function(desk, display_name, title) {
+			var _m = this.__m[desk];
+			for (var key in _m) {
+				_m[key].textContent = display_name;
+				_m[key].title = title;
 			}
-		};
+		},
+		get: function(desk, prop) {
+			var _m = this.__m[desk];
+			for (var key in _m) {
+				return _m[key][prop];
+			}
+		}
+	};
 		
 	// проверяем включена ли кукла в настройках
 	if (MAIN_SETTINGS['dollchanScript_enable']) {
@@ -218,10 +207,10 @@ function _RebuildFileSizeInfo() {
 		}
 	
 		// собираем куклоскрипт  ~  добавляем на страницу
-		var dollchan_script      = document.head.appendChild( document.createElement('script') );
-			dollchan_script.type = 'application/javascript';
-			dollchan_script.src  = '/lib/javascript/boardscript.js';
-			dollchan_script.addEventListener('load', function(e) {
+		document.head.appendChild(_z.setup('script', {
+			type: 'text/javascript', src: '/lib/javascript/boardscript.js'
+		}, {
+			load: function(e) {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
 		         однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
@@ -251,15 +240,14 @@ function _RebuildFileSizeInfo() {
 						}
 					}
 				});
-			});
-		
+			}
+		}));
 	} else {
 		// действия которые с включенной куклой делать не требуется
 		$DOMReady(function() {
 			// check highlight
 			if (location.hash) {
-				var no = document.querySelector('#reply'+ location.hash.substring(1) +' > .reflink > a');
-					no && no.click();
+				scrollHighlight(location.hash.substring(1));
 			}
 			// вставляем имя пользователя и адресс почты в поля формы
 			if ('postform' in document.forms) {
@@ -287,21 +275,19 @@ function _RebuildFileSizeInfo() {
 		});
 		
 		//reader need this function and onclick elements on thumbs
-		var box_image = document.createElement('img');
-		var box_video = document.createElement('video');
-			box_video.id = 'v-play';
-			box_video.controls = true;
+		var box_image = new Image, onWinResize;
+		var box_video = _z.setup('video', { id: 'v-play', controls: true });
 			box_video.style = box_image.style = 'border-radius: 3px; border-width: 0px; position: absolute; display: inline-block;';
-		var preview_layer = document.createElement('div'), onWinResize;
-			preview_layer.style = 'position: fixed; bottom: 0; top: 0; right: 0; left: 0; background-color: rgba(17,17,17,.9); z-index: 99999;';
-			preview_layer.innerHTML = '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><span></span></div>';
-			preview_layer.onclick = function(e) {
-				if (e.target.id !== 'v-play') {
-					this.remove();
-					box_image.src = box_video.src = '';
-					window.removeEventListener('resize', onWinResize, false);
-				}
-			};
+		var preview_layer = _z.setup('div', {
+			style: 'position: fixed; bottom: 0; top: 0; right: 0; left: 0; background-color: rgba(17,17,17,.9); z-index: 99999;',
+			html : '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><span></span></div>'
+		},{ click: function(e) {
+			if (e.target.id !== 'v-play') {
+				this.remove();
+				box_image.src = box_video.src = '';
+				window.removeEventListener('resize', onWinResize, false);
+			}
+		}});
 	
 		window.expandimg = function expandimg(sid, src, thumb, oW, oH, tW, tH) {
 			var i = /\.webm$/.test(src) ? box_video : box_image,
@@ -320,8 +306,6 @@ function _RebuildFileSizeInfo() {
 		
 			preview_layer.firstElementChild.replaceChild(i, preview_layer.firstElementChild.firstElementChild);
 		}
-		
-		window.highlight = highlight;
 		
 		if (!MAIN_SETTINGS['ponymapoff']) {
 			// востановленные понирефлинки, попытка сделать универсальный интерфейсм всплывающих окон для устройств с тачем и десктопа
@@ -377,10 +361,9 @@ function _RebuildFileSizeInfo() {
 									}
 								
 									if (!reply.PONY_buttons) {
-										reply.PONY_buttons = reply.appendChild(document.createElement('div'));
-										reply.PONY_buttons.className = 'PONY_buttons';
-										reply.PONY_buttons.innerHTML = '<div title="Убрать" class="clos-pop this-popup"></div><div title="Убрать все" class="clos-pop all-popups"></div>';
-										reply.PONY_buttons.onclick = function(e) {
+										reply.PONY_buttons = reply.appendChild(_z.setup('div', { html: '<div title="Убрать" class="clos-pop this-popup"></div><div title="Убрать все" class="clos-pop all-popups"></div>', 
+											class: 'PONY_buttons'
+										},{ click: function(e) {
 											switch (e.target.className) {
 												case 'clos-pop all-popups':
 													$forEachClass('PONY_popup', _PONY.clearPopups);
@@ -389,7 +372,7 @@ function _RebuildFileSizeInfo() {
 												case 'clos-pop this-popup':
 													_PONY.clearPopups(reply);
 											}
-										}
+										}}));
 									} else
 										reply.PONY_buttons.hidden = false;
 								}
@@ -454,7 +437,7 @@ function _RebuildFileSizeInfo() {
 									pony_ref.className = 'bot|'+ LOCATION_PATH.board +'||'+ map.from;
 									pony_ref.href = '#'+ map.from;
 									pony_ref[handler.over] = _PONY.openPopup;
-									pony_ref.onclick = function() { return window.highlight(map.from, false); }
+									pony_ref.onclick = function() { return scrollHighlight(map.from, false); }
 							});
 						}
 					}
@@ -484,10 +467,10 @@ function _RebuildFileSizeInfo() {
 		
 //> } else {
 		// создаем заглушку и перегораживаем ей экран
-		var whitescreen       = document.documentElement.appendChild( document.createElement('div') );
-			whitescreen.id    = 'whitescreen';
-			whitescreen.style = 'position: fixed; top: 0; left: 0; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;';
-			whitescreen.innerHTML = '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>';
+		var whitescreen = document.documentElement.appendChild( _z.setup('div', {
+			id    : 'whitescreen',
+			style : 'position: fixed; top: 0; left: 0; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;',
+			html  : '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>'}) );
 		// загружаем дополнительные модули
 		for (var j = 0, len = MAIN_SETTINGS['require_modules'].length; j < len; j++) {
 			var module = document.head.appendChild(document.createElement('script'));
@@ -578,38 +561,38 @@ function _RebuildFileSizeInfo() {
 			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent > blockquote { clear: right!important; }' : 'inline!important; }')
 		));
 	
-	var markup_buttons = document.createElement('span');
-		markup_buttons.onclick = deMarkupButtons;
-		markup_buttons.innerHTML = ''+
-			'<span class="markup-button" gmk="b" title="Жирный">'+
-				'<input value="B" type="button"><a href="#">B</a></span>'+
-			'<span class="markup-button" gmk="i" title="Курсивный">'+
-				'<input value="i" type="button"><a href="#">i</a></span>'+
-			'<span class="markup-button" gmk="u" title="Подчеркнутый">'+
-				'<input value="U" type="button"><a href="#">U</a></span>'+
-			'<span class="markup-button" gmk="s" title="Зачеркнутый">'+
-				'<input value="S" type="button"><a href="#">S</a></span>'+
-			'<span class="markup-button" gmk="spoiler" title="Спойлер">'+
-				'<input value="%%" type="button"><a href="#">%%</a></span>'+
-			'<span class="markup-button" gmk="code" title="Код">'+
-				'<input value="C" type="button"><a href="#">C</a></span>'+
-			'<span class="markup-button" gmk="rp" title="Ролеплей">'+
-				'<input value="RP" type="button"><a href="#">RP</a></span>'+
-			'<span class="markup-button" gmk="sup" title="Верхний индекс">'+
-				'<input value="Sup" type="button"><a href="#">Sup</a></span>'+
-			'<span class="markup-button" gmk="sub" title="Нижний индекс">'+
-				'<input value="Sub" type="button"><a href="#">Sub</a></span>'+
-			'<span class="markup-button" gmk="!!" title="Важный">'+
-				'<input value="!A" type="button"><a href="#">!A</a></span>'+
-			'<span class="markup-button" gmk="##" title="#dice">'+
-				'<input value="#D" type="button"><a href="#">#D</a></span>'+
-			'<span class="markup-button quote" gmk=">" title="Цитировать">'+
-				'<input value=">" type="button"><a href="#">&gt;</a></span>';
+	var markup_buttons = _z.setup('span', { html: (
+		'<span class="markup-button" gmk="b" title="Жирный">'+
+			'<input value="B" type="button"><a href="#">B</a></span>'+
+		'<span class="markup-button" gmk="i" title="Курсивный">'+
+			'<input value="i" type="button"><a href="#">i</a></span>'+
+		'<span class="markup-button" gmk="u" title="Подчеркнутый">'+
+			'<input value="U" type="button"><a href="#">U</a></span>'+
+		'<span class="markup-button" gmk="s" title="Зачеркнутый">'+
+			'<input value="S" type="button"><a href="#">S</a></span>'+
+		'<span class="markup-button" gmk="spoiler" title="Спойлер">'+
+			'<input value="%%" type="button"><a href="#">%%</a></span>'+
+		'<span class="markup-button" gmk="code" title="Код">'+
+			'<input value="C" type="button"><a href="#">C</a></span>'+
+		'<span class="markup-button" gmk="rp" title="Ролеплей">'+
+			'<input value="RP" type="button"><a href="#">RP</a></span>'+
+		'<span class="markup-button" gmk="sup" title="Верхний индекс">'+
+			'<input value="Sup" type="button"><a href="#">Sup</a></span>'+
+		'<span class="markup-button" gmk="sub" title="Нижний индекс">'+
+			'<input value="Sub" type="button"><a href="#">Sub</a></span>'+
+		'<span class="markup-button" gmk="!!" title="Важный">'+
+			'<input value="!A" type="button"><a href="#">!A</a></span>'+
+		'<span class="markup-button" gmk="##" title="#dice">'+
+			'<input value="#D" type="button"><a href="#">#D</a></span>'+
+		'<span class="markup-button quote" gmk=">" title="Цитировать">'+
+			'<input value=">" type="button"><a href="#">&gt;</a></span>'
+		)}, { click: deMarkupButtons });
 	
 	// добавляем свой код через DollchanAPI
 	window.addEventListener('message', function(e) {
 		if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
 			this.removeEventListener('message', arguments.callee, false);
+			this.handleFileSelect = trashObj.fn;
 			e.ports[0].onmessage = function(deApi) {
 				var result = deApi.data.data;
 				switch (deApi.data.name) {
@@ -626,11 +609,12 @@ function _RebuildFileSizeInfo() {
 									postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
 								_FileArea[i].className = 'file-area-empty';
 							}
-							_FileArea.sha512 = new Array(0);
+							_SHA512 = new Array(0);
 							passcode_refresh && passcode_refresh();
+							setCookie('name', postform.elements['name'].value, 2e4, '.'+ location.host);
 						}
 						// check captcha needed
-						window.isCaptchaNeeded(function() {
+						isCaptchaNeeded(function() {
 							postform.elements['go'].disabled = recapt2.hidden = false;
 						}, function() {
 							postform.elements['go'].disabled = recapt2.hidden = true;
@@ -644,6 +628,33 @@ function _RebuildFileSizeInfo() {
 						postform.elements['dollchan_send'].value = 1;
 						break;
 					case 'filechange':
+						var i = 0, n = 1;
+						var de_btn_del = document.getElementsByClassName('de-file-btn-del')
+						var dePostproc = function(file, k, j) {
+							fileBinaryCheck(file, k, trashObj.fn, function(msg) {
+								_FileArea[k].className = 'file-area-empty';
+								postform.elements['md5passcode-'+ k].value = '';
+								postform.elements['md5-'+ k].value = '';
+								var int = setInterval(function() {
+									var c = de_btn_del[j].parentNode.parentNode.querySelector('.de-file-txt-input, img.de-file-img');
+									if (c.value || c.src) {
+										de_btn_del[j].dispatchEvent(
+											new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
+										); clearInterval(int);
+									}
+								}, 200);
+								alertify.error(msg);
+							})
+						}
+						do {
+							if (!result[i])
+								_DelBtn[n].click();
+							else if (isBlobDifferent(_BlobStor[i], result[i]))
+								dePostproc(result[i], n, i)
+							n++; i++;
+						} while (i < result.length);
+						
+						_BlobStor = result//.slice(0);
 						//mepr.files = mrFiles = result;
 						break;
 					case 'newpost':
@@ -656,7 +667,7 @@ function _RebuildFileSizeInfo() {
 				}
 			};
 			// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
-			e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost'/*, 'filechange'*/] });
+			e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost', 'filechange'] });
 		}
 	});
 	
@@ -670,7 +681,7 @@ function _RebuildFileSizeInfo() {
 		document.body.appendChild(EXT_STYLE);
 		// добавляем снегопад ( если включен в настройках )
 		if (MAIN_SETTINGS['snowStorm_enable']) {
-			snowstorm_engine();
+			snowStormToggle();
 		}
 		// запуск обновления счетчиков
 		var brd_link = document.querySelectorAll('*[id^="board_link_"]'),
@@ -821,19 +832,6 @@ function _RebuildFileSizeInfo() {
 			}, false);
 		}
 		
-		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
-		var ponyaba = document.querySelector('.footer > a');
-		if (ponyaba) {
-			ponyaba.href = '#';
-			ponyaba.title = IS_TOUCH_DEVICE ? 'версия для ПК' : 'мобильная версия';
-			ponyaba.onclick = function(event) {
-				event.preventDefault();
-				MAIN_SETTINGS['dast_enable'] = !MAIN_SETTINGS['dast_enable'] ? 1 : 0;
-				localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
-				location.reload();
-			}
-		}
-		
 		// окно диалогов (оставлено без изменений)
 		var $winDialog = $(document.getElementById('reply-irc')).draggable({
 			snap: '#snapper, .droppable',
@@ -864,34 +862,27 @@ function _RebuildFileSizeInfo() {
 			// уточняем максимальный размер файла на доске
 			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
 			
-			for (var i = 1, input; input = postform.elements['upload-image-'+ i]; i++) {
+			for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
 			
 				_FileArea[i] = postform.elements['token'].parentNode.appendChild(document.createElement('div'));
+				               postform.elements['token'].parentNode.removeChild(postform.elements['file-clear-'+ i]);
 				
-				var md5 = _FileArea[i].appendChild(postform.elements['md5-'+ i]);
-				var passcode = _FileArea[i].appendChild(postform.elements['md5passcode-'+ i]);
-				var rating = postform.elements['upload-rating-'+ i];
+				_DelBtn[i]   = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton' }, { click: cleanInputs });
+				
+				var md5      = postform.elements['md5-'+ i];
+				var passcode = postform.elements['md5passcode-'+ i];
+				var upload   = _z.setup(postform.elements['upload-image-'+ i], { style: undefined });
+				var rating   = _z.setup(postform.elements['upload-rating-'+ i], { style: undefined, onchange: undefined });
 				
 				if (rating) {
-					input.parentNode.insertBefore(rating, input).removeAttribute('onchange');
-					rating.removeAttribute('style');
+					upload.parentNode.insertBefore(rating, upload);
 				}
-			
-				postform.elements['token'].parentNode.removeChild(postform.elements['file-clear-'+ i]);
-			
-				input.removeAttribute('style');
-				_FileArea[i].appendChild(input.parentNode);
+				_z.append(_FileArea[i], [ md5, passcode, upload.parentNode ]);
 				
-				_FileArea.clearBtn[i] = document.createElement('a');
-				_FileArea.clearBtn[i].textContent = '\n[X]';
-				_FileArea.clearBtn[i].className = 'textbutton';
-				_FileArea.clearBtn[i].id = 'clear-file-'+ i;
-				_FileArea.clearBtn[i].onclick = cleanInputs;
-			
-				if (input.files.length > 0) {
+				if (upload.files.length) {
 					_FileArea[i].className = 'file-area';
-					_FileArea.sha512.push(passcode.value);
-					input.parentNode.insertBefore(_FileArea.clearBtn[i], input);
+					_SHA512.push(passcode.value);
+					upload.parentNode.insertBefore(_DelBtn[i], upload);
 				} else {
 					_FileArea[i].className = 'file-area-empty';
 					passcode.value = md5.value = '';
@@ -924,13 +915,23 @@ function _RebuildFileSizeInfo() {
 				observer.observe(target, { childList: true });
 			});
 		
-			window.handleFileSelect = handleFileSelect;
+			window.handleFileSelect = function(n) {
+				var target = postform.elements['upload-image-'+ n],
+					file = target.files[0];
+				
+				fileBinaryCheck(file, n, function() {
+					target.parentNode.insertBefore(_DelBtn[n], target);
+				}, function(msg) {
+					_DelBtn[n].click();
+					alertify.error(msg);
+				});
+			};
 			window.postform_submit = function() {
-				var clickEvent = document.createEvent('MouseEvents');
-					clickEvent.initEvent('click', true, true);
 				// убираем поле для детекта отправки через кукловский ctrl+enter
 				postform.elements['dollchan_send'].value = 0;
-				postform.elements['fake_go'].dispatchEvent(clickEvent);
+				postform.elements['fake_go'].dispatchEvent(
+					new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
+				);
 			}
 			
 			// grab free file slots
@@ -978,26 +979,26 @@ function _RebuildFileSizeInfo() {
 			}
 			
 			var dbPREVIEW = $(document.getElementById('prepreview')).removeAttr('class style')[0];
-			var dbASKKEY = document.createElement('center');
-				dbASKKEY.id = 'dbaskkey';
-				dbASKKEY.innerHTML = '<p>Вы можете ввести свой API Key для использования ваших фильтров или использовать встроенный</p>'+
-					'<br><input type="button" name="set_userkey" value="Использовать мой"><input name="userkey_value" type="text" placeholder="Ваш ключ"><br>'+
-					'<br><input type="button" name="set_defaultkey" value="Использовать встроенный">';
-				dbASKKEY.onclick = function(e) {
-					switch (e.target.name) {
-						case 'set_userkey':
-							_db_.apiKey = e.target.nextElementSibling.value;
-							if (_db_.apiKey.length < 20) {
-								alertify.log('Неправильный ключ');
-								_db_.apiKey = '';
-								break;
-							}
-						case 'set_defaultkey':
-							localStorage['derpibooru_api_key'] = _db_.apiKey;
-							dbASKKEY.remove();
-							$(dbSEARCH.parentNode).show('slow');
-					}
+			var dbASKKEY = _z.setup('center', {
+				id: 'dbaskkey',
+				html: ('<p>Вы можете ввести свой API Key для использования ваших фильтров или использовать встроенный</p>'+
+				   '<br><input type="button" name="set_userkey" value="Использовать мой"><input name="userkey_value" type="text" placeholder="Ваш ключ"><br>'+
+				   '<br><input type="button" name="set_defaultkey" value="Использовать встроенный">')
+			}, { click: function(e) {
+				switch (e.target.name) {
+					case 'set_userkey':
+						_db_.apiKey = e.target.nextElementSibling.value;
+						if (_db_.apiKey.length < 20) {
+							alertify.log('Неправильный ключ');
+							_db_.apiKey = '';
+							break;
+						}
+					case 'set_defaultkey':
+						localStorage['derpibooru_api_key'] = _db_.apiKey;
+						dbASKKEY.remove();
+						$(dbSEARCH.parentNode).show('slow');
 				}
+			}});
 			
 			
 			var dbIMGPLACE = document.getElementById('imagesgoeshere');
@@ -1064,7 +1065,7 @@ function _RebuildFileSizeInfo() {
 			
 			recapt2 = document.getElementById('recapt-2')
 			
-			window.isCaptchaNeeded(function() {
+			isCaptchaNeeded(function() {
 				postform.elements['go'].disabled = false;
 			}, function() {
 				postform.elements['go'].disabled = true;
@@ -1083,14 +1084,19 @@ function _RebuildFileSizeInfo() {
 					event.target.appendChild(markup_buttons);
 				} else
 				if (event.target.classList.contains('de-src-iqdb')) {
-					event.target.parentNode.insertBefore((_DerpBtn || (
-						_DerpBtn = _z.setup('a', {
-							class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: DerpSearch }))
-					), event.target.nextSibling);
+					event.target.parentNode.insertBefore(_DerpBtn, event.target.nextSibling);
 				}
 			}
 		});
-		
+		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
+		_z.setup(_z.query('.footer > a'), { id: 'ponyaba', href: 'javascript:void(0)', title: IS_TOUCH_DEVICE ? 'версия для ПК' : 'мобильная версия',
+			onclick: function(event) {
+				event.preventDefault();
+				MAIN_SETTINGS['dast_enable'] = !MAIN_SETTINGS['dast_enable'] ? 1 : 0;
+				localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
+				location.reload();
+			}
+		});
 		function updatesq() {
 			clearTimeout(_db_.timr);
 			_db_.timr = setTimeout(function(){
@@ -1164,8 +1170,8 @@ function _RebuildFileSizeInfo() {
 		var k = this.id.slice(-1),
 			r = postform.elements['upload-rating-'+ k];
 			r && (r.value = MAIN_SETTINGS['UploadRating_default']);
-		var x = _FileArea.sha512.indexOf(postform.elements['md5passcode-'+ k].value);
-			x !== -1 && _FileArea.sha512.splice(x, 1);
+		var x = _SHA512.indexOf(postform.elements['md5passcode-'+ k].value);
+			x !== -1 && _SHA512.splice(x, 1);
 		_FileArea[k].className = 'file-area-empty';
 		postform.elements['md5passcode-'+ k].value = '';
 		postform.elements['upload-image-'+ k].value = '';
@@ -1173,21 +1179,11 @@ function _RebuildFileSizeInfo() {
 		this.remove();
 	}
 	
-	function fileError(n, msg) {
-		_FileArea.clearBtn[n].click();
-		alertify.error(msg);
-	}
-	
-	function handleFileSelect(n, _f, _resolve) {
-		var target = postform.elements['upload-image-'+ n],
-			file = target.files[0] || _f, smax;
-		
+	function fileBinaryCheck(file, n, resolve, reject, smax) {
 		if (!VALID_FILE_TYPES.test(file.type)) {
-			fileError(n,
-				'Неподдерживаемый формат\n<br>\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
+			reject('Неподдерживаемый формат\n<br>\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
 		} else if (file.size > (smax = MAX_FILE.SIZE.get(postform.elements['board']))) {
-			fileError(n,
-				'Слишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
+			reject('Слишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
 		} else {
 			var reader = new FileReader();
 				reader.onload = function() {
@@ -1201,11 +1197,11 @@ function _RebuildFileSizeInfo() {
 					
 						var passcode = postform.elements['md5passcode-'+ n],
 							md5 = rstr2hex(rstr_md5(filestring.substring(0, stringLength))),
-							cix = _FileArea.sha512.indexOf(passcode.value);
-							cix !== -1 && _FileArea.sha512.splice(cix, 1);
+							cix = _SHA512.indexOf(passcode.value);
+							cix !== -1 && _SHA512.splice(cix, 1);
 							
-						if (_FileArea.sha512.indexOf(md5) !== -1) {
-							fileError(n, 'Уже добавлен точно такой же файл');
+						if (_SHA512.indexOf(md5) !== -1) {
+							reject('Уже добавлен точно такой же файл');
 						} else {
 							// always send sha512 of file for passcode records
 							$GET('/chkmd5.php?x='+ md5, function() {
@@ -1213,9 +1209,8 @@ function _RebuildFileSizeInfo() {
 							});
 							// field will be sent only if user have cookie with real passcode
 							_FileArea[n].className = 'file-area';
-							target.parentNode.insertBefore(_FileArea.clearBtn[n], target);
-							_FileArea.sha512.push((passcode.value = md5));
-							_resolve && _resolve(file);
+							_SHA512.push((passcode.value = md5));
+							resolve(md5);
 						}
 					}
 				}
@@ -1223,9 +1218,9 @@ function _RebuildFileSizeInfo() {
 		}
 	}
 	
-	function highlight(pid, y) {
+	function scrollHighlight(pid, y) {
 		var reply = document.getElementById('reply'+ pid);
-		if (reply) {
+		if (reply && !reply.classList.contains('de-pview')) {
 			location.hash = pid;
 			$forEachClass('highlight', function(hl, i) {
 				hl.classList.remove('highlight');
@@ -1233,13 +1228,13 @@ function _RebuildFileSizeInfo() {
 			if (!reply.classList.contains('oppost')) {
 				reply.classList.add('highlight');
 			}
-			reply.parentNode.scrollIntoView({ block: (y ? 'start' : 'end'), behavior: 'smooth' });
+			reply.scrollIntoView({ block: (y ? 'start' : 'end'), behavior: 'smooth' });
 			return false;
 		}
-	}
+	}; window.highlight = scrollHighlight;
 	
 	function insertLS(txt) {
-		var msgbox = postform.elements['msgbox'],
+		var msgbox = (document.forms['gala-edit-form'] || postform).elements['message'],
 			start = msgbox.selectionStart,
 			end = msgbox.selectionEnd,
 			val = msgbox.value;
@@ -1250,7 +1245,7 @@ function _RebuildFileSizeInfo() {
 	}
 	
 	function insertIE(txt) {
-		var c = postform.elements['msgbox'].caretPos;
+		var c = (document.forms['gala-edit-form'] || postform).elements['message'].caretPos;
 		if (c) {
 			c.text = c.text.charAt(c.text.length - 1) == ' ' ? txt +' ' : txt;
 		} else
@@ -1261,14 +1256,12 @@ function _RebuildFileSizeInfo() {
 	function addBoundThumbnail(file_slot, img_selected, hash, preview_area, title, _p_) {
 		try {
 			var n      = file_slot.firstElementChild.name.split('-')[1],
-				rating = postform.elements['upload-rating-'+ n];
+				rating = postform.elements['upload-rating-'+ n], _Rn = '';
 		
 			postform.elements['md5-'+ n].value = hash;
 			
 			file_slot.className = 'file-booru';
 			file_slot.setAttribute('title', title);
-			
-			de_rpiChange(n, img_selected.src, title, rating.value);
 				
 			var prepreview = preview_area.children[ _p_ +'-prefile-'+ n ];
 		
@@ -1280,13 +1273,15 @@ function _RebuildFileSizeInfo() {
 			}
 		
 			if (rating) {
-				prepreview.firstElementChild.value = rating.value = MAIN_SETTINGS['UploadRating_default'];
+				prepreview.firstElementChild.value = rating.value = _Rn = MAIN_SETTINGS['UploadRating_default'];
 				prepreview.firstElementChild.onchange = function() {
 					file_slot.setAttribute('rate', 'R: '+ this.selectedOptions[0].textContent +'\n');
 					de_rpiChange(n, img_selected.src, title, (rating.value = this.value));
 				}
 				file_slot.setAttribute('rate', 'R: '+ rating.selectedOptions[0].textContent +'\n');
 			}
+			
+			de_rpiChange(n, img_selected.src, title, _Rn);
 			
 			prepreview.style = 'background-image: url('+ img_selected.src +')';
 			prepreview.ondblclick = img_selected.onclick = function(evt) {
@@ -1318,7 +1313,7 @@ function _RebuildFileSizeInfo() {
 					keyW = _Input.checked ? ['muteNots'] : '!';
 					break;
 				case 'set-cookie':
-					setCookie(name, (_Input.type === 'checkbox' ? _Input.checked : _Input.value), 36500);
+					setCookie(name, (_Input.type === 'checkbox' ? _Input.checked : _Input.value), 2e4);
 					break;
 				case 'set-module':
 					if (_Input.checked) {
@@ -1341,7 +1336,7 @@ function _RebuildFileSizeInfo() {
 							lnk.className = _class_;
 							lnk.textContent = lnk._text_;
 						});
-						document.querySelectorAll('.post-body > blockquote a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)').forEach(handleLinks);
+						document.querySelectorAll('.post-body > blockquote a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)').forEach(Gala.handleLinks);
 					} else {
 						document.querySelectorAll('.cm-button[id^="'+ keyW[1] +'lnk_"]').forEach(function(lnk) {
 							lnk.className = 'cm-link';
@@ -1354,7 +1349,7 @@ function _RebuildFileSizeInfo() {
 					$forEachClass('rating_select', function(rs) { rs.value = _Input.value; });
 					$forEachClass('de-file-rate', function(dr) {
 						var dF = dr.parentNode.parentNode;
-							dr.value = _Input.value;
+							dr.title = _Input.selectedOptions[0].textContent;
 						if (
 							(dF.classList[0] === 'de-file' ? dF : (dF = dF.querySelector('.de-file-txt-input') || dF)) &&
 							!dF.classList.contains('de-file-off')
@@ -1370,7 +1365,7 @@ function _RebuildFileSizeInfo() {
 					if (keyW[1] === 'freeze') {
 						(snowStorm || trashObj).freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
 					} else
-						snowstorm_engine();
+						snowStormToggle();
 					break;
 				case 'muteNots':
 					_Count.set(name,
@@ -1424,7 +1419,7 @@ function _RebuildFileSizeInfo() {
 				pstid = psttable.firstElementChild.firstElementChild.lastElementChild.id.substring(5);
 			psttable.className = 'hempty huser-'+ hashString(name);
 			inline_style.textContent = inline_style.textContent
-				.replace('.hempty', 'a[href$="#'+ pstid +'"], a[href="#'+ pstid +'"] + :before, a[href="#'+ pstid +'"] + :not(a), .hempty')
+				.replace('.hempty', 'a[href$="#'+ pstid +'"], a[href="#'+ pstid +'"] + :before, a[href="#'+ pstid +'"] + .de-refcomma, .hempty')
 				.replace('.hmref', 'a[onclick$=", '+ pstid +');"], a[onclick$=", '+ pstid +');"]:after, .hmref');
 			_HiP.push(pstid);
 		}
@@ -1555,34 +1550,37 @@ function _RebuildFileSizeInfo() {
 	}
 	
 	//--> Derpibooroo Reverse Search
-	var _DerpForm, _DerpBtn;
-	function DerpSearch(e) {
-		var imgSrc = decodeURIComponent(e.target.previousElementSibling.href.split('=')[1]);
-		if (!_DerpForm) {
-			_DerpForm = _z.setup('form', { method: 'post', 'accept-charset': 'UTF-8', action: 'https://www.derpibooru.org/search/reverse',
-				target: '_blank', enctype: 'multipart/form-data', hidden: true,
-				html: '<input name="scraper_url" type="url" value="'+ imgSrc +'"><input name="fuzziness" value="0.25" type="number">'});
-		} else
-			_DerpForm.firstElementChild.value = imgSrc;
-		document.body.appendChild(_DerpForm).submit();
-		_DerpForm.remove();
+	var _DerpBtn = _z.setup('a', {class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: derpSearch });
+	function derpSearch(e) {
+		var _DerpForm = _z.setup('form', {
+		  'accept-charset': 'UTF-8', 
+		   enctype : 'multipart/form-data',
+		   action  : 'https://www.derpibooru.org/search/reverse',
+		   target  : '_blank',
+		   method  : 'post',
+		   hidden  :  true,
+		   html    : '<input name="scraper_url" type="url" value=""><input name="fuzziness" value="0.25" type="number">'
+		});
+		(derpSearch = function(e) {
+			_DerpForm.firstElementChild.value = decodeURIComponent(e.target.previousElementSibling.href.split('=')[1]);
+			document.body.appendChild(_DerpForm).submit();
+			_DerpForm.remove();
+		})(e);
+		this.onclick = derpSearch;
 	} //<---*
 	
 	// кнопки аплоада картинок с дерпибуры и паскодов (собираем их заранее)
-	var dbpic_vi = document.createElement('label');
-		dbpic_vi.style['background-image'] = 'url(https://derpicdn.net/favicon.ico)';
-		dbpic_vi.setAttribute('for', 'modal-1');
-	var passcode_up = document.createElement('label');
-		passcode_up.style['background-image'] = 'url(https://ponyach.ru/images/fsto.ico)';
-		passcode_up.setAttribute('for', 'modal-2');
-		passcode_up.className = dbpic_vi.className = 'modal-btn';
+	var dbpic_vi    = _z.setup('label', { class: 'modal-btn', for: 'modal-1', style: 'background-image: url(https://derpicdn.net/favicon.ico)' });
+	var passcode_up = _z.setup('label', { class: 'modal-btn', for: 'modal-2', style: 'background-image: url(https://ponyach.ru/images/fsto.ico)' });
 		
 	// переработанное post-menu, лучше собирать здесь и вытаскивать на страничку динамически, а из html убрать вообще.
-	var postmenu = document.createElement('ul');
-		postmenu.innerHTML = '<li class="show-irc post-menu-item de-menu-item">Диалоги</li><li class="edit-post post-menu-item de-menu-item">Редактировать</li>'
-		postmenu.className = 'post-menu reply de-menu';
-		postmenu.onmouseenter = function(e) { clearTimeout(this.closetimer) };
-		postmenu.onmouseleave = function(e) { this.closetimer = setTimeout(function(){postmenu.remove()}, 500) };
+	var _pmct, postmenu = _z.setup('ul', {
+		html: '<li class="show-irc post-menu-item de-menu-item">Диалоги</li><li class="edit-post post-menu-item de-menu-item">Редактировать</li>',
+		class: 'post-menu reply de-menu'
+	}, {
+		mouseleave: function(e) { _pmct = setTimeout(function(){e.target.remove()}, 500) },
+		mouseenter: function(e) { clearTimeout(_pmct) }
+	});
 	
 	window.showpostmenu = function showpostmenu(pid) {
 		var menubtn = document.getElementById('postmenuclick'+ pid),
@@ -1593,6 +1591,21 @@ function _RebuildFileSizeInfo() {
 		postmenu.style['left'] = (position.left + pageXOffset) +'px';
 		
 		document.body.appendChild(postmenu);
+	};
+	
+	// динамически загружаемый снежный буран
+	function snowStormToggle() {
+		document.head.appendChild(_z.setup('script', {
+			type: 'text/javascript', src: '/lib/javascript/snowstorm_20161027223649.js'
+		}, {
+			load: function(e) {
+				snowStorm.freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
+				snowStorm.start();
+			}
+		}));
+		snowStormToggle = function() {
+			snowStorm[(MAIN_SETTINGS['snowStorm_enable'] ? 'resume' : 'freeze')]();
+		};
 	}
 	
 	function calcScale(i, s, n) {
@@ -1712,16 +1725,12 @@ function _RebuildFileSizeInfo() {
 	}
 	if (!String.prototype.includes) {
 		String.prototype.includes = function() {
-			'use strict';
 			return String.prototype.indexOf.apply(this, arguments) >= 0;
 		};
 	}
 	if (!Array.prototype.includes) {
 		Array.prototype.includes = function(searchElement /*, fromIndex*/) {
-			'use strict';
-			if (this == null) {
-				throw new TypeError('Array.prototype.includes called on null or undefined');
-			}
+			if (this == null) throw new TypeError('Array.prototype.includes called on null or undefined');
 		
 			var O = Object(this);
 			var len = parseInt(O.length, 10) || 0;
@@ -1781,19 +1790,15 @@ function getCookie(name) {
 	return out;
 }
 
-function setCookie(name, value, days) {
-	if (!name) {
-		return;
-	}
+function setCookie(name, value, days, host) {
+	if (!name) return;
 	
-	var expires = '; path=/';
+	var expires = (host ? '; domain='+ host : '' ) +'; path=/';
 	
 	if (!value) {
 		expires += '; expires=Thu, 01-Jan-70 00:00:01 GMT';
 	} else if (days) {
-		var date = new Date();
-			date.setTime(date.getTime() + (days*24*60*60*1000));
-		expires += '; expires='+ date.toGMTString();
+		expires += '; expires='+ new Date(Date.now() + days * 24 * 60 * 60 * 1000).toGMTString();
 	}
 	document.cookie = name +'='+ encodeURIComponent(value) + expires;
 }
@@ -1811,6 +1816,14 @@ function _PonyRateHiglight(el, val) {
 	);
 }
 
+function isBlobDifferent($blob, _blob) {
+	if (!$blob)
+		return true;
+	return $blob.size != _blob.size ||
+	       $blob.type != _blob.type ||
+	       $blob.name != _blob.name ||
+	       $blob.lastModified != _blob.lastModified;
+}
 function $forEachClass(name, func) {
 	Array.prototype.slice.call(
 		document.getElementsByClassName(name), 0)
@@ -2010,8 +2023,7 @@ function getDataBinary(TYPE, Source, Fn) {
 }
 
 /* SpelzZ - a lightweight Node Work Tool */
-var _z = (function(){
-	
+function _z() {
 	function __for_each(arr, Fn) {
 		Array.prototype.slice.call((typeof arr === 'string' ? document.querySelectorAll(arr) : arr), 0).forEach(Fn);
 	}
@@ -2079,14 +2091,20 @@ var _z = (function(){
 		document[fun +'EventListener']('moz'+ type, callback, false);
 		document[fun +'EventListener']('MS'+ type, callback, false);
 	}
+	function __el_query(All, path, targetNode) {
+		if (!('2' in arguments)) targetNode = document;
+		return targetNode['querySelector'+ All](path);
+	}
 	
 	return {
 		each : __for_each,
 		setup: __node_build,
 		route: __find_node,
+		queryAll: __el_query.bind(null, 'All'),
+		query: __el_query.bind(null, ''),
 		documentListener: {
-			add: function(type, func) { __prefixed_listener('add', type, func) },
-			rm: function(type, func) { __prefixed_listener('remove', type, func) }
+			add: __prefixed_listener.bind(null, 'add'),
+			rm: __prefixed_listener.bind(null, 'rm')
 		},
 		append: function(element /*, node or [n, o, d, e, s] to insert append */) {
 			element && __node_util((typeof element === 'string' ? document.querySelector(element) : element), null, 'appendChild', arguments[1]);
@@ -2120,7 +2138,7 @@ var _z = (function(){
 			}
 		}
 	}
-})(); /* ===> end <=== */
+} /* ===> end <=== */
 
 /* ---{ Soundcloud Player Engine (Custom build) }--- */
 var SCPurePlayer = (function() {
@@ -2607,8 +2625,6 @@ var SCPurePlayer = (function() {
 		createGroup: _scCreateGroup
 	}
 })(); /* ===> end <=== */
-
-try {
 	
 	EXT_STYLE.appendChild(document.createTextNode('.de-src-iqdb:after, #de-txt-panel:after { content:""; -webkit-animation: init 1s linear 2; animation: init 1s linear 2; }\
 \
@@ -2704,15 +2720,9 @@ span[de-bb]{ position: absolute; visibility: hidden; } input, textarea { outline
 .cm-play{ background-image: url(/test/src/139981404639.png); } .cm-play:before{ content: "Play: "; }\
 .cm-stop{ background-image: url(/test/src/148214537312/7673443634.png); } .cm-stop:before{ content: "Stop: "; }\
 @keyframes init{ 50% {opacity:0} } @-webkit-keyframes init{ 50% {opacity:0} }'));
-	
-	Gala(); //start
-	
-} catch(trace) {
-	console.error(trace);
-}
 
 /* ---{ Gala ponyach.ru Extension }--- */
-function Gala() {
+var Gala = (function() {
 	
 	var _EmbedField = localStorage.getItem('EmbedField') || 0;
 	var _Container, _EditForm, _GalaForm;
@@ -2877,8 +2887,6 @@ function Gala() {
 	var AF = ['opus', 'wav', 'm4a', 'm4r', 'aac', 'ogg', 'mp3'];
 	var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
 	var IF = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
-	
-	window.handleLinks = handleLinks;
 	
 	function handleLinks(a) {
 		var f_ext, m_id;
@@ -3083,6 +3091,7 @@ function Gala() {
 										_EditForm.elements['subject'].value = data.subject;
 										_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
 										_EditForm.elements['em'].value = data.email;
+										_EditForm.querySelector('.sagearrow').classList[data.email === 'sage' ? 'remove' : 'add']('inactive');
 										_z.prepend(el, _EditForm);
 									}
 							}
@@ -3728,27 +3737,13 @@ function Gala() {
 	
 	var dynamicCSS = _z.setup('style', { id: 'gala_dynamic_css' });
 	var content_error = 'Нельзя отправлять сообщения без файлов и текста.';
-	var myPostsMap = (function(_My, _F) {
-		for (var b in _My) {
-			var a = _My[b];
-			if (Array.isArray(a)) {
-				_F = true;
-				_My[b] = {};
-				for (var i = 0; i < a.length; i++) {
-					a[i] && (_My[b][a[i]] = [0,0,true]);
-				}
-			}
-		}
-		if (_F)
-			localStorage.setItem('de-myposts', JSON.stringify(_My));
-		return _My;
-	})(JSON.parse(localStorage.getItem('de-myposts')) || {});
+	var myPostsMap = JSON.parse(localStorage.getItem('de-myposts')) || {};
 	
 	function submitGFlistener(e) {
 		try { e.preventDefault();
 			var form = e.target;
 			var flen = e.target.files.length;
-			if (flen == 0 && !form.elements['message'].value) {
+			if (!flen && !form.elements['message'].value) {
 				form.children['gala-error-msg'].textContent = content_error;
 				form.children['gala-error-msg'].style['background-color'] = '#E04000';
 				return;
@@ -3806,11 +3801,13 @@ function Gala() {
 							form.remove();
 							form.clear_all();
 							
-							(myPostsMap[desk] || (myPostsMap[desk] = {}))[data.id] = [
-								Date.now(), (!thread_id ? data.id : Number(thread_id)), true ];
+							if (!(desk in myPostsMap))
+								myPostsMap[desk] = {};
+							myPostsMap[desk][data.id] = [Date.now(), Number(thread_id || data.id), true];
+							localStorage.setItem('de-myposts', JSON.stringify(myPostsMap));
+							setCookie('name', form.elements['name'].value, 2e4, '.'+ location.host);
 							dynamicCSS.appendChild(document.createTextNode('.post-body a[href$="#'+ data.id +
 								'"]:after{content:" (You)";} .de-ref-op[href$="#'+ data.id +'"]:after{content:" (OP)(You)";}'));
-							localStorage.setItem('de-myposts', JSON.stringify(myPostsMap));
 							
 							if (!thread_id) {
 								location.href = location.origin +'/'+ desk +'/res/'+ data.id +'.html';
@@ -3831,15 +3828,15 @@ function Gala() {
 					
 					switch (msg_error) {
 						case 'Ты отправляешь сообщения слишком быстро':
-							form.elements['submit_this_form'].value = 'Ждите 9';
-							var t = 8, timr = setInterval(function(){
+							form.elements['submit_this_form'].value = 'Ждите 7';
+							var t = 6, timr = setInterval(function(){
 								if (t == 0) {
 									clearInterval(timr);
 									form.elements['submit_this_form'].disabled = false;
 									form.elements['submit_this_form'].value = 'Отправить';
 								} else
 									form.elements['submit_this_form'].value = 'Ждите '+ (t--);
-							}, 1100);
+							}, 1050);
 							break;
 						case 'Введен неправильный код подтверждения':
 							form.elements['submit_this_form'].disabled = false;
@@ -3859,7 +3856,7 @@ function Gala() {
 	
 	if (MAIN_SETTINGS.galaform) {
 		_GalaForm = makeGalaForm(MAIN_SETTINGS.galaform);
-		window.isCaptchaNeeded(null, _GalaForm.captcha_needed);
+		isCaptchaNeeded(null, _GalaForm.captcha_needed);
 	}
 	
 	function handlePostNode(pst) {
@@ -3947,4 +3944,7 @@ function Gala() {
 		_z.each('.psttable *[id^="reply"], .oppost[id^="reply"]', handlePostNode);
 		document.body.appendChild(dynamicCSS);
 	});
-} /* ===> end <=== */
+	return {
+		handleLinks: handleLinks
+	}
+})(); /* ===> end <=== */

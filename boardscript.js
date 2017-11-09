@@ -4112,7 +4112,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function getFormElements(form, submitter) {
-		var controls, fixName, i, len, field, tagName, type, _name, options, j, jlen, option, imgFile, files, _j, _jlen, dirname;
+		var controls, fixName, i, len, field, tagName, type, name, options, j, jlen, option, imgFile, files, _j, _jlen, dirname;
 
 		return regeneratorRuntime.wrap(function getFormElements$(_context) {
 			while (1) {
@@ -4135,9 +4135,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						field = controls[i];
 						tagName = field.tagName.toLowerCase();
 						type = field.getAttribute('type');
-						_name = field.getAttribute('name');
+						name = field.getAttribute('name');
 
-						if (!($parent(field, 'DATALIST', form) || isFormElDisabled(field) || field !== submitter && (tagName === 'button' || tagName === 'input' && (type === 'submit' || type === 'reset' || type === 'button')) || tagName === 'input' && (type === 'checkbox' && !field.checked || type === 'radio' && !field.checked || type === 'image' && !_name) || tagName === 'object')) {
+						if (!($parent(field, 'DATALIST', form) || isFormElDisabled(field) || field !== submitter && (tagName === 'button' || tagName === 'input' && (type === 'submit' || type === 'reset' || type === 'button')) || tagName === 'input' && (type === 'checkbox' && !field.checked || type === 'radio' && !field.checked || type === 'image' && !name) || tagName === 'object')) {
 							_context.next = 10;
 							break;
 						}
@@ -4169,7 +4169,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 18;
 						return {
 							el: field,
-							name: fixName(_name),
+							name: fixName(name),
 							value: option.value,
 							type: type
 						};
@@ -4200,7 +4200,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 30;
 						return {
 							el: field,
-							name: fixName(_name),
+							name: fixName(name),
 							value: field.value || 'on',
 							type: type
 						};
@@ -4228,7 +4228,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 38;
 						return {
 							el: field,
-							name: _name,
+							name: name,
 							value: files[_j],
 							type: type
 						};
@@ -4251,7 +4251,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 46;
 						return {
 							el: field,
-							name: _name,
+							name: name,
 							value: new File([imgFile[0]], imgFile[1], { type: imgFile[2] }),
 							type: type
 						};
@@ -4264,7 +4264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 50;
 						return {
 							el: field,
-							name: fixName(_name),
+							name: fixName(name),
 							value: new File([''], ''),
 							type: 'application/octet-stream'
 						};
@@ -4281,7 +4281,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 54;
 						return {
 							el: field,
-							name: _name || '',
+							name: name || '',
 							value: field.value,
 							type: type
 						};
@@ -4294,7 +4294,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						_context.next = 58;
 						return {
 							el: field,
-							name: fixName(_name),
+							name: fixName(name),
 							value: field.value,
 							type: type
 						};
@@ -11639,7 +11639,7 @@ true, true],
 	function html5Submit(form, submitter) {
 		var needProgress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-		var formData, hasFiles, _iterator22, _isArray22, _i30, _ref39, _ref40, _name2, value, type, el, fileName, newFileName, _data5, ajaxParams, xhr;
+		var formData, hasFiles, _iterator22, _isArray22, _i30, _ref39, _ref40, name, value, type, el, fileName, newFileName, _data5, ajaxParams, xhr;
 
 		return regeneratorRuntime.async(function html5Submit$(_context16) {
 			while (1) {
@@ -11681,9 +11681,9 @@ true, true],
 						_ref39 = _i30.value;
 
 					case 13:
-						_ref40 = _ref39, _name2 = _ref40.name, value = _ref40.value, type = _ref40.type, el = _ref40.el;
+						_ref40 = _ref39, name = _ref40.name, value = _ref40.value, type = _ref40.type, el = _ref40.el;
 
-						if (!(_name2 === 'de-file-txt')) {
+						if (!(name === 'de-file-txt')) {
 							_context16.next = 16;
 							break;
 						}
@@ -11731,7 +11731,7 @@ true, true],
 						}
 
 					case 32:
-						formData.append(_name2, value);
+						formData.append(name, value);
 
 					case 33:
 						_context16.next = 3;
@@ -12488,7 +12488,8 @@ true, true],
 					}
 					if (this._spoilEl) {
 						this._btnSpoil.classList[this._spoilEl.checked ? 'add' : 'remove']('de-active');
-						this._btnSpoil.title = this._spoilEl.type === 'select-one' ? this._spoilEl.value : Lng.spoilFile[lang];
+						this._btnSpoil.title = this._spoilEl.type === 'select-one' ? this._spoilEl.selectedOptions[0].textContent : Lng.spoilFile[lang];
+						_PonyRateHiglight(this._thumb || this._txtInput, this._spoilEl.value);
 						$show(this._btnSpoil);
 					}
 					$show(this._txtDrop);
@@ -15672,22 +15673,22 @@ true, true],
 					fileHTML = '<div id="f' + num + '" class="file"><span class="fileThumb">\n\t\t\t\t<img src="' + _icon('filedeleted-res') + '" class="fileDeletedRes" alt="File deleted.">\n\t\t\t</span></div>';
 				} else if (typeof data.filename === 'string') {
 					var _DOMPostsBuilder$fixF = DOMPostsBuilder.fixFileName(data.filename, 30),
-					    _name3 = _DOMPostsBuilder$fixF.name,
+					    _name2 = _DOMPostsBuilder$fixF.name,
 					    needTitle = _DOMPostsBuilder$fixF.isFixed;
 
-					_name3 += data.ext;
+					_name2 += data.ext;
 					if (!data.tn_w && !data.tn_h && data.ext === '.gif') {
 						data.tn_w = data.w;
 						data.tn_h = data.h;
 					}
 					var isSpoiler = data.spoiler && !Cfg.noSpoilers;
 					if (isSpoiler) {
-						_name3 = 'Spoiler Image';
+						_name2 = 'Spoiler Image';
 						data.tn_w = data.tn_h = 100;
 						needTitle = false;
 					}
 					var size = prettifySize(data.fsize);
-					fileHTML = '<div class="file" id="f' + num + '">\n\t\t\t\t<div class="fileText" id="fT' + num + '" ' + (isSpoiler ? 'title="' + (data.filename + data.ext) + '"' : '') + '>File: <a href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" ' + (needTitle ? 'title="' + (data.filename + data.ext) + '"' : '') + ' target="_blank">' + _name3 + '</a> (' + size + ', ' + (data.ext === '.pdf' ? 'PDF' : data.w + 'x' + data.h) + ')</div>\n\t\t\t\t<a class="fileThumb ' + (isSpoiler ? 'imgSpoiler' : '') + '" href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" target="_blank">\n\t\t\t\t\t<img src="' + (isSpoiler ? '//s.4cdn.org/image/spoiler' + _4chanPostsBuilder._customSpoiler.get(brd) || '' + '.png' : '//i.4cdn.org/' + brd + '/' + data.tim + 's.jpg') + '" alt="' + size + '" data-md5="' + data.md5 + '" style="height: ' + data.tn_h + 'px; width: ' + data.tn_w + 'px;">\n\t\t\t\t\t<div data-tip="" data-tip-cb="mShowFull" class="mFileInfo mobile">' + size + ' ' + data.ext.substr(1).toUpperCase() + '</div>\n\t\t\t\t</a>\n\t\t\t</div>';
+					fileHTML = '<div class="file" id="f' + num + '">\n\t\t\t\t<div class="fileText" id="fT' + num + '" ' + (isSpoiler ? 'title="' + (data.filename + data.ext) + '"' : '') + '>File: <a href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" ' + (needTitle ? 'title="' + (data.filename + data.ext) + '"' : '') + ' target="_blank">' + _name2 + '</a> (' + size + ', ' + (data.ext === '.pdf' ? 'PDF' : data.w + 'x' + data.h) + ')</div>\n\t\t\t\t<a class="fileThumb ' + (isSpoiler ? 'imgSpoiler' : '') + '" href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" target="_blank">\n\t\t\t\t\t<img src="' + (isSpoiler ? '//s.4cdn.org/image/spoiler' + _4chanPostsBuilder._customSpoiler.get(brd) || '' + '.png' : '//i.4cdn.org/' + brd + '/' + data.tim + 's.jpg') + '" alt="' + size + '" data-md5="' + data.md5 + '" style="height: ' + data.tn_h + 'px; width: ' + data.tn_w + 'px;">\n\t\t\t\t\t<div data-tip="" data-tip-cb="mShowFull" class="mFileInfo mobile">' + size + ' ' + data.ext.substr(1).toUpperCase() + '</div>\n\t\t\t\t</a>\n\t\t\t</div>';
 				}
 
 				var highlight = '',
@@ -16601,18 +16602,6 @@ true, true],
 			key: '_updatePost',
 			value: function _updatePost(post, el, maybeVParser, maybeSpells) {
 				SpellsRunner.cachedData = null;
-
-				var val = ['videos', 'images', 'subj', 'posterName', 'posterTrip', 'html', 'msg'];
-				var prevPver = {};
-
-				for (var i = 0; i < 2; i++) {
-					var prop = Object.getOwnPropertyDescriptor(post, name[i]);
-					prevPver[name[i]] = prop && 'value' in prop ? prop.value : null;
-				}
-				for (; i < val.length; i++) {
-					prevPver[val[i]] = post[val[i]];
-				}
-
 				pByEl['delete'](post.el);
 				pByNum['delete'](post.num);
 				if (post.hidden) {
@@ -16620,15 +16609,47 @@ true, true],
 				}
 				RefMap.upd(post, false);
 
+				var val = ['videos', 'images', 'subj', 'posterName', 'posterTrip', 'html', 'msg'];
 				var newp = new Post(el, this, post.num, post.count, post.isOp, post.prev);
-
+				var pVer = {},
+				    isMy = MyPosts.has(post.num);
+				for (var i = 0; i < 2; i++) {
+					var prop = Object.getOwnPropertyDescriptor(post, val[i]);
+					pVer[val[i]] = prop && 'value' in prop ? prop.value : null;
+				}
+				for (; i < val.length; i++) {
+					pVer[val[i]] = post[val[i]];
+				}
+				newp._versions = post._versions || [];
+				newp._versions.push(pVer);
 				if (newp.next = post.next) {
 					post.next.prev = newp;
 				}
+				if (post.ref._set.size) {
+					var html = '';
+					for (var _iterator34 = post.ref._set, _isArray34 = Array.isArray(_iterator34), _i44 = 0, _iterator34 = _isArray34 ? _iterator34 : _iterator34[Symbol.iterator]();;) {
+						var _ref58;
 
-				newp._versions = post._versions || [];
-				newp._versions.push(prevPver);
+						if (_isArray34) {
+							if (_i44 >= _iterator34.length) break;
+							_ref58 = _iterator34[_i44++];
+						} else {
+							_i44 = _iterator34.next();
+							if (_i44.done) break;
+							_ref58 = _i44.value;
+						}
 
+						var num = _ref58;
+
+						newp.ref._set.add(num);
+						html += newp.ref._getHTML(num, '', Cfg.strikeHidd && Post.hiddenNums.has(num));
+					}
+					newp.ref._createEl(html, false);
+					newp.ref._inited = newp.ref.hasMap = true;
+				}
+				if ((Cfg.markMyPosts || Cfg.markMyLinks) && isMy) {
+					MyPosts.set(newp.num, this.thrId);
+				}
 				if (aib.t && !doc.hidden && Cfg.animation) {
 					$animate(newp.el, 'de-post-new');
 				}
@@ -16676,23 +16697,23 @@ true, true],
 				if (!aib.qBan) {
 					return;
 				}
-				for (var _iterator34 = pBuilder.bannedPostsData(), _isArray34 = Array.isArray(_iterator34), _i44 = 0, _iterator34 = _isArray34 ? _iterator34 : _iterator34[Symbol.iterator]();;) {
-					var _ref58;
+				for (var _iterator35 = pBuilder.bannedPostsData(), _isArray35 = Array.isArray(_iterator35), _i45 = 0, _iterator35 = _isArray35 ? _iterator35 : _iterator35[Symbol.iterator]();;) {
+					var _ref59;
 
-					if (_isArray34) {
-						if (_i44 >= _iterator34.length) break;
-						_ref58 = _iterator34[_i44++];
+					if (_isArray35) {
+						if (_i45 >= _iterator35.length) break;
+						_ref59 = _iterator35[_i45++];
 					} else {
-						_i44 = _iterator34.next();
-						if (_i44.done) break;
-						_ref58 = _i44.value;
+						_i45 = _iterator35.next();
+						if (_i45.done) break;
+						_ref59 = _i45.value;
 					}
 
-					var _ref59 = _ref58,
-					    _ref60 = _slicedToArray(_ref59, 3),
-					    banId = _ref60[0],
-					    bNum = _ref60[1],
-					    bEl = _ref60[2];
+					var _ref60 = _ref59,
+					    _ref61 = _slicedToArray(_ref60, 3),
+					    banId = _ref61[0],
+					    bNum = _ref61[1],
+					    bEl = _ref61[2];
 
 					var _post6 = bNum ? pByNum.get(bNum) : this.op;
 					if (_post6 && _post6.banned !== banId) {
@@ -16745,8 +16766,8 @@ true, true],
 					temp.innerHTML = aib.fixHTML(html.join(''));
 					fragm = temp.content;
 					var _posts = $Q(aib.qRPost, fragm);
-					for (var _i45 = 0, _len9 = _posts.length; _i45 < _len9; ++_i45) {
-						last = this._addPost(fragm, _posts[_i45], begin + _i45 + 1, last, maybeVParser);
+					for (var _i46 = 0, _len9 = _posts.length; _i46 < _len9; ++_i46) {
+						last = this._addPost(fragm, _posts[_i46], begin + _i46 + 1, last, maybeVParser);
 						newVisCount -= maybeSpells.value.run(last);
 					}
 				} else {
@@ -17624,9 +17645,9 @@ true, true],
 						case 1:
 							counter.setWait();
 							this._state = 2;
-							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref61) {
-								var newCount = _ref61.newCount,
-								    locked = _ref61.locked;
+							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref62) {
+								var newCount = _ref62.newCount,
+								    locked = _ref62.locked;
 								return _this66._handleNewPosts(newCount, locked ? AjaxError.Locked : AjaxError.Success);
 							}, function (e) {
 								return _this66._handleNewPosts(0, e);
@@ -18638,8 +18659,8 @@ true, true],
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i46 = 0; _i46 < 8; ++_i46) {
-						str += '<div' + (_i46 ? ' style="display: none;"' : '') + '><input type="file" name="image' + (_i46 + 1) + '"></div>';
+					for (var _i47 = 0; _i47 < 8; ++_i47) {
+						str += '<div' + (_i47 ? ' style="display: none;"' : '') + '><input type="file" name="image' + (_i47 + 1) + '"></div>';
 					}
 					el.innerHTML = str;
 				}
@@ -18922,8 +18943,8 @@ true, true],
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i47 = 0; _i47 < 5; ++_i47) {
-						str += '<div' + (_i47 ? ' style="display: none;"' : '') + '><input type="file" name="file' + (_i47 ? _i47 + 1 : '') + '"></div>';
+					for (var _i48 = 0; _i48 < 5; ++_i48) {
+						str += '<div' + (_i48 ? ' style="display: none;"' : '') + '><input type="file" name="file' + (_i48 ? _i48 + 1 : '') + '"></div>';
 					}
 					el.innerHTML = str;
 				}
@@ -19115,8 +19136,8 @@ true, true],
 						var el = mutations[0].addedNodes[0];
 						if (el && el.id === 'app') {
 							initObserver.disconnect();
-							doc.defaultView.addEventListener('message', function (_ref62) {
-								var data = _ref62.data;
+							doc.defaultView.addEventListener('message', function (_ref63) {
+								var data = _ref63.data;
 
 								if (data !== '0chan-content-done') {
 									return;
@@ -19844,8 +19865,8 @@ true, true],
 					var el = _get(Arhivach.prototype.__proto__ || Object.getPrototypeOf(Arhivach.prototype), 'fixHTML', this).call(this, data, isForm);
 					try {
 						var _els4 = $Q('.expand_image', el);
-						for (var _i48 = 0, tLen = _els4.length; _i48 < tLen; ++_i48) {
-							_els4[_i48].href = _els4[_i48].getAttribute('onclick').match(/http:\/[^']+/)[0];
+						for (var _i49 = 0, tLen = _els4.length; _i49 < tLen; ++_i49) {
+							_els4[_i49].href = _els4[_i49].getAttribute('onclick').match(/http:\/[^']+/)[0];
 						}
 					} catch (e) {}
 					return el;
@@ -20398,8 +20419,8 @@ true, true],
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i49 = 0; _i49 < 4; ++_i49) {
-						str += '<div' + (_i49 ? ' style="display: none;"' : '') + '><input type="file" name="file_' + _i49 + '" tabindex="7"></div>';
+					for (var _i50 = 0; _i50 < 4; ++_i50) {
+						str += '<div' + (_i50 ? ' style="display: none;"' : '') + '><input type="file" name="file_' + _i50 + '" tabindex="7"></div>';
 					}
 					el.innerHTML = str;
 					el.removeAttribute('id');
@@ -20435,8 +20456,8 @@ true, true],
 				value: function initCaptcha(cap) {
 					cap.hasCaptcha = false;
 					var scripts = $Q('script:not([src])', doc);
-					for (var _i50 = 0, _len11 = scripts.length; _i50 < _len11; ++_i50) {
-						var m = scripts[_i50].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
+					for (var _i51 = 0, _len11 = scripts.length; _i51 < _len11; ++_i51) {
+						var m = scripts[_i51].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
 						if (m) {
 							if (m[1] === 'true') {
 								cap.hasCaptcha = true;
@@ -20471,19 +20492,19 @@ true, true],
 					var sessionId = null;
 					var cookie = doc.cookie;
 					if (cookie.includes('desuchan.session')) {
-						for (var _iterator35 = cookie.split(';'), _isArray35 = Array.isArray(_iterator35), _i51 = 0, _iterator35 = _isArray35 ? _iterator35 : _iterator35[Symbol.iterator]();;) {
-							var _ref63;
+						for (var _iterator36 = cookie.split(';'), _isArray36 = Array.isArray(_iterator36), _i52 = 0, _iterator36 = _isArray36 ? _iterator36 : _iterator36[Symbol.iterator]();;) {
+							var _ref64;
 
-							if (_isArray35) {
-								if (_i51 >= _iterator35.length) break;
-								_ref63 = _iterator35[_i51++];
+							if (_isArray36) {
+								if (_i52 >= _iterator36.length) break;
+								_ref64 = _iterator36[_i52++];
 							} else {
-								_i51 = _iterator35.next();
-								if (_i51.done) break;
-								_ref63 = _i51.value;
+								_i52 = _iterator36.next();
+								if (_i52.done) break;
+								_ref64 = _i52.value;
 							}
 
-							var c = _ref63;
+							var c = _ref64;
 
 							var m = c.match(/^\s*desuchan\.session=(.*)$/);
 							if (m) {
@@ -20838,8 +20859,8 @@ true, true],
 				DollchanAPI.port.onmessage = DollchanAPI._handleMessage;
 				DollchanAPI.activeListeners = new Set();
 				var port = channel.port2;
-				doc.defaultView.addEventListener('message', function (_ref64) {
-					var data = _ref64.data;
+				doc.defaultView.addEventListener('message', function (_ref65) {
+					var data = _ref65.data;
 
 					if (data === 'de-request-api-message') {
 						DollchanAPI.hasListeners = true;
@@ -20861,8 +20882,8 @@ true, true],
 			}
 		}, {
 			key: '_handleMessage',
-			value: function _handleMessage(_ref65) {
-				var arg = _ref65.data;
+			value: function _handleMessage(_ref66) {
+				var arg = _ref66.data;
 
 				if (!arg || !arg.name) {
 					return;
@@ -20874,19 +20895,19 @@ true, true],
 					case 'registerapi':
 						if (data) {
 							rv = {};
-							for (var _iterator36 = data, _isArray36 = Array.isArray(_iterator36), _i52 = 0, _iterator36 = _isArray36 ? _iterator36 : _iterator36[Symbol.iterator]();;) {
-								var _ref66;
+							for (var _iterator37 = data, _isArray37 = Array.isArray(_iterator37), _i53 = 0, _iterator37 = _isArray37 ? _iterator37 : _iterator37[Symbol.iterator]();;) {
+								var _ref67;
 
-								if (_isArray36) {
-									if (_i52 >= _iterator36.length) break;
-									_ref66 = _iterator36[_i52++];
+								if (_isArray37) {
+									if (_i53 >= _iterator37.length) break;
+									_ref67 = _iterator37[_i53++];
 								} else {
-									_i52 = _iterator36.next();
-									if (_i52.done) break;
-									_ref66 = _i52.value;
+									_i53 = _iterator37.next();
+									if (_i53.done) break;
+									_ref67 = _i53.value;
 								}
 
-								var aName = _ref66;
+								var aName = _ref67;
 
 								rv[aName] = DollchanAPI._register(aName.toLowerCase());
 							}
@@ -21093,14 +21114,14 @@ true, true],
 	}
 
 	function updateCSS() {
-		var str = '.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.Presto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + '; }\n\t.de-selected, .de-error-input { ' + (nav.Presto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + '; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.Presto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + '; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user, .de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick, .de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.Presto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t' + (Cfg.resizeImgs ? '' : '.de-img-wrapper-inpost > .de-img-full { width: auto; }') + '\n\t' + (Cfg.maskImgs ? aib.qPostImg + (', .de-img-pre, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; } ' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-pre:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }') : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.' + aib.cReply.replace(/\s/, '.') + ':not(.de-pview) { float: none; width: 100%; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input { display: inline !important; }') + '\n\t' + (!Cfg.addSageBtn ? '#de-sagebtn, ' : '') + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + (!Cfg.imgNavBtns ? '#de-img-btn-next, #de-img-btn-prev, ' : '') + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + (!Cfg.panelCounter ? '#de-panel-info, ' : '') + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + (!Cfg.showHideBtn ? '.de-btn-hide, ' : '') + (!Cfg.showRepBtn ? '.de-btn-rep, ' : '') + (!Cfg.updThrBtns && !aib.t ? '.de-thread-updater, ' : '') + (!Cfg.ajaxPosting ? '.de-file-btn-rar, .de-file-btn-txt, ' : '') + (!Cfg.fileInputs ? '.de-file-txt-wrap, .de-file-btn-txt, ' : '') + (!aib.kus && (aib.multiFile || Cfg.fileInputs !== 2) ? '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ' : '') + ' body > hr, .postarea, small[id^="rfmap"], .theader { display: none !important; }';
+		var str = '.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.Presto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + '; }\n\t.de-selected, .de-error-input { ' + (nav.Presto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + '; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.Presto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + '; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user, .de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick, .de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.Presto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t' + (Cfg.resizeImgs ? '' : '.de-img-wrapper-inpost > .de-img-full { width: auto; }') + '\n\t' + (Cfg.maskImgs ? aib.qPostImg + (', .de-img-pre, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; } ' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-pre:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }') : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.' + aib.cReply.replace(/\s/, '.') + ':not(.de-pview) { float: none; width: 100%; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input, .rating_select { display: inline !important; } .de-file-rate { display: none !important; }') + '\n\t' + (!Cfg.addSageBtn ? '#de-sagebtn, ' : '') + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + (!Cfg.imgNavBtns ? '#de-img-btn-next, #de-img-btn-prev, ' : '') + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + (!Cfg.panelCounter ? '#de-panel-info, ' : '') + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + (!Cfg.showHideBtn ? '.de-btn-hide, ' : '') + (!Cfg.showRepBtn ? '.de-btn-rep, ' : '') + (!Cfg.updThrBtns && !aib.t ? '.de-thread-updater, ' : '') + (!Cfg.ajaxPosting ? '.de-file-btn-rar, .de-file-btn-txt, ' : '') + (!Cfg.fileInputs ? '.de-file-txt-wrap, .de-file-btn-txt, ' : '') + (!aib.kus && (aib.multiFile || Cfg.fileInputs !== 2) ? '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ' : '') + ' body > hr, .postarea, small[id^="rfmap"], .theader { display: none !important; }';
 		$id('de-css-dynamic').textContent = str + '\n' + aib.css;
 		$id('de-css-user').textContent = Cfg.userCSS ? Cfg.userCSSTxt : '';
 	}
 
 
 	function runMain(checkDomains, dataPromise) {
-		var formEl, eList, fav, _ref67, _ref68, _ref69, _ref70, storageName, firstThr;
+		var formEl, eList, fav, _ref68, _ref69, _ref70, _ref71, storageName, firstThr;
 
 		return regeneratorRuntime.async(function runMain$(_context23) {
 			while (1) {
@@ -21162,10 +21183,10 @@ true, true],
 						return regeneratorRuntime.awrap(dataPromise);
 
 					case 18:
-						_ref67 = _context23.sent;
-						_ref68 = _slicedToArray(_ref67, 2);
-						eList = _ref68[0];
-						fav = _ref68[1];
+						_ref68 = _context23.sent;
+						_ref69 = _slicedToArray(_ref68, 2);
+						eList = _ref69[0];
+						fav = _ref69[1];
 						_context23.next = 30;
 						break;
 
@@ -21174,10 +21195,10 @@ true, true],
 						return regeneratorRuntime.awrap(readData());
 
 					case 26:
-						_ref69 = _context23.sent;
-						_ref70 = _slicedToArray(_ref69, 2);
-						eList = _ref70[0];
-						fav = _ref70[1];
+						_ref70 = _context23.sent;
+						_ref71 = _slicedToArray(_ref70, 2);
+						eList = _ref71[0];
+						fav = _ref71[1];
 
 					case 30:
 						if (!(eList && eList.includes(aib.dm))) {
