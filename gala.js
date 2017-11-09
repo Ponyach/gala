@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.6.1
+	: version 3.6.2
 	© magicode
 */
 var _z = _z();
@@ -3834,6 +3834,8 @@ var Gala = (function() {
 									clearInterval(timr);
 									form.elements['submit_this_form'].disabled = false;
 									form.elements['submit_this_form'].value = 'Отправить';
+									form.children['gala-error-msg'].textContent = 'Теперь можно отправлять';
+									form.children['gala-error-msg'].style['background-color'] = '#04A13D';
 								} else
 									form.elements['submit_this_form'].value = 'Ждите '+ (t--);
 							}, 1050);
