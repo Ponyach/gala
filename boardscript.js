@@ -16954,17 +16954,17 @@ true, true],
 						var c = -1,
 						    p = this.op,
 						    n = pBuilder._op;
-						if (!aib.t) p = p.nextNotDeleted, c = p.count - 1, n = pBuilder._posts[c];
-						while (c < post.count) {
+						if (!aib.t) {
+							p = p.nextNotDeleted, c = p ? p.count - 1 : post.count, n = pBuilder._posts[c];
+						}
+						while (p && n) {
 							if (n.outerHTML !== this.originPostHtml[c]) {
 								this.originPostHtml[c] = n.outerHTML;
 								var parent = p.wrap.parentNode;
 								parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
 								res.push(p.num);
 							}
-							c = p.count;
-							p = p.nextNotDeleted;
-							n = pBuilder._posts[c];
+							c = p.count, p = p.nextNotDeleted, n = pBuilder._posts[c];
 						}
 						res.length && DollchanAPI.notify('newpost', res);
 					}
