@@ -892,12 +892,18 @@ function _RebuildFileSizeInfo() {
 			MAX_FILE.COUNT[postform.elements['board'].value] = i - 1;
 			
 			// отслеживание изменений в DOM
-			var observer = new MutationObserver(function(mutations) {
+			var _throbsv = 'MessageChannel' in window ? '' : ', body > form[action="/board.php"] *[id^="thread"]',
+				observer = new MutationObserver(function(mutations) {
 				mutations.forEach(function(record, i) {
 					if (record.addedNodes.length) {
 						var nodes = record.addedNodes;
 						if (record.target === document.body && nodes[0].tagName === 'FORM') {
 							observer.observe(nodes[0], { childList: true });
+							if (_throbsv) {
+								nodes[0].querySelectorAll('*[id^="thread"]').forEach(function(thread) {
+									observer.observe(thread, { childList: true });
+								});
+							}
 							nodes = nodes[0].querySelectorAll('.oppost[id^="reply"], .psttable *[id^="reply"]');
 						}
 						if (/psttable|oppost|de-pview/.test(nodes[0].className)) {
@@ -911,7 +917,7 @@ function _RebuildFileSizeInfo() {
 				});
 			});
 		
-			document.querySelectorAll('body, body > form[action="/board.php"]').forEach(function(target) {
+			document.querySelectorAll('body, body > form[action="/board.php"]'+ _throbsv).forEach(function(target) {
 				observer.observe(target, { childList: true });
 			});
 		
