@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name            Dollchan Extension Tools
-// @version         17.6.20.0
+// @version         18.1.15.0
 // @namespace       http://www.freedollchan.org/scripts/*
 // @author          Sthephan Shinkufag @ FreeDollChan
-// @copyright       © 2017 Dollchan Extension Tools Team. See the LICENSE file for license rights and limitations (MIT).
+// @copyright       © Dollchan Extension Team. See the LICENSE file for license rights and limitations (MIT).
 // @description     Doing some profit for imageboards
 // @icon            https://raw.github.com/SthephanShinkufag/Dollchan-Extension-Tools/master/Icon.png
 // @updateURL       https://raw.github.com/SthephanShinkufag/Dollchan-Extension-Tools/master/Dollchan_Extension_Tools.meta.js
@@ -13,92 +13,99 @@
 // @grant           GM_deleteValue
 // @grant           GM_openInTab
 // @grant           GM_xmlhttpRequest
+// @grant           GM.getValue
+// @grant           GM.setValue
+// @grant           GM.deleteValue
+// @grant           GM.xmlHttpRequest
 // @grant           unsafeWindow
 // @include         *
 // @nocompat        Chrome
 // ==/UserScript==
-(function de_main_func_outer(localData) {
+(function deMainFuncOuter(localData) {
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('../../modules/es6.string.iterator');
 require('../../modules/es6.array.from');
 module.exports = require('../../modules/_core').Array.from;
-},{"../../modules/_core":29,"../../modules/es6.array.from":99,"../../modules/es6.string.iterator":109}],2:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.array.from":100,"../../modules/es6.string.iterator":111}],2:[function(require,module,exports){
 require('../../modules/es6.array.iterator');
 module.exports = require('../../modules/_core').Array.values;
-},{"../../modules/_core":29,"../../modules/es6.array.iterator":100}],3:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.array.iterator":101}],3:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.map');
 require('../modules/es7.map.to-json');
 module.exports = require('../modules/_core').Map;
-},{"../modules/_core":29,"../modules/es6.map":101,"../modules/es6.object.to-string":105,"../modules/es6.string.iterator":109,"../modules/es7.map.to-json":114,"../modules/web.dom.iterable":118}],4:[function(require,module,exports){
+},{"../modules/_core":30,"../modules/es6.map":102,"../modules/es6.object.to-string":106,"../modules/es6.string.iterator":111,"../modules/es7.map.to-json":116,"../modules/web.dom.iterable":120}],4:[function(require,module,exports){
 require('../../modules/es6.math.clz32');
 module.exports = require('../../modules/_core').Math.clz32;
-},{"../../modules/_core":29,"../../modules/es6.math.clz32":102}],5:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.math.clz32":103}],5:[function(require,module,exports){
 require('../../modules/es6.number.max-safe-integer');
 module.exports = 0x1fffffffffffff;
-},{"../../modules/es6.number.max-safe-integer":103}],6:[function(require,module,exports){
+},{"../../modules/es6.number.max-safe-integer":104}],6:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/_core').Object.assign;
-},{"../../modules/_core":29,"../../modules/es6.object.assign":104}],7:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.object.assign":105}],7:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.promise');
 module.exports = require('../modules/_core').Promise;
-},{"../modules/_core":29,"../modules/es6.object.to-string":105,"../modules/es6.promise":106,"../modules/es6.string.iterator":109,"../modules/web.dom.iterable":118}],8:[function(require,module,exports){
+},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.promise":107,"../modules/es6.string.iterator":111,"../modules/web.dom.iterable":120}],8:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.set');
 require('../modules/es7.set.to-json');
 module.exports = require('../modules/_core').Set;
-},{"../modules/_core":29,"../modules/es6.object.to-string":105,"../modules/es6.set":107,"../modules/es6.string.iterator":109,"../modules/es7.set.to-json":115,"../modules/web.dom.iterable":118}],9:[function(require,module,exports){
+},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.set":108,"../modules/es6.string.iterator":111,"../modules/es7.set.to-json":117,"../modules/web.dom.iterable":120}],9:[function(require,module,exports){
+require('../../modules/es6.string.ends-with');
+module.exports = require('../../modules/_core').String.endsWith;
+},{"../../modules/_core":30,"../../modules/es6.string.ends-with":109}],10:[function(require,module,exports){
 require('../../modules/es6.string.includes');
 module.exports = require('../../modules/_core').String.includes;
-},{"../../modules/_core":29,"../../modules/es6.string.includes":108}],10:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.string.includes":110}],11:[function(require,module,exports){
 require('../../modules/es6.string.repeat');
 module.exports = require('../../modules/_core').String.repeat;
-},{"../../modules/_core":29,"../../modules/es6.string.repeat":110}],11:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.string.repeat":112}],12:[function(require,module,exports){
 require('../../modules/es6.string.starts-with');
 module.exports = require('../../modules/_core').String.startsWith;
-},{"../../modules/_core":29,"../../modules/es6.string.starts-with":111}],12:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.string.starts-with":113}],13:[function(require,module,exports){
 require('../../modules/es6.symbol');
 require('../../modules/es6.object.to-string');
 require('../../modules/es7.symbol.async-iterator');
 require('../../modules/es7.symbol.observable');
 module.exports = require('../../modules/_core').Symbol;
-},{"../../modules/_core":29,"../../modules/es6.object.to-string":105,"../../modules/es6.symbol":112,"../../modules/es7.symbol.async-iterator":116,"../../modules/es7.symbol.observable":117}],13:[function(require,module,exports){
+},{"../../modules/_core":30,"../../modules/es6.object.to-string":106,"../../modules/es6.symbol":114,"../../modules/es7.symbol.async-iterator":118,"../../modules/es7.symbol.observable":119}],14:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/web.dom.iterable');
 require('../modules/es6.weak-map');
 module.exports = require('../modules/_core').WeakMap;
-},{"../modules/_core":29,"../modules/es6.object.to-string":105,"../modules/es6.weak-map":113,"../modules/web.dom.iterable":118}],14:[function(require,module,exports){
+},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.weak-map":115,"../modules/web.dom.iterable":120}],15:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
 };
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var UNSCOPABLES = require('./_wks')('unscopables')
   , ArrayProto  = Array.prototype;
 if(ArrayProto[UNSCOPABLES] == undefined)require('./_hide')(ArrayProto, UNSCOPABLES, {});
 module.exports = function(key){
   ArrayProto[UNSCOPABLES][key] = true;
 };
-},{"./_hide":43,"./_wks":97}],16:[function(require,module,exports){
+},{"./_hide":44,"./_wks":98}],17:[function(require,module,exports){
 module.exports = function(it, Constructor, name, forbiddenField){
   if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var isObject = require('./_is-object');
 module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"./_is-object":51}],18:[function(require,module,exports){
+},{"./_is-object":52}],19:[function(require,module,exports){
 var forOf = require('./_for-of');
 
 module.exports = function(iter, ITERATOR){
@@ -107,7 +114,7 @@ module.exports = function(iter, ITERATOR){
   return result;
 };
 
-},{"./_for-of":40}],19:[function(require,module,exports){
+},{"./_for-of":41}],20:[function(require,module,exports){
 var toIObject = require('./_to-iobject')
   , toLength  = require('./_to-length')
   , toIndex   = require('./_to-index');
@@ -125,7 +132,7 @@ module.exports = function(IS_INCLUDES){
     } return !IS_INCLUDES && -1;
   };
 };
-},{"./_to-index":88,"./_to-iobject":90,"./_to-length":91}],20:[function(require,module,exports){
+},{"./_to-index":89,"./_to-iobject":91,"./_to-length":92}],21:[function(require,module,exports){
 var ctx      = require('./_ctx')
   , IObject  = require('./_iobject')
   , toObject = require('./_to-object')
@@ -163,7 +170,7 @@ module.exports = function(TYPE, $create){
     return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
   };
 };
-},{"./_array-species-create":22,"./_ctx":31,"./_iobject":48,"./_to-length":91,"./_to-object":92}],21:[function(require,module,exports){
+},{"./_array-species-create":23,"./_ctx":32,"./_iobject":49,"./_to-length":92,"./_to-object":93}],22:[function(require,module,exports){
 var isObject = require('./_is-object')
   , isArray  = require('./_is-array')
   , SPECIES  = require('./_wks')('species');
@@ -179,13 +186,13 @@ module.exports = function(original){
     }
   } return C === undefined ? Array : C;
 };
-},{"./_is-array":50,"./_is-object":51,"./_wks":97}],22:[function(require,module,exports){
+},{"./_is-array":51,"./_is-object":52,"./_wks":98}],23:[function(require,module,exports){
 var speciesConstructor = require('./_array-species-constructor');
 
 module.exports = function(original, length){
   return new (speciesConstructor(original))(length);
 };
-},{"./_array-species-constructor":21}],23:[function(require,module,exports){
+},{"./_array-species-constructor":22}],24:[function(require,module,exports){
 var cof = require('./_cof')
   , TAG = require('./_wks')('toStringTag')
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -203,13 +210,13 @@ module.exports = function(it){
     : ARG ? cof(O)
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
-},{"./_cof":24,"./_wks":97}],24:[function(require,module,exports){
+},{"./_cof":25,"./_wks":98}],25:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = function(it){
   return toString.call(it).slice(8, -1);
 };
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 var dP          = require('./_object-dp').f
   , create      = require('./_object-create')
@@ -331,7 +338,7 @@ module.exports = {
     setSpecies(NAME);
   }
 };
-},{"./_an-instance":16,"./_ctx":31,"./_defined":32,"./_descriptors":33,"./_for-of":40,"./_iter-define":55,"./_iter-step":57,"./_meta":61,"./_object-create":64,"./_object-dp":65,"./_redefine-all":76,"./_set-species":79}],26:[function(require,module,exports){
+},{"./_an-instance":17,"./_ctx":32,"./_defined":33,"./_descriptors":34,"./_for-of":41,"./_iter-define":56,"./_iter-step":58,"./_meta":62,"./_object-create":65,"./_object-dp":66,"./_redefine-all":77,"./_set-species":80}],27:[function(require,module,exports){
 var classof = require('./_classof')
   , from    = require('./_array-from-iterable');
 module.exports = function(NAME){
@@ -340,7 +347,7 @@ module.exports = function(NAME){
     return from(this);
   };
 };
-},{"./_array-from-iterable":18,"./_classof":23}],27:[function(require,module,exports){
+},{"./_array-from-iterable":19,"./_classof":24}],28:[function(require,module,exports){
 'use strict';
 var redefineAll       = require('./_redefine-all')
   , getWeak           = require('./_meta').getWeak
@@ -419,7 +426,7 @@ module.exports = {
   },
   ufstore: uncaughtFrozenStore
 };
-},{"./_an-instance":16,"./_an-object":17,"./_array-methods":20,"./_for-of":40,"./_has":42,"./_is-object":51,"./_meta":61,"./_redefine-all":76}],28:[function(require,module,exports){
+},{"./_an-instance":17,"./_an-object":18,"./_array-methods":21,"./_for-of":41,"./_has":43,"./_is-object":52,"./_meta":62,"./_redefine-all":77}],29:[function(require,module,exports){
 'use strict';
 var global            = require('./_global')
   , $export           = require('./_export')
@@ -498,10 +505,10 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 
   return C;
 };
-},{"./_an-instance":16,"./_export":37,"./_fails":39,"./_for-of":40,"./_global":41,"./_inherit-if-required":46,"./_is-object":51,"./_iter-detect":56,"./_meta":61,"./_redefine":77,"./_redefine-all":76,"./_set-to-string-tag":80}],29:[function(require,module,exports){
+},{"./_an-instance":17,"./_export":38,"./_fails":40,"./_for-of":41,"./_global":42,"./_inherit-if-required":47,"./_is-object":52,"./_iter-detect":57,"./_meta":62,"./_redefine":78,"./_redefine-all":77,"./_set-to-string-tag":81}],30:[function(require,module,exports){
 var core = module.exports = {version: '2.4.0'};
 if(typeof __e == 'number')__e = core; 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 var $defineProperty = require('./_object-dp')
   , createDesc      = require('./_property-desc');
@@ -510,7 +517,7 @@ module.exports = function(object, index, value){
   if(index in object)$defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
 };
-},{"./_object-dp":65,"./_property-desc":75}],31:[function(require,module,exports){
+},{"./_object-dp":66,"./_property-desc":76}],32:[function(require,module,exports){
 var aFunction = require('./_a-function');
 module.exports = function(fn, that, length){
   aFunction(fn);
@@ -530,27 +537,27 @@ module.exports = function(fn, that, length){
     return fn.apply(that, arguments);
   };
 };
-},{"./_a-function":14}],32:[function(require,module,exports){
+},{"./_a-function":15}],33:[function(require,module,exports){
 module.exports = function(it){
   if(it == undefined)throw TypeError("Can't call method on  " + it);
   return it;
 };
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 module.exports = !require('./_fails')(function(){
   return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_fails":39}],34:[function(require,module,exports){
+},{"./_fails":40}],35:[function(require,module,exports){
 var isObject = require('./_is-object')
   , document = require('./_global').document
   , is = isObject(document) && isObject(document.createElement);
 module.exports = function(it){
   return is ? document.createElement(it) : {};
 };
-},{"./_global":41,"./_is-object":51}],35:[function(require,module,exports){
+},{"./_global":42,"./_is-object":52}],36:[function(require,module,exports){
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 var getKeys = require('./_object-keys')
   , gOPS    = require('./_object-gops')
   , pIE     = require('./_object-pie');
@@ -565,7 +572,7 @@ module.exports = function(it){
     while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
   } return result;
 };
-},{"./_object-gops":70,"./_object-keys":73,"./_object-pie":74}],37:[function(require,module,exports){
+},{"./_object-gops":71,"./_object-keys":74,"./_object-pie":75}],38:[function(require,module,exports){
 var global    = require('./_global')
   , core      = require('./_core')
   , hide      = require('./_hide')
@@ -603,7 +610,7 @@ $export.W = 32;
 $export.U = 64;  
 $export.R = 128; 
 module.exports = $export;
-},{"./_core":29,"./_ctx":31,"./_global":41,"./_hide":43,"./_redefine":77}],38:[function(require,module,exports){
+},{"./_core":30,"./_ctx":32,"./_global":42,"./_hide":44,"./_redefine":78}],39:[function(require,module,exports){
 var MATCH = require('./_wks')('match');
 module.exports = function(KEY){
   var re = /./;
@@ -616,7 +623,7 @@ module.exports = function(KEY){
     } catch(f){  }
   } return true;
 };
-},{"./_wks":97}],39:[function(require,module,exports){
+},{"./_wks":98}],40:[function(require,module,exports){
 module.exports = function(exec){
   try {
     return !!exec();
@@ -624,7 +631,7 @@ module.exports = function(exec){
     return true;
   }
 };
-},{}],40:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 var ctx         = require('./_ctx')
   , call        = require('./_iter-call')
   , isArrayIter = require('./_is-array-iter')
@@ -649,16 +656,16 @@ var exports = module.exports = function(iterable, entries, fn, that, ITERATOR){
 };
 exports.BREAK  = BREAK;
 exports.RETURN = RETURN;
-},{"./_an-object":17,"./_ctx":31,"./_is-array-iter":49,"./_iter-call":53,"./_to-length":91,"./core.get-iterator-method":98}],41:[function(require,module,exports){
+},{"./_an-object":18,"./_ctx":32,"./_is-array-iter":50,"./_iter-call":54,"./_to-length":92,"./core.get-iterator-method":99}],42:[function(require,module,exports){
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
   ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 if(typeof __g == 'number')__g = global; 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function(it, key){
   return hasOwnProperty.call(it, key);
 };
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 var dP         = require('./_object-dp')
   , createDesc = require('./_property-desc');
 module.exports = require('./_descriptors') ? function(object, key, value){
@@ -667,13 +674,13 @@ module.exports = require('./_descriptors') ? function(object, key, value){
   object[key] = value;
   return object;
 };
-},{"./_descriptors":33,"./_object-dp":65,"./_property-desc":75}],44:[function(require,module,exports){
+},{"./_descriptors":34,"./_object-dp":66,"./_property-desc":76}],45:[function(require,module,exports){
 module.exports = require('./_global').document && document.documentElement;
-},{"./_global":41}],45:[function(require,module,exports){
+},{"./_global":42}],46:[function(require,module,exports){
 module.exports = !require('./_descriptors') && !require('./_fails')(function(){
   return Object.defineProperty(require('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
 });
-},{"./_descriptors":33,"./_dom-create":34,"./_fails":39}],46:[function(require,module,exports){
+},{"./_descriptors":34,"./_dom-create":35,"./_fails":40}],47:[function(require,module,exports){
 var isObject       = require('./_is-object')
   , setPrototypeOf = require('./_set-proto').set;
 module.exports = function(that, target, C){
@@ -682,7 +689,7 @@ module.exports = function(that, target, C){
     setPrototypeOf(that, P);
   } return that;
 };
-},{"./_is-object":51,"./_set-proto":78}],47:[function(require,module,exports){
+},{"./_is-object":52,"./_set-proto":79}],48:[function(require,module,exports){
 module.exports = function(fn, args, that){
   var un = that === undefined;
   switch(args.length){
@@ -698,12 +705,12 @@ module.exports = function(fn, args, that){
                       : fn.call(that, args[0], args[1], args[2], args[3]);
   } return              fn.apply(that, args);
 };
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var cof = require('./_cof');
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
-},{"./_cof":24}],49:[function(require,module,exports){
+},{"./_cof":25}],50:[function(require,module,exports){
 var Iterators  = require('./_iterators')
   , ITERATOR   = require('./_wks')('iterator')
   , ArrayProto = Array.prototype;
@@ -711,16 +718,16 @@ var Iterators  = require('./_iterators')
 module.exports = function(it){
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
-},{"./_iterators":58,"./_wks":97}],50:[function(require,module,exports){
+},{"./_iterators":59,"./_wks":98}],51:[function(require,module,exports){
 var cof = require('./_cof');
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
-},{"./_cof":24}],51:[function(require,module,exports){
+},{"./_cof":25}],52:[function(require,module,exports){
 module.exports = function(it){
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 var isObject = require('./_is-object')
   , cof      = require('./_cof')
   , MATCH    = require('./_wks')('match');
@@ -728,7 +735,7 @@ module.exports = function(it){
   var isRegExp;
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
 };
-},{"./_cof":24,"./_is-object":51,"./_wks":97}],53:[function(require,module,exports){
+},{"./_cof":25,"./_is-object":52,"./_wks":98}],54:[function(require,module,exports){
 var anObject = require('./_an-object');
 module.exports = function(iterator, fn, value, entries){
   try {
@@ -739,7 +746,7 @@ module.exports = function(iterator, fn, value, entries){
     throw e;
   }
 };
-},{"./_an-object":17}],54:[function(require,module,exports){
+},{"./_an-object":18}],55:[function(require,module,exports){
 'use strict';
 var create         = require('./_object-create')
   , descriptor     = require('./_property-desc')
@@ -752,7 +759,7 @@ module.exports = function(Constructor, NAME, next){
   Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
   setToStringTag(Constructor, NAME + ' Iterator');
 };
-},{"./_hide":43,"./_object-create":64,"./_property-desc":75,"./_set-to-string-tag":80,"./_wks":97}],55:[function(require,module,exports){
+},{"./_hide":44,"./_object-create":65,"./_property-desc":76,"./_set-to-string-tag":81,"./_wks":98}],56:[function(require,module,exports){
 'use strict';
 var LIBRARY        = require('./_library')
   , $export        = require('./_export')
@@ -817,7 +824,7 @@ module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED
   }
   return methods;
 };
-},{"./_export":37,"./_has":42,"./_hide":43,"./_iter-create":54,"./_iterators":58,"./_library":60,"./_object-gpo":71,"./_redefine":77,"./_set-to-string-tag":80,"./_wks":97}],56:[function(require,module,exports){
+},{"./_export":38,"./_has":43,"./_hide":44,"./_iter-create":55,"./_iterators":59,"./_library":61,"./_object-gpo":72,"./_redefine":78,"./_set-to-string-tag":81,"./_wks":98}],57:[function(require,module,exports){
 var ITERATOR     = require('./_wks')('iterator')
   , SAFE_CLOSING = false;
 
@@ -839,13 +846,13 @@ module.exports = function(exec, skipClosing){
   } catch(e){  }
   return safe;
 };
-},{"./_wks":97}],57:[function(require,module,exports){
+},{"./_wks":98}],58:[function(require,module,exports){
 module.exports = function(done, value){
   return {value: value, done: !!done};
 };
-},{}],58:[function(require,module,exports){
-module.exports = {};
 },{}],59:[function(require,module,exports){
+module.exports = {};
+},{}],60:[function(require,module,exports){
 var getKeys   = require('./_object-keys')
   , toIObject = require('./_to-iobject');
 module.exports = function(object, el){
@@ -856,9 +863,9 @@ module.exports = function(object, el){
     , key;
   while(length > index)if(O[key = keys[index++]] === el)return key;
 };
-},{"./_object-keys":73,"./_to-iobject":90}],60:[function(require,module,exports){
+},{"./_object-keys":74,"./_to-iobject":91}],61:[function(require,module,exports){
 module.exports = false;
-},{}],61:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 var META     = require('./_uid')('meta')
   , isObject = require('./_is-object')
   , has      = require('./_has')
@@ -902,7 +909,7 @@ var meta = module.exports = {
   getWeak:  getWeak,
   onFreeze: onFreeze
 };
-},{"./_fails":39,"./_has":42,"./_is-object":51,"./_object-dp":65,"./_uid":94}],62:[function(require,module,exports){
+},{"./_fails":40,"./_has":43,"./_is-object":52,"./_object-dp":66,"./_uid":95}],63:[function(require,module,exports){
 var global    = require('./_global')
   , macrotask = require('./_task').set
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
@@ -961,7 +968,7 @@ module.exports = function(){
     } last = task;
   };
 };
-},{"./_cof":24,"./_global":41,"./_task":87}],63:[function(require,module,exports){
+},{"./_cof":25,"./_global":42,"./_task":88}],64:[function(require,module,exports){
 'use strict';
 var getKeys  = require('./_object-keys')
   , gOPS     = require('./_object-gops')
@@ -993,7 +1000,7 @@ module.exports = !$assign || require('./_fails')(function(){
     while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
   } return T;
 } : $assign;
-},{"./_fails":39,"./_iobject":48,"./_object-gops":70,"./_object-keys":73,"./_object-pie":74,"./_to-object":92}],64:[function(require,module,exports){
+},{"./_fails":40,"./_iobject":49,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_to-object":93}],65:[function(require,module,exports){
 var anObject    = require('./_an-object')
   , dPs         = require('./_object-dps')
   , enumBugKeys = require('./_enum-bug-keys')
@@ -1030,7 +1037,7 @@ module.exports = Object.create || function create(O, Properties){
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"./_an-object":17,"./_dom-create":34,"./_enum-bug-keys":35,"./_html":44,"./_object-dps":66,"./_shared-key":81}],65:[function(require,module,exports){
+},{"./_an-object":18,"./_dom-create":35,"./_enum-bug-keys":36,"./_html":45,"./_object-dps":67,"./_shared-key":82}],66:[function(require,module,exports){
 var anObject       = require('./_an-object')
   , IE8_DOM_DEFINE = require('./_ie8-dom-define')
   , toPrimitive    = require('./_to-primitive')
@@ -1047,7 +1054,7 @@ exports.f = require('./_descriptors') ? Object.defineProperty : function defineP
   if('value' in Attributes)O[P] = Attributes.value;
   return O;
 };
-},{"./_an-object":17,"./_descriptors":33,"./_ie8-dom-define":45,"./_to-primitive":93}],66:[function(require,module,exports){
+},{"./_an-object":18,"./_descriptors":34,"./_ie8-dom-define":46,"./_to-primitive":94}],67:[function(require,module,exports){
 var dP       = require('./_object-dp')
   , anObject = require('./_an-object')
   , getKeys  = require('./_object-keys');
@@ -1061,7 +1068,7 @@ module.exports = require('./_descriptors') ? Object.defineProperties : function 
   while(length > i)dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
-},{"./_an-object":17,"./_descriptors":33,"./_object-dp":65,"./_object-keys":73}],67:[function(require,module,exports){
+},{"./_an-object":18,"./_descriptors":34,"./_object-dp":66,"./_object-keys":74}],68:[function(require,module,exports){
 var pIE            = require('./_object-pie')
   , createDesc     = require('./_property-desc')
   , toIObject      = require('./_to-iobject')
@@ -1078,7 +1085,7 @@ exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor
   } catch(e){  }
   if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
 };
-},{"./_descriptors":33,"./_has":42,"./_ie8-dom-define":45,"./_object-pie":74,"./_property-desc":75,"./_to-iobject":90,"./_to-primitive":93}],68:[function(require,module,exports){
+},{"./_descriptors":34,"./_has":43,"./_ie8-dom-define":46,"./_object-pie":75,"./_property-desc":76,"./_to-iobject":91,"./_to-primitive":94}],69:[function(require,module,exports){
 var toIObject = require('./_to-iobject')
   , gOPN      = require('./_object-gopn').f
   , toString  = {}.toString;
@@ -1098,16 +1105,16 @@ module.exports.f = function getOwnPropertyNames(it){
   return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
 };
 
-},{"./_object-gopn":69,"./_to-iobject":90}],69:[function(require,module,exports){
+},{"./_object-gopn":70,"./_to-iobject":91}],70:[function(require,module,exports){
 var $keys      = require('./_object-keys-internal')
   , hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
 
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
   return $keys(O, hiddenKeys);
 };
-},{"./_enum-bug-keys":35,"./_object-keys-internal":72}],70:[function(require,module,exports){
+},{"./_enum-bug-keys":36,"./_object-keys-internal":73}],71:[function(require,module,exports){
 exports.f = Object.getOwnPropertySymbols;
-},{}],71:[function(require,module,exports){
+},{}],72:[function(require,module,exports){
 var has         = require('./_has')
   , toObject    = require('./_to-object')
   , IE_PROTO    = require('./_shared-key')('IE_PROTO')
@@ -1120,7 +1127,7 @@ module.exports = Object.getPrototypeOf || function(O){
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
-},{"./_has":42,"./_shared-key":81,"./_to-object":92}],72:[function(require,module,exports){
+},{"./_has":43,"./_shared-key":82,"./_to-object":93}],73:[function(require,module,exports){
 var has          = require('./_has')
   , toIObject    = require('./_to-iobject')
   , arrayIndexOf = require('./_array-includes')(false)
@@ -1137,16 +1144,16 @@ module.exports = function(object, names){
   }
   return result;
 };
-},{"./_array-includes":19,"./_has":42,"./_shared-key":81,"./_to-iobject":90}],73:[function(require,module,exports){
+},{"./_array-includes":20,"./_has":43,"./_shared-key":82,"./_to-iobject":91}],74:[function(require,module,exports){
 var $keys       = require('./_object-keys-internal')
   , enumBugKeys = require('./_enum-bug-keys');
 
 module.exports = Object.keys || function keys(O){
   return $keys(O, enumBugKeys);
 };
-},{"./_enum-bug-keys":35,"./_object-keys-internal":72}],74:[function(require,module,exports){
+},{"./_enum-bug-keys":36,"./_object-keys-internal":73}],75:[function(require,module,exports){
 exports.f = {}.propertyIsEnumerable;
-},{}],75:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 module.exports = function(bitmap, value){
   return {
     enumerable  : !(bitmap & 1),
@@ -1155,13 +1162,13 @@ module.exports = function(bitmap, value){
     value       : value
   };
 };
-},{}],76:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 var redefine = require('./_redefine');
 module.exports = function(target, src, safe){
   for(var key in src)redefine(target, key, src[key], safe);
   return target;
 };
-},{"./_redefine":77}],77:[function(require,module,exports){
+},{"./_redefine":78}],78:[function(require,module,exports){
 var global    = require('./_global')
   , hide      = require('./_hide')
   , has       = require('./_has')
@@ -1193,7 +1200,7 @@ require('./_core').inspectSource = function(it){
 })(Function.prototype, TO_STRING, function toString(){
   return typeof this == 'function' && this[SRC] || $toString.call(this);
 });
-},{"./_core":29,"./_global":41,"./_has":42,"./_hide":43,"./_uid":94}],78:[function(require,module,exports){
+},{"./_core":30,"./_global":42,"./_has":43,"./_hide":44,"./_uid":95}],79:[function(require,module,exports){
 var isObject = require('./_is-object')
   , anObject = require('./_an-object');
 var check = function(O, proto){
@@ -1217,7 +1224,7 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
-},{"./_an-object":17,"./_ctx":31,"./_is-object":51,"./_object-gopd":67}],79:[function(require,module,exports){
+},{"./_an-object":18,"./_ctx":32,"./_is-object":52,"./_object-gopd":68}],80:[function(require,module,exports){
 'use strict';
 var global      = require('./_global')
   , dP          = require('./_object-dp')
@@ -1231,7 +1238,7 @@ module.exports = function(KEY){
     get: function(){ return this; }
   });
 };
-},{"./_descriptors":33,"./_global":41,"./_object-dp":65,"./_wks":97}],80:[function(require,module,exports){
+},{"./_descriptors":34,"./_global":42,"./_object-dp":66,"./_wks":98}],81:[function(require,module,exports){
 var def = require('./_object-dp').f
   , has = require('./_has')
   , TAG = require('./_wks')('toStringTag');
@@ -1239,20 +1246,20 @@ var def = require('./_object-dp').f
 module.exports = function(it, tag, stat){
   if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 };
-},{"./_has":42,"./_object-dp":65,"./_wks":97}],81:[function(require,module,exports){
+},{"./_has":43,"./_object-dp":66,"./_wks":98}],82:[function(require,module,exports){
 var shared = require('./_shared')('keys')
   , uid    = require('./_uid');
 module.exports = function(key){
   return shared[key] || (shared[key] = uid(key));
 };
-},{"./_shared":82,"./_uid":94}],82:[function(require,module,exports){
+},{"./_shared":83,"./_uid":95}],83:[function(require,module,exports){
 var global = require('./_global')
   , SHARED = '__core-js_shared__'
   , store  = global[SHARED] || (global[SHARED] = {});
 module.exports = function(key){
   return store[key] || (store[key] = {});
 };
-},{"./_global":41}],83:[function(require,module,exports){
+},{"./_global":42}],84:[function(require,module,exports){
 var anObject  = require('./_an-object')
   , aFunction = require('./_a-function')
   , SPECIES   = require('./_wks')('species');
@@ -1260,7 +1267,7 @@ module.exports = function(O, D){
   var C = anObject(O).constructor, S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
 };
-},{"./_a-function":14,"./_an-object":17,"./_wks":97}],84:[function(require,module,exports){
+},{"./_a-function":15,"./_an-object":18,"./_wks":98}],85:[function(require,module,exports){
 var toInteger = require('./_to-integer')
   , defined   = require('./_defined');
 module.exports = function(TO_STRING){
@@ -1276,7 +1283,7 @@ module.exports = function(TO_STRING){
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
-},{"./_defined":32,"./_to-integer":89}],85:[function(require,module,exports){
+},{"./_defined":33,"./_to-integer":90}],86:[function(require,module,exports){
 var isRegExp = require('./_is-regexp')
   , defined  = require('./_defined');
 
@@ -1284,7 +1291,7 @@ module.exports = function(that, searchString, NAME){
   if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
   return String(defined(that));
 };
-},{"./_defined":32,"./_is-regexp":52}],86:[function(require,module,exports){
+},{"./_defined":33,"./_is-regexp":53}],87:[function(require,module,exports){
 'use strict';
 var toInteger = require('./_to-integer')
   , defined   = require('./_defined');
@@ -1297,7 +1304,7 @@ module.exports = function repeat(count){
   for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
   return res;
 };
-},{"./_defined":32,"./_to-integer":89}],87:[function(require,module,exports){
+},{"./_defined":33,"./_to-integer":90}],88:[function(require,module,exports){
 var ctx                = require('./_ctx')
   , invoke             = require('./_invoke')
   , html               = require('./_html')
@@ -1366,7 +1373,7 @@ module.exports = {
   set:   setTask,
   clear: clearTask
 };
-},{"./_cof":24,"./_ctx":31,"./_dom-create":34,"./_global":41,"./_html":44,"./_invoke":47}],88:[function(require,module,exports){
+},{"./_cof":25,"./_ctx":32,"./_dom-create":35,"./_global":42,"./_html":45,"./_invoke":48}],89:[function(require,module,exports){
 var toInteger = require('./_to-integer')
   , max       = Math.max
   , min       = Math.min;
@@ -1374,30 +1381,30 @@ module.exports = function(index, length){
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
-},{"./_to-integer":89}],89:[function(require,module,exports){
+},{"./_to-integer":90}],90:[function(require,module,exports){
 var ceil  = Math.ceil
   , floor = Math.floor;
 module.exports = function(it){
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
-},{}],90:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 var IObject = require('./_iobject')
   , defined = require('./_defined');
 module.exports = function(it){
   return IObject(defined(it));
 };
-},{"./_defined":32,"./_iobject":48}],91:[function(require,module,exports){
+},{"./_defined":33,"./_iobject":49}],92:[function(require,module,exports){
 var toInteger = require('./_to-integer')
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; 
 };
-},{"./_to-integer":89}],92:[function(require,module,exports){
+},{"./_to-integer":90}],93:[function(require,module,exports){
 var defined = require('./_defined');
 module.exports = function(it){
   return Object(defined(it));
 };
-},{"./_defined":32}],93:[function(require,module,exports){
+},{"./_defined":33}],94:[function(require,module,exports){
 var isObject = require('./_is-object');
 module.exports = function(it, S){
   if(!isObject(it))return it;
@@ -1407,13 +1414,13 @@ module.exports = function(it, S){
   if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
   throw TypeError("Can't convert object to primitive value");
 };
-},{"./_is-object":51}],94:[function(require,module,exports){
+},{"./_is-object":52}],95:[function(require,module,exports){
 var id = 0
   , px = Math.random();
 module.exports = function(key){
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
-},{}],95:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 var global         = require('./_global')
   , core           = require('./_core')
   , LIBRARY        = require('./_library')
@@ -1423,9 +1430,9 @@ module.exports = function(name){
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
 };
-},{"./_core":29,"./_global":41,"./_library":60,"./_object-dp":65,"./_wks-ext":96}],96:[function(require,module,exports){
+},{"./_core":30,"./_global":42,"./_library":61,"./_object-dp":66,"./_wks-ext":97}],97:[function(require,module,exports){
 exports.f = require('./_wks');
-},{"./_wks":97}],97:[function(require,module,exports){
+},{"./_wks":98}],98:[function(require,module,exports){
 var store      = require('./_shared')('wks')
   , uid        = require('./_uid')
   , Symbol     = require('./_global').Symbol
@@ -1437,7 +1444,7 @@ var $exports = module.exports = function(name){
 };
 
 $exports.store = store;
-},{"./_global":41,"./_shared":82,"./_uid":94}],98:[function(require,module,exports){
+},{"./_global":42,"./_shared":83,"./_uid":95}],99:[function(require,module,exports){
 var classof   = require('./_classof')
   , ITERATOR  = require('./_wks')('iterator')
   , Iterators = require('./_iterators');
@@ -1446,7 +1453,7 @@ module.exports = require('./_core').getIteratorMethod = function(it){
     || it['@@iterator']
     || Iterators[classof(it)];
 };
-},{"./_classof":23,"./_core":29,"./_iterators":58,"./_wks":97}],99:[function(require,module,exports){
+},{"./_classof":24,"./_core":30,"./_iterators":59,"./_wks":98}],100:[function(require,module,exports){
 'use strict';
 var ctx            = require('./_ctx')
   , $export        = require('./_export')
@@ -1483,7 +1490,7 @@ $export($export.S + $export.F * !require('./_iter-detect')(function(iter){ Array
   }
 });
 
-},{"./_create-property":30,"./_ctx":31,"./_export":37,"./_is-array-iter":49,"./_iter-call":53,"./_iter-detect":56,"./_to-length":91,"./_to-object":92,"./core.get-iterator-method":98}],100:[function(require,module,exports){
+},{"./_create-property":31,"./_ctx":32,"./_export":38,"./_is-array-iter":50,"./_iter-call":54,"./_iter-detect":57,"./_to-length":92,"./_to-object":93,"./core.get-iterator-method":99}],101:[function(require,module,exports){
 'use strict';
 var addToUnscopables = require('./_add-to-unscopables')
   , step             = require('./_iter-step')
@@ -1512,7 +1519,7 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
-},{"./_add-to-unscopables":15,"./_iter-define":55,"./_iter-step":57,"./_iterators":58,"./_to-iobject":90}],101:[function(require,module,exports){
+},{"./_add-to-unscopables":16,"./_iter-define":56,"./_iter-step":58,"./_iterators":59,"./_to-iobject":91}],102:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
 
@@ -1527,7 +1534,7 @@ module.exports = require('./_collection')('Map', function(get){
     return strong.def(this, key === 0 ? 0 : key, value);
   }
 }, strong, true);
-},{"./_collection":28,"./_collection-strong":25}],102:[function(require,module,exports){
+},{"./_collection":29,"./_collection-strong":26}],103:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.S, 'Math', {
@@ -1535,15 +1542,15 @@ $export($export.S, 'Math', {
     return (x >>>= 0) ? 31 - Math.floor(Math.log(x + 0.5) * Math.LOG2E) : 32;
   }
 });
-},{"./_export":37}],103:[function(require,module,exports){
+},{"./_export":38}],104:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
-},{"./_export":37}],104:[function(require,module,exports){
+},{"./_export":38}],105:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.S + $export.F, 'Object', {assign: require('./_object-assign')});
-},{"./_export":37,"./_object-assign":63}],105:[function(require,module,exports){
+},{"./_export":38,"./_object-assign":64}],106:[function(require,module,exports){
 'use strict';
 var classof = require('./_classof')
   , test    = {};
@@ -1553,7 +1560,7 @@ if(test + '' != '[object z]'){
     return '[object ' + classof(this) + ']';
   }, true);
 }
-},{"./_classof":23,"./_redefine":77,"./_wks":97}],106:[function(require,module,exports){
+},{"./_classof":24,"./_redefine":78,"./_wks":98}],107:[function(require,module,exports){
 'use strict';
 var LIBRARY            = require('./_library')
   , global             = require('./_global')
@@ -1838,7 +1845,7 @@ $export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(functi
     return capability.promise;
   }
 });
-},{"./_a-function":14,"./_an-instance":16,"./_classof":23,"./_core":29,"./_ctx":31,"./_export":37,"./_for-of":40,"./_global":41,"./_is-object":51,"./_iter-detect":56,"./_library":60,"./_microtask":62,"./_redefine-all":76,"./_set-species":79,"./_set-to-string-tag":80,"./_species-constructor":83,"./_task":87,"./_wks":97}],107:[function(require,module,exports){
+},{"./_a-function":15,"./_an-instance":17,"./_classof":24,"./_core":30,"./_ctx":32,"./_export":38,"./_for-of":41,"./_global":42,"./_is-object":52,"./_iter-detect":57,"./_library":61,"./_microtask":63,"./_redefine-all":77,"./_set-species":80,"./_set-to-string-tag":81,"./_species-constructor":84,"./_task":88,"./_wks":98}],108:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
 
@@ -1849,7 +1856,27 @@ module.exports = require('./_collection')('Set', function(get){
     return strong.def(this, value = value === 0 ? 0 : value, value);
   }
 }, strong);
-},{"./_collection":28,"./_collection-strong":25}],108:[function(require,module,exports){
+},{"./_collection":29,"./_collection-strong":26}],109:[function(require,module,exports){
+'use strict';
+var $export   = require('./_export')
+  , toLength  = require('./_to-length')
+  , context   = require('./_string-context')
+  , ENDS_WITH = 'endsWith'
+  , $endsWith = ''[ENDS_WITH];
+
+$export($export.P + $export.F * require('./_fails-is-regexp')(ENDS_WITH), 'String', {
+  endsWith: function endsWith(searchString ){
+    var that = context(this, searchString, ENDS_WITH)
+      , endPosition = arguments.length > 1 ? arguments[1] : undefined
+      , len    = toLength(that.length)
+      , end    = endPosition === undefined ? len : Math.min(toLength(endPosition), len)
+      , search = String(searchString);
+    return $endsWith
+      ? $endsWith.call(that, search, end)
+      : that.slice(end - search.length, end) === search;
+  }
+});
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86,"./_to-length":92}],110:[function(require,module,exports){
 'use strict';
 var $export  = require('./_export')
   , context  = require('./_string-context')
@@ -1861,7 +1888,7 @@ $export($export.P + $export.F * require('./_fails-is-regexp')(INCLUDES), 'String
       .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-},{"./_export":37,"./_fails-is-regexp":38,"./_string-context":85}],109:[function(require,module,exports){
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86}],111:[function(require,module,exports){
 'use strict';
 var $at  = require('./_string-at')(true);
 
@@ -1877,13 +1904,13 @@ require('./_iter-define')(String, 'String', function(iterated){
   this._i += point.length;
   return {value: point, done: false};
 });
-},{"./_iter-define":55,"./_string-at":84}],110:[function(require,module,exports){
+},{"./_iter-define":56,"./_string-at":85}],112:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.P, 'String', {
   repeat: require('./_string-repeat')
 });
-},{"./_export":37,"./_string-repeat":86}],111:[function(require,module,exports){
+},{"./_export":38,"./_string-repeat":87}],113:[function(require,module,exports){
 'use strict';
 var $export     = require('./_export')
   , toLength    = require('./_to-length')
@@ -1901,7 +1928,7 @@ $export($export.P + $export.F * require('./_fails-is-regexp')(STARTS_WITH), 'Str
       : that.slice(index, index + search.length) === search;
   }
 });
-},{"./_export":37,"./_fails-is-regexp":38,"./_string-context":85,"./_to-length":91}],112:[function(require,module,exports){
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86,"./_to-length":92}],114:[function(require,module,exports){
 'use strict';
 var global         = require('./_global')
   , has            = require('./_has')
@@ -2116,7 +2143,7 @@ $Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PR
 setToStringTag($Symbol, 'Symbol');
 setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
-},{"./_an-object":17,"./_descriptors":33,"./_enum-keys":36,"./_export":37,"./_fails":39,"./_global":41,"./_has":42,"./_hide":43,"./_is-array":50,"./_keyof":59,"./_library":60,"./_meta":61,"./_object-create":64,"./_object-dp":65,"./_object-gopd":67,"./_object-gopn":69,"./_object-gopn-ext":68,"./_object-gops":70,"./_object-keys":73,"./_object-pie":74,"./_property-desc":75,"./_redefine":77,"./_set-to-string-tag":80,"./_shared":82,"./_to-iobject":90,"./_to-primitive":93,"./_uid":94,"./_wks":97,"./_wks-define":95,"./_wks-ext":96}],113:[function(require,module,exports){
+},{"./_an-object":18,"./_descriptors":34,"./_enum-keys":37,"./_export":38,"./_fails":40,"./_global":42,"./_has":43,"./_hide":44,"./_is-array":51,"./_keyof":60,"./_library":61,"./_meta":62,"./_object-create":65,"./_object-dp":66,"./_object-gopd":68,"./_object-gopn":70,"./_object-gopn-ext":69,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_property-desc":76,"./_redefine":78,"./_set-to-string-tag":81,"./_shared":83,"./_to-iobject":91,"./_to-primitive":94,"./_uid":95,"./_wks":98,"./_wks-define":96,"./_wks-ext":97}],115:[function(require,module,exports){
 'use strict';
 var each         = require('./_array-methods')(0)
   , redefine     = require('./_redefine')
@@ -2167,19 +2194,19 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
     });
   });
 }
-},{"./_array-methods":20,"./_collection":28,"./_collection-weak":27,"./_is-object":51,"./_meta":61,"./_object-assign":63,"./_redefine":77}],114:[function(require,module,exports){
+},{"./_array-methods":21,"./_collection":29,"./_collection-weak":28,"./_is-object":52,"./_meta":62,"./_object-assign":64,"./_redefine":78}],116:[function(require,module,exports){
 var $export  = require('./_export');
 
 $export($export.P + $export.R, 'Map', {toJSON: require('./_collection-to-json')('Map')});
-},{"./_collection-to-json":26,"./_export":37}],115:[function(require,module,exports){
+},{"./_collection-to-json":27,"./_export":38}],117:[function(require,module,exports){
 var $export  = require('./_export');
 
 $export($export.P + $export.R, 'Set', {toJSON: require('./_collection-to-json')('Set')});
-},{"./_collection-to-json":26,"./_export":37}],116:[function(require,module,exports){
+},{"./_collection-to-json":27,"./_export":38}],118:[function(require,module,exports){
 require('./_wks-define')('asyncIterator');
-},{"./_wks-define":95}],117:[function(require,module,exports){
+},{"./_wks-define":96}],119:[function(require,module,exports){
 require('./_wks-define')('observable');
-},{"./_wks-define":95}],118:[function(require,module,exports){
+},{"./_wks-define":96}],120:[function(require,module,exports){
 var $iterators    = require('./es6.array.iterator')
   , redefine      = require('./_redefine')
   , global        = require('./_global')
@@ -2202,7 +2229,7 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
     for(key in $iterators)if(!proto[key])redefine(proto, key, $iterators[key], true);
   }
 }
-},{"./_global":41,"./_hide":43,"./_iterators":58,"./_redefine":77,"./_wks":97,"./es6.array.iterator":100}],119:[function(require,module,exports){
+},{"./_global":42,"./_hide":44,"./_iterators":59,"./_redefine":78,"./_wks":98,"./es6.array.iterator":101}],121:[function(require,module,exports){
 var process = module.exports = {};
 
 
@@ -2371,7 +2398,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],120:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 (function (process,global){
 
 !(function(global) {
@@ -2918,168 +2945,879 @@ process.umask = function() { return 0; };
 );
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":119}],121:[function(require,module,exports){
+},{"_process":121}],123:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
-(function de_main_func_inner(scriptStorage, FormData, scrollTo, localData) {
+
+(function deMainFuncInner(scriptStorage, FormData, scrollTo, localData) {
 	'use strict';
 
-	var _marked = [getFormElements].map(regeneratorRuntime.mark);
 
-	var version = '17.6.20.0';
-	var commit = 'acfb55c';
+	var getStored = function () {
+		var _ref2 = _asyncToGenerator( regeneratorRuntime.mark(function _callee(id) {
+			var value, _value;
+
+			return regeneratorRuntime.wrap(function _callee$(_context2) {
+				while (1) {
+					switch (_context2.prev = _context2.next) {
+						case 0:
+							if (!nav.isNewGM) {
+								_context2.next = 7;
+								break;
+							}
+
+							_context2.next = 3;
+							return GM.getValue(id);
+
+						case 3:
+							value = _context2.sent;
+							return _context2.abrupt('return', value);
+
+						case 7:
+							if (!nav.isGM) {
+								_context2.next = 11;
+								break;
+							}
+
+							return _context2.abrupt('return', GM_getValue(id));
+
+						case 11:
+							if (!nav.isChromeStorage) {
+								_context2.next = 18;
+								break;
+							}
+
+							_context2.next = 14;
+							return new Promise(function (resolve) {
+								return chrome.storage.local.get(id, function (obj) {
+									if (Object.keys(obj).length) {
+										resolve(obj[id]);
+									} else {
+										chrome.storage.sync.get(id, function (obj) {
+											resolve(obj[id]);
+										});
+									}
+								});
+							});
+
+						case 14:
+							_value = _context2.sent;
+							return _context2.abrupt('return', _value);
+
+						case 18:
+							if (!nav.isScriptStorage) {
+								_context2.next = 20;
+								break;
+							}
+
+							return _context2.abrupt('return', scriptStorage.getItem(id));
+
+						case 20:
+							return _context2.abrupt('return', locStorage[id]);
+
+						case 21:
+						case 'end':
+							return _context2.stop();
+					}
+				}
+			}, _callee, this);
+		}));
+
+		return function getStored(_x6) {
+			return _ref2.apply(this, arguments);
+		};
+	}();
+
+
+
+	var getStoredObj = function () {
+		var _ref3 = _asyncToGenerator( regeneratorRuntime.mark(function _callee2(id) {
+			return regeneratorRuntime.wrap(function _callee2$(_context3) {
+				while (1) {
+					switch (_context3.prev = _context3.next) {
+						case 0:
+							_context3.t1 = JSON;
+							_context3.next = 3;
+							return getStored(id);
+
+						case 3:
+							_context3.t2 = _context3.sent;
+
+							if (_context3.t2) {
+								_context3.next = 6;
+								break;
+							}
+
+							_context3.t2 = '{}';
+
+						case 6:
+							_context3.t3 = _context3.t2;
+							_context3.t0 = _context3.t1.parse.call(_context3.t1, _context3.t3);
+
+							if (_context3.t0) {
+								_context3.next = 10;
+								break;
+							}
+
+							_context3.t0 = {};
+
+						case 10:
+							return _context3.abrupt('return', _context3.t0);
+
+						case 11:
+						case 'end':
+							return _context3.stop();
+					}
+				}
+			}, _callee2, this);
+		}));
+
+		return function getStoredObj(_x7) {
+			return _ref3.apply(this, arguments);
+		};
+	}();
+
+
+
+	var readCfg = function () {
+		var _ref4 = _asyncToGenerator( regeneratorRuntime.mark(function _callee3() {
+			var obj, val, hasGlobal;
+			return regeneratorRuntime.wrap(function _callee3$(_context4) {
+				while (1) {
+					switch (_context4.prev = _context4.next) {
+						case 0:
+							obj = void 0;
+							_context4.next = 3;
+							return getStoredObj('DESU_Config');
+
+						case 3:
+							val = _context4.sent;
+
+							if (!(aib.dm in val) || $isEmpty(obj = val[aib.dm])) {
+								hasGlobal = nav.isGlobal && !!val.global;
+
+								obj = hasGlobal ? val.global : {};
+								if (hasGlobal) {
+									delete obj.correctTime;
+									delete obj.captchaLang;
+								}
+							}
+							defaultCfg.captchaLang = aib.capLang;
+							defaultCfg.language = +!String(navigator.language).toLowerCase().startsWith('ru');
+							Cfg = Object.assign(Object.create(defaultCfg), obj);
+							if (!Cfg.timeOffset) {
+								Cfg.timeOffset = '+0';
+							}
+							if (!Cfg.timePattern) {
+								Cfg.timePattern = aib.timePattern;
+							}
+							if (aib.prot !== 'http:') {
+								Cfg.addVocaroo = 0;
+							}
+							if (aib.dobr && !Cfg.useDobrAPI) {
+								aib.JsonBuilder = null;
+							}
+							if (!('FormData' in window)) {
+								Cfg.ajaxPosting = 0;
+							}
+							if (!('Notification' in window)) {
+								Cfg.desktNotif = 0;
+							}
+							if (nav.isPresto) {
+								Cfg.preLoadImgs = 0;
+								Cfg.findImgFile = 0;
+								if (!nav.isGM) {
+									Cfg.updScript = 0;
+								}
+								Cfg.fileInputs = 0;
+							}
+							if (nav.isChromeStorage) {
+								Cfg.updScript = 0;
+							}
+							if (Cfg.updThrDelay < 10) {
+								Cfg.updThrDelay = 10;
+							}
+							if (!Cfg.saveSage) {
+								Cfg.sageReply = 0;
+							}
+							if (!Cfg.passwValue) {
+								Cfg.passwValue = Math.round(Math.random() * 1e15).toString(32);
+							}
+							if (!Cfg.stats) {
+								Cfg.stats = { view: 0, op: 0, reply: 0 };
+							}
+							setStored('DESU_Config', JSON.stringify(val));
+							lang = Cfg.language;
+							if (Cfg.updScript) {
+								checkForUpdates(false, val.lastUpd).then(function (html) {
+									if (doc.readyState === 'loading') {
+										doc.addEventListener('DOMContentLoaded', function () {
+											return $popup('updavail', html);
+										});
+									} else {
+										$popup('updavail', html);
+									}
+								}, emptyFn);
+							}
+
+						case 23:
+						case 'end':
+							return _context4.stop();
+					}
+				}
+			}, _callee3, this);
+		}));
+
+		return function readCfg() {
+			return _ref4.apply(this, arguments);
+		};
+	}();
+
+
+
+	var checkDelete = function () {
+		var _ref63 = _asyncToGenerator( regeneratorRuntime.mark(function _callee13(data) {
+			var err, els, threads, isThr, i, len, el;
+			return regeneratorRuntime.wrap(function _callee13$(_context14) {
+				while (1) {
+					switch (_context14.prev = _context14.next) {
+						case 0:
+							err = getSubmitError(data instanceof HTMLDocument ? data : $DOM(data));
+
+							if (!err) {
+								_context14.next = 5;
+								break;
+							}
+
+							$popup('delete', Lng.errDelete[lang] + ':\n' + err);
+							updater.sendErrNotif();
+							return _context14.abrupt('return');
+
+						case 5:
+							els = $Q('[de-form] ' + aib.qRPost + ' input:checked');
+							threads = new Set();
+							isThr = aib.t;
+
+							for (i = 0, len = els.length; i < len; ++i) {
+								el = els[i];
+
+								el.checked = false;
+								if (!isThr) {
+									threads.add(aib.getPostOfEl(el).thr);
+								}
+							}
+
+							if (!isThr) {
+								_context14.next = 21;
+								break;
+							}
+
+							Post.clearMarks();
+							_context14.prev = 11;
+							_context14.next = 14;
+							return Thread.first.loadNewPosts();
+
+						case 14:
+							_context14.next = 19;
+							break;
+
+						case 16:
+							_context14.prev = 16;
+							_context14.t0 = _context14['catch'](11);
+
+							infoLoadErrors(_context14.t0);
+
+						case 19:
+							_context14.next = 23;
+							break;
+
+						case 21:
+							_context14.next = 23;
+							return Promise.all(Array.from(threads, function (thr) {
+								return thr.loadPosts(visPosts, false, false);
+							}));
+
+						case 23:
+							$popup('delete', Lng.succDeleted[lang]);
+
+						case 24:
+						case 'end':
+							return _context14.stop();
+					}
+				}
+			}, _callee13, this, [[11, 16]]);
+		}));
+
+		return function checkDelete(_x38) {
+			return _ref63.apply(this, arguments);
+		};
+	}();
+
+	var html5Submit = function () {
+		var _ref64 = _asyncToGenerator( regeneratorRuntime.mark(function _callee14(form, submitter) {
+			var needProgress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+			var data, hasFiles, _iterator23, _isArray23, _i32, _ref65, _ref66, name, value, type, el, val, fileName, newFileName, cleanData, ajaxParams, xhr;
+
+			return regeneratorRuntime.wrap(function _callee14$(_context15) {
+				while (1) {
+					switch (_context15.prev = _context15.next) {
+						case 0:
+							data = new FormData();
+							hasFiles = false;
+							_iterator23 = getFormElements(form, submitter), _isArray23 = Array.isArray(_iterator23), _i32 = 0, _iterator23 = _isArray23 ? _iterator23 : _iterator23[Symbol.iterator]();
+
+						case 3:
+							if (!_isArray23) {
+								_context15.next = 9;
+								break;
+							}
+
+							if (!(_i32 >= _iterator23.length)) {
+								_context15.next = 6;
+								break;
+							}
+
+							return _context15.abrupt('break', 37);
+
+						case 6:
+							_ref65 = _iterator23[_i32++];
+							_context15.next = 13;
+							break;
+
+						case 9:
+							_i32 = _iterator23.next();
+
+							if (!_i32.done) {
+								_context15.next = 12;
+								break;
+							}
+
+							return _context15.abrupt('break', 37);
+
+						case 12:
+							_ref65 = _i32.value;
+
+						case 13:
+							_ref66 = _ref65, name = _ref66.name, value = _ref66.value, type = _ref66.type, el = _ref66.el;
+							val = value;
+
+							if (!(name === 'de-file-txt')) {
+								_context15.next = 17;
+								break;
+							}
+
+							return _context15.abrupt('continue', 35);
+
+						case 17:
+							if (!(type === 'file')) {
+								_context15.next = 34;
+								break;
+							}
+
+							hasFiles = true;
+							fileName = value.name;
+							newFileName = Cfg.removeFName ? ' ' + fileName.substring(fileName.lastIndexOf('.')) : fileName;
+
+							if (!((Cfg.postSameImg || Cfg.removeEXIF) && (value.type === 'image/jpeg' || value.type === 'image/png' || value.type === 'video/webm' && !aib.mak))) {
+								_context15.next = 33;
+								break;
+							}
+
+							_context15.t0 = cleanFile;
+							_context15.next = 25;
+							return readFile(value);
+
+						case 25:
+							_context15.t1 = _context15.sent.data;
+							_context15.t2 = el.obj ? el.obj.extraFile : null;
+							cleanData = (0, _context15.t0)(_context15.t1, _context15.t2);
+
+							if (cleanData) {
+								_context15.next = 30;
+								break;
+							}
+
+							return _context15.abrupt('return', Promise.reject(new Error(Lng.fileCorrupt[lang] + ': ' + fileName)));
+
+						case 30:
+							val = new File(cleanData, newFileName);
+							_context15.next = 34;
+							break;
+
+						case 33:
+							if (Cfg.removeFName) {
+								val = new File([value], newFileName);
+							}
+
+						case 34:
+							data.append(name, val);
+
+						case 35:
+							_context15.next = 3;
+							break;
+
+						case 37:
+							ajaxParams = { data: data, method: 'POST' };
+
+							if (needProgress && hasFiles) {
+								ajaxParams.onprogress = getUploadFunc();
+							}
+							_context15.prev = 39;
+							_context15.next = 42;
+							return $ajax(form.action, ajaxParams);
+
+						case 42:
+							xhr = _context15.sent;
+							return _context15.abrupt('return', aib.jsonSubmit ? xhr.responseText : $DOM(xhr.responseText));
+
+						case 46:
+							_context15.prev = 46;
+							_context15.t3 = _context15['catch'](39);
+							return _context15.abrupt('return', Promise.reject(_context15.t3));
+
+						case 49:
+						case 'end':
+							return _context15.stop();
+					}
+				}
+			}, _callee14, this, [[39, 46]]);
+		}));
+
+		return function html5Submit(_x40, _x41) {
+			return _ref64.apply(this, arguments);
+		};
+	}();
+
+	var readFile = function () {
+		var _ref67 = _asyncToGenerator( regeneratorRuntime.mark(function _callee15(file) {
+			var asText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+			return regeneratorRuntime.wrap(function _callee15$(_context16) {
+				while (1) {
+					switch (_context16.prev = _context16.next) {
+						case 0:
+							return _context16.abrupt('return', new Promise(function (resolve) {
+								var fr = new FileReader();
+								fr.onload = function (e) {
+									return resolve({ data: e.target.result });
+								};
+								if (asText) {
+									fr.readAsText(file);
+								} else {
+									fr.readAsArrayBuffer(file);
+								}
+							}));
+
+						case 1:
+						case 'end':
+							return _context16.stop();
+					}
+				}
+			}, _callee15, this);
+		}));
+
+		return function readFile(_x43) {
+			return _ref67.apply(this, arguments);
+		};
+	}();
+
+
+	var runMain = function () {
+		var _ref106 = _asyncToGenerator( regeneratorRuntime.mark(function _callee17(checkDomains, dataPromise) {
+			var formEl, eList, fav, _ref107, _ref108, _ref109, _ref110, oldMain, storageName, firstThr;
+
+			return regeneratorRuntime.wrap(function _callee17$(_context22) {
+				while (1) {
+					switch (_context22.prev = _context22.next) {
+						case 0:
+							Logger.init();
+							docBody = doc.body;
+
+							if (docBody) {
+								_context22.next = 4;
+								break;
+							}
+
+							return _context22.abrupt('return');
+
+						case 4:
+							if (aib) {
+								_context22.next = 8;
+								break;
+							}
+
+							aib = getImageBoard(checkDomains, true);
+
+							if (aib) {
+								_context22.next = 8;
+								break;
+							}
+
+							return _context22.abrupt('return');
+
+						case 8:
+							formEl = $q(aib.qDForm + ', form[de-form]');
+
+							if (formEl) {
+								_context22.next = 12;
+								break;
+							}
+
+							if (aib.observeContent) {
+								aib.observeContent(checkDomains, dataPromise);
+							}
+							return _context22.abrupt('return');
+
+						case 12:
+							Logger.log('Imageboard check');
+
+							if (locStorage) {
+								_context22.next = 17;
+								break;
+							}
+
+							if (checkStorage()) {
+								_context22.next = 16;
+								break;
+							}
+
+							return _context22.abrupt('return');
+
+						case 16:
+							initNavFuncs();
+
+						case 17:
+							eList = void 0, fav = void 0;
+
+							if (!dataPromise) {
+								_context22.next = 27;
+								break;
+							}
+
+							_context22.next = 21;
+							return dataPromise;
+
+						case 21:
+							_ref107 = _context22.sent;
+							_ref108 = _slicedToArray(_ref107, 2);
+							eList = _ref108[0];
+							fav = _ref108[1];
+							_context22.next = 33;
+							break;
+
+						case 27:
+							_context22.next = 29;
+							return readData();
+
+						case 29:
+							_ref109 = _context22.sent;
+							_ref110 = _slicedToArray(_ref109, 2);
+							eList = _ref110[0];
+							fav = _ref110[1];
+
+						case 33:
+							if (!(eList && eList.includes(aib.dm))) {
+								_context22.next = 35;
+								break;
+							}
+
+							return _context22.abrupt('return');
+
+						case 35:
+							excludeList = eList || '';
+							Logger.log('Data loading');
+							oldMain = void 0;
+
+							if (!(!Cfg.disabled && aib.init && aib.init() || (oldMain = $id('de-main')) && $id('de-panel-buttons').children.length > 1)) {
+								_context22.next = 40;
+								break;
+							}
+
+							return _context22.abrupt('return');
+
+						case 40:
+							$del(oldMain);
+							if ('toJSON' in aProto) {
+								delete aProto.toJSON;
+							}
+							addSVGIcons();
+
+							if (!Cfg.disabled) {
+								_context22.next = 47;
+								break;
+							}
+
+							Panel.init(formEl);
+							scriptCSS();
+							return _context22.abrupt('return');
+
+						case 47:
+							initStorageEvent();
+							DollchanAPI.init();
+							if (localData) {
+								aib.prot = 'http:';
+								aib.host = aib.dm;
+								aib.b = localData.b;
+								aib.t = localData.t;
+								aib.docExt = '.html';
+							} else {
+								aib.parseURL();
+							}
+							if (aib.t || !Cfg.scrollToTop) {
+								doc.defaultView.addEventListener('beforeunload', function () {
+									return sesStorage['de-scroll-' + aib.b + aib.t] = window.pageYOffset;
+								});
+							}
+							Logger.log('Init');
+							if (Cfg.correctTime) {
+								dTime = new DateTime(Cfg.timePattern, Cfg.timeRPattern, Cfg.timeOffset, lang, function (rp) {
+									return saveCfg('timeRPattern', rp);
+								});
+								Logger.log('Time correction');
+							}
+							MyPosts.read();
+							Logger.log('Read my posts');
+							$hide(docBody);
+							dummy = doc.createElement('div');
+							formEl = aib.fixHTML(formEl, true);
+							Logger.log('Replace delform');
+							pByEl = new Map();
+							pByNum = new Map();
+							_context22.prev = 61;
+
+							DelForm.last = DelForm.first = new DelForm(formEl, aib.page, false);
+							if (!Thread.first) {
+								console.error('No threads detected!');
+							}
+							_context22.next = 71;
+							break;
+
+						case 66:
+							_context22.prev = 66;
+							_context22.t0 = _context22['catch'](61);
+
+							console.error('Delform parsing error:', getErrorMessage(_context22.t0));
+							$show(docBody);
+							return _context22.abrupt('return');
+
+						case 71:
+							Logger.log('Parse delform');
+							storageName = 'de-lastpcount-' + aib.b + '-' + aib.t;
+
+							if (aib.t && !!sesStorage[storageName]) {
+								if (sesStorage[storageName] > Thread.first.pcount) {
+									sesStorage.removeItem(storageName);
+									window.location.reload();
+								}
+							}
+							pr = new PostForm($q(aib.qForm));
+							Logger.log('Parse postform');
+							if (Cfg.hotKeys) {
+								HotKeys.enable();
+								Logger.log('Init keybinds');
+							}
+							initPage();
+							Logger.log('Init page');
+							Panel.init(formEl);
+							Logger.log('Add panel');
+							DelForm.first.addStuff();
+							readViewedPosts();
+							scriptCSS();
+							Logger.log('Apply CSS');
+							$show(docBody);
+							Logger.log('Display page');
+							toggleInfinityScroll();
+							Logger.log('Infinity scroll');
+							firstThr = DelForm.first.firstThr;
+
+							if (firstThr) {
+								readPostsData(firstThr.op, fav);
+							}
+							Logger.log('Hide posts');
+							scrollPage();
+							Logger.log('Scroll page');
+							if (localData) {
+								$each($Q('.de-post-removed'), function (el) {
+									var post = pByEl.get(el);
+									if (post) {
+										post.delete(false);
+									}
+								});
+								Logger.log('Local changings');
+							}
+							Logger.finish();
+
+						case 96:
+						case 'end':
+							return _context22.stop();
+					}
+				}
+			}, _callee17, this, [[61, 66]]);
+		}));
+
+		return function runMain(_x70, _x71) {
+			return _ref106.apply(this, arguments);
+		};
+	}();
+
+
+
+	var _marked = regeneratorRuntime.mark(getFormElements);
+
+	var version = '18.1.15.0';
+	var commit = '2b0056e';
 
 
 	var defaultCfg = {
-		'disabled': 0, 
-		'language': 0, 
-		'hideBySpell': 1, 
-		'spells': null, 
-		'sortSpells': 0, 
-		'menuHiddBtn': 1, 
-		'hideRefPsts': 0, 
-		'delHiddPost': 0, 
-		'ajaxUpdThr': 1, 
-		'updThrDelay': 20, 
-		'updCount': 1, 
-		'favIcoBlink': 0, 
-		'desktNotif': 0, 
-		'noErrInTitle': 0, 
-		'markNewPosts': 1, 
-		'useDobrAPI': 1, 
-		'markMyPosts': 1, 
-		'hideReplies': 0, 
-		'expandTrunc': 0, 
-		'updThrBtns': 1, 
-		'showHideBtn': 1, 
-		'showRepBtn': 1, 
-		'postBtnsCSS': 1, 
-		'postBtnsBack': '#8c8c8c', 
-		'noSpoilers': 1, 
-		'noPostNames': 0, 
-		'widePosts': 0, 
-		'correctTime': 0, 
-		'timeOffset': '+0', 
-		'timePattern': '', 
-		'timeRPattern': '', 
-		'expandImgs': 2, 
-		'imgNavBtns': 1, 
-		'resizeDPI': 0, 
-		'resizeImgs': 1, 
-		'minImgSize': 100, 
-		'zoomFactor': 25, 
-		'webmControl': 1, 
-		'webmTitles': 0, 
-		'webmVolume': 100, 
-		'minWebmWidth': 320, 
-		'preLoadImgs': 0, 
-		'findImgFile': 0, 
-		'openImgs': 0, 
-		'imgSrcBtns': 1, 
-		'delImgNames': 0, 
-		'maskImgs': 0, 
-		'maskVisib': 7, 
-		'linksNavig': 1, 
-		'linksOver': 100, 
-		'linksOut': 1500, 
-		'markViewed': 0, 
-		'strikeHidd': 0, 
-		'removeHidd': 0, 
-		'noNavigHidd': 0, 
-		'markMyLinks': 1, 
-		'crossLinks': 0, 
-		'decodeLinks': 0, 
-		'insertNum': 1, 
-		'addOPLink': 0, 
-		'addImgs': 0, 
-		'addMP3': 1, 
-		'addVocaroo': 1, 
-		'addYouTube': 3, 
-		'YTubeType': 0, 
-		'YTubeWidth': 360, 
-		'YTubeHeigh': 270, 
-		'YTubeTitles': 0, 
-		'ytApiKey': '', 
-		'addVimeo': 1, 
-		'ajaxPosting': 1, 
-		'postSameImg': 1, 
-		'removeEXIF': 1, 
-		'removeFName': 0, 
-		'sendErrNotif': 1, 
-		'scrAfterRep': 0, 
-		'fileInputs': 2, 
-		'addPostForm': 2, 
-		'spacedQuote': 1, 
-		'favOnReply': 1, 
-		'warnSubjTrip': 0, 
-		'addSageBtn': 1, 
-		'saveSage': 1, 
-		'sageReply': 0, 
-		'cap4chanAlt': 1, 
-		'capUpdTime': 300, 
-		'captchaLang': 1, 
-		'addTextBtns': 1, 
-		'txtBtnsLoc': 1, 
-		'passwValue': '', 
-		'userName': 0, 
-		'nameValue': '', 
-		'noBoardRule': 1, 
-		'noPassword': 1, 
-		'noName': 0, 
-		'noSubj': 0, 
-		'scriptStyle': 0, 
-		'userCSS': 0, 
-		'userCSSTxt': '', 
-		'expandPanel': 0, 
-		'panelCounter': 1, 
-		'rePageTitle': 1, 
-		'animation': 1, 
-		'closePopups': 0, 
-		'inftyScroll': 1, 
-		'scrollToTop': 0, 
-		'hotKeys': 1, 
-		'loadPages': 1, 
-		'updScript': 1, 
-		'scrUpdIntrv': 1, 
-		'turnOff': 0, 
-		'textaWidth': 300, 
-		'textaHeight': 115, 
-		'replyWinDrag': 0, 
-		'replyWinX': 'right: 0', 
-		'replyWinY': 'top: 0', 
-		'cfgWinDrag': 0, 
-		'cfgWinX': 'right: 0', 
-		'cfgWinY': 'top: 0', 
-		'cfgTab': 'filters', 
-		'hidWinDrag': 0, 
-		'hidWinX': 'right: 0', 
-		'hidWinY': 'top: 0', 
-		'favWinDrag': 0, 
-		'favWinX': 'right: 0', 
-		'favWinY': 'top: 0', 
-		'favWinWidth': 500, 
-		'vidWinDrag': 0, 
-		'vidWinX': 'right: 0', 
-		'vidWinY': 'top: 0' 
+		disabled: 0, 
+		language: 0, 
+		hideBySpell: 1, 
+		spells: null, 
+		sortSpells: 0, 
+		menuHiddBtn: 1, 
+		hideRefPsts: 0, 
+		delHiddPost: 0, 
+		ajaxUpdThr: 1, 
+		updThrDelay: 20, 
+		updCount: 1, 
+		favIcoBlink: 0, 
+		desktNotif: 0, 
+		noErrInTitle: 0, 
+		markNewPosts: 1, 
+		useDobrAPI: 1, 
+		markMyPosts: 1, 
+		hideReplies: 0, 
+		expandTrunc: 0, 
+		updThrBtns: 1, 
+		showHideBtn: 1, 
+		showRepBtn: 1, 
+		postBtnsCSS: 1, 
+		postBtnsBack: '#8c8c8c', 
+		noSpoilers: 1, 
+		noPostNames: 0, 
+		widePosts: 0, 
+		correctTime: 0, 
+		timeOffset: '+0', 
+		timePattern: '', 
+		timeRPattern: '', 
+		expandImgs: 2, 
+		imgNavBtns: 1, 
+		imgInfoLink: 1, 
+		resizeDPI: 0, 
+		resizeImgs: 1, 
+		minImgSize: 100, 
+		zoomFactor: 25, 
+		webmControl: 1, 
+		webmTitles: 0, 
+		webmVolume: 100, 
+		minWebmWidth: 320, 
+		preLoadImgs: 0, 
+		findImgFile: 0, 
+		openImgs: 0, 
+		imgSrcBtns: 1, 
+		delImgNames: 0, 
+		maskImgs: 0, 
+		maskVisib: 7, 
+		linksNavig: 1, 
+		linksOver: 100, 
+		linksOut: 1500, 
+		markViewed: 0, 
+		strikeHidd: 0, 
+		removeHidd: 0, 
+		noNavigHidd: 0, 
+		markMyLinks: 1, 
+		crossLinks: 0, 
+		decodeLinks: 0, 
+		insertNum: 1, 
+		addOPLink: 0, 
+		addImgs: 0, 
+		addMP3: 1, 
+		addVocaroo: 1, 
+		addYouTube: 3, 
+		YTubeWidth: 360, 
+		YTubeHeigh: 270, 
+		YTubeTitles: 0, 
+		ytApiKey: '', 
+		addVimeo: 1, 
+		ajaxPosting: 1, 
+		postSameImg: 1, 
+		removeEXIF: 1, 
+		removeFName: 0, 
+		sendErrNotif: 1, 
+		scrAfterRep: 0, 
+		fileInputs: 2, 
+		addPostForm: 2, 
+		spacedQuote: 1, 
+		favOnReply: 1, 
+		warnSubjTrip: 0, 
+		addSageBtn: 1, 
+		saveSage: 1, 
+		sageReply: 0, 
+		cap4chanAlt: 1, 
+		capUpdTime: 300, 
+		captchaLang: 1, 
+		addTextBtns: 1, 
+		txtBtnsLoc: 1, 
+		passwValue: '', 
+		userName: 0, 
+		nameValue: '', 
+		noBoardRule: 1, 
+		noPassword: 1, 
+		noName: 0, 
+		noSubj: 0, 
+		scriptStyle: 0, 
+		userCSS: 0, 
+		userCSSTxt: '', 
+		expandPanel: 0, 
+		panelCounter: 1, 
+		rePageTitle: 1, 
+		animation: 1, 
+		closePopups: 0, 
+		inftyScroll: 1, 
+		scrollToTop: 0, 
+		hotKeys: 1, 
+		loadPages: 1, 
+		updScript: 1, 
+		scrUpdIntrv: 1, 
+		turnOff: 0, 
+		textaWidth: 300, 
+		textaHeight: 115, 
+		replyWinDrag: 0, 
+		replyWinX: 'right: 0', 
+		replyWinY: 'top: 0', 
+		cfgTab: 'filters', 
+		cfgWinDrag: 0, 
+		cfgWinX: 'right: 0', 
+		cfgWinY: 'top: 0', 
+		hidWinDrag: 0, 
+		hidWinX: 'right: 0', 
+		hidWinY: 'top: 0', 
+		favWinDrag: 0, 
+		favWinX: 'right: 0', 
+		favWinY: 'top: 0', 
+		favWinWidth: 500, 
+		vidWinDrag: 0, 
+		vidWinX: 'right: 0', 
+		vidWinY: 'top: 0' 
 	};
 
 
@@ -3144,6 +3882,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				txt: ['Раскрывать картинки по клику', 'Expand images on click', 'Розгортати зображення по кліку']
 			},
 			imgNavBtns: ['Добавлять кнопки навигации по картинкам', 'Add buttons to navigate images', 'Додавати кнопки навігації по зображеннях'],
+			imgInfoLink: ['Имя файла под раскрытой картинкой', 'Show file name under expanded image', 'Імʼя файлу під розкритим зображенням'],
 			resizeDPI: ['Не растягивать на дисплеях с высоким DPI', 'Donʼt upscale images on high DPI displays', 'Не розтягувати на дисплеях з високим DPI'],
 			resizeImgs: ['Умещать большие картинки в экран', 'Resize large images to fit screen', 'Вміщувати великі зображення в екран'],
 			minImgSize: ['Миним. размер раскрытых картинок (px)', 'Minimal size for expanded images (px)', 'Мінім. розмір розгорнутих зображень (px)'],
@@ -3160,7 +3899,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			},
 			imgSrcBtns: ['Добавлять кнопки "Поиск" для картинок', 'Add "Search" buttons for images', 'Додавати кнопки "Пошук" для зображень'],
 			delImgNames: ['Скрывать имена картинок', 'Hide filenames', 'Ховати імена зображень'],
-			maskVisib: ['Видимость для NSFW-изображений [0-100%]', 'Visibility for NSFW images [0-100%]', 'Видимість для NSFW-зображень [0-100%]'],
+			maskVisib: ['Видимость для NSFW-картинок [0-100%]', 'Visibility for NSFW images [0-100%]', 'Видимість для NSFW-зображень [0-100%]'],
 
 			linksNavig: ['Навигация постов по >>ссылкам* ', 'Posts navigation by >>links* ', 'Навігація постів по >>посиланнях* '],
 			linksOver: ['Появление ', 'Appearance ', 'Поява '],
@@ -3181,10 +3920,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			addYouTube: {
 				sel: [['Ничего', 'Плеер по клику', 'Авто плеер', 'Превью+плеер', 'Только превью'], ['Nothing', 'On click player', 'Auto player', 'Preview+player', 'Only preview'], ['Нічого', 'Плеєр по кліку', 'Авто плеєр', 'Превʼю+плеєр', 'Тільки превʼю']],
 				txt: ['к YouTube ссылкам* ', 'for YouTube links* ', 'до YouTube посилань* ']
-			},
-			YTubeType: {
-				sel: [['Flash', 'HTML5'], ['Flash', 'HTML5'], ['Flash', 'HTML5']],
-				txt: ['', '', '']
 			},
 			YTubeTitles: ['Загружать названия к YouTube ссылкам*', 'Load titles for YouTube links*', 'Отримувати назви до YouTube посилань*'],
 			ytApiKey: ['Ключ YT API*', 'YT API Key*', 'Ключ YT API*'],
@@ -3262,7 +3997,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			godown: ['В конец страницы', 'Scroll to bottom', 'Прогорнути донизу'],
 			expimg: ['Раскрыть все картинки', 'Expand all images', 'Розгорнути всі зображення'],
 			maskimg: ['Режим NSFW', 'NSFW mode', 'Режим NSFW'],
-			preimg: ['Предзагрузить картинки&#13;([Ctrl+Click] только для новых постов)', 'Preload images&#13;([Ctrl+Click] for new posts only)', 'Наперед завантажити зображення&#13;([Ctrl+Click] лише для нових постів)'],
+			preimg: ['Предзагрузить картинки\r\n([Ctrl+Click] только для новых постов)', 'Preload images\r\n([Ctrl+Click] for new posts only)', 'Наперед завантажити зображення\r\n([Ctrl+Click] лише для нових постів)'],
 			savethr: ['Сохранить на диск', 'Save to disk', 'Зберегти на диск'],
 			'upd-on': ['Выключить автообновление треда', 'Disable thread updater', 'Вимкнути оновлювач треду'],
 			'upd-off': ['Включить автообновление треда', 'Enable thread updater', 'Увімкнути оновлювач треду'],
@@ -3323,9 +4058,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		fullMonth: [['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'], ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня']],
 		week: [['Вск', 'Пнд', 'Втр', 'Срд', 'Чтв', 'Птн', 'Сбт'], ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], ['Нед', 'Пон', 'Вів', 'Сер', 'Чет', 'Птн', 'Сбт']],
 		monthDict: {
-			'янв': 0, 'фев': 1, 'мар': 2, 'апр': 3, 'май': 4, 'мая': 4, 'июн': 5, 'июл': 6, 'авг': 7, 'сен': 8, 'окт': 9, 'ноя': 10, 'дек': 11,
-			'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5, 'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11,
-			'січ': 0, 'лют': 1, 'бер': 2, 'кві': 3, 'тра': 4, 'чер': 5, 'лип': 6, 'сер': 7, 'вер': 8, 'жов': 9, 'лис': 10, 'гру': 11
+			янв: 0, фев: 1, мар: 2, апр: 3, май: 4, мая: 4, июн: 5, июл: 6, авг: 7, сен: 8, окт: 9, ноя: 10, дек: 11,
+			jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+			січ: 0, лют: 1, бер: 2, кві: 3, тра: 4, чер: 5, лип: 6, сер: 7, вер: 8, жов: 9, лис: 10, гру: 11
 		},
 
 		seSyntaxErr: ['синтаксическая ошибка в аргументе спелла: %s', 'syntax error in argument of spell: %s', 'синтаксична помилка в аргументі спеллу: %s'],
@@ -3335,7 +4070,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		seMissSpell: ['пропущен спелл', 'missing spell', 'пропущено спелл'],
 		seErrRegex: ['синтаксическая ошибка в регулярном выражении: %s', 'syntax error in regular expression: %s', 'синтаксична помилка в регулярному виразі: %s'],
 		seUnexpChar: ['неожиданный символ: %s', 'unexpected character: %s', 'неочікуваний символ: %s'],
-		seMissClBkt: ['пропущена закрывающая скобка', 'missing \')\' in expression', 'пропущено закривну дужку'],
+		seMissClBkt: ['пропущена закрывающая скобка', "missing ')' in expression", 'пропущено закривну дужку'],
 		seRepsInParens: ['спелл %s не должен располагаться в скобках', 'spell %s shouldnʼt be inside parentheses', 'спелл %s не може бути в дужках'],
 		seOpInReps: ['недопустимо использовать оператор %s со спеллами #rep и #outrep', 'donʼt use operator %s with spells #rep & #outrep', 'неприпустимо використовувати оператор %s зі спеллами #rep и #outrep'],
 		seRow: [' (строка ', ' (row ', ' (рядок '],
@@ -3366,8 +4101,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		myPosts: ['Мои посты', 'My posts', 'Мої пости'],
 
 		checkNow: ['Проверить сейчас', 'Check now', 'Перевірити зараз'],
-		updAvail: ['Доступно обновление Dollchan!', 'Dollchan update available!', 'Доступне оновлення Dollchan!'],
-		haveLatest: ['У вас стоит последняя стабильная версия!', 'You have the latest stable version!', 'Ви маєте останню стабільну версію!'],
+		updAvail: ['Доступно обновление Dollchan: %s', 'Dollchan update available: %s!', 'Доступне оновлення Dollchan: %s'],
+		newCommitsAvail: ['Обнаружены новые исправления: %s', 'New fixes detected: %s', 'Виявлено нові виправлення: %s'],
+		haveLatestStable: ['Ваша версия %s является последней из стабильных.', 'Your %s version is the latest from stable versions.', 'Ваша версія %s є останньою зі стабільних.'],
+		haveLatestCommit: ['Ваша версия %s содержит последние исправления.', 'Your %s version contains all the latest fixes.', 'Ваша версія %s містить всі останні виправлення.'],
 		thrViewed: ['Тредов посещено', 'Threads visited', 'Тредів відвідано'],
 		thrCreated: ['Тредов создано', 'Threads created', 'Тредів створено'],
 		thrHidden: ['Тредов скрыто', 'Threads hidden', 'Тредів сховано'],
@@ -3393,12 +4130,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		author: ['Автор: ', 'Author: ', 'Автор: '],
 		views: ['просмотров: ', 'views: ', 'переглядів: '],
 
+		pasteImage: ['Ctrl+V - вставить картинку из буфера', 'Ctrl+V - paste an image from clipboard', 'Ctrl+V - додати зображення з буферу'],
 		dropFileHere: ['Бросьте сюда файл(ы) или ссылку', 'Drop file(s) or link here', 'Киньте сюди файл(и) чи посилання'],
-		youCanDrag: ['Можно перетаскивать картинки и ссылки на файлы&#13;прямо со страницы или других сайтов', 'You can drag images and file links&#13;directly from the page or other sites', 'Можна перетягувати зображення чи посилання на файли&#13;безпосередньо зі сторінки чи інших сайтів'],
+		youCanDrag: ['Можно перетаскивать картинки и ссылки на файлы\r\nпрямо со страницы или других сайтов', 'You can drag images and file links\r\ndirectly from the page or other sites', 'Можна перетягувати зображення чи посилання на файли\r\nбезпосередньо зі сторінки чи інших сайтів'],
 		removeFile: ['Удалить файл', 'Remove file', 'Видалити файл'],
 		spoilFile: ['Спойлер', 'Spoiler', 'Спойлер'],
 		addManually: ['Ввести ссылку на файл вручную', 'Enter a link to the file manually', 'Ввести посилання на файл вручну'],
-		enterTheLink: ['Введите ссылку и нажмите \'+\'', 'Enter the link and click \'+\'', 'Введіть посилання та натисніть \'+\''],
+		enterTheLink: ["Введите ссылку и нажмите '+'", "Enter the link and click '+'", "Введіть посилання та натисніть '+'"],
 		helpAddFile: ['Встроить ogg/rar/zip/7z в картинку', 'Embed ogg/rar/zip/7z into the image', 'Вбудувати ogg/rar/zip/7z в зображення'],
 
 		expImgInline: ['[Click] открыть в посте, [Ctrl+Click] по центру', '[Click] expand in post, [Ctrl+Click] by center', '[Click] розгорнути в пості, [Ctrl+Click] в центрі'],
@@ -3406,6 +4144,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		nextImg: ['Следующая картинка', 'Next image', 'Наступне зображення'],
 		prevImg: ['Предыдущая картинка', 'Previous image', 'Попереднє зображення'],
 		downloadFile: ['Скачать содержащийся в картинке файл', 'Download embedded file from the image', 'Завантажити файл, що міститься в зображенні'],
+		openOriginal: ['Открыть оригинал в новой вкладке', 'Open the original image in new tab', 'Відкрити оригінал в новій вкладці'],
 
 		loadImage: ['Загружаются картинки', 'Loading images', 'Завантажуються зображення'],
 		loadFile: ['Загружаются файлы', 'Loading files', 'Завантажуються файли'],
@@ -3418,12 +4157,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		fileCorrupt: ['Файл повреждён', 'File is corrupt', 'Файл пошкоджено'],
 		errCorruptData: ['Ошибка: сервер отправил повреждённые данные', 'Error: server sent corrupted data', 'Помилка: сервер надіслав пошкоджені дані'],
 		noConnect: ['Ошибка подключения', 'Connection failed', 'Помилка зʼєднання'],
-		thrNotFound: ['Тред недоступен (№', 'Thread is unavailable (№', 'Тред недоступний (№'],
+		thrNotFound: ['Тред недоступен', 'Thread is unavailable', 'Тред недоступний'],
 		thrClosed: ['Тред закрыт', 'Thread is closed', 'Тред закрито'],
 		thrArchived: ['Тред в архиве', 'Thread is archived', 'Тред заархівовано'],
 
 		internalError: ['Внутренняя ошибка:\n', 'Internal error:\n', 'Внутрішня помилка:\n'],
-		postNotFound: ['Пост не найден', 'Post not found', 'пост не знайдено'],
+		postNotFound: ['Пост не найден', 'Post not found', 'Пост не знайдено'],
 		noHidThr: ['Нет скрытых тредов…', 'No hidden threads…', 'Немає схованих постів…'],
 		noFavThr: ['Нет избранных тредов…', 'Favorites is empty…', 'Немає вибраних тредів…'],
 		noVideoLinks: ['Нет ссылок на видео…', 'No video links…', 'Немає посилань на відео…'],
@@ -3482,12 +4221,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	};
 
 
-	var doc = window.document,
-	    emptyFn = Function.prototype,
-	    aProto = Array.prototype;
+	var doc = window.document;
+	var emptyFn = Function.prototype;
+	var aProto = Array.prototype;
 	var Images_ = { preloading: false, afterpreload: null, progressId: null, canvas: null };
 	var gitWiki = 'https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/';
-	var gitRaw = 'https://raw.github.com/SthephanShinkufag/Dollchan-Extension-Tools/master/';
+	var gitRaw = 'https://raw.githubusercontent.com/SthephanShinkufag/Dollchan-Extension-Tools/master/';
 
 	var docBody = void 0,
 	    locStorage = void 0,
@@ -3505,11 +4244,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	    isExpImg = void 0,
 	    isPreImg = void 0,
 	    needScroll = void 0,
-	    excludeList = void 0,
-	    quotetxt = '',
-	    nativeXHRworks = true,
-	    visPosts = 2,
-	    topWinZ = 0;
+	    excludeList = void 0;
+	var quotetxt = '';
+	var nativeXHRworks = true;
+	var visPosts = 2;
+	var topWinZ = 0;
 
 
 
@@ -3616,7 +4355,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function $css(text) {
-		if (nav.Safari && !('flex' in docBody.style)) {
+		if (nav.isSafari && !('flex' in docBody.style)) {
 			text = text.replace(/(transform|transition|flex|align-items)/g, ' -webkit-$1');
 		}
 		return $bEnd(doc.head, '<style type="text/css">' + text + '</style>');
@@ -3697,7 +4436,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	};
 
 	var quoteReg = function quoteReg(str) {
-		return (str + '').replace(/([.?*+^$[\]\\(){}|\-])/g, '\\$1');
+		return (str + '').replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
 	};
 
 	function toRegExp(str, noG) {
@@ -3735,7 +4474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function fixEventEl(el) {
-		if (el && nav.Presto) {
+		if (el && nav.isPresto) {
 			var svg = el.correspondingUseElement;
 			if (svg) {
 				el = svg.ownerSVGElement;
@@ -3750,11 +4489,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this._marks.push(['LoggerFinish', Date.now()]);
 		},
 		getData: function getData(full) {
-			var duration = void 0,
-			    i = 1;
 			var marks = this._marks;
 			var timeLog = [];
-			for (var len = marks.length - 1, lastExtra = 0; i < len; ++i) {
+			var duration = void 0,
+			    i = 1;
+			var lastExtra = 0;
+			for (var len = marks.length - 1; i < len; ++i) {
 				duration = marks[i][1] - marks[i - 1][1] + lastExtra;
 				if (full || duration > 1) {
 					lastExtra = 0;
@@ -3781,31 +4521,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		_marks: []
 	};
 
-	function sleep(ms) {
-		return new Promise(function (resolve, reject) {
-			return setTimeout(resolve, ms);
-		});
-	}
-
 	function CancelError() {}
 
 	var CancelablePromise = function () {
-		_createClass(CancelablePromise, null, [{
-			key: 'reject',
-			value: function reject(val) {
-				return new CancelablePromise(function (res, rej) {
-					return rej(val);
-				});
-			}
-		}, {
-			key: 'resolve',
-			value: function resolve(val) {
-				return new CancelablePromise(function (res, rej) {
-					return res(val);
-				});
-			}
-		}]);
-
 		function CancelablePromise(resolver, cancelFn) {
 			var _this = this;
 
@@ -3826,6 +4544,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(CancelablePromise, [{
+			key: 'cancel',
+			value: function cancel() {
+				this._reject(new CancelError());
+				if (!this._isResolved && this._cancelFn) {
+					this._cancelFn();
+				}
+			}
+		}, {
+			key: 'catch',
+			value: function _catch(eb) {
+				return this.then(void 0, eb);
+			}
+		}, {
 			key: 'then',
 			value: function then(cb, eb) {
 				var _this2 = this;
@@ -3862,42 +4593,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					_this2.cancel();
 				});
 			}
-		}, {
-			key: 'catch',
-			value: function _catch(eb) {
-				return this.then(void 0, eb);
+		}], [{
+			key: 'reject',
+			value: function reject(val) {
+				return new CancelablePromise(function (res, rej) {
+					return rej(val);
+				});
 			}
 		}, {
-			key: 'cancel',
-			value: function cancel() {
-				this._reject(new CancelError());
-				if (!this._isResolved && this._cancelFn) {
-					this._cancelFn();
-				}
+			key: 'resolve',
+			value: function resolve(val) {
+				return new CancelablePromise(function (res) {
+					return res(val);
+				});
 			}
 		}]);
 
 		return CancelablePromise;
 	}();
 
-	function Maybe(ctor ) {
-		this._ctor = ctor;
-		this.hasValue = false;
-	}
-	Maybe.prototype = {
-		get value() {
-			var ctor = this._ctor;
-			this.hasValue = !!ctor;
-			var val = ctor ? new ctor() : null;
-			Object.defineProperty(this, 'value', { value: val });
-			return val;
-		},
-		end: function end() {
-			if (this.hasValue) {
-				this.value.end();
-			}
+	var Maybe = function () {
+		function Maybe(Ctor ) {
+			_classCallCheck(this, Maybe);
+
+			this._ctor = Ctor;
+			this.hasValue = false;
 		}
-	};
+
+		_createClass(Maybe, [{
+			key: 'end',
+			value: function end() {
+				if (this.hasValue) {
+					this.value.end();
+				}
+			}
+		}, {
+			key: 'value',
+			get: function get() {
+				var Ctor = this._ctor;
+				this.hasValue = !!Ctor;
+				var value = Ctor ? new Ctor() : null;
+				Object.defineProperty(this, 'value', { value: value });
+				return value;
+			}
+		}]);
+
+		return Maybe;
+	}();
 
 	var TemporaryContent = function () {
 		function TemporaryContent(key) {
@@ -3944,7 +4686,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			key: 'remove',
 			value: function remove(key) {
 				if (this.data) {
-					this.data['delete'](key);
+					this.data.delete(key);
 				}
 			}
 		}]);
@@ -3954,149 +4696,369 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	TemporaryContent.purgeSecs = 6e4;
 
-	function TasksPool(tasksCount, taskFunc, endFn) {
-		this.array = [];
-		this.running = 0;
-		this.num = 1;
-		this.func = taskFunc;
-		this.endFn = endFn;
-		this.max = tasksCount;
-		this.completed = this.paused = this.stopped = false;
-	}
+	var TasksPool = function () {
+		function TasksPool(tasksCount, taskFunc, endFn) {
+			_classCallCheck(this, TasksPool);
+
+			this.array = [];
+			this.running = 0;
+			this.num = 1;
+			this.func = taskFunc;
+			this.endFn = endFn;
+			this.max = tasksCount;
+			this.completed = this.paused = this.stopped = false;
+		}
+
+		_createClass(TasksPool, [{
+			key: 'complete',
+			value: function complete() {
+				if (!this.stopped) {
+					if (this.array.length === 0 && this.running === 0) {
+						this.endFn();
+					} else {
+						this.completed = true;
+					}
+				}
+			}
+		}, {
+			key: 'continue',
+			value: function _continue() {
+				if (!this.stopped) {
+					this.paused = false;
+					if (this.array.length === 0) {
+						if (this.completed) {
+							this.endFn();
+						}
+						return;
+					}
+					while (this.array.length !== 0 && this.running !== this.max) {
+						this._run(this.array.shift());
+						this.running++;
+					}
+				}
+			}
+		}, {
+			key: 'pause',
+			value: function pause() {
+				this.paused = true;
+			}
+		}, {
+			key: 'run',
+			value: function run(data) {
+				if (!this.stopped) {
+					if (this.paused || this.running === this.max) {
+						this.array.push(data);
+					} else {
+						this._run(data);
+						this.running++;
+					}
+				}
+			}
+		}, {
+			key: 'stop',
+			value: function stop() {
+				this.stopped = true;
+				this.endFn();
+			}
+		}, {
+			key: '_end',
+			value: function _end() {
+				if (!this.stopped) {
+					if (!this.paused && this.array.length !== 0) {
+						this._run(this.array.shift());
+						return;
+					}
+					this.running--;
+					if (!this.paused && this.completed && this.running === 0) {
+						this.endFn();
+					}
+				}
+			}
+		}, {
+			key: '_run',
+			value: function _run(data) {
+				var _this3 = this;
+
+				this.func(this.num++, data).then(function () {
+					return _this3._end();
+				}, function (e) {
+					if (e instanceof TasksPool.PauseError) {
+						_this3.pause();
+						if (e.duration !== -1) {
+							setTimeout(function () {
+								return _this3.continue();
+							}, e.duration);
+						}
+					} else {
+						_this3._end();
+						throw e;
+					}
+				});
+			}
+		}]);
+
+		return TasksPool;
+	}();
+
 	TasksPool.PauseError = function (duration) {
 		this.name = 'TasksPool.PauseError';
 		this.duration = duration;
 	};
-	TasksPool.prototype = {
-		complete: function complete() {
-			if (!this.stopped) {
-				if (this.array.length === 0 && this.running === 0) {
-					this.endFn();
-				} else {
-					this.completed = true;
+
+	var WorkerPool = function () {
+		function WorkerPool(mReqs, wrkFn, errFn) {
+			var _this4 = this;
+
+			_classCallCheck(this, WorkerPool);
+
+			if (!nav.hasWorker) {
+				this.run = function (data, transferObjs, fn) {
+					return fn(wrkFn(data));
+				};
+				return;
+			}
+			var url = window.URL.createObjectURL(new Blob(['self.onmessage = function(e) {\n\t\t\tvar info = (' + String(wrkFn) + ')(e.data);\n\t\t\tif(info.data) {\n\t\t\t\tself.postMessage(info, [info.data]);\n\t\t\t} else {\n\t\t\t\tself.postMessage(info);\n\t\t\t}\n\t\t}'], { type: 'text/javascript' }));
+			this._pool = new TasksPool(mReqs, function (num, data) {
+				return _this4._createWorker(num, data);
+			}, null);
+			this._freeWorkers = [];
+			this._url = url;
+			this._errFn = errFn;
+			while (mReqs--) {
+				this._freeWorkers.push(new Worker(url));
+			}
+		}
+
+		_createClass(WorkerPool, [{
+			key: 'clear',
+			value: function clear() {
+				window.URL.revokeObjectURL(this._url);
+				this._freeWorkers.forEach(function (w) {
+					return w.terminate();
+				});
+				this._freeWorkers = [];
+			}
+		}, {
+			key: 'run',
+			value: function run(data, transferObjs, fn) {
+				this._pool.run([data, transferObjs, fn]);
+			}
+		}, {
+			key: '_createWorker',
+			value: function _createWorker(num, data) {
+				var _this5 = this;
+
+				return new Promise(function (resolve) {
+					var w = _this5._freeWorkers.pop();
+
+					var _data = _slicedToArray(data, 3),
+					    sendData = _data[0],
+					    transferObjs = _data[1],
+					    fn = _data[2];
+
+					w.onmessage = function (e) {
+						fn(e.data);
+						_this5._freeWorkers.push(w);
+						resolve();
+					};
+					w.onerror = function (err) {
+						resolve();
+						_this5._freeWorkers.push(w);
+						_this5._errFn(err);
+					};
+					w.postMessage(sendData, transferObjs);
+				});
+			}
+		}]);
+
+		return WorkerPool;
+	}();
+
+	var TarBuilder = function () {
+		function TarBuilder() {
+			_classCallCheck(this, TarBuilder);
+
+			this._data = [];
+		}
+
+		_createClass(TarBuilder, [{
+			key: 'addFile',
+			value: function addFile(filepath, input) {
+				var i = void 0,
+				    checksum = 0;
+				var fileSize = input.length;
+				var header = new Uint8Array(512);
+				var nameLen = Math.min(filepath.length, 100);
+				for (i = 0; i < nameLen; ++i) {
+					header[i] = filepath.charCodeAt(i) & 0xFF;
+				}
+				TarBuilder._padSet(header, 100, '100777', 8); 
+				TarBuilder._padSet(header, 108, '0', 8); 
+				TarBuilder._padSet(header, 116, '0', 8); 
+				TarBuilder._padSet(header, 124, fileSize.toString(8), 13); 
+				TarBuilder._padSet(header, 136, Math.floor(Date.now() / 1000).toString(8), 12); 
+				TarBuilder._padSet(header, 148, '        ', 8); 
+				header[156] = 0x30;
+				for (i = 0; i < 157; i++) {
+					checksum += header[i];
+				}
+				TarBuilder._padSet(header, 148, checksum.toString(8), 8);
+				this._data.push(header, input);
+				if ((i = Math.ceil(fileSize / 512) * 512 - fileSize) !== 0) {
+					this._data.push(new Uint8Array(i));
 				}
 			}
-		},
-		'continue': function _continue() {
-			if (!this.stopped) {
-				this.paused = false;
-				if (this.array.length === 0) {
-					if (this.completed) {
-						this.endFn();
+		}, {
+			key: 'addString',
+			value: function addString(filepath, str) {
+				var sDat = unescape(encodeURIComponent(str));
+				var len = sDat.length;
+				var data = new Uint8Array(len);
+				for (var i = 0; i < len; ++i) {
+					data[i] = sDat.charCodeAt(i) & 0xFF;
+				}
+				this.addFile(filepath, data);
+			}
+		}, {
+			key: 'get',
+			value: function get() {
+				this._data.push(new Uint8Array(1024));
+				return new Blob(this._data, { type: 'application/x-tar' });
+			}
+		}], [{
+			key: '_padSet',
+			value: function _padSet(data, offset, num, len) {
+				var i = 0;
+				var nLen = num.length;
+				len -= 2;
+				while (nLen < len) {
+					data[offset++] = 0x20; 
+					len--;
+				}
+				while (i < nLen) {
+					data[offset++] = num.charCodeAt(i++);
+				}
+				data[offset] = 0x20; 
+			}
+		}]);
+
+		return TarBuilder;
+	}();
+
+	var WebmParser = function () {
+		function WebmParser(data) {
+			_classCallCheck(this, WebmParser);
+
+			var offset = 0;
+			var dv = nav.getUnsafeDataView(data);
+			var len = dv.byteLength;
+			var el = new WebmParser.Element(dv, len, 0);
+			var voids = [];
+			var EBMLId = 0x1A45DFA3;
+			var segmentId = 0x18538067;
+			var voidId = 0xEC;
+			this.voidId = voidId;
+			error: do {
+				if (el.error || el.id !== EBMLId) {
+					break;
+				}
+				this.EBML = el;
+				offset += el.headSize + el.size;
+				while (true) {
+					var _el = new WebmParser.Element(dv, len, offset);
+					if (_el.error) {
+						break error;
 					}
+					if (_el.id === segmentId) {
+						this.segment = _el;
+						break; 
+					} else if (_el.id === voidId) {
+						voids.push(_el);
+					} else {
+						break error;
+					}
+					offset += _el.headSize + _el.size;
+				}
+				this.voids = voids;
+				this.data = data;
+				this.length = len;
+				this.rv = [null];
+				this.error = false;
+				return;
+			} while (false);
+			this.error = true;
+		}
+
+		_createClass(WebmParser, [{
+			key: 'addData',
+			value: function addData(data) {
+				if (this.error || !data) {
+					return this;
+				}
+				var size = typeof data === 'string' ? data.length : data.byteLength;
+				if (size > 127) {
+					this.error = true;
 					return;
 				}
-				while (this.array.length !== 0 && this.running !== this.max) {
-					this._run(this.array.shift());
-					this.running++;
-				}
+				this.rv.push(new Uint8Array([this.voidId, 0x80 | size]), data);
+				return this;
 			}
-		},
-		pause: function pause() {
-			this.paused = true;
-		},
-		run: function run(data) {
-			if (!this.stopped) {
-				if (this.paused || this.running === this.max) {
-					this.array.push(data);
-				} else {
-					this._run(data);
-					this.running++;
+		}, {
+			key: 'getData',
+			value: function getData() {
+				if (this.error) {
+					return null;
 				}
+				this.rv[0] = nav.getUnsafeUint8Array(this.data, 0, this.segment.endOffset);
+				return this.rv;
 			}
-		},
-		stop: function stop() {
-			this.stopped = true;
-			this.endFn();
-		},
-		_end: function _end() {
-			if (!this.stopped) {
-				if (!this.paused && this.array.length !== 0) {
-					this._run(this.array.shift());
-					return;
-				}
-				this.running--;
-				if (!this.paused && this.completed && this.running === 0) {
-					this.endFn();
-				}
-			}
-		},
-		_run: function _run(data) {
-			var _this3 = this;
+		}]);
 
-			this.func(this.num++, data).then(function () {
-				return _this3._end();
-			}, function (e) {
-				if (e instanceof TasksPool.PauseError) {
-					_this3.pause();
-					if (e.duration !== -1) {
-						setTimeout(function () {
-							return _this3['continue']();
-						}, e.duration);
-					}
-				} else {
-					_this3._end();
-					throw e;
-				}
-			});
-		}
-	};
+		return WebmParser;
+	}();
 
-	function TarBuilder() {
-		this._data = [];
-	}
-	TarBuilder.prototype = {
-		addFile: function addFile(filepath, input) {
-			var i = void 0,
-			    checksum = 0;
-			var fileSize = input.length;
-			var header = new Uint8Array(512);
-			var nameLen = Math.min(filepath.length, 100);
-			for (i = 0; i < nameLen; ++i) {
-				header[i] = filepath.charCodeAt(i) & 0xFF;
-			}
-			this._padSet(header, 100, '100777', 8); 
-			this._padSet(header, 108, '0', 8); 
-			this._padSet(header, 116, '0', 8); 
-			this._padSet(header, 124, fileSize.toString(8), 13); 
-			this._padSet(header, 136, Math.floor(Date.now() / 1000).toString(8), 12); 
-			this._padSet(header, 148, '        ', 8); 
-			header[156] = 0x30;
-			for (i = 0; i < 157; i++) {
-				checksum += header[i];
-			}
-			this._padSet(header, 148, checksum.toString(8), 8);
-			this._data.push(header, input);
-			if ((i = Math.ceil(fileSize / 512) * 512 - fileSize) !== 0) {
-				this._data.push(new Uint8Array(i));
-			}
-		},
-		addString: function addString(filepath, str) {
-			var sDat = unescape(encodeURIComponent(str));
-			var len = sDat.length;
-			var data = new Uint8Array(len);
-			for (var i = 0; i < len; ++i) {
-				data[i] = sDat.charCodeAt(i) & 0xFF;
-			}
-			this.addFile(filepath, data);
-		},
-		get: function get() {
-			this._data.push(new Uint8Array(1024));
-			return new Blob(this._data, { type: 'application/x-tar' });
-		},
-		_padSet: function _padSet(data, offset, num, len) {
-			var i = 0;
-			var nLen = num.length;
-			len -= 2;
-			while (nLen < len) {
-				data[offset++] = 0x20; 
-				len--;
-			}
-			while (i < nLen) {
-				data[offset++] = num.charCodeAt(i++);
-			}
-			data[offset] = 0x20; 
+	WebmParser.Element = function (elData, dataLength, offset) {
+		this.error = false;
+		this.id = 0;
+		if (offset + 4 >= dataLength) {
+			return;
 		}
+		var num = elData.getUint32(offset);
+		var leadZeroes = Math.clz32(num);
+		if (leadZeroes > 3) {
+			this.error = true;
+			return;
+		}
+		offset += leadZeroes + 1;
+		if (offset >= dataLength) {
+			this.error = true;
+			return;
+		}
+		this.id = num >>> 8 * (3 - leadZeroes);
+		this.headSize = leadZeroes + 1;
+		num = elData.getUint32(offset);
+		leadZeroes = Math.clz32(num);
+		var size = num & 0xFFFFFFFF >>> leadZeroes + 1;
+		if (leadZeroes > 3) {
+			var shift = 8 * (7 - leadZeroes);
+			if (size >>> shift !== 0 || offset + 4 > dataLength) {
+				this.error = true;
+				return; 
+			}
+			size = size << 32 - shift | elData.getUint32(offset + 4) >>> shift;
+		} else {
+			size >>>= 8 * (3 - leadZeroes);
+		}
+		this.headSize += leadZeroes + 1;
+		offset += leadZeroes + 1;
+		if (offset + size > dataLength) {
+			this.error = true;
+			return;
+		}
+		this.data = elData;
+		this.offset = offset;
+		this.endOffset = offset + size;
+		this.size = size;
 	};
 
 	function getErrorMessage(e) {
@@ -4106,13 +5068,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if (typeof e === 'string') {
 			return e;
 		}
-		return Lng.internalError[lang] + (!e.stack ? e.name + ': ' + e.message : nav.WebKit ? e.stack : e.name + ': ' + e.message + '\n' + (!nav.Firefox ? e.stack : e.stack.replace(/^([^@]*).*\/(.+)$/gm, function (str, fName, line) {
+		return Lng.internalError[lang] + (!e.stack ? e.name + ': ' + e.message : nav.isWebkit ? e.stack : e.name + ': ' + e.message + '\n' + (!nav.isFirefox ? e.stack : e.stack.replace(/^([^@]*).*\/(.+)$/gm, function (str, fName, line) {
 			return '    at ' + (fName ? fName + ' (' + line + ')' : line);
 		})));
 	}
 
 	function getFormElements(form, submitter) {
-		var controls, fixName, i, len, field, tagName, type, name, options, j, jlen, option, imgFile, files, _j, _jlen, dirname;
+		var controls, fixName, i, len, field, tagName, type, name, options, j, jlen, option, img, files, _j, _jlen, dirname;
 
 		return regeneratorRuntime.wrap(function getFormElements$(_context) {
 			while (1) {
@@ -4167,12 +5129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 
 						_context.next = 18;
-						return {
-							el: field,
-							name: fixName(name),
-							value: option.value,
-							type: type
-						};
+						return { type: type, el: field, name: fixName(name), value: option.value };
 
 					case 18:
 						++j;
@@ -4198,18 +5155,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 					case 28:
 						_context.next = 30;
-						return {
-							el: field,
-							name: fixName(name),
-							value: field.value || 'on',
-							type: type
-						};
+						return { type: type, el: field, name: fixName(name), value: field.value || 'on' };
 
 					case 30:
 						return _context.abrupt('continue', 62);
 
 					case 31:
-						imgFile = void 0;
+						img = void 0;
 
 						if (!(field.files.length > 0)) {
 							_context.next = 43;
@@ -4226,12 +5178,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 
 						_context.next = 38;
-						return {
-							el: field,
-							name: name,
-							value: files[_j],
-							type: type
-						};
+						return { name: name, type: type, el: field, value: files[_j] };
 
 					case 38:
 						++_j;
@@ -4243,17 +5190,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						break;
 
 					case 43:
-						if (!(field.obj && (imgFile = field.obj.imgFile))) {
+						if (!(field.obj && (img = field.obj.imgFile))) {
 							_context.next = 48;
 							break;
 						}
 
 						_context.next = 46;
 						return {
-							el: field,
 							name: name,
-							value: new File([imgFile[0]], imgFile[1], { type: imgFile[2] }),
-							type: type
+							type: type,
+							el: field,
+							value: new File([img[0]], img[1], { type: img[2] })
 						};
 
 					case 46:
@@ -4265,8 +5212,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						return {
 							el: field,
 							name: fixName(name),
-							value: new File([''], ''),
-							type: 'application/octet-stream'
+							type: 'application/octet-stream',
+							value: new File([''], '')
 						};
 
 					case 50:
@@ -4279,12 +5226,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 
 						_context.next = 54;
-						return {
-							el: field,
-							name: name || '',
-							value: field.value,
-							type: type
-						};
+						return { type: type, el: field, name: name || '', value: field.value };
 
 					case 54:
 						_context.next = 58;
@@ -4292,12 +5234,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 					case 56:
 						_context.next = 58;
-						return {
-							el: field,
-							name: fixName(name),
-							value: field.value,
-							type: type
-						};
+						return { type: type, el: field, name: fixName(name), value: field.value };
 
 					case 58:
 						dirname = field.getAttribute('dirname');
@@ -4311,8 +5248,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						return {
 							el: field,
 							name: fixName(dirname),
-							value: nav.matchesSelector(field, ':dir(rtl)') ? 'rtl' : 'ltr',
-							type: 'direction'
+							type: 'direction',
+							value: nav.matchesSelector(field, ':dir(rtl)') ? 'rtl' : 'ltr'
 						};
 
 					case 62:
@@ -4325,7 +5262,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						return _context.stop();
 				}
 			}
-		}, _marked[0], this);
+		}, _marked, this);
 	}
 
 	function isFormElDisabled(el) {
@@ -4359,104 +5296,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function getFileType(url) {
-		return (/\.jpe?g$/i.test(url) ? 'image/jpeg' : /\.png$/i.test(url) ? 'image/png' : /\.gif$/i.test(url) ? 'image/gif' : /\.webm$/i.test(url) ? 'video/webm' : ''
+		return (/\.jpe?g$/i.test(url) ? 'image/jpeg' : /\.png$/i.test(url) ? 'image/png' : /\.gif$/i.test(url) ? 'image/gif' : /\.webm$/i.test(url) ? 'video/webm' : /\.mp4$/i.test(url) ? 'video/mp4' : /\.ogv$/i.test(url) ? 'video/ogv' : ''
 		);
 	}
 
 	function downloadBlob(blob, name) {
-		var url = nav.MsEdge ? navigator.msSaveOrOpenBlob(blob, name) : window.URL.createObjectURL(blob);
+		var url = nav.isMsEdge ? navigator.msSaveOrOpenBlob(blob, name) : window.URL.createObjectURL(blob);
 		var link = docBody.appendChild($add('<a href="' + url + '" download="' + name + '"></a>'));
 		link.click();
 		setTimeout(function () {
 			window.URL.revokeObjectURL(url);
 			$del(link);
 		}, 2e5);
-	}
-
-
-	function getStored(id) {
-		return regeneratorRuntime.async(function getStored$(_context2) {
-			while (1) {
-				switch (_context2.prev = _context2.next) {
-					case 0:
-						if (!nav.isNewGM) {
-							_context2.next = 6;
-							break;
-						}
-
-						_context2.next = 3;
-						return regeneratorRuntime.awrap(GM.getValue(id));
-
-					case 3:
-						return _context2.abrupt('return', _context2.sent);
-
-					case 6:
-						if (!nav.isGM) {
-							_context2.next = 10;
-							break;
-						}
-
-						return _context2.abrupt('return', GM_getValue(id));
-
-					case 10:
-						if (!nav.isChromeStorage) {
-							_context2.next = 16;
-							break;
-						}
-
-						_context2.next = 13;
-						return regeneratorRuntime.awrap(new Promise(function (resolve, reject) {
-							return chrome.storage.local.get(id, function (obj) {
-								if (Object.keys(obj).length) {
-									resolve(obj[id]);
-								} else {
-									chrome.storage.sync.get(id, function (obj) {
-										resolve(obj[id]);
-									});
-								}
-							});
-						}));
-
-					case 13:
-						return _context2.abrupt('return', _context2.sent);
-
-					case 16:
-						if (!nav.isScriptStorage) {
-							_context2.next = 18;
-							break;
-						}
-
-						return _context2.abrupt('return', scriptStorage.getItem(id));
-
-					case 18:
-						return _context2.abrupt('return', locStorage[id]);
-
-					case 19:
-					case 'end':
-						return _context2.stop();
-				}
-			}
-		}, null, this);
-	}
-
-	function setStored(id, value) {
+	}function setStored(id, value) {
 		if (nav.isNewGM) {
 			return GM.setValue(id, value);
 		} else if (nav.isGM) {
 			GM_setValue(id, value);
 		} else if (nav.isChromeStorage) {
-			(function () {
-				var obj = {};
-				obj[id] = value;
-				chrome.storage.sync.set(obj, function () {
-					if (chrome.runtime.lastError) {
-						chrome.storage.local.set(obj, emptyFn);
-						chrome.storage.sync.remove(id, emptyFn);
-					} else {
-						chrome.storage.local.remove(id, emptyFn);
-					}
-				});
-			})();
+			var obj = {};
+			obj[id] = value;
+			chrome.storage.sync.set(obj, function () {
+				if (chrome.runtime.lastError) {
+					chrome.storage.local.set(obj, emptyFn);
+					chrome.storage.sync.remove(id, emptyFn);
+				} else {
+					chrome.storage.local.remove(id, emptyFn);
+				}
+			});
 		} else if (nav.isScriptStorage) {
 			scriptStorage.setItem(id, value);
 		} else {
@@ -4476,50 +5343,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		} else {
 			locStorage.removeItem(id);
 		}
-	}
-
-	function getStoredObj(id) {
-		return regeneratorRuntime.async(function getStoredObj$(_context3) {
-			while (1) {
-				switch (_context3.prev = _context3.next) {
-					case 0:
-						_context3.t1 = JSON;
-						_context3.next = 3;
-						return regeneratorRuntime.awrap(getStored(id));
-
-					case 3:
-						_context3.t2 = _context3.sent;
-
-						if (_context3.t2) {
-							_context3.next = 6;
-							break;
-						}
-
-						_context3.t2 = '{}';
-
-					case 6:
-						_context3.t3 = _context3.t2;
-						_context3.t0 = _context3.t1.parse.call(_context3.t1, _context3.t3);
-
-						if (_context3.t0) {
-							_context3.next = 10;
-							break;
-						}
-
-						_context3.t0 = {};
-
-					case 10:
-						return _context3.abrupt('return', _context3.t0);
-
-					case 11:
-					case 'end':
-						return _context3.stop();
-				}
-			}
-		}, null, this);
-	}
-
-	function saveCfgObj(dm, obj) {
+	}function saveCfgObj(dm, obj) {
 		getStoredObj('DESU_Config').then(function (val) {
 			if (obj) {
 				val[dm] = obj;
@@ -4543,100 +5367,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	function readData() {
 		return Promise.all([getStored('DESU_Exclude'), readFavorites(), readCfg()]);
-	}
-
-	function readCfg() {
-		var obj, val, hasGlobal;
-		return regeneratorRuntime.async(function readCfg$(_context4) {
-			while (1) {
-				switch (_context4.prev = _context4.next) {
-					case 0:
-						obj = void 0;
-						_context4.next = 3;
-						return regeneratorRuntime.awrap(getStoredObj('DESU_Config'));
-
-					case 3:
-						val = _context4.sent;
-
-						if (!(aib.dm in val) || $isEmpty(obj = val[aib.dm])) {
-							hasGlobal = nav.isGlobal && !!val.global;
-
-							obj = hasGlobal ? val.global : {};
-							if (hasGlobal) {
-								delete obj.correctTime;
-								delete obj.captchaLang;
-							}
-						}
-						defaultCfg.captchaLang = aib.capLang;
-						defaultCfg.language = +!String(navigator.language).toLowerCase().startsWith('ru');
-						Cfg = Object.assign(Object.create(defaultCfg), obj);
-						if (!Cfg.timeOffset) {
-							Cfg.timeOffset = '+0';
-						}
-						if (!Cfg.timePattern) {
-							Cfg.timePattern = aib.timePattern;
-						}
-						if (aib.prot !== 'http:') {
-							Cfg.addVocaroo = 0;
-						}
-						if (aib.dobr && !Cfg.useDobrAPI) {
-							aib.jsonBuilder = null;
-						}
-						if (!('FormData' in window)) {
-							Cfg.ajaxPosting = 0;
-						}
-						if (!('Notification' in window)) {
-							Cfg.desktNotif = 0;
-						}
-						if (nav.Presto) {
-							if (Cfg.YTubeType === 2) {
-								Cfg.YTubeType = 1;
-							}
-							Cfg.preLoadImgs = 0;
-							Cfg.findImgFile = 0;
-							if (!nav.isGM) {
-								Cfg.updScript = 0;
-							}
-							Cfg.fileInputs = 0;
-						}
-						if (nav.isChromeStorage) {
-							Cfg.updScript = 0;
-						}
-						if (Cfg.updThrDelay < 10) {
-							Cfg.updThrDelay = 10;
-						}
-						if (!Cfg.saveSage) {
-							Cfg.sageReply = 0;
-						}
-						if (!Cfg.passwValue) {
-							Cfg.passwValue = Math.round(Math.random() * 1e15).toString(32);
-						}
-						if (!Cfg.stats) {
-							Cfg.stats = { view: 0, op: 0, reply: 0 };
-						}
-						setStored('DESU_Config', JSON.stringify(val));
-						lang = Cfg.language;
-						if (Cfg.updScript) {
-							checkForUpdates(false, val.lastUpd).then(function (html) {
-								if (doc.readyState === 'loading') {
-									doc.addEventListener('DOMContentLoaded', function () {
-										return $popup('updavail', html);
-									});
-								} else {
-									$popup('updavail', html);
-								}
-							}, emptyFn);
-						}
-
-					case 23:
-					case 'end':
-						return _context4.stop();
-				}
-			}
-		}, null, this);
-	}
-
-	function readPostsData(firstPost, fav) {
+	}function readPostsData(firstPost, fav) {
 		var sVis = null;
 		try {
 			var str = aib.t ? sesStorage['de-hidden-' + aib.b + aib.t] : null;
@@ -4657,15 +5388,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		var spellsHide = Cfg.hideBySpell;
 		var maybeSpells = new Maybe(SpellsRunner);
 
-		for (var _post = firstPost; _post; _post = _post.next) {
-			var num = _post.num;
-			if (_post.isOp && num in favBrd) {
+		for (var post = firstPost; post; post = post.next) {
+			var _post = post,
+			    num = _post.num;
+
+			if (post.isOp && num in favBrd) {
 				var f = favBrd[num];
-				var thr = _post.thr;
-				_post.setFavBtn(true);
+				var _post2 = post,
+				    thr = _post2.thr;
+
+				post.setFavBtn(true);
 				if (aib.t) {
 					f.cnt = thr.pcount;
-					f['new'] = 0;
+					f.new = 0;
 					f.you = 0;
 					if (Cfg.markNewPosts && f.last) {
 						var lastPost = pByNum.get(+f.last.match(/\d+/));
@@ -4677,38 +5412,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					}
 					f.last = aib.anchor + thr.last.num;
 				} else {
-					f['new'] = thr.pcount - f.cnt;
+					f.new = thr.pcount - f.cnt;
 				}
 				updateFav = true;
 			}
 			if (HiddenPosts.has(num)) {
 				var uHideData = HiddenPosts.get(num);
-				if (!uHideData && _post.isOp && HiddenThreads.has(num)) {
-					_post.setUserVisib(true);
+				if (!uHideData && post.isOp && HiddenThreads.has(num)) {
+					post.setUserVisib(true);
 				} else {
-					_post.setUserVisib(uHideData, false);
+					post.setUserVisib(uHideData, false);
 				}
 				continue;
 			}
 			var hideData = void 0;
-			if (_post.isOp) {
+			if (post.isOp) {
 				if (HiddenThreads.has(num)) {
 					hideData = [true, null];
 				} else if (spellsHide) {
-					hideData = sVis && sVis[_post.count];
+					hideData = sVis && sVis[post.count];
 				}
 			} else if (spellsHide) {
-				hideData = sVis && sVis[_post.count];
+				hideData = sVis && sVis[post.count];
 			} else {
 				continue;
 			}
 			if (!hideData) {
-				maybeSpells.value.run(_post); 
+				maybeSpells.value.run(post); 
 			} else if (hideData[0]) {
-				if (_post.hidden) {
-					_post.spellHidden = true;
+				if (post.hidden) {
+					post.spellHidden = true;
 				} else {
-					_post.spellHide(hideData[1]);
+					post.spellHide(hideData[1]);
 				}
 			}
 		}
@@ -4762,16 +5497,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 
-	var PostsStorage = function (_ref2) {
-		_inherits(PostsStorage, _ref2);
-
+	var PostsStorage = function () {
 		function PostsStorage() {
 			_classCallCheck(this, PostsStorage);
 
-			return _possibleConstructorReturn(this, (PostsStorage.__proto__ || Object.getPrototypeOf(PostsStorage)).apply(this, arguments));
+			this.storageName = '';
+			this.__cachedTime = null;
+			this._cachedStorage = null;
+			this._cacheTO = null;
 		}
 
-		_createClass(PostsStorage, null, [{
+		_createClass(PostsStorage, [{
 			key: 'get',
 			value: function get(num) {
 				var storage = this._readStorage()[aib.b];
@@ -4817,10 +5553,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					var minDate = Date.now() - 5 * 24 * 3600 * 1000;
 					for (var b in storage) {
 						if (storage.hasOwnProperty(b)) {
-							var _data = storage[b];
-							for (var key in _data) {
-								if (_data.hasOwnProperty(key) && _data[key][0] < minDate) {
-									delete _data[key];
+							var _data2 = storage[b];
+							for (var key in _data2) {
+								if (_data2.hasOwnProperty(key) && _data2[key][0] < minDate) {
+									delete _data2[key];
 								}
 							}
 						}
@@ -4831,14 +5567,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 				storage[aib.b][num] = [this._cachedTime, thrNum, data];
 				this._saveStorage();
-			}
-		}, {
-			key: '_migrateOld',
-			value: function _migrateOld(newName, oldName) {
-				if (locStorage.hasOwnProperty(oldName)) {
-					locStorage[newName] = locStorage[oldName];
-					locStorage.removeItem(oldName);
-				}
 			}
 		}, {
 			key: '_readStorage',
@@ -4857,14 +5585,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: '_saveStorage',
 			value: function _saveStorage() {
-				var _this5 = this;
+				var _this6 = this;
 
 				if (this._cacheTO === null) {
 					this._cacheTO = setTimeout(function () {
-						if (_this5._cachedStorage) {
-							locStorage[_this5.storageName] = JSON.stringify(_this5._cachedStorage);
+						if (_this6._cachedStorage) {
+							locStorage[_this6.storageName] = JSON.stringify(_this6._cachedStorage);
 						}
-						_this5.purge();
+						_this6.purge();
 					}, 0);
 				}
 			}
@@ -4873,48 +5601,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			get: function get() {
 				return this.__cachedTime || (this.__cachedTime = Date.now());
 			}
-		}]);
-
-		return PostsStorage;
-	}(null);
-
-	PostsStorage.storageName = '';
-	PostsStorage.__cachedTime = null;
-	PostsStorage._cachedStorage = null;
-	PostsStorage._cacheTO = null;
-
-	var HiddenPosts = function (_PostsStorage) {
-		_inherits(HiddenPosts, _PostsStorage);
-
-		function HiddenPosts() {
-			_classCallCheck(this, HiddenPosts);
-
-			return _possibleConstructorReturn(this, (HiddenPosts.__proto__ || Object.getPrototypeOf(HiddenPosts)).apply(this, arguments));
-		}
-
-		_createClass(HiddenPosts, null, [{
-			key: '_readStorage',
-			value: function _readStorage() {
-				this._migrateOld(this.storageName, 'de-threads-new'); 
-				return _get(HiddenPosts.__proto__ || Object.getPrototypeOf(HiddenPosts), '_readStorage', this).call(this);
+		}], [{
+			key: '_migrateOld',
+			value: function _migrateOld(newName, oldName) {
+				if (locStorage.hasOwnProperty(oldName)) {
+					locStorage[newName] = locStorage[oldName];
+					locStorage.removeItem(oldName);
+				}
 			}
 		}]);
 
-		return HiddenPosts;
-	}(PostsStorage);
+		return PostsStorage;
+	}();
 
-	HiddenPosts.storageName = 'de-posts';
+	var HiddenPosts = new (function (_PostsStorage) {
+		_inherits(HiddenPostsClass, _PostsStorage);
 
-	var HiddenThreads = function (_PostsStorage2) {
-		_inherits(HiddenThreads, _PostsStorage2);
+		function HiddenPostsClass() {
+			_classCallCheck(this, HiddenPostsClass);
 
-		function HiddenThreads() {
-			_classCallCheck(this, HiddenThreads);
+			var _this7 = _possibleConstructorReturn(this, (HiddenPostsClass.__proto__ || Object.getPrototypeOf(HiddenPostsClass)).call(this));
 
-			return _possibleConstructorReturn(this, (HiddenThreads.__proto__ || Object.getPrototypeOf(HiddenThreads)).apply(this, arguments));
+			_this7.storageName = 'de-posts';
+			return _this7;
 		}
 
-		_createClass(HiddenThreads, null, [{
+		_createClass(HiddenPostsClass, [{
+			key: '_readStorage',
+			value: function _readStorage() {
+				PostsStorage._migrateOld(this.storageName, 'de-threads-new'); 
+				return _get(HiddenPostsClass.prototype.__proto__ || Object.getPrototypeOf(HiddenPostsClass.prototype), '_readStorage', this).call(this);
+			}
+		}]);
+
+		return HiddenPostsClass;
+	}(PostsStorage))();
+
+	var HiddenThreads = new (function (_PostsStorage2) {
+		_inherits(HiddenThreadsClass, _PostsStorage2);
+
+		function HiddenThreadsClass() {
+			_classCallCheck(this, HiddenThreadsClass);
+
+			var _this8 = _possibleConstructorReturn(this, (HiddenThreadsClass.__proto__ || Object.getPrototypeOf(HiddenThreadsClass)).call(this));
+
+			_this8.storageName = 'de-threads';
+			return _this8;
+		}
+
+		_createClass(HiddenThreadsClass, [{
 			key: 'getCount',
 			value: function getCount() {
 				var storage = this._readStorage();
@@ -4938,26 +5673,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: '_readStorage',
 			value: function _readStorage() {
-				this._migrateOld(this.storageName, ''); 
-				return _get(HiddenThreads.__proto__ || Object.getPrototypeOf(HiddenThreads), '_readStorage', this).call(this);
+				PostsStorage._migrateOld(this.storageName, ''); 
+				return _get(HiddenThreadsClass.prototype.__proto__ || Object.getPrototypeOf(HiddenThreadsClass.prototype), '_readStorage', this).call(this);
 			}
 		}]);
 
-		return HiddenThreads;
-	}(PostsStorage);
+		return HiddenThreadsClass;
+	}(PostsStorage))();
 
-	HiddenThreads.storageName = 'de-threads';
+	var MyPosts = new (function (_PostsStorage3) {
+		_inherits(MyPostsClass, _PostsStorage3);
 
-	var MyPosts = function (_PostsStorage3) {
-		_inherits(MyPosts, _PostsStorage3);
+		function MyPostsClass() {
+			_classCallCheck(this, MyPostsClass);
 
-		function MyPosts() {
-			_classCallCheck(this, MyPosts);
+			var _this9 = _possibleConstructorReturn(this, (MyPostsClass.__proto__ || Object.getPrototypeOf(MyPostsClass)).call(this));
 
-			return _possibleConstructorReturn(this, (MyPosts.__proto__ || Object.getPrototypeOf(MyPosts)).apply(this, arguments));
+			_this9.storageName = 'de-myposts';
+			_this9._cachedData = null;
+			return _this9;
 		}
 
-		_createClass(MyPosts, null, [{
+		_createClass(MyPostsClass, [{
 			key: 'has',
 			value: function has(num) {
 				return this._cachedData.has(num);
@@ -4965,7 +5702,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: 'purge',
 			value: function purge() {
-				_get(MyPosts.__proto__ || Object.getPrototypeOf(MyPosts), 'purge', this).call(this);
+				_get(MyPostsClass.prototype.__proto__ || Object.getPrototypeOf(MyPostsClass.prototype), 'purge', this).call(this);
 				this._cachedData = null;
 				this._readStorage();
 			}
@@ -4977,7 +5714,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: 'set',
 			value: function set(num, thrNum) {
-				_get(MyPosts.__proto__ || Object.getPrototypeOf(MyPosts), 'set', this).call(this, num, thrNum);
+				_get(MyPostsClass.prototype.__proto__ || Object.getPrototypeOf(MyPostsClass.prototype), 'set', this).call(this, num, thrNum);
 				this._cachedData.add(+num);
 				locStorage['__de-mypost'] = 1; 
 				locStorage.removeItem('__de-mypost');
@@ -4988,8 +5725,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (this._cachedData && this._cachedStorage) {
 					return this._cachedStorage;
 				}
-				this._migrateOld(this.storageName, 'de-myposts-new');
-				var rv = _get(MyPosts.__proto__ || Object.getPrototypeOf(MyPosts), '_readStorage', this).call(this);
+				PostsStorage._migrateOld(this.storageName, 'de-myposts-new');
+				var rv = _get(MyPostsClass.prototype.__proto__ || Object.getPrototypeOf(MyPostsClass.prototype), '_readStorage', this).call(this);
 				this._cachedData = rv[aib.b] ? new Set(Object.keys(rv[aib.b]).map(function (_) {
 					return +_;
 				})) : new Set();
@@ -4997,17 +5734,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 		}]);
 
-		return MyPosts;
-	}(PostsStorage);
-
-	MyPosts.storageName = 'de-myposts';
-	MyPosts._cachedData = null;
+		return MyPostsClass;
+	}(PostsStorage))();
 
 	function initStorageEvent() {
 		doc.defaultView.addEventListener('storage', function (e) {
-			var data,
-			    temp,
-			    post,
+			var data = void 0,
+			    temp = void 0,
 			    val = e.newValue;
 			if (!val) {
 				return;
@@ -5033,7 +5766,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						HiddenThreads.purge();
 						HiddenPosts.purge();
 						if (data.brd === aib.b) {
-							if ((post = pByNum.get(data.num)) && post.hidden ^ data.hide) {
+							var post = pByNum.get(data.num);
+							if (post && post.hidden ^ data.hide) {
 								post.setUserVisib(data.hide, false);
 							} else if (post = pByNum.get(data.thrNum)) {
 								post.thr.userTouched.set(data.num, data.hide);
@@ -5082,63 +5816,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 
-	var panel = Object.create({
-		_el: null,
-		_hideTO: 0,
-		_menu: null,
-		_menuTO: 0,
-		get _pcountEl() {
-			var value = $id('de-panel-info-pcount');
-			Object.defineProperty(this, '_pcountEl', { value: value, configurable: true });
-			return value;
+	var Panel = Object.create({
+		isVidEnabled: false,
+		init: function init(formEl) {
+			var imgLen = $Q(aib.qPostImg, formEl).length;
+			var isThr = aib.t;
+			(pr && pr.pArea[0] || formEl).insertAdjacentHTML('beforebegin', '<div id="de-main">\n\t\t\t<div id="de-panel">\n\t\t\t\t<div id="de-panel-logo" title="' + Lng.panelBtn.attach[lang] + '">\n\t\t\t\t\t<svg class="de-panel-logo-svg">\n\t\t\t\t\t\t<use xlink:href="#de-symbol-panel-logo"/>\n\t\t\t\t\t</svg>\n\t\t\t\t</div>\n\t\t\t\t<span id="de-panel-buttons"' + (Cfg.expandPanel ? '' : ' style="display: none;"') + '>\n\t\t\t\t' + (Cfg.disabled ? this._getButton('enable') : this._getButton('cfg') + this._getButton('hid') + this._getButton('fav') + (!Cfg.addYouTube ? '' : this._getButton('vid')) + (localData ? '' : this._getButton('refresh') + (!isThr && aib.page === aib.firstPage ? '' : this._getButton('goback')) + (isThr || aib.page === aib.lastPage ? '' : this._getButton('gonext'))) + this._getButton('goup') + this._getButton('godown') + (imgLen === 0 ? '' : this._getButton('expimg') + this._getButton('maskimg')) + (nav.isPresto || localData ? '' : (imgLen === 0 || Cfg.preLoadImgs ? '' : this._getButton('preimg')) + (!isThr ? '' : this._getButton('savethr'))) + (!isThr || localData ? '' : this._getButton(Cfg.ajaxUpdThr && !aib.isArchived ? 'upd-on' : 'upd-off') + (nav.isSafari ? '' : this._getButton('audio-off'))) + (!aib.hasCatalog ? '' : this._getButton('catalog')) + this._getButton('enable') + (!isThr ? '' : '<span id="de-panel-info">\n\t\t\t\t\t\t<span id="de-panel-info-pcount" title="' + (Lng.panelBtn[Cfg.panelCounter !== 2 ? 'pcount' : 'pcountNotHid'][lang] + '">') + (Thread.first.pcount + '</span>\n\t\t\t\t\t\t<span id="de-panel-info-icount" title="' + Lng.panelBtn.imglen[lang] + '">\n\t\t\t\t\t\t\t' + imgLen + '</span>\n\t\t\t\t\t\t<span id="de-panel-info-acount" title="' + Lng.panelBtn.posters[lang] + '"></span>\n\t\t\t\t\t</span>'))) + '\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t' + (Cfg.disabled ? '' : '<div id="de-wrapper-popup"></div><hr style="clear: both;">') + '\n\t\t</div>');
+			this._el = $id('de-panel');
+			this._el.addEventListener('click', this, true);
+			this._el.addEventListener('mouseover', this);
+			this._el.addEventListener('mouseout', this);
+			this._buttons = $id('de-panel-buttons');
+			this.isNew = true;
 		},
-		get _icountEl() {
-			var value = $id('de-panel-info-icount');
-			Object.defineProperty(this, '_icountEl', { value: value, configurable: true });
-			return value;
-		},
-		get _acountEl() {
-			var value = $id('de-panel-info-acount');
-			Object.defineProperty(this, '_acountEl', { value: value, configurable: true });
-			return value;
-		},
-		_getButton: function _getButton(id) {
-			var p, href, title, useId;
-			switch (id) {
-				case 'goback':
-					p = Math.max(aib.page - 1, 0);
-					href = aib.getPageUrl(aib.b, p);
-					if (!aib.t) {
-						title = Lng.panelBtn.gonext[lang].replace('%s', p);
-					}
-					useId = 'arrow';
-					break;
-				case 'gonext':
-					p = aib.page + 1;
-					href = aib.getPageUrl(aib.b, p);
-					title = Lng.panelBtn.gonext[lang].replace('%s', p);
-				case 'goup':
-				case 'godown':
-					useId = 'arrow';
-					break;
-				case 'upd-on':
-				case 'upd-off':
-					useId = 'upd';
-					break;
-				case 'catalog':
-					href = aib.catalogUrl;
-			}
-			var panelTitle = title || Lng.panelBtn[id][lang];
-			return '\n\t\t<a id="de-panel-' + id + '" class="de-abtn de-panel-button" title="' + panelTitle + '" href="' + (href || '#') + '">\n\t\t\t<svg class="de-panel-svg">\n\t\t\t' + (id !== 'audio-off' ? '\n\t\t\t\t<use xlink:href="#de-symbol-panel-' + (useId || id) + '"/>' : '\n\t\t\t\t<use class="de-use-audio-off" xlink:href="#de-symbol-panel-audio-off"/>\n\t\t\t\t<use class="de-use-audio-on" xlink:href="#de-symbol-panel-audio-on"/>') + '\n\t\t\t</svg>\n\t\t</a>';
-		},
-		_prepareToHide: function _prepareToHide(rt) {
-			var _this9 = this;
-
-			if (!Cfg.expandPanel && !$q('.de-win-active') && (!rt || !this._el.contains(rt.farthestViewportElement || rt))) {
-				this._hideTO = setTimeout(function () {
-					return $hide(_this9._buttons);
-				}, 500);
-			}
+		remove: function remove() {
+			this._el.removeEventListener('click', this, true);
+			this._el.removeEventListener('mouseover', this);
+			this._el.removeEventListener('mouseout', this);
+			delete this._pcountEl;
+			delete this._icountEl;
+			delete this._acountEl;
+			$del($id('de-main'));
 		},
 		handleEvent: function handleEvent(e) {
 			var _this10 = this;
@@ -5166,7 +5864,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						case 'de-panel-fav':
 							toggleWindow('fav', false);break;
 						case 'de-panel-vid':
-							toggleWindow('vid', false);break;
+							toggleWindow('vid', false);
+							this.isVidEnabled = !this.isVidEnabled;
+							break;
 						case 'de-panel-refresh':
 							window.location.reload();break;
 						case 'de-panel-goup':
@@ -5175,7 +5875,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							scrollTo(0, docBody.scrollHeight || docBody.offsetHeight);break;
 						case 'de-panel-expimg':
 							isExpImg = !isExpImg;
-							$del($q('.de-img-center'));
+							$del($q('.de-fullimg-center'));
 							for (var post = Thread.first.op; post; post = post.next) {
 								post.toggleImages(isExpImg);
 							}
@@ -5184,20 +5884,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							isPreImg = !isPreImg;
 							if (!e.ctrlKey) {
 								for (var _iterator2 = DelForm, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-									var _ref3;
+									var _ref5;
 
 									if (_isArray2) {
 										if (_i2 >= _iterator2.length) break;
-										_ref3 = _iterator2[_i2++];
+										_ref5 = _iterator2[_i2++];
 									} else {
 										_i2 = _iterator2.next();
 										if (_i2.done) break;
-										_ref3 = _i2.value;
+										_ref5 = _i2.value;
 									}
 
-									var form = _ref3;
+									var _ref6 = _ref5,
+									    _el2 = _ref6.el;
 
-									preloadImages(form.el);
+									preloadImages(_el2);
 								}
 							}
 							break;
@@ -5285,31 +5986,72 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					}
 			}
 		},
-		init: function init(formEl) {
-			var imgLen = $Q(aib.qPostImg, formEl).length,
-			    isThr = aib.t;
-			(pr && pr.pArea[0] || formEl).insertAdjacentHTML('beforebegin', '\n\t\t<div id="de-main">\n\t\t\t<div id="de-panel">\n\t\t\t\t<div id="de-panel-logo" title="' + Lng.panelBtn.attach[lang] + '">\n\t\t\t\t\t<svg class="de-panel-logo-svg">\n\t\t\t\t\t\t<use xlink:href="#de-symbol-panel-logo"/>\n\t\t\t\t\t</svg>\n\t\t\t\t</div>\n\t\t\t\t<span id="de-panel-buttons"' + (Cfg.expandPanel ? '' : ' style="display: none;"') + '>\n\t\t\t\t' + (Cfg.disabled ? this._getButton('enable') : this._getButton('cfg') + this._getButton('hid') + this._getButton('fav') + (!Cfg.addYouTube ? '' : this._getButton('vid')) + (localData ? '' : this._getButton('refresh') + (!isThr && aib.page === aib.firstPage ? '' : this._getButton('goback')) + (isThr || aib.page === aib.lastPage ? '' : this._getButton('gonext'))) + this._getButton('goup') + this._getButton('godown') + (imgLen === 0 ? '' : this._getButton('expimg') + this._getButton('maskimg')) + (nav.Presto || localData ? '' : (imgLen === 0 || Cfg.preLoadImgs ? '' : this._getButton('preimg')) + (!isThr ? '' : this._getButton('savethr'))) + (!isThr || localData ? '' : this._getButton(Cfg.ajaxUpdThr && !aib.isArchived ? 'upd-on' : 'upd-off') + (nav.Safari ? '' : this._getButton('audio-off'))) + (!aib.hasCatalog ? '' : this._getButton('catalog')) + this._getButton('enable') + (!isThr ? '' : '<span id="de-panel-info">' + '<span id="de-panel-info-pcount" title="' + Lng.panelBtn[Cfg.panelCounter !== 2 ? 'pcount' : 'pcountNotHid'][lang] + '">' + Thread.first.pcount + '</span>' + '<span id="de-panel-info-icount" title="' + Lng.panelBtn.imglen[lang] + '">' + imgLen + '</span>' + '<span id="de-panel-info-acount" title="' + Lng.panelBtn.posters[lang] + '"></span>' + '</span>')) + '\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t' + (Cfg.disabled ? '' : '<div id="de-wrapper-popup"></div><hr style="clear: both;">') + '\n\t\t</div>');
-			this._el = $id('de-panel');
-			this._el.addEventListener('click', this, true);
-			this._el.addEventListener('mouseover', this);
-			this._el.addEventListener('mouseout', this);
-			this._buttons = $id('de-panel-buttons');
-			this.isNew = true;
-		},
-		remove: function remove() {
-			this._el.removeEventListener('click', this, true);
-			this._el.removeEventListener('mouseover', this);
-			this._el.removeEventListener('mouseout', this);
-			delete this._pcountEl;
-			delete this._icountEl;
-			delete this._acountEl;
-			$del($id('de-main'));
-		},
 		updateCounter: function updateCounter(postCount, imgsCount, postersCount) {
 			this._pcountEl.textContent = postCount;
 			this._icountEl.textContent = imgsCount;
 			this._acountEl.textContent = postersCount;
 			this.isNew = false;
+		},
+
+
+		_el: null,
+		_hideTO: 0,
+		_menu: null,
+		_menuTO: 0,
+		get _acountEl() {
+			var value = $id('de-panel-info-acount');
+			Object.defineProperty(this, '_acountEl', { value: value, configurable: true });
+			return value;
+		},
+		get _icountEl() {
+			var value = $id('de-panel-info-icount');
+			Object.defineProperty(this, '_icountEl', { value: value, configurable: true });
+			return value;
+		},
+		get _pcountEl() {
+			var value = $id('de-panel-info-pcount');
+			Object.defineProperty(this, '_pcountEl', { value: value, configurable: true });
+			return value;
+		},
+		_getButton: function _getButton(id) {
+			var page = void 0,
+			    href = void 0,
+			    title = void 0,
+			    useId = void 0;
+			switch (id) {
+				case 'goback':
+					page = Math.max(aib.page - 1, 0);
+					href = aib.getPageUrl(aib.b, page);
+					if (!aib.t) {
+						title = Lng.panelBtn.gonext[lang].replace('%s', page);
+					}
+					useId = 'arrow';
+					break;
+				case 'gonext':
+					page = aib.page + 1;
+					href = aib.getPageUrl(aib.b, page);
+					title = Lng.panelBtn.gonext[lang].replace('%s', page);
+				case 'goup':
+				case 'godown':
+					useId = 'arrow';
+					break;
+				case 'upd-on':
+				case 'upd-off':
+					useId = 'upd';
+					break;
+				case 'catalog':
+					href = aib.catalogUrl;
+			}
+			return '<a id="de-panel-' + id + '" class="de-abtn de-panel-button" title="' + (title || Lng.panelBtn[id][lang]) + '" href="' + (href || '#') + '">\n\t\t\t<svg class="de-panel-svg">\n\t\t\t' + (id !== 'audio-off' ? '\n\t\t\t\t<use xlink:href="#de-symbol-panel-' + (useId || id) + '"/>' : '\n\t\t\t\t<use class="de-use-audio-off" xlink:href="#de-symbol-panel-audio-off"/>\n\t\t\t\t<use class="de-use-audio-on" xlink:href="#de-symbol-panel-audio-on"/>') + '\n\t\t\t</svg>\n\t\t</a>';
+		},
+		_prepareToHide: function _prepareToHide(rt) {
+			var _this11 = this;
+
+			if (!Cfg.expandPanel && !$q('.de-win-active') && (!rt || !this._el.contains(rt.farthestViewportElement || rt))) {
+				this._hideTO = setTimeout(function () {
+					return $hide(_this11._buttons);
+				}, 500);
+			}
 		}
 	});
 
@@ -5322,10 +6064,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	function makeDraggable(name, win, head) {
 		head.addEventListener('mousedown', {
-			_win: win,
-			_wStyle: win.style,
 			_oldX: 0,
 			_oldY: 0,
+			_win: win,
+			_wStyle: win.style,
 			_X: 0,
 			_Y: 0,
 			_Z: 0,
@@ -5335,6 +6077,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 				var curX = e.clientX,
 				    curY = e.clientY;
+
 				switch (e.type) {
 					case 'mousedown':
 						this._oldX = curX;
@@ -5349,18 +6092,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						$pd(e);
 						return;
 					case 'mousemove':
-						var maxX = Post.sizing.wWidth - this._win.offsetWidth,
-						    maxY = Post.sizing.wHeight - this._win.offsetHeight - 25,
-						    cr = this._win.getBoundingClientRect(),
-						    x = cr.left + curX - this._oldX,
-						    y = cr.top + curY - this._oldY;
-						this._X = x >= maxX || curX > this._oldX && x > maxX - 20 ? 'right: 0' : x < 0 || curX < this._oldX && x < 20 ? 'left: 0' : 'left: ' + x + 'px';
-						this._Y = y >= maxY || curY > this._oldY && y > maxY - 20 ? 'bottom: 25px' : y < 0 || curY < this._oldY && y < 20 ? 'top: 0' : 'top: ' + y + 'px';
-						var width = this._wStyle.width;
-						this._win.setAttribute('style', this._X + '; ' + this._Y + '; z-index: ' + this._Z + (width ? '; width: ' + width : ''));
-						this._oldX = curX;
-						this._oldY = curY;
-						return;
+						{
+							var maxX = Post.sizing.wWidth - this._win.offsetWidth;
+							var maxY = Post.sizing.wHeight - this._win.offsetHeight - 25;
+							var cr = this._win.getBoundingClientRect();
+							var x = cr.left + curX - this._oldX;
+							var y = cr.top + curY - this._oldY;
+							this._X = x >= maxX || curX > this._oldX && x > maxX - 20 ? 'right: 0' : x < 0 || curX < this._oldX && x < 20 ? 'left: 0' : 'left: ' + x + 'px';
+							this._Y = y >= maxY || curY > this._oldY && y > maxY - 20 ? 'bottom: 25px' : y < 0 || curY < this._oldY && y < 20 ? 'top: 0' : 'top: ' + y + 'px';
+							var width = this._wStyle.width;
+
+							this._win.setAttribute('style', this._X + '; ' + this._Y + '; z-index: ' + this._Z + (width ? '; width: ' + width : ''));
+							this._oldX = curX;
+							this._oldY = curY;
+							return;
+						}
 					default:
 						docBody.removeEventListener('mousemove', this);
 						docBody.removeEventListener('mouseup', this);
@@ -5371,76 +6117,86 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		});
 	}
 
-	function WinResizer(name, dir, cfgName, win, target) {
-		this.name = name;
-		this.dir = dir;
-		this.cfgName = cfgName;
-		this.vertical = dir === 'top' || dir === 'bottom';
-		this.win = win;
-		this.wStyle = this.win.style;
-		this.tStyle = target.style;
-		$q('.de-resizer-' + dir, win).addEventListener('mousedown', this);
-	}
-	WinResizer.prototype = {
-		handleEvent: function handleEvent(e) {
-			var val,
-			    x,
-			    y,
-			    cr = this.win.getBoundingClientRect(),
-			    maxX = Post.sizing.wWidth,
-			    maxY = Post.sizing.wHeight,
-			    width = this.wStyle.width,
-			    z = '; z-index: ' + this.wStyle.zIndex + (width ? '; width:' + width : '');
-			switch (e.type) {
-				case 'mousedown':
-					if (this.win.classList.contains('de-win-fixed')) {
-						x = 'right: 0';
-						y = 'bottom: 25px';
-					} else {
-						x = Cfg[this.name + 'WinX'];
-						y = Cfg[this.name + 'WinY'];
-					}
-					switch (this.dir) {
-						case 'top':
-							val = x + '; bottom: ' + (maxY - cr.bottom) + 'px' + z;break;
-						case 'bottom':
-							val = x + '; top: ' + cr.top + 'px' + z;break;
-						case 'left':
-							val = 'right: ' + (maxX - cr.right) + 'px; ' + y + z;break;
-						case 'right':
-							val = 'left: ' + cr.left + 'px; ' + y + z;
-					}
-					this.win.setAttribute('style', val);
-					docBody.addEventListener('mousemove', this);
-					docBody.addEventListener('mouseup', this);
-					$pd(e);
-					return;
-				case 'mousemove':
-					if (this.vertical) {
-						val = e.clientY;
-						this.tStyle.height = Math.max(parseInt(this.tStyle.height, 10) + (this.dir === 'top' ? cr.top - (val < 20 ? 0 : val) : (val > maxY - 45 ? maxY - 25 : val) - cr.bottom), 90) + 'px';
-					} else {
-						val = e.clientX;
-						this.tStyle.width = Math.max(parseInt(this.tStyle.width, 10) + (this.dir === 'left' ? cr.left - (val < 20 ? 0 : val) : (val > maxX - 20 ? maxX : val) - cr.right), this.name === 'reply' ? 275 : 400) + 'px';
-					}
-					return;
-				default:
-					docBody.removeEventListener('mousemove', this);
-					docBody.removeEventListener('mouseup', this);
-					saveCfg(this.cfgName, parseInt(this.vertical ? this.tStyle.height : this.tStyle.width, 10));
-					if (this.win.classList.contains('de-win-fixed')) {
-						this.win.setAttribute('style', 'right: 0; bottom: 25px' + z);
-						return;
-					}
-					if (this.vertical) {
-						saveCfg(this.name + 'WinY', cr.top < 1 ? 'top: 0' : cr.bottom > maxY - 26 ? 'bottom: 25px' : 'top: ' + cr.top + 'px');
-					} else {
-						saveCfg(this.name + 'WinX', cr.left < 1 ? 'left: 0' : cr.right > maxX - 1 ? 'right: 0' : 'left: ' + cr.left + 'px');
-					}
-					this.win.setAttribute('style', Cfg[this.name + 'WinX'] + '; ' + Cfg[this.name + 'WinY'] + z);
-			}
+	var WinResizer = function () {
+		function WinResizer(name, dir, cfgName, win, target) {
+			_classCallCheck(this, WinResizer);
+
+			this.name = name;
+			this.dir = dir;
+			this.cfgName = cfgName;
+			this.vertical = dir === 'top' || dir === 'bottom';
+			this.win = win;
+			this.wStyle = this.win.style;
+			this.tStyle = target.style;
+			$q('.de-resizer-' + dir, win).addEventListener('mousedown', this);
 		}
-	};
+
+		_createClass(WinResizer, [{
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				var val = void 0,
+				    x = void 0,
+				    y = void 0;
+				var _Post$sizing = Post.sizing,
+				    maxX = _Post$sizing.wWidth,
+				    maxY = _Post$sizing.wHeight;
+				var width = this.wStyle.width;
+
+				var cr = this.win.getBoundingClientRect();
+				var z = '; z-index: ' + this.wStyle.zIndex + (width ? '; width:' + width : '');
+				switch (e.type) {
+					case 'mousedown':
+						if (this.win.classList.contains('de-win-fixed')) {
+							x = 'right: 0';
+							y = 'bottom: 25px';
+						} else {
+							x = Cfg[this.name + 'WinX'];
+							y = Cfg[this.name + 'WinY'];
+						}
+						switch (this.dir) {
+							case 'top':
+								val = x + '; bottom: ' + (maxY - cr.bottom) + 'px' + z;break;
+							case 'bottom':
+								val = x + '; top: ' + cr.top + 'px' + z;break;
+							case 'left':
+								val = 'right: ' + (maxX - cr.right) + 'px; ' + (y + z);break;
+							case 'right':
+								val = 'left: ' + cr.left + 'px; ' + (y + z);
+						}
+						this.win.setAttribute('style', val);
+						docBody.addEventListener('mousemove', this);
+						docBody.addEventListener('mouseup', this);
+						$pd(e);
+						return;
+					case 'mousemove':
+						if (this.vertical) {
+							val = e.clientY;
+							this.tStyle.height = Math.max(parseInt(this.tStyle.height, 10) + (this.dir === 'top' ? cr.top - (val < 20 ? 0 : val) : (val > maxY - 45 ? maxY - 25 : val) - cr.bottom), 90) + 'px';
+						} else {
+							val = e.clientX;
+							this.tStyle.width = Math.max(parseInt(this.tStyle.width, 10) + (this.dir === 'left' ? cr.left - (val < 20 ? 0 : val) : (val > maxX - 20 ? maxX : val) - cr.right), this.name === 'reply' ? 275 : 400) + 'px';
+						}
+						return;
+					default:
+						docBody.removeEventListener('mousemove', this);
+						docBody.removeEventListener('mouseup', this);
+						saveCfg(this.cfgName, parseInt(this.vertical ? this.tStyle.height : this.tStyle.width, 10));
+						if (this.win.classList.contains('de-win-fixed')) {
+							this.win.setAttribute('style', 'right: 0; bottom: 25px' + z);
+							return;
+						}
+						if (this.vertical) {
+							saveCfg(this.name + 'WinY', cr.top < 1 ? 'top: 0' : cr.bottom > maxY - 26 ? 'bottom: 25px' : 'top: ' + cr.top + 'px');
+						} else {
+							saveCfg(this.name + 'WinX', cr.left < 1 ? 'left: 0' : cr.right > maxX - 1 ? 'right: 0' : 'left: ' + cr.left + 'px');
+						}
+						this.win.setAttribute('style', Cfg[this.name + 'WinX'] + '; ' + Cfg[this.name + 'WinY'] + z);
+				}
+			}
+		}]);
+
+		return WinResizer;
+	}();
 
 	function toggleWindow(name, isUpd, data, noAnim) {
 		var el = void 0,
@@ -5451,27 +6207,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 		if (!win) {
 			var winAttr = (Cfg[name + 'WinDrag'] ? 'de-win" style="' + Cfg[name + 'WinX'] + '; ' + Cfg[name + 'WinY'] : 'de-win-fixed" style="right: 0; bottom: 25px') + (name !== 'fav' ? '' : '; width: ' + Cfg.favWinWidth + 'px; ');
-			var backColor = getComputedStyle(docBody).getPropertyValue('background-color');
-			var bodyAttr = name === 'cfg' ? ' ' + aib.cReply : '" style="background-color: ' + (backColor !== 'transparent' ? backColor : '#EEE');
-			win = $aBegin($id('de-main'), '<div id="de-win-' + name + '" class="' + winAttr + '; display: none;">\n\t\t\t<div class="de-win-head">\n\t\t\t\t<span class="de-win-title">\n\t\t\t\t\t' + (name === 'cfg' ? 'Dollchan Extension Tools' : Lng.panelBtn[name][lang]) + '\n\t\t\t\t</span>\n\t\t\t\t<span class="de-win-buttons">\n\t\t\t\t\t<svg class="de-btn-toggle"><use xlink:href="#de-symbol-win-arrow"/></svg>\n\t\t\t\t\t<svg class="de-btn-close"><use xlink:href="#de-symbol-win-close"/></svg>\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t<div class="de-win-body' + bodyAttr + '"></div>\n\t\t\t' + (name !== 'fav' ? '' : '\n\t\t\t\t<div class="de-resizer de-resizer-left"></div>\n\t\t\t\t<div class="de-resizer de-resizer-right"></div>') + '\n\t\t</div>');
+			win = $aBegin($id('de-main'), '<div id="de-win-' + name + '" class="' + winAttr + '; display: none;">\n\t\t\t<div class="de-win-head">\n\t\t\t\t<span class="de-win-title">\n\t\t\t\t\t' + (name === 'cfg' ? 'Dollchan Extension Tools' : Lng.panelBtn[name][lang]) + '\n\t\t\t\t</span>\n\t\t\t\t<span class="de-win-buttons">\n\t\t\t\t\t<svg class="de-btn-toggle"><use xlink:href="#de-symbol-win-arrow"/></svg>\n\t\t\t\t\t<svg class="de-btn-close"><use xlink:href="#de-symbol-win-close"/></svg>\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t<div class="de-win-body"></div>\n\t\t\t' + (name !== 'fav' ? '' : '\n\t\t\t\t<div class="de-resizer de-resizer-left"></div>\n\t\t\t\t<div class="de-resizer de-resizer-right"></div>') + '\n\t\t</div>');
+			setTimeout(function () {
+				var el = $q('.de-win-body', win);
+				if (name === 'cfg') {
+					el.className = 'de-win-body ' + aib.cReply;
+				} else {
+					var backColor = getComputedStyle(docBody).getPropertyValue('background-color');
+					el.style.backgroundColor = backColor !== 'transparent' ? backColor : '#EEE';
+				}
+			}, 0);
 			if (name === 'fav') {
 				new WinResizer('fav', 'left', 'favWinWidth', win, win);
 				new WinResizer('fav', 'right', 'favWinWidth', win, win);
 			}
 			el = $q('.de-win-buttons', win);
-			el.onmouseover = function (e) {
-				switch (fixEventEl(e.target).classList[0]) {
+			el.onmouseover = function (_ref7) {
+				var target = _ref7.target;
+
+				var el = target.parentNode;
+				switch (fixEventEl(target).classList[0]) {
 					case 'de-btn-close':
-						this.title = Lng.closeWindow[lang];break;
+						el.title = Lng.closeWindow[lang];break;
 					case 'de-btn-toggle':
-						this.title = Cfg[name + 'WinDrag'] ? Lng.toPanel[lang] : Lng.makeDrag[lang];
+						el.title = Cfg[name + 'WinDrag'] ? Lng.toPanel[lang] : Lng.makeDrag[lang];
 				}
 			};
 			el.lastElementChild.onclick = function () {
 				return toggleWindow(name, false);
 			};
-			el.firstElementChild.onclick = function (e) {
+			el.firstElementChild.onclick = function () {
 				var width = win.style.width;
+
 				var w = width ? '; width: ' + width : '';
 				toggleCfg(name + 'WinDrag');
 				if (Cfg[name + 'WinDrag']) {
@@ -5499,8 +6266,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		var isAnim = !noAnim && !isUpd && Cfg.animation;
 		var body = $q('.de-win-body', win);
 		if (isAnim && body.hasChildNodes()) {
-			win.addEventListener('animationend', function aEvent() {
-				this.removeEventListener('animationend', aEvent);
+			win.addEventListener('animationend', function aEvent(e) {
+				e.target.removeEventListener('animationend', aEvent);
 				showWindow(win, body, name, remove, data, Cfg.animation);
 				win = body = name = remove = data = null;
 			});
@@ -5541,7 +6308,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				});
 				return;
 			case 'cfg':
-				cfgWindow.init(body);break;
+				CfgWindow.init(body);break;
 			case 'hid':
 				showHiddenWindow(body);break;
 			case 'vid':
@@ -5576,10 +6343,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		body.addEventListener('click', {
 			linkList: linkList,
+			currentLink: null,
 			listHidden: false,
 			player: body.firstElementChild,
 			playerInfo: null,
-			currentLink: null,
 			handleEvent: function handleEvent(e) {
 				var el = e.target;
 				if (el.classList.contains('de-abtn')) {
@@ -5605,10 +6372,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							node.lastElementChild.click();
 							break;
 						case 'de-video-btn-resize':
-							var exp = this.player.className === 'de-video-obj';
-							this.player.className = exp ? 'de-video-obj de-video-expanded' : 'de-video-obj';
-							this.linkList.style.maxWidth = (exp ? 894 : +Cfg.YTubeWidth + 40) + 'px';
-							this.linkList.style.maxHeight = nav.viewportHeight() * 0.92 - (exp ? 562 : +Cfg.YTubeHeigh + 82) + 'px';
+							{
+								var exp = this.player.className === 'de-video-obj';
+								this.player.className = exp ? 'de-video-obj de-video-expanded' : 'de-video-obj';
+								this.linkList.style.maxWidth = (exp ? 894 : +Cfg.YTubeWidth + 40) + 'px';
+								this.linkList.style.maxHeight = nav.viewportHeight() * 0.92 - (exp ? 562 : +Cfg.YTubeHeigh + 82) + 'px';
+							}
 					}
 					$pd(e);
 					return;
@@ -5623,22 +6392,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					}
 					this.currentLink = el;
 					el.classList.add('de-current');
-					this.playerInfo = info;
-					Videos.addPlayer(this.player, info, el.classList.contains('de-ytube'), true);
+					Videos.addPlayer(this, info, el.classList.contains('de-ytube'), true);
 				}
 				$pd(e);
 			}
 		}, true);
 
 		for (var i = 0, len = els.length; i < len; ++i) {
-			var el = els[i].cloneNode(true);
-			var num = aib.getPostOfEl(els[i]).num;
-			el.videoInfo = els[i].videoInfo;
-			$bEnd(linkList, '<div class="de-entry ' + aib.cReply + '">\n\t\t\t<a class="de-video-refpost" title=">>' + num + '" de-num="' + num + '">&gt;</a>\n\t\t</div>').appendChild(el).classList.remove('de-current');
-			el.setAttribute('onclick', 'window.de_addVideoEvents && window.de_addVideoEvents();');
+			updateVideoList(linkList, els[i], aib.getPostOfEl(els[i]).num);
 		}
 		body.appendChild(linkList);
 		$q('.de-video-link', linkList).click();
+	}
+
+	function updateVideoList(parent, link, num) {
+		var el = link.cloneNode(true);
+		el.videoInfo = link.videoInfo;
+		$bEnd(parent, '<div class="de-entry ' + aib.cReply + '">\n\t\t<a class="de-video-refpost" title=">>' + num + '" de-num="' + num + '">&gt;</a>\n\t</div>').appendChild(el).classList.remove('de-current');
+		el.setAttribute('onclick', 'window.de_addVideoEvents && window.de_addVideoEvents();');
 	}
 
 	function showHiddenWindow(body) {
@@ -5656,14 +6427,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					});
 				};
 				for (var tNum in hThr[b]) {
-					$bEnd(block, '<div class="de-entry ' + aib.cReply + '" info="' + (b + ';' + tNum) + '">\n\t\t\t\t\t<input type="checkbox">\n\t\t\t\t\t<a href="' + aib.getThrUrl(b, tNum) + '" target="_blank">' + tNum + '</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + hThr[b][tNum][2] + '</div>\n\t\t\t\t</div>');
+					$bEnd(block, '<div class="de-entry ' + aib.cReply + '" info="' + b + ';' + tNum + '">\n\t\t\t\t\t<input type="checkbox">\n\t\t\t\t\t<a href="' + aib.getThrUrl(b, tNum) + '" target="_blank">' + tNum + '</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + hThr[b][tNum][2] + '</div>\n\t\t\t\t</div>');
 				}
 			};
 
 			for (var b in hThr) {
-				var _ret2 = _loop(b);
+				var _ret = _loop(b);
 
-				if (_ret2 === 'continue') continue;
+				if (_ret === 'continue') continue;
 			}
 		}
 		$bEnd(body, hasThreads ? '<hr>' : '<center><b>' + Lng.noHidThr[lang] + '</b></center><hr>');
@@ -5676,54 +6447,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 		}));
 
-		body.appendChild($btn(Lng.clear[lang], Lng.clrDeleted[lang], function _callee() {
-			var i, els, len, _els$i$getAttribute$s, _els$i$getAttribute$s2, _b, tNum;
+		body.appendChild($btn(Lng.clear[lang], Lng.clrDeleted[lang], function () {
+			var _ref8 = _asyncToGenerator( regeneratorRuntime.mark(function _callee4(e) {
+				var els, i, len, _els$i$getAttribute$s, _els$i$getAttribute$s2, b, tNum;
 
-			return regeneratorRuntime.async(function _callee$(_context5) {
-				while (1) {
-					switch (_context5.prev = _context5.next) {
-						case 0:
-							i = 0, els = $Q('.de-entry[info]', this.parentNode), len = els.length;
+				return regeneratorRuntime.wrap(function _callee4$(_context5) {
+					while (1) {
+						switch (_context5.prev = _context5.next) {
+							case 0:
+								els = $Q('.de-entry[info]', e.target.parentNode);
+								i = 0, len = els.length;
 
-						case 1:
-							if (!(i < len)) {
-								_context5.next = 14;
+							case 2:
+								if (!(i < len)) {
+									_context5.next = 15;
+									break;
+								}
+
+								_els$i$getAttribute$s = els[i].getAttribute('info').split(';'), _els$i$getAttribute$s2 = _slicedToArray(_els$i$getAttribute$s, 2), b = _els$i$getAttribute$s2[0], tNum = _els$i$getAttribute$s2[1];
+								_context5.prev = 4;
+								_context5.next = 7;
+								return $ajax(aib.getThrUrl(b, tNum));
+
+							case 7:
+								_context5.next = 12;
 								break;
-							}
 
-							_els$i$getAttribute$s = els[i].getAttribute('info').split(';'), _els$i$getAttribute$s2 = _slicedToArray(_els$i$getAttribute$s, 2), _b = _els$i$getAttribute$s2[0], tNum = _els$i$getAttribute$s2[1];
-							_context5.prev = 3;
-							_context5.next = 6;
-							return regeneratorRuntime.awrap($ajax(aib.getThrUrl(_b, tNum)));
+							case 9:
+								_context5.prev = 9;
+								_context5.t0 = _context5['catch'](4);
 
-						case 6:
-							_context5.next = 11;
-							break;
+								if (_context5.t0.code === 404) {
+									HiddenThreads.remove(tNum, b); 
+									HiddenPosts.remove(tNum, b); 
+								}
 
-						case 8:
-							_context5.prev = 8;
-							_context5.t0 = _context5['catch'](3);
+							case 12:
+								++i;
+								_context5.next = 2;
+								break;
 
-							if (_context5.t0.code === 404) {
-								HiddenThreads.remove(tNum, _b); 
-								HiddenPosts.remove(tNum, _b); 
-							}
+							case 15:
+								toggleWindow('hid', true);
 
-						case 11:
-							++i;
-							_context5.next = 1;
-							break;
-
-						case 14:
-							toggleWindow('hid', true);
-
-						case 15:
-						case 'end':
-							return _context5.stop();
+							case 16:
+							case 'end':
+								return _context5.stop();
+						}
 					}
-				}
-			}, null, this, [[3, 8]]);
-		}));
+				}, _callee4, this, [[4, 9]]);
+			}));
+
+			return function (_x10) {
+				return _ref8.apply(this, arguments);
+			};
+		}()));
 
 		body.appendChild($btn(Lng.remove[lang], Lng.delEntries[lang], function () {
 			$each($Q('.de-entry[info]', body), function (el) {
@@ -5733,22 +6511,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				var _el$getAttribute$spli = el.getAttribute('info').split(';'),
 				    _el$getAttribute$spli2 = _slicedToArray(_el$getAttribute$spli, 2),
-				    b = _el$getAttribute$spli2[0],
+				    brd = _el$getAttribute$spli2[0],
 				    tNum = _el$getAttribute$spli2[1];
 
 				var num = +tNum;
 				if (pByNum.has(num)) {
 					pByNum.get(num).setUserVisib(false);
 				} else {
-					locStorage['__de-post'] = JSON.stringify({
-						'brd': b,
-						'num': num,
-						'thrNum': num,
-						'hide': false
-					});
+					locStorage['__de-post'] = JSON.stringify({ brd: brd, num: num, hide: false, thrNum: num });
 					locStorage.removeItem('__de-post');
 				}
-				HiddenThreads.remove(num, b); 
+				HiddenThreads.remove(num, brd); 
 				HiddenPosts.set(num, num, false); 
 			});
 			toggleWindow('hid', true);
@@ -5783,21 +6556,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			for (var b in data[h]) {
 				var d = data[h][b];
 				var innerHtml = '';
-				for (var _tNum in d) {
-					if (_tNum === 'url') {
+				for (var tNum in d) {
+					if (tNum === 'url') {
 						continue;
 					}
-					var t = d[_tNum];
+					var t = d[tNum];
 					if (!t.url.startsWith('http')) {
 						t.url = (h === aib.host ? aib.prot + '//' : 'http://') + h + t.url;
 					}
 
-					innerHtml += '<div class="de-entry ' + aib.cReply + '" de-host="' + h + '" de-board="' + b + '" de-num="' + _tNum + '" de-url="' + t.url + '">\n\t\t\t\t\t<input class="de-fav-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-link" href="' + (t.url + (!t.last ? '' : t.last.startsWith('#') ? t.last : h === aib.host ? aib.anchor + t.last : '')) + '" rel="noreferrer">\n\t\t\t\t\t\t' + _tNum + '\n\t\t\t\t\t</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + t.txt + '</div>\n\t\t\t\t\t<div class="de-fav-inf">\n\t\t\t\t\t\t<span class="de-fav-inf-iwrap" ' + (!t.err ? '' : t.err === 'Closed' ? 'title="' + Lng.thrClosed[lang] + '"' : 'title="' + t.err + '"') + '>\n\t\t\t\t\t\t\t<svg class="de-fav-inf-icon ' + (!t.err ? '' : t.err === 'Closed' || t.err === 'Archived' ? 'de-fav-closed' : 'de-fav-unavail') + '">\n\t\t\t\t\t\t\t\t<use class="de-fav-closed-use" xlink:href="#de-symbol-closed"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-unavail-use" xlink:href="#de-symbol-unavail"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-wait-use" xlink:href="#de-symbol-wait"/>\n\t\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<span class="de-fav-inf-you" title="' + Lng.myPostsRep[lang] + '"' + (t.you ? '' : ' style="display: none;"') + '>' + (t.you || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-new" title="' + Lng.newPosts[lang] + '"' + (t['new'] ? '' : ' style="display: none;"') + '>' + (t['new'] || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-old" title="' + Lng.oldPosts[lang] + '">' + t.cnt + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-page" title="' + Lng.thrPage[lang] + '"></span>\n\t\t\t\t\t</div>\n\t\t\t\t</div>';
+					var favLinkHref = t.url + (!t.last ? '' : t.last.startsWith('#') ? t.last : h === aib.host ? aib.anchor + t.last : '');
+					var favInfIwrapTitle = !t.err ? '' : t.err === 'Closed' ? 'title="' + Lng.thrClosed[lang] + '"' : 'title="' + t.err + '"';
+					var favInfIconClass = !t.err ? '' : t.err === 'Closed' || t.err === 'Archived' ? 'de-fav-closed' : 'de-fav-unavail';
+					var favInfYouDisp = t.you ? '' : ' style="display: none;"';
+					var favInfNewDisp = t.new ? '' : ' style="display: none;"';
+					innerHtml += '<div class="de-entry ' + aib.cReply + '" de-host="' + h + '" de-board="' + b + '" de-num="' + tNum + '" de-url="' + t.url + '">\n\t\t\t\t\t<input class="de-fav-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-link" href="' + favLinkHref + '" rel="noreferrer">' + tNum + '</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + t.txt + '</div>\n\t\t\t\t\t<div class="de-fav-inf">\n\t\t\t\t\t\t<span class="de-fav-inf-iwrap" ' + favInfIwrapTitle + '>\n\t\t\t\t\t\t\t<svg class="de-fav-inf-icon ' + favInfIconClass + '">\n\t\t\t\t\t\t\t\t<use class="de-fav-closed-use" xlink:href="#de-symbol-closed"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-unavail-use" xlink:href="#de-symbol-unavail"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-wait-use" xlink:href="#de-symbol-wait"/>\n\t\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<span class="de-fav-inf-you" title="' + Lng.myPostsRep[lang] + '"' + favInfYouDisp + '>\n\t\t\t\t\t\t\t' + (t.you || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-new" title="' + Lng.newPosts[lang] + '"' + favInfNewDisp + '>\n\t\t\t\t\t\t\t' + (t.new || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-old" title="' + Lng.oldPosts[lang] + '">' + t.cnt + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-page" title="' + Lng.thrPage[lang] + '"></span>\n\t\t\t\t\t</div>\n\t\t\t\t</div>';
 				}
 				if (!innerHtml) {
 					continue;
 				}
-
 				html += '<div class="de-fold-block' + (h === aib.host && b === aib.b ? ' de-fav-current' : '') + '">\n\t\t\t\t<div class="de-fav-header">\n\t\t\t\t\t<input class="de-fav-header-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-header-link" href="' + d.url + '" rel="noreferrer">' + h + '/' + b + '</a>\n\t\t\t\t</div>\n\t\t\t\t<div class="de-fav-entries"' + (h === aib.host ? ' de-opened' : ' style="display: none;"') + '>\n\t\t\t\t\t' + innerHtml + '\n\t\t\t\t</div>\n\t\t\t</div>';
 			}
 		}
@@ -5805,39 +6582,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if (html) {
 			$bEnd(body, '<div class="de-fav-table">' + html + '</div>').addEventListener('click', function (e) {
 				var el = e.target;
+				switch (el.className) {
+					case 'de-fav-link':
+						sesStorage['de-win-fav'] = '1'; 
+						el = el.parentNode;
+						sesStorage.removeItem('de-scroll-' + el.getAttribute('de-board') + el.getAttribute('de-num'));
+						break;
+					case 'de-fav-header-switch':
+						{
+							var _el3 = el,
+							    checked = _el3.checked;
 
-				var _ret3 = function () {
-					switch (el.className) {
-						case 'de-fav-link':
-							sesStorage['de-win-fav'] = '1'; 
-							el = el.parentNode;
-							sesStorage.removeItem('de-scroll-' + el.getAttribute('de-board') + el.getAttribute('de-num'));
-							break;
-						case 'de-fav-header-switch':
-							var checked = el.checked;
 							el = el.parentNode.nextElementSibling;
 							$each($Q('.de-entry > input', el), function (checkBox) {
 								return checkBox.checked = checked;
 							});
 							if (!checked || el.hasAttribute('de-opened')) {
-								return {
-									v: void 0
-								};
+								return;
 							}
 							break;
-						case 'de-fav-header-link':
-							el = el.parentNode.nextElementSibling;
-							$pd(e); 
-							break;
-						default:
-							return {
-								v: void 0
-							};
-					}
-
-				}();
-
-				if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
+						}
+					case 'de-fav-header-link':
+						el = el.parentNode.nextElementSibling;
+						$pd(e); 
+						break;
+					default:
+						return;
+				}
 				if (el.hasAttribute('de-opened')) {
 					el.style.display = 'none';
 					el.removeAttribute('de-opened');
@@ -5858,15 +6629,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 		}));
 
-		div.appendChild($btn(Lng.refresh[lang], Lng.infoCount[lang], function _callee2() {
-			var fav, isUpdate, last404, myposts, els, i, len, el, host, _b2, num, f, countEl, youEl, iconEl, titleEl, form, isArchived, _ref4, _ref5, bArch, posts, cnt, j, links, a, _len, _num, tc;
+		div.appendChild($btn(Lng.refresh[lang], Lng.infoCount[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee5() {
+			var fav, isUpdate, last404, myposts, els, i, len, el, host, _b, num, f, countEl, youEl, iconEl, titleEl, form, isArchived, _ref10, _ref11, bArch, posts, cnt, j, links, a, _len, tc;
 
-			return regeneratorRuntime.async(function _callee2$(_context6) {
+			return regeneratorRuntime.wrap(function _callee5$(_context6) {
 				while (1) {
 					switch (_context6.prev = _context6.next) {
 						case 0:
 							_context6.next = 2;
-							return regeneratorRuntime.awrap(getStoredObj('DESU_Favorites'));
+							return getStoredObj('DESU_Favorites');
 
 						case 2:
 							fav = _context6.sent;
@@ -5893,10 +6664,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 							el = els[i];
 							host = el.getAttribute('de-host');
-							_b2 = el.getAttribute('de-board');
+							_b = el.getAttribute('de-board');
 							num = el.getAttribute('de-num');
-							f = fav[host][_b2][num];
-
+							f = fav[host][_b][num];
 
 							if (!(host !== aib.host || f.err === 'Closed' || f.err === 'Archived')) {
 								_context6.next = 18;
@@ -5922,7 +6692,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 
 							_context6.next = 29;
-							return regeneratorRuntime.awrap(ajaxLoad(aib.getThrUrl(_b2, num)));
+							return ajaxLoad(aib.getThrUrl(_b, num));
 
 						case 29:
 							form = _context6.sent;
@@ -5931,13 +6701,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						case 32:
 							_context6.next = 34;
-							return regeneratorRuntime.awrap(ajaxLoad(aib.getThrUrl(_b2, num), true, false, aib.iichan));
+							return ajaxLoad(aib.getThrUrl(_b, num), true, false, aib.iichan);
 
 						case 34:
-							_ref4 = _context6.sent;
-							_ref5 = _slicedToArray(_ref4, 2);
-							form = _ref5[0];
-							isArchived = _ref5[1];
+							_ref10 = _context6.sent;
+							_ref11 = _slicedToArray(_ref10, 2);
+							form = _ref11[0];
+							isArchived = _ref11[1];
 
 						case 38:
 							last404 = false;
@@ -5958,7 +6728,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								break;
 							}
 
-							Thread.removeSavedData(_b2, num); 
+							Thread.removeSavedData(_b, num); 
 							_context6.next = 51;
 							break;
 
@@ -5977,7 +6747,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							return _context6.abrupt('continue', 63);
 
 						case 58:
-
 							if (aib.qClosed && $q(aib.qClosed, form)) {
 								iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-closed');
 								titleEl.title = Lng.thrClosed[lang];
@@ -5987,13 +6756,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-closed');
 								titleEl.title = Lng.thrArchived[lang];
 								f.err = 'Archived';
-								bArch = _b2 + '/arch';
+								bArch = _b + '/arch';
 
 								if (!fav[host][bArch]) {
-									fav[host][bArch] = { url: fav[host][_b2].url + 'arch/' };
+									fav[host][bArch] = { url: fav[host][_b].url + 'arch/' };
 								}
 								fav[host][bArch][num] = Object.assign({}, f);
-								removeFavoriteEntry(fav, host, _b2, num);
+								removeFavoriteEntry(fav, host, _b, num);
 								isUpdate = true;
 							} else {
 								iconEl.setAttribute('class', 'de-fav-inf-icon');
@@ -6003,7 +6772,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 									isUpdate = true;
 								}
 							}
-
 							posts = $Q(aib.qRPost, form);
 							cnt = posts.length + 1 - f.cnt;
 
@@ -6013,10 +6781,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								$hide(youEl);
 							} else {
 								$show(countEl);
-								f['new'] = cnt;
+								f.new = cnt;
 								isUpdate = true;
-
-								if (myposts && myposts[_b2]) {
+								if (myposts && myposts[_b]) {
 									f.you = 0;
 									for (j = 0; j < cnt; ++j) {
 										links = $Q(aib.qPostMsg + ' a', posts[posts.length - 1 - j]);
@@ -6024,7 +6791,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										for (a = 0, _len = links.length; a < _len; ++a) {
 											tc = links[a].textContent;
 
-											if (tc[0] === '>' && tc[1] === '>' && myposts[_b2][tc.substr(2)]) {
+											if (tc[0] === '>' && tc[1] === '>' && myposts[_b][tc.substr(2)]) {
 												f.you++;
 											}
 										}
@@ -6052,13 +6819,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							return _context6.stop();
 					}
 				}
-			}, null, this, [[25, 41]]);
-		}));
+			}, _callee5, this, [[25, 41]]);
+		}))));
 
-		div.appendChild($btn(Lng.page[lang], Lng.infoPage[lang], function _callee3() {
-			var els, len, thrInfo, i, el, iconEl, titleEl, endPage, page, infoLoaded, tNums, form, _i3, pInfo, _i4, _thrInfo$_i, found, pageEl, iconClass, _iconEl, iconTitle, _titleEl;
+		div.appendChild($btn(Lng.page[lang], Lng.infoPage[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee6() {
+			var els, len, thrInfo, i, el, iconEl, titleEl, endPage, infoLoaded, page, tNums, form, _i3, pInfo, _i4, _thrInfo$_i, found, pageEl, iconClass, _iconEl, iconTitle, _titleEl;
 
-			return regeneratorRuntime.async(function _callee3$(_context7) {
+			return regeneratorRuntime.wrap(function _callee6$(_context7) {
 				while (1) {
 					switch (_context7.prev = _context7.next) {
 						case 0:
@@ -6075,7 +6842,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						case 5:
 							$popup('load-pages', Lng.loading[lang], true);
-
 							for (i = 0; i < len; ++i) {
 								el = els[i];
 								iconEl = $q('.de-fav-inf-icon', el);
@@ -6093,38 +6859,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-wait');
 								titleEl.title = Lng.updating[lang];
 							}
-
 							endPage = (aib.lastPage || 10) + 1; 
 
-							page = 0, infoLoaded = 0;
+							infoLoaded = 0;
+							page = 0;
 
-						case 9:
+						case 10:
 							if (!(page < endPage)) {
-								_context7.next = 27;
+								_context7.next = 28;
 								break;
 							}
 
 							tNums = void 0;
-							_context7.prev = 11;
-							_context7.next = 14;
-							return regeneratorRuntime.awrap(ajaxLoad(aib.getPageUrl(aib.b, page)));
+							_context7.prev = 12;
+							_context7.next = 15;
+							return ajaxLoad(aib.getPageUrl(aib.b, page));
 
-						case 14:
+						case 15:
 							form = _context7.sent;
 
-							tNums = new Set(Array.from(DelForm.getThreads(form)).map(function (thrEl) {
+							tNums = new Set(Array.from(DelForm.getThreads(form), function (thrEl) {
 								return aib.getTNum(thrEl);
 							}));
-							_context7.next = 21;
+							_context7.next = 22;
 							break;
 
-						case 18:
-							_context7.prev = 18;
-							_context7.t0 = _context7['catch'](11);
-							return _context7.abrupt('continue', 24);
+						case 19:
+							_context7.prev = 19;
+							_context7.t0 = _context7['catch'](12);
+							return _context7.abrupt('continue', 25);
 
-						case 21:
-
+						case 22:
 							for (_i3 = 0; _i3 < len; ++_i3) {
 								pInfo = thrInfo[_i3];
 
@@ -6142,19 +6907,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 
 							if (!(infoLoaded === len)) {
-								_context7.next = 24;
+								_context7.next = 25;
 								break;
 							}
 
-							return _context7.abrupt('break', 27);
+							return _context7.abrupt('break', 28);
 
-						case 24:
+						case 25:
 							++page;
-							_context7.next = 9;
+							_context7.next = 10;
 							break;
 
-						case 27:
-
+						case 28:
 							for (_i4 = 0; _i4 < len; ++_i4) {
 								_thrInfo$_i = thrInfo[_i4], found = _thrInfo$_i.found, pageEl = _thrInfo$_i.pageEl, iconClass = _thrInfo$_i.iconClass, _iconEl = _thrInfo$_i.iconEl, iconTitle = _thrInfo$_i.iconTitle, _titleEl = _thrInfo$_i.titleEl;
 
@@ -6168,28 +6932,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 									pageEl.textContent = '@?'; 
 								}
 							}
-
 							closePopup('load-pages');
 
-						case 29:
+						case 30:
 						case 'end':
 							return _context7.stop();
 					}
 				}
-			}, null, this, [[11, 18]]);
-		}));
+			}, _callee6, this, [[12, 19]]);
+		}))));
 
-		div.appendChild($btn(Lng.clear[lang], Lng.clrDeleted[lang], function _callee4() {
-			var i, last404, els, len, el, iconEl, titleEl;
-			return regeneratorRuntime.async(function _callee4$(_context8) {
+		div.appendChild($btn(Lng.clear[lang], Lng.clrDeleted[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee7() {
+			var last404, els, len, i, el, iconEl, titleEl;
+			return regeneratorRuntime.wrap(function _callee7$(_context8) {
 				while (1) {
 					switch (_context8.prev = _context8.next) {
 						case 0:
-							i = 0, last404 = false, els = $Q('.de-entry'), len = els.length;
+							last404 = false;
+							els = $Q('.de-entry'), len = els.length;
+							i = 0;
 
-						case 1:
+						case 3:
 							if (!(i < len)) {
-								_context8.next = 31;
+								_context8.next = 33;
 								break;
 							}
 
@@ -6199,63 +6964,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-wait');
 							titleEl.title = Lng.updating[lang];
-							_context8.prev = 7;
-							_context8.next = 10;
-							return regeneratorRuntime.awrap($ajax(el.getAttribute('de-url'), null, false));
+							_context8.prev = 9;
+							_context8.next = 12;
+							return $ajax(el.getAttribute('de-url'), null, false);
 
-						case 10:
+						case 12:
 							iconEl.setAttribute('class', 'de-fav-inf-icon');
 							titleEl.removeAttribute('title');
-							_context8.next = 27;
+							_context8.next = 29;
 							break;
 
-						case 14:
-							_context8.prev = 14;
-							_context8.t0 = _context8['catch'](7);
+						case 16:
+							_context8.prev = 16;
+							_context8.t0 = _context8['catch'](9);
 
 							if (!(_context8.t0.code === 404)) {
-								_context8.next = 25;
+								_context8.next = 27;
 								break;
 							}
 
 							if (!last404) {
-								_context8.next = 22;
+								_context8.next = 24;
 								break;
 							}
 
 							Thread.removeSavedData(el.getAttribute('de-board'), 
 							+el.getAttribute('de-num'));
 							el.setAttribute('de-removed', ''); 
-							_context8.next = 25;
+							_context8.next = 27;
 							break;
 
-						case 22:
+						case 24:
 							last404 = true;
 							--i; 
-							return _context8.abrupt('continue', 28);
+							return _context8.abrupt('continue', 30);
 
-						case 25:
+						case 27:
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-unavail');
 							titleEl.title = getErrorMessage(_context8.t0);
 
-						case 27:
+						case 29:
 							last404 = false;
 
-						case 28:
+						case 30:
 							++i;
-							_context8.next = 1;
+							_context8.next = 3;
 							break;
 
-						case 31:
+						case 33:
 							cleanFavorites(); 
 
-						case 32:
+						case 34:
 						case 'end':
 							return _context8.stop();
 					}
 				}
-			}, null, this, [[7, 14]]);
-		}));
+			}, _callee7, this, [[9, 16]]);
+		}))));
 
 		div.appendChild($btn(Lng.deletion[lang], Lng.delEntries[lang], function () {
 			return body.classList.add('de-fav-del');
@@ -6281,9 +7046,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 
-	var cfgWindow = Object.create({
+	var CfgWindow = {
 		init: function init(body) {
-			var _this11 = this;
+			var _this12 = this;
 
 			body.addEventListener('click', this);
 			body.addEventListener('mouseover', this);
@@ -6321,7 +7086,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						var obj = {};
 						var com = data[aib.dm];
 						for (var i in com) {
-							if (i !== 'correctTime' && i !== 'timePattern' && i !== 'userCSS' && i !== 'userCSSTxt' && com[i] !== defaultCfg[i] && i !== 'stats') {
+							if (i !== 'correctTime' && i !== 'timePattern' && i !== 'userCSS' && i !== 'userCSSTxt' && i !== 'stats' && com[i] !== defaultCfg[i]) {
 								obj[i] = com[i];
 							}
 						}
@@ -6333,16 +7098,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				el.insertAdjacentHTML('beforeend', '<hr><small>' + Lng.descrGlobal[lang] + '</small>');
 			}));
 
-			!nav.Presto && div.appendChild($btn(Lng.file[lang], Lng.fileImpExp[lang], function () {
-				$popup('cfg-file', '<b>' + Lng.fileImpExp[lang] + ':</b><hr>' + '<div class="de-list">' + Lng.fileToData[lang] + ':<div class="de-cfg-depend">' + '<input type="file" accept=".json" id="de-import-file"></div></div><hr>' + '<div class="de-list"><a id="de-export-file" href="#">' + Lng.dataToFile[lang] + ':<div class="de-cfg-depend">' + _this11._getList([Lng.panelBtn.cfg[lang] + ' ' + Lng.allDomains[lang], Lng.panelBtn.fav[lang], Lng.hidPostThr[lang] + ' (' + aib.dm + ')', Lng.myPosts[lang] + ' (' + aib.dm + ')']) + '</div></div>');
+			!nav.isPresto && div.appendChild($btn(Lng.file[lang], Lng.fileImpExp[lang], function () {
+				$popup('cfg-file', '<b>' + Lng.fileImpExp[lang] + ':</b><hr>' + ('<div class="de-list">' + Lng.fileToData[lang] + ':<div class="de-cfg-depend">') + '<input type="file" accept=".json" id="de-import-file"></div></div><hr>' + '<div class="de-list"><a id="de-export-file" href="#">' + Lng.dataToFile[lang] + ':<div class="de-cfg-depend">' + _this12._getList([Lng.panelBtn.cfg[lang] + ' ' + Lng.allDomains[lang], Lng.panelBtn.fav[lang], Lng.hidPostThr[lang] + (' (' + aib.dm + ')'), Lng.myPosts[lang] + (' (' + aib.dm + ')')]) + '</div></div>');
 
 				$id('de-import-file').onchange = function (e) {
 					var file = e.target.files[0];
 					if (!file) {
 						return;
 					}
-					readFile(file, true).then(function (_ref6) {
-						var data = _ref6.data;
+					readFile(file, true).then(function (_ref14) {
+						var data = _ref14.data;
 
 						var obj = void 0;
 						try {
@@ -6391,105 +7156,112 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				var expFile = $id('de-export-file');
 				var els = $Q('input', expFile.nextElementSibling);
 				els[0].checked = true;
-				expFile.addEventListener('click', function _callee5(e) {
-					var name, nameDm, d, val, valDm, i, len, cfgData;
-					return regeneratorRuntime.async(function _callee5$(_context9) {
-						while (1) {
-							switch (_context9.prev = _context9.next) {
-								case 0:
-									name = [], nameDm = [], d = new Date();
-									val = [], valDm = [];
-									i = 0, len = els.length;
+				expFile.addEventListener('click', function () {
+					var _ref15 = _asyncToGenerator( regeneratorRuntime.mark(function _callee8(e) {
+						var name, nameDm, d, val, valDm, i, len, cfgData;
+						return regeneratorRuntime.wrap(function _callee8$(_context9) {
+							while (1) {
+								switch (_context9.prev = _context9.next) {
+									case 0:
+										name = [], nameDm = [], d = new Date();
+										val = [], valDm = [];
+										i = 0, len = els.length;
 
-								case 3:
-									if (!(i < len)) {
-										_context9.next = 34;
+									case 3:
+										if (!(i < len)) {
+											_context9.next = 34;
+											break;
+										}
+
+										if (els[i].checked) {
+											_context9.next = 6;
+											break;
+										}
+
+										return _context9.abrupt('continue', 31);
+
+									case 6:
+										_context9.t0 = i;
+										_context9.next = _context9.t0 === 0 ? 9 : _context9.t0 === 1 ? 15 : _context9.t0 === 2 ? 26 : _context9.t0 === 3 ? 29 : 31;
 										break;
-									}
 
-									if (els[i].checked) {
-										_context9.next = 6;
+									case 9:
+										name.push('Cfg');_context9.next = 12;
+										return Promise.all([getStored('DESU_Config'), getStored('DESU_keys'), getStored('DESU_Exclude')]);
+
+									case 12:
+										cfgData = _context9.sent;
+
+										val.push('"settings":' + cfgData[0], '"hotkeys":' + (cfgData[1] || '""'), '"exclude":"' + (cfgData[2] || '') + '"');
+										return _context9.abrupt('break', 31);
+
+									case 15:
+										name.push('Fav');
+										_context9.t1 = val;
+										_context9.next = 19;
+										return getStored('DESU_Favorites');
+
+									case 19:
+										_context9.t2 = _context9.sent;
+
+										if (_context9.t2) {
+											_context9.next = 22;
+											break;
+										}
+
+										_context9.t2 = '{}';
+
+									case 22:
+										_context9.t3 = _context9.t2;
+										_context9.t4 = '"favorites":' + _context9.t3;
+
+										_context9.t1.push.call(_context9.t1, _context9.t4);
+
+										return _context9.abrupt('break', 31);
+
+									case 26:
+										nameDm.push('Hid');
+										valDm.push('"posts":' + (locStorage['de-posts'] || '{}'), '"threads":' + (locStorage['de-threads'] || '{}'));
+										return _context9.abrupt('break', 31);
+
+									case 29:
+										nameDm.push('You');
+										valDm.push('"myposts":' + (locStorage['de-myposts'] || '{}'));
+
+									case 31:
+										++i;
+										_context9.next = 3;
 										break;
-									}
 
-									return _context9.abrupt('continue', 31);
+									case 34:
+										if (valDm = valDm.join(',')) {
+											val.push('"' + aib.dm + '":{' + valDm + '}');
+											name.push(aib.dm + ' (' + nameDm.join('+') + ')');
+										}
+										if (val = val.join(',')) {
+											downloadBlob(new Blob(['{' + val + '}'], { type: 'application/json' }), 'DE_' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '_' + pad2(d.getHours()) + pad2(d.getMinutes()) + '_' + name.join('+') + '.json');
+										}
+										$pd(e);
 
-								case 6:
-									_context9.t0 = i;
-									_context9.next = _context9.t0 === 0 ? 9 : _context9.t0 === 1 ? 15 : _context9.t0 === 2 ? 26 : _context9.t0 === 3 ? 29 : 31;
-									break;
-
-								case 9:
-									name.push('Cfg');
-									_context9.next = 12;
-									return regeneratorRuntime.awrap(Promise.all([getStored('DESU_Config'), getStored('DESU_keys'), getStored('DESU_Exclude')]));
-
-								case 12:
-									cfgData = _context9.sent;
-
-									val.push('"settings":' + cfgData[0], '"hotkeys":' + (cfgData[1] || '""'), '"exclude":"' + (cfgData[2] || '') + '"');
-									return _context9.abrupt('break', 31);
-
-								case 15:
-									name.push('Fav');
-									_context9.t1 = val;
-									_context9.next = 19;
-									return regeneratorRuntime.awrap(getStored('DESU_Favorites'));
-
-								case 19:
-									_context9.t2 = _context9.sent;
-
-									if (_context9.t2) {
-										_context9.next = 22;
-										break;
-									}
-
-									_context9.t2 = '{}';
-
-								case 22:
-									_context9.t3 = _context9.t2;
-									_context9.t4 = '"favorites":' + _context9.t3;
-
-									_context9.t1.push.call(_context9.t1, _context9.t4);
-
-									return _context9.abrupt('break', 31);
-
-								case 26:
-									nameDm.push('Hid');
-									valDm.push('"posts":' + (locStorage['de-posts'] || '{}'), '"threads":' + (locStorage['de-threads'] || '{}'));
-									return _context9.abrupt('break', 31);
-
-								case 29:
-									nameDm.push('You');
-									valDm.push('"myposts":' + (locStorage['de-myposts'] || '{}'));
-
-								case 31:
-									++i;
-									_context9.next = 3;
-									break;
-
-								case 34:
-									if (valDm = valDm.join(',')) {
-										val.push('"' + aib.dm + '":{' + valDm + '}');
-										name.push(aib.dm + '(' + nameDm.join('+') + ')');
-									}
-									if (val = val.join(',')) {
-										downloadBlob(new Blob(['{' + val + '}'], { type: 'application/json' }), 'DE_' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '_' + pad2(d.getHours()) + pad2(d.getMinutes()) + '_' + name.join('+') + '.json');
-									}
-									$pd(e);
-
-								case 37:
-								case 'end':
-									return _context9.stop();
+									case 37:
+									case 'end':
+										return _context9.stop();
+								}
 							}
-						}
-					}, null, this);
-				}, true);
+						}, _callee8, _this12);
+					}));
+
+					return function (_x11) {
+						return _ref15.apply(this, arguments);
+					};
+				}(), true);
 			}));
 
 			div.appendChild($btn(Lng.reset[lang] + '…', Lng.resetCfg[lang], function () {
-				return $popup('cfg-reset', '<b>' + Lng.resetData[lang] + ':</b><hr>' + ('<div class="de-list"><b>' + aib.dm + ':</b>' + _this11._getList([Lng.panelBtn.cfg[lang], Lng.hidPostThr[lang], Lng.myPosts[lang]]) + '</div><hr>') + ('<div class="de-list"><b>' + Lng.allDomains[lang] + ':</b>' + _this11._getList([Lng.panelBtn.cfg[lang], Lng.panelBtn.fav[lang]]) + '</div><hr>')).appendChild($btn(Lng.clear[lang], '', function () {
-					var els = $Q('input[type="checkbox"]', this.parentNode);
+				return $popup('cfg-reset', '<b>' + Lng.resetData[lang] + ':</b><hr>' + ('<div class="de-list"><b>' + aib.dm + ':</b>' + _this12._getList([Lng.panelBtn.cfg[lang], Lng.hidPostThr[lang], Lng.myPosts[lang]]) + '</div><hr>') + ('<div class="de-list"><b>' + Lng.allDomains[lang] + ':</b>' + _this12._getList([Lng.panelBtn.cfg[lang], Lng.panelBtn.fav[lang]]) + '</div><hr>')).appendChild($btn(Lng.clear[lang], '', function (_ref16) {
+					var target = _ref16.target;
+
+					var els = $Q('input[type="checkbox"]', target.parentNode);
 					for (var i = 1, len = els.length; i < len; ++i) {
 						if (!els[i].checked) {
 							continue;
@@ -6526,8 +7298,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 		handleEvent: function handleEvent(e) {
-			var type = e.type;
-			var el = e.target;
+			var type = e.type,
+			    el = e.target;
+
 			var tag = el.tagName;
 			if (type === 'click' && tag === 'DIV' && el.classList.contains('de-cfg-tab')) {
 				var info = el.getAttribute('info');
@@ -6541,27 +7314,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				switch (_info) {
 					case 'language':
 						lang = el.selectedIndex;
-						panel.remove();
+						Panel.remove();
+						if (pr.form) {
+							pr.addMarkupPanel();
+							pr.setPlaceholders();
+							pr.updateLanguage();
+							if (pr.files) {
+								$each($Q('.de-file-img, .de-file-txt-input', pr.form), function (el) {
+									return el.title = Lng.youCanDrag[lang];
+								});
+							}
+						}
 						this._updateCSS();
-						panel.init(DelForm.first.el);
+						Panel.init(DelForm.first.el);
 						toggleWindow('cfg', false);
 						break;
 					case 'delHiddPost':
-						var isHide = Cfg.delHiddPost === 1 || Cfg.delHiddPost === 2;
-						for (var _post2 = Thread.first.op; _post2; _post2 = _post2.next) {
-							if (_post2.hidden && !_post2.isOp) {
-								if (isHide) {
-									_post2.wrap.classList.add('de-hidden');
-								} else {
-									_post2.wrap.classList.remove('de-hidden');
+						{
+							var isHide = Cfg.delHiddPost === 1 || Cfg.delHiddPost === 2;
+							for (var post = Thread.first.op; post; post = post.next) {
+								if (post.hidden && !post.isOp) {
+									if (isHide) {
+										post.wrap.classList.add('de-hidden');
+									} else {
+										post.wrap.classList.remove('de-hidden');
+									}
 								}
 							}
+							updateCSS();
+							break;
 						}
-						updateCSS();
-						break;
 					case 'postBtnsCSS':
 						updateCSS();
-						if (nav.Presto) {
+						if (nav.isPresto) {
 							$del($q('.de-svg-icons'));
 							addSVGIcons();
 						}
@@ -6576,9 +7361,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						break;
 					case 'fileInputs':
 						pr.files.changeMode();
-						if (!aib.kus && !aib.multiFile) {
-							pr.setPlaceholders();
-						}
+						pr.setPlaceholders();
 						updateCSS();
 						break;
 					case 'addPostForm':
@@ -6586,7 +7369,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						pr.setReply(false, !aib.t || Cfg.addPostForm > 1);
 						break;
 					case 'addTextBtns':
-						pr.addTextPanel();break;
+						pr.addMarkupPanel();break;
 					case 'scriptStyle':
 						this._updateCSS();
 				}
@@ -6646,7 +7429,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'markNewPosts':
 						Post.clearMarks();break;
 					case 'useDobrAPI':
-						aib.jsonBuilder = Cfg.useDobrAPI ? DobrochanPostsBuilder : null;break;
+						aib.JsonBuilder = Cfg.useDobrAPI ? DobrochanPostsBuilder : null;break;
 					case 'markMyPosts':
 						if (!Cfg.markMyPosts && !Cfg.markMyLinks) {
 							locStorage.removeItem('de-myposts');
@@ -6655,24 +7438,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						updateCSS();
 						break;
 					case 'correctTime':
-						DateTime.toggleSettings();break;
+						DateTime.toggleSettings(el);break;
+					case 'imgInfoLink':
+						{
+							var img = $q('.de-fullimg-wrap');
+							if (img) {
+								img.click();
+							}
+							updateCSS();
+							break;
+						}
 					case 'imgSrcBtns':
 						if (Cfg.imgSrcBtns) {
 							for (var _iterator3 = DelForm, _isArray3 = Array.isArray(_iterator3), _i5 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-								var _ref7;
+								var _ref17;
 
 								if (_isArray3) {
 									if (_i5 >= _iterator3.length) break;
-									_ref7 = _iterator3[_i5++];
+									_ref17 = _iterator3[_i5++];
 								} else {
 									_i5 = _iterator3.next();
 									if (_i5.done) break;
-									_ref7 = _i5.value;
+									_ref17 = _i5.value;
 								}
 
-								var form = _ref7;
+								var _ref18 = _ref17,
+								    _el4 = _ref18.el;
 
-								processImagesLinks(form.el, 1, 0);
+								processImagesLinks(_el4, 1, 0);
 							}
 						} else {
 							$each($Q('.de-btn-src'), function (el) {
@@ -6683,20 +7476,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'delImgNames':
 						if (Cfg.delImgNames) {
 							for (var _iterator4 = DelForm, _isArray4 = Array.isArray(_iterator4), _i6 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-								var _ref8;
+								var _ref19;
 
 								if (_isArray4) {
 									if (_i6 >= _iterator4.length) break;
-									_ref8 = _iterator4[_i6++];
+									_ref19 = _iterator4[_i6++];
 								} else {
 									_i6 = _iterator4.next();
 									if (_i6.done) break;
-									_ref8 = _i6.value;
+									_ref19 = _i6.value;
 								}
 
-								var _form = _ref8;
+								var _ref20 = _ref19,
+								    _el5 = _ref20.el;
 
-								processImagesLinks(_form.el, 0, 1);
+								processImagesLinks(_el5, 0, 1);
 							}
 						} else {
 							$each($Q('.de-img-name'), function (link) {
@@ -6719,7 +7513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						updateCSS();
 						break;
 					case 'txtBtnsLoc':
-						pr.addTextPanel();break;
+						pr.addMarkupPanel();break;
 					case 'userName':
 						PostForm.setUserName();break;
 					case 'noPassword':
@@ -6782,13 +7576,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						break;
 					case 'de-cfg-btn-debug':
 						$popup('cfg-debug', Lng.infoDebug[lang] + ':<textarea readonly class="de-editor"></textarea>').firstElementChild.value = JSON.stringify({
-							'version': version,
-							'location': String(window.location),
-							'nav': nav,
-							'cfg': Cfg,
-							'sSpells': Spells.list.split('\n'),
-							'oSpells': sesStorage['de-spells-' + aib.b + (aib.t || '')],
-							'perf': Logger.getData(true)
+							version: version + '.' + commit,
+							location: String(window.location),
+							nav: nav,
+							Cfg: Cfg,
+							sSpells: Spells.list.split('\n'),
+							oSpells: sesStorage['de-spells-' + aib.b + (aib.t || '')],
+							perf: Logger.getData(true)
 						}, function (key, value) {
 							switch (key) {
 								case 'stats':
@@ -6818,11 +7612,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'zoomFactor':
 						saveCfg('zoomFactor', Math.min(Math.max(+el.value, 1), 100));break;
 					case 'webmVolume':
-						var val = Math.min(+el.value || 0, 100);
-						saveCfg('webmVolume', val);
-						locStorage['__de-webmvolume'] = val;
-						locStorage.removeItem('__de-webmvolume');
-						break;
+						{
+							var val = Math.min(+el.value || 0, 100);
+							saveCfg('webmVolume', val);
+							locStorage['__de-webmvolume'] = val;
+							locStorage.removeItem('__de-webmvolume');
+							break;
+						}
 					case 'minWebmWidth':
 						saveCfg('minWebmWidth', Math.max(+el.value, Cfg.minImgSize));break;
 					case 'maskVisib':
@@ -6918,53 +7714,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			var els = $Q('.de-cfg-chkbox, .de-cfg-inptxt, .de-cfg-select', newTab.parentNode);
 			for (var i = 0, len = els.length; i < len; ++i) {
-				var _el = els[i];
-				var _info4 = _el.getAttribute('info');
-				if (_el.tagName === 'INPUT') {
-					if (_el.type === 'checkbox') {
-						_el.checked = !!Cfg[_info4];
+				var _el6 = els[i];
+				var _info4 = _el6.getAttribute('info');
+				if (_el6.tagName === 'INPUT') {
+					if (_el6.type === 'checkbox') {
+						_el6.checked = !!Cfg[_info4];
 					} else {
-						_el.value = _info4 !== 'excludeList' ? Cfg[_info4] : excludeList;
+						_el6.value = _info4 !== 'excludeList' ? Cfg[_info4] : excludeList;
 					}
 				} else {
-					_el.selectedIndex = Cfg[_info4];
+					_el6.selectedIndex = Cfg[_info4];
 				}
 			}
 		},
 
 
 		_getCfgFilters: function _getCfgFilters() {
-			return '<div id="de-cfg-filters" class="de-cfg-unvis">\n\t\t\t<div id="de-spell-panel">\n\t\t\t\t' + this._getBox('hideBySpell') + '\n\t\t\t\t<a id="de-btn-spell-add" class="de-abtn de-spell-btn" href="#">' + Lng.add[lang] + '</a>\n\t\t\t\t<a id="de-btn-spell-apply" class="de-abtn de-spell-btn" href="#">' + Lng.apply[lang] + '</a>\n\t\t\t\t<a id="de-btn-spell-clear" class="de-abtn de-spell-btn" href="#">' + Lng.clear[lang] + '</a>\n\t\t\t\t<a class="de-abtn de-spell-btn" href="' + (gitWiki + 'Spells-' + (lang ? 'en' : 'ru')) + '" target="_blank">[?]</a>\n\t\t\t</div>\n\t\t\t<div id="de-spell-editor">\n\t\t\t\t<div id="de-spell-rowmeter"></div>\n\t\t\t\t<textarea id="de-spell-txt" wrap="off"></textarea>\n\t\t\t</div>\n\t\t\t' + this._getBox('sortSpells') + '<br>\n\t\t\t' + this._getBox('menuHiddBtn') + '<br>\n\t\t\t' + this._getBox('hideRefPsts') + '<br>\n\t\t\t' + this._getSel('delHiddPost') + '\n\t\t</div>';
+			return '<div id="de-cfg-filters" class="de-cfg-unvis">\n\t\t\t<div id="de-spell-panel">\n\t\t\t\t' + this._getBox('hideBySpell') + '\n\t\t\t\t<a id="de-btn-spell-add" class="de-abtn de-spell-btn" href="#">' + Lng.add[lang] + '</a>\n\t\t\t\t<a id="de-btn-spell-apply" class="de-abtn de-spell-btn" href="#">' + Lng.apply[lang] + '</a>\n\t\t\t\t<a id="de-btn-spell-clear" class="de-abtn de-spell-btn" href="#">' + Lng.clear[lang] + '</a>\n\t\t\t\t<a class="de-abtn de-spell-btn" href="' + gitWiki + 'Spells-' + ((lang ? 'en' : 'ru') + '" target="_blank">[?]</a>\n\t\t\t</div>\n\t\t\t<div id="de-spell-editor">\n\t\t\t\t<div id="de-spell-rowmeter"></div>\n\t\t\t\t<textarea id="de-spell-txt" wrap="off"></textarea>\n\t\t\t</div>\n\t\t\t' + this._getBox('sortSpells') + '<br>\n\t\t\t' + this._getBox('menuHiddBtn') + '<br>\n\t\t\t' + this._getBox('hideRefPsts') + '<br>\n\t\t\t' + this._getSel('delHiddPost') + '\n\t\t</div>');
 		},
 
 
 		_getCfgPosts: function _getCfgPosts() {
-			return '<div id="de-cfg-posts" class="de-cfg-unvis">\n\t\t\t' + (!localData ? this._getBox('ajaxUpdThr') + this._getInp('updThrDelay') + ('<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getBox('updCount') + '<br>\n\t\t\t\t\t' + this._getBox('favIcoBlink') + '<br>\n\t\t\t\t\t' + ('Notification' in window ? this._getBox('desktNotif') + '<br>' : '') + '\n\t\t\t\t\t' + this._getBox('noErrInTitle') + '<br>\n\t\t\t\t\t' + this._getBox('markNewPosts') + '<br>\n\t\t\t\t\t' + (aib.dobr ? this._getBox('useDobrAPI') : '') + '\n\t\t\t\t</div>') : '') + '\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyPosts') + '<br>' : '') + '\n\t\t\t' + this._getBox('hideReplies') + '<br>\n\t\t\t' + this._getBox('expandTrunc') + '<br>\n\t\t\t' + this._getBox('updThrBtns') + '<br>\n\t\t\t' + this._getBox('showHideBtn') + '\n\t\t\t' + this._getBox('showRepBtn') + '<br>\n\t\t\t' + this._getSel('postBtnsCSS') + '\n\t\t\t' + this._getInp('postBtnsBack', false, 8) + '<br>\n\t\t\t' + this._getSel('noSpoilers') + '<br>\n\t\t\t' + this._getBox('noPostNames') + '<br>\n\t\t\t' + this._getBox('widePosts') + '<br>\n\t\t\t' + this._getBox('correctTime') + '\n\t\t\t' + this._getInp('timeOffset') + '\n\t\t\t<a class="de-abtn" target="_blank" href="' + (gitWiki + 'Settings-time-' + (lang ? 'en' : 'ru')) + '">[?]</a>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('timePattern', true, 24) + '<br>\n\t\t\t\t' + this._getInp('timeRPattern', true, 24) + '\n\t\t\t</div>\n\t\t</div>';
+			return '<div id="de-cfg-posts" class="de-cfg-unvis">\n\t\t\t' + (localData ? '' : this._getBox('ajaxUpdThr') + '\n\t\t\t\t' + this._getInp('updThrDelay') + '\n\t\t\t\t<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getBox('updCount') + '<br>\n\t\t\t\t\t' + this._getBox('favIcoBlink') + '<br>\n\t\t\t\t\t' + ('Notification' in window ? this._getBox('desktNotif') + '<br>' : '') + '\n\t\t\t\t\t' + this._getBox('noErrInTitle') + '<br>\n\t\t\t\t\t' + this._getBox('markNewPosts') + '<br>\n\t\t\t\t\t' + (aib.dobr ? this._getBox('useDobrAPI') : '') + '\n\t\t\t\t</div>') + '\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyPosts') + '<br>' : '') + '\n\t\t\t' + this._getBox('hideReplies') + '<br>\n\t\t\t' + this._getBox('expandTrunc') + '<br>\n\t\t\t' + this._getBox('updThrBtns') + '<br>\n\t\t\t' + this._getBox('showHideBtn') + '\n\t\t\t' + this._getBox('showRepBtn') + '<br>\n\t\t\t' + this._getSel('postBtnsCSS') + '\n\t\t\t' + this._getInp('postBtnsBack', false, 8) + '<br>\n\t\t\t' + this._getSel('noSpoilers') + '<br>\n\t\t\t' + this._getBox('noPostNames') + '<br>\n\t\t\t' + this._getBox('widePosts') + '<br>\n\t\t\t' + this._getBox('correctTime') + '\n\t\t\t' + this._getInp('timeOffset') + '\n\t\t\t<a class="de-abtn" target="_blank" href="' + gitWiki + 'Settings-time-' + ((lang ? 'en' : 'ru') + '">[?]</a>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('timePattern', true, 24) + '<br>\n\t\t\t\t' + this._getInp('timeRPattern', true, 24) + '\n\t\t\t</div>\n\t\t</div>');
 		},
 
 
 		_getCfgImages: function _getCfgImages() {
-			return '<div id="de-cfg-images" class="de-cfg-unvis">\n\t\t\t' + this._getSel('expandImgs') + '<br>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('imgNavBtns') + '<br>\n\t\t\t\t' + this._getBox('resizeImgs') + '<br>\n\t\t\t\t' + (Post.sizing.dPxRatio > 1 ? this._getBox('resizeDPI') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('minImgSize') + '<br>\n\t\t\t\t' + this._getInp('zoomFactor') + '<br>\n\t\t\t\t' + this._getBox('webmControl') + '<br>\n\t\t\t\t' + this._getBox('webmTitles') + '<br>\n\t\t\t\t' + this._getInp('webmVolume') + '<br>\n\t\t\t\t' + this._getInp('minWebmWidth') + '\n\t\t\t</div>\n\t\t\t' + (!nav.Presto ? this._getBox('preLoadImgs') + '<br>' : '') + '\n\t\t\t' + (!nav.Presto && !aib.fch ? '<div class="de-cfg-depend">' + this._getBox('findImgFile') + '</div>' : '') + '\n\t\t\t' + this._getSel('openImgs') + '<br>\n\t\t\t' + this._getBox('imgSrcBtns') + '<br>\n\t\t\t' + this._getBox('delImgNames') + '<br>\n\t\t\t' + this._getInp('maskVisib') + '\n\t\t</div>';
+			return '<div id="de-cfg-images" class="de-cfg-unvis">\n\t\t\t' + this._getSel('expandImgs') + '<br>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('imgNavBtns') + '<br>\n\t\t\t\t' + this._getBox('imgInfoLink') + '<br>\n\t\t\t\t' + this._getBox('resizeImgs') + '<br>\n\t\t\t\t' + (Post.sizing.dPxRatio > 1 ? this._getBox('resizeDPI') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('minImgSize') + '<br>\n\t\t\t\t' + this._getInp('zoomFactor') + '<br>\n\t\t\t\t' + this._getBox('webmControl') + '<br>\n\t\t\t\t' + this._getBox('webmTitles') + '<br>\n\t\t\t\t' + this._getInp('webmVolume') + '<br>\n\t\t\t\t' + this._getInp('minWebmWidth') + '\n\t\t\t</div>\n\t\t\t' + (nav.isPresto ? '' : this._getBox('preLoadImgs') + '<br>') + '\n\t\t\t' + (nav.isPresto || aib.fch ? '' : '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('findImgFile') + '\n\t\t\t</div>') + '\n\t\t\t' + this._getSel('openImgs') + '<br>\n\t\t\t' + this._getBox('imgSrcBtns') + '<br>\n\t\t\t' + this._getBox('delImgNames') + '<br>\n\t\t\t' + this._getInp('maskVisib') + '\n\t\t</div>';
 		},
 
 
 		_getCfgLinks: function _getCfgLinks() {
-			return '<div id="de-cfg-links" class="de-cfg-unvis">\n\t\t\t' + this._getBox('linksNavig') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('linksOver') + '\n\t\t\t\t' + this._getInp('linksOut') + '<br>\n\t\t\t\t' + this._getBox('markViewed') + '<br>\n\t\t\t\t' + this._getBox('strikeHidd') + '\n\t\t\t\t<div class="de-cfg-depend">' + this._getBox('removeHidd') + '</div>\n\t\t\t\t' + this._getBox('noNavigHidd') + '\n\t\t\t</div>\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyLinks') + '<br>' : '') + '\n\t\t\t' + this._getBox('crossLinks') + '<br>\n\t\t\t' + this._getBox('decodeLinks') + '<br>\n\t\t\t' + this._getBox('insertNum') + '<br>\n\t\t\t' + this._getBox('addOPLink') + '<br>\n\t\t\t' + this._getBox('addImgs') + '<br>\n\t\t\t<div>\n\t\t\t\t' + this._getBox('addMP3') + '\n\t\t\t\t' + (aib.prot === 'http:' ? this._getBox('addVocaroo') : '') + '\n\t\t\t</div>\n\t\t\t' + this._getSel('addYouTube') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getSel('YTubeType') + '\n\t\t\t\t' + this._getInp('YTubeWidth', false) + '\xD7\n\t\t\t\t' + this._getInp('YTubeHeigh', false) + '(px)<br>\n\t\t\t\t' + this._getBox('YTubeTitles') + '<br>\n\t\t\t\t' + this._getInp('ytApiKey', true, 25) + '<br>\n\t\t\t\t' + this._getBox('addVimeo') + '\n\t\t\t</div>\n\t\t</div>';
+			return '<div id="de-cfg-links" class="de-cfg-unvis">\n\t\t\t' + this._getBox('linksNavig') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('linksOver') + '\n\t\t\t\t' + this._getInp('linksOut') + '<br>\n\t\t\t\t' + this._getBox('markViewed') + '<br>\n\t\t\t\t' + this._getBox('strikeHidd') + '\n\t\t\t\t<div class="de-cfg-depend">' + this._getBox('removeHidd') + '</div>\n\t\t\t\t' + this._getBox('noNavigHidd') + '\n\t\t\t</div>\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyLinks') + '<br>' : '') + '\n\t\t\t' + this._getBox('crossLinks') + '<br>\n\t\t\t' + this._getBox('decodeLinks') + '<br>\n\t\t\t' + this._getBox('insertNum') + '<br>\n\t\t\t' + this._getBox('addOPLink') + '<br>\n\t\t\t' + this._getBox('addImgs') + '<br>\n\t\t\t<div>\n\t\t\t\t' + this._getBox('addMP3') + '\n\t\t\t\t' + (aib.prot === 'http:' ? this._getBox('addVocaroo') : '') + '\n\t\t\t</div>\n\t\t\t' + this._getSel('addYouTube') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('YTubeWidth', false) + '\xD7\n\t\t\t\t' + this._getInp('YTubeHeigh', false) + '(px)<br>\n\t\t\t\t' + this._getBox('YTubeTitles') + '<br>\n\t\t\t\t' + this._getInp('ytApiKey', true, 25) + '<br>\n\t\t\t\t' + this._getBox('addVimeo') + '\n\t\t\t</div>\n\t\t</div>';
 		},
 
 
 		_getCfgForm: function _getCfgForm() {
-			return '<div id="de-cfg-form" class="de-cfg-unvis">\n\t\t\t' + this._getBox('ajaxPosting') + '<br>\n\t\t\t' + (pr.form ? '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('postSameImg') + '<br>\n\t\t\t\t' + this._getBox('removeEXIF') + '\n\t\t\t\t' + this._getBox('removeFName') + '<br>\n\t\t\t\t' + this._getBox('sendErrNotif') + '<br>\n\t\t\t\t' + this._getBox('scrAfterRep') + '<br>\n\t\t\t\t' + (pr.files && !nav.Presto ? this._getSel('fileInputs') : '') + '\n\t\t\t</div>' : '') + '\n\t\t\t' + (pr.form ? this._getSel('addPostForm') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getBox('spacedQuote') + '<br>' : '') + '\n\t\t\t' + this._getBox('favOnReply') + '<br>\n\t\t\t' + (pr.subj ? this._getBox('warnSubjTrip') + '<br>' : '') + '\n\t\t\t' + (pr.mail ? this._getBox('addSageBtn') + this._getBox('saveSage') + '<br>' : '') + '\n\t\t\t' + (pr.cap ? (aib.fch ? this._getBox('cap4chanAlt') + '<br>' : '') + this._getInp('capUpdTime') + '<br>' + this._getSel('captchaLang') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getSel('addTextBtns') + this._getBox('txtBtnsLoc') + '<br>' : '') + '\n\t\t\t' + (pr.passw ? this._getInp('passwValue', true, 9) + ('<input type="button" id="de-cfg-btn-pass" class="de-cfg-button" value="' + Lng.change[lang] + '"><br>') : '') + '\n\t\t\t' + (pr.name ? this._getInp('nameValue', false, 9) + ' ' + this._getBox('userName') + '<br>' : '') + '\n\t\t\t' + (pr.rules || pr.passw || pr.name ? Lng.hide[lang] + (pr.rules ? this._getBox('noBoardRule') : '') + (pr.passw ? this._getBox('noPassword') : '') + (pr.name ? this._getBox('noName') : '') + (pr.subj ? this._getBox('noSubj') : '') : '') + '\n\t\t</div>';
+			return '<div id="de-cfg-form" class="de-cfg-unvis">\n\t\t\t' + this._getBox('ajaxPosting') + '<br>\n\t\t\t' + (pr.form ? '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('postSameImg') + '<br>\n\t\t\t\t' + this._getBox('removeEXIF') + '\n\t\t\t\t' + this._getBox('removeFName') + '<br>\n\t\t\t\t' + this._getBox('sendErrNotif') + '<br>\n\t\t\t\t' + this._getBox('scrAfterRep') + '<br>\n\t\t\t\t' + (pr.files && !nav.isPresto ? this._getSel('fileInputs') : '') + '\n\t\t\t</div>' : '') + '\n\t\t\t' + (pr.form ? this._getSel('addPostForm') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getBox('spacedQuote') + '<br>' : '') + '\n\t\t\t' + this._getBox('favOnReply') + '<br>\n\t\t\t' + (pr.subj ? this._getBox('warnSubjTrip') + '<br>' : '') + '\n\t\t\t' + (pr.mail ? this._getBox('addSageBtn') + '\n\t\t\t\t' + this._getBox('saveSage') + '<br>' : '') + '\n\t\t\t' + (pr.cap ? (aib.fch ? this._getBox('cap4chanAlt') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('capUpdTime') + '<br>\n\t\t\t\t' + this._getSel('captchaLang') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getSel('addTextBtns') + '\n\t\t\t\t' + (!aib.fch ? this._getBox('txtBtnsLoc') : '') + '<br>' : '') + '\n\t\t\t' + (pr.passw ? this._getInp('passwValue', true, 9) + '<input type="button" id="de-cfg-btn-pass' + ('" class="de-cfg-button" value="' + Lng.change[lang] + '"><br>') : '') + '\n\t\t\t' + (pr.name ? this._getInp('nameValue', false, 9) + '\n\t\t\t\t' + this._getBox('userName') + '<br>' : '') + '\n\t\t\t' + (pr.rules || pr.passw || pr.name ? Lng.hide[lang] + (pr.rules ? this._getBox('noBoardRule') : '') + (pr.passw ? this._getBox('noPassword') : '') + (pr.name ? this._getBox('noName') : '') + (pr.subj ? this._getBox('noSubj') : '') : '') + '\n\t\t</div>';
 		},
 
 
 		_getCfgCommon: function _getCfgCommon() {
-			return '<div id="de-cfg-common" class="de-cfg-unvis">\n\t\t\t' + this._getSel('scriptStyle') + '<br>\n\t\t\t' + this._getBox('userCSS') + '\n\t\t\t<a href="' + gitWiki + 'css-tricks" class="de-abtn" target="_blank">[?]</a><br>\n\t\t\t' + this._getSel('panelCounter') + '<br>\n\t\t\t' + this._getBox('rePageTitle') + '<br>\n\t\t\t' + ('animation' in docBody.style ? this._getBox('animation') + '<br>' : '') + '\n\t\t\t' + this._getBox('closePopups') + '<br>\n\t\t\t' + this._getBox('inftyScroll') + '<br>\n\t\t\t' + this._getBox('scrollToTop') + '<br>\n\t\t\t' + this._getBox('hotKeys') + '\n\t\t\t<input type="button" id="de-cfg-btn-keys" class="de-cfg-button" value="' + Lng.edit[lang] + '">\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('loadPages') + '\n\t\t\t</div>\n\t\t\t' + (!nav.isChromeStorage && !nav.Presto || nav.isGM ? this._getBox('updScript') + ('<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getSel('scrUpdIntrv') + '\n\t\t\t\t\t<input type="button" id="de-cfg-btn-updnow" class="de-cfg-button" value="' + Lng.checkNow[lang] + '">\n\t\t\t\t</div>') : '') + '\n\t\t\t' + (nav.isGlobal ? Lng.cfg.excludeList[lang] + '<input type="text" info="excludeList" class="de-cfg-inptxt" style="display: block; width: 80%;" placeholder="4chan.org, 8ch.net, \u2026">' + this._getBox('turnOff') : '') + '\n\t\t</div>';
+			return '<div id="de-cfg-common" class="de-cfg-unvis">\n\t\t\t' + this._getSel('scriptStyle') + '<br>\n\t\t\t' + this._getBox('userCSS') + '\n\t\t\t<a href="' + gitWiki + 'css-tricks" class="de-abtn" target="_blank">[?]</a><br>\n\t\t\t' + this._getSel('panelCounter') + '<br>\n\t\t\t' + this._getBox('rePageTitle') + '<br>\n\t\t\t' + ('animation' in docBody.style ? this._getBox('animation') + '<br>' : '') + '\n\t\t\t' + this._getBox('closePopups') + '<br>\n\t\t\t' + this._getBox('inftyScroll') + '<br>\n\t\t\t' + this._getBox('scrollToTop') + '<br>\n\t\t\t' + this._getBox('hotKeys') + '\n\t\t\t<input type="button" id="de-cfg-btn-keys" class="de-cfg-button" value="' + Lng.edit[lang] + '">\n\t\t\t<div class="de-cfg-depend">' + this._getInp('loadPages') + '</div>\n\t\t\t' + (!nav.isChromeStorage && !nav.isPresto || nav.hasGMXHR ? this._getBox('updScript') + '\n\t\t\t\t<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getSel('scrUpdIntrv') + '\n\t\t\t\t\t<input type="button" id="de-cfg-btn-updnow" class="de-cfg-button" value="' + (Lng.checkNow[lang] + '">\n\t\t\t\t</div>') : '') + '\n\t\t\t' + (nav.isGlobal ? Lng.cfg.excludeList[lang] + '\n\t\t\t\t<input type="text" info="excludeList" class="de-cfg-inptxt" style="display: block;' + (' width: 80%;" placeholder="4chan.org, 8ch.net, \u2026">' + this._getBox('turnOff')) : '') + '\n\t\t</div>';
 		},
 
 
 		_getCfgInfo: function _getCfgInfo() {
-			return '<div id="de-cfg-info" class="de-cfg-unvis">\n\t\t\t<div style="padding-bottom: 10px;">\n\t\t\t\t<a href="' + gitWiki + 'versions" target="_blank">v' + version + '.' + (commit + (nav.isESNext ? '.es6' : '')) + '</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="http://www.freedollchan.org/scripts/" target="_blank">Freedollchan</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="' + (gitWiki + (lang ? 'home-en/' : '')) + '" target="_blank">Github</a>\n\t\t\t</div>\n\t\t\t<div id="de-info-table">\n\t\t\t\t<div id="de-info-stats">' + this._getInfoTable([[Lng.thrViewed[lang], Cfg.stats.view], [Lng.thrCreated[lang], Cfg.stats.op], [Lng.thrHidden[lang], HiddenThreads.getCount()], [Lng.postsSent[lang], Cfg.stats.reply]], false) + '</div>\n\t\t\t\t<div id="de-info-log">' + this._getInfoTable(Logger.getData(false), true) + '</div>\n\t\t\t</div>\n\t\t\t<input type="button" id="de-cfg-btn-debug" value="' + Lng.debug[lang] + '" title="' + Lng.infoDebug[lang] + '">\n\t\t</div>';
+			var statsTable = this._getInfoTable([[Lng.thrViewed[lang], Cfg.stats.view], [Lng.thrCreated[lang], Cfg.stats.op], [Lng.thrHidden[lang], HiddenThreads.getCount()], [Lng.postsSent[lang], Cfg.stats.reply]], false);
+			return '<div id="de-cfg-info" class="de-cfg-unvis">\n\t\t\t<div style="padding-bottom: 10px;">\n\t\t\t\t<a href="' + gitWiki + 'versions" target="_blank">v' + version + '.' + commit + ((nav.isESNext ? '.es6' : '') + '</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="http://www.freedollchan.org/scripts/" target="_blank">Freedollchan</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="' + gitWiki + (lang ? 'home-en/' : '') + '" target="_blank">Github</a>\n\t\t\t</div>\n\t\t\t<div id="de-info-table">\n\t\t\t\t<div id="de-info-stats">' + statsTable + '</div>\n\t\t\t\t<div id="de-info-log">' + this._getInfoTable(Logger.getData(false), true) + '</div>\n\t\t\t</div>\n\t\t\t<input type="button" id="de-cfg-btn-debug" value="') + (Lng.debug[lang] + '" title="' + Lng.infoDebug[lang] + '">\n\t\t</div>');
 		},
 
 
@@ -6972,14 +7769,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			return '<label class="de-cfg-label">\n\t\t\t<input class="de-cfg-chkbox" info="' + id + '" type="checkbox"> ' + Lng.cfg[id][lang] + '\n\t\t</label>';
 		},
 
+		_getInfoTable: function _getInfoTable(data, needMs) {
+			return data.map(function (data) {
+				return '<div class="de-info-row">\n\t\t\t<span class="de-info-name">' + data[0] + '</span>\n\t\t\t<span>' + (data[1] + (needMs ? 'ms' : '')) + '</span>\n\t\t</div>';
+			}).join('');
+		},
 
 		_getInp: function _getInp(id) {
 			var addText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 			var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
 
-			return '<label class="de-cfg-label">\n\t\t\t<input class="de-cfg-inptxt" info="' + id + '" type="text" size="' + size + '" value="' + escapeHTML(Cfg[id]) + '">' + (addText && Lng.cfg[id] ? Lng.cfg[id][lang] : '') + '</label>';
+			return '<label class="de-cfg-label">\n\t\t\t<input class="de-cfg-inptxt" info="' + id + '" type="text" size="' + size + '" value="' + (escapeHTML(Cfg[id]) + '">' + (addText && Lng.cfg[id] ? Lng.cfg[id][lang] : '') + '</label>');
 		},
 
+		_getList: function _getList(a) {
+			return $join(a, '<label class="de-block"><input type="checkbox"> ', '</label>');
+		},
 
 		_getSel: function _getSel(id) {
 			var x = Lng.cfg[id];
@@ -6990,23 +7795,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			return '<label class="de-cfg-label">\n\t\t\t<select class="de-cfg-select" info="' + id + '">' + opt.join('') + '</select> ' + x.txt[lang] + '\n\t\t</label>';
 		},
 
-
-		_getInfoTable: function _getInfoTable(data, needMs) {
-			return data.map(function (data) {
-				return '<div class="de-info-row">\n\t\t\t<span class="de-info-name">' + data[0] + '</span>\n\t\t\t<span>' + (data[1] + (needMs ? 'ms' : '')) + '</span>\n\t\t</div>';
-			}).join('');
-		},
-
-
-		_getList: function _getList(a) {
-			return $join(a, '<label class="de-block"><input type="checkbox"> ', '</label>');
-		},
-
-
 		_getTab: function _getTab(name) {
 			return '<div class="' + aib.cReply + ' de-cfg-tab" info="' + name + '">' + Lng.cfgTab[name][lang] + '</div>';
 		},
-
 
 		_toggleBox: function _toggleBox(state, arr) {
 			var i = arr.length;
@@ -7022,19 +7813,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		_updateDependant: function _updateDependant() {
 			this._toggleBox(Cfg.ajaxUpdThr, ['input[info="updThrDelay"]', 'input[info="updCount"]', 'input[info="favIcoBlink"]', 'input[info="markNewPosts"]', 'input[info="desktNotif"]', 'input[info="noErrInTitle"]']);
 			this._toggleBox(Cfg.postBtnsCSS === 2, ['input[info="postBtnsBack"]']);
-			this._toggleBox(Cfg.expandImgs, ['input[info="imgNavBtns"]', 'input[info="resizeDPI"]', 'input[info="resizeImgs"]', 'input[info="minImgSize"]', 'input[info="zoomFactor"]', 'input[info="webmControl"]', 'input[info="webmTitles"]', 'input[info="webmVolume"]', 'input[info="minWebmWidth"]']);
+			this._toggleBox(Cfg.expandImgs, ['input[info="imgNavBtns"]', 'input[info="imgInfoLink"]', 'input[info="resizeDPI"]', 'input[info="resizeImgs"]', 'input[info="minImgSize"]', 'input[info="zoomFactor"]', 'input[info="webmControl"]', 'input[info="webmTitles"]', 'input[info="webmVolume"]', 'input[info="minWebmWidth"]']);
 			this._toggleBox(Cfg.preLoadImgs, ['input[info="findImgFile"]']);
 			this._toggleBox(Cfg.linksNavig, ['input[info="linksOver"]', 'input[info="linksOut"]', 'input[info="markViewed"]', 'input[info="strikeHidd"]', 'input[info="noNavigHidd"]']);
 			this._toggleBox(Cfg.strikeHidd && Cfg.linksNavig, ['input[info="removeHidd"]']);
-			this._toggleBox(Cfg.addYouTube && Cfg.addYouTube !== 4, ['select[info="YTubeType"]', 'input[info="addVimeo"]']);
-			this._toggleBox(Cfg.addYouTube, ['input[info="YTubeWidth"]', 'input[info="YTubeHeigh"]', 'input[info="YTubeTitles"]', 'input[info="ytApiKey"]']);
+			this._toggleBox(Cfg.addYouTube, ['input[info="YTubeWidth"]', 'input[info="YTubeHeigh"]', 'input[info="YTubeTitles"]', 'input[info="ytApiKey"]', 'input[info="addVimeo"]']);
 			this._toggleBox(Cfg.YTubeTitles, ['input[info="ytApiKey"]']);
 			this._toggleBox(Cfg.ajaxPosting, ['input[info="postSameImg"]', 'input[info="removeEXIF"]', 'input[info="removeFName"]', 'input[info="sendErrNotif"]', 'input[info="scrAfterRep"]', 'select[info="fileInputs"]']);
 			this._toggleBox(Cfg.addTextBtns, ['input[info="txtBtnsLoc"]']);
 			this._toggleBox(Cfg.updScript, ['select[info="scrUpdIntrv"]']);
 			this._toggleBox(Cfg.hotKeys, ['input[info="loadPages"]']);
 		},
-
 
 		_updateRowMeter: function _updateRowMeter(node) {
 			var top = node.scrollTop;
@@ -7051,7 +7840,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 			el.scrollTop = top;
 		}
-	});
+	};
 
 
 	function closePopup(data) {
@@ -7079,8 +7868,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 		} else {
 			el = $id('de-wrapper-popup').appendChild($add('\n\t\t<div class="' + aib.cReply + ' de-popup" id="de-popup-' + id + '">\n\t\t\t<span class="de-popup-btn">' + buttonHTML + '</span>\n\t\t\t<div class="de-popup-msg">' + txt.trim() + '</div>\n\t\t</div>'));
-			el.onclick = function (e) {
-				var el = fixEventEl(e.target);
+			el.onclick = function (_ref21) {
+				var target = _ref21.target;
+
+				var el = fixEventEl(target);
 				el = el.tagName.toLowerCase() === 'svg' ? el.parentNode : el;
 				if (el.className === 'de-popup-btn') {
 					closePopup(el.parentNode);
@@ -7122,92 +7913,94 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, className);
 	}
 
-	function Menu(parentEl, html, clickFn) {
-		var isFixed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+	var Menu = function () {
+		function Menu(parentEl, html, clickFn) {
+			var isFixed = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-		var el = $bEnd(docBody, '<div class="' + aib.cReply + ' de-menu" style="position: ' + (isFixed ? 'fixed' : 'absolute') + '; left: 0px; top: 0px; visibility: hidden;">' + html + '</div>');
-		var mStyle = el.style,
-		    cr = parentEl.getBoundingClientRect(),
-		    width = el.offsetWidth,
-		    xOffset = isFixed ? 0 : window.pageXOffset;
-		if (cr.left + width < Post.sizing.wWidth) {
-			mStyle.left = xOffset + cr.left + 'px';
-		} else {
-			mStyle.left = xOffset + cr.right - width + 'px';
-		}
-		var height = el.offsetHeight;
-		var yOffset = isFixed ? 0 : window.pageYOffset;
-		if (cr.bottom + height < Post.sizing.wHeight) {
-			mStyle.top = yOffset + cr.bottom - 0.5 + 'px';
-		} else {
-			mStyle.top = yOffset + cr.top - height + 0.5 + 'px';
-		}
-		mStyle.removeProperty('visibility');
-		this._clickFn = clickFn;
-		this._el = el;
-		this.parentEl = parentEl;
-		el.addEventListener('mouseover', this, true);
-		el.addEventListener('mouseout', this, true);
-		parentEl.addEventListener('mouseout', this);
-		el.addEventListener('click', this);
-	}
-	Menu.prototype = {
-		_closeTO: 0,
-		onover: null,
-		onout: null,
-		onremove: null,
-		remove: function remove() {
-			if (!this._el) {
-				return;
-			}
-			if (this.onremove) {
-				this.onremove();
-			}
-			this._el.removeEventListener('mouseover', this, true);
-			this._el.removeEventListener('mouseout', this, true);
-			this.parentEl.removeEventListener('mouseout', this);
-			this._el.removeEventListener('click', this);
-			$del(this._el);
-			this._el = null;
-		},
-		handleEvent: function handleEvent(e) {
-			var _this12 = this;
+			_classCallCheck(this, Menu);
 
-			var isOverEvent = false,
-			    el = e.target;
-			switch (e.type) {
-				case 'click':
-					if (el.className === 'de-menu-item') {
-						this.remove();
-						this._clickFn(el);
-						if (!Cfg.expandPanel && !$q('.de-win-active')) {
-							$hide($id('de-panel-buttons'));
-						}
-					}
-					break;
-				case 'mouseover':
-					isOverEvent = true;
-				case 'mouseout':
-					clearTimeout(this._closeTO);
-					var rt = fixEventEl(e.relatedTarget);
-					rt = rt && rt.farthestViewportElement || rt;
-					if (!rt || rt !== this._el && !this._el.contains(rt)) {
-						if (isOverEvent) {
-							if (this.onover) {
-								this.onover();
-							}
-						} else if (!rt || rt !== this.parentEl && !this.parentEl.contains(rt)) {
-							this._closeTO = setTimeout(function () {
-								return _this12.remove();
-							}, 75);
-							if (this.onout) {
-								this.onout();
+			this.onout = null;
+			this.onover = null;
+			this.onremove = null;
+			this._closeTO = 0;
+			var el = $bEnd(docBody, '<div class="' + aib.cReply + ' de-menu" style="position: ' + (isFixed ? 'fixed' : 'absolute') + '; left: 0px; top: 0px; visibility: hidden;">' + html + '</div>');
+			var cr = parentEl.getBoundingClientRect();
+			var style = el.style,
+			    w = el.offsetWidth,
+			    h = el.offsetHeight;
+
+			style.left = (isFixed ? 0 : window.pageXOffset) + (cr.left + w < Post.sizing.wWidth ? cr.left : cr.right - w) + 'px';
+			style.top = (isFixed ? 0 : window.pageYOffset) + (cr.bottom + h < Post.sizing.wHeight ? cr.bottom - 0.5 : cr.top - h + 0.5) + 'px';
+			style.removeProperty('visibility');
+			this._clickFn = clickFn;
+			this._el = el;
+			this.parentEl = parentEl;
+			el.addEventListener('mouseover', this, true);
+			el.addEventListener('mouseout', this, true);
+			el.addEventListener('click', this);
+			parentEl.addEventListener('mouseout', this);
+		}
+
+		_createClass(Menu, [{
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				var _this13 = this;
+
+				var isOverEvent = false;
+				switch (e.type) {
+					case 'click':
+						if (e.target.className === 'de-menu-item') {
+							this.remove();
+							this._clickFn(e.target);
+							if (!Cfg.expandPanel && !$q('.de-win-active')) {
+								$hide($id('de-panel-buttons'));
 							}
 						}
-					}
+						break;
+					case 'mouseover':
+						isOverEvent = true;
+					case 'mouseout':
+						{
+							clearTimeout(this._closeTO);
+							var rt = fixEventEl(e.relatedTarget);
+							rt = rt && rt.farthestViewportElement || rt;
+							if (!rt || rt !== this._el && !this._el.contains(rt)) {
+								if (isOverEvent) {
+									if (this.onover) {
+										this.onover();
+									}
+								} else if (!rt || rt !== this.parentEl && !this.parentEl.contains(rt)) {
+									this._closeTO = setTimeout(function () {
+										return _this13.remove();
+									}, 75);
+									if (this.onout) {
+										this.onout();
+									}
+								}
+							}
+						}
+				}
 			}
-		}
-	};
+		}, {
+			key: 'remove',
+			value: function remove() {
+				if (!this._el) {
+					return;
+				}
+				if (this.onremove) {
+					this.onremove();
+				}
+				this._el.removeEventListener('mouseover', this, true);
+				this._el.removeEventListener('mouseout', this, true);
+				this.parentEl.removeEventListener('mouseout', this);
+				this._el.removeEventListener('click', this);
+				$del(this._el);
+				this._el = null;
+			}
+		}]);
+
+		return Menu;
+	}();
 
 	function addMenu(el) {
 		var fn = function fn(a) {
@@ -7257,6 +8050,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		ntKeys: null,
 		tKeys: null,
 		version: 7,
+		clear: function clear() {
+			this.cPost = null;
+			this.lastPageOffset = 0;
+		},
+		disable: function disable() {
+			if (this.enabled) {
+				this.enabled = false;
+				if (this.cPost) {
+					this.cPost.unselect();
+				}
+				this.clear();
+				this.gKeys = this.ntKeys = this.tKeys = null;
+				doc.removeEventListener('keydown', this, true);
+			}
+		},
+		enable: function enable() {
+			var _this14 = this;
+
+			if (!this.enabled) {
+				this.enabled = true;
+				this._paused = false;
+				Promise.resolve(this.readKeys()).then(function (keys) {
+					if (_this14.enabled) {
+						var _keys = _slicedToArray(keys, 5);
+
+						_this14.gKeys = _keys[2];
+						_this14.ntKeys = _keys[3];
+						_this14.tKeys = _keys[4];
+
+						doc.addEventListener('keydown', _this14, true);
+					}
+				});
+			}
+		},
 		getDefaultKeys: function getDefaultKeys() {
 			var globKeys = [
 0x004B 
@@ -7288,46 +8115,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var thrKeys = [
 0x0055 
 			];
-			return [HotKeys.version, nav.Firefox, globKeys, nonThrKeys, thrKeys];
-		},
-		clear: function clear() {
-			this.cPost = null;
-			this.lastPageOffset = 0;
-		},
-		disable: function disable() {
-			if (this.enabled) {
-				this.enabled = false;
-				if (this.cPost) {
-					this.cPost.unselect();
-				}
-				this.clear();
-				this.gKeys = this.ntKeys = this.tKeys = null;
-				doc.removeEventListener('keydown', this, true);
-			}
-		},
-		enable: function enable() {
-			var _this13 = this;
-
-			if (!this.enabled) {
-				this.enabled = true;
-				this._paused = false;
-				Promise.resolve(this.readKeys()).then(function (keys) {
-					if (_this13.enabled) {
-						_this13.gKeys = keys[2];
-						_this13.ntKeys = keys[3];
-						_this13.tKeys = keys[4];
-						doc.addEventListener('keydown', _this13, true);
-					}
-				});
-			}
+			return [this.version, nav.isFirefox, globKeys, nonThrKeys, thrKeys];
 		},
 		handleEvent: function handleEvent(e) {
 			if (this._paused || e.metaKey) {
 				return;
 			}
-			var isThr = aib.t,
-			    curTh = e.target.tagName,
-			    kc = e.keyCode | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (curTh === 'TEXTAREA' || curTh === 'INPUT' && (e.target.type === 'text' || e.target.type === 'password') ? 0x8000 : 0);
+			var idx = void 0;
+			var isThr = aib.t;
+			var tag = e.target.tagName;
+			var kc = e.keyCode | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (tag === 'TEXTAREA' || tag === 'INPUT' && (e.target.type === 'text' || e.target.type === 'password') ? 0x8000 : 0);
 			if (kc === 0x74 || kc === 0x8074) {
 				if (isThr || $id('de-popup-load-pages')) {
 					return;
@@ -7354,9 +8151,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			} else if (kc === 0x801B) {
 				e.target.blur();
 			} else {
-				var post,
-				    idx,
-				    globIdx = this.gKeys.indexOf(kc);
+				var post = void 0;
+				var globIdx = this.gKeys.indexOf(kc);
 				switch (globIdx) {
 					case 2:
 						if (pr.form) {
@@ -7493,8 +8289,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							break;
 						}
 					default:
-						var scrollToThr = !isThr && (globIdx === 0 || globIdx === 1);
-						this._scroll(this._getFirstVisPost(scrollToThr, false), globIdx === 0 || idx === 0, scrollToThr);
+						{
+							var scrollToThr = !isThr && (globIdx === 0 || globIdx === 1);
+							this._scroll(this._getFirstVisPost(scrollToThr, false), globIdx === 0 || idx === 0, scrollToThr);
+						}
 				}
 			}
 			e.stopPropagation();
@@ -7503,113 +8301,132 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		pause: function pause() {
 			this._paused = true;
 		},
+		readKeys: function () {
+			var _ref22 = _asyncToGenerator( regeneratorRuntime.mark(function _callee9() {
+				var str, keys, tKeys, mapFunc;
+				return regeneratorRuntime.wrap(function _callee9$(_context10) {
+					while (1) {
+						switch (_context10.prev = _context10.next) {
+							case 0:
+								_context10.next = 2;
+								return getStored('DESU_keys');
+
+							case 2:
+								str = _context10.sent;
+
+								if (str) {
+									_context10.next = 5;
+									break;
+								}
+
+								return _context10.abrupt('return', this.getDefaultKeys());
+
+							case 5:
+								keys = void 0;
+								_context10.prev = 6;
+
+								keys = JSON.parse(str);
+
+							case 8:
+								_context10.prev = 8;
+
+								if (keys) {
+									_context10.next = 11;
+									break;
+								}
+
+								return _context10.abrupt('return', this.getDefaultKeys());
+
+							case 11:
+								if (keys[0] !== this.version) {
+									tKeys = this.getDefaultKeys();
+
+									switch (keys[0]) {
+										case 1:
+											keys[2][11] = tKeys[2][11];
+											keys[4] = tKeys[4];
+										case 2:
+											keys[2][12] = tKeys[2][12];
+											keys[2][13] = tKeys[2][13];
+											keys[2][14] = tKeys[2][14];
+											keys[2][15] = tKeys[2][15];
+											keys[2][16] = tKeys[2][16];
+										case 3:
+											keys[2][17] = keys[3][3];
+											keys[3][3] = keys[3].splice(4, 1)[0];
+										case 4:
+										case 5:
+										case 6:
+											keys[2][18] = tKeys[2][18];
+									}
+									keys[0] = this.version;
+									setStored('DESU_keys', JSON.stringify(keys));
+								}
+								if (keys[1] ^ nav.isFirefox) {
+									mapFunc = nav.isFirefox ? function mapFuncFF(key) {
+										switch (key) {
+											case 189:
+												return 173;
+											case 187:
+												return 61;
+											case 186:
+												return 59;
+											default:
+												return key;
+										}
+									} : function mapFuncNonFF(key) {
+										switch (key) {
+											case 173:
+												return 189;
+											case 61:
+												return 187;
+											case 59:
+												return 186;
+											default:
+												return key;
+										}
+									};
+
+									keys[1] = nav.isFirefox;
+									keys[2] = keys[2].map(mapFunc);
+									keys[3] = keys[3].map(mapFunc);
+									setStored('DESU_keys', JSON.stringify(keys));
+								}
+								return _context10.abrupt('return', keys);
+
+							case 15:
+							case 'end':
+								return _context10.stop();
+						}
+					}
+				}, _callee9, this, [[6,, 8, 15]]);
+			}));
+
+			function readKeys() {
+				return _ref22.apply(this, arguments);
+			}
+
+			return readKeys;
+		}(),
 		resume: function resume(keys) {
-			this.gKeys = keys[2];
-			this.ntKeys = keys[3];
-			this.tKeys = keys[4];
+			var _keys2 = _slicedToArray(keys, 5);
+
+			this.gKeys = _keys2[2];
+			this.ntKeys = _keys2[3];
+			this.tKeys = _keys2[4];
+
 			this._paused = false;
 		},
 
-		readKeys: function readKeys() {
-			var keys, str, tKeys, mapFunc;
-			return regeneratorRuntime.async(function readKeys$(_context10) {
-				while (1) {
-					switch (_context10.prev = _context10.next) {
-						case 0:
-							_context10.next = 2;
-							return regeneratorRuntime.awrap(getStored('DESU_keys'));
-
-						case 2:
-							str = _context10.sent;
-
-							if (str) {
-								_context10.next = 5;
-								break;
-							}
-
-							return _context10.abrupt('return', this.getDefaultKeys());
-
-						case 5:
-							_context10.prev = 5;
-
-							keys = JSON.parse(str);
-
-						case 7:
-							_context10.prev = 7;
-
-							if (keys) {
-								_context10.next = 10;
-								break;
-							}
-
-							return _context10.abrupt('return', this.getDefaultKeys());
-
-						case 10:
-							if (keys[0] !== this.version) {
-								tKeys = this.getDefaultKeys();
-
-								switch (keys[0]) {
-									case 1:
-										keys[2][11] = tKeys[2][11];
-										keys[4] = tKeys[4];
-									case 2:
-										keys[2][12] = tKeys[2][12];
-										keys[2][13] = tKeys[2][13];
-										keys[2][14] = tKeys[2][14];
-										keys[2][15] = tKeys[2][15];
-										keys[2][16] = tKeys[2][16];
-									case 3:
-										keys[2][17] = keys[3][3];
-										keys[3][3] = keys[3].splice(4, 1)[0];
-									case 4:
-									case 5:
-									case 6:
-										keys[2][18] = tKeys[2][18];
-								}
-								keys[0] = this.version;
-								setStored('DESU_keys', JSON.stringify(keys));
-							}
-							if (keys[1] ^ nav.Firefox) {
-								mapFunc = nav.Firefox ? function mapFuncFF(key) {
-									switch (key) {
-										case 189:
-											return 173;
-										case 187:
-											return 61;
-										case 186:
-											return 59;
-										default:
-											return key;
-									}
-								} : function mapFuncNonFF(key) {
-									switch (key) {
-										case 173:
-											return 189;
-										case 61:
-											return 187;
-										case 59:
-											return 186;
-										default:
-											return key;
-									}
-								};
-
-								keys[1] = nav.Firefox;
-								keys[2] = keys[2].map(mapFunc);
-								keys[3] = keys[3].map(mapFunc);
-								setStored('DESU_keys', JSON.stringify(keys));
-							}
-							return _context10.abrupt('return', keys);
-
-						case 14:
-						case 'end':
-							return _context10.stop();
-					}
-				}
-			}, null, this, [[5,, 7, 14]]);
-		},
 
 		_paused: false,
+		_getNextVisPost: function _getNextVisPost(cPost, isOp, toUp) {
+			if (isOp) {
+				var thr = cPost ? toUp ? cPost.thr.prevNotHidden : cPost.thr.nextNotHidden : Thread.first.hidden ? Thread.first.nextNotHidden : Thread.first;
+				return thr ? thr.op : null;
+			}
+			return cPost ? cPost.getAdjacentVisPost(toUp) : Thread.first.hidden || Thread.first.op.hidden ? Thread.first.op.getAdjacentVisPost(toUp) : Thread.first.op;
+		},
 		_getFirstVisPost: function _getFirstVisPost(getThread, getFull) {
 			if (this.lastPageOffset !== window.pageYOffset) {
 				var post = getThread ? Thread.first : Thread.first.op;
@@ -7627,13 +8444,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this.lastPageOffset = window.pageYOffset;
 			}
 			return this.cPost;
-		},
-		_getNextVisPost: function _getNextVisPost(cPost, isOp, toUp) {
-			if (isOp) {
-				var thr = cPost ? toUp ? cPost.thr.prevNotHidden : cPost.thr.nextNotHidden : Thread.first.hidden ? Thread.first.nextNotHidden : Thread.first;
-				return thr ? thr.op : null;
-			}
-			return cPost ? cPost.getAdjacentVisPost(toUp) : Thread.first.hidden || Thread.first.op.hidden ? Thread.first.op.getAdjacentVisPost(toUp) : Thread.first.op;
 		},
 		_scroll: function _scroll(post, toUp, toThread) {
 			var next = this._getNextVisPost(post, toThread, toUp);
@@ -7660,209 +8470,239 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 	};
 
-	function KeyEditListener(popupEl, keys, allKeys) {
-		var aInputs = Array.from($Q('.de-input-key', popupEl));
-		for (var i = 0, len = allKeys.length; i < len; ++i) {
-			var k = allKeys[i];
-			if (k !== 0) {
-				for (var j = i + 1; j < len; ++j) {
-					if (k === allKeys[j]) {
-						aInputs[i].classList.add('de-error-input');
-						aInputs[j].classList.add('de-error-input');
-						break;
+	var KeyEditListener = function () {
+		function KeyEditListener(popupEl, keys, allKeys) {
+			_classCallCheck(this, KeyEditListener);
+
+			this.cEl = null;
+			this.cKey = -1;
+			this.errorInput = false;
+			var aInputs = [].concat(_toConsumableArray($Q('.de-input-key', popupEl)));
+			for (var i = 0, len = allKeys.length; i < len; ++i) {
+				var k = allKeys[i];
+				if (k !== 0) {
+					for (var j = i + 1; j < len; ++j) {
+						if (k === allKeys[j]) {
+							aInputs[i].classList.add('de-error-input');
+							aInputs[j].classList.add('de-error-input');
+							break;
+						}
 					}
 				}
 			}
+			this.popupEl = popupEl;
+			this.keys = keys;
+			this.initKeys = JSON.parse(JSON.stringify(keys));
+			this.allKeys = allKeys;
+			this.allInputs = aInputs;
+			this.errCount = $Q('.de-error-input', popupEl).length;
+			if (this.errCount !== 0) {
+				this.saveButton.disabled = true;
+			}
 		}
-		this.popupEl = popupEl;
-		this.keys = keys;
-		this.initKeys = JSON.parse(JSON.stringify(keys));
-		this.allKeys = allKeys;
-		this.allInputs = aInputs;
-		this.errCount = $Q('.de-error-input', popupEl).length;
-		if (this.errCount !== 0) {
-			this.saveButton.disabled = true;
-		}
-	}
-	KeyEditListener.keyCodes = ['',,,,,,,, 'Backspace', 'Tab',,,, 'Enter',,, 'Shift', 'Ctrl', 'Alt',,,,,,,,,,,,,,  
-'Space',,,,,    '←', '↑', '→', '↓',,,,,,,,  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',, ';',, '=',,,, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',,,,,,
-'Numpad 0', 'Numpad 1', 'Numpad 2', 'Numpad 3', 'Numpad 4', 'Numpad 5', 'Numpad 6', 'Numpad 7', 'Numpad 8', 'Numpad 9', 'Numpad *', 'Numpad +',, 'Numpad -', 'Numpad .', 'Numpad /',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,     
-'-',,,,,,,,,,,,, ';', '=', ',', '-', '.', '/', '`',,,,,,,,,,,,,,,,,,,,,,,,,,, '[', '\\', ']', '\''];
-	KeyEditListener.getStrKey = function (key) {
-		return (key & 0x1000 ? 'Ctrl+' : '') + (key & 0x2000 ? 'Shift+' : '') + (key & 0x4000 ? 'Alt+' : '') + KeyEditListener.keyCodes[key & 0xFFF];
-	};
-	KeyEditListener.getEditMarkup = function (keys) {
-		var allKeys = [];
-		var html = Lng.hotKeyEdit[lang].join('').replace(/%l/g, '<label class="de-block">').replace(/%\/l/g, '</label>').replace(/%i([2-4])([0-9]+)(t)?/g, function (all, id1, id2, isText) {
-			var key = keys[+id1][+id2];
-			allKeys.push(key);
-			return '<input class="de-input-key" type="text" de-id1="' + id1 + '" de-id2="' + id2 + '" size="16" value="' + KeyEditListener.getStrKey(key) + (isText ? '" de-text' : '"') + ' readonly>';
-		}) + '<input type="button" id="de-keys-save" class="de-button" value="' + Lng.save[lang] + '">' + '<input type="button" id="de-keys-reset" class="de-button" value="' + Lng.reset[lang] + '">';
-		return [allKeys, html];
-	};
-	KeyEditListener.setTitle = function (el, idx) {
-		var title = el.getAttribute('de-title');
-		if (!title) {
-			title = el.getAttribute('title');
-			el.setAttribute('de-title', title);
-		}
-		if (HotKeys.enabled && idx !== -1) {
-			title += ' [' + KeyEditListener.getStrKey(HotKeys.gKeys[idx]) + ']';
-		}
-		el.title = title;
-	};
-	KeyEditListener.prototype = {
-		cEl: null,
-		cKey: -1,
-		errorInput: false,
-		get saveButton() {
-			var val = $id('de-keys-save');
-			Object.defineProperty(this, 'saveButton', { value: val, configurable: true });
-			return val;
-		},
-		handleEvent: function handleEvent(e) {
-			var key,
-			    el = e.target;
-			switch (e.type) {
-				case 'blur':
-					if (HotKeys.enabled && this.errCount === 0) {
-						HotKeys.resume(this.keys);
-					}
-					this.cEl = null;
-					return;
-				case 'focus':
-					if (HotKeys.enabled) {
-						HotKeys.pause();
-					}
-					this.cEl = el;
-					return;
-				case 'click':
-					var keys;
-					if (el.id === 'de-keys-reset') {
-						this.keys = HotKeys.getDefaultKeys();
-						this.initKeys = HotKeys.getDefaultKeys();
-						if (HotKeys.enabled) {
+
+		_createClass(KeyEditListener, [{
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				var key = void 0,
+				    el = e.target;
+				switch (e.type) {
+					case 'blur':
+						if (HotKeys.enabled && this.errCount === 0) {
 							HotKeys.resume(this.keys);
 						}
-						var temp = KeyEditListener.getEditMarkup(this.keys);
-						this.allKeys = temp[0];
-						this.popupEl.innerHTML = temp[1];
-						this.allInputs = Array.from($Q('.de-input-key', this.popupEl));
-						this.errCount = 0;
-						delete this.saveButton;
-						break;
-					} else if (el.id === 'de-keys-save') {
-						keys = this.keys;
-						setStored('DESU_keys', JSON.stringify(keys));
-					} else if (el.className === 'de-popup-btn') {
-						keys = this.initKeys;
-					} else {
+						this.cEl = null;
 						return;
-					}
-					if (HotKeys.enabled) {
-						HotKeys.resume(keys);
-					}
-					closePopup('edit-hotkeys');
-					break;
-				case 'keydown':
-					if (!this.cEl) {
+					case 'focus':
+						if (HotKeys.enabled) {
+							HotKeys.pause();
+						}
+						this.cEl = el;
 						return;
-					}
-					key = e.keyCode;
-					if (key === 0x1B || key === 0x2E) {
-						this.cEl.value = '';
-						this.cKey = 0;
-						this.errorInput = false;
-						break;
-					}
-					var keyStr = KeyEditListener.keyCodes[key];
-					if (keyStr === undefined) {
-						this.cKey = -1;
-						return;
-					}
-					var str = '';
-					if (e.ctrlKey) {
-						str += 'Ctrl+';
-					}
-					if (e.shiftKey) {
-						str += 'Shift+';
-					}
-					if (e.altKey) {
-						str += 'Alt+';
-					}
-					if (key === 16 || key === 17 || key === 18) {
-						this.errorInput = true;
-						this.cKey = 0;
-					} else {
-						this.cKey = key | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (this.cEl.hasAttribute('de-text') ? 0x8000 : 0);
-						this.errorInput = false;
-						str += keyStr;
-					}
-					this.cEl.value = str;
-					break;
-				case 'keyup':
-					el = this.cEl;
-					key = this.cKey;
-					if (!el || key === -1) {
-						return;
-					}
-					var rEl,
-					    isError = el.classList.contains('de-error-input');
-					if (!this.errorInput && key !== -1) {
-						var idx = this.allInputs.indexOf(el),
-						    oKey = this.allKeys[idx];
-						if (oKey === key) {
-							this.errorInput = false;
+					case 'click':
+						{
+							var keys = void 0;
+							if (el.id === 'de-keys-reset') {
+								this.keys = HotKeys.getDefaultKeys();
+								this.initKeys = HotKeys.getDefaultKeys();
+								if (HotKeys.enabled) {
+									HotKeys.resume(this.keys);
+								}
+
+								var _KeyEditListener$getE = KeyEditListener.getEditMarkup(this.keys);
+
+								var _KeyEditListener$getE2 = _slicedToArray(_KeyEditListener$getE, 2);
+
+								this.allKeys = _KeyEditListener$getE2[0];
+								this.popupEl.innerHTML = _KeyEditListener$getE2[1];
+
+								this.allInputs = [].concat(_toConsumableArray($Q('.de-input-key', this.popupEl)));
+								this.errCount = 0;
+								delete this.saveButton;
+								break;
+							} else if (el.id === 'de-keys-save') {
+								keys = this.keys;
+
+								setStored('DESU_keys', JSON.stringify(keys));
+							} else if (el.className === 'de-popup-btn') {
+								keys = this.initKeys;
+							} else {
+								return;
+							}
+							if (HotKeys.enabled) {
+								HotKeys.resume(keys);
+							}
+							closePopup('edit-hotkeys');
 							break;
 						}
-						var rIdx = key === 0 ? -1 : this.allKeys.indexOf(key);
-						this.allKeys[idx] = key;
-						if (isError) {
-							idx = this.allKeys.indexOf(oKey);
-							if (idx !== -1 && this.allKeys.indexOf(oKey, idx + 1) === -1) {
-								rEl = this.allInputs[idx];
-								if (rEl.classList.contains('de-error-input')) {
-									this.errCount--;
-									rEl.classList.remove('de-error-input');
+					case 'keydown':
+						{
+							if (!this.cEl) {
+								return;
+							}
+							key = e.keyCode;
+							if (key === 0x1B || key === 0x2E) {
+								this.cEl.value = '';
+								this.cKey = 0;
+								this.errorInput = false;
+								break;
+							}
+							var keyStr = KeyEditListener.keyCodes[key];
+							if (keyStr === undefined) {
+								this.cKey = -1;
+								return;
+							}
+							var str = '';
+							if (e.ctrlKey) {
+								str += 'Ctrl+';
+							}
+							if (e.shiftKey) {
+								str += 'Shift+';
+							}
+							if (e.altKey) {
+								str += 'Alt+';
+							}
+							if (key === 16 || key === 17 || key === 18) {
+								this.errorInput = true;
+								this.cKey = 0;
+							} else {
+								this.cKey = key | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (this.cEl.hasAttribute('de-text') ? 0x8000 : 0);
+								this.errorInput = false;
+								str += keyStr;
+							}
+							this.cEl.value = str;
+							break;
+						}
+					case 'keyup':
+						{
+							el = this.cEl;
+							key = this.cKey;
+							if (!el || key === -1) {
+								return;
+							}
+							var rEl = void 0;
+							var isError = el.classList.contains('de-error-input');
+							if (!this.errorInput && key !== -1) {
+								var idx = this.allInputs.indexOf(el);
+								var oKey = this.allKeys[idx];
+								if (oKey === key) {
+									this.errorInput = false;
+									break;
+								}
+								var rIdx = key === 0 ? -1 : this.allKeys.indexOf(key);
+								this.allKeys[idx] = key;
+								if (isError) {
+									idx = this.allKeys.indexOf(oKey);
+									if (idx !== -1 && this.allKeys.indexOf(oKey, idx + 1) === -1) {
+										rEl = this.allInputs[idx];
+										if (rEl.classList.contains('de-error-input')) {
+											this.errCount--;
+											rEl.classList.remove('de-error-input');
+										}
+									}
+									if (rIdx === -1) {
+										this.errCount--;
+										el.classList.remove('de-error-input');
+									}
+								}
+								if (rIdx === -1) {
+									this.keys[+el.getAttribute('de-id1')][+el.getAttribute('de-id2')] = key;
+									if (this.errCount === 0) {
+										this.saveButton.disabled = false;
+									}
+									this.errorInput = false;
+									break;
+								}
+								rEl = this.allInputs[rIdx];
+								if (!rEl.classList.contains('de-error-input')) {
+									this.errCount++;
+									rEl.classList.add('de-error-input');
 								}
 							}
-							if (rIdx === -1) {
-								this.errCount--;
-								el.classList.remove('de-error-input');
+							if (!isError) {
+								this.errCount++;
+								el.classList.add('de-error-input');
+							}
+							if (this.errCount !== 0) {
+								this.saveButton.disabled = true;
 							}
 						}
-						if (rIdx === -1) {
-							this.keys[+el.getAttribute('de-id1')][+el.getAttribute('de-id2')] = key;
-							if (this.errCount === 0) {
-								this.saveButton.disabled = false;
-							}
-							this.errorInput = false;
-							break;
-						}
-						rEl = this.allInputs[rIdx];
-						if (!rEl.classList.contains('de-error-input')) {
-							this.errCount++;
-							rEl.classList.add('de-error-input');
-						}
-					}
-					if (!isError) {
-						this.errCount++;
-						el.classList.add('de-error-input');
-					}
-					if (this.errCount !== 0) {
-						this.saveButton.disabled = true;
-					}
+				}
+				$pd(e);
 			}
-			$pd(e);
-		}
-	};
+		}, {
+			key: 'saveButton',
+			get: function get() {
+				var value = $id('de-keys-save');
+				Object.defineProperty(this, 'saveButton', { value: value, configurable: true });
+				return value;
+			}
+		}], [{
+			key: 'getEditMarkup',
+			value: function getEditMarkup(keys) {
+				var allKeys = [];
+				return [allKeys, Lng.hotKeyEdit[lang].join('').replace(/%l/g, '<label class="de-block">').replace(/%\/l/g, '</label>').replace(/%i([2-4])([0-9]+)(t)?/g, function (all, id1, id2, isText) {
+					var key = keys[+id1][+id2];
+					allKeys.push(key);
+					return '<input class="de-input-key" type="text" de-id1="' + id1 + '" de-id2="' + id2 + ('" size="16" value="' + KeyEditListener.getStrKey(key) + (isText ? '" de-text' : '"') + ' readonly>');
+				}) + '<input type="button" id="de-keys-save" class="de-button" value="' + Lng.save[lang] + '">' + ('<input type="button" id="de-keys-reset" class="de-button" value="' + Lng.reset[lang] + '">')];
+			}
+		}, {
+			key: 'getStrKey',
+			value: function getStrKey(key) {
+				return (key & 0x1000 ? 'Ctrl+' : '') + (key & 0x2000 ? 'Shift+' : '') + (key & 0x4000 ? 'Alt+' : '') + KeyEditListener.keyCodes[key & 0xFFF];
+			}
+		}, {
+			key: 'setTitle',
+			value: function setTitle(el, idx) {
+				var title = el.getAttribute('de-title');
+				if (!title) {
+					title = el.getAttribute('title');
+					el.setAttribute('de-title', title);
+				}
+				if (HotKeys.enabled && idx !== -1) {
+					title += ' [' + KeyEditListener.getStrKey(HotKeys.gKeys[idx]) + ']';
+				}
+				el.title = title;
+			}
+		}]);
+
+		return KeyEditListener;
+	}();
+
+
+	KeyEditListener.keyCodes = ['',,,,,,,, 'Backspace', 'Tab',,,, 'Enter',,, 'Shift', 'Ctrl', 'Alt',,,,,,,,,,,,,,  
+'Space',,,,,    '←', '↑', '→', '↓',,,,,,,, 
+'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',, ';',, '=',,,, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',,,,,,  
+'Num 0', 'Num 1', 'Num 2', 'Num 3', 'Num 4', 'Num 5', 'Num 6', 'Num 7', 'Num 8', 'Num 9', 'Num *', 'Num +',, 'Num -', 'Num .', 'Num /',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,        
+'-',,,,,,,,,,,,, ';', '=', ',', '-', '.', '/', '`',,,,,,,,,,,,,,,,,,,,,,,,,,, '[', '\\', ']', "'"];
 
 
 	function detectImgFile(ab) {
-		var i,
-		    j,
-		    dat = new Uint8Array(ab),
-		    len = dat.length;
+		var i = void 0,
+		    j = void 0;
+		var dat = new Uint8Array(ab);
+		var len = dat.length;
 		if (dat[0] === 0xFF && dat[1] === 0xD8) {
 			for (i = 0, j = 0; i < len - 1; i++) {
 				if (dat[i] === 0xFF) {
@@ -7902,66 +8742,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		return {};
 	}
 
-	function WorkerPool(mReqs, wrkFn, errFn) {
-		var _this14 = this;
-
-		if (!nav.hasWorker) {
-			this.run = function (data, transferObjs, fn) {
-				return fn(wrkFn(data));
-			};
-			return;
-		}
-		var url = window.URL.createObjectURL(new Blob(['self.onmessage = function(e) {\n\t\tvar info = (' + String(wrkFn) + ')(e.data);\n\t\tif(info.data) {\n\t\t\tself.postMessage(info, [info.data]);\n\t\t} else {\n\t\t\tself.postMessage(info);\n\t\t}\n\t}'], { type: 'text/javascript' }));
-		this._pool = new TasksPool(mReqs, function (num, data) {
-			return _this14._createWorker(num, data);
-		}, null);
-		this._freeWorkers = [];
-		this._url = url;
-		this._errFn = errFn;
-		while (mReqs--) {
-			this._freeWorkers.push(new Worker(url));
-		}
-	}
-	WorkerPool.prototype = {
-		run: function run(data, transferObjs, fn) {
-			this._pool.run([data, transferObjs, fn]);
-		},
-		_createWorker: function _createWorker(num, data) {
-			var _this15 = this;
-
-			return new Promise(function (resolve, reject) {
-				var w = _this15._freeWorkers.pop(),
-				    _data2 = _slicedToArray(data, 3),
-				    sendData = _data2[0],
-				    transferObjs = _data2[1],
-				    fn = _data2[2];
-
-				w.onmessage = function (e) {
-					fn(e.data);
-					_this15._freeWorkers.push(w);
-					resolve();
-				};
-				w.onerror = function (err) {
-					resolve();
-					_this15._freeWorkers.push(w);
-					_this15._errFn(err);
-				};
-				w.postMessage(sendData, transferObjs);
-			});
-		},
-		clear: function clear() {
-			window.URL.revokeObjectURL(this._url);
-			this._freeWorkers = [];
-		}
-	};
-
 	function addImgFileIcon(nameLink, fName, info) {
-		var app,
-		    ext,
-		    type = info.type;
+		var type = info.type;
+
 		if (typeof type === 'undefined') {
 			return;
 		}
+		var app = void 0,
+		    ext = void 0;
 		if (type === 2) {
 			app = 'application/x-rar-compressed';
 			ext = 'rar';
@@ -7978,56 +8766,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			app = 'audio/mpeg';
 			ext = 'mp3';
 		}
-		nameLink.insertAdjacentHTML('afterend', '<a href="' + window.URL.createObjectURL(new Blob([nav.getUnsafeUint8Array(info.data, info.idx)], { type: app })) + '" class="de-img-' + (type > 2 ? 'audio' : 'arch') + '" title="' + Lng.downloadFile[lang] + '" download="' + fName.substring(0, fName.lastIndexOf('.')) + '.' + ext + '">.' + ext + '</a>');
+		nameLink.insertAdjacentHTML('afterend', '<a href="' + window.URL.createObjectURL(new Blob([nav.getUnsafeUint8Array(info.data, info.idx)], { type: app })) + '" class="de-img-' + (type > 2 ? 'audio' : 'arch') + '" title="' + Lng.downloadFile[lang] + '" download="' + fName.substring(0, fName.lastIndexOf('.')) + '.' + ext + '">.' + ext + '\'</a>');
 	}
 
 	function downloadImgData(url) {
 		var repeatOnError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-		return regeneratorRuntime.async(function downloadImgData$(_context11) {
-			while (1) {
-				switch (_context11.prev = _context11.next) {
-					case 0:
-						return _context11.abrupt('return', $ajax(url, {
-							responseType: 'arraybuffer',
-							overrideMimeType: 'text/plain; charset=x-user-defined'
-						}, url.startsWith('blob')).then(function (xhr) {
-							if (xhr.status === 0 && xhr.responseType === 'arraybuffer') {
-								return new Uint8Array(xhr.response);
-							}
-							if ('response' in xhr) {
-								try {
-									return nav.getUnsafeUint8Array(xhr.response);
-								} catch (e) {}
-							}
-							var txt = xhr.responseText;
-							var rv = new Uint8Array(txt.length);
-							for (var i = 0, len = txt.length; i < len; ++i) {
-								rv[i] = txt.charCodeAt(i) & 0xFF;
-							}
-							return rv;
-						}, function (err) {
-							return err.code !== 404 && repeatOnError ? downloadImgData(url, false) : null;
-						}));
 
-					case 1:
-					case 'end':
-						return _context11.stop();
-				}
+		return $ajax(url, {
+			responseType: 'arraybuffer',
+			overrideMimeType: 'text/plain; charset=x-user-defined'
+		}, url.startsWith('blob')).then(function (xhr) {
+			if (xhr.status === 0 && xhr.responseType === 'arraybuffer') {
+				return new Uint8Array(xhr.response);
 			}
-		}, null, this);
+			if ('response' in xhr) {
+				try {
+					return nav.getUnsafeUint8Array(xhr.response);
+				} catch (e) {}
+			}
+			var txt = xhr.responseText;
+			var rv = new Uint8Array(txt.length);
+			for (var i = 0, len = txt.length; i < len; ++i) {
+				rv[i] = txt.charCodeAt(i) & 0xFF;
+			}
+			return rv;
+		}, function (err) {
+			return err.code !== 404 && repeatOnError ? downloadImgData(url, false) : null;
+		});
 	}
 
 	function preloadImages(data) {
 		if (!Cfg.preLoadImgs && !Cfg.openImgs && !isPreImg) {
 			return;
 		}
-		var pool,
-		    isPost = data instanceof AbstractPost;
+		var pool = void 0;
+		var isPost = data instanceof AbstractPost;
+		var els = $Q(aib.qPostImg, isPost ? data.el : data);
+		var len = els.length;
 		if (isPreImg || Cfg.preLoadImgs) {
-			var cImg = 1,
-			    mReqs = isPost ? 1 : 4,
-			    rjf = (isPreImg || Cfg.findImgFile) && new WorkerPool(mReqs, detectImgFile, function (e) {
-				console.error('File detector error:', 'line: ' + e.lineno + ' - ' + e.message);
+			var cImg = 1;
+			var mReqs = isPost ? 1 : 4;
+			var rjf = (isPreImg || Cfg.findImgFile) && new WorkerPool(mReqs, detectImgFile, function (e) {
+				return console.error('File detector error:', 'line: ' + e.lineno + ' - ' + e.message);
 			});
 			pool = new TasksPool(mReqs, function (num, data) {
 				return downloadImgData(data[0]).then(function (imageData) {
@@ -8039,25 +8819,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					    el = _data3[4];
 
 					if (imageData) {
-						(function () {
-							var fName = url.substring(url.lastIndexOf('/') + 1);
-							var nameLink = $q(aib.qImgNameLink, aib.getImgWrap(el));
-							imgLink.setAttribute('download', fName);
-							nameLink.setAttribute('download', fName);
-							nameLink.setAttribute('de-href', nameLink.href);
-							imgLink.href = nameLink.href = window.URL.createObjectURL(new Blob([imageData], { type: iType }));
-							if (iType === 'video/webm') {
-								el.setAttribute('de-video', '');
-							}
-							if (nExp) {
-								el.src = imgLink.href;
-							}
-							if (rjf) {
-								rjf.run(imageData.buffer, [imageData.buffer], function (info) {
-									return addImgFileIcon(nameLink, fName, info);
-								});
-							}
-						})();
+						var fName = url.substring(url.lastIndexOf('/') + 1);
+						var nameLink = $q(aib.qImgNameLink, aib.getImgWrap(el));
+						imgLink.setAttribute('download', fName);
+						nameLink.setAttribute('download', fName);
+						nameLink.setAttribute('de-href', nameLink.href);
+						imgLink.href = nameLink.href = window.URL.createObjectURL(new Blob([imageData], { type: iType }));
+						if (iType === 'video/webm' || iType === 'video/mp4' || iType === 'video/ogv') {
+							el.setAttribute('de-video', '');
+						}
+						if (nExp) {
+							el.src = imgLink.href;
+						}
+						if (rjf) {
+							rjf.run(imageData.buffer, [imageData.buffer], function (info) {
+								return addImgFileIcon(nameLink, fName, info);
+							});
+						}
 					}
 					if (Images_.progressId) {
 						$popup(Images_.progressId, Lng.loadImage[lang] + ': ' + cImg + '/' + len, true);
@@ -8076,30 +8854,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 			Images_.preloading = true;
 		}
-		var els = $Q(aib.qPostImg, isPost ? data.el : data);
-		for (var i = 0, len = els.length; i < len; ++i) {
-			var el = els[i],
-			    imgLink = $parent(el = els[i], 'A');
+		for (var i = 0; i < len; ++i) {
+			var el = els[i];
+			var imgLink = $parent(el = els[i], 'A');
 			if (!imgLink) {
 				continue;
 			}
 			var nExp = !!Cfg.openImgs;
-			var url = imgLink.href;
-			var iType = getFileType(url);
+			var _url = imgLink.href;
+			var iType = getFileType(_url);
 			if (!iType) {
 				continue;
 			} else if (iType === 'image/gif') {
 				nExp &= Cfg.openImgs !== 3;
 			} else {
-				if (iType === 'video/webm') {
+				if (iType === 'video/webm' || iType === 'video/mp4' || iType === 'video/ogv') {
 					nExp = false;
 				}
 				nExp &= Cfg.openImgs !== 2;
 			}
 			if (pool) {
-				pool.run([url, imgLink, iType, nExp, el]);
+				pool.run([_url, imgLink, iType, nExp, el]);
 			} else if (nExp) {
-				el.src = url; 
+				el.src = _url; 
 			}
 		}
 		if (pool) {
@@ -8122,26 +8899,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function loadDocFiles(imgOnly) {
-		var els,
-		    progress,
-		    counter,
+		var progress = void 0,
+		    counter = void 0,
 		    count = 0,
 		    current = 1,
 		    warnings = '',
-		    tar = new TarBuilder(),
-		    dc = imgOnly ? doc : doc.documentElement.cloneNode(true);
+		    tar = new TarBuilder();
+		var dc = imgOnly ? doc : doc.documentElement.cloneNode(true);
 		Images_.pool = new TasksPool(4, function (num, data) {
 			return downloadImgData(data[0]).then(function (imgData) {
 				var _data4 = _slicedToArray(data, 4),
 				    url = _data4[0],
 				    fName = _data4[1],
 				    el = _data4[2],
-				    imgLink = _data4[3],
-				    safeName = fName.replace(/[\\\/:*?"<>|]/g, '_');
+				    imgLink = _data4[3];
 
-				progress.value = current;
-				counter.innerHTML = current;
-				current++;
+				var safeName = fName.replace(/[\\/:*?"<>|]/g, '_');
+				progress.value = counter.innerHTML = current++;
 				if (imgLink) {
 					var thumbName = safeName.replace(/\.[a-z]+$/, '.png');
 					if (imgOnly) {
@@ -8154,7 +8928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					if (imgData) {
 						tar.addFile(safeName, imgData);
 					} else {
-						warnings += '<br>' + Lng.cantLoad[lang] + ' <a href="' + url + '">' + url + '</a><br>' + Lng.willSavePview[lang];
+						warnings += '<br>' + Lng.cantLoad[lang] + ' <a href="' + url + '">' + url + '</a>' + ('<br>' + Lng.willSavePview[lang]);
 						$popup('err-files', Lng.loadErrors[lang] + warnings);
 						if (imgOnly) {
 							return getDataFromImg(el).then(function (data) {
@@ -8166,7 +8940,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						el.src = thumbName;
 						tar.addFile(thumbName, data);
 					}, function () {
-						el.src = safeName;
+						return el.src = safeName;
 					});
 				} else if (imgData && imgData.length > 0) {
 					tar.addFile(el.href = el.src = 'data/' + safeName, imgData);
@@ -8175,16 +8949,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			});
 		}, function () {
-			var docName = aib.dm + '-' + aib.b.replace(/[\\\/:*?"<>|]/g, '') + '-' + aib.t;
+			var docName = aib.dm + '-' + aib.b.replace(/[\\/:*?"<>|]/g, '') + '-' + aib.t;
 			if (!imgOnly) {
 				$q('head', dc).insertAdjacentHTML('beforeend', '<script type="text/javascript" src="data/dollscript.js" charset="utf-8"></script>');
 				$each($Q('#de-css, #de-css-dynamic, #de-css-user', dc), $del);
-				var scriptStr,
-				    localData = JSON.stringify({ dm: aib.dm, b: aib.b, t: aib.t });
+				var scriptStr = void 0;
+				var _localData = JSON.stringify({ dm: aib.dm, b: aib.b, t: aib.t });
 				if (nav.isESNext) {
-					scriptStr = '(' + String(de_main_func_inner) + ')(null, null, (x, y) => window.scrollTo(x, y), ' + localData + ');';
+					scriptStr = '(' + String(deMainFuncInner) + ')(null, null, (x, y) => window.scrollTo(x, y), ' + _localData + ');';
 				} else {
-					scriptStr = '(' + String(de_main_func_outer) + ')(' + localData + ');';
+					scriptStr = '(' + String(deMainFuncOuter) + ')(' + _localData + ');';
 				}
 				tar.addString('data/dollscript.js', scriptStr);
 				var dt = doc.doctype;
@@ -8194,23 +8968,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			$del($id('de-popup-load-files'));
 			Images_.pool = tar = warnings = count = current = imgOnly = progress = counter = null;
 		});
-		els = Array.from($Q(aib.qPostImg, $q('[de-form]', dc)));
+		var els = [].concat(_toConsumableArray($Q(aib.qPostImg, $q('[de-form]', dc))));
 		count += els.length;
 		els.forEach(function (el) {
 			var imgLink = $parent(el, 'A');
 			if (imgLink) {
-				var url = imgLink.href;
-				if (aib.tiny) {
-					url = url.replace(/^.*?\?v=|&.*?$/g, '');
-				}
-				Images_.pool.run([url, imgLink.getAttribute('download') || url.substring(url.lastIndexOf('/') + 1), el, imgLink]);
+				var _url2 = imgLink.href;
+				Images_.pool.run([_url2, imgLink.getAttribute('download') || _url2.substring(_url2.lastIndexOf('/') + 1), el, imgLink]);
 			}
 		});
 		if (!imgOnly) {
-			$each($Q('#de-main, .de-parea, .de-post-btns, .de-btn-src, .de-refmap, .de-thread-buttons, ' + '.de-video-obj, #de-win-reply, link[rel="alternate stylesheet"], script, ' + aib.qForm, dc), $del);
+			$each($Q('#de-main, .de-parea, .de-post-btns, .de-btn-src, ' + '.de-refmap, .de-thread-buttons, .de-video-obj, #de-win-reply, ' + 'link[rel="alternate stylesheet"], script, ' + aib.qForm, dc), $del);
 			$each($Q('a', dc), function (el) {
-				var num,
-				    tc = el.textContent;
+				var num = void 0;
+				var tc = el.textContent;
 				if (tc[0] === '>' && tc[1] === '>' && (num = +tc.substr(2)) && pByNum.has(num)) {
 					el.href = aib.anchor + num;
 					if (!el.classList.contains('de-link-pref')) {
@@ -8224,21 +8995,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				post.setAttribute('de-num', i === 0 ? aib.t : aib.getPNum(post));
 			});
 			var files = [];
-			var urlRegex = new RegExp('^\\/\\/?|^https?:\\/\\/([^\\/]*\.)?' + quoteReg(aib.fch ? '4cdn.org' : aib.dm) + '\\/', 'i');
+			var urlRegex = new RegExp('^\\/\\/?|^https?:\\/\\/([^\\/]*\\.)?' + quoteReg(aib.fch ? '4cdn.org' : aib.dm) + '\\/', 'i');
 			$each($Q('link, *[src]', dc), function (el) {
 				if (els.indexOf(el) !== -1) {
 					return;
 				}
-				var fName,
-				    url = el.tagName === 'LINK' ? el.href : el.src;
+				var url = el.tagName === 'LINK' ? el.href : el.src;
 				if (!urlRegex.test(url)) {
 					$del(el);
 					return;
 				}
-				fName = url.substring(url.lastIndexOf('/') + 1).replace(/[\\\/:*?"<>|]/g, '_').toLowerCase();
+				var fName = url.substring(url.lastIndexOf('/') + 1).replace(/[\\/:*?"<>|]/g, '_').toLowerCase();
 				if (files.indexOf(fName) !== -1) {
-					var temp = url.lastIndexOf('.'),
-					    ext = url.substring(temp);
+					var temp = url.lastIndexOf('.');
+					var ext = url.substring(temp);
 					url = url.substring(0, temp);
 					fName = fName.substring(0, fName.lastIndexOf('.'));
 					for (var i = 0;; ++i) {
@@ -8254,7 +9024,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				count++;
 			});
 		}
-		$popup('load-files', (imgOnly ? Lng.loadImage[lang] : Lng.loadFile[lang]) + ':<br><progress id="de-loadprogress" value="0" max="' + count + '"></progress> <span>1</span>/' + count, true);
+		$popup('load-files', (imgOnly ? Lng.loadImage[lang] : Lng.loadFile[lang]) + ':<br>' + ('<progress id="de-loadprogress" value="0" max="' + count + '"></progress> <span>1</span>/' + count), true);
 		progress = $id('de-loadprogress');
 		counter = progress.nextElementSibling;
 		Images_.pool.complete();
@@ -8262,422 +9032,514 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 
-	function DateTime(pattern, rPattern, diff, dtLang, onRPat) {
-		if (DateTime.checkPattern(pattern)) {
-			this.disabled = true;
-			return;
-		}
-		this.regex = pattern.replace(/(?:[sihdny]\?){2,}/g, function (str) {
-			return '(?:' + str.replace(/\?/g, '') + ')?';
-		}).replace(/\-/g, '[^<]').replace(/\+/g, '[^0-9<]').replace(/([sihdny]+)/g, '($1)').replace(/[sihdny]/g, '\\d').replace(/m|w/g, '([a-zA-Zа-яА-Я]+)');
-		this.pattern = pattern.replace(/[\?\-\+]+/g, '').replace(/([a-z])\1+/g, '$1');
-		this.diff = parseInt(diff, 10);
-		this.arrW = Lng.week[dtLang];
-		this.arrM = Lng.month[dtLang];
-		this.arrFM = Lng.fullMonth[dtLang];
-		if (rPattern) {
-			this.genDateTime = this.genRFunc(rPattern);
-		} else {
-			this.onRPat = onRPat;
-		}
-	}
-	DateTime.toggleSettings = function (el) {
-		if (el.checked && (!/^[+-]\d{1,2}$/.test(Cfg.timeOffset) || DateTime.checkPattern(Cfg.timePattern))) {
-			$popup('err-correcttime', Lng.cTimeError[lang]);
-			saveCfg('correctTime', 0);
-			el.checked = false;
-		}
-	};
-	DateTime.checkPattern = function (val) {
-		return !val.includes('i') || !val.includes('h') || !val.includes('d') || !val.includes('y') || !(val.includes('n') || val.includes('m')) || /[^\?\-\+sihdmwny]|mm|ww|\?\?|([ihdny]\?)\1+/.test(val);
-	};
-	DateTime.prototype = {
-		genDateTime: null,
-		onRPat: null,
-		pad2: pad2,
-		genRFunc: function genRFunc(rPattern) {
-			return new Function('dtime', 'return \'' + rPattern.replace('_o', (this.diff < 0 ? '' : '+') + this.diff).replace('_s', '\' + this.pad2(dtime.getSeconds()) + \'').replace('_i', '\' + this.pad2(dtime.getMinutes()) + \'').replace('_h', '\' + this.pad2(dtime.getHours()) + \'').replace('_d', '\' + this.pad2(dtime.getDate()) + \'').replace('_w', '\' + this.arrW[dtime.getDay()] + \'').replace('_n', '\' + this.pad2(dtime.getMonth() + 1) + \'').replace('_m', '\' + this.arrM[dtime.getMonth()] + \'').replace('_M', '\' + this.arrFM[dtime.getMonth()] + \'').replace('_y', '\' + (\'\' + dtime.getFullYear()).substring(2) + \'').replace('_Y', '\' + dtime.getFullYear() + \'') + '\';');
-		},
-		getRPattern: function getRPattern(txt) {
-			var m = txt.match(new RegExp(this.regex));
-			if (!m) {
+	var DateTime = function () {
+		function DateTime(pattern, rPattern, diff, dtLang, onRPat) {
+			_classCallCheck(this, DateTime);
+
+			this.pad2 = pad2;
+			this.genDateTime = null;
+			this.onRPat = null;
+			if (DateTime.checkPattern(pattern)) {
 				this.disabled = true;
-				return false;
-			}
-			var rPattern = '';
-			for (var i = 1, len = m.length, j = 0, str = m[0]; i < len;) {
-				var a = m[i++],
-				    p = this.pattern[i - 2];
-				if ((p === 'm' || p === 'y') && a.length > 3) {
-					p = p.toUpperCase();
-				}
-				var k = str.indexOf(a, j);
-				rPattern += str.substring(j, k) + '_' + p;
-				j = k + a.length;
-			}
-			if (this.onRPat) {
-				this.onRPat(rPattern);
-			}
-			this.genDateTime = this.genRFunc(rPattern);
-			return true;
-		},
-		fix: function fix(txt) {
-			var _this16 = this;
-
-			if (this.disabled || !this.genDateTime && !this.getRPattern(txt)) {
-				return txt;
-			}
-			return txt.replace(new RegExp(this.regex, 'g'), function (str) {
-				for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key = 1; _key < _len2; _key++) {
-					args[_key - 1] = arguments[_key];
-				}
-
-				var second, minute, hour, day, month, year;
-				for (var i = 0; i < 7; ++i) {
-					var a = args[i];
-					switch (_this16.pattern[i]) {
-						case 's':
-							second = a;break;
-						case 'i':
-							minute = a;break;
-						case 'h':
-							hour = a;break;
-						case 'd':
-							day = a;break;
-						case 'n':
-							month = a - 1;break;
-						case 'y':
-							year = a;break;
-						case 'm':
-							month = Lng.monthDict[a.slice(0, 3).toLowerCase()] || 0;break;
-					}
-				}
-				var dtime = new Date(year.length === 2 ? '20' + year : year, month, day, hour, minute, second || 0);
-				dtime.setHours(dtime.getHours() + _this16.diff);
-				return _this16.genDateTime(dtime);
-			});
-		}
-	};
-
-
-	function Videos(post) {
-		var player = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-		var playerInfo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-		this.post = post;
-		this.vData = [[], []];
-		if (player && playerInfo) {
-			Object.defineProperty(this, 'player', { value: player });
-			this.playerInfo = playerInfo;
-		}
-	}
-	Videos._global = {
-		get vData() {
-			var val;
-			try {
-				sesStorage.removeItem('de-videos-data1');
-				val = Cfg.YTubeTitles ? JSON.parse(sesStorage['de-videos-data2'] || '[{}, {}]') : [{}, {}];
-			} catch (e) {
-				val = [{}, {}];
-			}
-			Object.defineProperty(this, 'vData', { value: val });
-			return val;
-		}
-	};
-	Videos.ytReg = /^https?:\/\/(?:www\.|m\.)?youtu(?:be\.com\/(?:watch\?.*?v=|v\/|embed\/)|\.be\/)([a-zA-Z0-9-_]+).*?(?:t(?:ime)?=(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?)?$/;
-	Videos.vimReg = /^https?:\/\/(?:www\.)?vimeo\.com\/(?:[^\?]+\?clip_id=|.*?\/)?(\d+).*?(#t=\d+)?$/;
-	Videos.addPlayer = function (el, m, isYtube) {
-		var enableJsapi = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-		var txt;
-		if (isYtube) {
-			var list = m[0].match(/list=[^&#]+/);
-			txt = '<iframe class="de-video-player" src="https://www.youtube.com/embed/' + m[1] + '?start=' + ((m[2] ? m[2] * 3600 : 0) + (m[3] ? m[3] * 60 : 0) + (m[4] ? +m[4] : 0)) + (enableJsapi ? '&enablejsapi=1' : Cfg.addYouTube === 3 ? '&autoplay=1' : '') + (list ? '&' + list[0] : '') + (Cfg.YTubeType === 1 ? '&html5=1" type="text/html"' : '" type="application/x-shockwave-flash"') + ' frameborder="0" allowfullscreen="1"></iframe>';
-		} else {
-			var id = m[1] + (m[2] ? m[2] : '');
-			txt = Cfg.YTubeType === 1 ? '<iframe class="de-video-player" src="' + aib.prot + '//player.vimeo.com/video/' + id + (Cfg.addYouTube === 3 ? '?autoplay=1' : '') + '" frameborder="0" ' + 'webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>' : '<embed class="de-video-player" type="application/x-shockwave-flash" src="' + aib.prot + '//vimeo.com/moogaloop.swf' + '?clip_id=' + id + (Cfg.addYouTube === 3 ? '&autoplay=1' : '') + '&server=vimeo.com&color=00adef&fullscreen=1" ' + 'allowscriptaccess="always" allowfullscreen="true"></embed>';
-		}
-		el.innerHTML = txt + (enableJsapi ? '' : '<span class="de-video-resizer" title="' + Lng.expandVideo[lang] + '"></span>');
-		$show(el);
-		if (!enableJsapi) {
-			el.lastChild.onclick = function () {
-				var node = this.parentNode;
-				node.className = 'de-video-obj' + (node.className === 'de-video-obj' ? ' de-video-expanded' : '');
-			};
-		}
-	};
-	Videos.setLinkData = function (link, _ref9) {
-		var _ref10 = _slicedToArray(_ref9, 5),
-		    title = _ref10[0],
-		    author = _ref10[1],
-		    views = _ref10[2],
-		    publ = _ref10[3],
-		    duration = _ref10[4];
-
-		link.textContent = title;
-		link.classList.add('de-video-title');
-		link.setAttribute('de-author', author);
-		link.title = (duration ? Lng.duration[lang] + duration : '') + (publ ? ', ' + Lng.published[lang] + publ + '\n' : '') + Lng.author[lang] + author + (views ? ', ' + Lng.views[lang] + views : '');
-	};
-	Videos._fixTime = function () {
-		var seconds = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-		var minutes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-		var hours = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-		if (seconds >= 60) {
-			minutes += Math.floor(seconds / 60);
-			seconds %= 60;
-		}
-		if (minutes >= 60) {
-			hours += Math.floor(seconds / 60);
-			minutes %= 60;
-		}
-		var timeStr = (hours ? hours + 'h' : '') + (minutes ? minutes + 'm' : '') + (seconds ? seconds + 's' : '');
-		return [timeStr, hours, minutes, seconds];
-	};
-	Videos._titlesLoaderHelper = function (_ref11, num) {
-		var _ref12 = _slicedToArray(_ref11, 4),
-		    link = _ref12[0],
-		    isYtube = _ref12[1],
-		    videoObj = _ref12[2],
-		    id = _ref12[3];
-
-		for (var _len3 = arguments.length, data = Array(_len3 > 2 ? _len3 - 2 : 0), _key2 = 2; _key2 < _len3; _key2++) {
-			data[_key2 - 2] = arguments[_key2];
-		}
-
-		if (data.length !== 0) {
-			Videos.setLinkData(link, data);
-			Videos._global.vData[isYtube ? 0 : 1][id] = data;
-			videoObj.vData[isYtube ? 0 : 1].push(data);
-			if (videoObj.titleLoadFn) {
-				videoObj.titleLoadFn(data);
-			}
-		}
-		videoObj.loadedLinksCount++;
-		if (num % 30 === 0) {
-			return Promise.reject(new TasksPool.PauseError(3e3));
-		}
-		return sleep(250);
-	};
-	Videos._getYTInfoAPI = function (info, num, id) {
-		return $ajax('https://www.googleapis.com/youtube/v3/videos?key=' + Cfg.ytApiKey + '&id=' + id + '&part=snippet,statistics,contentDetails&fields=items/snippet/title,items/snippet/publishedAt,items/snippet/channelTitle,items/statistics/viewCount,items/contentDetails/duration', null, false).then(function (xhr) {
-			var items = JSON.parse(xhr.responseText).items[0];
-			return Videos._titlesLoaderHelper(info, num, items.snippet.title, items.snippet.channelTitle, items.statistics.viewCount, items.snippet.publishedAt.substr(0, 10), items.contentDetails.duration.substr(2).toLowerCase());
-		})['catch'](function () {
-			return Videos._getYTInfoOembed(info, num, id);
-		});
-	};
-	Videos._getYTInfoOembed = function (info, num, id) {
-		return (nav.isGM ? $ajax('https://www.youtube.com/oembed?url=http%3A//youtube.com/watch%3Fv%3D' + id + '&format=json', null, false) : $ajax('https://noembed.com/embed?url=http%3A//youtube.com/watch%3Fv%3D' + id + '&callback=?')).then(function (xhr) {
-			var json = JSON.parse(xhr.responseText);
-			return Videos._titlesLoaderHelper(info, num, json.title, json.author_name, null, null, null);
-		})['catch'](function () {
-			return Videos._titlesLoaderHelper(info, num);
-		});
-	};
-	Videos._getTitlesLoader = function () {
-		return Cfg.YTubeTitles && new TasksPool(4, function (num, info) {
-			var _info5 = _slicedToArray(info, 4),
-			    isYtube = _info5[1],
-			    id = _info5[3];
-
-			if (isYtube) {
-				return Cfg.ytApiKey ? Videos._getYTInfoAPI(info, num, id) : Videos._getYTInfoOembed(info, num, id);
-			}
-			return $ajax(aib.prot + '//vimeo.com/api/v2/video/' + id + '.json', null, false).then(function (xhr) {
-				var entry = JSON.parse(xhr.responseText)[0];
-				return Videos._titlesLoaderHelper(info, num, entry.title, entry.user_name, entry.stats_number_of_plays, /(.*)\s(.*)?/.exec(entry.upload_date)[1], Videos._fixTime(entry.duration)[0]);
-			})['catch'](function () {
-				return Videos._titlesLoaderHelper(info, num);
-			});
-		}, function () {
-			sesStorage['de-videos-data2'] = JSON.stringify(Videos._global.vData);
-		});
-	};
-	Videos.prototype = {
-		currentLink: null,
-		hasLinks: false,
-		playerInfo: null,
-		titleLoadFn: null,
-		linksCount: 0,
-		loadedLinksCount: 0,
-		get player() {
-			var post = this.post;
-			var val = aib.insertYtPlayer(post.msg, '<div class="de-video-obj' + (post.images.hasAttachments && !post.isOp ? ' de-video-obj-inline' : '') + '"></div>');
-			Object.defineProperty(this, 'player', { value: val });
-			return val;
-		},
-		addLink: function addLink(m, loader, link, isYtube) {
-			var time, dataObj;
-			this.hasLinks = true;
-			this.linksCount++;
-			if (this.playerInfo === null) {
-				if (Cfg.addYouTube === 2) {
-					this.addPlayer(m, isYtube);
-				} else if (Cfg.addYouTube > 2) {
-					this._addThumb(m, isYtube);
-				}
-			} else if (!link && $q('.de-video-link[href*="' + m[1] + '"]', this.post.msg)) {
 				return;
 			}
-			if (loader && (dataObj = Videos._global.vData[isYtube ? 0 : 1][m[1]])) {
-				this.vData[isYtube ? 0 : 1].push(dataObj);
-			}
-
-			var _Videos$_fixTime = Videos._fixTime(m[4], m[3], m[2]);
-
-			var _Videos$_fixTime2 = _slicedToArray(_Videos$_fixTime, 4);
-
-			time = _Videos$_fixTime2[0];
-			m[2] = _Videos$_fixTime2[1];
-			m[3] = _Videos$_fixTime2[2];
-			m[4] = _Videos$_fixTime2[3];
-
-			if (link) {
-				link.href = link.href.replace(/^http:/, 'https:');
-				if (time) {
-					link.setAttribute('de-time', time);
-				}
-				link.className = 'de-video-link ' + (isYtube ? 'de-ytube' : 'de-vimeo');
+			this.regex = pattern.replace(/(?:[sihdny]\?){2,}/g, function (str) {
+				return '(?:' + str.replace(/\?/g, '') + ')?';
+			}).replace(/-/g, '[^<]').replace(/\+/g, '[^0-9<]').replace(/([sihdny]+)/g, '($1)').replace(/[sihdny]/g, '\\d').replace(/m|w/g, '([a-zA-Zа-яА-Я]+)');
+			this.pattern = pattern.replace(/[?\-+]+/g, '').replace(/([a-z])\1+/g, '$1');
+			this.diff = parseInt(diff, 10);
+			this.arrW = Lng.week[dtLang];
+			this.arrM = Lng.month[dtLang];
+			this.arrFM = Lng.fullMonth[dtLang];
+			if (rPattern) {
+				this.genDateTime = this.genRFunc(rPattern);
 			} else {
-				var src = isYtube ? aib.prot + '//www.youtube.com/watch?v=' + m[1] + (time ? '#t=' + time : '') : aib.prot + '//vimeo.com/' + m[1];
-				link = $bEnd(this.post.msg, '\n\t\t\t<p class="de-video-ext"><a class="de-video-link ' + ((isYtube ? 'de-ytube' : 'de-vimeo') + (time ? '" de-time="' + time : '')) + '" href="' + src + '">' + (dataObj ? '' : src) + '</a></p>').firstChild;
+				this.onRPat = onRPat;
 			}
-			if (dataObj) {
-				Videos.setLinkData(link, dataObj);
+		}
+
+		_createClass(DateTime, [{
+			key: 'genRFunc',
+			value: function genRFunc(rPattern) {
+				return new Function('dtime', 'return \'' + rPattern.replace('_o', (this.diff < 0 ? '' : '+') + this.diff).replace('_s', "' + this.pad2(dtime.getSeconds()) + '").replace('_i', "' + this.pad2(dtime.getMinutes()) + '").replace('_h', "' + this.pad2(dtime.getHours()) + '").replace('_d', "' + this.pad2(dtime.getDate()) + '").replace('_w', "' + this.arrW[dtime.getDay()] + '").replace('_n', "' + this.pad2(dtime.getMonth() + 1) + '").replace('_m', "' + this.arrM[dtime.getMonth()] + '").replace('_M', "' + this.arrFM[dtime.getMonth()] + '").replace('_y', "' + ('' + dtime.getFullYear()).substring(2) + '").replace('_Y', "' + dtime.getFullYear() + '") + '\';');
 			}
-			if (this.playerInfo === null || this.playerInfo === m) {
-				this.currentLink = link;
-			}
-			link.videoInfo = m;
-			if (loader && !dataObj) {
-				loader.run([link, isYtube, this, m[1]]);
-			}
-		},
-		addPlayer: function addPlayer(m, isYtube) {
-			this.playerInfo = m;
-			Videos.addPlayer(this.player, m, isYtube);
-		},
-		clickLink: function clickLink(el, mode) {
-			var m = el.videoInfo;
-			if (this.playerInfo !== m) {
-				this.currentLink.classList.remove('de-current');
-				this.currentLink = el;
-				if (mode > 2) {
-					this._addThumb(m, el.classList.contains('de-ytube'));
-				} else {
-					el.classList.add('de-current');
-					this.addPlayer(m, el.classList.contains('de-ytube'));
+		}, {
+			key: 'getRPattern',
+			value: function getRPattern(txt) {
+				var m = txt.match(new RegExp(this.regex));
+				if (!m) {
+					this.disabled = true;
+					return false;
 				}
-				return;
+				var rPattern = '';
+				for (var i = 1, len = m.length, j = 0, str = m[0]; i < len;) {
+					var a = m[i++];
+					if (!a) {
+						continue;
+					}
+					var p = this.pattern[i - 2];
+					if ((p === 'm' || p === 'y') && a.length > 3) {
+						p = p.toUpperCase();
+					}
+					var k = str.indexOf(a, j);
+					rPattern += str.substring(j, k) + '_' + p;
+					j = k + a.length;
+				}
+				if (this.onRPat) {
+					this.onRPat(rPattern);
+				}
+				this.genDateTime = this.genRFunc(rPattern);
+				return true;
 			}
-			if (mode === 3) {
-				if ($q('.de-video-thumb', this.player)) {
-					el.classList.add('de-current');
-					this.addPlayer(m, el.classList.contains('de-ytube'));
+		}, {
+			key: 'fix',
+			value: function fix(txt) {
+				var _this15 = this;
+
+				if (this.disabled || !this.genDateTime && !this.getRPattern(txt)) {
+					return txt;
+				}
+				return txt.replace(new RegExp(this.regex, 'g'), function (str) {
+					for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key = 1; _key < _len2; _key++) {
+						args[_key - 1] = arguments[_key];
+					}
+
+					var second = void 0,
+					    minute = void 0,
+					    hour = void 0,
+					    day = void 0,
+					    month = void 0,
+					    year = void 0;
+					for (var i = 0; i < 7; ++i) {
+						var a = args[i];
+						switch (_this15.pattern[i]) {
+							case 's':
+								second = a;break;
+							case 'i':
+								minute = a;break;
+							case 'h':
+								hour = a;break;
+							case 'd':
+								day = a;break;
+							case 'n':
+								month = a - 1;break;
+							case 'y':
+								year = a;break;
+							case 'm':
+								month = Lng.monthDict[a.slice(0, 3).toLowerCase()] || 0;break;
+						}
+					}
+					var dtime = new Date(year.length === 2 ? '20' + year : year, month, day, hour, minute, second || 0);
+					dtime.setHours(dtime.getHours() + _this15.diff);
+					return _this15.genDateTime(dtime);
+				});
+			}
+		}], [{
+			key: 'checkPattern',
+			value: function checkPattern(val) {
+				return !val.includes('i') || !val.includes('h') || !val.includes('d') || !val.includes('y') || !(val.includes('n') || val.includes('m')) || /[^?\-+sihdmwny]|mm|ww|\?\?|([ihdny]\?)\1+/.test(val);
+			}
+		}, {
+			key: 'toggleSettings',
+			value: function toggleSettings(el) {
+				if (el.checked && (!/^[+-]\d{1,2}$/.test(Cfg.timeOffset) || DateTime.checkPattern(Cfg.timePattern))) {
+					$popup('err-correcttime', Lng.cTimeError[lang]);
+					saveCfg('correctTime', 0);
+					el.checked = false;
+				}
+			}
+		}]);
+
+		return DateTime;
+	}();
+
+
+	var Videos = function () {
+		function Videos(post) {
+			var player = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+			var playerInfo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+			_classCallCheck(this, Videos);
+
+			this.currentLink = null;
+			this.hasLinks = false;
+			this.linksCount = 0;
+			this.loadedLinksCount = 0;
+			this.playerInfo = null;
+			this.post = post;
+			this.titleLoadFn = null;
+			this.vData = [[], []];
+			if (player && playerInfo) {
+				Object.defineProperty(this, 'player', { value: player });
+				this.playerInfo = playerInfo;
+			}
+		}
+
+		_createClass(Videos, [{
+			key: 'addLink',
+			value: function addLink(m, loader, link, isYtube) {
+				this.hasLinks = true;
+				this.linksCount++;
+				if (this.playerInfo === null) {
+					if (Cfg.addYouTube === 2) {
+						this.setPlayer(m, isYtube);
+					} else if (Cfg.addYouTube > 2) {
+						this._addThumb(m, isYtube);
+					}
+				} else if (!link && $q('.de-video-link[href*="' + m[1] + '"]', this.post.msg)) {
+					return;
+				}
+				var dataObj = void 0;
+				if (loader && (dataObj = Videos._global.vData[isYtube ? 0 : 1][m[1]])) {
+					this.vData[isYtube ? 0 : 1].push(dataObj);
+				}
+				var time = '';
+
+				var _Videos$_fixTime = Videos._fixTime(m[4], m[3], m[2]);
+
+				var _Videos$_fixTime2 = _slicedToArray(_Videos$_fixTime, 4);
+
+				time = _Videos$_fixTime2[0];
+				m[2] = _Videos$_fixTime2[1];
+				m[3] = _Videos$_fixTime2[2];
+				m[4] = _Videos$_fixTime2[3];
+
+				if (link) {
+					link.href = link.href.replace(/^http:/, 'https:');
+					if (time) {
+						link.setAttribute('de-time', time);
+					}
+					link.className = 'de-video-link ' + (isYtube ? 'de-ytube' : 'de-vimeo');
+				} else {
+					var src = isYtube ? aib.prot + '//www.youtube.com/watch?v=' + m[1] + (time ? '#t=' + time : '') : aib.prot + '//vimeo.com/' + m[1];
+					link = $bEnd(this.post.msg, '<p class="de-video-ext"><a class="de-video-link ' + (isYtube ? 'de-ytube' : 'de-vimeo') + (time ? '" de-time="' + time : '') + '" href="' + src + '">' + (dataObj ? '' : src) + '</a></p>').firstChild;
+				}
+				if (dataObj) {
+					Videos.setLinkData(link, dataObj);
+				}
+				if (this.playerInfo === null || this.playerInfo === m) {
+					this.currentLink = link;
+				}
+				link.videoInfo = m;
+				if (Panel.isVidEnabled) {
+					updateVideoList($id('de-video-list'), link, this.post.num);
+				}
+				if (loader && !dataObj) {
+					loader.run([link, isYtube, this, m[1]]);
+				}
+			}
+		}, {
+			key: 'clickLink',
+			value: function clickLink(el, mode) {
+				var m = el.videoInfo;
+				if (this.playerInfo !== m) {
+					this.currentLink.classList.remove('de-current');
+					this.currentLink = el;
+					if (mode > 2) {
+						this._addThumb(m, el.classList.contains('de-ytube'));
+					} else {
+						el.classList.add('de-current');
+						this.setPlayer(m, el.classList.contains('de-ytube'));
+					}
+					return;
+				}
+				if (mode === 3) {
+					if ($q('.de-video-thumb', this.player)) {
+						el.classList.add('de-current');
+						this.setPlayer(m, el.classList.contains('de-ytube'));
+					} else {
+						el.classList.remove('de-current');
+						this._addThumb(m, el.classList.contains('de-ytube'));
+					}
 				} else {
 					el.classList.remove('de-current');
-					this._addThumb(m, el.classList.contains('de-ytube'));
+					$hide(this.player);
+					this.player.innerHTML = '';
+					this.playerInfo = null;
 				}
-			} else {
-				el.classList.remove('de-current');
-				$hide(this.player);
-				this.player.innerHTML = '';
-				this.playerInfo = null;
 			}
-		},
-		updatePost: function updatePost(oldLinks, newLinks, cloned) {
-			var loader = !cloned && Videos._getTitlesLoader();
-			for (var i = 0, j = 0, len = newLinks.length; i < len; ++i) {
-				var el = newLinks[i],
-				    link = oldLinks[j];
-				if (link && link.classList.contains('de-current')) {
-					this.currentLink = el;
-				}
-				if (cloned) {
-					el.videoInfo = link.videoInfo;
-					j++;
-				} else {
-					var m = el.href.match(Videos.ytReg);
-					if (m) {
-						this.addLink(m, loader, el, true);
+		}, {
+			key: 'setPlayer',
+			value: function setPlayer(m, isYtube) {
+				Videos.addPlayer(this, m, isYtube);
+			}
+		}, {
+			key: 'updatePost',
+			value: function updatePost(oldLinks, newLinks, cloned) {
+				var loader = !cloned && Videos._getTitlesLoader();
+				var j = 0;
+				for (var i = 0, len = newLinks.length; i < len; ++i) {
+					var el = newLinks[i];
+					var link = oldLinks[j];
+					if (link && link.classList.contains('de-current')) {
+						this.currentLink = el;
+					}
+					if (cloned) {
+						el.videoInfo = link.videoInfo;
 						j++;
-					}
-				}
-			}
-			this.currentLink = this.currentLink || newLinks[0];
-			if (loader) {
-				loader.complete();
-			}
-		},
-		_addThumb: function _addThumb(m, isYtube) {
-			var el = this.player;
-			this.playerInfo = m;
-			$show(el);
-			if (isYtube) {
-				el.innerHTML = '<a class="de-video-player" href="' + aib.prot + '//www.youtube.com/watch?v=' + m[1] + '" target="_blank">' + '<img class="de-video-thumb de-ytube" src="https://i.ytimg.com/vi/' + m[1] + '/0.jpg"></a>';
-				return;
-			}
-			el.innerHTML = '<a class="de-video-player" href="' + aib.prot + '//vimeo.com/' + m[1] + '" target="_blank"><img class="de-video-thumb de-vimeo" src=""></a>';
-			$ajax(aib.prot + '//vimeo.com/api/v2/video/' + m[1] + '.json', null, false).then(function (xhr) {
-				try {
-					el.firstChild.firstChild.setAttribute('src', JSON.parse(xhr.responseText)[0].thumbnail_large);
-				} catch (e) {}
-			});
-		}
-	};
-
-	function VideosParser() {
-		this._loader = Videos._getTitlesLoader();
-	}
-	VideosParser.prototype = {
-		end: function end() {
-			if (this._loader) {
-				this._loader.complete();
-			}
-		},
-		parse: function parse(data) {
-			var isPost = data instanceof AbstractPost;
-			var loader = this._loader;
-			var links = $Q('a[href*="youtu"]', isPost ? data.el : data);
-			for (var i = 0, len = links.length; i < len; ++i) {
-				var link = links[i];
-				var m = link.href.match(Videos.ytReg);
-				if (m) {
-					var _mPost = isPost ? data : aib.getPostOfEl(link);
-					if (_mPost) {
-						_mPost.videos.addLink(m, loader, link, true);
-					}
-				}
-			}
-			if (Cfg.addVimeo) {
-				links = $Q('a[href*="vimeo.com"]', isPost ? data.el : data);
-				for (var _i7 = 0, _len4 = links.length; _i7 < _len4; ++_i7) {
-					var _link = links[_i7];
-					var _m = _link.href.match(Videos.vimReg);
-					if (_m) {
-						var mPost = isPost ? data : aib.getPostOfEl(_link);
-						if (mPost) {
-							mPost.videos.addLink(_m, loader, _link, false);
+					} else {
+						var m = el.href.match(Videos.ytReg);
+						if (m) {
+							this.addLink(m, loader, el, true);
+							j++;
 						}
 					}
 				}
-			}
-			var vids = aib.fixVideo(isPost, data);
-			for (var _i8 = 0, _len5 = vids.length; _i8 < _len5; ++_i8) {
-				var _vids$_i = _slicedToArray(vids[_i8], 3),
-				    pst = _vids$_i[0],
-				    _m2 = _vids$_i[1],
-				    isYtube = _vids$_i[2];
-
-				if (pst) {
-					pst.videos.addLink(_m2, loader, null, isYtube);
+				this.currentLink = this.currentLink || newLinks[0];
+				if (loader) {
+					loader.complete();
 				}
 			}
-			return this;
+		}, {
+			key: '_addThumb',
+			value: function _addThumb(m, isYtube) {
+				var el = this.player;
+				this.playerInfo = m;
+				el.classList.remove('de-video-expanded');
+				$show(el);
+				var str = '<a class="de-video-player" href="' + aib.prot;
+				if (isYtube) {
+					el.innerHTML = str + '//www.youtube.com/watch?v=' + m[1] + '" target="_blank">' + ('<img class="de-video-thumb de-ytube" src="https://i.ytimg.com/vi/' + m[1] + '/0.jpg"></a>');
+					return;
+				}
+				el.innerHTML = str + '//vimeo.com/' + m[1] + '" target="_blank">' + '<img class="de-video-thumb de-vimeo" src=""></a>';
+				$ajax(aib.prot + '//vimeo.com/api/v2/video/' + m[1] + '.json', null, false).then(function (xhr) {
+					try {
+						el.firstChild.firstChild.setAttribute('src', JSON.parse(xhr.responseText)[0].thumbnail_large);
+					} catch (e) {}
+				});
+			}
+		}, {
+			key: 'player',
+			get: function get() {
+				var post = this.post;
+
+				var value = aib.insertYtPlayer(post.msg, '<div class="de-video-obj' + (post.images.hasAttachments && !post.isOp ? ' de-video-obj-inline' : '') + '"></div>');
+				Object.defineProperty(this, 'player', { value: value });
+				return value;
+			}
+		}], [{
+			key: 'addPlayer',
+			value: function addPlayer(obj, m, isYtube) {
+				var enableJsapi = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+				var el = obj.player;
+				obj.playerInfo = m;
+				var txt = void 0;
+				if (isYtube) {
+					var list = m[0].match(/list=[^&#]+/);
+					txt = '<iframe class="de-video-player" src="https://www.youtube.com/embed/' + m[1] + '?start=' + (m[2] ? m[2] * 3600 : 0) + (m[3] ? m[3] * 60 : 0) + (m[4] ? +m[4] : 0) + (enableJsapi ? '&enablejsapi=1' : Cfg.addYouTube === 3 ? '&autoplay=1' : '') + (list ? '&' + list[0] : '') + '" frameborder="0" allowfullscreen></iframe>';
+				} else {
+					var id = m[1] + (m[2] ? m[2] : '');
+					txt = '<iframe class="de-video-player" src="' + aib.prot + '//player.vimeo.com/video/' + id + (Cfg.addYouTube === 3 ? '?autoplay=1' : '') + '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+				}
+				el.innerHTML = txt + (enableJsapi ? '' : '<span class="de-video-resizer" title="' + Lng.expandVideo[lang] + '"></span>');
+				$show(el);
+				if (!enableJsapi) {
+					el.lastChild.onclick = function (_ref23) {
+						var target = _ref23.target;
+						return target.parentNode.classList.toggle('de-video-expanded');
+					};
+				}
+			}
+		}, {
+			key: 'setLinkData',
+			value: function setLinkData(link, data) {
+				var isCloned = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+				var _data5 = _slicedToArray(data, 5),
+				    title = _data5[0],
+				    author = _data5[1],
+				    views = _data5[2],
+				    publ = _data5[3],
+				    duration = _data5[4];
+
+				if (Panel.isVidEnabled && !isCloned) {
+					var clonedLink = $q('.de-entry > .de-video-link[href="' + link.href + '"]:not(title)');
+					if (clonedLink) {
+						Videos.setLinkData(clonedLink, data, true);
+					}
+				}
+				link.textContent = title;
+				link.classList.add('de-video-title');
+				link.setAttribute('de-author', author);
+				link.title = (duration ? Lng.duration[lang] + duration : '') + (publ ? ', ' + (Lng.published[lang] + publ) + '\n' : '') + Lng.author[lang] + author + (views ? ', ' + Lng.views[lang] + views : '');
+			}
+		}, {
+			key: '_fixTime',
+			value: function _fixTime() {
+				var seconds = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+				var minutes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+				var hours = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+				if (seconds >= 60) {
+					minutes += Math.floor(seconds / 60);
+					seconds %= 60;
+				}
+				if (minutes >= 60) {
+					hours += Math.floor(seconds / 60);
+					minutes %= 60;
+				}
+				return [(hours ? hours + 'h' : '') + (minutes ? minutes + 'm' : '') + (seconds ? seconds + 's' : ''), hours, minutes, seconds];
+			}
+		}, {
+			key: '_getTitlesLoader',
+			value: function _getTitlesLoader() {
+				return Cfg.YTubeTitles && new TasksPool(4, function (num, info) {
+					var _info5 = _slicedToArray(info, 4),
+					    isYtube = _info5[1],
+					    id = _info5[3];
+
+					if (isYtube) {
+						if (Cfg.ytApiKey) {
+							return Videos._getYTInfoAPI(info, num, id);
+						} else {
+							return Videos._getYTInfoOembed(info, num, id);
+						}
+					}
+					return $ajax(aib.prot + '//vimeo.com/api/v2/video/' + id + '.json', null, false).then(function (xhr) {
+						var entry = JSON.parse(xhr.responseText)[0];
+						return Videos._titlesLoaderHelper(info, num, entry.title, entry.user_name, entry.stats_number_of_plays, /(.*)\s(.*)?/.exec(entry.upload_date)[1], Videos._fixTime(entry.duration)[0]);
+					}).catch(function () {
+						return Videos._titlesLoaderHelper(info, num);
+					});
+				}, function () {
+					return sesStorage['de-videos-data2'] = JSON.stringify(Videos._global.vData);
+				});
+			}
+		}, {
+			key: '_getYTInfoAPI',
+			value: function _getYTInfoAPI(info, num, id) {
+				return $ajax('https://www.googleapis.com/youtube/v3/videos?key=' + Cfg.ytApiKey + '&id=' + id + '&part=snippet,statistics,contentDetails&fields=items/snippet/title,items/snippet/publishedAt,' + 'items/snippet/channelTitle,items/statistics/viewCount,items/contentDetails/duration', null, false).then(function (xhr) {
+					var items = JSON.parse(xhr.responseText).items[0];
+					return Videos._titlesLoaderHelper(info, num, items.snippet.title, items.snippet.channelTitle, items.statistics.viewCount, items.snippet.publishedAt.substr(0, 10), items.contentDetails.duration.substr(2).toLowerCase());
+				}).catch(function () {
+					return Videos._getYTInfoOembed(info, num, id);
+				});
+			}
+		}, {
+			key: '_getYTInfoOembed',
+			value: function _getYTInfoOembed(info, num, id) {
+				return (nav.hasGMXHR ? $ajax('https://www.youtube.com/oembed?url=http%3A//youtube.com/watch%3Fv%3D' + id + '&format=json', null, false) : $ajax('https://noembed.com/embed?url=http%3A//youtube.com/watch%3Fv%3D' + id + '&callback=?')).then(function (xhr) {
+					var res = xhr.responseText;
+					var json = JSON.parse(nav.hasGMXHR ? res : res.replace(/^[^{]+|\)$/g, ''));
+					return Videos._titlesLoaderHelper(info, num, json.title, json.author_name, null, null, null);
+				}).catch(function () {
+					return Videos._titlesLoaderHelper(info, num);
+				});
+			}
+		}, {
+			key: '_titlesLoaderHelper',
+			value: function _titlesLoaderHelper(_ref24, num) {
+				var _ref25 = _slicedToArray(_ref24, 4),
+				    link = _ref25[0],
+				    isYtube = _ref25[1],
+				    videoObj = _ref25[2],
+				    id = _ref25[3];
+
+				for (var _len3 = arguments.length, data = Array(_len3 > 2 ? _len3 - 2 : 0), _key2 = 2; _key2 < _len3; _key2++) {
+					data[_key2 - 2] = arguments[_key2];
+				}
+
+				if (data.length !== 0) {
+					Videos.setLinkData(link, data);
+					Videos._global.vData[isYtube ? 0 : 1][id] = data;
+					videoObj.vData[isYtube ? 0 : 1].push(data);
+					if (videoObj.titleLoadFn) {
+						videoObj.titleLoadFn(data);
+					}
+				}
+				videoObj.loadedLinksCount++;
+				if (num % 30 === 0) {
+					return Promise.reject(new TasksPool.PauseError(3e3));
+				}
+				return new Promise(function (resolve) {
+					return setTimeout(resolve, 250);
+				});
+			}
+		}]);
+
+		return Videos;
+	}();
+
+	Videos.ytReg = /^https?:\/\/(?:www\.|m\.)?youtu(?:be\.com\/(?:watch\?.*?v=|v\/|embed\/)|\.be\/)([a-zA-Z0-9-_]+).*?(?:t(?:ime)?=(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?)?$/;
+	Videos.vimReg = /^https?:\/\/(?:www\.)?vimeo\.com\/(?:[^?]+\?clip_id=|.*?\/)?(\d+).*?(#t=\d+)?$/;
+	Videos._global = {
+		get vData() {
+			var value = void 0;
+			try {
+				sesStorage.removeItem('de-videos-data1');
+				value = Cfg.YTubeTitles ? JSON.parse(sesStorage['de-videos-data2'] || '[{}, {}]') : [{}, {}];
+			} catch (e) {
+				value = [{}, {}];
+			}
+			Object.defineProperty(this, 'vData', { value: value });
+			return value;
 		}
 	};
+
+	var VideosParser = function () {
+		function VideosParser() {
+			_classCallCheck(this, VideosParser);
+
+			this._loader = Videos._getTitlesLoader();
+		}
+
+		_createClass(VideosParser, [{
+			key: 'end',
+			value: function end() {
+				if (this._loader) {
+					this._loader.complete();
+				}
+			}
+		}, {
+			key: 'parse',
+			value: function parse(data) {
+				var isPost = data instanceof AbstractPost;
+				var loader = this._loader;
+				var links = $Q('a[href*="youtu"]', isPost ? data.el : data);
+				for (var i = 0, len = links.length; i < len; ++i) {
+					var link = links[i];
+					var m = link.href.match(Videos.ytReg);
+					if (m) {
+						var mPost = isPost ? data : aib.getPostOfEl(link);
+						if (mPost) {
+							mPost.videos.addLink(m, loader, link, true);
+						}
+					}
+				}
+				if (Cfg.addVimeo) {
+					links = $Q('a[href*="vimeo.com"]', isPost ? data.el : data);
+					for (var _i7 = 0, _len4 = links.length; _i7 < _len4; ++_i7) {
+						var _link = links[_i7];
+						var _m = _link.href.match(Videos.vimReg);
+						if (_m) {
+							var _mPost = isPost ? data : aib.getPostOfEl(_link);
+							if (_mPost) {
+								_mPost.videos.addLink(_m, loader, _link, false);
+							}
+						}
+					}
+				}
+				var vids = aib.fixVideo(isPost, data);
+				for (var _i8 = 0, _len5 = vids.length; _i8 < _len5; ++_i8) {
+					var _vids$_i = _slicedToArray(vids[_i8], 3),
+					    post = _vids$_i[0],
+					    _m2 = _vids$_i[1],
+					    isYtube = _vids$_i[2];
+
+					if (post) {
+						post.videos.addLink(_m2, loader, null, isYtube);
+					}
+				}
+				return this;
+			}
+		}]);
+
+		return VideosParser;
+	}();
+
+
 
 	function embedMediaLinks(data) {
 		var isPost = data instanceof AbstractPost;
@@ -8695,7 +9557,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						el.insertAdjacentHTML('beforeend', '<p><audio src="' + src + '" preload="none" controls></audio></p>');
 					}
 				} else if (!$q('object[FlashVars*="' + src + '"]', el)) {
-					el.insertAdjacentHTML('beforeend', '<object data="http://junglebook2007.narod.ru/audio/player.swf" type="application/x-shockwave-flash" wmode="transparent" width="220" height="16" FlashVars="playerID=1&amp;bg=0x808080&amp;leftbg=0xB3B3B3&amp;lefticon=0x000000&amp;rightbg=0x808080&amp;rightbghover=0x999999&amp;rightcon=0x000000&amp;righticonhover=0xffffff&amp;text=0xffffff&amp;slider=0x222222&amp;track=0xf5f5dc&amp;border=0x666666&amp;loader=0x7fc7ff&amp;loop=yes&amp;autostart=no&amp;soundFile=' + src + '"><br>');
+					el.insertAdjacentHTML('beforeend', '<object data="' + 'http://junglebook2007.narod.ru/audio/player.swf" type="application/x-shockwave-flash" ' + 'wmode="transparent" width="220" height="16" FlashVars="playerID=1&amp;' + 'bg=0x808080&amp;leftbg=0xB3B3B3&amp;lefticon=0x000000&amp;rightbg=0x808080&amp;' + 'rightbghover=0x999999&amp;rightcon=0x000000&amp;righticonhover=0xffffff&amp;' + 'text=0xffffff&amp;slider=0x222222&amp;track=0xf5f5dc&amp;border=0x666666&amp;' + ('loader=0x7fc7ff&amp;loop=yes&amp;autostart=no&amp;soundFile=' + src + '"><br>'));
 				}
 			}
 		}
@@ -8703,9 +9565,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var _els = $Q('a[href*="vocaroo.com"]', isPost ? data.el : data);
 			for (var _i9 = 0, _len6 = _els.length; _i9 < _len6; ++_i9) {
 				var _link2 = _els[_i9];
-				var _el2 = _link2.previousSibling;
-				if (!_el2 || _el2.className !== 'de-vocaroo') {
-					_link2.insertAdjacentHTML('beforebegin', '<div class="de-vocaroo">\n\t\t\t\t\t<embed src="http://vocaroo.com/player.swf?playMediaID=' + _link2.href.split('\/').pop() + '" width="148" height="44" wmode="transparent" type="application/x-shockwave-flash">\n\t\t\t\t</div>');
+				var _el7 = _link2.previousSibling;
+				if (!_el7 || _el7.className !== 'de-vocaroo') {
+					_link2.insertAdjacentHTML('beforebegin', '<div class="de-vocaroo">\n\t\t\t\t\t<embed src="http://vocaroo.com/player.swf?playMediaID=' + _link2.href.split('/').pop() + '" width="148" height="44" wmode="transparent" type="application/x-shockwave-flash">\n\t\t\t\t</div>');
 				}
 			}
 		}
@@ -8721,115 +9583,108 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		    cancelFn = void 0;
 		var needTO = params ? params.useTimeout : false;
 		if (!useNative && nav.hasGMXHR) {
-			(function () {
-				var gmxhr = void 0;
-				var toFunc = function toFunc() {
-					reject(AjaxError.Timeout);
-					try {
-						gmxhr.abort();
-					} catch (e) {}
-				};
-				var loadTO = needTO && setTimeout(toFunc, 5e3);
-				var obj = {
-					'method': params && params.method || 'GET',
-					'url': nav.fixLink(url),
-					'onreadystatechange': function onreadystatechange(e) {
-						if (needTO) {
-							clearTimeout(loadTO);
-						}
-						if (e.readyState === 4) {
-							if (e.status === 200 || aib.tiny && e.status === 400) {
-								resolve(e);
-							} else {
-								reject(new AjaxError(e.status, e.statusText));
-							}
-						} else if (needTO) {
-							loadTO = setTimeout(toFunc, 5e3);
-						}
-					}
-				};
-				if (params) {
-					if (params.onprogress) {
-						obj.upload = { onprogress: params.onprogress };
-						delete params.onprogress;
-					}
-					delete params.method;
-					Object.assign(obj, params);
-				}
-				if (nav.isNewGM) {
-					GM.xmlHttpRequest(obj);
-					cancelFn = emptyFn;
-				} else {
-					gmxhr = GM_xmlhttpRequest(obj);
-					cancelFn = function cancelFn() {
-						if (needTO) {
-							clearTimeout(loadTO);
-						}
-						try {
-							gmxhr.abort();
-						} catch (e) {}
-					};
-				}
-			})();
-		} else {
-			var _ret6 = function () {
-				var xhr = new XMLHttpRequest();
-				var toFunc = function toFunc() {
-					reject(AjaxError.Timeout);
-					xhr.abort();
-				};
-				var loadTO = needTO && setTimeout(toFunc, 5e3);
-				if (params && params.onprogress) {
-					xhr.upload.onprogress = params.onprogress;
-				}
-				xhr.onreadystatechange = function (_ref13) {
-					var target = _ref13.target;
-
+			var gmxhr = void 0;
+			var toFunc = function toFunc() {
+				reject(AjaxError.Timeout);
+				try {
+					gmxhr.abort();
+				} catch (e) {}
+			};
+			var loadTO = needTO && setTimeout(toFunc, 5e3);
+			var obj = {
+				method: params && params.method || 'GET',
+				url: nav.fixLink(url),
+				onreadystatechange: function onreadystatechange(e) {
 					if (needTO) {
 						clearTimeout(loadTO);
 					}
-					if (target.readyState === 4) {
-						if (target.status === 200 || aib.tiny && target.status === 400 || target.status === 0 && target.responseType === 'arraybuffer') {
-							resolve(target);
+					if (e.readyState === 4) {
+						if (e.status === 200 || aib.tiny && e.status === 400) {
+							resolve(e);
 						} else {
-							reject(new AjaxError(target.status, target.statusText));
+							reject(new AjaxError(e.status, e.statusText));
 						}
 					} else if (needTO) {
 						loadTO = setTimeout(toFunc, 5e3);
 					}
+				}
+			};
+			if (params) {
+				if (params.onprogress) {
+					obj.upload = { onprogress: params.onprogress };
+					delete params.onprogress;
+				}
+				delete params.method;
+				Object.assign(obj, params);
+			}
+			if (nav.isNewGM) {
+				GM.xmlHttpRequest(obj);
+				cancelFn = emptyFn;
+			} else {
+				gmxhr = GM_xmlhttpRequest(obj);
+				cancelFn = function cancelFn() {
+					if (needTO) {
+						clearTimeout(loadTO);
+					}
+					try {
+						gmxhr.abort();
+					} catch (e) {}
 				};
-				try {
-					xhr.open(params && params.method || 'GET', url, true);
-					if (params) {
-						if (params.responseType) {
-							xhr.responseType = params.responseType;
-						}
-						var headers = params.headers;
-						if (headers) {
-							for (var h in headers) {
-								if (headers.hasOwnProperty(h)) {
-									xhr.setRequestHeader(h, headers[h]);
-								}
+			}
+		} else {
+			var xhr = new XMLHttpRequest();
+			var _toFunc = function _toFunc() {
+				reject(AjaxError.Timeout);
+				xhr.abort();
+			};
+			var _loadTO = needTO && setTimeout(_toFunc, 5e3);
+			if (params && params.onprogress) {
+				xhr.upload.onprogress = params.onprogress;
+			}
+			xhr.onreadystatechange = function (_ref26) {
+				var target = _ref26.target;
+
+				if (needTO) {
+					clearTimeout(_loadTO);
+				}
+				if (target.readyState === 4) {
+					if (target.status === 200 || aib.tiny && target.status === 400 || target.status === 0 && target.responseType === 'arraybuffer') {
+						resolve(target);
+					} else {
+						reject(new AjaxError(target.status, target.statusText));
+					}
+				} else if (needTO) {
+					_loadTO = setTimeout(_toFunc, 5e3);
+				}
+			};
+			try {
+				xhr.open(params && params.method || 'GET', (url[1] === '/' ? aib.prot : url[0] === '/' ? aib.prot + '//' + aib.host : '') + url, true);
+				if (params) {
+					if (params.responseType) {
+						xhr.responseType = params.responseType;
+					}
+					var headers = params.headers;
+
+					if (headers) {
+						for (var h in headers) {
+							if (headers.hasOwnProperty(h)) {
+								xhr.setRequestHeader(h, headers[h]);
 							}
 						}
 					}
-					xhr.send(params && params.data || null);
-					cancelFn = function cancelFn() {
-						if (needTO) {
-							clearTimeout(loadTO);
-						}
-						xhr.abort();
-					};
-				} catch (e) {
-					clearTimeout(loadTO);
-					nativeXHRworks = false;
-					return {
-						v: $ajax(url, params, false)
-					};
 				}
-			}();
-
-			if ((typeof _ret6 === 'undefined' ? 'undefined' : _typeof(_ret6)) === "object") return _ret6.v;
+				xhr.send(params && params.data || null);
+				cancelFn = function cancelFn() {
+					if (needTO) {
+						clearTimeout(_loadTO);
+					}
+					xhr.abort();
+				};
+			} catch (e) {
+				clearTimeout(_loadTO);
+				nativeXHRworks = false;
+				return $ajax(url, params, false);
+			}
 		}
 		return new CancelablePromise(function (res, rej) {
 			resolve = res;
@@ -8867,94 +9722,81 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 	});
 
-	var AjaxCache = function (_ref14) {
-		_inherits(AjaxCache, _ref14);
+	var AjaxCache = {
+		fixURL: function fixURL(url) {
+			return '' + url + (url.includes('?') ? '&' : '?') + 'nocache=' + Math.random();
+		},
+		clear: function clear() {
+			this._data = new Map();
+		},
+		runCachedAjax: function runCachedAjax(url, useCache) {
+			var _this16 = this;
 
-		function AjaxCache() {
-			_classCallCheck(this, AjaxCache);
+			var _ref27 = this._data.get(url) || {},
+			    hasCacheControl = _ref27.hasCacheControl,
+			    params = _ref27.params;
 
-			return _possibleConstructorReturn(this, (AjaxCache.__proto__ || Object.getPrototypeOf(AjaxCache)).apply(this, arguments));
-		}
+			var ajaxURL = hasCacheControl === false ? this.fixURL(url) : url;
+			return $ajax(ajaxURL, useCache && params || { useTimeout: true }).then(function (xhr) {
+				return _this16.saveData(url, xhr) ? xhr : $ajax(_this16.fixURL(url), useCache && params);
+			});
+		},
+		saveData: function saveData(url, xhr) {
+			var ETag = null;
+			var LastModified = null;
+			var i = 0;
+			var hasCacheControl = false;
+			var ajaxHeaders = 'getAllResponseHeaders' in xhr ? xhr.getAllResponseHeaders() : xhr.responseHeaders;
+			for (var _iterator5 = ajaxHeaders.split('\r\n'), _isArray5 = Array.isArray(_iterator5), _i10 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+				var _ref28;
 
-		_createClass(AjaxCache, null, [{
-			key: 'clear',
-			value: function clear() {
-				AjaxCache._data = new Map();
-			}
-		}, {
-			key: 'fixURL',
-			value: function fixURL(url) {
-				return url + (url.includes('?') ? '&' : '?') + 'nocache=' + Math.random();
-			}
-		}, {
-			key: 'runCachedAjax',
-			value: function runCachedAjax(url, useCache) {
-				var _ref15 = AjaxCache._data.get(url) || {},
-				    hasCacheControl = _ref15.hasCacheControl,
-				    params = _ref15.params;
-
-				var ajaxURL = hasCacheControl === false ? AjaxCache.fixURL(url) : url;
-				return $ajax(ajaxURL, useCache && params || { useTimeout: true }).then(function (xhr) {
-					return AjaxCache.saveData(url, xhr) ? xhr : $ajax(AjaxCache.fixURL(url), useCache && params);
-				});
-			}
-		}, {
-			key: 'saveData',
-			value: function saveData(url, xhr) {
-				var ETag = null,
-				    LastModified = null,
-				    i = 0,
-				    hasCacheControl = false,
-				    ajaxHeaders = 'getAllResponseHeaders' in xhr ? xhr.getAllResponseHeaders() : xhr.responseHeaders;
-				for (var _iterator5 = ajaxHeaders.split('\r\n'), _isArray5 = Array.isArray(_iterator5), _i10 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-					var _ref16;
-
-					if (_isArray5) {
-						if (_i10 >= _iterator5.length) break;
-						_ref16 = _iterator5[_i10++];
-					} else {
-						_i10 = _iterator5.next();
-						if (_i10.done) break;
-						_ref16 = _i10.value;
-					}
-
-					var header = _ref16;
-
-					var lHeader = header.toLowerCase();
-					if (lHeader.startsWith('cache-control: ')) {
-						hasCacheControl = true;
-						i++;
-					} else if (lHeader.startsWith('last-modified: ')) {
-						LastModified = header.substr(15);
-						i++;
-					} else if (lHeader.startsWith('etag: ')) {
-						ETag = header.substr(6);
-						i++;
-					}
-					if (i === 3) {
-						break;
-					}
+				if (_isArray5) {
+					if (_i10 >= _iterator5.length) break;
+					_ref28 = _iterator5[_i10++];
+				} else {
+					_i10 = _iterator5.next();
+					if (_i10.done) break;
+					_ref28 = _i10.value;
 				}
-				var headers = null;
-				if (ETag || LastModified) {
-					headers = {};
-					if (ETag) {
-						headers['If-None-Match'] = ETag;
-					}
-					if (LastModified) {
-						headers['If-Modified-Since'] = LastModified;
-					}
+
+				var header = _ref28;
+
+				var lHeader = header.toLowerCase();
+				if (lHeader.startsWith('cache-control: ')) {
+					hasCacheControl = true;
+					i++;
+				} else if (lHeader.startsWith('last-modified: ')) {
+					LastModified = header.substr(15);
+					i++;
+				} else if (lHeader.startsWith('etag: ')) {
+					ETag = header.substr(6);
+					i++;
 				}
-				var hasUrl = AjaxCache._data.has(url);
-				AjaxCache._data.set(url, { hasCacheControl: hasCacheControl, params: headers ? { headers: headers, useTimeout: true } : { useTimeout: true } });
-				return hasUrl || hasCacheControl;
+				if (i === 3) {
+					break;
+				}
 			}
-		}]);
+			var headers = null;
+			if (ETag || LastModified) {
+				headers = {};
+				if (ETag) {
+					headers['If-None-Match'] = ETag;
+				}
+				if (LastModified) {
+					headers['If-Modified-Since'] = LastModified;
+				}
+			}
+			var hasUrl = this._data.has(url);
+			this._data.set(url, {
+				hasCacheControl: hasCacheControl,
+				params: headers ? { headers: headers, useTimeout: true } : { useTimeout: true }
+			});
+			return hasUrl || hasCacheControl;
+		},
 
-		return AjaxCache;
-	}(null);
 
-	AjaxCache._data = new Map();
+		_data: new Map()
+	};
 
 	function ajaxLoad(url) {
 		var returnForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
@@ -8962,8 +9804,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		var checkArch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
 
 		return AjaxCache.runCachedAjax(url, useCache).then(function (xhr) {
-			var el,
-			    text = xhr.responseText;
+			var el = void 0;
+			var text = xhr.responseText;
 			if (text.includes('</html>')) {
 				el = returnForm ? $q(aib.qDForm, $DOM(text)) : $DOM(text);
 			}
@@ -8974,16 +9816,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function ajaxPostsLoad(brd, tNum, useCache) {
-		if (aib.jsonBuilder) {
+		if (aib.JsonBuilder) {
 			return AjaxCache.runCachedAjax(aib.getJsonApiUrl(brd, tNum), useCache).then(function (xhr) {
 				try {
-					return new aib.jsonBuilder(JSON.parse(xhr.responseText), brd);
+					return new aib.JsonBuilder(JSON.parse(xhr.responseText), brd);
 				} catch (e) {
 					if (e instanceof AjaxError) {
 						return CancelablePromise.reject(e);
 					}
 					console.warn('API error: ' + e + '. Switching to DOM parsing!');
-					aib.jsonBuilder = null;
+					aib.JsonBuilder = null;
 					return ajaxPostsLoad(brd, tNum, useCache);
 				}
 			}, function (e) {
@@ -9000,14 +9842,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	function infoLoadErrors(e) {
 		var showError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-		var isAjax = e instanceof AjaxError,
-		    eCode = isAjax ? e.code : 0;
+		var isAjax = e instanceof AjaxError;
+		var eCode = isAjax ? e.code : 0;
 		if (eCode === 200) {
 			closePopup('newposts');
 		} else if (isAjax && eCode === 0) {
 			$popup('newposts', e.message ? String(e.message) : Lng.noConnect[lang]);
 		} else {
-			$popup('newposts', Lng.thrNotFound[lang] + aib.t + '): \n' + getErrorMessage(e));
+			$popup('newposts', ' (' + Lng.thrNotFound[lang] + ': \u2116' + aib.t + '): \n' + getErrorMessage(e));
 			if (showError) {
 				doc.title = '{' + eCode + '} ' + doc.title;
 			}
@@ -9017,169 +9859,178 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	var Pages = {
 		add: function add() {
-			var _this18 = this;
+			var _this17 = this;
 
 			var pageNum = DelForm.last.pageNum + 1;
 			if (this._adding || pageNum > aib.lastPage) {
 				return;
 			}
 			this._adding = true;
-			DelForm.last.el.insertAdjacentHTML('beforeend', '<div class="de-addpage-wait"><hr>' + '<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>');
+			DelForm.last.el.insertAdjacentHTML('beforeend', '<div class="de-addpage-wait"><hr>' + ('<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
 			MyPosts.purge();
 			this._addPromise = ajaxLoad(aib.getPageUrl(aib.b, pageNum)).then(function (formEl) {
-				var form = _this18._addForm(formEl, pageNum);
-				if (!form.firstThr) {
-					_this18._endAdding();
-					_this18.add();
+				if (!_this17._addForm(formEl, pageNum).firstThr) {
+					_this17._endAdding();
+					_this17.add();
 					return CancelablePromise.reject(new CancelError());
 				}
-				return _this18._updateForms(DelForm.last);
+				return _this17._updateForms(DelForm.last);
 			}).then(function () {
-				return _this18._endAdding();
-			})['catch'](function (e) {
+				return _this17._endAdding();
+			}).catch(function (e) {
 				if (!(e instanceof CancelError)) {
 					$popup('add-page', getErrorMessage(e));
-					_this18._endAdding();
+					_this17._endAdding();
 				}
 			});
 		},
+		load: function () {
+			var _ref29 = _asyncToGenerator( regeneratorRuntime.mark(function _callee10(count) {
+				var _iterator6, _isArray6, _i11, _ref30, form, i, len, first;
 
-		load: function load(count) {
-			var _iterator6, _isArray6, _i11, _ref17, form, len, i, el, first;
+				return regeneratorRuntime.wrap(function _callee10$(_context11) {
+					while (1) {
+						switch (_context11.prev = _context11.next) {
+							case 0:
+								$popup('load-pages', Lng.loading[lang], true);
+								if (this._addPromise) {
+									this._addPromise.cancel();
+									this._endAdding();
+								}
+								PviewsCache.purge();
+								isExpImg = false;
+								pByEl = new Map();
+								pByNum = new Map();
+								Post.hiddenNums = new Set();
+								if (Attachment.viewer) {
+									Attachment.viewer.close(null);
+									Attachment.viewer = null;
+								}
+								if (pr.isQuick) {
+									pr.clearForm();
+								}
+								DelForm.tNums = new Set();
+								_iterator6 = DelForm, _isArray6 = Array.isArray(_iterator6), _i11 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();
 
-			return regeneratorRuntime.async(function load$(_context12) {
-				while (1) {
-					switch (_context12.prev = _context12.next) {
-						case 0:
-							$popup('load-pages', Lng.loading[lang], true);
-							if (this._addPromise) {
-								this._addPromise.cancel();
-								this._endAdding();
-							}
-							PviewsCache.purge();
-							isExpImg = false;
-							pByEl = new Map();
-							pByNum = new Map();
-							Post.hiddenNums = new Set();
-							if (Attachment.viewer) {
-								Attachment.viewer.close(null);
-								Attachment.viewer = null;
-							}
-							if (pr.isQuick) {
-								pr.clearForm();
-							}
-							DelForm.tNums = new Set();
-							_iterator6 = DelForm, _isArray6 = Array.isArray(_iterator6), _i11 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();
+							case 11:
+								if (!_isArray6) {
+									_context11.next = 17;
+									break;
+								}
 
-						case 11:
-							if (!_isArray6) {
-								_context12.next = 17;
+								if (!(_i11 >= _iterator6.length)) {
+									_context11.next = 14;
+									break;
+								}
+
+								return _context11.abrupt('break', 29);
+
+							case 14:
+								_ref30 = _iterator6[_i11++];
+								_context11.next = 21;
 								break;
-							}
 
-							if (!(_i11 >= _iterator6.length)) {
-								_context12.next = 14;
+							case 17:
+								_i11 = _iterator6.next();
+
+								if (!_i11.done) {
+									_context11.next = 20;
+									break;
+								}
+
+								return _context11.abrupt('break', 29);
+
+							case 20:
+								_ref30 = _i11.value;
+
+							case 21:
+								form = _ref30;
+
+								$each($Q('a[href^="blob:"]', form.el), function (a) {
+									return URL.revokeObjectURL(a.href);
+								});
+								$hide(form.el);
+
+								if (!(form === DelForm.last)) {
+									_context11.next = 26;
+									break;
+								}
+
+								return _context11.abrupt('break', 29);
+
+							case 26:
+								$del(form.el);
+
+							case 27:
+								_context11.next = 11;
 								break;
-							}
 
-							return _context12.abrupt('break', 29);
+							case 29:
+								DelForm.first = DelForm.last;
+								i = aib.page, len = Math.min(aib.lastPage + 1, aib.page + count);
 
-						case 14:
-							_ref17 = _iterator6[_i11++];
-							_context12.next = 21;
-							break;
+							case 31:
+								if (!(i < len)) {
+									_context11.next = 47;
+									break;
+								}
 
-						case 17:
-							_i11 = _iterator6.next();
+								_context11.prev = 32;
+								_context11.t0 = this;
+								_context11.next = 36;
+								return ajaxLoad(aib.getPageUrl(aib.b, i));
 
-							if (!_i11.done) {
-								_context12.next = 20;
+							case 36:
+								_context11.t1 = _context11.sent;
+								_context11.t2 = i;
+
+								_context11.t0._addForm.call(_context11.t0, _context11.t1, _context11.t2);
+
+								_context11.next = 44;
 								break;
-							}
 
-							return _context12.abrupt('break', 29);
+							case 41:
+								_context11.prev = 41;
+								_context11.t3 = _context11['catch'](32);
 
-						case 20:
-							_ref17 = _i11.value;
+								$popup('load-pages', getErrorMessage(_context11.t3));
 
-						case 21:
-							form = _ref17;
-
-							$each($Q('a[href^="blob:"]', form.el), function (a) {
-								return URL.revokeObjectURL(a.href);
-							});
-							$hide(form.el);
-
-							if (!(form === DelForm.last)) {
-								_context12.next = 26;
+							case 44:
+								++i;
+								_context11.next = 31;
 								break;
-							}
 
-							return _context12.abrupt('break', 29);
+							case 47:
+								first = DelForm.first;
 
-						case 26:
-							$del(form.el);
+								if (!(first !== DelForm.last)) {
+									_context11.next = 54;
+									break;
+								}
 
-						case 27:
-							_context12.next = 11;
-							break;
+								DelForm.first = first.next;
+								$del(first.el);
+								_context11.next = 53;
+								return this._updateForms(DelForm.first);
 
-						case 29:
-							DelForm.first = DelForm.last;
-							len = Math.min(aib.lastPage + 1, aib.page + count);
-							i = aib.page;
+							case 53:
+								closePopup('load-pages');
 
-						case 32:
-							if (!(i < len)) {
-								_context12.next = 46;
-								break;
-							}
-
-							_context12.prev = 33;
-							_context12.next = 36;
-							return regeneratorRuntime.awrap(ajaxLoad(aib.getPageUrl(aib.b, i)));
-
-						case 36:
-							el = _context12.sent;
-
-							this._addForm(el, i);
-							_context12.next = 43;
-							break;
-
-						case 40:
-							_context12.prev = 40;
-							_context12.t0 = _context12['catch'](33);
-
-							$popup('load-pages', getErrorMessage(_context12.t0));
-
-						case 43:
-							++i;
-							_context12.next = 32;
-							break;
-
-						case 46:
-							first = DelForm.first;
-
-							if (!(first !== DelForm.last)) {
-								_context12.next = 53;
-								break;
-							}
-
-							DelForm.first = first.next;
-							$del(first.el);
-							_context12.next = 52;
-							return regeneratorRuntime.awrap(this._updateForms(DelForm.first));
-
-						case 52:
-							closePopup('load-pages');
-
-						case 53:
-						case 'end':
-							return _context12.stop();
+							case 54:
+							case 'end':
+								return _context11.stop();
+						}
 					}
-				}
-			}, null, this, [[33, 40]]);
-		},
+				}, _callee10, this, [[32, 41]]);
+			}));
+
+			function load(_x31) {
+				return _ref29.apply(this, arguments);
+			}
+
+			return load;
+		}(),
+
 
 		_adding: false,
 		_addPromise: null,
@@ -9190,7 +10041,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var form = new DelForm(formEl, +pageNum, DelForm.last);
 			DelForm.last = form;
 			form.addStuff();
-			if (pageNum != aib.page && form.firstThr) {
+			if (pageNum !== aib.page && form.firstThr) {
 				formEl.insertAdjacentHTML('afterbegin', '<div class="de-page-num">\n\t\t\t\t<center style="font-size: 2em">' + Lng.page[lang] + ' ' + pageNum + '</center>\n\t\t\t\t<hr>\n\t\t\t</div>');
 			}
 			$show(formEl);
@@ -9201,34 +10052,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this._adding = false;
 			this._addPromise = null;
 		},
+		_updateForms: function () {
+			var _ref31 = _asyncToGenerator( regeneratorRuntime.mark(function _callee11(newForm) {
+				return regeneratorRuntime.wrap(function _callee11$(_context12) {
+					while (1) {
+						switch (_context12.prev = _context12.next) {
+							case 0:
+								_context12.t0 = readPostsData;
+								_context12.t1 = newForm.firstThr.op;
+								_context12.next = 4;
+								return getStoredObj('DESU_Favorites');
 
-		_updateForms: function _updateForms(newForm) {
-			var fav;
-			return regeneratorRuntime.async(function _updateForms$(_context13) {
-				while (1) {
-					switch (_context13.prev = _context13.next) {
-						case 0:
-							_context13.next = 2;
-							return regeneratorRuntime.awrap(getStoredObj('DESU_Favorites'));
+							case 4:
+								_context12.t2 = _context12.sent;
+								(0, _context12.t0)(_context12.t1, _context12.t2);
 
-						case 2:
-							fav = _context13.sent;
+								if (pr.passw) {
+									PostForm.setUserPassw();
+								}
+								if (HotKeys.enabled) {
+									HotKeys.clear();
+								}
 
-							readPostsData(newForm.firstThr.op, fav);
-							if (pr.passw) {
-								PostForm.setUserPassw();
-							}
-							if (HotKeys.enabled) {
-								HotKeys.clear();
-							}
-
-						case 6:
-						case 'end':
-							return _context13.stop();
+							case 8:
+							case 'end':
+								return _context12.stop();
+						}
 					}
-				}
-			}, null, this);
-		}
+				}, _callee11, this);
+			}));
+
+			function _updateForms(_x32) {
+				return _ref31.apply(this, arguments);
+			}
+
+			return _updateForms;
+		}()
 	};
 
 	function toggleInfinityScroll() {
@@ -9254,73 +10113,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	var Spells = Object.create({
 		hash: null,
-		names: ['words', 'exp', 'exph', 'imgn', 'ihash', 'subj', 'name', 'trip', 'img', 'sage', 'op', 'tlen', 'all', 'video', 'wipe', 'num', 'vauthor'],
-		needArg: [
-true, true, true, true, true,
-false, true, false, false, false,
-false, false, false, false, false,
-true, true],
 		get hiders() {
 			this._init();
 			return this.hiders;
 		},
-		get reps() {
-			this._init();
-			return this.reps;
-		},
-		get outreps() {
-			this._init();
-			return this.outreps;
-		},
 		get list() {
-			var str, reps, oreps, data;
 			if (Cfg.spells === null) {
 				return '#wipe(samelines,samewords,longwords,symbols,numbers,whitespace)';
 			}
+			var data = void 0;
 			try {
 				data = JSON.parse(Cfg.spells);
 			} catch (e) {
 				return '';
 			}
-			str = data[1] ? this._decompileScope(data[1], '')[0].join('\n') : '';
-			reps = data[2];
-			oreps = data[3];
+
+			var _data6 = data,
+			    _data7 = _slicedToArray(_data6, 4),
+			    s = _data7[1],
+			    reps = _data7[2],
+			    oreps = _data7[3];
+
+			var str = s ? this._decompileScope(s, '')[0].join('\n') : '';
 			if (reps || oreps) {
 				if (str) {
 					str += '\n\n';
 				}
 				if (reps) {
 					for (var _iterator7 = reps, _isArray7 = Array.isArray(_iterator7), _i12 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-						var _ref18;
+						var _ref32;
 
 						if (_isArray7) {
 							if (_i12 >= _iterator7.length) break;
-							_ref18 = _iterator7[_i12++];
+							_ref32 = _iterator7[_i12++];
 						} else {
 							_i12 = _iterator7.next();
 							if (_i12.done) break;
-							_ref18 = _i12.value;
+							_ref32 = _i12.value;
 						}
 
-						var rep = _ref18;
+						var rep = _ref32;
 
 						str += this._decompileRep(rep, false) + '\n';
 					}
 				}
 				if (oreps) {
 					for (var _iterator8 = oreps, _isArray8 = Array.isArray(_iterator8), _i13 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-						var _ref19;
+						var _ref33;
 
 						if (_isArray8) {
 							if (_i13 >= _iterator8.length) break;
-							_ref19 = _iterator8[_i13++];
+							_ref33 = _iterator8[_i13++];
 						} else {
 							_i13 = _iterator8.next();
 							if (_i13.done) break;
-							_ref19 = _i13.value;
+							_ref33 = _i13.value;
 						}
 
-						var orep = _ref19;
+						var orep = _ref33;
 
 						str += this._decompileRep(orep, true) + '\n';
 					}
@@ -9329,12 +10179,29 @@ true, true],
 			}
 			return str;
 		},
+		get names() {
+			return ['words', 'exp', 'exph', 'imgn', 'ihash', 'subj', 'name', 'trip', 'img', 'sage', 'op', 'tlen', 'all', 'video', 'wipe', 'num', 'vauthor'];
+		},
+		get needArg() {
+			return [
+true, true, true, true, true,
+false, true, false, false, false,
+false, false, false, false, false,
+true, true];
+		},
+		get outreps() {
+			this._init();
+			return this.outreps;
+		},
+		get reps() {
+			this._init();
+			return this.reps;
+		},
 		add: function add(type, arg, isNeg) {
-			var temp,
-			    fld = $id('de-spell-txt'),
-			    val = fld && fld.value,
-			    chk = $q('input[info="hideBySpell"]'),
-			    spells = val && this.parseText(val);
+			var fld = $id('de-spell-txt');
+			var val = fld && fld.value;
+			var chk = $q('input[info="hideBySpell"]');
+			var spells = val && this.parseText(val);
 			if (!val || spells) {
 				if (!spells) {
 					try {
@@ -9342,14 +10209,14 @@ true, true],
 					} catch (e) {}
 					spells = spells || [Date.now(), [], null, null];
 				}
-				var idx,
-				    scope = aib.t ? [aib.b, aib.t] : null,
-				    sScope = String(scope),
-				    sArg = String(arg);
-				var isAdded = true;
+				var idx = void 0,
+				    isAdded = true;
+				var scope = aib.t ? [aib.b, aib.t] : null;
 				if (spells[1]) {
+					var sScope = String(scope);
+					var sArg = String(arg);
 					spells[1].some(scope && isNeg ? function (spell, i) {
-						var data;
+						var data = void 0;
 						if (spell[0] === 0xFF && (data = spell[1]) instanceof Array && data.length === 2 && data[0][0] === 0x20C && data[1][0] === type && data[1][2] == null && String(data[1][1]) === sArg && String(data[0][2]) === sScope) {
 							idx = i;
 							return true;
@@ -9405,103 +10272,126 @@ true, true],
 		decompileSpell: function decompileSpell(type, neg, val, scope) {
 			var wipeMsg = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-			var spell = (neg ? '!#' : '#') + Spells.names[type] + (scope ? '[' + scope[0] + (scope[1] ? ',' + (scope[1] === -1 ? '' : scope[1]) : '') + ']' : '');
+			var spell = (neg ? '!#' : '#') + this.names[type] + (scope ? '[' + scope[0] + (scope[1] ? ',' + (scope[1] === -1 ? '' : scope[1]) : '') + ']' : '');
 			if (!val) {
 				return spell;
 			}
 			if (type === 8) {
 				return spell + '(' + (val[0] === 2 ? '>' : val[0] === 1 ? '<' : '=') + (val[1] ? val[1][0] + (val[1][1] === val[1][0] ? '' : '-' + val[1][1]) : '') + (val[2] ? '@' + val[2][0] + (val[2][0] === val[2][1] ? '' : '-' + val[2][1]) + 'x' + val[2][2] + (val[2][2] === val[2][3] ? '' : '-' + val[2][3]) : '') + ')';
-			}
-			else if (type === 14) {
-					if (val === 0x3F && !wipeMsg) {
-						return spell;
-					}
-
-					var _ref20 = wipeMsg || [],
-					    _ref21 = _slicedToArray(_ref20, 2),
-					    msgBit = _ref21[0],
-					    msgData = _ref21[1],
-					    names = [],
-					    bits = { 1: 'samelines', 2: 'samewords', 4: 'longwords', 8: 'symbols',
-						16: 'capslock', 32: 'numbers', 64: 'whitespace' };
-
-					for (var bit in bits) {
-						if (+bit !== msgBit) {
-							if (val & +bit) {
-								names.push(bits[bit]);
-							}
-						}
-					}
-					if (msgBit) {
-						names.push(bits[msgBit].toUpperCase() + (msgData ? ': ' + msgData : ''));
-					}
-					return spell + '(' + names.join(',') + ')';
+			} else if (type === 14) {
+				if (val === 0x3F && !wipeMsg) {
+					return spell;
 				}
-				else if (type === 15 || type === 11) {
-						var temp_,
-						    temp = val[1].length - 1;
-						if (temp !== -1) {
-							for (temp_ = []; temp >= 0; --temp) {
-								temp_.push(val[1][temp][0] + '-' + val[1][temp][1]);
-							}
-							temp_.reverse();
+
+				var _ref34 = wipeMsg || [],
+				    _ref35 = _slicedToArray(_ref34, 2),
+				    msgBit = _ref35[0],
+				    msgData = _ref35[1];
+
+				var names = [];
+				var bits = {
+					1: 'samelines',
+					2: 'samewords',
+					4: 'longwords',
+					8: 'symbols',
+					16: 'capslock',
+					32: 'numbers',
+					64: 'whitespace'
+				};
+				for (var bit in bits) {
+					if (+bit !== msgBit) {
+						if (val & +bit) {
+							names.push(bits[bit]);
 						}
-						spell += '(';
-						if (val[0].length) {
-							spell += val[0].join(',') + (temp_ ? ',' : '');
-						}
-						if (temp_) {
-							spell += temp_.join(',');
-						}
-						return spell + ')';
 					}
-					else if (type === 0 || type === 6 || type === 7 || type === 16) {
-							return spell + '(' + val.replace(/([)\\])/g, '\\$1').replace(/\n/g, '\\n') + ')';
-						} else {
-							return spell + '(' + String(val) + ')';
-						}
+				}
+				if (msgBit) {
+					names.push(bits[msgBit].toUpperCase() + (msgData ? ': ' + msgData : ''));
+				}
+				return spell + '(' + names.join(',') + ')';
+			} else if (type === 15 || type === 11) {
+				var temp_ = void 0,
+				    temp = val[1].length - 1;
+				if (temp !== -1) {
+					for (temp_ = []; temp >= 0; --temp) {
+						temp_.push(val[1][temp][0] + '-' + val[1][temp][1]);
+					}
+					temp_.reverse();
+				}
+				spell += '(';
+				if (val[0].length) {
+					spell += val[0].join(',') + (temp_ ? ',' : '');
+				}
+				if (temp_) {
+					spell += temp_.join(',');
+				}
+				return spell + ')';
+			} else if (type === 0 || type === 6 || type === 7 || type === 16) {
+				return spell + '(' + val.replace(/([)\\])/g, '\\$1').replace(/\n/g, '\\n') + ')';
+			} else {
+				return spell + '(' + String(val) + ')';
+			}
 		},
 		disable: function disable() {
-			var value = null,
-			    configurable = true;
+			var value = null;
+			var configurable = true;
 			Object.defineProperties(this, {
 				hiders: { configurable: configurable, value: value },
-				reps: { configurable: configurable, value: value },
-				outreps: { configurable: configurable, value: value }
+				outreps: { configurable: configurable, value: value },
+				reps: { configurable: configurable, value: value }
 			});
 			saveCfg('hideBySpell', 0);
 		},
 		outReplace: function outReplace(txt) {
 			for (var _iterator9 = this.outreps, _isArray9 = Array.isArray(_iterator9), _i14 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-				var _ref22;
+				var _ref36;
 
 				if (_isArray9) {
 					if (_i14 >= _iterator9.length) break;
-					_ref22 = _iterator9[_i14++];
+					_ref36 = _iterator9[_i14++];
 				} else {
 					_i14 = _iterator9.next();
 					if (_i14.done) break;
-					_ref22 = _i14.value;
+					_ref36 = _i14.value;
 				}
 
-				var orep = _ref22;
+				var orep = _ref36;
 
 				txt = txt.replace(orep[0], orep[1]);
 			}
 			return txt;
 		},
 		parseText: function parseText(text) {
-			var codeGen = new SpellsCodegen(text),
-			    data = codeGen.generate();
+			var codeGen = new SpellsCodegen(text);
+			var data = codeGen.generate();
 			if (codeGen.hasError) {
 				$popup('err-spell', Lng.error[lang] + ': ' + codeGen.error);
 			} else if (data) {
 				if (data[0] && Cfg.sortSpells) {
 					this._sort(data[0]);
 				}
-				return [Date.now(), data[0], data[1], data[2]];
+				return [Date.now()].concat(_toConsumableArray(data));
 			}
 			return null;
+		},
+		replace: function replace(txt) {
+			for (var _iterator10 = this.reps, _isArray10 = Array.isArray(_iterator10), _i15 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+				var _ref37;
+
+				if (_isArray10) {
+					if (_i15 >= _iterator10.length) break;
+					_ref37 = _iterator10[_i15++];
+				} else {
+					_i15 = _iterator10.next();
+					if (_i15.done) break;
+					_ref37 = _i15.value;
+				}
+
+				var rep = _ref37;
+
+				txt = txt.replace(rep[0], rep[1]);
+			}
+			return txt;
 		},
 		setSpells: function setSpells(spells, sync) {
 			if (sync) {
@@ -9523,29 +10413,10 @@ true, true],
 				SpellsRunner.unhideAll();
 			}
 		},
-		replace: function replace(txt) {
-			for (var _iterator10 = this.reps, _isArray10 = Array.isArray(_iterator10), _i15 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
-				var _ref23;
-
-				if (_isArray10) {
-					if (_i15 >= _iterator10.length) break;
-					_ref23 = _iterator10[_i15++];
-				} else {
-					_i15 = _iterator10.next();
-					if (_i15.done) break;
-					_ref23 = _i15.value;
-				}
-
-				var orep = _ref23;
-
-				txt = txt.replace(orep[0], orep[1]);
-			}
-			return txt;
-		},
 		toggle: function toggle() {
-			var spells,
-			    fld = $id('de-spell-txt'),
-			    val = fld.value;
+			var spells = void 0;
+			var fld = $id('de-spell-txt');
+			var val = fld.value;
 			if (val && (spells = this.parseText(val))) {
 				closePopup('err-spell');
 				this.setSpells(spells, true);
@@ -9563,24 +10434,27 @@ true, true],
 				$q('input[info="hideBySpell"]').checked = false;
 			}
 		},
+		_decompileRep: function _decompileRep(rep, isOrep) {
+			return (isOrep ? '#outrep' : '#rep') + (rep[0] ? '[' + rep[0] + (rep[1] ? ',' + (rep[1] === -1 ? '' : rep[1]) : '') + ']' : '') + ('(' + rep[2] + ',' + rep[3].replace(/([)\\])/g, '\\$1').replace(/\n/g, '\\n') + ')');
+		},
 		_decompileScope: function _decompileScope(scope, indent) {
-			var dScope = [],
-			    hScope = false;
+			var dScope = [];
+			var hScope = false;
 			for (var i = 0, j = 0, len = scope.length; i < len; i++, j++) {
-				var spell = scope[i],
-				    type = spell[0] & 0xFF;
+				var spell = scope[i];
+				var type = spell[0] & 0xFF;
 				if (type === 0xFF) {
 					hScope = true;
 					var temp = this._decompileScope(spell[1], indent + '    ');
 					if (temp[1]) {
-						var str = (spell[0] & 0x100 ? '!(\n' : '(\n') + indent + '    ' + temp[0].join('\n' + indent + '    ') + '\n' + indent + ')';
+						var str = '' + (spell[0] & 0x100 ? '!(\n' : '(\n') + indent + '    ' + (temp[0].join('\n' + indent + '    ') + '\n' + indent + ')');
 						if (j === 0) {
 							dScope[0] = str;
 						} else {
 							dScope[--j] += ' ' + str;
 						}
 					} else {
-						dScope[j] = (spell[0] & 0x100 ? '!(' : '(') + temp[0].join(' ') + ')';
+						dScope[j] = '' + (spell[0] & 0x100 ? '!(' : '(') + temp[0].join(' ') + ')';
 					}
 				} else {
 					dScope[j] = this.decompileSpell(type, spell[0] & 0x100, spell[1], spell[2]);
@@ -9591,21 +10465,19 @@ true, true],
 			}
 			return [dScope, dScope.length > 2 || hScope];
 		},
-		_decompileRep: function _decompileRep(rep, isOrep) {
-			return (isOrep ? '#outrep' : '#rep') + (rep[0] ? '[' + rep[0] + (rep[1] ? ',' + (rep[1] === -1 ? '' : rep[1]) : '') + ']' : '') + '(' + rep[2] + ',' + rep[3].replace(/([)\\])/g, '\\$1').replace(/\n/g, '\\n') + ')';
-		},
 		_init: function _init() {
 			if (!Cfg.hideBySpell) {
-				var value = null,
-				    configurable = true;
+				var value = null;
+				var configurable = true;
 				Object.defineProperties(this, {
 					hiders: { configurable: configurable, value: value },
-					reps: { configurable: configurable, value: value },
-					outreps: { configurable: configurable, value: value }
+					outreps: { configurable: configurable, value: value },
+					reps: { configurable: configurable, value: value }
 				});
 				return;
 			}
-			var spells, data;
+			var spells = void 0,
+			    data = void 0;
 			try {
 				spells = JSON.parse(Cfg.spells);
 				data = JSON.parse(sesStorage['de-spells-' + aib.b + (aib.t || '')]);
@@ -9624,18 +10496,18 @@ true, true],
 		_initHiders: function _initHiders(data) {
 			if (data) {
 				for (var _iterator11 = data, _isArray11 = Array.isArray(_iterator11), _i16 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
-					var _ref24;
+					var _ref38;
 
 					if (_isArray11) {
 						if (_i16 >= _iterator11.length) break;
-						_ref24 = _iterator11[_i16++];
+						_ref38 = _iterator11[_i16++];
 					} else {
 						_i16 = _iterator11.next();
 						if (_i16.done) break;
-						_ref24 = _i16.value;
+						_ref38 = _i16.value;
 					}
 
-					var item = _ref24;
+					var item = _ref38;
 
 					var val = item[1];
 					if (val) {
@@ -9657,18 +10529,18 @@ true, true],
 		_initReps: function _initReps(data) {
 			if (data) {
 				for (var _iterator12 = data, _isArray12 = Array.isArray(_iterator12), _i17 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
-					var _ref25;
+					var _ref39;
 
 					if (_isArray12) {
 						if (_i17 >= _iterator12.length) break;
-						_ref25 = _iterator12[_i17++];
+						_ref39 = _iterator12[_i17++];
 					} else {
 						_i17 = _iterator12.next();
 						if (_i17.done) break;
-						_ref25 = _i17.value;
+						_ref39 = _i17.value;
 					}
 
-					var item = _ref25;
+					var item = _ref39;
 
 					item[0] = toRegExp(item[0], false);
 				}
@@ -9676,44 +10548,47 @@ true, true],
 			return data;
 		},
 		_optimize: function _optimize(data) {
-			var hiders = data[1] ? this._optimizeSpells(data[1]) : null,
-			    reps = data[2] ? this._optimizeReps(data[2]) : null,
-			    outreps = data[3] ? this._optimizeReps(data[3]) : null;
-			sesStorage['de-spells-' + aib.b + (aib.t || '')] = JSON.stringify([data[0], hiders, reps, outreps]);
+			var arr = [data[1] ? this._optimizeSpells(data[1]) : null, data[2] ? this._optimizeReps(data[2]) : null, data[3] ? this._optimizeReps(data[3]) : null];
+			sesStorage['de-spells-' + aib.b + (aib.t || '')] = JSON.stringify([data[0]].concat(arr));
 			this.hash = data[0];
-			this._setData(hiders, reps, outreps);
+			this._setData.apply(this, arr);
 		},
 		_optimizeReps: function _optimizeReps(data) {
 			var rv = [];
 			for (var _iterator13 = data, _isArray13 = Array.isArray(_iterator13), _i18 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
-				var _ref26;
+				var _ref40;
 
 				if (_isArray13) {
 					if (_i18 >= _iterator13.length) break;
-					_ref26 = _iterator13[_i18++];
+					_ref40 = _iterator13[_i18++];
 				} else {
 					_i18 = _iterator13.next();
 					if (_i18.done) break;
-					_ref26 = _i18.value;
+					_ref40 = _i18.value;
 				}
 
-				var rep = _ref26;
+				var _ref41 = _ref40,
+				    _ref42 = _slicedToArray(_ref41, 4),
+				    r0 = _ref42[0],
+				    r1 = _ref42[1],
+				    r2 = _ref42[2],
+				    r3 = _ref42[3];
 
-				if (!rep[0] || rep[0] === aib.b && (rep[1] === -1 ? !aib.t : !rep[1] || +rep[1] === aib.t)) {
-					rv.push([rep[2], rep[3]]);
+				if (!r0 || r0 === aib.b && (r1 === -1 ? !aib.t : !r1 || +r1 === aib.t)) {
+					rv.push([r2, r3]);
 				}
 			}
 			return !rv.length ? null : rv;
 		},
 		_optimizeSpells: function _optimizeSpells(spells) {
-			var neg,
-			    lastSpell = -1,
-			    newSpells = [];
+			var neg = void 0,
+			    lastSpell = -1;
+			var newSpells = [];
 			for (var i = 0, len = spells.length; i < len; ++i) {
-				var j,
-				    spell = spells[i],
-				    flags = spell[0],
-				    type = flags & 0xFF;
+				var j = void 0;
+				var spell = spells[i];
+				var flags = spell[0];
+				var type = flags & 0xFF;
 				neg = (flags & 0x100) !== 0;
 				if (type === 0xFF) {
 					var parensSpells = this._optimizeSpells(spell[1]);
@@ -9760,8 +10635,8 @@ true, true],
 			var configurable = true;
 			Object.defineProperties(this, {
 				hiders: { configurable: configurable, value: this._initHiders(hiders) },
-				reps: { configurable: configurable, value: this._initReps(reps) },
-				outreps: { configurable: configurable, value: this._initReps(outreps) }
+				outreps: { configurable: configurable, value: this._initReps(outreps) },
+				reps: { configurable: configurable, value: this._initReps(reps) }
 			});
 		},
 		_sort: function _sort(sp) {
@@ -9778,10 +10653,11 @@ true, true],
 			}
 			sp = sp.sort();
 			for (var _i19 = 0, _len7 = sp.length - 1; _i19 < _len7; _i19++) {
-				if (sp[_i19][0] === sp[_i19 + 1][0] && sp[_i19][1] <= sp[_i19 + 1][1] && sp[_i19][1] >= sp[_i19 + 1][1] && (sp[_i19][2] === null || 
+				var j = _i19 + 1;
+				if (sp[_i19][0] === sp[j][0] && sp[_i19][1] <= sp[j][1] && sp[_i19][1] >= sp[j][1] && (sp[_i19][2] === null || 
 				sp[_i19][2] === undefined || 
-				sp[_i19][2] <= sp[_i19 + 1][2] && sp[_i19][2] >= sp[_i19 + 1][2])) {
-					sp.splice(_i19 + 1, 1);
+				sp[_i19][2] <= sp[j][2] && sp[_i19][2] >= sp[j][2])) {
+					sp.splice(j, 1);
 					_i19--;
 					_len7--;
 				} else if (sp[_i19][0] === 0xFF) {
@@ -9792,396 +10668,386 @@ true, true],
 			}
 		},
 		_sync: function _sync(data) {
-			locStorage['__de-spells'] = JSON.stringify({
-				'hide': !!Cfg.hideBySpell,
-				'data': data
-			});
+			locStorage['__de-spells'] = JSON.stringify({ hide: !!Cfg.hideBySpell, data: data });
 			locStorage.removeItem('__de-spells');
 		}
 	});
 
-	function SpellsCodegen(sList) {
-		this._line = 1;
-		this._col = 1;
-		this._sList = sList;
-		this.hasError = false;
-	}
-	SpellsCodegen.prototype = {
-		TYPE_UNKNOWN: 0,
-		TYPE_ANDOR: 1,
-		TYPE_NOT: 2,
-		TYPE_SPELL: 3,
-		TYPE_PARENTHESES: 4,
-		TYPE_REPLACER: 5,
+	var SpellsCodegen = function () {
+		function SpellsCodegen(sList) {
+			_classCallCheck(this, SpellsCodegen);
 
-		generate: function generate() {
-			return this._sList ? this._generate(this._sList, false) : null;
-		},
+			this.TYPE_UNKNOWN = 0;
+			this.TYPE_ANDOR = 1;
+			this.TYPE_NOT = 2;
+			this.TYPE_SPELL = 3;
+			this.TYPE_PARENTHESES = 4;
+			this.TYPE_REPLACER = 5;
+			this.hasError = false;
+			this._col = 1;
+			this._errMsg = '';
+			this._errMsgArg = null;
+			this._line = 1;
+			this._sList = sList;
+		}
 
-		get error() {
-			if (!this.hasError) {
-				return '';
+		_createClass(SpellsCodegen, [{
+			key: 'generate',
+			value: function generate() {
+				return this._sList ? this._generate(this._sList, false) : null;
 			}
-			return (this._errMsgArg ? this._errMsg.replace('%s', this._errMsgArg) : this._errMsg) + Lng.seRow[lang] + this._line + Lng.seCol[lang] + this._col + ')';
-		},
-
-		_errMsg: '',
-		_errMsgArg: null,
-		_generate: function _generate(sList, inParens) {
-			var spells = [],
-			    reps = [],
-			    outreps = [],
-			    lastType = this.TYPE_UNKNOWN,
-			    hasReps = false;
-			for (var i = 0, len = sList.length; i < len; i++, this._col++) {
-				var res;
-				switch (sList[i]) {
-					case '\n':
-						this._line++;
-						this._col = 0;
-					case '\r':
-					case ' ':
-						continue;
-					case '#':
-						var name = '';
-						i++;
-						this._col++;
-						while (sList[i] >= 'a' && sList[i] <= 'z' || sList[i] >= 'A' && sList[i] <= 'Z') {
-							name += sList[i].toLowerCase();
-							i++;
-							this._col++;
-						}
-						if (name === 'rep' || name === 'outrep') {
-							if (!hasReps) {
-								if (inParens) {
-									this._col -= 1 + name.length;
-									this._setError(Lng.seRepsInParens[lang], '#' + name);
-									return null;
+		}, {
+			key: '_generate',
+			value: function _generate(sList, inParens) {
+				var spellsArr = [];
+				var reps = [];
+				var outreps = [];
+				var lastType = this.TYPE_UNKNOWN;
+				var hasReps = false;
+				for (var i = 0, len = sList.length; i < len; i++, this._col++) {
+					var res = void 0;
+					switch (sList[i]) {
+						case '\n':
+							this._line++;
+							this._col = 0;
+						case '\r':
+						case ' ':
+							continue;
+						case '#':
+							{
+								var name = '';
+								i++;
+								this._col++;
+								while (sList[i] >= 'a' && sList[i] <= 'z' || sList[i] >= 'A' && sList[i] <= 'Z') {
+									name += sList[i].toLowerCase();
+									i++;
+									this._col++;
 								}
-								if (lastType === this.TYPE_ANDOR || lastType === this.TYPE_NOT) {
-									i -= 1 + name.length;
-									this._col -= 1 + name.length;
-									lookBack: while (i >= 0) {
-										switch (sList[i]) {
-											case '\n':
-											case '\r':
-											case ' ':
-												i--;
-												this._col--;
-												break;
-											default:
-												break lookBack;
+								if (name === 'rep' || name === 'outrep') {
+									if (!hasReps) {
+										if (inParens) {
+											this._col -= 1 + name.length;
+											this._setError(Lng.seRepsInParens[lang], '#' + name);
+											return null;
 										}
+										if (lastType === this.TYPE_ANDOR || lastType === this.TYPE_NOT) {
+											i -= 1 + name.length;
+											this._col -= 1 + name.length;
+											lookBack: while (i >= 0) {
+												switch (sList[i]) {
+													case '\n':
+													case '\r':
+													case ' ':
+														i--;
+														this._col--;
+														break;
+													default:
+														break lookBack;
+												}
+											}
+											this._setError(Lng.seOpInReps[lang], sList[i]);
+											return null;
+										}
+										hasReps = true;
 									}
-									this._setError(Lng.seOpInReps[lang], sList[i]);
-									return null;
+									res = this._doRep(name, sList.substr(i));
+									if (!res) {
+										return null;
+									}
+									(name === 'rep' ? reps : outreps).push(res[1]);
+									i += res[0] - 1;
+									this._col += res[0] - 1;
+									lastType = this.TYPE_REPLACER;
+								} else {
+									if (lastType === this.TYPE_SPELL || lastType === this.TYPE_PARENTHESES) {
+										this._setError(Lng.seMissOp[lang], null);
+										return null;
+									}
+									res = this._doSpell(name, sList.substr(i), lastType === this.TYPE_NOT);
+									if (!res) {
+										return null;
+									}
+									i += res[0] - 1;
+									this._col += res[0] - 1;
+									spellsArr.push(res[1]);
+									lastType = this.TYPE_SPELL;
 								}
-								hasReps = true;
+								break;
 							}
-							res = this._doRep(name, sList.substr(i));
-							if (!res) {
+						case '(':
+							if (hasReps) {
+								this._setError(Lng.seUnexpChar[lang], '(');
 								return null;
 							}
-							(name === 'rep' ? reps : outreps).push(res[1]);
-							i += res[0] - 1;
-							this._col += res[0] - 1;
-							lastType = this.TYPE_REPLACER;
-						} else {
 							if (lastType === this.TYPE_SPELL || lastType === this.TYPE_PARENTHESES) {
 								this._setError(Lng.seMissOp[lang], null);
 								return null;
 							}
-							res = this._doSpell(name, sList.substr(i), lastType === this.TYPE_NOT);
+							res = this._generate(sList.substr(i + 1), true);
 							if (!res) {
 								return null;
 							}
-							i += res[0] - 1;
-							this._col += res[0] - 1;
-							spells.push(res[1]);
-							lastType = this.TYPE_SPELL;
-						}
-						break;
-					case '(':
-						if (hasReps) {
-							this._setError(Lng.seUnexpChar[lang], '(');
-							return null;
-						}
-						if (lastType === this.TYPE_SPELL || lastType === this.TYPE_PARENTHESES) {
-							this._setError(Lng.seMissOp[lang], null);
-							return null;
-						}
-						res = this._generate(sList.substr(i + 1), true);
-						if (!res) {
-							return null;
-						}
-						i += res[0] + 1;
-						spells.push([lastType === this.TYPE_NOT ? 0x1FF : 0xFF, res[1]]);
-						lastType = this.TYPE_PARENTHESES;
-						break;
-					case '|':
-					case '&':
-						if (hasReps) {
-							this._setError(Lng.seUnexpChar[lang], sList[i]);
-							return null;
-						}
-						if (lastType !== this.TYPE_SPELL && lastType !== this.TYPE_PARENTHESES) {
-							this._setError(Lng.seMissSpell[lang], null);
-							return null;
-						}
-						if (sList[i] === '&') {
-							spells[spells.length - 1][0] |= 0x200;
-						}
-						lastType = this.TYPE_ANDOR;
-						break;
-					case '!':
-						if (hasReps) {
-							this._setError(Lng.seUnexpChar[lang], '!');
-							return null;
-						}
-						if (lastType !== this.TYPE_ANDOR && lastType !== this.TYPE_UNKNOWN) {
-							this._setError(Lng.seMissOp[lang], null);
-							return null;
-						}
-						lastType = this.TYPE_NOT;
-						break;
-					case ')':
-						if (hasReps) {
-							this._setError(Lng.seUnexpChar[lang], ')');
-							return null;
-						}
-						if (lastType === this.TYPE_ANDOR || lastType === this.TYPE_NOT) {
-							this._setError(Lng.seMissSpell[lang], null);
-							return null;
-						}
-						if (inParens) {
-							return [i, spells];
-						}
-					default:
-						this._setError(Lng.seUnexpChar[lang], sList[i]);
-						return null;
-				}
-			}
-			if (inParens) {
-				this._setError(Lng.seMissClBkt[lang], null);
-				return null;
-			}
-			if (lastType !== this.TYPE_SPELL && lastType !== this.TYPE_PARENTHESES && lastType !== this.TYPE_REPLACER) {
-				this._setError(Lng.seMissSpell[lang], null);
-				return null;
-			}
-			if (!reps.length) {
-				reps = false;
-			}
-			if (!outreps.length) {
-				outreps = false;
-			}
-			return [spells, reps, outreps];
-		},
-		_getScope: function _getScope(str) {
-			var m = str.match(/^\[([a-z0-9\/]+)(?:(,)|,(\s*[0-9]+))?\]/);
-			if (m) {
-				return [m[0].length, [m[1], m[3] ? +m[3] : m[2] ? -1 : false]];
-			}
-			return null;
-		},
-		_getRegex: function _getRegex(str, haveComma) {
-			var val,
-			    m = str.match(/^\((\/.*?[^\\]\/[igm]*)(?:\)|\s*(,))/);
-			if (!m) {
-				return null;
-			}
-			if (haveComma !== Boolean(m[2])) {
-				return null;
-			}
-			val = m[1];
-			try {
-				toRegExp(val, true);
-			} catch (e) {
-				this._setError(Lng.seErrRegex[lang], val);
-				return null;
-			}
-			return [m[0].length, val];
-		},
-		_getText: function _getText(str, haveBracket) {
-			if (haveBracket && str[0] !== '(') {
-				return [0, ''];
-			}
-			var rv = '';
-			for (var i = haveBracket ? 1 : 0, len = str.length; i < len; ++i) {
-				var ch = str[i];
-				if (ch === '\\') {
-					if (i === len - 1) {
-						return null;
-					}
-					switch (str[i + 1]) {
-						case 'n':
-							rv += '\n';
+							i += res[0] + 1;
+							spellsArr.push([lastType === this.TYPE_NOT ? 0x1FF : 0xFF, res[1]]);
+							lastType = this.TYPE_PARENTHESES;
 							break;
-						case '\\':
-							rv += '\\';
+						case '|':
+						case '&':
+							if (hasReps) {
+								this._setError(Lng.seUnexpChar[lang], sList[i]);
+								return null;
+							}
+							if (lastType !== this.TYPE_SPELL && lastType !== this.TYPE_PARENTHESES) {
+								this._setError(Lng.seMissSpell[lang], null);
+								return null;
+							}
+							if (sList[i] === '&') {
+								spellsArr[spellsArr.length - 1][0] |= 0x200;
+							}
+							lastType = this.TYPE_ANDOR;
+							break;
+						case '!':
+							if (hasReps) {
+								this._setError(Lng.seUnexpChar[lang], '!');
+								return null;
+							}
+							if (lastType !== this.TYPE_ANDOR && lastType !== this.TYPE_UNKNOWN) {
+								this._setError(Lng.seMissOp[lang], null);
+								return null;
+							}
+							lastType = this.TYPE_NOT;
 							break;
 						case ')':
-							rv += ')';
-							break;
+							if (hasReps) {
+								this._setError(Lng.seUnexpChar[lang], ')');
+								return null;
+							}
+							if (lastType === this.TYPE_ANDOR || lastType === this.TYPE_NOT) {
+								this._setError(Lng.seMissSpell[lang], null);
+								return null;
+							}
+							if (inParens) {
+								return [i, spellsArr];
+							}
 						default:
+							this._setError(Lng.seUnexpChar[lang], sList[i]);
 							return null;
 					}
-					++i;
-				} else if (ch === ')') {
-					return [i + 1, rv];
-				} else {
-					rv += ch;
 				}
-			}
-			return null;
-		},
-		_doRep: function _doRep(name, str) {
-			var regex,
-			    scope = this._getScope(str);
-			if (scope) {
-				str = str.substring(scope[0]);
-			} else {
-				scope = [0, ['', '']];
-			}
-			regex = this._getRegex(str, true);
-			if (regex) {
-				str = str.substring(regex[0]);
-				if (str[0] === ')') {
-					return [regex[0] + scope[0] + 1, [scope[1][0], scope[1][1], regex[1], '']];
-				}
-				var val = this._getText(str, false);
-				if (val) {
-					return [val[0] + regex[0] + scope[0], [scope[1][0], scope[1][1], regex[1], val[1]]];
-				}
-			}
-			this._setError(Lng.seSyntaxErr[lang], name);
-			return null;
-		},
-		_doSpell: function _doSpell(name, str, isNeg) {
-			var m,
-			    spellType,
-			    val,
-			    temp,
-			    scope = null,
-			    i = 0,
-			    spellIdx = Spells.names.indexOf(name);
-			if (spellIdx === -1) {
-				this._setError(Lng.seUnknown[lang], name);
-				return null;
-			}
-			temp = this._getScope(str);
-			if (temp) {
-				i += temp[0];
-				str = str.substring(temp[0]);
-				scope = temp[1];
-			}
-			spellType = isNeg ? spellIdx | 0x100 : spellIdx;
-			if (str[0] !== '(' || str[1] === ')') {
-				if (Spells.needArg[spellIdx]) {
-					this._setError(Lng.seMissArg[lang], name);
+				if (inParens) {
+					this._setError(Lng.seMissClBkt[lang], null);
 					return null;
 				}
-				return [str[0] === '(' ? i + 2 : i, [spellType, spellIdx === 14 ? 0x3F : '', scope]];
+				if (lastType !== this.TYPE_SPELL && lastType !== this.TYPE_PARENTHESES && lastType !== this.TYPE_REPLACER) {
+					this._setError(Lng.seMissSpell[lang], null);
+					return null;
+				}
+				if (!reps.length) {
+					reps = false;
+				}
+				if (!outreps.length) {
+					outreps = false;
+				}
+				return [spellsArr, reps, outreps];
 			}
-			switch (spellIdx) {
-				case 4:
-					m = str.match(/^\((\d+)\)/);
-					if (+m[1] === +m[1]) {
-						return [i + m[0].length, [spellType, +m[1], scope]];
+		}, {
+			key: '_getRegex',
+			value: function _getRegex(str, haveComma) {
+				var m = str.match(/^\((\/.*?[^\\]\/[igm]*)(?:\)|\s*(,))/);
+				if (!m || haveComma !== Boolean(m[2])) {
+					return null;
+				}
+				var val = m[1];
+				try {
+					toRegExp(val, true);
+				} catch (e) {
+					this._setError(Lng.seErrRegex[lang], val);
+					return null;
+				}
+				return [m[0].length, val];
+			}
+		}, {
+			key: '_doRep',
+			value: function _doRep(name, str) {
+				var scope = SpellsCodegen._getScope(str);
+				if (scope) {
+					str = str.substring(scope[0]);
+				} else {
+					scope = [0, ['', '']];
+				}
+				var regex = this._getRegex(str, true);
+				if (regex) {
+					str = str.substring(regex[0]);
+					if (str[0] === ')') {
+						return [regex[0] + scope[0] + 1, [scope[1][0], scope[1][1], regex[1], '']];
 					}
-					break;
-				case 8:
-					m = str.match(/^\(([><=])(?:(\d+(?:\.\d+)?)(?:-(\d+(?:\.\d+)?))?)?(?:@(\d+)(?:-(\d+))?x(\d+)(?:-(\d+))?)?\)/);
-					if (m && (m[2] || m[4])) {
-						return [i + m[0].length, [spellType, [m[1] === '=' ? 0 : m[1] === '<' ? 1 : 2, m[2] && [+m[2], m[3] ? +m[3] : +m[2]], m[4] && [+m[4], m[5] ? +m[5] : +m[4], +m[6], m[7] ? +m[7] : +m[6]]], scope]];
+					var val = SpellsCodegen._getText(str, false);
+					if (val) {
+						return [val[0] + regex[0] + scope[0], [scope[1][0], scope[1][1], regex[1], val[1]]];
 					}
-					break;
-				case 14:
-					m = str.match(/^\(([a-z, ]+)\)/);
-					if (m) {
-						val = m[1].split(/, */).reduce(function (val, str) {
-							switch (str) {
-								case 'samelines':
-									return val |= 1;
-								case 'samewords':
-									return val |= 2;
-								case 'longwords':
-									return val |= 4;
-								case 'symbols':
-									return val |= 8;
-								case 'capslock':
-									return val |= 16;
-								case 'numbers':
-									return val |= 32;
-								case 'whitespace':
-									return val |= 64;
-								default:
-									return -1;
+				}
+				this._setError(Lng.seSyntaxErr[lang], name);
+				return null;
+			}
+		}, {
+			key: '_doSpell',
+			value: function _doSpell(name, str, isNeg) {
+				var m = void 0,
+				    val = void 0,
+				    scope = null,
+				    i = 0;
+				var spellIdx = Spells.names.indexOf(name);
+				if (spellIdx === -1) {
+					this._setError(Lng.seUnknown[lang], name);
+					return null;
+				}
+				var temp = SpellsCodegen._getScope(str);
+				if (temp) {
+					i += temp[0];
+					str = str.substring(temp[0]);
+					scope = temp[1];
+				}
+				var spellType = isNeg ? spellIdx | 0x100 : spellIdx;
+				if (str[0] !== '(' || str[1] === ')') {
+					if (Spells.needArg[spellIdx]) {
+						this._setError(Lng.seMissArg[lang], name);
+						return null;
+					}
+					return [str[0] === '(' ? i + 2 : i, [spellType, spellIdx === 14 ? 0x3F : '', scope]];
+				}
+				switch (spellIdx) {
+					case 4:
+						m = str.match(/^\((\d+)\)/);
+						if (+m[1] === +m[1]) {
+							return [i + m[0].length, [spellType, +m[1], scope]];
+						}
+						break;
+					case 8:
+						m = str.match(/^\(([><=])(?:(\d+(?:\.\d+)?)(?:-(\d+(?:\.\d+)?))?)?(?:@(\d+)(?:-(\d+))?x(\d+)(?:-(\d+))?)?\)/);
+						if (m && (m[2] || m[4])) {
+							return [i + m[0].length, [spellType, [m[1] === '=' ? 0 : m[1] === '<' ? 1 : 2, m[2] && [+m[2], m[3] ? +m[3] : +m[2]], m[4] && [+m[4], m[5] ? +m[5] : +m[4], +m[6], m[7] ? +m[7] : +m[6]]], scope]];
+						}
+						break;
+					case 14:
+						m = str.match(/^\(([a-z, ]+)\)/);
+						if (m) {
+							val = m[1].split(/, */).reduce(function (val, str) {
+								switch (str) {
+									case 'samelines':
+										return val |= 1;
+									case 'samewords':
+										return val |= 2;
+									case 'longwords':
+										return val |= 4;
+									case 'symbols':
+										return val |= 8;
+									case 'capslock':
+										return val |= 16;
+									case 'numbers':
+										return val |= 32;
+									case 'whitespace':
+										return val |= 64;
+									default:
+										return -1;
+								}
+							}, 0);
+							if (val !== -1) {
+								return [i + m[0].length, [spellType, val, scope]];
 							}
-						}, 0);
-						if (val !== -1) {
+						}
+						break;
+					case 11:
+					case 15:
+						m = str.match(/^\(([\d-, ]+)\)/);
+						if (m) {
+							m[1].split(/, */).forEach(function (v) {
+								if (v.includes('-')) {
+									var nums = v.split('-');
+									nums[0] = +nums[0];
+									nums[1] = +nums[1];
+									this[1].push(nums);
+								} else {
+									this[0].push(+v);
+								}
+							}, val = [[], []]);
 							return [i + m[0].length, [spellType, val, scope]];
 						}
-					}
-					break;
-				case 11:
-				case 15:
-					m = str.match(/^\(([\d-, ]+)\)/);
-					if (m) {
-						m[1].split(/, */).forEach(function (v) {
-							if (v.includes('-')) {
-								var nums = v.split('-');
-								nums[0] = +nums[0];
-								nums[1] = +nums[1];
-								this[1].push(nums);
-							} else {
-								this[0].push(+v);
-							}
-						}, val = [[], []]);
-						return [i + m[0].length, [spellType, val, scope]];
-					}
-					break;
-				case 1:
-				case 2:
-				case 3:
-				case 5:
-				case 13:
-					temp = this._getRegex(str, false);
-					if (temp) {
-						return [i + temp[0], [spellType, temp[1], scope]];
-					}
-					break;
-				default:
-					temp = this._getText(str, true);
-					if (temp) {
-						return [i + temp[0], [spellType, spellIdx === 0 ? temp[1].toLowerCase() : temp[1], scope]];
-					}
+						break;
+					case 1:
+					case 2:
+					case 3:
+					case 5:
+					case 13:
+						temp = this._getRegex(str, false);
+						if (temp) {
+							return [i + temp[0], [spellType, temp[1], scope]];
+						}
+						break;
+					default:
+						temp = SpellsCodegen._getText(str, true);
+						if (temp) {
+							return [i + temp[0], [spellType, spellIdx === 0 ? temp[1].toLowerCase() : temp[1], scope]];
+						}
+				}
+				this._setError(Lng.seSyntaxErr[lang], name);
+				return null;
 			}
-			this._setError(Lng.seSyntaxErr[lang], name);
-			return null;
-		},
-		_setError: function _setError(msg, arg) {
-			this.hasError = true;
-			this._errMsg = msg;
-			this._errMsgArg = arg;
-		}
-	};
-
-	var SpellsRunner = function () {
-		_createClass(SpellsRunner, null, [{
-			key: 'unhideAll',
-			value: function unhideAll() {
-				if (aib.t) {
-					sesStorage['de-hidden-' + aib.b + aib.t] = null;
+		}, {
+			key: '_setError',
+			value: function _setError(msg, arg) {
+				this.hasError = true;
+				this._errMsg = msg;
+				this._errMsgArg = arg;
+			}
+		}, {
+			key: 'error',
+			get: function get() {
+				return !this.hasError ? '' : (this._errMsgArg ? this._errMsg.replace('%s', this._errMsgArg) : this._errMsg) + Lng.seRow[lang] + this._line + Lng.seCol[lang] + this._col + ')';
+			}
+		}], [{
+			key: '_getScope',
+			value: function _getScope(str) {
+				var m = str.match(/^\[([a-z0-9/]+)(?:(,)|,(\s*[0-9]+))?\]/);
+				return m ? [m[0].length, [m[1], m[3] ? +m[3] : m[2] ? -1 : false]] : null;
+			}
+		}, {
+			key: '_getText',
+			value: function _getText(str, haveBracket) {
+				if (haveBracket && str[0] !== '(') {
+					return [0, ''];
 				}
-				for (var post = Thread.first.op; post; post = post.next) {
-					if (post.spellHidden) {
-						post.spellUnhide();
+				var rv = '';
+				for (var i = haveBracket ? 1 : 0, len = str.length; i < len; ++i) {
+					var ch = str[i];
+					if (ch === '\\') {
+						if (i === len - 1) {
+							return null;
+						}
+						switch (str[i + 1]) {
+							case 'n':
+								rv += '\n';break;
+							case '\\':
+								rv += '\\';break;
+							case ')':
+								rv += ')';break;
+							default:
+								return null;
+						}
+						++i;
+					} else if (ch === ')') {
+						return [i + 1, rv];
+					} else {
+						rv += ch;
 					}
 				}
+				return null;
 			}
 		}]);
 
+		return SpellsCodegen;
+	}();
+
+	var SpellsRunner = function () {
 		function SpellsRunner() {
 			_classCallCheck(this, SpellsRunner);
 
@@ -10189,7 +11055,7 @@ true, true],
 			this._endPromise = null;
 			this._spells = Spells.hiders;
 			if (!this._spells) {
-				this.run = this._unhidePost;
+				this.run = SpellsRunner._unhidePost;
 				SpellsRunner.cachedData = null;
 			}
 		}
@@ -10197,11 +11063,11 @@ true, true],
 		_createClass(SpellsRunner, [{
 			key: 'end',
 			value: function end() {
-				var _this19 = this;
+				var _this18 = this;
 
 				if (this._endPromise) {
 					this._endPromise.then(function () {
-						return _this19._savePostsHelper();
+						return _this18._savePostsHelper();
 					});
 				} else {
 					this._savePostsHelper();
@@ -10210,13 +11076,12 @@ true, true],
 		}, {
 			key: 'run',
 			value: function run(post) {
-				var _this20 = this;
+				var _this19 = this;
 
-				var interp = new SpellsInterpreter(post, this._spells);
-				var res = interp.run();
+				var res = new SpellsInterpreter(post, this._spells).run();
 				if (res instanceof Promise) {
 					res = res.then(function (val) {
-						return _this20._checkRes(post, val);
+						return _this19._checkRes(post, val);
 					});
 					this._endPromise = this._endPromise ? this._endPromise.then(function () {
 						return res;
@@ -10227,11 +11092,11 @@ true, true],
 			}
 		}, {
 			key: '_checkRes',
-			value: function _checkRes(post, _ref27) {
-				var _ref28 = _slicedToArray(_ref27, 3),
-				    hasNumSpell = _ref28[0],
-				    val = _ref28[1],
-				    msg = _ref28[2];
+			value: function _checkRes(post, _ref43) {
+				var _ref44 = _slicedToArray(_ref43, 3),
+				    hasNumSpell = _ref44[0],
+				    val = _ref44[1],
+				    msg = _ref44[2];
 
 				this.hasNumSpell |= hasNumSpell;
 				if (val) {
@@ -10241,7 +11106,48 @@ true, true],
 					}
 					return 1;
 				}
-				return this._unhidePost(post);
+				return SpellsRunner._unhidePost(post);
+			}
+		}, {
+			key: '_savePostsHelper',
+			value: function _savePostsHelper() {
+				if (this._spells) {
+					if (aib.t) {
+						var lPost = Thread.first.lastNotDeleted;
+						var data = null;
+						if (Spells.hiders) {
+							if (SpellsRunner.cachedData) {
+								data = SpellsRunner.cachedData;
+							} else {
+								data = [];
+								for (var post = Thread.first.op; post; post = post.nextNotDeleted) {
+									data.push(post.spellHidden ? [true, Post.Note.text] : [false, null]);
+								}
+								SpellsRunner.cachedData = data;
+							}
+						}
+						sesStorage['de-hidden-' + aib.b + aib.t] = !data ? null : JSON.stringify({
+							hash: Cfg.hideBySpell ? Spells.hash : 0,
+							lastCount: lPost.count,
+							lastNum: lPost.num,
+							data: data
+						});
+					}
+					toggleWindow('hid', true);
+				}
+				ImagesHashStorage.endFn();
+			}
+		}], [{
+			key: 'unhideAll',
+			value: function unhideAll() {
+				if (aib.t) {
+					sesStorage['de-hidden-' + aib.b + aib.t] = null;
+				}
+				for (var post = Thread.first.op; post; post = post.next) {
+					if (post.spellHidden) {
+						post.spellUnhide();
+					}
+				}
 			}
 		}, {
 			key: '_unhidePost',
@@ -10254,36 +11160,6 @@ true, true],
 				}
 				return 0;
 			}
-		}, {
-			key: '_savePostsHelper',
-			value: function _savePostsHelper() {
-				if (this._spells) {
-					if (aib.t) {
-						var lPost = Thread.first.lastNotDeleted,
-						    data = null;
-						if (Spells.hiders) {
-							if (SpellsRunner.cachedData) {
-								data = SpellsRunner.cachedData;
-							} else {
-								data = [];
-								for (var post = Thread.first.op; post; post = post.nextNotDeleted) {
-									var hidden = post.spellHidden;
-									data.push(hidden ? [true, post.note.text] : [false, null]);
-								}
-								SpellsRunner.cachedData = data;
-							}
-						}
-						sesStorage['de-hidden-' + aib.b + aib.t] = !data ? null : JSON.stringify({
-							'hash': Cfg.hideBySpell ? Spells.hash : 0,
-							'lastCount': lPost.count,
-							'lastNum': lPost.num,
-							'data': data
-						});
-					}
-					toggleWindow('hid', true);
-				}
-				ImagesHashStorage.endFn();
-			}
 		}]);
 
 		return SpellsRunner;
@@ -10291,1144 +11167,1363 @@ true, true],
 
 	SpellsRunner.cachedData = null;
 
-	function SpellsInterpreter(post, spells) {
-		this._post = post;
-		this._ctx = [spells.length, spells, 0, false];
-		this._lastTSpells = [];
-		this._triggeredSpellsStack = [this._lastTSpells];
-		this._deep = 0;
-	}
-	SpellsInterpreter.prototype = {
-		hasNumSpell: false,
-		run: function run() {
-			var _this21 = this;
+	var SpellsInterpreter = function () {
+		function SpellsInterpreter(post, spells) {
+			_classCallCheck(this, SpellsInterpreter);
 
-			var rv,
-			    stopCheck,
-			    isNegScope = this._ctx.pop(),
-			    i = this._ctx.pop(),
-			    scope = this._ctx.pop(),
-			    len = this._ctx.pop();
-			while (true) {
-				if (i < len) {
-					var type = scope[i][0] & 0xFF;
-					if (type === 0xFF) {
-						this._deep++;
-						this._ctx.push(len, scope, i, isNegScope);
-						isNegScope = !!((scope[i][0] & 0x100) !== 0 ^ isNegScope);
-						scope = scope[i][1];
-						len = scope.length;
-						i = 0;
-						this._lastTSpells = [];
-						this._triggeredSpellsStack.push(this._lastTSpells);
-						continue;
+			this.hasNumSpell = false;
+			this._ctx = [spells.length, spells, 0, false];
+			this._deep = 0;
+			this._lastTSpells = [];
+			this._post = post;
+			this._triggeredSpellsStack = [this._lastTSpells];
+			this._wipeMsg = null;
+		}
+
+		_createClass(SpellsInterpreter, [{
+			key: 'run',
+			value: function run() {
+				var _this20 = this;
+
+				var rv = void 0,
+				    stopCheck = void 0;
+				var isNegScope = this._ctx.pop();
+				var i = this._ctx.pop();
+				var scope = this._ctx.pop();
+				var len = this._ctx.pop();
+				while (true) {
+					if (i < len) {
+						var type = scope[i][0] & 0xFF;
+						if (type === 0xFF) {
+							this._deep++;
+							this._ctx.push(len, scope, i, isNegScope);
+							isNegScope = !!((scope[i][0] & 0x100) !== 0 ^ isNegScope);
+							scope = scope[i][1];
+							len = scope.length;
+							i = 0;
+							this._lastTSpells = [];
+							this._triggeredSpellsStack.push(this._lastTSpells);
+							continue;
+						}
+						var val = this._runSpell(type, scope[i][1]);
+						if (val instanceof Promise) {
+							this._ctx.push(len, scope, ++i, isNegScope);
+							return val.then(function (v) {
+								return _this20._asyncContinue(v);
+							});
+						}
+
+						var _checkRes2 = this._checkRes(scope[i], val, isNegScope);
+
+						var _checkRes3 = _slicedToArray(_checkRes2, 2);
+
+						rv = _checkRes3[0];
+						stopCheck = _checkRes3[1];
+
+						if (!stopCheck) {
+							i++;
+							continue;
+						}
 					}
-					var val = this._runSpell(type, scope[i][1]);
-					if (val instanceof Promise) {
-						this._ctx.push(len, scope, ++i, isNegScope);
-						return val.then(function (v) {
-							return _this21._asyncContinue(v);
-						});
+					if (this._deep !== 0) {
+						this._deep--;
+						isNegScope = this._ctx.pop();
+						i = this._ctx.pop();
+						scope = this._ctx.pop();
+						len = this._ctx.pop();
+						if ((scope[i][0] & 0x200) === 0 ^ rv) {
+							i++;
+							this._triggeredSpellsStack.pop();
+							this._lastTSpells = this._triggeredSpellsStack[this._triggeredSpellsStack.length - 1];
+							continue;
+						}
 					}
-
-					var _checkRes2 = this._checkRes(scope[i], val, isNegScope);
-
-					var _checkRes3 = _slicedToArray(_checkRes2, 2);
-
-					rv = _checkRes3[0];
-					stopCheck = _checkRes3[1];
-
-					if (!stopCheck) {
-						i++;
-						continue;
-					}
+					return [this.hasNumSpell, rv, rv ? this._getMsg() : null];
 				}
-				if (this._deep !== 0) {
-					this._deep--;
-					isNegScope = this._ctx.pop();
-					i = this._ctx.pop();
-					scope = this._ctx.pop();
-					len = this._ctx.pop();
-					if ((scope[i][0] & 0x200) === 0 ^ rv) {
-						i++;
-						this._triggeredSpellsStack.pop();
-						this._lastTSpells = this._triggeredSpellsStack[this._triggeredSpellsStack.length - 1];
-						continue;
-					}
-				}
-				return [this.hasNumSpell, rv, rv ? this._getMsg() : null];
 			}
-		},
+		}, {
+			key: '_asyncContinue',
+			value: function _asyncContinue(val) {
+				var cl = this._ctx.length;
+				var spell = this._ctx[cl - 3][this._ctx[cl - 2] - 1];
 
+				var _checkRes4 = this._checkRes(spell, val, this._ctx[cl - 1]),
+				    _checkRes5 = _slicedToArray(_checkRes4, 2),
+				    rv = _checkRes5[0],
+				    stopCheck = _checkRes5[1];
 
-		_wipeMsg: null,
-		_asyncContinue: function _asyncContinue(val) {
-			var cl = this._ctx.length;
-			var spell = this._ctx[cl - 3][this._ctx[cl - 2] - 1];
-
-			var _checkRes4 = this._checkRes(spell, val, this._ctx[cl - 1]),
-			    _checkRes5 = _slicedToArray(_checkRes4, 2),
-			    rv = _checkRes5[0],
-			    stopCheck = _checkRes5[1];
-
-			return stopCheck ? [this.hasNumSpell, rv, rv ? this._getMsg() : null] : this.run();
-		},
-		_checkRes: function _checkRes(spell, val, isNegScope) {
-			var flags = spell[0];
-			var isAndSpell = (flags & 0x200) !== 0 ^ isNegScope;
-			var isNegSpell = (flags & 0x100) !== 0 ^ isNegScope;
-			if (isNegSpell ^ val) {
-				this._lastTSpells.push([isNegSpell, spell, (spell[0] & 0xFF) === 14 ? this._wipeMsg : null]);
-				return [true, !isAndSpell];
+				return stopCheck ? [this.hasNumSpell, rv, rv ? this._getMsg() : null] : this.run();
 			}
-			this._lastTSpells.length = 0;
-			return [false, isAndSpell];
-		},
-		_getMsg: function _getMsg() {
-			var rv = [];
-			for (var _iterator14 = this._triggeredSpellsStack, _isArray14 = Array.isArray(_iterator14), _i20 = 0, _iterator14 = _isArray14 ? _iterator14 : _iterator14[Symbol.iterator]();;) {
-				var _ref29;
-
-				if (_isArray14) {
-					if (_i20 >= _iterator14.length) break;
-					_ref29 = _iterator14[_i20++];
-				} else {
-					_i20 = _iterator14.next();
-					if (_i20.done) break;
-					_ref29 = _i20.value;
+		}, {
+			key: '_checkRes',
+			value: function _checkRes(spell, val, isNegScope) {
+				var flags = spell[0];
+				var isAndSpell = (flags & 0x200) !== 0 ^ isNegScope;
+				var isNegSpell = (flags & 0x100) !== 0 ^ isNegScope;
+				if (isNegSpell ^ val) {
+					this._lastTSpells.push([isNegSpell, spell, (spell[0] & 0xFF) === 14 ? this._wipeMsg : null]);
+					return [true, !isAndSpell];
 				}
+				this._lastTSpells.length = 0;
+				return [false, isAndSpell];
+			}
+		}, {
+			key: '_getMsg',
+			value: function _getMsg() {
+				var rv = [];
+				for (var _iterator14 = this._triggeredSpellsStack, _isArray14 = Array.isArray(_iterator14), _i20 = 0, _iterator14 = _isArray14 ? _iterator14 : _iterator14[Symbol.iterator]();;) {
+					var _ref45;
 
-				var spellEls = _ref29;
-
-				for (var _iterator15 = spellEls, _isArray15 = Array.isArray(_iterator15), _i21 = 0, _iterator15 = _isArray15 ? _iterator15 : _iterator15[Symbol.iterator]();;) {
-					var _ref30;
-
-					if (_isArray15) {
-						if (_i21 >= _iterator15.length) break;
-						_ref30 = _iterator15[_i21++];
+					if (_isArray14) {
+						if (_i20 >= _iterator14.length) break;
+						_ref45 = _iterator14[_i20++];
 					} else {
-						_i21 = _iterator15.next();
-						if (_i21.done) break;
-						_ref30 = _i21.value;
+						_i20 = _iterator14.next();
+						if (_i20.done) break;
+						_ref45 = _i20.value;
 					}
 
-					var _ref31 = _ref30,
-					    _ref32 = _slicedToArray(_ref31, 3),
-					    isNeg = _ref32[0],
-					    spell = _ref32[1],
-					    wipeMsg = _ref32[2];
+					var spellEls = _ref45;
 
-					rv.push(Spells.decompileSpell(spell[0] & 0xFF, isNeg, spell[1], spell[2], wipeMsg));
-				}
-			}
-			return rv.join(' & ');
-		},
-		_runSpell: function _runSpell(spellId, val) {
-			switch (spellId) {
-				case 0:
-					return this._words(val);
-				case 1:
-					return this._exp(val);
-				case 2:
-					return this._exph(val);
-				case 3:
-					return this._imgn(val);
-				case 4:
-					return this._ihash(val);
-				case 5:
-					return this._subj(val);
-				case 6:
-					return this._name(val);
-				case 7:
-					return this._trip(val);
-				case 8:
-					return this._img(val);
-				case 9:
-					return this._sage(val);
-				case 10:
-					return this._op(val);
-				case 11:
-					return this._tlen(val);
-				case 12:
-					return this._all(val);
-				case 13:
-					return this._video(val);
-				case 14:
-					return this._wipe(val);
-				case 15:
-					this.hasNumSpell = true;
-					return this._num(val);
-				case 16:
-					return this._vauthor(val);
-			}
-		},
-		_words: function _words(val) {
-			return this._post.text.toLowerCase().includes(val) || this._post.subj.toLowerCase().includes(val);
-		},
-		_exp: function _exp(val) {
-			return val.test(this._post.text);
-		},
-		_exph: function _exph(val) {
-			return val.test(this._post.html);
-		},
-		_imgn: function _imgn(val) {
-			for (var _iterator16 = this._post.images, _isArray16 = Array.isArray(_iterator16), _i22 = 0, _iterator16 = _isArray16 ? _iterator16 : _iterator16[Symbol.iterator]();;) {
-				var _ref33;
+					for (var _iterator15 = spellEls, _isArray15 = Array.isArray(_iterator15), _i21 = 0, _iterator15 = _isArray15 ? _iterator15 : _iterator15[Symbol.iterator]();;) {
+						var _ref46;
 
-				if (_isArray16) {
-					if (_i22 >= _iterator16.length) break;
-					_ref33 = _iterator16[_i22++];
-				} else {
-					_i22 = _iterator16.next();
-					if (_i22.done) break;
-					_ref33 = _i22.value;
-				}
+						if (_isArray15) {
+							if (_i21 >= _iterator15.length) break;
+							_ref46 = _iterator15[_i21++];
+						} else {
+							_i21 = _iterator15.next();
+							if (_i21.done) break;
+							_ref46 = _i21.value;
+						}
 
-				var image = _ref33;
+						var _ref47 = _ref46,
+						    _ref48 = _slicedToArray(_ref47, 3),
+						    isNeg = _ref48[0],
+						    spell = _ref48[1],
+						    wipeMsg = _ref48[2];
 
-				if (image instanceof Attachment && val.test(image.name)) {
-					return true;
-				}
-			}
-			return false;
-		},
-
-		_ihash: function _ihash(val) {
-			var _iterator17, _isArray17, _i23, _ref34, image, hash;
-
-			return regeneratorRuntime.async(function _ihash$(_context14) {
-				while (1) {
-					switch (_context14.prev = _context14.next) {
-						case 0:
-							_iterator17 = this._post.images, _isArray17 = Array.isArray(_iterator17), _i23 = 0, _iterator17 = _isArray17 ? _iterator17 : _iterator17[Symbol.iterator]();
-
-						case 1:
-							if (!_isArray17) {
-								_context14.next = 7;
-								break;
-							}
-
-							if (!(_i23 >= _iterator17.length)) {
-								_context14.next = 4;
-								break;
-							}
-
-							return _context14.abrupt('break', 21);
-
-						case 4:
-							_ref34 = _iterator17[_i23++];
-							_context14.next = 11;
-							break;
-
-						case 7:
-							_i23 = _iterator17.next();
-
-							if (!_i23.done) {
-								_context14.next = 10;
-								break;
-							}
-
-							return _context14.abrupt('break', 21);
-
-						case 10:
-							_ref34 = _i23.value;
-
-						case 11:
-							image = _ref34;
-
-							if (image instanceof Attachment) {
-								_context14.next = 14;
-								break;
-							}
-
-							return _context14.abrupt('continue', 19);
-
-						case 14:
-							_context14.next = 16;
-							return regeneratorRuntime.awrap(ImagesHashStorage.getHash(image));
-
-						case 16:
-							hash = _context14.sent;
-
-							if (!(hash === val)) {
-								_context14.next = 19;
-								break;
-							}
-
-							return _context14.abrupt('return', true);
-
-						case 19:
-							_context14.next = 1;
-							break;
-
-						case 21:
-							return _context14.abrupt('return', false);
-
-						case 22:
-						case 'end':
-							return _context14.stop();
+						rv.push(Spells.decompileSpell(spell[0] & 0xFF, isNeg, spell[1], spell[2], wipeMsg));
 					}
 				}
-			}, null, this);
-		},
-		_subj: function _subj(val) {
-			var pSubj = this._post.subj;
-			return pSubj ? !val || val.test(pSubj) : false;
-		},
-		_name: function _name(val) {
-			var pName = this._post.posterName;
-			return pName ? !val || pName.includes(val) : false;
-		},
-		_trip: function _trip(val) {
-			var pTrip = this._post.posterTrip;
-			return pTrip ? !val || pTrip.includes(val) : false;
-		},
-		_img: function _img(val) {
-			var images = this._post.images;
-
-			var _val = _slicedToArray(val, 3),
-			    compareRule = _val[0],
-			    weightVals = _val[1],
-			    sizeVals = _val[2];
-
-			if (!val) {
-				return images.hasAttachments;
+				return rv.join(' & ');
 			}
-			for (var _iterator18 = images, _isArray18 = Array.isArray(_iterator18), _i24 = 0, _iterator18 = _isArray18 ? _iterator18 : _iterator18[Symbol.iterator]();;) {
-				var _ref35;
+		}, {
+			key: '_runSpell',
+			value: function _runSpell(spellId, val) {
+				switch (spellId) {
+					case 0:
+						return this._words(val);
+					case 1:
+						return this._exp(val);
+					case 2:
+						return this._exph(val);
+					case 3:
+						return this._imgn(val);
+					case 4:
+						return this._ihash(val);
+					case 5:
+						return this._subj(val);
+					case 6:
+						return this._name(val);
+					case 7:
+						return this._trip(val);
+					case 8:
+						return this._img(val);
+					case 9:
+						return this._sage(val);
+					case 10:
+						return this._op(val);
+					case 11:
+						return this._tlen(val);
+					case 12:
+						return this._all(val);
+					case 13:
+						return this._video(val);
+					case 14:
+						return this._wipe(val);
+					case 15:
+						this.hasNumSpell = true;
+						return this._num(val);
+					case 16:
+						return this._vauthor(val);
+				}
+			}
+		}, {
+			key: '_all',
+			value: function _all() {
+				return true;
+			}
+		}, {
+			key: '_exp',
+			value: function _exp(val) {
+				return val.test(this._post.text);
+			}
+		}, {
+			key: '_exph',
+			value: function _exph(val) {
+				return val.test(this._post.html);
+			}
+		}, {
+			key: '_ihash',
+			value: function () {
+				var _ref49 = _asyncToGenerator( regeneratorRuntime.mark(function _callee12(val) {
+					var _iterator16, _isArray16, _i22, _ref50, image;
 
-				if (_isArray18) {
-					if (_i24 >= _iterator18.length) break;
-					_ref35 = _iterator18[_i24++];
-				} else {
-					_i24 = _iterator18.next();
-					if (_i24.done) break;
-					_ref35 = _i24.value;
+					return regeneratorRuntime.wrap(function _callee12$(_context13) {
+						while (1) {
+							switch (_context13.prev = _context13.next) {
+								case 0:
+									_iterator16 = this._post.images, _isArray16 = Array.isArray(_iterator16), _i22 = 0, _iterator16 = _isArray16 ? _iterator16 : _iterator16[Symbol.iterator]();
+
+								case 1:
+									if (!_isArray16) {
+										_context13.next = 7;
+										break;
+									}
+
+									if (!(_i22 >= _iterator16.length)) {
+										_context13.next = 4;
+										break;
+									}
+
+									return _context13.abrupt('break', 23);
+
+								case 4:
+									_ref50 = _iterator16[_i22++];
+									_context13.next = 11;
+									break;
+
+								case 7:
+									_i22 = _iterator16.next();
+
+									if (!_i22.done) {
+										_context13.next = 10;
+										break;
+									}
+
+									return _context13.abrupt('break', 23);
+
+								case 10:
+									_ref50 = _i22.value;
+
+								case 11:
+									image = _ref50;
+									_context13.t0 = image instanceof Attachment;
+
+									if (!_context13.t0) {
+										_context13.next = 19;
+										break;
+									}
+
+									_context13.next = 16;
+									return ImagesHashStorage.getHash(image);
+
+								case 16:
+									_context13.t1 = _context13.sent;
+									_context13.t2 = val;
+									_context13.t0 = _context13.t1 === _context13.t2;
+
+								case 19:
+									if (!_context13.t0) {
+										_context13.next = 21;
+										break;
+									}
+
+									return _context13.abrupt('return', true);
+
+								case 21:
+									_context13.next = 1;
+									break;
+
+								case 23:
+									return _context13.abrupt('return', false);
+
+								case 24:
+								case 'end':
+									return _context13.stop();
+							}
+						}
+					}, _callee12, this);
+				}));
+
+				function _ihash(_x34) {
+					return _ref49.apply(this, arguments);
 				}
 
-				var image = _ref35;
+				return _ihash;
+			}()
+		}, {
+			key: '_img',
+			value: function _img(val) {
+				var images = this._post.images;
 
-				if (!(image instanceof Attachment)) {
-					continue;
+				var _val = _slicedToArray(val, 3),
+				    compareRule = _val[0],
+				    weightVals = _val[1],
+				    sizeVals = _val[2];
+
+				if (!val) {
+					return images.hasAttachments;
 				}
-				if (weightVals) {
-					var w = image.weight;
-					var hide = void 0;
-					switch (compareRule) {
-						case 0:
-							hide = w >= weightVals[0] && w <= weightVals[1];break;
-						case 1:
-							hide = w < weightVals[0];break;
-						case 2:
-							hide = w > weightVals[0];break;
+				for (var _iterator17 = images, _isArray17 = Array.isArray(_iterator17), _i23 = 0, _iterator17 = _isArray17 ? _iterator17 : _iterator17[Symbol.iterator]();;) {
+					var _ref51;
+
+					if (_isArray17) {
+						if (_i23 >= _iterator17.length) break;
+						_ref51 = _iterator17[_i23++];
+					} else {
+						_i23 = _iterator17.next();
+						if (_i23.done) break;
+						_ref51 = _i23.value;
 					}
-					if (!hide) {
+
+					var image = _ref51;
+
+					if (!(image instanceof Attachment)) {
 						continue;
-					} else if (!sizeVals) {
+					}
+					if (weightVals) {
+						var w = image.weight;
+						var hide = void 0;
+						switch (compareRule) {
+							case 0:
+								hide = w >= weightVals[0] && w <= weightVals[1];break;
+							case 1:
+								hide = w < weightVals[0];break;
+							case 2:
+								hide = w > weightVals[0];break;
+						}
+						if (!hide) {
+							continue;
+						} else if (!sizeVals) {
+							return true;
+						}
+					}
+					if (sizeVals) {
+						var h = image.height,
+						    _w = image.width;
+
+						switch (compareRule) {
+							case 0:
+								if (_w >= sizeVals[0] && _w <= sizeVals[1] && h >= sizeVals[2] && h <= sizeVals[3]) {
+									return true;
+								}
+								break;
+							case 1:
+								if (_w < sizeVals[0] && h < sizeVals[3]) {
+									return true;
+								}
+								break;
+							case 2:
+								if (_w > sizeVals[0] && h > sizeVals[3]) {
+									return true;
+								}
+						}
+					}
+				}
+				return false;
+			}
+		}, {
+			key: '_imgn',
+			value: function _imgn(val) {
+				for (var _iterator18 = this._post.images, _isArray18 = Array.isArray(_iterator18), _i24 = 0, _iterator18 = _isArray18 ? _iterator18 : _iterator18[Symbol.iterator]();;) {
+					var _ref52;
+
+					if (_isArray18) {
+						if (_i24 >= _iterator18.length) break;
+						_ref52 = _iterator18[_i24++];
+					} else {
+						_i24 = _iterator18.next();
+						if (_i24.done) break;
+						_ref52 = _i24.value;
+					}
+
+					var image = _ref52;
+
+					if (image instanceof Attachment && val.test(image.name)) {
 						return true;
 					}
 				}
-				if (sizeVals) {
-					var _w = image.width;
-					var h = image.height;
-					switch (compareRule) {
-						case 0:
-							if (_w >= sizeVals[0] && _w <= sizeVals[1] && h >= sizeVals[2] && h <= sizeVals[3]) {
-								return true;
-							}
-							break;
-						case 1:
-							if (_w < sizeVals[0] && h < sizeVals[3]) {
-								return true;
-							}
-							break;
-						case 2:
-							if (_w > sizeVals[0] && h > sizeVals[3]) {
-								return true;
-							}
-					}
-				}
+				return false;
 			}
-			return false;
-		},
-		_sage: function _sage(val) {
-			return this._post.sage;
-		},
-		_op: function _op(val) {
-			return this._post.isOp;
-		},
-		_tlen: function _tlen(val) {
-			var text = this._post.text.replace(/\s+(?=\s)|\n/g, '');
-			return !val ? !!text : this._tlenNum_helper(val, text.length);
-		},
-		_all: function _all(val) {
-			return true;
-		},
-		_video: function _video(val) {
-			return this._videoVauthor(val, false);
-		},
-		_wipe: function _wipe(val) {
-			var arr = void 0,
-			    len = void 0,
-			    x = void 0,
-			    txt = this._post.text;
-			if (val & 1) {
-				arr = txt.replace(/>/g, '').split(/\s*\n\s*/);
-				if ((len = arr.length) > 5) {
-					arr.sort();
-					for (var i = 0, n = len / 4; i < len;) {
-						x = arr[i];
-						var j = 0;
-						while (arr[i++] === x) {
-							j++;
+		}, {
+			key: '_name',
+			value: function _name(val) {
+				var pName = this._post.posterName;
+				return pName ? !val || pName.includes(val) : false;
+			}
+		}, {
+			key: '_num',
+			value: function _num(val) {
+				return SpellsInterpreter._tlenNum_helper(val, this._post.count + 1);
+			}
+		}, {
+			key: '_op',
+			value: function _op() {
+				return this._post.isOp;
+			}
+		}, {
+			key: '_sage',
+			value: function _sage() {
+				return this._post.sage;
+			}
+		}, {
+			key: '_subj',
+			value: function _subj(val) {
+				var pSubj = this._post.subj;
+				return pSubj ? !val || val.test(pSubj) : false;
+			}
+		}, {
+			key: '_tlen',
+			value: function _tlen(val) {
+				var text = this._post.text.replace(/\s+(?=\s)|\n/g, '');
+				return !val ? !!text : SpellsInterpreter._tlenNum_helper(val, text.length);
+			}
+		}, {
+			key: '_trip',
+			value: function _trip(val) {
+				var pTrip = this._post.posterTrip;
+				return pTrip ? !val || pTrip.includes(val) : false;
+			}
+		}, {
+			key: '_vauthor',
+			value: function _vauthor(val) {
+				return this._videoVauthor(val, true);
+			}
+		}, {
+			key: '_video',
+			value: function _video(val) {
+				return this._videoVauthor(val, false);
+			}
+		}, {
+			key: '_videoVauthor',
+			value: function _videoVauthor(val, isAuthorSpell) {
+				var videos = this._post.videos;
+
+				if (!val) {
+					return !!videos.hasLinks;
+				}
+				if (!videos.hasLinks || !Cfg.YTubeTitles) {
+					return false;
+				}
+				for (var _iterator19 = videos.vData, _isArray19 = Array.isArray(_iterator19), _i25 = 0, _iterator19 = _isArray19 ? _iterator19 : _iterator19[Symbol.iterator]();;) {
+					var _ref53;
+
+					if (_isArray19) {
+						if (_i25 >= _iterator19.length) break;
+						_ref53 = _iterator19[_i25++];
+					} else {
+						_i25 = _iterator19.next();
+						if (_i25.done) break;
+						_ref53 = _i25.value;
+					}
+
+					var siteData = _ref53;
+
+					for (var _iterator20 = siteData, _isArray20 = Array.isArray(_iterator20), _i26 = 0, _iterator20 = _isArray20 ? _iterator20 : _iterator20[Symbol.iterator]();;) {
+						var _ref54;
+
+						if (_isArray20) {
+							if (_i26 >= _iterator20.length) break;
+							_ref54 = _iterator20[_i26++];
+						} else {
+							_i26 = _iterator20.next();
+							if (_i26.done) break;
+							_ref54 = _i26.value;
 						}
-						if (j > 4 && j > n && x) {
-							this._wipeMsg = [1, '"' + x.substr(0, 20) + '" x' + (j + 1)];
+
+						var data = _ref54;
+
+						if (isAuthorSpell ? val === data[1] : val.test(data[0])) {
 							return true;
 						}
 					}
 				}
-			}
-			if (val & 2) {
-				arr = txt.replace(/[\s\.\?\!,>]+/g, ' ').toUpperCase().split(' ');
-				if ((len = arr.length) > 3) {
-					arr.sort();
-					var keys = 0;
-					for (var _i25 = 0, _n = len / 4, pop = 0; _i25 < len; keys++) {
-						x = arr[_i25];
-						var _j2 = 0;
-						while (arr[_i25++] === x) {
-							_j2++;
+				if (videos.linksCount === videos.loadedLinksCount) {
+					return false;
+				}
+				return new Promise(function (resolve) {
+					return videos.titleLoadFn = function (data) {
+						if (isAuthorSpell ? val === data[1] : val.test(data[0])) {
+							resolve(true);
+						} else if (videos.linksCount === videos.loadedLinksCount) {
+							resolve(false);
+						} else {
+							return;
 						}
-						if (len > 25) {
-							if (_j2 > pop && x.length > 2) {
-								pop = _j2;
+						videos.titleLoadFn = null;
+					};
+				});
+			}
+		}, {
+			key: '_wipe',
+			value: function _wipe(val) {
+				var arr = void 0,
+				    len = void 0,
+				    x = void 0;
+				var txt = this._post.text;
+				if (val & 1) {
+					arr = txt.replace(/>/g, '').split(/\s*\n\s*/);
+					if ((len = arr.length) > 5) {
+						arr.sort();
+						for (var i = 0, n = len / 4; i < len;) {
+							x = arr[i];
+							var j = 0;
+							while (arr[i++] === x) {
+								j++;
 							}
-							if (pop >= _n) {
-								this._wipeMsg = [2, 'same "' + x.substr(0, 20) + '" x' + (pop + 1)];
+							if (j > 4 && j > n && x) {
+								this._wipeMsg = [1, '"' + x.substr(0, 20) + '" x' + (j + 1)];
 								return true;
 							}
 						}
 					}
-					x = keys / len;
-					if (x < 0.25) {
-						this._wipeMsg = [2, 'uniq ' + (x * 100).toFixed(0) + '%'];
+				}
+				if (val & 2) {
+					arr = txt.replace(/[\s.?!,>]+/g, ' ').toUpperCase().split(' ');
+					if ((len = arr.length) > 3) {
+						arr.sort();
+						var keys = 0;
+						var pop = 0;
+						for (var _i27 = 0, _n = len / 4; _i27 < len; keys++) {
+							x = arr[_i27];
+							var _j2 = 0;
+							while (arr[_i27++] === x) {
+								_j2++;
+							}
+							if (len > 25) {
+								if (_j2 > pop && x.length > 2) {
+									pop = _j2;
+								}
+								if (pop >= _n) {
+									this._wipeMsg = [2, 'same "' + x.substr(0, 20) + '" x' + (pop + 1)];
+									return true;
+								}
+							}
+						}
+						x = keys / len;
+						if (x < 0.25) {
+							this._wipeMsg = [2, 'uniq ' + (x * 100).toFixed(0) + '%'];
+							return true;
+						}
+					}
+				}
+				if (val & 4) {
+					arr = txt.replace(/https*:\/\/.*?(\s|$)/g, '').replace(/[\s.?!,>:;-]+/g, ' ').split(' ');
+					if (arr[0].length > 50 || (len = arr.length) > 1 && arr.join('').length / len > 10) {
+						this._wipeMsg = [4, null];
 						return true;
 					}
 				}
-			}
-			if (val & 4) {
-				arr = txt.replace(/https*:\/\/.*?(\s|$)/g, '').replace(/[\s\.\?!,>:;-]+/g, ' ').split(' ');
-				if (arr[0].length > 50 || (len = arr.length) > 1 && arr.join('').length / len > 10) {
-					this._wipeMsg = [4, null];
-					return true;
-				}
-			}
-			if (val & 8) {
-				var _txt = txt.replace(/\s+/g, '');
-				if ((len = _txt.length) > 30 && (x = _txt.replace(/[0-9a-zа-я\.\?!,]/ig, '').length / len) > 0.4) {
-					this._wipeMsg = [8, (x * 100).toFixed(0) + '%'];
-					return true;
-				}
-			}
-			if (val & 16) {
-				arr = txt.replace(/[\s\.\?!;,-]+/g, ' ').trim().split(' ');
-				if ((len = arr.length) > 4) {
-					var _n2 = 0;
-					var capsw = 0;
-					var casew = 0;
-					for (var _i26 = 0; _i26 < len; _i26++) {
-						x = arr[_i26];
-						if ((x.match(/[a-zа-я]/ig) || []).length < 5) {
-							continue;
-						}
-						if ((x.match(/[A-ZА-Я]/g) || []).length > 2) {
-							casew++;
-						}
-						if (x === x.toUpperCase()) {
-							capsw++;
-						}
-						_n2++;
-					}
-					if (capsw / _n2 >= 0.3 && _n2 > 4) {
-						this._wipeMsg = [16, 'CAPS ' + capsw / arr.length * 100 + '%'];
-						return true;
-					} else if (casew / _n2 >= 0.3 && _n2 > 8) {
-						this._wipeMsg = [16, 'cAsE ' + casew / arr.length * 100 + '%'];
+				if (val & 8) {
+					var _txt = txt.replace(/\s+/g, '');
+					if ((len = _txt.length) > 30 && (x = _txt.replace(/[0-9a-zа-я.?!,]/ig, '').length / len) > 0.4) {
+						this._wipeMsg = [8, (x * 100).toFixed(0) + '%'];
 						return true;
 					}
 				}
-			}
-			if (val & 32) {
-				var _txt2 = txt.replace(/\s+/g, ' ').replace(/>>\d+|https*:\/\/.*?(?: |$)/g, '');
-				if ((len = _txt2.length) > 30 && (x = (len - _txt2.replace(/\d/g, '').length) / len) > 0.4) {
-					this._wipeMsg = [32, Math.round(x * 100) + '%'];
-					return true;
+				if (val & 16) {
+					arr = txt.replace(/[\s.?!;,-]+/g, ' ').trim().split(' ');
+					if ((len = arr.length) > 4) {
+						var _n2 = 0;
+						var capsw = 0;
+						var casew = 0;
+						for (var _i28 = 0; _i28 < len; _i28++) {
+							x = arr[_i28];
+							if ((x.match(/[a-zа-я]/ig) || []).length < 5) {
+								continue;
+							}
+							if ((x.match(/[A-ZА-Я]/g) || []).length > 2) {
+								casew++;
+							}
+							if (x === x.toUpperCase()) {
+								capsw++;
+							}
+							_n2++;
+						}
+						if (capsw / _n2 >= 0.3 && _n2 > 4) {
+							this._wipeMsg = [16, 'CAPS ' + capsw / arr.length * 100 + '%'];
+							return true;
+						} else if (casew / _n2 >= 0.3 && _n2 > 8) {
+							this._wipeMsg = [16, 'cAsE ' + casew / arr.length * 100 + '%'];
+							return true;
+						}
+					}
 				}
-			}
-			if (val & 64) {
-				if (/(?:\n\s*){10}/i.test(txt)) {
-					this._wipeMsg = [64, null];
-					return true;
+				if (val & 32) {
+					var _txt2 = txt.replace(/\s+/g, ' ').replace(/>>\d+|https*:\/\/.*?(?: |$)/g, '');
+					if ((len = _txt2.length) > 30 && (x = (len - _txt2.replace(/\d/g, '').length) / len) > 0.4) {
+						this._wipeMsg = [32, Math.round(x * 100) + '%'];
+						return true;
+					}
 				}
-			}
-			return false;
-		},
-		_num: function _num(val) {
-			return this._tlenNum_helper(val, this._post.count + 1);
-		},
-		_tlenNum_helper: function _tlenNum_helper(val, num) {
-			var i, arr;
-			for (arr = val[0], i = arr.length - 1; i >= 0; --i) {
-				if (arr[i] === num) {
-					return true;
+				if (val & 64) {
+					if (/(?:\n\s*){10}/i.test(txt)) {
+						this._wipeMsg = [64, null];
+						return true;
+					}
 				}
-			}
-			for (arr = val[1], i = arr.length - 1; i >= 0; --i) {
-				if (num >= arr[i][0] && num <= arr[i][1]) {
-					return true;
-				}
-			}
-			return false;
-		},
-		_vauthor: function _vauthor(val) {
-			return this._videoVauthor(val, true);
-		},
-		_videoVauthor: function _videoVauthor(val, isAuthorSpell) {
-			var videos = this._post.videos;
-			if (!val) {
-				return !!videos.hasLinks;
-			}
-			if (!videos.hasLinks || !Cfg.YTubeTitles) {
 				return false;
 			}
-			for (var _iterator19 = videos.vData, _isArray19 = Array.isArray(_iterator19), _i27 = 0, _iterator19 = _isArray19 ? _iterator19 : _iterator19[Symbol.iterator]();;) {
-				var _ref36;
+		}, {
+			key: '_words',
+			value: function _words(val) {
+				return this._post.text.toLowerCase().includes(val) || this._post.subj.toLowerCase().includes(val);
+			}
+		}], [{
+			key: '_tlenNum_helper',
+			value: function _tlenNum_helper(val, num) {
+				for (var arr = val[0], i = arr.length - 1; i >= 0; --i) {
+					if (arr[i] === num) {
+						return true;
+					}
+				}
+				for (var _arr = val[1], _i29 = _arr.length - 1; _i29 >= 0; --_i29) {
+					if (num >= _arr[_i29][0] && num <= _arr[_i29][1]) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}]);
 
-				if (_isArray19) {
-					if (_i27 >= _iterator19.length) break;
-					_ref36 = _iterator19[_i27++];
+		return SpellsInterpreter;
+	}();
+
+
+	var PostForm = function () {
+		function PostForm(form) {
+			var _this21 = this;
+
+			var oeForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+			var ignoreForm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+			_classCallCheck(this, PostForm);
+
+			this.isBottom = false;
+			this.isHidden = false;
+			this.isQuick = false;
+			this.lastQuickPNum = -1;
+			this.pArea = [];
+			this.pForm = null;
+			this.qArea = null;
+			this._pBtn = [];
+			var qOeForm = 'form[name="oeform"], form[action*="paint"]';
+			this.oeForm = oeForm || $q(qOeForm);
+			if (!ignoreForm && !form) {
+				if (this.oeForm) {
+					ajaxLoad(aib.getThrUrl(aib.b, Thread.first.num), false).then(function (loadedDoc) {
+						var form = $q(aib.qForm, loadedDoc);
+						var oeForm = $q(qOeForm, loadedDoc);
+						pr = new PostForm(form && doc.adoptNode(form), oeForm && doc.adoptNode(oeForm), true);
+					}, function () {
+						return pr = new PostForm(null, null, true);
+					});
 				} else {
-					_i27 = _iterator19.next();
-					if (_i27.done) break;
-					_ref36 = _i27.value;
+					this.form = null;
 				}
-
-				var siteData = _ref36;
-
-				for (var _iterator20 = siteData, _isArray20 = Array.isArray(_iterator20), _i28 = 0, _iterator20 = _isArray20 ? _iterator20 : _iterator20[Symbol.iterator]();;) {
-					var _ref37;
-
-					if (_isArray20) {
-						if (_i28 >= _iterator20.length) break;
-						_ref37 = _iterator20[_i28++];
-					} else {
-						_i28 = _iterator20.next();
-						if (_i28.done) break;
-						_ref37 = _i28.value;
-					}
-
-					var data = _ref37;
-
-					if (isAuthorSpell ? val === data[1] : val.test(data[0])) {
-						return true;
-					}
-				}
+				return;
 			}
-			if (videos.linksCount === videos.loadedLinksCount) {
-				return false;
+			this.tNum = aib.t;
+			this.form = form;
+			this.files = null;
+			this.txta = $q('tr:not([style*="none"]) textarea:not([style*="display:none"])', form);
+			this.subm = $q('tr input[type="submit"]', form);
+			this.name = $q(aib.qFormName, form);
+			this.mail = $q(aib.qFormMail, form);
+			this.subj = $q(aib.qFormSubj, form);
+			this.passw = $q(aib.qFormPassw, form);
+			this.rules = $q(aib.qFormRules, form);
+			this.video = $q('tr input[name="video"], tr input[name="embed"]', form);
+			this._initFileInputs();
+			this._makeHideableContainer();
+			this._makeWindow();
+			if (!form || !this.txta) {
+				return;
 			}
-			return new Promise(function (resolve, reject) {
-				videos.titleLoadFn = function (data) {
-					if (isAuthorSpell ? val === data[1] : val.test(data[0])) {
-						resolve(true);
-					} else if (videos.linksCount === videos.loadedLinksCount) {
-						resolve(false);
-					} else {
-						return;
-					}
-					videos.titleLoadFn = null;
-				};
-			});
-		}
-	};
+			form.style.display = 'inline-block';
+			form.style.textAlign = 'left';
+			var qArea = this.qArea,
+			    txta = this.txta;
 
-
-	function PostForm(form) {
-		var _this22 = this;
-
-		var oeForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-		var ignoreForm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-		if (!ignoreForm && !form) {
-			if (this.oeForm) {
-				ajaxLoad(aib.getThrUrl(aib.b, Thread.first.num), false).then(function (loadedDoc) {
-					var form = $q(aib.qForm, loadedDoc);
-					var oeForm = $q('form[name="oeform"], form[action*="paint"]', loadedDoc);
-					pr = new PostForm(form && doc.adoptNode(form), oeForm && doc.adoptNode(oeForm), true);
-				}, function () {
-					pr = new PostForm(null, null, true);
-				});
-			} else {
-				this.form = null;
-			}
-			return;
-		}
-		this.tNum = aib.t;
-		this.form = form;
-		this.oeForm = oeForm || $q('form[name="oeform"], form[action*="paint"]');
-		this.txta = $q('tr:not([style*="none"]) textarea:not([style*="display:none"])', form);
-		this.subm = $q('tr input[type="submit"]', form);
-		var fileEl = $q('tr input[type="file"]', form);
-		if (fileEl) {
-			if (aib.fixFileInputs) {
-				aib.fixFileInputs($parent(fileEl, 'TD'));
-			}
-			this.files = new Files(this, $q('tr input[type="file"]', form));
-			window.addEventListener('load', function () {
-				return setTimeout(function () {
-					if (!_this22.files.filesCount) {
-						_this22.files.clear();
-					}
-				}, 0);
-			});
-		}
-		this.name = $q(aib.qFormName, form);
-		this.mail = $q(aib.qFormMail, form);
-		this.subj = $q(aib.qFormSubj, form);
-		this.passw = $q(aib.qFormPassw, form);
-		this.rules = $q(aib.qFormRules, form);
-		this.video = $q('tr input[name="video"], tr input[name="embed"]', form);
-		this.pForm = $add('<div id="de-pform" class="de-win-body"></div>');
-		if (this.form) {
-			this.pForm.appendChild(this.form);
-		}
-		if (this.oeForm) {
-			this.pForm.appendChild(this.oeForm);
-		}
-		var html = '<div class="de-parea"><div>[<a href="#"></a>]</div><hr></div>';
-		this.pArea = [$bBegin(DelForm.first.el, html), $aEnd(aib.fch ? $q('.board', DelForm.first.el) : DelForm.first.el, html)];
-		this._pBtn = [this.pArea[0].firstChild, this.pArea[1].firstChild];
-		this._pBtn[0].firstElementChild.onclick = function (e) {
-			return _this22.showMainReply(false, e);
-		};
-		this._pBtn[1].firstElementChild.onclick = function (e) {
-			return _this22.showMainReply(true, e);
-		};
-		this.qArea = $add('<div style="display: none; ' + Cfg.replyWinX + '; ' + Cfg.replyWinY + '; z-index: ' + ++topWinZ + ';" id="de-win-reply" class="' + aib.cReply + (Cfg.replyWinDrag ? ' de-win' : ' de-win-inpost') + '"></div>');
-		this.isBottom = Cfg.addPostForm === 1;
-		this.setReply(false, !aib.t || Cfg.addPostForm > 1);
-		makeDraggable('reply', this.qArea, $aBegin(this.qArea, '<div class="de-win-head">\n\t\t<span class="de-win-title"></span>\n\t\t<span class="de-win-buttons">\n\t\t\t<svg class="de-btn-clear"><use xlink:href="#de-symbol-unavail"/></svg>\n\t\t\t<svg class="de-btn-toggle"><use xlink:href="#de-symbol-win-arrow"/></svg>\n\t\t\t<svg class="de-btn-close"><use xlink:href="#de-symbol-win-close"/></svg>\n\t\t</span>\n\t</div>\n\t<div class="de-resizer de-resizer-top"></div>\n\t<div class="de-resizer de-resizer-left"></div>\n\t<div class="de-resizer de-resizer-right"></div>\n\t<div class="de-resizer de-resizer-bottom"></div>'));
-		var el = $q('.de-win-buttons', this.qArea);
-		el.onmouseover = function (e) {
-			switch (fixEventEl(e.target).classList[0]) {
-				case 'de-btn-clear':
-					this.title = Lng.clearForm[lang];break;
-				case 'de-btn-close':
-					this.title = Lng.closeReply[lang];break;
-				case 'de-btn-toggle':
-					this.title = Cfg.replyWinDrag ? Lng.underPost[lang] : Lng.makeDrag[lang];
-			}
-		};
-		(el = el.firstElementChild).onclick = function () {
-			saveCfg('sageReply', 0);
-			_this22._setSage();
-			_this22.files.clear();
-			[_this22.txta, _this22.name, _this22.mail, _this22.subj, _this22.video, _this22.cap && _this22.cap.textEl].forEach(function (node) {
-				if (node) {
-					node.value = '';
-				}
-			});
-		};
-		(el = el.nextElementSibling).onclick = function () {
-			toggleCfg('replyWinDrag');
-			if (Cfg.replyWinDrag) {
-				_this22.qArea.className = aib.cReply + ' de-win';
-				updateWinZ(_this22.qArea.style);
-			} else {
-				_this22.qArea.className = aib.cReply + ' de-win-inpost';
-				_this22.txta.focus();
-			}
-		};
-		el.nextElementSibling.onclick = function () {
-			return _this22.closeReply();
-		};
-		if (!this.form || !this.txta) {
-			return;
-		}
-		new WinResizer('reply', 'top', 'textaHeight', this.qArea, this.txta);
-		new WinResizer('reply', 'left', 'textaWidth', this.qArea, this.txta);
-		new WinResizer('reply', 'right', 'textaWidth', this.qArea, this.txta);
-		new WinResizer('reply', 'bottom', 'textaHeight', this.qArea, this.txta);
-		if (!aib.kus && (aib.multiFile || Cfg.fileInputs !== 2)) {
+			new WinResizer('reply', 'top', 'textaHeight', qArea, txta);
+			new WinResizer('reply', 'left', 'textaWidth', qArea, txta);
+			new WinResizer('reply', 'right', 'textaWidth', qArea, txta);
+			new WinResizer('reply', 'bottom', 'textaHeight', qArea, txta);
+			this._initTextarea();
+			this.addMarkupPanel();
 			this.setPlaceholders();
-		}
-		this.form.style.display = 'inline-block';
-		this.form.style.textAlign = 'left';
-		if (nav.Firefox) {
-			this.txta.addEventListener('mouseup', function () {
-				saveCfg('textaWidth', parseInt(this.style.width, 10));
-				saveCfg('textaHeight', parseInt(this.style.height, 10));
-			});
-		} else {
-			$aEnd(this.txta, '<div id="de-resizer-text"></div>').addEventListener('mousedown', {
-				_el: this.txta,
-				_elStyle: this.txta.style,
-				handleEvent: function handleEvent(e) {
-					switch (e.type) {
-						case 'mousedown':
-							docBody.addEventListener('mousemove', this);
-							docBody.addEventListener('mouseup', this);
-							$pd(e);
-							return;
-						case 'mousemove':
-							var cr = this._el.getBoundingClientRect();
-							this._elStyle.width = e.clientX - cr.left + 'px';
-							this._elStyle.height = e.clientY - cr.top + 'px';
-							return;
-						default:
-							docBody.removeEventListener('mousemove', this);
-							docBody.removeEventListener('mouseup', this);
-							saveCfg('textaWidth', parseInt(this._elStyle.width, 10));
-							saveCfg('textaHeight', parseInt(this._elStyle.height, 10));
-					}
-				}
-			});
-		}
-		if (Cfg.addSageBtn && this.mail) {
-			PostForm.hideField($parent(this.mail, 'LABEL') || this.mail);
-			$aEnd(this.subm, '<svg id="de-sagebtn" class="de-btn-sage">' + '<use xlink:href="#de-symbol-post-sage"/></svg>').onclick = function (e) {
-				e.stopPropagation();
-				$pd(e);
-				toggleCfg('sageReply');
-				_this22._setSage();
-			};
-			setTimeout(function () {
-				return _this22._setSage();
-			}, 0);
-		}
-		this.addTextPanel();
-		this.txta.classList.add('de-textarea');
-		this.txta.style.cssText = 'width: ' + Cfg.textaWidth + 'px; height: ' + Cfg.textaHeight + 'px;';
-		this.txta.addEventListener('keypress', function (e) {
-			var code = e.charCode || e.keyCode;
-			if ((code === 33 || code === 34) && e.which === 0) {
-				e.target.blur();
-				window.focus();
-			}
-		});
-		if (aib.dobr) {
-			this.txta.removeAttribute('id');
-		}
-		if (!aib.tiny || aib.brchan) {
-			this.subm.value = Lng.reply[lang];
-		}
-		this.subm.addEventListener('click', function (e) {
-			if (Cfg.warnSubjTrip && _this22.subj && /#.|##./.test(_this22.subj.value)) {
-				$pd(e);
-				$popup('upload', Lng.subjHasTrip[lang]);
-				return;
-			}
-			var val = _this22.txta.value;
-			if (Spells.outreps) {
-				val = Spells.outReplace(val);
-			}
-			if (_this22.tNum && pByNum.get(_this22.tNum).subj === 'Dollchan Extension Tools') {
-				var temp = '\n\n' + _this22._wrapText(aib.markupTags[5], '-'.repeat(50) + '\n' + nav.ua + '\nv' + version + '.' + commit + (nav.isESNext ? '.es6' : '') + ' [' + nav.scriptInstall + ']')[1];
-				if (!val.includes(temp)) {
-					val += temp;
-				}
-			}
-			_this22.txta.value = val;
+			this.updateLanguage();
+			this._initCaptcha();
+			this._initSubmit();
 			if (Cfg.ajaxPosting) {
-				$popup('upload', Lng.checking[lang], true);
+				this._initAjaxPosting();
 			}
-			if (_this22.video && (val = _this22.video.value) && (val = val.match(Videos.ytReg))) {
-				_this22.video.value = 'http://www.youtube.com/watch?v=' + val[1];
+			if (Cfg.addSageBtn && this.mail) {
+				this._makeSageBtn();
 			}
-			if (_this22.isQuick) {
-				$hide(_this22.pForm);
-				$hide(_this22.qArea);
-				$after(_this22._pBtn[+_this22.isBottom], _this22.pForm);
+			if (Cfg.noPassword && this.passw) {
+				$hide($parent(this.passw, 'TR'));
 			}
-			updater.pause();
-		});
-		if (Cfg.noPassword && (el = this.passw)) {
-			$hide($parent(el, 'TR'));
-		}
-		if (Cfg.noName && (el = this.name)) {
-			PostForm.hideField(el);
-		}
-		if (Cfg.noSubj && (el = this.subj)) {
-			PostForm.hideField(el);
-		}
-		window.addEventListener('load', function () {
-			if (Cfg.userName && _this22.name) {
-				setTimeout(PostForm.setUserName, 1e3);
+			if (Cfg.noName && this.name) {
+				PostForm.hideField(this.name);
 			}
-			if (_this22.passw) {
-				setTimeout(PostForm.setUserPassw, 1e3);
+			if (Cfg.noSubj && this.subj) {
+				PostForm.hideField(this.subj);
 			}
-		});
-		var capEl = $q('input[type="text"][name*="aptcha"], *[id*="captcha"], *[class*="captcha"]', form);
-		if (capEl) {
-			this.cap = new Captcha(capEl, this.tNum);
-			var updCapFn = function updCapFn() {
-				_this22.cap.addCaptcha();
-				_this22.cap.updOutdated();
-			};
-			this.txta.addEventListener('focus', updCapFn);
-			if (this.files) {
-				this.files.onchange = updCapFn;
-			}
-			this.form.addEventListener('click', function () {
-				return _this22.cap.addCaptcha();
-			}, true);
-		} else {
-			this.cap = null;
-		}
-		if (Cfg.ajaxPosting) {
-			if (aib.qFormRedir && (el = $q(aib.qFormRedir, form))) {
-				aib.disableRedirection(el);
-			}
-			this.form.onsubmit = function (e) {
-				$pd(e);
-				$popup('upload', Lng.sending[lang], true);
-				html5Submit(_this22.form, _this22.subm, true).then(checkUpload)['catch'](function (e) {
-					return $popup('upload', getErrorMessage(e));
-				});
-			};
-		}
-	}
-	PostForm.hideField = function (el) {
-		var next = el.nextElementSibling;
-		$toggle(next && next.style.display !== 'none' || el.previousElementSibling ? el : $parent(el, 'TR'));
-	};
-	PostForm.setUserName = function () {
-		var el = $q('input[info="nameValue"]');
-		if (el) {
-			saveCfg('nameValue', el.value);
-		}
-		pr.name.value = Cfg.userName ? Cfg.nameValue : '';
-	};
-	PostForm.setUserPassw = function () {
-		var el = $q('input[info="passwValue"]');
-		if (el) {
-			saveCfg('passwValue', el.value);
-		}
-		var value = pr.passw.value = Cfg.passwValue;
-		for (var _iterator21 = DelForm, _isArray21 = Array.isArray(_iterator21), _i29 = 0, _iterator21 = _isArray21 ? _iterator21 : _iterator21[Symbol.iterator]();;) {
-			var _ref38;
-
-			if (_isArray21) {
-				if (_i29 >= _iterator21.length) break;
-				_ref38 = _iterator21[_i29++];
-			} else {
-				_i29 = _iterator21.next();
-				if (_i29.done) break;
-				_ref38 = _i29.value;
-			}
-
-			var form = _ref38;
-
-			(form.passEl || {}).value = value;
-		}
-	};
-	PostForm.prototype = {
-		isHidden: false,
-		isQuick: false,
-		isBottom: false,
-		lastQuickPNum: -1,
-		pForm: null,
-		pArea: [],
-		qArea: null,
-		addTextPanel: function addTextPanel() {
-			var id,
-			    val,
-			    btns,
-			    html = '',
-			    tPanel = $id('de-txt-panel');
-			if (!Cfg.addTextBtns || aib.fch && !$q('input[type="checkbox"][name="spoiler"]', this.form)) {
-				$del(tPanel);
-				return;
-			}
-			if (!tPanel) {
-				tPanel = $add('<span id="de-txt-panel"></span>');
-				tPanel.addEventListener('click', this);
-				tPanel.addEventListener('mouseover', this);
-			}
-			tPanel.style.cssFloat = Cfg.txtBtnsLoc ? 'none' : 'right';
-			$after(Cfg.txtBtnsLoc ? $id('de-resizer-text') || this.txta : this.subm, tPanel);
-			id = ['bold', 'italic', 'under', 'strike', 'spoil', 'code', 'sup', 'sub'];
-			val = ['B', 'i', 'U', 'S', '%', 'C', 'v', '^'];
-			btns = aib.markupTags;
-			for (var i = 0, len = btns.length; i < len; ++i) {
-				if (btns[i] === '') {
-					continue;
+			window.addEventListener('load', function () {
+				if (Cfg.userName && _this21.name) {
+					setTimeout(PostForm.setUserName, 1e3);
 				}
-				html += '<div id="de-btn-' + id[i] + '" de-title="' + Lng.txtBtn[i][lang] + '" de-tag="' + btns[i] + '">' + (Cfg.addTextBtns === 2 ? (html === '' ? '[ ' : '') + '<a class="de-abtn" href="#">' + val[i] + '</a> / ' : Cfg.addTextBtns === 3 ? '<button type="button" style="font-weight: bold;">' + val[i] + '</button>' : '<svg><use xlink:href="#de-symbol-markup-' + id[i] + '"/></svg>') + '</div>';
+				if (_this21.passw) {
+					setTimeout(PostForm.setUserPassw, 1e3);
+				}
+			});
+		}
+
+		_createClass(PostForm, [{
+			key: 'addMarkupPanel',
+			value: function addMarkupPanel() {
+				var el = $id('de-txt-panel');
+				if (!Cfg.addTextBtns) {
+					$del(el);
+					return;
+				}
+				if (!el) {
+					el = $add('<span id="de-txt-panel"></span>');
+					el.addEventListener('click', this);
+					el.addEventListener('mouseover', this);
+				}
+				el.style.cssFloat = Cfg.txtBtnsLoc ? 'none' : 'right';
+				$after(Cfg.txtBtnsLoc ? $id('de-resizer-text') || this.txta : this.subm, el);
+				var id = ['bold', 'italic', 'under', 'strike', 'spoil', 'code', 'sup', 'sub'];
+				var val = ['B', 'i', 'U', 'S', '%', 'C', 'x\xB2', 'x\u2082'];
+				var btns = aib.markupTags;
+				var mode = Cfg.addTextBtns;
+				var html = '';
+				for (var i = 0, len = btns.length; i < len; ++i) {
+					if (btns[i] === '') {
+						continue;
+					}
+					html += '<div id="de-btn-' + id[i] + '" de-title="' + Lng.txtBtn[i][lang] + '" de-tag="' + btns[i] + '">' + (mode === 2 ? (html === '' ? '[ ' : '') + '<a class="de-abtn" href="#">' + val[i] + '</a> / ' : mode === 3 ? '<button type="button" style="font-weight: bold;">' + val[i] + '</button>' : '<svg><use xlink:href="#de-symbol-markup-' + id[i] + '"/></svg>') + '</div>';
+				}
+				el.innerHTML = html + '<div id="de-btn-quote" de-title="' + Lng.txtBtn[8][lang] + '" de-tag="q">' + (mode === 2 ? '<a class="de-abtn" href="#">&gt;</a> ]' : mode === 3 ? '<button type="button" style="font-weight: bold;">&gt;</button>' : '<svg><use xlink:href="#de-symbol-markup-quote"/></svg>') + '</span>';
 			}
-			tPanel.innerHTML = html + ('<div id="de-btn-quote" de-title="' + Lng.txtBtn[8][lang] + '" de-tag="q">' + (Cfg.addTextBtns === 2 ? '<a class="de-abtn" href="#">&gt;</a> ]' : Cfg.addTextBtns === 3 ? '<button type="button" style="font-weight: bold;">&gt;</button>' : '<svg><use xlink:href="#de-symbol-markup-quote"/></svg>') + '</span>');
-		},
-		clearForm: function clearForm() {
-			if (this.txta) {
-				this.txta.value = '';
+		}, {
+			key: 'clearForm',
+			value: function clearForm() {
+				if (this.txta) {
+					this.txta.value = '';
+				}
+				if (this.files) {
+					this.files.clear();
+				}
+				if (this.video) {
+					this.video.value = '';
+				}
 			}
-			if (this.files) {
-				this.files.clear();
+		}, {
+			key: 'closeReply',
+			value: function closeReply() {
+				if (this.isQuick) {
+					this.isQuick = false;
+					this.lastQuickPNum = -1;
+					if (!aib.t) {
+						this._toggleQuickReply(false);
+					}
+					this.setReply(false, !aib.t || Cfg.addPostForm > 1);
+				}
 			}
-			if (this.video) {
-				this.video.value = '';
-			}
-		},
-		handleEvent: function handleEvent(e) {
-			var id,
-			    el = e.target;
-			if (el.tagName !== 'SPAN') {
-				el = el.parentNode;
-			}
-			id = el.id;
-			if (id.startsWith('de-btn')) {
-				var x;
+		}, {
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				var el = e.target;
+				if (el.tagName !== 'SPAN') {
+					el = el.parentNode;
+				}
+				var _el8 = el,
+				    id = _el8.id;
+
+				if (!id.startsWith('de-btn')) {
+					return;
+				}
 				if (e.type === 'mouseover') {
 					if (id === 'de-btn-quote') {
 						quotetxt = window.getSelection().toString();
 					}
-					x = -1;
+					var key = -1;
 					if (HotKeys.enabled) {
 						switch (id.substr(7)) {
 							case 'bold':
-								x = 12;break;
+								key = 12;break;
 							case 'italic':
-								x = 13;break;
+								key = 13;break;
 							case 'strike':
-								x = 14;break;
+								key = 14;break;
 							case 'spoil':
-								x = 15;break;
+								key = 15;break;
 							case 'code':
-								x = 16;
+								key = 16;
 						}
 					}
-					KeyEditListener.setTitle(el, x);
+					KeyEditListener.setTitle(el, key);
 					return;
 				}
-				x = pr.txta;
-				var start = x.selectionStart,
-				    end = x.selectionEnd,
-				    q = Cfg.spacedQuote ? '> ' : '>';
+				var txtaEl = pr.txta;
+				var start = txtaEl.selectionStart,
+				    end = txtaEl.selectionEnd;
+
+				var quote = Cfg.spacedQuote ? '> ' : '>';
 				if (id === 'de-btn-quote') {
-					$txtInsert(x, q + (start === end ? quotetxt : x.value.substring(start, end)).replace(/\n/gm, '\n' + q));
+					$txtInsert(txtaEl, quote + (start === end ? quotetxt : txtaEl.value.substring(start, end)).replace(/\n/gm, '\n' + quote));
 					quotetxt = '';
 				} else {
-					var scrtop = x.scrollTop,
-					    val = this._wrapText(el.getAttribute('de-tag'), x.value.substring(start, end)),
-					    len = start + val[0];
-					x.value = x.value.substr(0, start) + val[1] + x.value.substr(end);
-					x.setSelectionRange(len, len);
-					x.focus();
-					x.scrollTop = scrtop;
+					var scrtop = txtaEl.scrtop;
+
+					var val = PostForm._wrapText(el.getAttribute('de-tag'), txtaEl.value.substring(start, end));
+					var len = start + val[0];
+					txtaEl.value = txtaEl.value.substr(0, start) + val[1] + txtaEl.value.substr(end);
+					txtaEl.setSelectionRange(len, len);
+					txtaEl.focus();
+					txtaEl.scrollTop = scrtop;
 				}
 				$pd(e);
 				e.stopPropagation();
 			}
-		},
+		}, {
+			key: 'refreshCap',
+			value: function refreshCap() {
+				var isErr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-		get isVisible() {
-			if (!this.isHidden && this.isBottom && $q(':focus', this.pForm)) {
-				var cr = this.pForm.getBoundingClientRect();
-				return cr.bottom > 0 && cr.top < nav.viewportHeight();
-			}
-			return false;
-		},
-		get top() {
-			return this.pForm.getBoundingClientRect().top;
-		},
-		showQuickReply: function showQuickReply(post, pNum, closeReply, isNumClick) {
-			if (!this.isQuick) {
-				this.isQuick = true;
-				this.setReply(true, false);
-				$q('a', this._pBtn[+this.isBottom]).className = 'de-abtn de-parea-btn-' + (aib.t ? 'reply' : 'thr');
-			} else if (closeReply && !quotetxt && post.wrap.nextElementSibling === this.qArea) {
-				this.closeReply();
-				return;
-			}
-			$after(post.wrap, this.qArea);
-			if (this.qArea.classList.contains('de-win')) {
-				updateWinZ(this.qArea.style);
-			}
-			var qNum = post.thr.num;
-			if (!aib.t) {
-				this._toggleQuickReply(qNum);
-			}
-			if (!this.form) {
-				return;
-			}
-			if (!aib.t && this.tNum !== qNum) {
-				this.tNum = qNum;
-				this.refreshCap();
-			}
-			this.tNum = qNum;
-			var temp = this.txta.value;
-			if (!Cfg.addOPLink && !aib.t && post.isOp && !isNumClick) {
-				this.txta.focus();
-			} else {
-				var isOnNewLine = temp === '' || temp.slice(-1) === '\n';
-				$txtInsert(this.txta, (isNumClick ? '>>' + pNum + (isOnNewLine ? '\n' : '') : (isOnNewLine ? '' : '\n') + (this.lastQuickPNum === pNum && temp.includes('>>' + pNum) ? '' : '>>' + pNum + '\n')) + (quotetxt ? quotetxt.replace(/^\n|\n$/g, '').replace(/(^|\n)(.)/gm, '$1>' + (Cfg.spacedQuote ? ' ' : '') + '$2') + '\n' : ''));
-			}
-			temp = pByNum.get(pNum).thr.op.title.trim();
-			if (temp.length > 27) {
-				temp = temp.substr(0, 30) + '\u2026';
-			}
-			$q('.de-win-title', this.qArea).textContent = temp || '#' + pNum;
-			this.lastQuickPNum = pNum;
-		},
-		showMainReply: function showMainReply(isBottom, evt) {
-			this.closeReply();
-			if (!aib.t) {
-				this.tNum = false;
-				this.refreshCap();
-			}
-			if (this.isBottom === isBottom) {
-				$toggle(this.pForm, this.isHidden);
-				this.isHidden = !this.isHidden;
-				this.updatePAreaBtns();
-			} else {
-				this.isBottom = isBottom;
-				this.setReply(false, false);
-			}
-			if (evt) {
-				$pd(evt);
-			}
-		},
-		closeReply: function closeReply() {
-			if (this.isQuick) {
-				this.isQuick = false;
-				this.lastQuickPNum = -1;
-				if (!aib.t) {
-					this._toggleQuickReply(false);
+				if (this.cap) {
+					this.cap.refreshCaptcha(isErr, isErr, this.tNum);
 				}
+			}
+		}, {
+			key: 'setPlaceholders',
+			value: function setPlaceholders() {
+				if (aib.kus || !aib.multiFile && Cfg.fileInputs === 2) {
+					return;
+				}
+				this._setPlaceholder('name');
+				this._setPlaceholder('subj');
+				this._setPlaceholder('mail');
+				this._setPlaceholder('video');
+				if (this.cap) {
+					this._setPlaceholder('cap');
+				}
+			}
+		}, {
+			key: 'setReply',
+			value: function setReply(isQuick, needToHide) {
+				if (isQuick) {
+					$after(this.qArea.firstChild, this.pForm);
+				} else {
+					$after(this.pArea[+this.isBottom], this.qArea);
+					$after(this._pBtn[+this.isBottom], this.pForm);
+				}
+				this.isHidden = needToHide;
+				$toggle(this.qArea, isQuick);
+				$toggle(this.pForm, !needToHide);
+				this.updatePAreaBtns();
+			}
+		}, {
+			key: 'showMainReply',
+			value: function showMainReply(isBottom, evt) {
+				this.closeReply();
+				if (!aib.t) {
+					this.tNum = false;
+					this.refreshCap();
+				}
+				if (this.isBottom === isBottom) {
+					$toggle(this.pForm, this.isHidden);
+					this.isHidden = !this.isHidden;
+					this.updatePAreaBtns();
+				} else {
+					this.isBottom = isBottom;
+					this.setReply(false, false);
+				}
+				if (evt) {
+					$pd(evt);
+				}
+			}
+		}, {
+			key: 'showQuickReply',
+			value: function showQuickReply(post, pNum, closeReply, isNumClick) {
+				if (!this.isQuick) {
+					this.isQuick = true;
+					this.setReply(true, false);
+					$q('a', this._pBtn[+this.isBottom]).className = 'de-abtn de-parea-btn-' + (aib.t ? 'reply' : 'thr');
+				} else if (closeReply && !quotetxt && post.wrap.nextElementSibling === this.qArea) {
+					this.closeReply();
+					return;
+				}
+				$after(post.wrap, this.qArea);
+				if (this.qArea.classList.contains('de-win')) {
+					updateWinZ(this.qArea.style);
+				}
+				var qNum = post.thr.num;
+				if (!aib.t) {
+					this._toggleQuickReply(qNum);
+				}
+				if (!this.form) {
+					return;
+				}
+				if (!aib.t && this.tNum !== qNum) {
+					this.tNum = qNum;
+					this.refreshCap();
+				}
+				this.tNum = qNum;
+				var temp = this.txta.value;
+				if (!Cfg.addOPLink && !aib.t && post.isOp && !isNumClick) {
+					this.txta.focus();
+				} else {
+					var isOnNewLine = temp === '' || temp.slice(-1) === '\n';
+					$txtInsert(this.txta, (isNumClick ? '>>' + pNum + (isOnNewLine ? '\n' : '') : (isOnNewLine ? '' : '\n') + (this.lastQuickPNum === pNum && temp.includes('>>' + pNum) ? '' : '>>' + pNum + '\n')) + (quotetxt ? quotetxt.replace(/^\n|\n$/g, '').replace(/(^|\n)(.)/gm, '$1>' + (Cfg.spacedQuote ? ' ' : '') + '$2') + '\n' : ''));
+				}
+				temp = pByNum.get(pNum).thr.op.title.trim();
+				if (temp.length > 27) {
+					temp = temp.substr(0, 30) + '\u2026';
+				}
+				$q('.de-win-title', this.qArea).textContent = temp || '#' + pNum;
+				this.lastQuickPNum = pNum;
+			}
+		}, {
+			key: 'updateLanguage',
+			value: function updateLanguage() {
+				this.txta.title = Lng.pasteImage[lang];
+				if (!aib.tiny) {
+					this.subm.value = Lng.reply[lang];
+				}
+			}
+		}, {
+			key: 'updatePAreaBtns',
+			value: function updatePAreaBtns() {
+				var txt = 'de-abtn de-parea-btn-';
+				var rep = aib.t ? 'reply' : 'thr';
+				$q('a', this._pBtn[+this.isBottom]).className = txt + (!this.pForm.style.display ? 'close' : rep);
+				$q('a', this._pBtn[+!this.isBottom]).className = txt + rep;
+			}
+		}, {
+			key: '_initAjaxPosting',
+			value: function _initAjaxPosting() {
+				var _this22 = this;
+
+				var el = void 0;
+				if (aib.qFormRedir && (el = $q(aib.qFormRedir, this.form))) {
+					aib.disableRedirection(el);
+				}
+				this.form.onsubmit = function (e) {
+					$pd(e);
+					$popup('upload', Lng.sending[lang], true);
+					html5Submit(_this22.form, _this22.subm, true).then(checkUpload).catch(function (e) {
+						return $popup('upload', getErrorMessage(e));
+					});
+				};
+			}
+		}, {
+			key: '_initCaptcha',
+			value: function _initCaptcha() {
+				var _this23 = this;
+
+				var capEl = $q('input[type="text"][name*="aptcha"], *[id*="captcha"], *[class*="captcha"]', this.form);
+				if (!capEl || aib.fch && doc.cookie.includes('pass_enabled')) {
+					this.cap = null;
+					return;
+				}
+				this.cap = new Captcha(capEl, this.tNum);
+				var updCapFn = function updCapFn() {
+					_this23.cap.addCaptcha();
+					_this23.cap.updOutdated();
+				};
+				this.txta.addEventListener('focus', updCapFn);
+				if (this.files) {
+					this.files.onchange = updCapFn;
+				}
+				this.form.addEventListener('click', function () {
+					return _this23.cap.addCaptcha();
+				}, true);
+			}
+		}, {
+			key: '_initFileInputs',
+			value: function _initFileInputs() {
+				var _this24 = this;
+
+				var fileEl = $q('tr input[type="file"]', this.form);
+				if (!fileEl) {
+					return;
+				}
+				if (aib.fixFileInputs) {
+					aib.fixFileInputs($parent(fileEl, 'TD'));
+				}
+				this.files = new Files(this, $q('tr input[type="file"]', this.form));
+				window.addEventListener('load', function () {
+					return setTimeout(function () {
+						if (!_this24.files.filesCount) {
+							_this24.files.clear();
+						}
+					}, 0);
+				});
+			}
+		}, {
+			key: '_initSubmit',
+			value: function _initSubmit() {
+				var _this25 = this;
+
+				this.subm.addEventListener('click', function (e) {
+					if (Cfg.warnSubjTrip && _this25.subj && /#.|##./.test(_this25.subj.value)) {
+						$pd(e);
+						$popup('upload', Lng.subjHasTrip[lang]);
+						return;
+					}
+					var val = _this25.txta.value;
+					if (Spells.outreps) {
+						val = Spells.outReplace(val);
+					}
+					if (_this25.tNum && pByNum.get(_this25.tNum).subj === 'Dollchan Extension Tools') {
+						var temp = '\n\n' + PostForm._wrapText(aib.markupTags[5], '-'.repeat(50) + '\n' + nav.ua + '\nv' + version + '.' + commit + (nav.isESNext ? '.es6' : '') + ' [' + nav.scriptInstall + ']')[1];
+						if (!val.includes(temp)) {
+							val += temp;
+						}
+					}
+					_this25.txta.value = val;
+					if (Cfg.ajaxPosting) {
+						$popup('upload', Lng.checking[lang], true);
+					}
+					if (_this25.video && (val = _this25.video.value) && (val = val.match(Videos.ytReg))) {
+						_this25.video.value = 'http://www.youtube.com/watch?v=' + val[1];
+					}
+					if (_this25.isQuick) {
+						$hide(_this25.pForm);
+						$hide(_this25.qArea);
+						$after(_this25._pBtn[+_this25.isBottom], _this25.pForm);
+					}
+					updater.pause();
+				});
+			}
+		}, {
+			key: '_initTextarea',
+			value: function _initTextarea() {
+				var _this26 = this;
+
+				var el = this.txta;
+				if (aib.dobr) {
+					el.removeAttribute('id');
+				}
+				el.classList.add('de-textarea');
+				el.style.cssText = 'width: ' + Cfg.textaWidth + 'px; height: ' + Cfg.textaHeight + 'px;';
+				el.addEventListener('keypress', function (e) {
+					var code = e.charCode || e.keyCode;
+					if ((code === 33  || code === 34 ) && e.which === 0) {
+						e.target.blur();
+						window.focus();
+					}
+				});
+				el.addEventListener('paste', function (e) {
+					if ('clipboardData' in e) {
+						for (var _iterator21 = e.clipboardData.items, _isArray21 = Array.isArray(_iterator21), _i30 = 0, _iterator21 = _isArray21 ? _iterator21 : _iterator21[Symbol.iterator]();;) {
+							var _ref55;
+
+							if (_isArray21) {
+								if (_i30 >= _iterator21.length) break;
+								_ref55 = _iterator21[_i30++];
+							} else {
+								_i30 = _iterator21.next();
+								if (_i30.done) break;
+								_ref55 = _i30.value;
+							}
+
+							var item = _ref55;
+
+							if (item.kind === 'file') {
+								var inputs = _this26.files._inputs;
+								for (var i = 0, len = inputs.length; i < len; ++i) {
+									var input = inputs[i];
+									if (!input.hasFile) {
+										var file = item.getAsFile();
+										input._addUrlFile(URL.createObjectURL(file), file);
+										break;
+									}
+								}
+							}
+						}
+					}
+				});
+				if (nav.isFirefox) {
+					el.addEventListener('mouseup', function (_ref56) {
+						var target = _ref56.target;
+
+						saveCfg('textaWidth', parseInt(target.style.width, 10));
+						saveCfg('textaHeight', parseInt(target.style.height, 10));
+					});
+					return;
+				}
+				$aEnd(el, '<div id="de-resizer-text"></div>').addEventListener('mousedown', {
+					_el: el,
+					_elStyle: el.style,
+					handleEvent: function handleEvent(e) {
+						switch (e.type) {
+							case 'mousedown':
+								docBody.addEventListener('mousemove', this);
+								docBody.addEventListener('mouseup', this);
+								$pd(e);
+								return;
+							case 'mousemove':
+								{
+									var cr = this._el.getBoundingClientRect();
+									this._elStyle.width = e.clientX - cr.left + 'px';
+									this._elStyle.height = e.clientY - cr.top + 'px';
+									return;
+								}
+							default:
+								docBody.removeEventListener('mousemove', this);
+								docBody.removeEventListener('mouseup', this);
+								saveCfg('textaWidth', parseInt(this._elStyle.width, 10));
+								saveCfg('textaHeight', parseInt(this._elStyle.height, 10));
+						}
+					}
+				});
+			}
+		}, {
+			key: '_makeHideableContainer',
+			value: function _makeHideableContainer() {
+				var _this27 = this;
+
+				this.pForm = $add('<div id="de-pform" class="de-win-body"></div>');
+				if (this.form) {
+					this.pForm.appendChild(this.form);
+				}
+				if (this.oeForm) {
+					this.pForm.appendChild(this.oeForm);
+				}
+				var html = '<div class="de-parea"><div>[<a href="#"></a>]</div><hr></div>';
+				this.pArea = [$bBegin(DelForm.first.el, html), $aEnd(aib.fch ? $q('.board', DelForm.first.el) : DelForm.first.el, html)];
+				this._pBtn = [this.pArea[0].firstChild, this.pArea[1].firstChild];
+				this._pBtn[0].firstElementChild.onclick = function (e) {
+					return _this27.showMainReply(false, e);
+				};
+				this._pBtn[1].firstElementChild.onclick = function (e) {
+					return _this27.showMainReply(true, e);
+				};
+				this.qArea = $add('<div style="display: none; ' + Cfg.replyWinX + '; ' + Cfg.replyWinY + '; z-index: ' + ++topWinZ + ';" id="de-win-reply" class="' + (aib.cReply + (Cfg.replyWinDrag ? ' de-win' : ' de-win-inpost')) + '"></div>');
+				this.isBottom = Cfg.addPostForm === 1;
 				this.setReply(false, !aib.t || Cfg.addPostForm > 1);
 			}
-		},
-		refreshCap: function refreshCap() {
-			var isErr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		}, {
+			key: '_makeSageBtn',
+			value: function _makeSageBtn() {
+				var _this28 = this;
 
-			if (this.cap) {
-				this.cap.refreshCaptcha(isErr, isErr, this.tNum);
+				PostForm.hideField($parent(this.mail, 'LABEL') || this.mail);
+				$aEnd(this.subm, '<svg id="de-sagebtn" class="de-btn-sage">' + '<use xlink:href="#de-symbol-post-sage"/></svg>').onclick = function (e) {
+					e.stopPropagation();
+					$pd(e);
+					toggleCfg('sageReply');
+					_this28._setSage();
+				};
+				setTimeout(function () {
+					return _this28._setSage();
+				}, 0);
 			}
-		},
-		setReply: function setReply(isQuick, needToHide) {
-			if (isQuick) {
-				$after(this.qArea.firstChild, this.pForm);
-			} else {
-				$after(this.pArea[+this.isBottom], this.qArea);
-				$after(this._pBtn[+this.isBottom], this.pForm);
-			}
-			this.isHidden = needToHide;
-			$toggle(this.qArea, isQuick);
-			$toggle(this.pForm, !needToHide);
-			this.updatePAreaBtns();
-		},
-		setPlaceholders: function setPlaceholders() {
-			this._setPlaceholder('name');
-			this._setPlaceholder('subj');
-			this._setPlaceholder('mail');
-			this._setPlaceholder('video');
-			if (this.cap) {
-				this._setPlaceholder('cap');
-			}
-		},
-		updatePAreaBtns: function updatePAreaBtns() {
-			var txt = 'de-abtn de-parea-btn-',
-			    rep = aib.t ? 'reply' : 'thr';
-			$q('a', this._pBtn[+this.isBottom]).className = txt + (!this.pForm.style.display ? 'close' : rep);
-			$q('a', this._pBtn[+!this.isBottom]).className = txt + rep;
-		},
+		}, {
+			key: '_makeWindow',
+			value: function _makeWindow() {
+				var _this29 = this;
 
+				makeDraggable('reply', this.qArea, $aBegin(this.qArea, '<div class="de-win-head">\n\t\t\t<span class="de-win-title"></span>\n\t\t\t<span class="de-win-buttons">\n\t\t\t\t<svg class="de-btn-clear"><use xlink:href="#de-symbol-unavail"/></svg>\n\t\t\t\t<svg class="de-btn-toggle"><use xlink:href="#de-symbol-win-arrow"/></svg>\n\t\t\t\t<svg class="de-btn-close"><use xlink:href="#de-symbol-win-close"/></svg>\n\t\t\t</span>\n\t\t</div>\n\t\t<div class="de-resizer de-resizer-top"></div>\n\t\t<div class="de-resizer de-resizer-left"></div>\n\t\t<div class="de-resizer de-resizer-right"></div>\n\t\t<div class="de-resizer de-resizer-bottom"></div>'));
+				var buttons = $q('.de-win-buttons', this.qArea);
+				buttons.onmouseover = function (_ref57) {
+					var target = _ref57.target;
 
-		_pBtn: [],
-		_setSage: function _setSage() {
-			var el = $id('de-sagebtn'),
-			    c = Cfg.sageReply;
-			el.style.opacity = c ? '1' : '.3';
-			el.title = c ? 'SAGE!' : Lng.noSage[lang];
-			if (this.mail.type === 'text') {
-				this.mail.value = c ? 'sage' : aib.fch ? 'noko' : '';
-			} else {
-				this.mail.checked = c;
+					var el = target.parentNode;
+					switch (fixEventEl(target).classList[0]) {
+						case 'de-btn-clear':
+							el.title = Lng.clearForm[lang];break;
+						case 'de-btn-close':
+							el.title = Lng.closeReply[lang];break;
+						case 'de-btn-toggle':
+							el.title = Cfg.replyWinDrag ? Lng.underPost[lang] : Lng.makeDrag[lang];
+					}
+				};
+
+				var _ref58 = [].concat(_toConsumableArray(buttons.children)),
+				    clearBtn = _ref58[0],
+				    toggleBtn = _ref58[1],
+				    closeBtn = _ref58[2];
+
+				clearBtn.onclick = function () {
+					saveCfg('sageReply', 0);
+					_this29._setSage();
+					_this29.files.clear();
+					[_this29.txta, _this29.name, _this29.mail, _this29.subj, _this29.video, _this29.cap && _this29.cap.textEl].forEach(function (node) {
+						if (node) {
+							node.value = '';
+						}
+					});
+				};
+				toggleBtn.onclick = function () {
+					toggleCfg('replyWinDrag');
+					if (Cfg.replyWinDrag) {
+						_this29.qArea.className = aib.cReply + ' de-win';
+						updateWinZ(_this29.qArea.style);
+					} else {
+						_this29.qArea.className = aib.cReply + ' de-win-inpost';
+						_this29.txta.focus();
+					}
+				};
+				closeBtn.onclick = function () {
+					return _this29.closeReply();
+				};
 			}
-		},
-		_toggleQuickReply: function _toggleQuickReply(tNum) {
-			if (this.oeForm) {
-				$del($q('input[name="oek_parent"]', this.oeForm));
-				if (tNum) {
-					this.oeForm.insertAdjacentHTML('afterbegin', '<input type="hidden" value="' + tNum + '" name="oek_parent">');
-				}
-			}
-			if (this.form) {
-				if (aib.tiny) {
-					if (tNum) {
-						$del($q('input[name="page"]', this.form));
-					} else if (!$q('input[name="page"]', this.form)) {
-						$q('input[name="board"]', this.form).insertAdjacentHTML('afterend', '<input name="page" value="1" type="hidden">');
+		}, {
+			key: '_setPlaceholder',
+			value: function _setPlaceholder(val) {
+				var el = val === 'cap' ? this.cap.textEl : this[val];
+				if (el) {
+					if (aib.multiFile || Cfg.fileInputs !== 2) {
+						el.placeholder = Lng[val][lang];
+					} else {
+						el.removeAttribute('placeholder');
 					}
 				}
-				$del($q('input[name="' + aib.formParent + '"]', this.form));
-				if (tNum) {
-					this.form.insertAdjacentHTML('afterbegin', '<input type="hidden" name="' + aib.formParent + '" value="' + tNum + '">');
-				}
 			}
-		},
-		_setPlaceholder: function _setPlaceholder(val) {
-			var el = val === 'cap' ? this.cap.textEl : this[val];
-			if (el) {
-				if (aib.multiFile || Cfg.fileInputs !== 2) {
-					el.placeholder = Lng[val][lang];
+		}, {
+			key: '_setSage',
+			value: function _setSage() {
+				var el = $id('de-sagebtn');
+				var c = Cfg.sageReply;
+				el.style.opacity = c ? '1' : '.3';
+				el.title = c ? 'SAGE!' : Lng.noSage[lang];
+				if (this.mail.type === 'text') {
+					this.mail.value = c ? 'sage' : aib.fch ? 'noko' : '';
 				} else {
-					el.removeAttribute('placeholder');
+					this.mail.checked = c;
 				}
 			}
-		},
-		_wrapText: function _wrapText(tag, text) {
-			var m,
-			    isBB = aib.markupBB;
-			if (tag.startsWith('[')) {
-				tag = tag.substr(1);
-				isBB = true;
-			}
-			if (isBB) {
-				var str;
-				if (text.includes('\n')) {
-					str = '[' + tag + ']' + text + '[/' + tag + ']';
-					return [str.length, str];
+		}, {
+			key: '_toggleQuickReply',
+			value: function _toggleQuickReply(tNum) {
+				if (this.oeForm) {
+					$del($q('input[name="oek_parent"]', this.oeForm));
+					if (tNum) {
+						this.oeForm.insertAdjacentHTML('afterbegin', '<input type="hidden" value="' + tNum + '" name="oek_parent">');
+					}
 				}
-				m = text.match(/^(\s*)(.*?)(\s*)$/);
-				str = m[1] + '[' + tag + ']' + m[2] + '[/' + tag + ']' + m[3];
-				return [!m[2].length ? m[1].length + tag.length + 2 : str.length, str];
+				if (this.form) {
+					if (aib.tiny) {
+						if (tNum) {
+							$del($q('input[name="page"]', this.form));
+						} else if (!$q('input[name="page"]', this.form)) {
+							$q('input[name="board"]', this.form).insertAdjacentHTML('afterend', '<input name="page" value="1" type="hidden">');
+						}
+					}
+					$del($q('input[name="' + aib.formParent + '"]', this.form));
+					if (tNum) {
+						this.form.insertAdjacentHTML('afterbegin', '<input type="hidden" name="' + aib.formParent + '" value="' + tNum + '">');
+					}
+				}
 			}
-			var rv = '',
-			    i = 0,
-			    arr = text.split('\n');
-			for (var len = arr.length; i < len; ++i) {
-				m = arr[i].match(/^(\s*)(.*?)(\s*)$/);
-				rv += '\n' + m[1] + (tag === '^H' ? m[2] + '^H'.repeat(m[2].length) : tag + m[2] + tag) + m[3];
+		}, {
+			key: 'isVisible',
+			get: function get() {
+				if (!this.isHidden && this.isBottom && $q(':focus', this.pForm)) {
+					var cr = this.pForm.getBoundingClientRect();
+					return cr.bottom > 0 && cr.top < nav.viewportHeight();
+				}
+				return false;
 			}
-			return [i === 1 && !m[2].length && tag !== '^H' ? m[1].length + tag.length : rv.length - 1, rv.slice(1)];
-		}
-	};
+		}, {
+			key: 'top',
+			get: function get() {
+				return this.pForm.getBoundingClientRect().top;
+			}
+		}], [{
+			key: 'hideField',
+			value: function hideField(el) {
+				var next = el.nextElementSibling;
+				$toggle(next && next.style.display !== 'none' || el.previousElementSibling ? el : $parent(el, 'TR'));
+			}
+		}, {
+			key: 'setUserName',
+			value: function setUserName() {
+				var el = $q('input[info="nameValue"]');
+				if (el) {
+					saveCfg('nameValue', el.value);
+				}
+				pr.name.value = Cfg.userName ? Cfg.nameValue : '';
+			}
+		}, {
+			key: 'setUserPassw',
+			value: function setUserPassw() {
+				var el = $q('input[info="passwValue"]');
+				if (el) {
+					saveCfg('passwValue', el.value);
+				}
+				var value = pr.passw.value = Cfg.passwValue;
+				for (var _iterator22 = DelForm, _isArray22 = Array.isArray(_iterator22), _i31 = 0, _iterator22 = _isArray22 ? _iterator22 : _iterator22[Symbol.iterator]();;) {
+					var _ref59;
+
+					if (_isArray22) {
+						if (_i31 >= _iterator22.length) break;
+						_ref59 = _iterator22[_i31++];
+					} else {
+						_i31 = _iterator22.next();
+						if (_i31.done) break;
+						_ref59 = _i31.value;
+					}
+
+					var _ref60 = _ref59,
+					    _ref60$passEl = _ref60.passEl,
+					    passEl = _ref60$passEl === undefined ? {} : _ref60$passEl;
+
+					passEl.value = value;
+				}
+			}
+		}, {
+			key: '_wrapText',
+			value: function _wrapText(tag, text) {
+				var isBB = aib.markupBB;
+				if (tag.startsWith('[')) {
+					tag = tag.substr(1);
+					isBB = true;
+				}
+				if (isBB) {
+					if (text.includes('\n')) {
+						var _str = '[' + tag + ']' + text + '[/' + tag + ']';
+						return [_str.length, _str];
+					}
+					var _m3 = text.match(/^(\s*)(.*?)(\s*)$/);
+					var str = _m3[1] + '[' + tag + ']' + _m3[2] + '[/' + tag + ']' + _m3[3];
+					return [!_m3[2].length ? _m3[1].length + tag.length + 2 : str.length, str];
+				}
+				var m = void 0,
+				    rv = '',
+				    i = 0;
+				var arr = text.split('\n');
+				for (var len = arr.length; i < len; ++i) {
+					m = arr[i].match(/^(\s*)(.*?)(\s*)$/);
+					rv += '\n' + m[1] + (tag === '^H' ? m[2] + '^H'.repeat(m[2].length) : tag + m[2] + tag) + m[3];
+				}
+				return [i === 1 && !m[2].length && tag !== '^H' ? m[1].length + tag.length : rv.length - 1, rv.slice(1)];
+			}
+		}]);
+
+		return PostForm;
+	}();
 
 
 	function getSubmitError(dc) {
 		if (!dc.body.hasChildNodes() || $q(aib.qDForm, dc)) {
 			return null;
 		}
-		var err = '',
-		    els = $Q(aib.qError, dc);
+		var err = '';
+		var els = $Q(aib.qError, dc);
 		for (var i = 0, len = els.length; i < len; ++i) {
 			err += els[i].innerHTML + '\n';
 		}
 		err = err.replace(/<a [^>]+>Назад.+|<br.+/, '') || Lng.error[lang] + ':\n' + dc.body.innerHTML;
-		return (/successful|uploaded|updating|post deleted|обновл|удален[о\.]/i.test(err) ? null : err
+		return (/successful|uploaded|updating|post deleted|обновл|удален[о.]/i.test(err) ? null : err
 		);
 	}
 
@@ -11439,30 +12534,32 @@ true, true],
 		var progress = $id('de-uploadprogress');
 		var counterWrap = progress.nextElementSibling;
 
-		var _Array$from = Array.from(counterWrap.children),
-		    _Array$from2 = _slicedToArray(_Array$from, 3),
-		    counterEl = _Array$from2[0],
-		    totalEl = _Array$from2[1],
-		    speedEl = _Array$from2[2];
+		var _ref61 = [].concat(_toConsumableArray(counterWrap.children)),
+		    counterEl = _ref61[0],
+		    totalEl = _ref61[1],
+		    speedEl = _ref61[2];
 
-		return function (data) {
+		return function (_ref62) {
+			var total = _ref62.total,
+			    i = _ref62.loaded;
+
 			if (!inited) {
-				progress.setAttribute('max', data.total);
+				progress.setAttribute('max', total);
 				$show(progress);
-				totalEl.textContent = prettifySize(data.total);
+				totalEl.textContent = prettifySize(total);
 				$show(counterWrap);
 				inited = true;
 			}
-			progress.value = data.loaded;
-			counterEl.textContent = prettifySize(data.loaded);
-			speedEl.textContent = prettifySize(data.loaded / (Date.now() - beginTime) * 1e3) + '/' + Lng.second[lang];
+			progress.value = i;
+			counterEl.textContent = prettifySize(i);
+			speedEl.textContent = prettifySize(1e3 * i / (Date.now() - beginTime)) + '/' + Lng.second[lang];
 		};
 	}
 
 	function checkUpload(data) {
-		var error = null,
-		    postNum = null,
-		    isDocument = data instanceof HTMLDocument;
+		var error = null;
+		var postNum = null;
+		var isDocument = data instanceof HTMLDocument;
 		if (aib.getSubmitData) {
 			if (aib.jsonSubmit) {
 				if (aib._8ch && data.substring(0, 16) === '{"captcha":true|') {
@@ -11487,7 +12584,7 @@ true, true],
 							pr.setReply(true, false);
 						}
 						updater.sendErrNotif();
-						updater['continue']();
+						updater.continue();
 					});
 					return;
 				}
@@ -11515,11 +12612,13 @@ true, true],
 			}
 			$popup('upload', error);
 			updater.sendErrNotif();
-			updater['continue']();
+			updater.continue();
 			DollchanAPI.notify('submitform', { success: false, error: error });
 			return;
 		}
-		var tNum = pr.tNum;
+		var _pr = pr,
+		    tNum = _pr.tNum;
+
 		if ((Cfg.markMyPosts || Cfg.markMyLinks) && postNum) {
 			MyPosts.set(postNum, tNum || postNum);
 		}
@@ -11532,11 +12631,11 @@ true, true],
 		saveCfgObj(aib.dm, Cfg);
 		if (!tNum) {
 			if (postNum) {
-				window.location = aib.getThrUrl(aib.b, postNum);
+				window.location.assign(aib.getThrUrl(aib.b, postNum));
 			} else if (isDocument) {
 				var dForm = $q(aib.qDForm, data);
 				if (dForm) {
-					window.location = aib.getThrUrl(aib.b, aib.getTNum(dForm));
+					window.location.assign(aib.getThrUrl(aib.b, aib.getTNum(dForm)));
 				}
 			}
 			return;
@@ -11552,7 +12651,7 @@ true, true],
 				if (Cfg.scrAfterRep) {
 					scrollTo(0, window.pageYOffset + Thread.first.last.el.getBoundingClientRect().top);
 				}
-				updater['continue'](true);
+				updater.continue(true);
 				closePopup('upload');
 			});
 		} else {
@@ -11564,248 +12663,22 @@ true, true],
 		pr.refreshCap();
 	}
 
-	function checkDelete(data) {
-		var err, els, threads, isThr, i, len, el;
-		return regeneratorRuntime.async(function checkDelete$(_context15) {
-			while (1) {
-				switch (_context15.prev = _context15.next) {
-					case 0:
-						err = getSubmitError(data instanceof HTMLDocument ? data : $DOM(data));
-
-						if (!err) {
-							_context15.next = 5;
-							break;
-						}
-
-						$popup('delete', Lng.errDelete[lang] + ':\n' + err);
-						updater.sendErrNotif();
-						return _context15.abrupt('return');
-
-					case 5:
-						els = $Q('[de-form] ' + aib.qRPost + ' input:checked');
-						threads = new Set();
-						isThr = aib.t;
-
-						for (i = 0, len = els.length; i < len; ++i) {
-							el = els[i];
-
-							el.checked = false;
-							if (!isThr) {
-								threads.add(aib.getPostOfEl(el).thr);
-							}
-						}
-
-						if (!isThr) {
-							_context15.next = 21;
-							break;
-						}
-
-						Post.clearMarks();
-						_context15.prev = 11;
-						_context15.next = 14;
-						return regeneratorRuntime.awrap(Thread.first.loadNewPosts());
-
-					case 14:
-						_context15.next = 19;
-						break;
-
-					case 16:
-						_context15.prev = 16;
-						_context15.t0 = _context15['catch'](11);
-
-						infoLoadErrors(_context15.t0);
-
-					case 19:
-						_context15.next = 23;
-						break;
-
-					case 21:
-						_context15.next = 23;
-						return regeneratorRuntime.awrap(Promise.all(Array.from(threads).map(function (thr) {
-							return thr.loadPosts(visPosts, false, false);
-						})));
-
-					case 23:
-						$popup('delete', Lng.succDeleted[lang]);
-
-					case 24:
-					case 'end':
-						return _context15.stop();
-				}
-			}
-		}, null, this, [[11, 16]]);
-	}
-
-	function html5Submit(form, submitter) {
-		var needProgress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-		var formData, hasFiles, _iterator22, _isArray22, _i30, _ref39, _ref40, name, value, type, el, fileName, newFileName, _data5, ajaxParams, xhr;
-
-		return regeneratorRuntime.async(function html5Submit$(_context16) {
-			while (1) {
-				switch (_context16.prev = _context16.next) {
-					case 0:
-						formData = new FormData();
-						hasFiles = false;
-						_iterator22 = getFormElements(form, submitter), _isArray22 = Array.isArray(_iterator22), _i30 = 0, _iterator22 = _isArray22 ? _iterator22 : _iterator22[Symbol.iterator]();
-
-					case 3:
-						if (!_isArray22) {
-							_context16.next = 9;
-							break;
-						}
-
-						if (!(_i30 >= _iterator22.length)) {
-							_context16.next = 6;
-							break;
-						}
-
-						return _context16.abrupt('break', 35);
-
-					case 6:
-						_ref39 = _iterator22[_i30++];
-						_context16.next = 13;
-						break;
-
-					case 9:
-						_i30 = _iterator22.next();
-
-						if (!_i30.done) {
-							_context16.next = 12;
-							break;
-						}
-
-						return _context16.abrupt('break', 35);
-
-					case 12:
-						_ref39 = _i30.value;
-
-					case 13:
-						_ref40 = _ref39, name = _ref40.name, value = _ref40.value, type = _ref40.type, el = _ref40.el;
-
-						if (!(name === 'de-file-txt')) {
-							_context16.next = 16;
-							break;
-						}
-
-						return _context16.abrupt('continue', 33);
-
-					case 16:
-						if (!(type === 'file')) {
-							_context16.next = 32;
-							break;
-						}
-
-						hasFiles = true;
-						fileName = value.name;
-						newFileName = Cfg.removeFName ? ' ' + fileName.substring(fileName.lastIndexOf('.')) : fileName;
-
-						if (!((Cfg.postSameImg || Cfg.removeEXIF) && (value.type === 'image/jpeg' || value.type === 'image/png' || value.type === 'video/webm' && !aib.mak))) {
-							_context16.next = 31;
-							break;
-						}
-
-						_context16.next = 23;
-						return regeneratorRuntime.awrap(readFile(value));
-
-					case 23:
-						_context16.t0 = _context16.sent.data;
-						_context16.t1 = el.obj ? el.obj.extraFile : null;
-						_data5 = cleanFile(_context16.t0, _context16.t1);
-
-						if (_data5) {
-							_context16.next = 28;
-							break;
-						}
-
-						return _context16.abrupt('return', Promise.reject(Lng.fileCorrupt[lang] + ': ' + fileName));
-
-					case 28:
-						value = new File(_data5, newFileName);
-						_context16.next = 32;
-						break;
-
-					case 31:
-						if (Cfg.removeFName) {
-							value = new File([value], newFileName);
-						}
-
-					case 32:
-						formData.append(name, value);
-
-					case 33:
-						_context16.next = 3;
-						break;
-
-					case 35:
-						ajaxParams = { method: 'POST', data: formData };
-
-						if (needProgress && hasFiles) {
-							ajaxParams.onprogress = getUploadFunc();
-						}
-						_context16.prev = 37;
-						_context16.next = 40;
-						return regeneratorRuntime.awrap($ajax(form.action, ajaxParams));
-
-					case 40:
-						xhr = _context16.sent;
-						return _context16.abrupt('return', aib.jsonSubmit ? xhr.responseText : $DOM(xhr.responseText));
-
-					case 44:
-						_context16.prev = 44;
-						_context16.t2 = _context16['catch'](37);
-						return _context16.abrupt('return', Promise.reject(_context16.t2));
-
-					case 47:
-					case 'end':
-						return _context16.stop();
-				}
-			}
-		}, null, this, [[37, 44]]);
-	}
-
-	function readFile(file) {
-		var asText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-		return regeneratorRuntime.async(function readFile$(_context17) {
-			while (1) {
-				switch (_context17.prev = _context17.next) {
-					case 0:
-						return _context17.abrupt('return', new Promise(function (resolve, reject) {
-							var fr = new FileReader();
-							fr.onload = function (e) {
-								return resolve({ data: e.target.result });
-							};
-							if (asText) {
-								fr.readAsText(file);
-							} else {
-								fr.readAsArrayBuffer(file);
-							}
-						}));
-
-					case 1:
-					case 'end':
-						return _context17.stop();
-				}
-			}
-		}, null, this);
-	}
-
 	function cleanFile(data, extraData) {
-		var subarray = function subarray(begin, end) {
-			return nav.getUnsafeUint8Array(data, begin, end - begin);
-		};
-		var i,
-		    len,
-		    val,
-		    lIdx,
-		    jpgDat,
-		    img = nav.getUnsafeUint8Array(data),
-		    rand = Cfg.postSameImg && String(Math.round(Math.random() * 1e6)),
-		    rExif = !!Cfg.removeEXIF,
-		    rv = extraData ? rand ? [img, extraData, rand] : [img, extraData] : rand ? [img, rand] : [img];
+		var img = nav.getUnsafeUint8Array(data);
+		var rand = Cfg.postSameImg && String(Math.round(Math.random() * 1e6));
+		var rv = extraData ? rand ? [img, extraData, rand] : [img, extraData] : rand ? [img, rand] : [img];
+		var rExif = !!Cfg.removeEXIF;
 		if (!rand && !rExif && !extraData) {
 			return rv;
 		}
+		var i = void 0,
+		    len = void 0,
+		    val = void 0,
+		    lIdx = void 0,
+		    jpgDat = void 0;
+		var subarray = function subarray(begin, end) {
+			return nav.getUnsafeUint8Array(data, begin, end - begin);
+		};
 		if (img[0] === 0xFF && img[1] === 0xD8) {
 			var deep = 1;
 			for (i = 2, len = img.length - 1, val = [null, null], lIdx = 2, jpgDat = null; i < len;) {
@@ -11867,28 +12740,27 @@ true, true],
 			return rv;
 		}
 		if (img[0] === 0x1a && img[1] === 0x45 && img[2] === 0xDF && img[3] === 0xA3) {
-			return new _WebmParser(data).addData(rand).getData();
+			return new WebmParser(data).addData(rand).getData();
 		}
 		return null;
 	}
 
 	function readExif(data, off, len) {
-		var i,
-		    xRes = 0,
-		    yRes = 0,
-		    resT = 0,
-		    dv = nav.getUnsafeDataView(data, off),
-		    le = String.fromCharCode(dv.getUint8(0), dv.getUint8(1)) !== 'MM';
+		var xRes = 0;
+		var yRes = 0;
+		var resT = 0;
+		var dv = nav.getUnsafeDataView(data, off);
+		var le = String.fromCharCode(dv.getUint8(0), dv.getUint8(1)) !== 'MM';
 		if (dv.getUint16(2, le) !== 0x2A) {
 			return null;
 		}
-		i = dv.getUint32(4, le);
+		var i = dv.getUint32(4, le);
 		if (i > len) {
 			return null;
 		}
 		for (var j = 0, tgLen = dv.getUint16(i, le); j < tgLen; j++) {
-			var dE = i + 2 + 12 * j,
-			    tag = dv.getUint16(dE, le);
+			var dE = i + 2 + 12 * j;
+			var tag = dv.getUint16(dE, le);
 			if (tag === 0x0128) {
 				resT = dv.getUint16(dE + 8, le) - 1;
 			} else if (tag === 0x011A || tag === 0x011B) {
@@ -11907,118 +12779,6 @@ true, true],
 		yRes = yRes || xRes;
 		return new Uint8Array([resT & 0xFF, xRes >> 8, xRes & 0xFF, yRes >> 8, yRes & 0xFF]);
 	}
-
-	var _WebmParser = function WebmParser(data) {
-		var EBMLId = 0x1A45DFA3,
-		    segmentId = 0x18538067,
-		    voidId = 0xEC;
-		function WebmElement(elData, dataLength, offset) {
-			if (offset + 4 >= dataLength) {
-				return;
-			}
-			var num = elData.getUint32(offset),
-			    leadZeroes = Math.clz32(num);
-			if (leadZeroes > 3) {
-				this.error = true;
-				return;
-			}
-			offset += leadZeroes + 1;
-			if (offset >= dataLength) {
-				this.error = true;
-				return;
-			}
-			this.id = num >>> 8 * (3 - leadZeroes);
-			this.headSize = leadZeroes + 1;
-			num = elData.getUint32(offset);
-			leadZeroes = Math.clz32(num);
-			var size = num & 0xFFFFFFFF >>> leadZeroes + 1;
-			if (leadZeroes > 3) {
-				var shift = 8 * (7 - leadZeroes);
-				if (size >>> shift !== 0 || offset + 4 > dataLength) {
-					this.error = true;
-					return; 
-				}
-				size = size << 32 - shift | elData.getUint32(offset + 4) >>> shift;
-			} else {
-				size >>>= 8 * (3 - leadZeroes);
-			}
-			this.headSize += leadZeroes + 1;
-			offset += leadZeroes + 1;
-			if (offset + size > dataLength) {
-				this.error = true;
-				return;
-			}
-			this.data = elData;
-			this.offset = offset;
-			this.endOffset = offset + size;
-			this.size = size;
-		}
-		WebmElement.prototype = {
-			error: false,
-			id: 0
-		};
-
-		function Parser(data) {
-			var dv = nav.getUnsafeDataView(data),
-			    len = dv.byteLength,
-			    el = new WebmElement(dv, len, 0),
-			    offset = 0,
-			    voids = [];
-			error: do {
-				if (el.error || el.id !== EBMLId) {
-					break;
-				}
-				this.EBML = el;
-				offset += el.headSize + el.size;
-				while (true) {
-					el = new WebmElement(dv, len, offset);
-					if (el.error) {
-						break error;
-					}
-					if (el.id === segmentId) {
-						this.segment = el;
-						break; 
-					} else if (el.id === voidId) {
-						voids.push(el);
-					} else {
-						break error;
-					}
-					offset += el.headSize + el.size;
-				}
-				this.voids = voids;
-				this.data = data;
-				this.length = len;
-				this.rv = [null];
-				this.error = false;
-				return;
-			} while (false);
-			this.error = true;
-		}
-		Parser.prototype = {
-			addData: function addData(data) {
-				if (this.error || !data) {
-					return this;
-				}
-				var size = typeof data === 'string' ? data.length : data.byteLength;
-				if (size > 127) {
-					this.error = true;
-					return;
-				}
-				this.rv.push(new Uint8Array([voidId, 0x80 | size]), data);
-				return this;
-			},
-			getData: function getData() {
-				if (this.error) {
-					return null;
-				}
-				this.rv[0] = nav.getUnsafeUint8Array(this.data, 0, this.segment.endOffset);
-				return this.rv;
-			}
-		};
-
-		_WebmParser = Parser;
-		return new Parser(data);
-	};
 
 
 	var Files = function () {
@@ -12043,19 +12803,19 @@ true, true],
 			key: 'changeMode',
 			value: function changeMode() {
 				var cfg = Cfg.fileInputs === 2 && Cfg.ajaxPosting;
-				for (var _iterator23 = this._inputs, _isArray23 = Array.isArray(_iterator23), _i31 = 0, _iterator23 = _isArray23 ? _iterator23 : _iterator23[Symbol.iterator]();;) {
-					var _ref41;
+				for (var _iterator24 = this._inputs, _isArray24 = Array.isArray(_iterator24), _i33 = 0, _iterator24 = _isArray24 ? _iterator24 : _iterator24[Symbol.iterator]();;) {
+					var _ref68;
 
-					if (_isArray23) {
-						if (_i31 >= _iterator23.length) break;
-						_ref41 = _iterator23[_i31++];
+					if (_isArray24) {
+						if (_i33 >= _iterator24.length) break;
+						_ref68 = _iterator24[_i33++];
 					} else {
-						_i31 = _iterator23.next();
-						if (_i31.done) break;
-						_ref41 = _i31.value;
+						_i33 = _iterator24.next();
+						if (_i33.done) break;
+						_ref68 = _i33.value;
 					}
 
-					var inp = _ref41;
+					var inp = _ref68;
 
 					inp.changeMode(cfg);
 				}
@@ -12064,19 +12824,19 @@ true, true],
 		}, {
 			key: 'clear',
 			value: function clear() {
-				for (var _iterator24 = this._inputs, _isArray24 = Array.isArray(_iterator24), _i32 = 0, _iterator24 = _isArray24 ? _iterator24 : _iterator24[Symbol.iterator]();;) {
-					var _ref42;
+				for (var _iterator25 = this._inputs, _isArray25 = Array.isArray(_iterator25), _i34 = 0, _iterator25 = _isArray25 ? _iterator25 : _iterator25[Symbol.iterator]();;) {
+					var _ref69;
 
-					if (_isArray24) {
-						if (_i32 >= _iterator24.length) break;
-						_ref42 = _iterator24[_i32++];
+					if (_isArray25) {
+						if (_i34 >= _iterator25.length) break;
+						_ref69 = _iterator25[_i34++];
 					} else {
-						_i32 = _iterator24.next();
-						if (_i32.done) break;
-						_ref42 = _i32.value;
+						_i34 = _iterator25.next();
+						if (_i34.done) break;
+						_ref69 = _i34.value;
 					}
 
-					var inp = _ref42;
+					var inp = _ref69;
 
 					inp.clear();
 				}
@@ -12140,14 +12900,12 @@ true, true],
 			this._thumb = null;
 			this._utils = $add('<div class="de-file-utils">\n\t\t\t<div class="de-file-btn-rar" title="' + Lng.helpAddFile[lang] + '" style="display: none;"></div>\n\t\t\t<div class="de-file-spoil" title="' + Lng.spoilFile[lang] + '" style="display: none;"></div>\n\t\t\t<div class="de-file-btn-txt" title="' + Lng.addManually[lang] + '"></div>\n\t\t\t<div class="de-file-btn-del" title="' + Lng.removeFile[lang] + '" style="display: none;"></div>\n\t\t</div>');
 
-			var _Array$from3 = Array.from(this._utils.children);
+			var _ref70 = [].concat(_toConsumableArray(this._utils.children));
 
-			var _Array$from4 = _slicedToArray(_Array$from3, 4);
-
-			this._btnRarJpg = _Array$from4[0];
-			this._btnSpoil = _Array$from4[1];
-			this._btnTxt = _Array$from4[2];
-			this._btnDel = _Array$from4[3];
+			this._btnRarJpg = _ref70[0];
+			this._btnSpoil = _ref70[1];
+			this._btnTxt = _ref70[2];
+			this._btnDel = _ref70[3];
 
 			if (this._spoilEl) {
 				switch (this._spoilEl.type) {
@@ -12162,15 +12920,13 @@ true, true],
 				}
 			}
 			this._utils.addEventListener('click', this);
-			this._txtWrap = $add('<span class="de-file-txt-wrap">\n\t\t\t<div class="de-file-txt-drop" title="' + Lng.youCanDrag[lang] + '"></div>\n\t\t\t<input type="text" name="de-file-txt" class="de-file-txt-input de-file-off" placeholder="' + Lng.dropFileHere[lang] + '">\n\t\t\t<input type="button" class="de-file-txt-add" value="+" title="' + Lng.add[lang] + '" style="display: none;"></span>');
+			this._txtWrap = $add('<span class="de-file-txt-wrap">\n\t\t\t<div class="de-file-txt-drop" title="' + Lng.youCanDrag[lang] + '"></div>\n\t\t\t<input type="text" name="de-file-txt" class="de-file-txt-input de-file-off" placeholder="' + Lng.dropFileHere[lang] + '">\n\t\t\t<input type="button" class="de-file-txt-add" value="+" title="' + (Lng.add[lang] + '" style="display: none;"></span>'));
 
-			var _Array$from5 = Array.from(this._txtWrap.children);
+			var _ref71 = [].concat(_toConsumableArray(this._txtWrap.children));
 
-			var _Array$from6 = _slicedToArray(_Array$from5, 3);
-
-			this._txtDrop = _Array$from6[0];
-			this._txtInput = _Array$from6[1];
-			this._txtAddBtn = _Array$from6[2];
+			this._txtDrop = _ref71[0];
+			this._txtInput = _ref71[1];
+			this._txtAddBtn = _ref71[2];
 
 			this._txtWrap.addEventListener('click', this);
 			this._toggleDragEvents(this._txtWrap, true);
@@ -12183,7 +12939,10 @@ true, true],
 			if (el.files && el.files[0]) {
 				this._removeFile();
 			}
-			if (this._isThumb) {
+			if (aib.multiFile && Cfg.fileInputs && Cfg.ajaxPosting) {
+				this._input.setAttribute('multiple', true);
+			}
+			if (FileInput._isThumb) {
 				this._initThumbs();
 			} else {
 				if (Cfg.fileInputs === 1 && Cfg.ajaxPosting) {
@@ -12198,6 +12957,11 @@ true, true],
 			value: function changeMode(showThumbs) {
 				if (!(showThumbs ^ !!this._thumb)) {
 					return;
+				}
+				if (aib.multiFile && Cfg.fileInputs && Cfg.ajaxPosting) {
+					this._input.setAttribute('multiple', true);
+				} else {
+					this._input.removeAttribute('multiple');
 				}
 				if (showThumbs) {
 					this._initThumbs();
@@ -12222,7 +12986,7 @@ true, true],
 		}, {
 			key: 'clear',
 			value: function clear() {
-				if (this._isThumb) {
+				if (FileInput._isThumb) {
 					this._thumb.className = 'de-file de-file-off';
 					if (this._mediaEl) {
 						window.URL.revokeObjectURL(this._mediaEl.src);
@@ -12237,7 +13001,7 @@ true, true],
 					$hide(this._btnRarJpg);
 					$hide(this._txtAddBtn);
 					$del(this._rarMsg);
-					if (this._isThumb) {
+					if (FileInput._isThumb) {
 						$hide(this._txtWrap);
 					}
 					$show(this._txtDrop);
@@ -12253,23 +13017,43 @@ true, true],
 		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
-				var _this23 = this;
+				var _this30 = this;
 
 				var el = e.target;
+				var thumb = this._thumb;
 				var isThumb = el === this._thumb || el.className === 'de-file-img' ? '_thumb' : el === this._txtDrop ? '_txtInput' : 0;
 				switch (e.type) {
 					case 'change':
-						setTimeout(function () {
-							return _this23._onFileChange(false);
-						}, 20);
-						var index = this._parent._inputs.indexOf(this);
-						if (el.files.length > 0) {
-							this._parent._files[index] = el.files[0];
-						} else {
-							delete this._parent._files[index];
+						{
+							var inpArray = this._parent._inputs;
+							var curInpIdx = inpArray.indexOf(this);
+							var filesLen = el.files.length;
+							if (filesLen > 1) {
+								(function () {
+									var allowedLen = Math.min(filesLen, inpArray.length - curInpIdx);
+									var j = allowedLen;
+									for (var i = 0; i < allowedLen; ++i) {
+										FileInput._readDroppedFile(inpArray[curInpIdx + i], el.files[i]).then(function () {
+											if (! --j) {
+												_this30._removeFileHelper();
+											}
+										});
+										_this30._parent._files[curInpIdx + i] = el.files[i];
+									}
+								})();
+							} else {
+								setTimeout(function () {
+									return _this30._onFileChange(false);
+								}, 20);
+								if (filesLen > 0) {
+									this._parent._files[curInpIdx] = el.files[0];
+								} else {
+									delete this._parent._files[curInpIdx];
+								}
+							}
+							DollchanAPI.notify('filechange', this._parent._files);
+							return;
 						}
-						DollchanAPI.notify('filechange', this._parent._files);
-						return;
 					case 'click':
 						if (isThumb) {
 							this._input.click();
@@ -12290,7 +13074,7 @@ true, true],
 						} else if (el === this._btnTxt) {
 							this._showDelBtn(this._isTxtEditable = true);
 							$show(this._txtAddBtn);
-							if (this._isThumb) {
+							if (FileInput._isThumb) {
 								$toggle(this._txtWrap);
 							}
 							$hide(this._txtDrop);
@@ -12313,33 +13097,35 @@ true, true],
 						}
 						return;
 					case 'drop':
-						var dt = e.dataTransfer;
-						if (!isThumb) {
-							return;
-						}
-						var filesLen = dt.files.length;
-						if (filesLen) {
-							var inpArray = this._parent._inputs;
-							var inpLen = inpArray.length;
-							for (var i = inpArray.indexOf(this), j = 0; i < inpLen && j < filesLen; ++i, ++j) {
-								FileInput._readDroppedFile(inpArray[i], dt.files[j]);
-								this._parent._files[i] = dt.files[j];
+						{
+							var dt = e.dataTransfer;
+							if (!isThumb) {
+								return;
 							}
-							DollchanAPI.notify('filechange', this._parent._files);
-						} else {
-							this._addUrlFile(dt.getData('text/plain'));
+							var _filesLen = dt.files.length;
+							if (_filesLen) {
+								var _inpArray = this._parent._inputs;
+								var inpLen = _inpArray.length;
+								for (var i = _inpArray.indexOf(this), j = 0; i < inpLen && j < _filesLen; ++i, ++j) {
+									FileInput._readDroppedFile(_inpArray[i], dt.files[j]);
+									this._parent._files[i] = dt.files[j];
+								}
+								DollchanAPI.notify('filechange', this._parent._files);
+							} else {
+								this._addUrlFile(dt.getData('text/plain'));
+							}
+							setTimeout(function () {
+								return _this30[isThumb].classList.remove('de-file-drag');
+							}, 10);
+							e.stopPropagation();
+							$pd(e);
 						}
-						setTimeout(function () {
-							return _this23[isThumb].classList.remove('de-file-drag');
-						}, 10);
-						e.stopPropagation();
-						$pd(e);
 				}
 			}
 		}, {
 			key: 'hide',
 			value: function hide() {
-				if (this._isThumb) {
+				if (FileInput._isThumb) {
 					this._showDelBtn(false);
 					$hide(this._thumb);
 					$hide(this._txtWrap);
@@ -12349,14 +13135,14 @@ true, true],
 		}, {
 			key: 'show',
 			value: function show() {
-				if (this._isThumb) {
+				if (FileInput._isThumb) {
 					$show(this._thumb);
 				}
 				$show(this._wrap);
 			}
 		}, {
 			key: '_addNewThumb',
-			value: function _addNewThumb(fileData, fileName, fileSize, fileType) {
+			value: function _addNewThumb(fileData, fileName, fileType, fileSize) {
 				var el = this._thumb;
 				el.classList.remove('de-file-off');
 				el = el.firstChild.firstChild;
@@ -12371,22 +13157,24 @@ true, true],
 		}, {
 			key: '_addRarJpeg',
 			value: function _addRarJpeg() {
-				var _this24 = this;
+				var _this31 = this;
 
 				var el = this._parent.rarInput;
-				el.onchange = function (e) {
-					$hide(_this24._btnRarJpg);
-					var myBtn = _this24._rarMsg = $aBegin(_this24._utils, '<span><svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg></span>');
-					var file = e.target.files[0];
-					readFile(file).then(function (_ref43) {
-						var data = _ref43.data;
+				el.onchange = function (_ref72) {
+					var target = _ref72.target;
 
-						if (_this24._rarMsg === myBtn) {
+					$hide(_this31._btnRarJpg);
+					var myBtn = _this31._rarMsg = $aBegin(_this31._utils, '<span><svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg></span>');
+					var file = target.files[0];
+					readFile(file).then(function (_ref73) {
+						var data = _ref73.data;
+
+						if (_this31._rarMsg === myBtn) {
 							myBtn.className = 'de-file-rarmsg';
-							var origFileName = _this24.imgFile ? _this24.imgFile[1] : _this24._input.files[0].name;
+							var origFileName = _this31.imgFile ? _this31.imgFile[1] : _this31._input.files[0].name;
 							myBtn.title = origFileName + ' + ' + file.name;
 							myBtn.textContent = file.name.split('.').pop();
-							_this24.extraFile = data;
+							_this31.extraFile = data;
 						}
 					});
 				};
@@ -12395,22 +13183,28 @@ true, true],
 		}, {
 			key: '_addUrlFile',
 			value: function _addUrlFile(url) {
-				var _this25 = this;
+				var _this32 = this;
+
+				var file = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
 				if (!url) {
-					return;
+					return Promise.reject(new Error('URL is null'));
 				}
 				$popup('file-loading', Lng.loading[lang], true);
-				downloadImgData(url, false).then(function (data) {
+				return downloadImgData(url, false).then(function (data) {
+					if (file) {
+						window.URL.revokeObjectURL(url);
+					}
 					if (!data) {
 						$popup('file-loading', Lng.cantLoad[lang] + ' URL: ' + url);
 						return;
 					}
 					closePopup('file-loading');
-					_this25._isTxtEditable = false;
-					var name = url.split('/').pop();
-					var ext = name.split('.').pop();
-					if (!/^(jpe?g|png|gif|webm)$/.test(ext)) {
+					_this32._isTxtEditable = false;
+					var name = file ? file.name : url.split('/').pop();
+					var type = file && file.type || getFileType(name);
+					if (!type || name.includes('?')) {
+						var ext = void 0;
 						switch (data[0] << 8 | data[1]) {
 							case 0xFFD8:
 								ext = 'jpg';break;
@@ -12424,18 +13218,20 @@ true, true],
 								ext = '';
 						}
 						if (ext) {
-							url = name = name.split('?').shift() + '.' + ext;
+							name = name.split('?').shift() + '.' + ext;
 						}
 					}
-					_this25.imgFile = [data.buffer, name, getFileType(url)];
-					var file = new Blob([data], { type: _this25.imgFile[2] });
-					file.name = name;
-					_this25._parent._files[_this25._parent._inputs.indexOf(_this25)] = file;
-					DollchanAPI.notify('filechange', _this25._parent._files);
-					if (_this25._isThumb) {
-						$hide(_this25._txtWrap);
+					_this32.imgFile = [data.buffer, name, type || getFileType(name)];
+					if (!file) {
+						file = new Blob([data], { type: _this32.imgFile[2] });
+						file.name = name;
 					}
-					_this25._onFileChange(true);
+					_this32._parent._files[_this32._parent._inputs.indexOf(_this32)] = file;
+					DollchanAPI.notify('filechange', _this32._parent._files);
+					if (FileInput._isThumb) {
+						$hide(_this32._txtWrap);
+					}
+					_this32._onFileChange(true);
 				});
 			}
 		}, {
@@ -12473,7 +13269,7 @@ true, true],
 				if (this._parent.onchange) {
 					this._parent.onchange();
 				}
-				if (this._isThumb) {
+				if (FileInput._isThumb) {
 					this._showPviewImage();
 				}
 				if (this.hasFile) {
@@ -12483,7 +13279,7 @@ true, true],
 					this._changeFilesCount(+1);
 					this._showDelBtn(true);
 					$hide(this._txtAddBtn);
-					if (this._isThumb) {
+					if (FileInput._isThumb) {
 						$hide(this._txtWrap);
 					}
 					if (this._spoilEl) {
@@ -12497,7 +13293,7 @@ true, true],
 					this._txtInput.placeholder = Lng.dropFileHere[lang];
 				}
 				this._parent.hide();
-				if (!nav.Presto && !aib.fch && /^image\/(?:png|jpeg)$/.test(hasImgFile ? this.imgFile[2] : this._input.files[0].type)) {
+				if (!nav.isPresto && !aib.fch && /^image\/(?:png|jpeg)$/.test(hasImgFile ? this.imgFile[2] : this._input.files[0].type)) {
 					$del(this._rarMsg);
 					$show(this._btnRarJpg);
 				}
@@ -12505,6 +13301,13 @@ true, true],
 		}, {
 			key: '_removeFile',
 			value: function _removeFile() {
+				this._removeFileHelper();
+				this.hasFile = false;
+				delete this._parent._files[this._parent._inputs.indexOf(this)];
+			}
+		}, {
+			key: '_removeFileHelper',
+			value: function _removeFileHelper() {
 				var oldEl = this._input;
 				var newEl = $aEnd(oldEl, oldEl.outerHTML);
 				oldEl.removeEventListener('change', this);
@@ -12512,41 +13315,34 @@ true, true],
 				newEl.obj = this;
 				this._input = newEl;
 				$del(oldEl);
-				this.hasFile = false;
-				delete this._parent._files[this._parent._inputs.indexOf(this)];
-			}
-		}, {
-			key: '_showPviewImage',
-			value: function _showPviewImage() {
-				var _this26 = this;
-
-				if (this.imgFile) {
-					var _imgFile = _slicedToArray(this.imgFile, 3),
-					    _data6 = _imgFile[0],
-					    fileName = _imgFile[1],
-					    fileType = _imgFile[2];
-
-					this._addNewThumb(_data6, fileName, _data6.byteLength, fileType);
-				} else {
-					(function () {
-						var file = _this26._input.files[0];
-						if (file) {
-							readFile(file).then(function (_ref44) {
-								var data = _ref44.data;
-
-								if (_this26._input.files[0] === file) {
-									_this26._addNewThumb(data, file.name, file.size, file.type);
-								}
-							});
-						}
-					})();
-				}
 			}
 		}, {
 			key: '_showDelBtn',
 			value: function _showDelBtn(isShow) {
 				$toggle(this._btnDel, isShow);
 				$toggle(this._btnTxt, !isShow);
+			}
+		}, {
+			key: '_showPviewImage',
+			value: function _showPviewImage() {
+				var _this33 = this;
+
+				var imgFile = this.imgFile;
+
+				if (imgFile) {
+					this._addNewThumb.apply(this, _toConsumableArray(imgFile).concat([imgFile[0].byteLength]));
+					return;
+				}
+				var file = this._input.files[0];
+				if (file) {
+					readFile(file).then(function (_ref74) {
+						var data = _ref74.data;
+
+						if (_this33._input.files[0] === file) {
+							_this33._addNewThumb(data, file.name, file.type, file.size);
+						}
+					});
+				}
 			}
 		}, {
 			key: '_toggleDragEvents',
@@ -12558,11 +13354,6 @@ true, true],
 				el[name]('drop', this);
 			}
 		}, {
-			key: '_isThumb',
-			get: function get() {
-				return Cfg.fileInputs === 2 && Cfg.ajaxPosting;
-			}
-		}, {
 			key: '_wrap',
 			get: function get() {
 				return aib.multiFile ? this._input.parentNode : this._input;
@@ -12570,13 +13361,18 @@ true, true],
 		}], [{
 			key: '_readDroppedFile',
 			value: function _readDroppedFile(input, file) {
-				readFile(file).then(function (_ref45) {
-					var data = _ref45.data;
+				return readFile(file).then(function (_ref75) {
+					var data = _ref75.data;
 
 					input.imgFile = [data, file.name, file.type];
 					input.show();
 					input._onFileChange(true);
 				});
+			}
+		}, {
+			key: '_isThumb',
+			get: function get() {
+				return Cfg.fileInputs === 2 && Cfg.ajaxPosting;
 			}
 		}]);
 
@@ -12605,7 +13401,7 @@ true, true],
 		_createClass(Captcha, [{
 			key: 'addCaptcha',
 			value: function addCaptcha() {
-				var _this27 = this;
+				var _this34 = this;
 
 				if (this.isAdded) {
 					return;
@@ -12617,18 +13413,18 @@ true, true],
 				} else if (this._isOldRecap()) {
 					this.textEl = $id('recaptcha_response_field');
 				} else {
-					var _el3 = $q('#g-recaptcha, .g-recaptcha' + (aib.fch ? ', #qrCaptchaContainerAlt' : ''));
-					$replace(_el3, '<div id="g-recaptcha" class="g-recaptcha" data-sitekey="' + _el3.getAttribute('data-sitekey') + '"></div>');
+					var el = $q('#g-recaptcha, .g-recaptcha' + (aib.fch ? ', #qrCaptchaContainerAlt' : ''));
+					$replace(el, '<div id="g-recaptcha" class="g-recaptcha" data-sitekey="' + el.getAttribute('data-sitekey') + '"></div>');
 				}
 				var initPromise = aib.initCaptcha ? aib.initCaptcha(this) : null;
 				if (initPromise) {
 					initPromise.then(function () {
-						return _this27.showCaptcha();
+						return _this34.showCaptcha();
 					}, function (e) {
 						if (e instanceof AjaxError) {
-							_this27._setUpdateError(e);
+							_this34._setUpdateError(e);
 						} else {
-							_this27.hasCaptcha = false;
+							_this34.hasCaptcha = false;
 						}
 					});
 				} else if (this.hasCaptcha) {
@@ -12640,27 +13436,29 @@ true, true],
 			value: function handleEvent(e) {
 				switch (e.type) {
 					case 'keypress':
-						if (!Cfg.captchaLang || e.which === 0) {
-							return;
-						}
-						var ruUa = 'йцукенгшщзхъїфыівапролджэєячсмитьбюёґ';
-						var en = 'qwertyuiop[]]assdfghjkl;\'\'zxcvbnm,.`\\';
-						var code = e.charCode || e.keyCode;
-						var i = void 0,
-						    chr = String.fromCharCode(code).toLowerCase();
-						if (Cfg.captchaLang === 1) {
-							if (code < 0x0410 || code > 0x04FF || (i = ruUa.indexOf(chr)) === -1) {
+						{
+							if (!Cfg.captchaLang || e.which === 0) {
 								return;
 							}
-							chr = en[i];
-						} else {
-							if (code < 0x0021 || code > 0x007A || (i = en.indexOf(chr)) === -1) {
-								return;
+							var ruUa = 'йцукенгшщзхъїфыівапролджэєячсмитьбюёґ';
+							var en = "qwertyuiop[]]assdfghjkl;''zxcvbnm,.`\\";
+							var code = e.charCode || e.keyCode;
+							var i = void 0,
+							    chr = String.fromCharCode(code).toLowerCase();
+							if (Cfg.captchaLang === 1) {
+								if (code < 0x0410 || code > 0x04FF || (i = ruUa.indexOf(chr)) === -1) {
+									return;
+								}
+								chr = en[i];
+							} else {
+								if (code < 0x0021 || code > 0x007A || (i = en.indexOf(chr)) === -1) {
+									return;
+								}
+								chr = ruUa[i];
 							}
-							chr = ruUa[i];
+							$txtInsert(e.target, chr);
+							break;
 						}
-						$txtInsert(e.target, chr);
-						break;
 					case 'focus':
 						this.updOutdated();
 				}
@@ -12670,13 +13468,13 @@ true, true],
 		}, {
 			key: 'initImage',
 			value: function initImage(img) {
-				var _this28 = this;
+				var _this35 = this;
 
 				img.title = Lng.refresh[lang];
 				img.alt = Lng.loading[lang];
 				img.style.cssText = 'vertical-align: text-bottom; border: none; cursor: pointer;';
 				img.onclick = function () {
-					return _this28.refreshCaptcha(true);
+					return _this35.refreshCaptcha(true);
 				};
 			}
 		}, {
@@ -12726,7 +13524,7 @@ true, true],
 		}, {
 			key: 'refreshCaptcha',
 			value: function refreshCaptcha(isFocus) {
-				var _this29 = this;
+				var _this36 = this;
 
 				var isErr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 				var tNum = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.tNum;
@@ -12747,9 +13545,9 @@ true, true],
 					var updatePromise = aib.updateCaptcha(this, isErr);
 					if (updatePromise) {
 						updatePromise.then(function () {
-							return _this29._updateTextEl(isFocus);
+							return _this36._updateTextEl(isFocus);
 						}, function (e) {
-							return _this29._setUpdateError(e);
+							return _this36._setUpdateError(e);
 						});
 					}
 				} else if (this._isRecap) {
@@ -12802,14 +13600,14 @@ true, true],
 		}, {
 			key: '_setUpdateError',
 			value: function _setUpdateError(e) {
-				var _this30 = this;
+				var _this37 = this;
 
 				if (e) {
 					this.parentEl = e.toString();
 					this.isAdded = false;
 					this.parentEl.onclick = function () {
-						_this30.parentEl.onclick = null;
-						_this30.addCaptcha();
+						_this37.parentEl.onclick = null;
+						_this37.addCaptcha();
 					};
 					$show(this.parentEl);
 				}
@@ -12820,15 +13618,13 @@ true, true],
 				if (this._isOldRecap()) {
 					$script('Recaptcha.reload()');
 				} else {
-					(function () {
-						var script = doc.createElement('script');
-						script.type = 'text/javascript';
-						script.src = aib.prot + '//www.google.com/recaptcha/api.js';
-						doc.head.appendChild(script);
-						setTimeout(function () {
-							return $del(script);
-						}, 1e5);
-					})();
+					var script = doc.createElement('script');
+					script.type = 'text/javascript';
+					script.src = aib.prot + '//www.google.com/recaptcha/api.js';
+					doc.head.appendChild(script);
+					setTimeout(function () {
+						return $del(script);
+					}, 1e5);
 				}
 			}
 		}, {
@@ -12851,15 +13647,15 @@ true, true],
 		function AbstractPost(thr, num, isOp) {
 			_classCallCheck(this, AbstractPost);
 
-			this._hasEvents = false;
-			this._linkDelay = 0;
-			this._menu = null;
-			this._menuDelay = 0;
 			this.isOp = isOp;
 			this.kid = null;
 			this.num = num;
 			this.ref = new RefMap(this);
 			this.thr = thr;
+			this._hasEvents = false;
+			this._linkDelay = 0;
+			this._menu = null;
+			this._menuDelay = 0;
 		}
 
 		_createClass(AbstractPost, [{
@@ -12874,13 +13670,14 @@ true, true],
 		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
-				var _this31 = this;
+				var _this38 = this;
 
-				var temp,
-				    el = fixEventEl(e.target),
-				    type = e.type,
-				    isOutEvent = type === 'mouseout',
-				    isPview = this instanceof Pview;
+				var temp = void 0,
+				    el = fixEventEl(e.target);
+				var type = e.type;
+
+				var isOutEvent = type === 'mouseout';
+				var isPview = this instanceof Pview;
 				if (type === 'click') {
 					switch (e.button) {
 						case 0:
@@ -12909,7 +13706,7 @@ true, true],
 									this._getFullMsg(temp, false);
 									$pd(e);
 									e.stopPropagation();
-								} else if (Cfg.insertNum && pr.form && (aib.tiny ? el : temp) === this._pref && !/Reply|Ответ/.test(el.textContent)) {
+								} else if (Cfg.insertNum && pr.form && this._pref === (aib.tiny ? el : temp) && !/Reply|Ответ/.test(el.textContent)) {
 									$pd(e);
 									e.stopPropagation();
 									if (!Cfg.showRepBtn) {
@@ -12919,13 +13716,13 @@ true, true],
 									} else if (pr.isQuick || aib.t && pr.isHidden) {
 										pr.showQuickReply(isPview ? Pview.topParent : this, this.num, false, true);
 									} else if (aib.t) {
-										var formText = pr.txta.value,
-										    isOnNewLine = formText === '' || formText.slice(-1) === '\n';
+										var formText = pr.txta.value;
+										var isOnNewLine = formText === '' || formText.slice(-1) === '\n';
 										$txtInsert(pr.txta, '>>' + this.num + (isOnNewLine ? '\n' : ''));
 									} else {
 										window.location = el.href.replace(/#i/, '#');
 									}
-								} else if ((temp = el.textContent)[0] === '>' && temp[1] === '>' && !temp[2].includes('\/')) {
+								} else if ((temp = el.textContent)[0] === '>' && temp[1] === '>' && !temp[2].includes('/')) {
 									var post = pByNum.get(+temp.match(/\d+/));
 									if (post) {
 										post.selectAndScrollTo();
@@ -12936,9 +13733,10 @@ true, true],
 						case 'IMG':
 							if (el.classList.contains('de-video-thumb')) {
 								if (Cfg.addYouTube === 3) {
-									var vObject = this.videos;
-									vObject.currentLink.classList.add('de-current');
-									vObject.addPlayer(vObject.playerInfo, el.classList.contains('de-ytube'));
+									var videos = this.videos;
+
+									videos.currentLink.classList.add('de-current');
+									videos.setPlayer(videos.playerInfo, el.classList.contains('de-ytube'));
 									$pd(e);
 								}
 							} else if (Cfg.expandImgs !== 0) {
@@ -12952,15 +13750,46 @@ true, true],
 							}
 							return;
 					}
-					if (aib.mak && el.classList.contains('expand-large-comment')) {
-						this._getFullMsg(el, false);
-						$pd(e);
-						e.stopPropagation();
+					if (aib.mak) {
+						switch (el.className) {
+							case 'fa fa-bolt':
+							case 'fa fa-thumbs-down':
+								el = el.parentNode;
+							case 'like-icon':
+							case 'dislike-icon':
+							case 'like-caption':
+							case 'dislike-caption':
+							case 'like-count':
+							case 'dislike-count':
+								el = el.parentNode;
+							case 'like-div':
+							case 'dislike-div':
+								{
+									var task = el.className.split('-')[0];
+									var num = el.id.match(/\d+/)[0];
+									$ajax('/makaba/likes.fcgi?task=' + task + '&board=' + aib.b + '&num=' + num).then(function (xhr) {
+										var data = JSON.parse(xhr.responseText);
+										if (data.Status !== 'OK') {
+											$popup('err-2chlike', data.Reason);
+											return;
+										}
+										el.classList.add(task + '-div-checked');
+										var countEl = $q('.' + task + '-count', el);
+										countEl.textContent = +countEl.textContent + 1;
+									}, function () {
+										return $popup('err-2chlike', Lng.noConnect[lang]);
+									});
+								}
+						}
+						if (el.classList.contains('expand-large-comment')) {
+							this._getFullMsg(el, false);
+							$pd(e);
+							e.stopPropagation();
+						}
 					}
 					switch (el.classList[0]) {
 						case 'de-btn-expthr':
-							this.thr.loadPosts('all');
-							return;
+							this.thr.loadPosts('all');return;
 						case 'de-btn-fav':
 							this.thr.setFavorState(true, 'user');return;
 						case 'de-btn-fav-sel':
@@ -12969,8 +13798,7 @@ true, true],
 						case 'de-btn-hide-user':
 						case 'de-btn-unhide':
 						case 'de-btn-unhide-user':
-							this.setUserVisib(!this.hidden);
-							return;
+							this.setUserVisib(!this.hidden);return;
 						case 'de-btn-rep':
 							pr.showQuickReply(isPview ? Pview.topParent : this, this.num, !isPview, false);
 							quotetxt = '';
@@ -12984,7 +13812,7 @@ true, true],
 					}
 					return;
 				}
-				if (!isOutEvent && Cfg.expandImgs && el.tagName === 'IMG' && !el.classList.contains('de-img-full') && (temp = this.images.getImageByEl(el)) && (temp.isImage || temp.isVideo)) {
+				if (!isOutEvent && Cfg.expandImgs && el.tagName === 'IMG' && !el.classList.contains('de-fullimg') && (temp = this.images.getImageByEl(el)) && (temp.isImage || temp.isVideo)) {
 					el.title = Cfg.expandImgs === 1 ? Lng.expImgInline[lang] : Lng.expImgFull[lang];
 				}
 				if (!this._hasEvents) {
@@ -13025,7 +13853,7 @@ true, true],
 					case 'de-btn-stick':
 						this.btns.title = Lng.attachPview[lang];return;
 					case 'de-btn-src':
-						this._addMenu(el, isOutEvent, this._getMenuImgSrc(el));return;
+						this._addMenu(el, isOutEvent, AbstractPost._getMenuImgSrc(el));return;
 					default:
 						if (!Cfg.linksNavig || el.tagName !== 'A' || el.lchecked) {
 							return;
@@ -13037,22 +13865,23 @@ true, true],
 						el.className = 'de-link-pref ' + el.className;
 					case 'de-link-ref':
 					case 'de-link-pref':
-						if (Cfg.linksNavig) {
-							if (isOutEvent) {
-								clearTimeout(this._linkDelay);
-								if (!(aib.getPostOfEl(fixEventEl(e.relatedTarget)) instanceof Pview) && Pview.top) {
-									Pview.top.markToDel(); 
-								} else if (this.kid) {
-									this.kid.markToDel(); 
-								}
-							} else {
-								this._linkDelay = setTimeout(function () {
-									return _this31.kid = Pview.show(_this31, el);
-								}, Cfg.linksOver);
-							}
-							$pd(e);
-							e.stopPropagation();
+						if (!Cfg.linksNavig) {
+							return;
 						}
+						if (isOutEvent) {
+							clearTimeout(this._linkDelay);
+							if (!(aib.getPostOfEl(fixEventEl(e.relatedTarget)) instanceof Pview) && Pview.top) {
+								Pview.top.markToDel(); 
+							} else if (this.kid) {
+								this.kid.markToDel(); 
+							}
+						} else {
+							this._linkDelay = setTimeout(function () {
+								return _this38.kid = Pview.show(_this38, el);
+							}, Cfg.linksOver);
+						}
+						$pd(e);
+						e.stopPropagation();
 				}
 			}
 		}, {
@@ -13066,19 +13895,19 @@ true, true],
 		}, {
 			key: 'updateMsg',
 			value: function updateMsg(newMsg, sRunner) {
-				var videoExt,
-				    videoLinks,
-				    origMsg = aib.dobr ? this.msg.firstElementChild : this.msg;
+				var videoExt = void 0,
+				    videoLinks = void 0;
+				var origMsg = aib.dobr ? this.msg.firstElementChild : this.msg;
 				if (Cfg.addYouTube) {
 					videoExt = $q('.de-video-ext', origMsg);
 					videoLinks = $Q(':not(.de-video-ext) > .de-video-link', origMsg);
 				}
 				$replace(origMsg, newMsg);
 				Object.defineProperties(this, {
-					'msg': { configurable: true, value: newMsg },
-					'trunc': { configurable: true, value: null }
+					msg: { configurable: true, value: newMsg },
+					trunc: { configurable: true, value: null }
 				});
-				Post.content.remove(this);
+				Post.Сontent.remove(this);
 				if (Cfg.addYouTube) {
 					this.videos.updatePost(videoLinks, $Q('a[href*="youtu"], a[href*="vimeo.com"]', newMsg), false);
 					if (videoExt) {
@@ -13092,7 +13921,7 @@ true, true],
 		}, {
 			key: '_addMenu',
 			value: function _addMenu(el, isOutEvent, html) {
-				var _this32 = this;
+				var _this39 = this;
 
 				if (this.menu && this.menu.parentEl === el) {
 					return;
@@ -13101,7 +13930,7 @@ true, true],
 					clearTimeout(this._menuDelay);
 				} else {
 					this._menuDelay = setTimeout(function () {
-						return _this32._showMenu(el, html);
+						return _this39._showMenu(el, html);
 					}, Cfg.linksOver);
 				}
 			}
@@ -13119,7 +13948,7 @@ true, true],
 		}, {
 			key: '_getFullMsg',
 			value: function _getFullMsg(el, isInit) {
-				var _this33 = this;
+				var _this40 = this;
 
 				if (aib.delTruncMsg) {
 					aib.delTruncMsg(this, el, isInit);
@@ -13130,14 +13959,14 @@ true, true],
 				}
 				ajaxLoad(aib.getThrUrl(aib.b, this.tNum)).then(function (form) {
 					var maybeSpells = new Maybe(SpellsRunner);
-					if (_this33.isOp) {
-						_this33.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, form))), maybeSpells.value);
+					if (_this40.isOp) {
+						_this40.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, form))), maybeSpells.value);
 						$del(el);
 					} else {
 						var _els3 = $Q(aib.qRPost, form);
 						for (var i = 0, len = _els3.length; i < len; i++) {
-							if (_this33.num === aib.getPNum(_els3[i])) {
-								_this33.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, _els3[i]))), maybeSpells.value);
+							if (_this40.num === aib.getPNum(_els3[i])) {
+								_this40.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, _els3[i]))), maybeSpells.value);
 								$del(el);
 								break;
 							}
@@ -13147,25 +13976,18 @@ true, true],
 				}, emptyFn);
 			}
 		}, {
-			key: '_getMenuImgSrc',
-			value: function _getMenuImgSrc(el) {
-				var link = el.nextSibling,
-				    p = encodeURIComponent(link.getAttribute('de-href') || link.href) + '" target="_blank">' + Lng.searchIn[lang];
-				return '<a class="de-menu-item de-src-google" href="https://www.google.com/searchbyimage?image_url=' + p + 'Google</a>' + '<a class="de-menu-item de-src-yandex" href="http://yandex.ru/images/search?rpt=imageview&img_url=' + p + 'Yandex</a>' + '<a class="de-menu-item de-src-tineye" href="http://tineye.com/search/?url=' + p + 'TinEye</a>' + '<a class="de-menu-item de-src-saucenao" href="http://saucenao.com/search.php?url=' + p + 'SauceNAO</a>' + '<a class="de-menu-item de-src-iqdb" href="http://iqdb.org/?url=' + p + 'IQDB</a>' + '<a class="de-menu-item de-src-whatanime" href="http://whatanime.ga/?auto&url=' + (aib.iichan ? 'http://reho.st/' + p : p) + 'WhatAnime</a>';
-			}
-		}, {
 			key: '_showMenu',
 			value: function _showMenu(el, html) {
-				var _this34 = this;
+				var _this41 = this;
 
 				if (this._menu) {
 					this._menu.remove();
 				}
 				this._menu = new Menu(el, html, function (el) {
-					return _this34._clickMenu(el);
+					return _this41._clickMenu(el);
 				}, false);
 				this._menu.onremove = function () {
-					return _this34._menu = null;
+					return _this41._menu = null;
 				};
 			}
 		}, {
@@ -13192,19 +14014,19 @@ true, true],
 		}, {
 			key: 'msg',
 			get: function get() {
-				var val = $q(aib.qPostMsg, this.el);
-				Object.defineProperty(this, 'msg', { configurable: true, value: val });
-				return val;
+				var value = $q(aib.qPostMsg, this.el);
+				Object.defineProperty(this, 'msg', { value: value, configurable: true });
+				return value;
 			}
 		}, {
 			key: 'trunc',
 			get: function get() {
-				var el = aib.qTrunc && $q(aib.qTrunc, this.el),
-				    value = null;
+				var value = null;
+				var el = aib.qTrunc && $q(aib.qTrunc, this.el);
 				if (el && /long|full comment|gekürzt|слишком|длинн|мног|полн/i.test(el.textContent)) {
 					value = el;
 				}
-				Object.defineProperty(this, 'trunc', { configurable: true, value: value });
+				Object.defineProperty(this, 'trunc', { value: value, configurable: true });
 				return value;
 			}
 		}, {
@@ -13214,6 +14036,13 @@ true, true],
 				Object.defineProperty(this, 'videos', { value: value });
 				return value;
 			}
+		}], [{
+			key: '_getMenuImgSrc',
+			value: function _getMenuImgSrc(el) {
+				var link = el.nextSibling;
+				var p = encodeURIComponent(link.getAttribute('de-href') || link.href) + '" target="_blank">' + Lng.searchIn[lang];
+				return '<a class="de-menu-item ' + ['de-src-google" href="https://www.google.com/searchbyimage?image_url=' + p + 'Google', 'de-src-yandex" href="http://yandex.ru/images/search?rpt=imageview&img_url=' + p + 'Yandex', 'de-src-tineye" href="http://tineye.com/search/?url=' + p + 'TinEye', 'de-src-saucenao" href="http://saucenao.com/search.php?url=' + p + 'SauceNAO', 'de-src-iqdb" href="http://iqdb.org/?url=' + p + 'IQDB', 'de-src-whatanime" href="http://whatanime.ga/?auto&url=' + (aib.iichan ? 'http://reho.st/' + p : p) + 'WhatAnime'].join('</a><a class="de-menu-item ') + '</a>';
+			}
 		}]);
 
 		return AbstractPost;
@@ -13222,96 +14051,50 @@ true, true],
 	var Post = function (_AbstractPost) {
 		_inherits(Post, _AbstractPost);
 
-		_createClass(Post, null, [{
-			key: 'addMark',
-			value: function addMark(postEl, forced) {
-				if (!doc.hidden && !forced) {
-					Post.clearMarks();
-				} else {
-					if (!Post.hasNew) {
-						Post.hasNew = true;
-						doc.addEventListener('click', Post.clearMarks, true);
-					}
-					postEl.classList.add('de-new-post');
-				}
-			}
-		}, {
-			key: 'clearMarks',
-			value: function clearMarks() {
-				if (Post.hasNew) {
-					Post.hasNew = false;
-					$each($Q('.de-new-post'), function (el) {
-						return el.classList.remove('de-new-post');
-					});
-					doc.removeEventListener('click', Post.clearMarks, true);
-				}
-			}
-		}, {
-			key: 'hideContent',
-			value: function hideContent(headerEl, hideBtn, isUser, hide) {
-				if (hide) {
-					if (aib.t) {
-						Thread.first.hidCounter++;
-					}
-					hideBtn.setAttribute('class', isUser ? 'de-btn-unhide-user' : 'de-btn-unhide');
-					if (headerEl) {
-						for (var el = headerEl.nextElementSibling; el; el = el.nextElementSibling) {
-							el.classList.add('de-post-hiddencontent');
-						}
-					}
-				} else {
-					hideBtn.setAttribute('class', isUser ? 'de-btn-hide-user' : 'de-btn-hide');
-					$each($Q('.de-post-hiddencontent', headerEl.parentNode), function (el) {
-						return el.classList.remove('de-post-hiddencontent');
-					});
-				}
-			}
-		}]);
-
 		function Post(el, thr, num, count, isOp, prev) {
 			_classCallCheck(this, Post);
 
-			var _this35 = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, thr, num, isOp));
+			var _this42 = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, thr, num, isOp));
 
-			_this35.count = count;
-			_this35.el = el;
-			_this35.prev = prev;
-			_this35.next = null;
-			_this35.deleted = false;
-			_this35.hidden = false;
-			_this35.omitted = false;
-			_this35.spellHidden = false;
-			_this35.userToggled = false;
-			_this35.viewed = false;
-			_this35._selRange = null;
-			_this35._selText = '';
+			_this42.count = count;
+			_this42.deleted = false;
+			_this42.el = el;
+			_this42.hidden = false;
+			_this42.next = null;
+			_this42.omitted = false;
+			_this42.prev = prev;
+			_this42.spellHidden = false;
+			_this42.userToggled = false;
+			_this42.viewed = false;
+			_this42._selRange = null;
+			_this42._selText = '';
 			if (prev) {
-				prev.next = _this35;
+				prev.next = _this42;
 			}
-			pByEl.set(el, _this35);
-			pByNum.set(num, _this35);
+			pByEl.set(el, _this42);
+			pByNum.set(num, _this42);
 			if (MyPosts.has(num)) {
-				_this35.el.classList.add('de-mypost');
+				_this42.el.classList.add('de-mypost');
 			}
-			var refEl = $q(aib.qPostRef, el),
-			    html = '<span class="de-post-btns' + (isOp ? '' : ' de-post-counter') + '"><svg class="de-btn-hide"><use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/>' + '<use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>';
-			_this35._pref = refEl;
+			var refEl = $q(aib.qPostRef, el);
+			var html = '<span class="de-post-btns' + (isOp ? '' : ' de-post-counter') + '">' + '<svg class="de-btn-hide"><use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/>' + '<use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>';
+			_this42._pref = refEl;
 			if (isOp) {
 				if (!aib.t) {
 					html += '<svg class="de-btn-expthr"><use xlink:href="#de-symbol-post-expthr"/></svg>';
 				}
 				html += '<svg class="de-btn-fav"><use xlink:href="#de-symbol-post-fav"/></svg>';
 			}
-			_this35.sage = aib.getSage(el);
-			if (_this35.sage) {
+			_this42.sage = aib.getSage(el);
+			if (_this42.sage) {
 				html += '<svg class="de-btn-sage"><use xlink:href="#de-symbol-post-sage"/></svg>';
 			}
-			_this35.btns = $aEnd(refEl, html + '</span>');
-			if (Cfg.expandTrunc && _this35.trunc) {
-				_this35._getFullMsg(_this35.trunc, true);
+			_this42.btns = $aEnd(refEl, html + '</span>');
+			if (Cfg.expandTrunc && _this42.trunc) {
+				_this42._getFullMsg(_this42.trunc, true);
 			}
-			el.addEventListener('mouseover', _this35, true);
-			return _this35;
+			el.addEventListener('mouseover', _this42, true);
+			return _this42;
 		}
 
 		_createClass(Post, [{
@@ -13327,8 +14110,8 @@ true, true],
 			value: function _delete(removeEl) {
 				if (removeEl) {
 					$del(this.wrap);
-					pByEl['delete'](this.el);
-					pByNum['delete'](this.num);
+					pByEl.delete(this.el);
+					pByNum.delete(this.num);
 					if (this.hidden) {
 						this.ref.unhide();
 					}
@@ -13424,11 +14207,11 @@ true, true],
 						}
 					}
 					locStorage['__de-post'] = JSON.stringify({
-						'brd': aib.b,
-						'num': this.num,
-						'thrNum': this.thr.num,
-						'hide': hide,
-						'title': this.isOp ? this.title : ''
+						hide: hide,
+						brd: aib.b,
+						num: this.num,
+						thrNum: this.thr.num,
+						title: this.isOp ? this.title : ''
 					});
 					locStorage.removeItem('__de-post');
 				}
@@ -13441,7 +14224,7 @@ true, true],
 		}, {
 			key: 'setVisib',
 			value: function setVisib(hide) {
-				var _this36 = this;
+				var _this43 = this;
 
 				var note = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -13463,14 +14246,14 @@ true, true],
 					} else {
 						this._pref.onmouseover = this._pref.onmouseout = !hide ? null : function (e) {
 							var yOffset = window.pageYOffset;
-							_this36.hideContent(e.type === 'mouseout');
+							_this43.hideContent(e.type === 'mouseout');
 							scrollTo(window.pageXOffset, yOffset);
 						};
 					}
 				}
 				if (Cfg.strikeHidd) {
 					setTimeout(function () {
-						return _this36._strikePostNum(hide);
+						return _this43._strikePostNum(hide);
 					}, 50);
 				}
 				if (hide) {
@@ -13504,19 +14287,19 @@ true, true],
 			value: function toggleImages() {
 				var expand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.images.expanded;
 
-				for (var _iterator25 = this.images, _isArray25 = Array.isArray(_iterator25), _i33 = 0, _iterator25 = _isArray25 ? _iterator25 : _iterator25[Symbol.iterator]();;) {
-					var _ref46;
+				for (var _iterator26 = this.images, _isArray26 = Array.isArray(_iterator26), _i35 = 0, _iterator26 = _isArray26 ? _iterator26 : _iterator26[Symbol.iterator]();;) {
+					var _ref76;
 
-					if (_isArray25) {
-						if (_i33 >= _iterator25.length) break;
-						_ref46 = _iterator25[_i33++];
+					if (_isArray26) {
+						if (_i35 >= _iterator26.length) break;
+						_ref76 = _iterator26[_i35++];
 					} else {
-						_i33 = _iterator25.next();
-						if (_i33.done) break;
-						_ref46 = _i33.value;
+						_i35 = _iterator26.next();
+						if (_i35.done) break;
+						_ref76 = _i35.value;
 					}
 
-					var image = _ref46;
+					var image = _ref76;
 
 					if (image.isImage && image.expanded ^ expand) {
 						if (expand) {
@@ -13541,12 +14324,99 @@ true, true],
 				}
 			}
 		}, {
+			key: '_clickMenu',
+			value: function _clickMenu(el) {
+				var hidden = this.hidden;
+
+				switch (el.getAttribute('info')) {
+					case 'hide-sel':
+						{
+							var _selRange = this._selRange,
+							    start = _selRange.startContainer,
+							    end = _selRange.endContainer;
+
+							if (start.nodeType === 3) {
+								start = start.parentNode;
+							}
+							if (end.nodeType === 3) {
+								end = end.parentNode;
+							}
+							var inMsgSel = aib.qPostMsg + ', ' + aib.qPostMsg + ' *';
+							if (nav.matchesSelector(start, inMsgSel) && nav.matchesSelector(end, inMsgSel) || nav.matchesSelector(start, aib.qPostSubj) && nav.matchesSelector(end, aib.qPostSubj)) {
+								if (this._selText.includes('\n')) {
+									Spells.add(1 
+									, '/' + quoteReg(this._selText).replace(/\r?\n/g, '\\n') + '/', false);
+								} else {
+									Spells.add(0 , this._selText.toLowerCase(), false);
+								}
+							} else {
+								dummy.innerHTML = '';
+								dummy.appendChild(this._selRange.cloneContents());
+								Spells.add(2 
+								, '/' + quoteReg(dummy.innerHTML.replace(/^<[^>]+>|<[^>]+>$/g, '')) + '/', false);
+							}
+							return;
+						}
+					case 'hide-name':
+						Spells.add(6 , this.posterName, false);return;
+					case 'hide-trip':
+						Spells.add(7 , this.posterTrip, false);return;
+					case 'hide-img':
+						{
+							var _images$firstAttach = this.images.firstAttach,
+							    w = _images$firstAttach.weight,
+							    wi = _images$firstAttach.width,
+							    h = _images$firstAttach.height;
+
+							Spells.add(8 , [0, [w, w], [wi, wi, h, h]], false);
+							return;
+						}
+					case 'hide-imgn':
+						Spells.add(3 , '/' + quoteReg(this.images.firstAttach.name) + '/', false);
+						return;
+					case 'hide-ihash':
+						ImagesHashStorage.getHash(this.images.firstAttach).then(function (hash) {
+							if (hash !== -1) {
+								Spells.add(4 , hash, false);
+							}
+						});
+						return;
+					case 'hide-noimg':
+						Spells.add(0x108 , '', true);return;
+					case 'hide-text':
+						{
+							var num = this.num;
+
+							var words = Post.getWrds(this.text);
+							for (var post = Thread.first.op; post; post = post.next) {
+								Post.findSameText(num, hidden, words, post);
+							}
+							return;
+						}
+					case 'hide-notext':
+						Spells.add(0x10B , '', true);return;
+					case 'hide-refs':
+						if (hidden) {
+							this.ref.unhide(true);
+						} else {
+							this.ref.hide(true);
+						}
+						this.setUserVisib(!hidden);
+						return;
+					case 'thr-exp':
+						{
+							var task = parseInt(el.textContent.match(/\d+/), 10);
+							this.thr.loadPosts(!task ? 'all' : task === 10 ? 'more' : task);
+						}
+				}
+			}
+		}, {
 			key: '_getMenuHide',
-			value: function _getMenuHide(el) {
-				var str = '',
-				    sel = window.getSelection(),
-				    ssel = sel.toString().trim(),
-				    getItem = function getItem(name) {
+			value: function _getMenuHide() {
+				var str = '';
+				var sel = window.getSelection();
+				var ssel = sel.toString().trim();
+				var getItem = function getItem(name) {
 					return '<span info="hide-' + name + '" class="de-menu-item">' + Lng.selHiderMenu[name][lang] + '</span>';
 				};
 				if (ssel) {
@@ -13578,83 +14448,16 @@ true, true],
 				return str;
 			}
 		}, {
-			key: '_clickMenu',
-			value: function _clickMenu(el) {
-				var hidden = this.hidden;
-				switch (el.getAttribute('info')) {
-					case 'hide-sel':
-						var start = this._selRange.startContainer,
-						    end = this._selRange.endContainer;
-						if (start.nodeType === 3) {
-							start = start.parentNode;
-						}
-						if (end.nodeType === 3) {
-							end = end.parentNode;
-						}
-						var inMsgSel = aib.qPostMsg + ', ' + aib.qPostMsg + ' *';
-						if (nav.matchesSelector(start, inMsgSel) && nav.matchesSelector(end, inMsgSel) || nav.matchesSelector(start, aib.qPostSubj) && nav.matchesSelector(end, aib.qPostSubj)) {
-							if (this._selText.includes('\n')) {
-								Spells.add(1 , '/' + quoteReg(this._selText).replace(/\r?\n/g, '\\n') + '/', false);
-							} else {
-								Spells.add(0 , this._selText.toLowerCase(), false);
-							}
-						} else {
-							dummy.innerHTML = '';
-							dummy.appendChild(this._selRange.cloneContents());
-							Spells.add(2 , '/' + quoteReg(dummy.innerHTML.replace(/^<[^>]+>|<[^>]+>$/g, '')) + '/', false);
-						}
-						return;
-					case 'hide-name':
-						Spells.add(6 , this.posterName, false);return;
-					case 'hide-trip':
-						Spells.add(7 , this.posterTrip, false);return;
-					case 'hide-img':
-						var img = this.images.firstAttach,
-						    w = img.weight,
-						    wi = img.width,
-						    h = img.height;
-						Spells.add(8 , [0, [w, w], [wi, wi, h, h]], false);
-						return;
-					case 'hide-imgn':
-						Spells.add(3 , '/' + quoteReg(this.images.firstAttach.name) + '/', false);
-						return;
-					case 'hide-ihash':
-						ImagesHashStorage.getHash(this.images.firstAttach).then(function (hash) {
-							if (hash !== -1) {
-								Spells.add(4 , hash, false);
-							}
-						});
-						return;
-					case 'hide-noimg':
-						Spells.add(0x108 , '', true);return;
-					case 'hide-text':
-						var num = this.num,
-						    wrds = Post.getWrds(this.text);
-						for (var post = Thread.first.op; post; post = post.next) {
-							Post.findSameText(num, hidden, wrds, post);
-						}
-						return;
-					case 'hide-notext':
-						Spells.add(0x10B , '', true);return;
-					case 'hide-refs':
-						this.ref[hidden ? 'unhide' : 'hide'](true);
-						this.setUserVisib(!hidden);
-						return;
-					case 'thr-exp':
-						var task = parseInt(el.textContent.match(/\d+/), 10);
-						this.thr.loadPosts(!task ? 'all' : task === 10 ? 'more' : task);
-				}
-			}
-		}, {
 			key: '_strikePostNum',
 			value: function _strikePostNum(isHide) {
 				var num = this.num;
+
 				if (isHide) {
 					Post.hiddenNums.add(+num);
 				} else {
-					Post.hiddenNums['delete'](+num);
+					Post.hiddenNums.delete(+num);
 				}
-				$each($Q('[de-form] a[href*="' + aib.anchor + num + '"]'), isHide ? function (el) {
+				$each($Q('[de-form] a[href*="' + (aib.anchor + num) + '"]'), isHide ? function (el) {
 					el.classList.add('de-link-hid');
 					if (Cfg.removeHidd && el.classList.contains('de-link-ref')) {
 						var refmap = el.parentNode;
@@ -13676,7 +14479,7 @@ true, true],
 			key: 'banned',
 			get: function get() {
 				var value = aib.getBanId(this.el);
-				Object.defineProperty(this, 'banned', { writable: true, value: value });
+				Object.defineProperty(this, 'banned', { value: value, writable: true });
 				return value;
 			}
 		}, {
@@ -13687,12 +14490,12 @@ true, true],
 		}, {
 			key: 'headerEl',
 			get: function get() {
-				return new Post.content(this).headerEl;
+				return new Post.Сontent(this).headerEl;
 			}
 		}, {
 			key: 'html',
 			get: function get() {
-				return new Post.content(this).html;
+				return new Post.Сontent(this).html;
 			}
 		}, {
 			key: 'nextInThread',
@@ -13712,34 +14515,34 @@ true, true],
 		}, {
 			key: 'note',
 			get: function get() {
-				var value = new Post.note(this);
+				var value = new Post.Note(this);
 				Object.defineProperty(this, 'note', { value: value });
 				return value;
 			}
 		}, {
 			key: 'posterName',
 			get: function get() {
-				return new Post.content(this).posterName;
+				return new Post.Сontent(this).posterName;
 			}
 		}, {
 			key: 'posterTrip',
 			get: function get() {
-				return new Post.content(this).posterTrip;
+				return new Post.Сontent(this).posterTrip;
 			}
 		}, {
 			key: 'subj',
 			get: function get() {
-				return new Post.content(this).subj;
+				return new Post.Сontent(this).subj;
 			}
 		}, {
 			key: 'text',
 			get: function get() {
-				return new Post.content(this).text;
+				return new Post.Сontent(this).text;
 			}
 		}, {
 			key: 'title',
 			get: function get() {
-				return new Post.content(this).title;
+				return new Post.Сontent(this).title;
 			}
 		}, {
 			key: 'tNum',
@@ -13754,28 +14557,121 @@ true, true],
 		}, {
 			key: 'wrap',
 			get: function get() {
-				return new Post.content(this).wrap;
+				return new Post.Сontent(this).wrap;
+			}
+		}], [{
+			key: 'addMark',
+			value: function addMark(postEl, forced) {
+				if (!doc.hidden && !forced) {
+					Post.clearMarks();
+				} else {
+					if (!Post.hasNew) {
+						Post.hasNew = true;
+						doc.addEventListener('click', Post.clearMarks, true);
+					}
+					postEl.classList.add('de-new-post');
+				}
+			}
+		}, {
+			key: 'clearMarks',
+			value: function clearMarks() {
+				if (Post.hasNew) {
+					Post.hasNew = false;
+					$each($Q('.de-new-post'), function (el) {
+						return el.classList.remove('de-new-post');
+					});
+					doc.removeEventListener('click', Post.clearMarks, true);
+				}
+			}
+		}, {
+			key: 'findSameText',
+			value: function findSameText(pNum, isHidden, words, curPost) {
+				var curWords = Post.getWrds(curPost.text);
+				var len = curWords.length;
+				var i = words.length;
+				var olen = i;
+				var _olen = i;
+				var n = 0;
+				if (len < olen * 0.4 || len > olen * 3) {
+					return;
+				}
+				while (i--) {
+					if (olen > 6 && words[i].length < 3) {
+						_olen--;
+						continue;
+					}
+					var j = len;
+					while (j--) {
+						if (curWords[j] === words[i] || words[i].match(/>>\d+/) && curWords[j].match(/>>\d+/)) {
+							n++;
+						}
+					}
+				}
+				if (n < _olen * 0.4 || len > _olen * 3) {
+					return;
+				}
+				if (isHidden) {
+					if (curPost.spellHidden) {
+						Post.Note.reset();
+					} else {
+						curPost.setVisib(false);
+					}
+					if (curPost.userToggled) {
+						HiddenPosts.remove(curPost.num);
+						curPost.userToggled = false;
+					}
+				} else {
+					curPost.setUserVisib(true, true, 'similar to >>' + pNum);
+				}
+				return false;
+			}
+		}, {
+			key: 'getWrds',
+			value: function getWrds(text) {
+				return text.replace(/\s+/g, ' ').replace(/[^a-zа-яё ]/ig, '').trim().substring(0, 800).split(' ');
+			}
+		}, {
+			key: 'hideContent',
+			value: function hideContent(headerEl, hideBtn, isUser, hide) {
+				if (hide) {
+					if (aib.t) {
+						Thread.first.hidCounter++;
+					}
+					hideBtn.setAttribute('class', isUser ? 'de-btn-unhide-user' : 'de-btn-unhide');
+					if (headerEl) {
+						for (var el = headerEl.nextElementSibling; el; el = el.nextElementSibling) {
+							el.classList.add('de-post-hiddencontent');
+						}
+					}
+				} else {
+					hideBtn.setAttribute('class', isUser ? 'de-btn-hide-user' : 'de-btn-hide');
+					$each($Q('.de-post-hiddencontent', headerEl.parentNode), function (el) {
+						return el.classList.remove('de-post-hiddencontent');
+					});
+				}
 			}
 		}]);
 
 		return Post;
 	}(AbstractPost);
 
-	Post.content = function (_TemporaryContent) {
+	Post.hasNew = false;
+	Post.hiddenNums = new Set();
+	Post.Сontent = function (_TemporaryContent) {
 		_inherits(PostContent, _TemporaryContent);
 
 		function PostContent(post) {
 			_classCallCheck(this, PostContent);
 
-			var _this37 = _possibleConstructorReturn(this, (PostContent.__proto__ || Object.getPrototypeOf(PostContent)).call(this, post));
+			var _this44 = _possibleConstructorReturn(this, (PostContent.__proto__ || Object.getPrototypeOf(PostContent)).call(this, post));
 
-			if (_this37._inited) {
-				return _possibleConstructorReturn(_this37);
+			if (_this44._inited) {
+				return _possibleConstructorReturn(_this44);
 			}
-			_this37._inited = true;
-			_this37.el = post.el;
-			_this37.post = post;
-			return _this37;
+			_this44._inited = true;
+			_this44.el = post.el;
+			_this44.post = post;
+			return _this44;
 		}
 
 		_createClass(PostContent, [{
@@ -13788,33 +14684,33 @@ true, true],
 		}, {
 			key: 'html',
 			get: function get() {
-				var val = this.el.outerHTML;
-				Object.defineProperty(this, 'html', { value: val });
-				return val;
+				var value = this.el.outerHTML;
+				Object.defineProperty(this, 'html', { value: value });
+				return value;
 			}
 		}, {
 			key: 'posterName',
 			get: function get() {
-				var pName = $q(aib.qPostName, this.el),
-				    val = pName ? pName.textContent.trim().replace(/\s/g, ' ') : '';
-				Object.defineProperty(this, 'posterName', { value: val });
-				return val;
+				var pName = $q(aib.qPostName, this.el);
+				var value = pName ? pName.textContent.trim().replace(/\s/g, ' ') : '';
+				Object.defineProperty(this, 'posterName', { value: value });
+				return value;
 			}
 		}, {
 			key: 'posterTrip',
 			get: function get() {
-				var pTrip = $q(aib.qPostTrip, this.el),
-				    val = pTrip ? pTrip.textContent : '';
-				Object.defineProperty(this, 'posterTrip', { value: val });
-				return val;
+				var pTrip = $q(aib.qPostTrip, this.el);
+				var value = pTrip ? pTrip.textContent : '';
+				Object.defineProperty(this, 'posterTrip', { value: value });
+				return value;
 			}
 		}, {
 			key: 'subj',
 			get: function get() {
-				var subj = $q(aib.qPostSubj, this.el),
-				    val = subj ? subj.textContent : '';
-				Object.defineProperty(this, 'subj', { value: val });
-				return val;
+				var subj = $q(aib.qPostSubj, this.el);
+				var value = subj ? subj.textContent : '';
+				Object.defineProperty(this, 'subj', { value: value });
+				return value;
 			}
 		}, {
 			key: 'text',
@@ -13826,24 +14722,22 @@ true, true],
 		}, {
 			key: 'title',
 			get: function get() {
-				var val = this.subj || this.text.substring(0, 70).replace(/\s+/g, ' ');
-				Object.defineProperty(this, 'title', { value: val });
-				return val;
+				var value = this.subj || this.text.substring(0, 70).replace(/\s+/g, ' ');
+				Object.defineProperty(this, 'title', { value: value });
+				return value;
 			}
 		}, {
 			key: 'wrap',
 			get: function get() {
-				var val = aib.getPostWrap(this.el, this.post.isOp);
-				Object.defineProperty(this, 'wrap', { value: val });
-				return val;
+				var value = aib.getPostWrap(this.el, this.post.isOp);
+				Object.defineProperty(this, 'wrap', { value: value });
+				return value;
 			}
 		}]);
 
 		return PostContent;
 	}(TemporaryContent);
-	Post.hasNew = false;
-	Post.hiddenNums = new Set();
-	Post.note = function () {
+	Post.Note = function () {
 		function PostNote(post) {
 			_classCallCheck(this, PostNote);
 
@@ -13868,28 +14762,6 @@ true, true],
 				$hide(this._noteEl);
 			}
 		}, {
-			key: 'set',
-			value: function set(note) {
-				var _this38 = this;
-
-				this.text = note;
-				var text = void 0;
-				if (this.isHideThr) {
-					this._aEl.onmouseover = this._aEl.onmouseout = function (e) {
-						return _this38._post.hideContent(e.type === 'mouseout');
-					};
-					this._aEl.onclick = function (e) {
-						$pd(e);
-						_this38._post.setUserVisib(!_this38._post.hidden);
-					};
-					text = (this._post.title ? '(' + this._post.title + ') ' : '') + (note ? '[autohide: ' + note + ']' : '');
-				} else {
-					text = note ? 'autohide: ' + note : '';
-				}
-				this.textEl.textContent = text;
-				$show(this._noteEl);
-			}
-		}, {
 			key: 'reset',
 			value: function reset() {
 				this.text = null;
@@ -13899,82 +14771,61 @@ true, true],
 					this.hide();
 				}
 			}
+		}, {
+			key: 'set',
+			value: function set(note) {
+				var _this45 = this;
+
+				this.text = note;
+				var text = void 0;
+				if (this.isHideThr) {
+					this._aEl.onmouseover = this._aEl.onmouseout = function (e) {
+						return _this45._post.hideContent(e.type === 'mouseout');
+					};
+					this._aEl.onclick = function (e) {
+						$pd(e);
+						_this45._post.setUserVisib(!_this45._post.hidden);
+					};
+					text = (this._post.title ? '(' + this._post.title + ') ' : '') + (note ? '[autohide: ' + note + ']' : '');
+				} else {
+					text = note ? 'autohide: ' + note : '';
+				}
+				this.textEl.textContent = text;
+				$show(this._noteEl);
+			}
 		}]);
 
 		return PostNote;
 	}();
-	Post.getWrds = function (text) {
-		return text.replace(/\s+/g, ' ').replace(/[^a-zа-яё ]/ig, '').trim().substring(0, 800).split(' ');
-	};
-	Post.findSameText = function (oNum, oHid, oWords, post) {
-		var words = Post.getWrds(post.text),
-		    len = words.length,
-		    i = oWords.length,
-		    olen = i,
-		    _olen = i,
-		    n = 0;
-		if (len < olen * 0.4 || len > olen * 3) {
-			return;
-		}
-		while (i--) {
-			if (olen > 6 && oWords[i].length < 3) {
-				_olen--;
-				continue;
-			}
-			var j = len;
-			while (j--) {
-				if (words[j] === oWords[i] || oWords[i].match(/>>\d+/) && words[j].match(/>>\d+/)) {
-					n++;
-				}
-			}
-		}
-		if (n < _olen * 0.4 || len > _olen * 3) {
-			return;
-		}
-		if (oHid) {
-			if (post.spellHidden) {
-				post.note.reset();
-			} else {
-				post.setVisib(false);
-			}
-			if (post.userToggled) {
-				HiddenPosts.remove(post.num);
-				post.userToggled = false;
-			}
-		} else {
-			post.setUserVisib(true, true, 'similar to >>' + oNum);
-		}
-		return false;
-	};
 	Post.sizing = {
 		get dPxRatio() {
-			var val = window.devicePixelRatio || 1;
-			Object.defineProperty(this, 'dPxRatio', { value: val });
-			return val;
+			var value = window.devicePixelRatio || 1;
+			Object.defineProperty(this, 'dPxRatio', { value: value });
+			return value;
 		},
 		get wHeight() {
-			var val = nav.viewportHeight();
+			var value = nav.viewportHeight();
 			if (!this._enabled) {
 				doc.defaultView.addEventListener('resize', this);
 				this._enabled = true;
 			}
 			Object.defineProperties(this, {
-				'wWidth': { writable: true, configurable: true, value: nav.viewportWidth() },
-				'wHeight': { writable: true, configurable: true, value: val }
+				wHeight: { writable: true, configurable: true, value: value },
+				wWidth: { writable: true, configurable: true, value: nav.viewportWidth() }
 			});
-			return val;
+			return value;
 		},
 		get wWidth() {
-			var val = nav.viewportWidth();
+			var value = nav.viewportWidth();
 			if (!this._enabled) {
 				doc.defaultView.addEventListener('resize', this);
 				this._enabled = true;
 			}
 			Object.defineProperties(this, {
-				'wWidth': { writable: true, configurable: true, value: val },
-				'wHeight': { writable: true, configurable: true, value: nav.viewportHeight() }
+				wHeight: { writable: true, configurable: true, value: nav.viewportHeight() },
+				wWidth: { writable: true, configurable: true, value: value }
 			});
-			return val;
+			return value;
 		},
 		handleEvent: function handleEvent() {
 			this.wHeight = nav.viewportHeight();
@@ -13985,204 +14836,132 @@ true, true],
 		_enabled: false
 	};
 
-	function PostImages(post) {
-		var first = null,
-		    last = null,
-		    els = $Q(aib.qPostImg, post.el);
-		var hasAttachments = false;
-		var filesMap = new Map();
-		for (var i = 0, len = els.length; i < len; ++i) {
-			var _el4 = els[i];
-			last = new Attachment(post, _el4, last);
-			filesMap.set(_el4, last);
-			hasAttachments = true;
-			if (!first) {
-				first = last;
-			}
-		}
-		if (Cfg.addImgs) {
-			els = Array.from($Q('.de-img-pre', post.el));
-			for (var _i34 = 0, _len8 = els.length; _i34 < _len8; ++_i34) {
-				var _el5 = els[_i34];
-				last = new EmbeddedImage(post, _el5, last);
-				filesMap.set(_el5, last);
+	var PostImages = function () {
+		function PostImages(post) {
+			_classCallCheck(this, PostImages);
+
+			var first = null,
+			    last = null,
+			    els = $Q(aib.qPostImg, post.el);
+			var hasAttachments = false;
+			var filesMap = new Map();
+			for (var i = 0, len = els.length; i < len; ++i) {
+				var el = els[i];
+				last = new Attachment(post, el, last);
+				filesMap.set(el, last);
+				hasAttachments = true;
 				if (!first) {
 					first = last;
 				}
 			}
-		}
-		this.first = first;
-		this.last = last;
-		this.hasAttachments = hasAttachments;
-		this._map = filesMap;
-	}
-	PostImages.prototype = _defineProperty({
-		get expanded() {
-			for (var img = this.first; img; img = img.next) {
-				if (img.expanded) {
-					return true;
+			if (Cfg.addImgs) {
+				els = $Q('.de-img-pre', post.el);
+				for (var _i36 = 0, _len8 = els.length; _i36 < _len8; ++_i36) {
+					var _el9 = els[_i36];
+					last = new EmbeddedImage(post, _el9, last);
+					filesMap.set(_el9, last);
+					if (!first) {
+						first = last;
+					}
 				}
 			}
-			return false;
-		},
-		get firstAttach() {
-			return this.hasAttachments ? this.first : null;
-		},
-		getImageByEl: function getImageByEl(el) {
-			return this._map.get(el);
+			this.first = first;
+			this.last = last;
+			this.hasAttachments = hasAttachments;
+			this._map = filesMap;
 		}
-	}, Symbol.iterator, function () {
-		return {
-			_img: this.first,
-			next: function next() {
-				var value = this._img;
-				if (value) {
-					this._img = value.next;
-					return { value: value, done: false };
-				}
-				return { done: true };
+
+		_createClass(PostImages, [{
+			key: 'getImageByEl',
+			value: function getImageByEl(el) {
+				return this._map.get(el);
 			}
-		};
-	});
+		}, {
+			key: Symbol.iterator,
+			value: function value() {
+				return {
+					_img: this.first,
+					next: function next() {
+						var value = this._img;
+						if (value) {
+							this._img = value.next;
+							return { value: value, done: false };
+						}
+						return { done: true };
+					}
+				};
+			}
+		}, {
+			key: 'expanded',
+			get: function get() {
+				for (var img = this.first; img; img = img.next) {
+					if (img.expanded) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}, {
+			key: 'firstAttach',
+			get: function get() {
+				return this.hasAttachments ? this.first : null;
+			}
+		}]);
+
+		return PostImages;
+	}();
 
 
 	var Pview = function (_AbstractPost2) {
 		_inherits(Pview, _AbstractPost2);
 
-		_createClass(Pview, null, [{
-			key: 'show',
-			value: function show(parent, link) {
-				var tNum = +(link.pathname.match(/.+?\/[^\d]*(\d+)/) || [, aib.getPostOfEl(link).tNum])[1];
-				var pNum = +(link.textContent.trim().match(/\d+$/) || [tNum])[0];
-				var isTop = !(parent instanceof Pview);
-				var pv = isTop ? Pview.top : parent.kid;
-				clearTimeout(Pview._delTO);
-				if (pv && pv.num === pNum) {
-					if (pv.kid) {
-						pv.kid['delete']();
-					}
-					if (pv._link !== link) {
-						pv._setPosition(link, Cfg.animation);
-						pv._link.classList.remove('de-link-parent');
-						link.classList.add('de-link-parent');
-						pv._link = link;
-						if (pv.parent.num !== parent.num) {
-							$each($Q('.de-link-pview', pv.el), function (el) {
-								el.classList.remove('de-link-pview');
-							});
-							Pview._markLink(pv.el, parent.num);
-						}
-					}
-					pv.parent = parent;
-				} else if (!Cfg.noNavigHidd || !pByNum.has(pNum) || !pByNum.get(pNum).hidden) {
-					if (pv) {
-						pv['delete']();
-					}
-					pv = new Pview(parent, link, pNum, tNum);
-					if (isTop) {
-						Pview.top = pv;
-					}
-				} else {
-					return null;
-				}
-				return pv;
-			}
-		}, {
-			key: 'updatePosition',
-			value: function updatePosition(scroll) {
-				var pv = Pview.top;
-				if (!pv) {
-					return;
-				}
-				var parent = pv.parent;
-				if (parent.omitted) {
-					pv['delete']();
-					return;
-				}
-				if (parent.thr.loadCount === 1 && !parent.el.contains(pv._link)) {
-					var _el6 = parent.ref.getElByNum(pv.num);
-					if (_el6) {
-						pv._link = _el6;
-					} else {
-						pv['delete']();
-						return;
-					}
-				}
-				var cr = parent.hidden ? parent : pv._link.getBoundingClientRect();
-				var diff = pv._isTop ? pv._offsetTop - window.pageYOffset - cr.bottom : pv._offsetTop + pv.el.offsetHeight - window.pageYOffset - cr.top;
-				if (Math.abs(diff) > 1) {
-					if (scroll) {
-						scrollTo(window.pageXOffset, window.pageYOffset - diff);
-					}
-					do {
-						pv._offsetTop -= diff;
-						pv.el.style.top = Math.max(pv._offsetTop, 0) + 'px';
-					} while (pv = pv.kid);
-				}
-			}
-		}, {
-			key: '_markLink',
-			value: function _markLink(el, num) {
-				$each($Q('a[href*="' + num + '"]', el), function (el) {
-					if (el.textContent.startsWith('>>' + num)) {
-						el.classList.add('de-link-pview');
-					}
-				});
-			}
-		}, {
-			key: 'topParent',
-			get: function get() {
-				return Pview.top ? Pview.top.parent : null;
-			}
-		}]);
-
 		function Pview(parent, link, pNum, tNum) {
 			_classCallCheck(this, Pview);
 
-			var _this39 = _possibleConstructorReturn(this, (Pview.__proto__ || Object.getPrototypeOf(Pview)).call(this, parent.thr, pNum, pNum === tNum));
+			var _this46 = _possibleConstructorReturn(this, (Pview.__proto__ || Object.getPrototypeOf(Pview)).call(this, parent.thr, pNum, pNum === tNum));
 
-			_this39._isCached = false;
-			_this39._isLeft = false;
-			_this39._isTop = false;
-			_this39._link = link;
-			_this39._newPos = null;
-			_this39._offsetTop = 0;
-			_this39._readDelay = 0;
-			_this39.isSticky = false;
-			_this39.parent = parent;
-			_this39.tNum = tNum;
+			_this46.isSticky = false;
+			_this46.parent = parent;
+			_this46.tNum = tNum;
+			_this46._isCached = false;
+			_this46._isLeft = false;
+			_this46._isTop = false;
+			_this46._link = link;
+			_this46._newPos = null;
+			_this46._offsetTop = 0;
+			_this46._readDelay = 0;
 			var post = pByNum.get(pNum);
 			if (post && (!post.isOp || !(parent instanceof Pview) || !parent._isCached)) {
-				_this39._showPost(post);
-				return _possibleConstructorReturn(_this39);
+				_this46._showPost(post);
+				return _possibleConstructorReturn(_this46);
 			}
-			_this39._isCached = true;
-			_this39._brd = link.pathname.match(/^\/?(.+\/)/)[1].replace(aib.res, '').replace(/\/$/, '');
-			if (PviewsCache.has(_this39._brd + tNum)) {
-				post = PviewsCache.get(_this39._brd + tNum).getPost(pNum);
+			_this46._isCached = true;
+			_this46._brd = link.pathname.match(/^\/?(.+\/)/)[1].replace(aib.res, '').replace(/\/$/, '');
+			if (PviewsCache.has(_this46._brd + tNum)) {
+				post = PviewsCache.get(_this46._brd + tNum).getPost(pNum);
 				if (post) {
-					_this39._showPost(post);
+					_this46._showPost(post);
 				} else {
-					_this39._showPview(_this39.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t\t\t' + Lng.postNotFound[lang] + '</div>'));
+					_this46._showPview(_this46.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t\t\t' + Lng.postNotFound[lang] + '</div>'));
 				}
-				return _possibleConstructorReturn(_this39);
+				return _possibleConstructorReturn(_this46);
 			}
-			_this39._showPview(_this39.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
+			_this46._showPview(_this46.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
 
-			_this39._loadPromise = ajaxPostsLoad(_this39._brd, tNum, false).then(function (pBuilder) {
-				if (aib.jsonBuilder) {
+			_this46._loadPromise = ajaxPostsLoad(_this46._brd, tNum, false).then(function (pBuilder) {
+				if (aib.JsonBuilder) {
 					var html = [];
 					for (var i = 0, len = pBuilder.length + 1; i < len; ++i) {
 						html.push(pBuilder.getPostHTML(i - 1)); 
 					}
-					_this39._onload($add('<div>' + aib.fixHTML(html.join('')) + '</div>'));
+					_this46._onload($add('<div>' + aib.fixHTML(html.join('')) + '</div>'));
 				} else {
-					_this39._onload(pBuilder._form);
+					_this46._onload(pBuilder._form);
 				}
 			}, function (e) {
-				return _this39._onerror(e);
+				return _this46._onerror(e);
 			});
-			return _this39;
+			return _this46;
 		}
 
 		_createClass(Pview, [{
@@ -14205,8 +14984,10 @@ true, true],
 						Attachment.viewer.close(null);
 						Attachment.viewer = vPost = null;
 					}
-					var el = pv.el;
-					pByEl['delete'](el);
+					var _pv = pv,
+					    el = _pv.el;
+
+					pByEl.delete(el);
 					if (Cfg.animation) {
 						$animate(el, 'de-pview-anim', true);
 						el.style.animationName = 'de-post-close-' + (this._isTop ? 't' : 'b') + (this._isLeft ? 'l' : 'r');
@@ -14226,9 +15007,9 @@ true, true],
 					}
 				} while (pv = pv.kid);
 				if (!lastSticky) {
-					this['delete']();
+					this.delete();
 				} else if (lastSticky.kid) {
-					lastSticky.kid['delete']();
+					lastSticky.kid.delete();
 				}
 			}
 		}, {
@@ -14269,11 +15050,11 @@ true, true],
 		}, {
 			key: 'markToDel',
 			value: function markToDel() {
-				var _this40 = this;
+				var _this47 = this;
 
 				clearTimeout(Pview._delTO);
 				Pview._delTO = setTimeout(function () {
-					return _this40.deleteNonSticky();
+					return _this47.deleteNonSticky();
 				}, Cfg.linksOut);
 			}
 		}, {
@@ -14317,10 +15098,12 @@ true, true],
 		}, {
 			key: '_onload',
 			value: function _onload(form) {
-				var parentNum = this.parent.num,
-				    post = new PviewsCache(doc.adoptNode(form), this._brd, this.tNum).getPost(this.num);
-				if (post && (aib.b !== this._brd || !post.ref.hasMap || !post.ref.has(parentNum))) {
-					(post.ref.hasMap ? $q('.de-refmap', post.el) : $aEnd(post.msg, '<div class="de-refmap"></div>')).insertAdjacentHTML('afterbegin', '<a class="de-link-ref" href="' + aib.getThrUrl(this._brd, this.parent.tNum) + aib.anchor + parentNum + '">&gt;&gt;' + (aib.b === this._brd ? '' : '/' + aib.b + '/') + parentNum + '</a><span class="de-refcomma">, </span>');
+				var b = this._brd;
+				var num = this.parent.num;
+
+				var post = new PviewsCache(doc.adoptNode(form), b, this.tNum).getPost(this.num);
+				if (post && (aib.b !== b || !post.ref.hasMap || !post.ref.has(num))) {
+					(post.ref.hasMap ? $q('.de-refmap', post.el) : $aEnd(post.msg, '<div class="de-refmap"></div>')).insertAdjacentHTML('afterbegin', '<a class="de-link-ref" href="' + (aib.getThrUrl(b, this.parent.tNum) + aib.anchor + num) + '">&gt;&gt;' + (aib.b === b ? '' : '/' + aib.b + '/') + num + '</a><span class="de-refcomma">, </span>');
 				}
 				if (post) {
 					this._showPost(post);
@@ -14331,23 +15114,23 @@ true, true],
 		}, {
 			key: '_setPosition',
 			value: function _setPosition(link, isAnim) {
-				var oldCSS,
-				    pv = this.el,
-				    cr = link.getBoundingClientRect(),
-				    offX = cr.left + window.pageXOffset + cr.width / 2,
-				    offY = cr.top,
-				    bWidth = nav.viewportWidth(),
-				    isLeft = offX < bWidth / 2,
-				    tmp = isLeft ? offX : offX - Math.min(parseInt(pv.offsetWidth, 10), offX - 10),
-				    lmw = 'max-width:' + (bWidth - tmp - 10) + 'px; left:' + tmp + 'px;';
+				var oldCSS = void 0;
+				var cr = link.getBoundingClientRect();
+				var offX = cr.left + window.pageXOffset + cr.width / 2;
+				var offY = cr.top;
+				var bWidth = nav.viewportWidth();
+				var isLeft = offX < bWidth / 2;
+				var pv = this.el;
+				var tmp = isLeft ? offX : offX - Math.min(parseInt(pv.offsetWidth, 10), offX - 10);
+				var lmw = 'max-width:' + (bWidth - tmp - 10) + 'px; left:' + tmp + 'px;';
 				if (isAnim) {
 					oldCSS = pv.style.cssText;
 					pv.style.cssText = 'opacity: 0; ' + lmw;
 				} else {
 					pv.style.cssText = lmw;
 				}
-				var top = pv.offsetHeight,
-				    isTop = offY + top + cr.height < nav.viewportHeight() || offY - top < 5;
+				var top = pv.offsetHeight;
+				var isTop = offY + top + cr.height < nav.viewportHeight() || offY - top < 5;
 				top = window.pageYOffset + (isTop ? offY + cr.height : offY - top);
 				this._offsetTop = top;
 				this._isLeft = isLeft;
@@ -14372,14 +15155,14 @@ true, true],
 		}, {
 			key: '_showMenu',
 			value: function _showMenu(el, html) {
-				var _this41 = this;
+				var _this48 = this;
 
 				_get(Pview.prototype.__proto__ || Object.getPrototypeOf(Pview.prototype), '_showMenu', this).call(this, el, html);
 				this._menu.onover = function () {
-					return _this41.mouseEnter();
+					return _this48.mouseEnter();
 				};
 				this._menu.onout = function () {
-					return _this41.markToDel();
+					return _this48.markToDel();
 				};
 			}
 		}, {
@@ -14388,20 +15171,20 @@ true, true],
 				if (this.el) {
 					$del(this.el);
 				}
-				var el = this.el = post.el.cloneNode(true),
-				    isMyPost = Cfg.markMyPosts && MyPosts.has(this.num),
-				    pText = '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>' + (post.sage ? '<svg class="de-btn-sage"><use xlink:href="#de-symbol-post-sage"/></svg>' : '') + '<svg class="de-btn-stick"><use xlink:href="#de-symbol-post-stick"/></svg>' + (post.deleted ? '' : '<span style="margin: 0 4px 0 2px; vertical-align: 1px; ' + 'color: #4f7942; font: bold 11px tahoma; cursor: default;">' + (post.isOp ? 'OP' : post.count + 1) + (isMyPost ? ' (You)' : '') + '</span>');
-				pByEl.set(el, this);
-				el.className = aib.cReply + ' de-pview' + (post.viewed ? ' de-viewed' : '') + (isMyPost ? ' de-mypost' : '');
-				$show(el);
-				$each($Q('.de-post-hiddencontent', el), function (node) {
+				var pviewEl = this.el = post.el.cloneNode(true);
+				var isMyPost = Cfg.markMyPosts && MyPosts.has(this.num);
+				pByEl.set(pviewEl, this);
+				pviewEl.className = aib.cReply + ' de-pview' + (post.viewed ? ' de-viewed' : '') + (isMyPost ? ' de-mypost' : '');
+				$show(pviewEl);
+				$each($Q('.de-post-hiddencontent', pviewEl), function (node) {
 					return node.classList.remove('de-post-hiddencontent');
 				});
 				if (Cfg.linksNavig) {
-					Pview._markLink(el, this.parent.num);
+					Pview._markLink(pviewEl, this.parent.num);
 				}
-				this._pref = $q(aib.qPostRef, el);
+				this._pref = $q(aib.qPostRef, pviewEl);
 				this._link.classList.add('de-link-parent');
+				var pText = '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>' + (post.sage ? '<svg class="de-btn-sage"><use xlink:href="#de-symbol-post-sage"/></svg>' : '') + '<svg class="de-btn-stick"><use xlink:href="#de-symbol-post-stick"/></svg>' + (post.deleted ? '' : '<span class="de-post-counter-pview">' + (post.isOp ? 'OP' : post.count + +!aib.JsonBuilder) + (isMyPost ? ' (You)' : '') + '</span>');
 				if (post instanceof CacheItem) {
 					this.btns = $aEnd(this._pref, '<span class="de-post-btns">' + pText + '</span>');
 					embedMediaLinks(this);
@@ -14409,51 +15192,49 @@ true, true],
 						new VideosParser().parse(this).end();
 					}
 					if (Cfg.addImgs) {
-						embedImagesLinks(el);
+						embedImagesLinks(pviewEl);
 					}
-					processImagesLinks(el);
+					processImagesLinks(pviewEl);
 				} else {
-					var node = this._pref.nextSibling;
-					this.btns = node;
+					var el = this._pref.nextSibling;
+					this.btns = el;
 					this.isOp = post.isOp;
-					node.classList.remove('de-post-counter');
+					el.classList.remove('de-post-counter');
 					if (post.hidden) {
-						node.classList.add('de-post-hide');
+						el.classList.add('de-post-hide');
 					}
-					node.innerHTML = '<svg class="de-btn-' + (post.hidden ? 'unhide' : 'hide') + (post.userToggled ? '-user' : '') + ' de-btn-pview-hide" de-num="' + this.num + '">' + '<use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/>' + '<use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + pText;
-					$each($Q((!aib.t && post.isOp ? aib.qOmitted + ', ' : '') + '.de-img-wrapper, .de-after-fimg', el), $del);
-					$each($Q(aib.qPostImg, el), function (el) {
-						$show(el.parentNode);
+					el.innerHTML = '<svg class="de-btn-' + (post.hidden ? 'unhide' : 'hide') + (post.userToggled ? '-user' : '') + ' de-btn-pview-hide" de-num="' + this.num + '"><!--\n\t\t\t\t--><use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/><!--\n\t\t\t\t--><use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + pText;
+					$each($Q((!aib.t && post.isOp ? aib.qOmitted + ', ' : '') + '.de-fullimg-wrap, .de-fullimg-after', pviewEl), $del);
+					$each($Q(aib.qPostImg, pviewEl), function (img) {
+						return $show(img.parentNode);
 					});
-					node = $q('.de-link-parent', el);
-					if (node) {
-						node.classList.remove('de-link-parent');
+					el = $q('.de-link-parent', pviewEl);
+					if (el) {
+						el.classList.remove('de-link-parent');
 					}
 					if (Cfg.addYouTube && post.videos.hasLinks) {
 						if (post.videos.playerInfo !== null) {
-							Object.defineProperty(this, 'videos', {
-								value: new Videos(this, $q('.de-video-obj', el), post.videos.playerInfo)
-							});
+							Object.defineProperty(this, 'videos', { value: new Videos(this, $q('.de-video-obj', pviewEl), post.videos.playerInfo) });
 						}
-						this.videos.updatePost($Q('.de-video-link', post.el), $Q('.de-video-link', el), true);
+						this.videos.updatePost($Q('.de-video-link', post.el), $Q('.de-video-link', pviewEl), true);
 					}
 					if (Cfg.addImgs) {
-						$each($Q('.de-img-pre', el), $show);
+						$each($Q('.de-img-pre', pviewEl), $show);
 					}
 					if (Cfg.markViewed) {
-						this._readDelay = setTimeout(function (pst) {
-							if (!pst.viewed) {
-								pst.el.classList.add('de-viewed');
-								pst.viewed = true;
+						this._readDelay = setTimeout(function (post) {
+							if (!post.viewed) {
+								post.el.classList.add('de-viewed');
+								post.viewed = true;
 							}
 							var arr = (sesStorage['de-viewed'] || '').split(',');
-							arr.push(pst.num);
+							arr.push(post.num);
 							sesStorage['de-viewed'] = arr;
 						}, post.text.length > 100 ? 2e3 : 500, post);
 					}
 				}
-				el.addEventListener('click', this, true);
-				this._showPview(el);
+				pviewEl.addEventListener('click', this, true);
+				this._showPview(pviewEl);
 			}
 		}, {
 			key: '_showPview',
@@ -14479,6 +15260,93 @@ true, true],
 				Object.defineProperty(this, 'stickBtn', { value: value });
 				return value;
 			}
+		}], [{
+			key: 'show',
+			value: function show(parent, link) {
+				var tNum = +(link.pathname.match(/.+?\/[^\d]*(\d+)/) || [0, aib.getPostOfEl(link).tNum])[1];
+				var pNum = +(link.textContent.trim().match(/\d+$/) || [tNum])[0];
+				var isTop = !(parent instanceof Pview);
+				var pv = isTop ? Pview.top : parent.kid;
+				clearTimeout(Pview._delTO);
+				if (pv && pv.num === pNum) {
+					if (pv.kid) {
+						pv.kid.delete();
+					}
+					if (pv._link !== link) {
+						pv._setPosition(link, Cfg.animation);
+						pv._link.classList.remove('de-link-parent');
+						link.classList.add('de-link-parent');
+						pv._link = link;
+						if (pv.parent.num !== parent.num) {
+							$each($Q('.de-link-pview', pv.el), function (el) {
+								el.classList.remove('de-link-pview');
+							});
+							Pview._markLink(pv.el, parent.num);
+						}
+					}
+					pv.parent = parent;
+				} else if (!Cfg.noNavigHidd || !pByNum.has(pNum) || !pByNum.get(pNum).hidden) {
+					if (pv) {
+						pv.delete();
+					}
+					pv = new Pview(parent, link, pNum, tNum);
+					if (isTop) {
+						Pview.top = pv;
+					}
+				} else {
+					return null;
+				}
+				return pv;
+			}
+		}, {
+			key: 'updatePosition',
+			value: function updatePosition(scroll) {
+				var pv = Pview.top;
+				if (!pv) {
+					return;
+				}
+				var _pv2 = pv,
+				    parent = _pv2.parent;
+
+				if (parent.omitted) {
+					pv.delete();
+					return;
+				}
+				if (parent.thr.loadCount === 1 && !parent.el.contains(pv._link)) {
+					var el = parent.ref.getElByNum(pv.num);
+					if (el) {
+						pv._link = el;
+					} else {
+						pv.delete();
+						return;
+					}
+				}
+				var cr = parent.hidden ? parent : pv._link.getBoundingClientRect();
+				var diff = pv._isTop ? pv._offsetTop - window.pageYOffset - cr.bottom : pv._offsetTop + pv.el.offsetHeight - window.pageYOffset - cr.top;
+				if (Math.abs(diff) > 1) {
+					if (scroll) {
+						scrollTo(window.pageXOffset, window.pageYOffset - diff);
+					}
+					do {
+						pv._offsetTop -= diff;
+						pv.el.style.top = Math.max(pv._offsetTop, 0) + 'px';
+					} while (pv = pv.kid);
+				}
+			}
+		}, {
+			key: '_markLink',
+			value: function _markLink(el, num) {
+				$each($Q('a[href*="' + num + '"]', el), function (el) {
+					if (el.textContent.startsWith('>>' + num)) {
+						el.classList.add('de-link-pview');
+					}
+				});
+			}
+		}, {
+			key: 'topParent',
+			get: function get() {
+				return Pview.top ? Pview.top.parent : null;
+			}
 		}]);
 
 		return Pview;
@@ -14491,11 +15359,11 @@ true, true],
 		function CacheItem(el, count) {
 			_classCallCheck(this, CacheItem);
 
-			this.el = el;
 			this.count = count;
+			this.el = el;
+			this.deleted = false;
 			this.isOp = count === 0;
 			this.itemInited = false;
-			this.deleted = false;
 			this.viewed = false;
 		}
 
@@ -14503,7 +15371,7 @@ true, true],
 			key: 'msg',
 			get: function get() {
 				var value = $q(aib.qPostMsg, this.el);
-				Object.defineProperty(this, 'msg', { configurable: true, value: value });
+				Object.defineProperty(this, 'msg', { value: value, configurable: true });
 				return value;
 			}
 		}, {
@@ -14531,49 +15399,47 @@ true, true],
 		function PviewsCache(form, b, tNum) {
 			_classCallCheck(this, PviewsCache);
 
-			var _this42 = _possibleConstructorReturn(this, (PviewsCache.__proto__ || Object.getPrototypeOf(PviewsCache)).call(this, b + tNum));
+			var _this49 = _possibleConstructorReturn(this, (PviewsCache.__proto__ || Object.getPrototypeOf(PviewsCache)).call(this, b + tNum));
 
-			if (_this42._inited) {
-				return _possibleConstructorReturn(_this42);
+			if (_this49._inited) {
+				return _possibleConstructorReturn(_this49);
 			}
-			_this42._inited = true;
-			var pBn = new Map(),
-			    thr = $q(aib.qThread, form) || form,
-			    posts = $Q(aib.qRPost + ', ' + aib.qOPost, thr);
+			_this49._inited = true;
+			var pByNum = new Map();
+			var thr = $q(aib.qThread, form) || form;
+			var posts = $Q(aib.qRPost + ', ' + aib.qOPost, thr);
 			for (var i = 0, len = posts.length; i < len; ++i) {
 				var post = posts[i];
-				pBn.set(aib.getPNum(post), new CacheItem(post, i + 1));
+				pByNum.set(aib.getPNum(post), new CacheItem(post, i + 1));
 			}
-			pBn.set(tNum, _this42._opObj = new CacheItem(aib.getOp(thr), 0));
-			_this42._b = b;
-			_this42._tNum = tNum;
-			_this42._tUrl = aib.getThrUrl(b, tNum);
-			_this42._posts = pBn;
+			pByNum.set(tNum, _this49._opObj = new CacheItem(aib.getOp(thr), 0));
+			_this49._b = b;
+			_this49._tNum = tNum;
+			_this49._tUrl = aib.getThrUrl(b, tNum);
+			_this49._posts = pByNum;
 			if (Cfg.linksNavig) {
-				RefMap.gen(pBn, _this42._tUrl);
+				RefMap.gen(pByNum, _this49._tUrl);
 			}
-			return _this42;
+			return _this49;
 		}
 
 		_createClass(PviewsCache, [{
 			key: 'getPost',
 			value: function getPost(num) {
-				var pst = this._posts.get(num);
-				if (!pst || pst.itemInited) {
-					return pst;
+				var post = this._posts.get(num);
+				if (!post || post.itemInited) {
+					return post;
 				}
-				if (num === this._tNum) {
-					if (this._b === aib.b && pByNum.has(this._tNum)) {
-						pst.ref.makeUnion(pByNum.get(this._tNum).ref);
-					}
+				if (num === this._tNum && this._b === aib.b && pByNum.has(this._tNum)) {
+					post.ref.makeUnion(pByNum.get(this._tNum).ref);
 				}
-				pst.el = aib.fixHTML(pst.el);
-				delete pst.msg;
-				if (pst.ref.hasMap) {
-					pst.ref.init(this._tUrl, Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null);
+				post.el = aib.fixHTML(post.el);
+				delete post.msg;
+				if (post.ref.hasMap) {
+					post.ref.init(this._tUrl, Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null);
 				}
-				pst.itemInited = true;
-				return pst;
+				post.itemInited = true;
+				return post;
 			}
 		}]);
 
@@ -14583,334 +15449,384 @@ true, true],
 	PviewsCache.purgeSecs = 3e5;
 
 
-	function ImgBtnsShowHider(nextFn, prevFn) {
-		var btns = $bEnd(docBody, '<div style="display: none;">' + '<div id="de-img-btn-next" de-title="' + Lng.nextImg[lang] + '"></div>' + '<div id="de-img-btn-prev" de-title="' + Lng.prevImg[lang] + '"></div></div>');
-		this._btns = btns;
-		this._btnsStyle = btns.style;
-		this._nextFn = nextFn;
-		this._prevFn = prevFn;
-		doc.defaultView.addEventListener('mousemove', this);
-		btns.addEventListener('mouseover', this);
-	}
-	ImgBtnsShowHider.prototype = {
-		handleEvent: function handleEvent(e) {
-			switch (e.type) {
-				case 'mousemove':
-					var curX = e.clientX,
-					    curY = e.clientY;
-					if (this._oldX !== curX || this._oldY !== curY) {
-						this._oldX = curX;
-						this._oldY = curY;
-						this.show();
-					}
-					return;
-				case 'mouseover':
-					if (!this.hasEvents) {
-						this.hasEvents = true;
-						this._btns.addEventListener('mouseout', this);
-						this._btns.addEventListener('click', this);
-					}
-					if (!this._hidden) {
-						clearTimeout(this._hideTmt);
-						KeyEditListener.setTitle(this._btns.firstChild, 17);
-						KeyEditListener.setTitle(this._btns.lastChild, 4);
-					}
-					return;
-				case 'mouseout':
-					this._setHideTmt();return;
-				case 'click':
-					switch (e.target.id) {
-						case 'de-img-btn-next':
-							this._nextFn();return;
-						case 'de-img-btn-prev':
-							this._prevFn();
-					}
-			}
-		},
-		hide: function hide() {
-			this._btnsStyle.display = 'none';
+	var ImgBtnsShowHider = function () {
+		function ImgBtnsShowHider(nextFn, prevFn) {
+			_classCallCheck(this, ImgBtnsShowHider);
+
+			var btns = $bEnd(docBody, '<div style="display: none;">' + ('<div id="de-img-btn-next" de-title="' + Lng.nextImg[lang] + '"></div>') + ('<div id="de-img-btn-prev" de-title="' + Lng.prevImg[lang] + '"></div></div>'));
+			this._btns = btns;
+			this._btnsStyle = btns.style;
+			this._hasEvents = false;
 			this._hidden = true;
-			this._oldX = this._oldY = -1;
-		},
-		remove: function remove() {
-			$del(this._btns);
-			doc.defaultView.removeEventListener('mousemove', this);
-			clearTimeout(this._hideTmt);
-		},
-		show: function show() {
-			if (this._hidden) {
-				this._btnsStyle.removeProperty('display');
-				this._hidden = false;
-				this._setHideTmt();
-			}
-		},
-
-
-		_hasEvents: false,
-		_hideTmt: 0,
-		_hidden: true,
-		_oldX: -1,
-		_oldY: -1,
-		_setHideTmt: function _setHideTmt() {
-			var _this43 = this;
-
-			clearTimeout(this._hideTmt);
-			this._hideTmt = setTimeout(function () {
-				return _this43.hide();
-			}, 2e3);
+			this._hideTmt = 0;
+			this._nextFn = nextFn;
+			this._oldX = -1;
+			this._oldY = -1;
+			this._prevFn = prevFn;
+			doc.defaultView.addEventListener('mousemove', this);
+			btns.addEventListener('mouseover', this);
 		}
-	};
 
-	function AttachmentViewer(data) {
-		this._show(data);
-	}
-	AttachmentViewer.prototype = {
-		data: null,
-		close: function close(e) {
-			if (this.hasOwnProperty('_btns')) {
-				this._btns.remove();
-			}
-			this._remove(e);
-		},
-		handleEvent: function handleEvent(e) {
-			switch (e.type) {
-				case 'mousedown':
-					if (this.data.isVideo && this.data.isControlClick(e)) {
-						return;
-					}
-					this._oldX = e.clientX;
-					this._oldY = e.clientY;
-					docBody.addEventListener('mousemove', this, true);
-					docBody.addEventListener('mouseup', this, true);
-					break;
-				case 'mousemove':
-					var curX = e.clientX,
-					    curY = e.clientY;
-					if (curX !== this._oldX || curY !== this._oldY) {
-						this._elStyle.left = (this._oldL = parseInt(this._elStyle.left, 10) + curX - this._oldX) + 'px';
-						this._elStyle.top = (this._oldT = parseInt(this._elStyle.top, 10) + curY - this._oldY) + 'px';
-						this._oldX = curX;
-						this._oldY = curY;
-						this._moved = true;
-					}
-					return;
-				case 'mouseup':
-					docBody.removeEventListener('mousemove', this, true);
-					docBody.removeEventListener('mouseup', this, true);
-					return;
-				case 'click':
-					if (this.data.isVideo && this.data.isControlClick(e)) {
-						return;
-					}
-					if (e.button === 0) {
-						if (this._moved) {
-							this._moved = false;
-						} else {
-							this.close(e);
-							Attachment.viewer = null;
+		_createClass(ImgBtnsShowHider, [{
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				switch (e.type) {
+					case 'mousemove':
+						{
+							var curX = e.clientX,
+							    curY = e.clientY;
+
+							if (this._oldX !== curX || this._oldY !== curY) {
+								this._oldX = curX;
+								this._oldY = curY;
+								this.show();
+							}
+							return;
 						}
-						e.stopPropagation();
-						break;
-					}
-					return;
-				case 'mousewheel':
-					this._handleWheelEvent(e.clientX, e.clientY, -1 / 40 * ('wheelDeltaY' in e ? e.wheelDeltaY : e.wheelDelta));
-					break;
-				default:
-					this._handleWheelEvent(e.clientX, e.clientY, e.deltaY);
-			}
-			$pd(e);
-		},
-		navigate: function navigate(isForward) {
-			var data = this.data;
-			data.cancelWebmLoad(this._fullEl);
-			do {
-				data = data.getFollow(isForward);
-			} while (data && !data.isVideo && !data.isImage);
-			if (data) {
-				this.update(data, true, null);
-				data.post.selectAndScrollTo(data.post.images.first.el);
-			}
-		},
-		update: function update(data, showButtons, e) {
-			this._remove(e);
-			this._show(data, showButtons);
-		},
-
-
-		_data: null,
-		_elStyle: null,
-		_fullEl: null,
-		_obj: null,
-		_oldL: 0,
-		_oldT: 0,
-		_height: 0,
-		_width: 0,
-		_oldX: 0,
-		_oldY: 0,
-		_minSize: 0,
-		_moved: false,
-		get _btns() {
-			var _this44 = this;
-
-			var val = new ImgBtnsShowHider(function () {
-				return _this44.navigate(true);
-			}, function () {
-				return _this44.navigate(false);
-			});
-			Object.defineProperty(this, '_btns', { value: val });
-			return val;
-		},
-		get _zoomFactor() {
-			var val = 1 + Cfg.zoomFactor / 100;
-			Object.defineProperty(this, '_zoomFactor', { value: val });
-			return val;
-		},
-		_handleWheelEvent: function _handleWheelEvent(clientX, clientY, delta) {
-			if (delta === 0) {
-				return;
-			}
-			var width,
-			    height,
-			    oldW = this._width,
-			    oldH = this._height;
-			if (delta > 0) {
-				width = oldW / this._zoomFactor;
-				height = oldH / this._zoomFactor;
-				if (width <= this._minSize && height <= this._minSize) {
-					return;
-				}
-			} else {
-				width = oldW * this._zoomFactor;
-				height = oldH * this._zoomFactor;
-			}
-			this._width = width;
-			this._height = height;
-			this._elStyle.width = width + 'px';
-			this._elStyle.height = height + 'px';
-			this._elStyle.left = (this._oldL = parseInt(clientX - width / oldW * (clientX - this._oldL), 10)) + 'px';
-			this._elStyle.top = (this._oldT = parseInt(clientY - height / oldH * (clientY - this._oldT), 10)) + 'px';
-		},
-		_show: function _show(data) {
-			var _this45 = this;
-
-			var _data$computeFullSize = data.computeFullSize(),
-			    _data$computeFullSize2 = _slicedToArray(_data$computeFullSize, 3),
-			    width = _data$computeFullSize2[0],
-			    height = _data$computeFullSize2[1],
-			    minSize = _data$computeFullSize2[2];
-
-			this._fullEl = data.getFullObject(false, function (el) {
-				return _this45._resize(el);
-			}, function (el) {
-				return _this45._rotate(el);
-			});
-			if (data.isVideo && width < Cfg.minWebmWidth) {
-				width = Cfg.minWebmWidth;
-			}
-			this._width = width;
-			this._height = height;
-			this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
-			this._oldL = (Post.sizing.wWidth - width) / 2 - 1;
-			this._oldT = (Post.sizing.wHeight - height) / 2 - 1;
-			var obj = $add('<div class="de-img-center" style="top:' + this._oldT + 'px; left:' + this._oldL + 'px; width:' + width + 'px; height:' + height + 'px; display: block"></div>');
-			if (data.isImage) {
-				$aBegin(obj, '<a style="width: inherit; height: inherit;" href="' + data.src + '"></a>').appendChild(this._fullEl);
-			} else {
-				obj.appendChild(this._fullEl);
-			}
-			this._elStyle = obj.style;
-			this.data = data;
-			this._obj = obj;
-			obj.addEventListener('onwheel' in obj ? 'wheel' : 'mousewheel', this, true);
-			obj.addEventListener('mousedown', this, true);
-			obj.addEventListener('click', this, true);
-			if (data.inPview && !data.post.isSticky) {
-				this.data.post.setSticky(true);
-			}
-			if (!data.inPview) {
-				this._btns.show();
-			} else if (this.hasOwnProperty('_btns')) {
-				this._btns.hide();
-			}
-			data.post.thr.form.el.appendChild(obj);
-		},
-		_remove: function _remove(e) {
-			var data = this.data;
-			data.cancelWebmLoad(this._fullEl);
-			if (data.inPview && data.post.isSticky) {
-				data.post.setSticky(false);
-			}
-			$del(this._obj);
-			if (e && data.inPview) {
-				data.sendCloseEvent(e, false);
-			}
-		},
-		_resize: function _resize(el) {
-			if (el !== this._fullEl) {
-				return;
-			}
-
-			var _data$computeFullSize3 = this.data.computeFullSize(),
-			    _data$computeFullSize4 = _slicedToArray(_data$computeFullSize3, 3),
-			    width = _data$computeFullSize4[0],
-			    height = _data$computeFullSize4[1],
-			    minSize = _data$computeFullSize4[2];
-
-			this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
-			if (Post.sizing.wWidth - this._oldL - this._width < 5 || Post.sizing.wHeight - this._oldT - this._height < 5) {
-				return;
-			}
-			var cPointX = this._oldL + this._width / 2,
-			    cPointY = this._oldT + this._height / 2,
-			    maxWidth = (Post.sizing.wWidth - cPointX - 2) * 2,
-			    maxHeight = (Post.sizing.wHeight - cPointY - 2) * 2;
-			if (width > maxWidth || height > maxHeight) {
-				var ar = width / height;
-				if (ar > maxWidth / maxHeight) {
-					width = maxWidth;
-					height = width / ar;
-				} else {
-					height = maxHeight;
-					width = height * ar;
-				}
-				if (minSize && width < minSize || height < minSize) {
-					this._minSize = Math.max(width, height);
+					case 'mouseover':
+						if (!this.hasEvents) {
+							this.hasEvents = true;
+							this._btns.addEventListener('mouseout', this);
+							this._btns.addEventListener('click', this);
+						}
+						if (!this._hidden) {
+							clearTimeout(this._hideTmt);
+							KeyEditListener.setTitle(this._btns.firstChild, 17);
+							KeyEditListener.setTitle(this._btns.lastChild, 4);
+						}
+						return;
+					case 'mouseout':
+						this._setHideTmt();return;
+					case 'click':
+						switch (e.target.id) {
+							case 'de-img-btn-next':
+								this._nextFn();return;
+							case 'de-img-btn-prev':
+								this._prevFn();
+						}
 				}
 			}
-			this._width = width;
-			this._height = height;
-			this._elStyle.width = width + 'px';
-			this._elStyle.height = height + 'px';
-			this._elStyle.left = (this._oldL = parseInt(cPointX - width / 2, 10)) + 'px';
-			this._elStyle.top = (this._oldT = parseInt(cPointY - height / 2, 10)) + 'px';
-		},
-		_rotate: function _rotate(el) {
-			if (el !== this._fullEl) {
-				return;
+		}, {
+			key: 'hide',
+			value: function hide() {
+				this._btnsStyle.display = 'none';
+				this._hidden = true;
+				this._oldX = this._oldY = -1;
 			}
-			var width = this._width;
-			var height = this._height;
-			this._width = height;
-			this._height = width;
-			this._elStyle.width = height + 'px';
-			this._elStyle.height = width + 'px';
-			var halfWidth = width / 2;
-			var halfHeight = height / 2;
-			this._elStyle.left = (this._oldL = parseInt(this._oldL + halfWidth - halfHeight, 10)) + 'px';
-			this._elStyle.top = (this._oldT = parseInt(this._oldT + halfHeight - halfWidth, 10)) + 'px';
+		}, {
+			key: 'remove',
+			value: function remove() {
+				$del(this._btns);
+				doc.defaultView.removeEventListener('mousemove', this);
+				clearTimeout(this._hideTmt);
+			}
+		}, {
+			key: 'show',
+			value: function show() {
+				if (this._hidden) {
+					this._btnsStyle.removeProperty('display');
+					this._hidden = false;
+					this._setHideTmt();
+				}
+			}
+		}, {
+			key: '_setHideTmt',
+			value: function _setHideTmt() {
+				var _this50 = this;
+
+				clearTimeout(this._hideTmt);
+				this._hideTmt = setTimeout(function () {
+					return _this50.hide();
+				}, 2e3);
+			}
+		}]);
+
+		return ImgBtnsShowHider;
+	}();
+
+	var AttachmentViewer = function () {
+		function AttachmentViewer(data) {
+			_classCallCheck(this, AttachmentViewer);
+
+			this.data = null;
+			this._data = null;
+			this._elStyle = null;
+			this._fullEl = null;
+			this._height = 0;
+			this._minSize = 0;
+			this._moved = false;
+			this._obj = null;
+			this._oldL = 0;
+			this._oldT = 0;
+			this._oldX = 0;
+			this._oldY = 0;
+			this._width = 0;
+			this._show(data);
 		}
-	};
+
+		_createClass(AttachmentViewer, [{
+			key: 'close',
+			value: function close(e) {
+				if (this.hasOwnProperty('_btns')) {
+					this._btns.remove();
+				}
+				this._remove(e);
+			}
+		}, {
+			key: 'handleEvent',
+			value: function handleEvent(e) {
+				switch (e.type) {
+					case 'mousedown':
+						if (this.data.isVideo && ExpandableMedia.isControlClick(e)) {
+							return;
+						}
+						this._oldX = e.clientX;
+						this._oldY = e.clientY;
+						docBody.addEventListener('mousemove', this, true);
+						docBody.addEventListener('mouseup', this, true);
+						break;
+					case 'mousemove':
+						{
+							var curX = e.clientX,
+							    curY = e.clientY;
+
+							if (curX !== this._oldX || curY !== this._oldY) {
+								this._oldL = parseInt(this._elStyle.left, 10) + curX - this._oldX;
+								this._elStyle.left = this._oldL + 'px';
+								this._oldT = parseInt(this._elStyle.top, 10) + curY - this._oldY;
+								this._elStyle.top = this._oldT + 'px';
+								this._oldX = curX;
+								this._oldY = curY;
+								this._moved = true;
+							}
+							return;
+						}
+					case 'mouseup':
+						docBody.removeEventListener('mousemove', this, true);
+						docBody.removeEventListener('mouseup', this, true);
+						return;
+					case 'click':
+						{
+							var el = e.target;
+							if (this.data.isVideo && ExpandableMedia.isControlClick(e) || el.tagName !== 'IMG' && el.tagName !== 'VIDEO' && !el.classList.contains('de-fullimg-wrap') && el.target.className !== 'de-fullimg-load') {
+								return;
+							}
+							if (e.button === 0) {
+								if (this._moved) {
+									this._moved = false;
+								} else {
+									this.close(e);
+									Attachment.viewer = null;
+								}
+								e.stopPropagation();
+								break;
+							}
+							return;
+						}
+					case 'mousewheel':
+						this._handleWheelEvent(e.clientX, e.clientY, -1 / 40 * ('wheelDeltaY' in e ? e.wheelDeltaY : e.wheelDelta));
+						break;
+					default:
+						this._handleWheelEvent(e.clientX, e.clientY, e.deltaY);
+				}
+				$pd(e);
+			}
+		}, {
+			key: 'navigate',
+			value: function navigate(isForward) {
+				var data = this.data;
+
+				data.cancelWebmLoad(this._fullEl);
+				do {
+					data = data.getFollow(isForward);
+				} while (data && !data.isVideo && !data.isImage);
+				if (data) {
+					this.update(data, true, null);
+					data.post.selectAndScrollTo(data.post.images.first.el);
+				}
+			}
+		}, {
+			key: 'update',
+			value: function update(data, showButtons, e) {
+				this._remove(e);
+				this._show(data, showButtons);
+			}
+		}, {
+			key: '_handleWheelEvent',
+			value: function _handleWheelEvent(clientX, clientY, delta) {
+				if (delta === 0) {
+					return;
+				}
+				var width = void 0,
+				    height = void 0;
+				var oldW = this._width,
+				    oldH = this._height;
+
+				if (delta > 0) {
+					width = oldW / this._zoomFactor;
+					height = oldH / this._zoomFactor;
+					if (width <= this._minSize && height <= this._minSize) {
+						return;
+					}
+				} else {
+					width = oldW * this._zoomFactor;
+					height = oldH * this._zoomFactor;
+				}
+				this._width = width;
+				this._height = height;
+				this._elStyle.width = width + 'px';
+				this._elStyle.height = height + 'px';
+				this._oldL = parseInt(clientX - width / oldW * (clientX - this._oldL), 10);
+				this._elStyle.left = this._oldL + 'px';
+				this._oldT = parseInt(clientY - height / oldH * (clientY - this._oldT), 10);
+				this._elStyle.top = this._oldT + 'px';
+			}
+		}, {
+			key: '_show',
+			value: function _show(data) {
+				var _this51 = this;
+
+				var _data$computeFullSize = data.computeFullSize(),
+				    _data$computeFullSize2 = _slicedToArray(_data$computeFullSize, 3),
+				    width = _data$computeFullSize2[0],
+				    height = _data$computeFullSize2[1],
+				    minSize = _data$computeFullSize2[2];
+
+				this._fullEl = data.getFullObject(false, function (el) {
+					return _this51._resize(el);
+				}, function (el) {
+					return _this51._rotate(el);
+				});
+				this._width = width;
+				this._height = height;
+				this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
+				this._oldL = (Post.sizing.wWidth - width) / 2 - 1;
+				this._oldT = (Post.sizing.wHeight - height) / 2 - 1;
+				var obj = $add('<div class="de-fullimg-center" style="top:' + (this._oldT - (Cfg.imgInfoLink ? 11 : 0)) + 'px; left:' + this._oldL + 'px; width:' + width + 'px; height:' + height + 'px; display: block"></div>');
+				(data.isImage ? $aBegin(obj, '<a class="de-fullimg-wrap-link" href="' + data.src + '"></a>') : obj).appendChild(this._fullEl);
+				this._elStyle = obj.style;
+				this.data = data;
+				this._obj = obj;
+				obj.addEventListener('onwheel' in obj ? 'wheel' : 'mousewheel', this, true);
+				obj.addEventListener('mousedown', this, true);
+				obj.addEventListener('click', this, true);
+				if (data.inPview && !data.post.isSticky) {
+					this.data.post.setSticky(true);
+				}
+				if (!data.inPview) {
+					this._btns.show();
+				} else if (this.hasOwnProperty('_btns')) {
+					this._btns.hide();
+				}
+				data.post.thr.form.el.appendChild(obj);
+			}
+		}, {
+			key: '_remove',
+			value: function _remove(e) {
+				var data = this.data;
+
+				data.cancelWebmLoad(this._fullEl);
+				if (data.inPview && data.post.isSticky) {
+					data.post.setSticky(false);
+				}
+				$del(this._obj);
+				if (e && data.inPview) {
+					data.sendCloseEvent(e, false);
+				}
+			}
+		}, {
+			key: '_resize',
+			value: function _resize(el) {
+				if (el !== this._fullEl) {
+					return;
+				}
+
+				var _data$computeFullSize3 = this.data.computeFullSize(),
+				    _data$computeFullSize4 = _slicedToArray(_data$computeFullSize3, 3),
+				    width = _data$computeFullSize4[0],
+				    height = _data$computeFullSize4[1],
+				    minSize = _data$computeFullSize4[2];
+
+				this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
+				if (Post.sizing.wWidth - this._oldL - this._width < 5 || Post.sizing.wHeight - this._oldT - this._height < 5) {
+					return;
+				}
+				var cPointX = this._oldL + this._width / 2;
+				var cPointY = this._oldT + this._height / 2;
+				var maxWidth = (Post.sizing.wWidth - cPointX - 2) * 2;
+				var maxHeight = (Post.sizing.wHeight - cPointY - 2) * 2;
+				if (width > maxWidth || height > maxHeight) {
+					var ar = width / height;
+					if (ar > maxWidth / maxHeight) {
+						width = maxWidth;
+						height = width / ar;
+					} else {
+						height = maxHeight;
+						width = height * ar;
+					}
+					if (minSize && width < minSize || height < minSize) {
+						this._minSize = Math.max(width, height);
+					}
+				}
+				this._width = width;
+				this._height = height;
+				this._elStyle.width = width + 'px';
+				this._elStyle.height = height + 'px';
+				this._elStyle.left = (this._oldL = parseInt(cPointX - width / 2, 10)) + 'px';
+				this._elStyle.top = (this._oldT = parseInt(cPointY - height / 2, 10)) + 'px';
+			}
+		}, {
+			key: '_rotate',
+			value: function _rotate(el) {
+				if (el !== this._fullEl) {
+					return;
+				}
+				var _width = this._width,
+				    _height = this._height;
+
+				this._width = _height;
+				this._height = _width;
+				this._elStyle.width = _height + 'px';
+				this._elStyle.height = _width + 'px';
+				var halfWidth = _width / 2;
+				var halfHeight = _height / 2;
+				this._elStyle.left = (this._oldL = parseInt(this._oldL + halfWidth - halfHeight, 10)) + 'px';
+				this._elStyle.top = (this._oldT = parseInt(this._oldT + halfHeight - halfWidth, 10)) + 'px';
+			}
+		}, {
+			key: '_btns',
+			get: function get() {
+				var _this52 = this;
+
+				var value = new ImgBtnsShowHider(function () {
+					return _this52.navigate(true);
+				}, function () {
+					return _this52.navigate(false);
+				});
+				Object.defineProperty(this, '_btns', { value: value });
+				return value;
+			}
+		}, {
+			key: '_zoomFactor',
+			get: function get() {
+				var value = 1 + Cfg.zoomFactor / 100;
+				Object.defineProperty(this, '_zoomFactor', { value: value });
+				return value;
+			}
+		}]);
+
+		return AttachmentViewer;
+	}();
 
 	var ExpandableMedia = function () {
 		function ExpandableMedia(post, el, prev) {
 			_classCallCheck(this, ExpandableMedia);
 
-			this.post = post;
 			this.el = el;
-			this.prev = prev;
-			this.next = null;
 			this.expanded = false;
+			this.next = null;
+			this.post = post;
+			this.prev = prev;
 			this._fullEl = null;
 			this._webmTitleLoad = null;
 			if (prev) {
@@ -14921,10 +15837,11 @@ true, true],
 		_createClass(ExpandableMedia, [{
 			key: 'cancelWebmLoad',
 			value: function cancelWebmLoad(fullEl) {
-				if (this.isVideo && fullEl.tagName === 'VIDEO') {
-					fullEl.pause();
-					fullEl.removeAttribute('src');
-					fullEl.load();
+				if (this.isVideo) {
+					var videoEl = fullEl.firstElementChild;
+					videoEl.pause();
+					videoEl.removeAttribute('src');
+					videoEl.load();
 				}
 				if (this._webmTitleLoad) {
 					this._webmTitleLoad.cancel();
@@ -14934,7 +15851,7 @@ true, true],
 		}, {
 			key: 'collapse',
 			value: function collapse(e) {
-				if (e && this.isVideo && this.isControlClick(e)) {
+				if (e && this.isVideo && ExpandableMedia.isControlClick(e)) {
 					return;
 				}
 				this.cancelWebmLoad(this._fullEl);
@@ -14956,13 +15873,16 @@ true, true],
 				if (!this._size) {
 					return this._getThumbSize();
 				}
-				var width = this._size[0];
-				var height = this._size[1];
+
+				var _size = _slicedToArray(this._size, 2),
+				    width = _size[0],
+				    height = _size[1];
+
 				if (Cfg.resizeDPI) {
 					width /= Post.sizing.dPxRatio;
 					height /= Post.sizing.dPxRatio;
 				}
-				var minSize = Cfg.minImgSize;
+				var minSize = this.isVideo ? Math.max(Cfg.minImgSize, Cfg.minWebmWidth) : Cfg.minImgSize;
 				if (width < minSize && height < minSize) {
 					var ar = width / height;
 					if (width > height) {
@@ -14975,7 +15895,7 @@ true, true],
 				}
 				if (Cfg.resizeImgs) {
 					var maxWidth = Post.sizing.wWidth - 2;
-					var maxHeight = Post.sizing.wHeight - 2;
+					var maxHeight = Post.sizing.wHeight - (Cfg.imgInfoLink ? 24 : 2);
 					if (width > maxWidth || height > maxHeight) {
 						var _ar = width / height;
 						if (_ar > maxWidth / maxHeight) {
@@ -14995,7 +15915,7 @@ true, true],
 		}, {
 			key: 'expand',
 			value: function expand(inPost, e) {
-				var _this46 = this;
+				var _this53 = this;
 
 				if (e && !e.bubbles) {
 					return;
@@ -15015,10 +15935,11 @@ true, true],
 				}
 				this.expanded = true;
 				var el = this.el;
-				(aib.hasPicWrap ? this._getImageParent() : el.parentNode).insertAdjacentHTML('afterend', '<div class="de-after-fimg"></div>');
+
+				(aib.hasPicWrap ? this._getImageParent() : el.parentNode).insertAdjacentHTML('afterend', '<div class="de-fullimg-after"></div>');
 				this._fullEl = this.getFullObject(true, null, null);
 				this._fullEl.addEventListener('click', function (e) {
-					return _this46.collapse(e);
+					return _this53.collapse(e);
 				});
 				$hide(el.parentNode);
 				$after(el.parentNode, this._fullEl);
@@ -15030,7 +15951,7 @@ true, true],
 				if (nImage) {
 					return nImage;
 				}
-				var imgs,
+				var imgs = void 0,
 				    post = this.post;
 				do {
 					post = post.getAdjacentVisPost(!isForward);
@@ -15050,82 +15971,107 @@ true, true],
 		}, {
 			key: 'getFullObject',
 			value: function getFullObject(inPost, onsizechange, onrotate) {
-				var _this47 = this;
+				var _this54 = this;
 
-				var obj = void 0,
-				    src = this.src;
+				var wrapEl = void 0,
+				    name = void 0,
+				    origSrc = void 0;
+				var src = this.src;
+
+				var parent = this._getImageParent();
+				if (this.el.className !== 'de-img-pre') {
+					var nameEl = $q(aib.qImgNameLink, parent);
+					origSrc = nameEl.getAttribute('de-href') || nameEl.href;
+					name = this.name;
+				} else {
+					origSrc = parent.href;
+					name = origSrc.split('/').pop();
+				}
+				var imgNameEl = '<a class="de-fullimg-src" target="_blank" title="' + Lng.openOriginal[lang] + '" href="' + origSrc + '">' + name + '</a>';
+				var wrapClass = (inPost ? ' de-fullimg-wrap-inpost' : ' de-fullimg-wrap-center' + (this._size ? '' : ' de-fullimg-wrap-nosize')) + (this.isVideo ? ' de-fullimg-video' : '');
 				if (!this.isVideo) {
-					var html = '<div class="de-img-wrapper' + (inPost ? ' de-img-wrapper-inpost' : this._size ? '' : ' de-img-wrapper-nosize') + '">';
-					if (!inPost && !this._size) {
-						html += '<svg class="de-img-load"><use xlink:href="#de-symbol-wait"/></svg>';
-					}
-					html += '<img class="de-img-full" src="' + src + '" alt="' + src + '"></div>';
-					obj = $add(html);
-					var img = obj.lastChild;
-					img.onload = img.onerror = function (_ref47) {
-						var target = _ref47.target;
+					var waitEl = inPost || this._size ? '' : '<svg class="de-fullimg-load"><use xlink:href="#de-symbol-wait"/></svg>';
+					wrapEl = $add('<div class="de-fullimg-wrap' + wrapClass + '">\n\t\t\t\t' + waitEl + '\n\t\t\t\t<img class="de-fullimg" src="' + src + '" alt="' + src + '">\n\t\t\t\t<div class="de-fullimg-info">' + imgNameEl + '</div>\n\t\t\t</div>');
+					var img = $q('.de-fullimg', wrapEl);
+					img.onload = img.onerror = function (_ref77) {
+						var target = _ref77.target;
 
 						if (target.naturalHeight + target.naturalWidth === 0) {
 							if (!target.onceLoaded) {
 								target.src = target.src;
 								target.onceLoaded = true;
 							}
-						} else {
-							var newWidth = target.naturalWidth;
-							var newHeight = target.naturalHeight;
-							var ar = _this47._size ? _this47._size[1] / _this47._size[0] : newHeight / newWidth;
-							var isExifRotated = target.scrollHeight / target.scrollWidth > 1 ? ar < 1 : ar > 1;
-							if (!_this47._size || isExifRotated) {
-								_this47._size = isExifRotated ? [newHeight, newWidth] : [newWidth, newHeight];
+							return;
+						}
+						var newW = target.naturalWidth,
+						    newH = target.naturalHeight;
+
+						var ar = _this54._size ? _this54._size[1] / _this54._size[0] : newH / newW;
+						var isExifRotated = target.scrollHeight / target.scrollWidth > 1 ? ar < 1 : ar > 1;
+						if (!_this54._size || isExifRotated) {
+							_this54._size = isExifRotated ? [newH, newW] : [newW, newH];
+						}
+						var el = target.previousElementSibling;
+						if (el) {
+							var p = el.parentNode;
+							$hide(el);
+							p.classList.remove('de-fullimg-wrap-nosize');
+							if (onsizechange) {
+								onsizechange(p);
 							}
-							var _el7 = target.previousElementSibling;
-							if (_el7) {
-								var p = _el7.parentNode;
-								$hide(_el7);
-								p.classList.remove('de-img-wrapper-nosize');
-								if (onsizechange) {
-									onsizechange(p);
-								}
-							} else if (isExifRotated && onrotate) {
-								onrotate(target.parentNode);
-							}
+						} else if (isExifRotated && onrotate) {
+							onrotate(target.parentNode);
 						}
 					};
 					DollchanAPI.notify('expandmedia', src);
-					return obj;
+					return wrapEl;
 				}
 
-				if (aib.tiny) {
-					src = src.replace(/^.*?\?v=|&.*?$/g, '');
+				var isWebm = src.split('.').pop() === 'webm';
+				var needTitle = isWebm && Cfg.webmTitles;
+				var inPostSize = '';
+				if (inPost) {
+					var _computeFullSize = this.computeFullSize(),
+					    _computeFullSize2 = _slicedToArray(_computeFullSize, 2),
+					    width = _computeFullSize2[0],
+					    height = _computeFullSize2[1];
+
+					inPostSize = ' style="width: ' + width + 'px; height: ' + height + 'px;"';
 				}
-				obj = $add('<video style="width: inherit; height: inherit" src="' + src + '" loop autoplay ' + (Cfg.webmControl ? 'controls ' : '') + (Cfg.webmVolume === 0 ? 'muted ' : '') + '></video>');
-				obj.volume = Cfg.webmVolume / 100;
-				obj.addEventListener('error', function () {
-					if (!this.onceLoaded) {
-						this.load();
-						this.onceLoaded = true;
+				wrapEl = $add('<div class="de-fullimg-wrap' + wrapClass + '"' + inPostSize + '>\n\t\t\t<video style="width: inherit; height: inherit" src="' + src + '" loop autoplay ' + ('' + (Cfg.webmControl ? 'controls ' : '')) + ((Cfg.webmVolume === 0 ? 'muted ' : '') + '></video>\n\t\t\t<div class="de-fullimg-info">\n\t\t\t\t' + imgNameEl + '\n\t\t\t\t' + (needTitle ? '<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' : '') + '\n\t\t\t</div>\n\t\t</div>'));
+				var videoEl = wrapEl.firstElementChild;
+				videoEl.volume = Cfg.webmVolume / 100;
+				videoEl.addEventListener('error', function (_ref78) {
+					var target = _ref78.target;
+
+					if (!target.onceLoaded) {
+						target.load();
+						target.onceLoaded = true;
 					}
 				});
 				setTimeout(function () {
-					return obj.dispatchEvent(new CustomEvent('volumechange'));
+					return videoEl.dispatchEvent(new CustomEvent('volumechange'));
 				}, 150);
-				obj.addEventListener('volumechange', function (e) {
-					var val = this.muted ? 0 : Math.round(this.volume * 100);
+				videoEl.addEventListener('volumechange', function (e) {
+					var val = e.target.muted ? 0 : Math.round(e.target.volume * 100);
 					if (e.isTrusted && val !== Cfg.webmVolume) {
 						saveCfg('webmVolume', val);
 						locStorage['__de-webmvolume'] = val;
 						locStorage.removeItem('__de-webmvolume');
 					}
 				});
-				var isWebm = src.split('.').pop() === 'webm';
-				if (nav.MsEdge && isWebm && !DollchanAPI.hasListener('expandmedia')) {
+				if (nav.isMsEdge && isWebm && !DollchanAPI.hasListener('expandmedia')) {
 					var href = 'https://github.com/Kagami/webmify/';
-					$popup('err-expandmedia', Lng.errMsEdgeWebm[lang] + (':\n<a href="' + href + '" target="_blank">' + href + '</a>'), false);
+					$popup('err-expandmedia', Lng.errMsEdgeWebm[lang] + ':\n<a href="' + href + '" target="_blank">' + href + '</a>', false);
 				}
-				if (isWebm && Cfg.webmTitles) {
-					this._webmTitleLoad = downloadImgData(obj.src, false).then(function (data) {
+				if (needTitle) {
+					this._webmTitleLoad = downloadImgData(videoEl.src, false).then(function (data) {
+						$hide($q('.de-wait', wrapEl));
+						if (!data) {
+							return;
+						}
 						var title = '',
-						    d = new _WebmParser(data.buffer).getData();
+						    d = new WebmParser(data.buffer).getData();
 						if (!d) {
 							return;
 						}
@@ -15137,7 +16083,7 @@ true, true],
 									title += String.fromCharCode(d[i]);
 								}
 								if (title) {
-									obj.title = decodeURIComponent(escape(title));
+									$q('.de-fullimg-src', wrapEl).textContent += ' - ' + (videoEl.title = decodeURIComponent(escape(title)));
 								}
 								break;
 							}
@@ -15145,20 +16091,15 @@ true, true],
 					});
 				}
 				DollchanAPI.notify('expandmedia', src);
-				return obj;
-			}
-		}, {
-			key: 'isControlClick',
-			value: function isControlClick(e) {
-				return Cfg.webmControl && e.clientY > e.target.getBoundingClientRect().bottom - 40;
+				return wrapEl;
 			}
 		}, {
 			key: 'sendCloseEvent',
 			value: function sendCloseEvent(e, inPost) {
-				var pv = this.post,
-				    cr = pv.el.getBoundingClientRect(),
-				    x = e.pageX - window.pageXOffset,
-				    y = e.pageY - window.pageYOffset;
+				var pv = this.post;
+				var cr = pv.el.getBoundingClientRect();
+				var x = e.pageX - window.pageXOffset;
+				var y = e.pageY - window.pageYOffset;
 				if (!inPost) {
 					while (x > cr.right || x < cr.left || y > cr.bottom || y < cr.top) {
 						pv = pv.parent;
@@ -15198,23 +16139,23 @@ true, true],
 		}, {
 			key: 'isImage',
 			get: function get() {
-				var val = /\.jpe?g|\.png|\.gif/i.test(this.src) || this.src.startsWith('blob:') && !this.el.hasAttribute('de-video');
-				Object.defineProperty(this, 'isImage', { value: val });
-				return val;
+				var value = /\.jpe?g|\.png|\.gif/i.test(this.src) || this.src.startsWith('blob:') && !this.el.hasAttribute('de-video');
+				Object.defineProperty(this, 'isImage', { value: value });
+				return value;
 			}
 		}, {
 			key: 'isVideo',
 			get: function get() {
-				var val = /\.(?:webm|mp4)(?:&|$)/i.test(this.src) || this.src.startsWith('blob:') && this.el.hasAttribute('de-video');
-				Object.defineProperty(this, 'isVideo', { value: val });
-				return val;
+				var value = /\.(?:webm|mp4|ogv)(?:&|$)/i.test(this.src) || this.src.startsWith('blob:') && this.el.hasAttribute('de-video');
+				Object.defineProperty(this, 'isVideo', { value: value });
+				return value;
 			}
 		}, {
 			key: 'src',
 			get: function get() {
-				var val = this._getImageSrc();
-				Object.defineProperty(this, 'src', { value: val });
-				return val;
+				var value = this._getImageSrc();
+				Object.defineProperty(this, 'src', { value: value });
+				return value;
 			}
 		}, {
 			key: 'width',
@@ -15227,6 +16168,11 @@ true, true],
 				var value = this._getImageSize();
 				Object.defineProperty(this, '_size', { value: value, writable: true });
 				return value;
+			}
+		}], [{
+			key: 'isControlClick',
+			value: function isControlClick(e) {
+				return Cfg.webmControl && e.clientY > e.target.getBoundingClientRect().bottom - 40;
 			}
 		}]);
 
@@ -15280,7 +16226,7 @@ true, true],
 			key: '_getImageSize',
 			value: function _getImageSize() {
 				if (this.info) {
-					var size = this.info.match(/(\d+)\s?[x\u00D7]\s?(\d+)/);
+					var size = this.info.match(/(?:[\s]|^)(\d+)\s?[x\u00D7]\s?(\d+)(?:[)\s,]|$)/);
 					return [size[1], size[2]];
 				}
 				return null;
@@ -15293,28 +16239,28 @@ true, true],
 		}, {
 			key: 'info',
 			get: function get() {
-				var val = aib.getImgInfo(aib.getImgWrap(this.el));
-				Object.defineProperty(this, 'info', { value: val });
-				return val;
-			}
-		}, {
-			key: 'weight',
-			get: function get() {
-				var val = 0;
-				if (this.info) {
-					var w = this.info.match(/(\d+(?:[\.,]\d+)?)\s*([mмkк])?i?[bб]/i);
-					var w1 = w[1].replace(',', '.');
-					val = w[2] === 'M' ? w1 * 1e3 | 0 : !w[2] ? Math.round(w1 / 1e3) : w1;
-				}
-				Object.defineProperty(this, 'weight', { value: val });
-				return val;
+				var value = aib.getImgInfo(aib.getImgWrap(this.el));
+				Object.defineProperty(this, 'info', { value: value });
+				return value;
 			}
 		}, {
 			key: 'name',
 			get: function get() {
-				var val = aib.getImgRealName(aib.getImgWrap(this.el)).textContent.trim();
-				Object.defineProperty(this, 'name', { value: val });
-				return val;
+				var value = aib.getImgRealName(aib.getImgWrap(this.el)).trim();
+				Object.defineProperty(this, 'name', { value: value });
+				return value;
+			}
+		}, {
+			key: 'weight',
+			get: function get() {
+				var value = 0;
+				if (this.info) {
+					var w = this.info.match(/(\d+(?:[.,]\d+)?)\s*([mмkк])?i?[bб]/i);
+					var w1 = w[1].replace(',', '.');
+					value = w[2] === 'M' ? w1 * 1e3 | 0 : !w[2] ? Math.round(w1 / 1e3) : w1;
+				}
+				Object.defineProperty(this, 'weight', { value: value });
+				return value;
 			}
 		}]);
 
@@ -15324,6 +16270,11 @@ true, true],
 	Attachment.viewer = null;
 
 	var ImagesHashStorage = Object.create({
+		get getHash() {
+			var value = this._getHashHelper.bind(this);
+			Object.defineProperty(this, 'getHash', { value: value });
+			return value;
+		},
 		endFn: function endFn() {
 			if (this.hasOwnProperty('_storage')) {
 				sesStorage['de-imageshash'] = JSON.stringify(this._storage);
@@ -15334,133 +16285,137 @@ true, true],
 			}
 		},
 
-		get getHash() {
-			var val = this._getHashHelper.bind(this);
-			Object.defineProperty(this, 'getHash', { value: val });
-			return val;
-		},
 
-		_getHashHelper: function _getHashHelper(imgObj) {
-			var _this50 = this;
-
-			var el, src, data, buffer, val, w, h, imgData, cnv, ctx;
-			return regeneratorRuntime.async(function _getHashHelper$(_context18) {
-				while (1) {
-					switch (_context18.prev = _context18.next) {
-						case 0:
-							el = imgObj.el, src = imgObj.src;
-
-							if (!(src in this._storage)) {
-								_context18.next = 3;
-								break;
-							}
-
-							return _context18.abrupt('return', this._storage[src]);
-
-						case 3:
-							if (el.complete) {
-								_context18.next = 6;
-								break;
-							}
-
-							_context18.next = 6;
-							return regeneratorRuntime.awrap(new Promise(function (resolve) {
-								return el.addEventListener('load', function () {
-									return resolve();
-								});
-							}));
-
-						case 6:
-							if (!(el.naturalWidth + el.naturalHeight === 0)) {
-								_context18.next = 8;
-								break;
-							}
-
-							return _context18.abrupt('return', -1);
-
-						case 8:
-							val = -1, w = el.naturalWidth, h = el.naturalHeight;
-
-							if (!aib.fch) {
-								_context18.next = 16;
-								break;
-							}
-
-							_context18.next = 12;
-							return regeneratorRuntime.awrap(downloadImgData(el.src));
-
-						case 12:
-							imgData = _context18.sent;
-
-							if (imgData) {
-								buffer = imgData.buffer;
-							}
-							_context18.next = 22;
-							break;
-
-						case 16:
-							cnv = this._canvas;
-
-							cnv.width = w;
-							cnv.height = h;
-							ctx = cnv.getContext('2d');
-
-							ctx.drawImage(el, 0, 0);
-							buffer = ctx.getImageData(0, 0, w, h).data.buffer;
-
-						case 22:
-							if (!buffer) {
-								_context18.next = 27;
-								break;
-							}
-
-							_context18.next = 25;
-							return regeneratorRuntime.awrap(new Promise(function (resolve) {
-								return _this50._workers.run([buffer, w, h], [buffer], function (val) {
-									return resolve(val);
-								});
-							}));
-
-						case 25:
-							data = _context18.sent;
-
-							if (data && 'hash' in data) {
-								val = data.hash;
-							}
-
-						case 27:
-							this._storage[src] = val;
-							return _context18.abrupt('return', val);
-
-						case 29:
-						case 'end':
-							return _context18.stop();
-					}
-				}
-			}, null, this);
-		},
 		get _canvas() {
-			var val = doc.createElement('canvas');
-			Object.defineProperty(this, '_canvas', { value: val });
-			return val;
+			var value = doc.createElement('canvas');
+			Object.defineProperty(this, '_canvas', { value: value });
+			return value;
 		},
 		get _storage() {
-			var val = null;
+			var value = null;
 			try {
-				val = JSON.parse(sesStorage['de-imageshash']);
+				value = JSON.parse(sesStorage['de-imageshash']);
 			} finally {
-				if (!val) {
-					val = {};
+				if (!value) {
+					value = {};
 				}
-				Object.defineProperty(this, '_storage', { value: val });
-				return val;
+				Object.defineProperty(this, '_storage', { value: value });
+				return value;
 			}
 		},
 		get _workers() {
-			var val = new WorkerPool(4, genImgHash, emptyFn);
-			Object.defineProperty(this, '_workers', { value: val, configurable: true });
-			return val;
-		}
+			var value = new WorkerPool(4, genImgHash, emptyFn);
+			Object.defineProperty(this, '_workers', { value: value, configurable: true });
+			return value;
+		},
+		_getHashHelper: function () {
+			var _ref80 = _asyncToGenerator( regeneratorRuntime.mark(function _callee16(_ref79) {
+				var _this57 = this;
+
+				var el = _ref79.el,
+				    src = _ref79.src;
+				var data, buffer, val, w, h, imgData, cnv, ctx;
+				return regeneratorRuntime.wrap(function _callee16$(_context17) {
+					while (1) {
+						switch (_context17.prev = _context17.next) {
+							case 0:
+								if (!(src in this._storage)) {
+									_context17.next = 2;
+									break;
+								}
+
+								return _context17.abrupt('return', this._storage[src]);
+
+							case 2:
+								if (el.complete) {
+									_context17.next = 5;
+									break;
+								}
+
+								_context17.next = 5;
+								return new Promise(function (resolve) {
+									return el.addEventListener('load', function () {
+										return resolve();
+									});
+								});
+
+							case 5:
+								if (!(el.naturalWidth + el.naturalHeight === 0)) {
+									_context17.next = 7;
+									break;
+								}
+
+								return _context17.abrupt('return', -1);
+
+							case 7:
+								data = void 0, buffer = void 0, val = -1;
+								w = el.naturalWidth, h = el.naturalHeight;
+
+								if (!aib.fch) {
+									_context17.next = 16;
+									break;
+								}
+
+								_context17.next = 12;
+								return downloadImgData(el.src);
+
+							case 12:
+								imgData = _context17.sent;
+
+								if (imgData) {
+									buffer = imgData.buffer;
+								}
+								_context17.next = 22;
+								break;
+
+							case 16:
+								cnv = this._canvas;
+
+								cnv.width = w;
+								cnv.height = h;
+								ctx = cnv.getContext('2d');
+
+								ctx.drawImage(el, 0, 0);
+								buffer = ctx.getImageData(0, 0, w, h).data.buffer;
+
+							case 22:
+								if (!buffer) {
+									_context17.next = 27;
+									break;
+								}
+
+								_context17.next = 25;
+								return new Promise(function (resolve) {
+									return _this57._workers.run([buffer, w, h], [buffer], function (val) {
+										return resolve(val);
+									});
+								});
+
+							case 25:
+								data = _context17.sent;
+
+								if (data && 'hash' in data) {
+									val = data.hash;
+								}
+
+							case 27:
+								this._storage[src] = val;
+								return _context17.abrupt('return', val);
+
+							case 29:
+							case 'end':
+								return _context17.stop();
+						}
+					}
+				}, _callee16, this);
+			}));
+
+			function _getHashHelper(_x53) {
+				return _ref80.apply(this, arguments);
+			}
+
+			return _getHashHelper;
+		}()
 	});
 
 	function processImagesLinks(el) {
@@ -15470,7 +16425,8 @@ true, true],
 		if (!addSrc && !delNames) {
 			return;
 		}
-		for (var i = 0, els = $Q(aib.qImgNameLink, el), len = els.length; i < len; i++) {
+		var els = $Q(aib.qImgNameLink, el);
+		for (var i = 0, len = els.length; i < len; i++) {
 			var link = els[i];
 			if (/google\.|tineye\.com|iqdb\.org/.test(link.href)) {
 				$del(link);
@@ -15492,23 +16448,27 @@ true, true],
 	}
 
 	function embedImagesLinks(el) {
-		for (var i = 0, els = $Q(aib.qMsgImgLink, el), len = els.length; i < len; ++i) {
-			var link = els[i],
-			    url = link.href;
-			if (link.parentNode.tagName === 'SMALL' || url.includes('?')) {
+		var els = $Q(aib.qMsgImgLink, el);
+		for (var i = 0, len = els.length; i < len; ++i) {
+			var link = els[i];
+			var _url3 = link.href;
+			if (link.parentNode.tagName === 'SMALL' || _url3.includes('?')) {
 				return;
 			}
 			var a = link.cloneNode(false);
 			a.target = '_blank';
-			a.innerHTML = '<img class="de-img-pre" src="' + url + '">';
+			a.innerHTML = '<img class="de-img-pre" src="' + _url3 + '">';
 			$before(link, a);
 		}
 	}
 
-	function genImgHash(data) {
-		var buf = new Uint8Array(data[0]);
-		var oldw = data[1];
-		var oldh = data[2];
+	function genImgHash(_ref81) {
+		var _ref82 = _slicedToArray(_ref81, 3),
+		    arrBuf = _ref82[0],
+		    oldw = _ref82[1],
+		    oldh = _ref82[2];
+
+		var buf = new Uint8Array(arrBuf);
 		var size = oldw * oldh;
 		for (var i = 0, j = 0; i < size; i++, j += 4) {
 			buf[i] = buf[j] * 0.3 + buf[j + 1] * 0.59 + buf[j + 2] * 0.11;
@@ -15519,9 +16479,9 @@ true, true],
 		var areas = 256 / levels;
 		var values = 256 / (levels - 1);
 		var hash = 0;
-		for (var _i35 = 0; _i35 < newh; _i35++) {
+		for (var _i37 = 0; _i37 < newh; _i37++) {
 			for (var _j3 = 0; _j3 < neww; _j3++) {
-				var tmp = _i35 / (newh - 1) * (oldh - 1);
+				var tmp = _i37 / (newh - 1) * (oldh - 1);
 				var l = Math.min(tmp | 0, oldh - 2);
 				var u = tmp - l;
 				tmp = _j3 / (neww - 1) * (oldw - 1);
@@ -15557,44 +16517,45 @@ true, true],
 				return aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, this._form)));
 			}
 		}, {
-			key: 'getPostEl',
-			value: function getPostEl(i) {
-				return aib.fixHTML(this._posts[i]);
-			}
-		}, {
 			key: 'getPNum',
 			value: function getPNum(i) {
 				return aib.getPNum(this._posts[i]);
 			}
 		}, {
+			key: 'getPostEl',
+			value: function getPostEl(i) {
+				return aib.fixHTML(this._posts[i]);
+			}
+		}, {
 			key: 'bannedPostsData',
 			value: regeneratorRuntime.mark(function bannedPostsData() {
-				var bEls, i, len, bEl, pEl;
-				return regeneratorRuntime.wrap(function bannedPostsData$(_context19) {
+				var banEls, i, len, banEl, postEl;
+				return regeneratorRuntime.wrap(function bannedPostsData$(_context18) {
 					while (1) {
-						switch (_context19.prev = _context19.next) {
+						switch (_context18.prev = _context18.next) {
 							case 0:
-								bEls = $Q(aib.qBan, this._form);
-								i = 0, len = bEls.length;
+								banEls = $Q(aib.qBan, this._form);
+								i = 0, len = banEls.length;
 
 							case 2:
 								if (!(i < len)) {
-									_context19.next = 9;
+									_context18.next = 10;
 									break;
 								}
 
-								bEl = bEls[i], pEl = aib.getPostElOfEl(bEl);
-								_context19.next = 6;
-								return [1, pEl ? aib.getPNum(pEl) : null, doc.adoptNode(bEl)];
+								banEl = banEls[i];
+								postEl = aib.getPostElOfEl(banEl);
+								_context18.next = 7;
+								return [1, postEl ? aib.getPNum(postEl) : null, doc.adoptNode(banEl)];
 
-							case 6:
+							case 7:
 								++i;
-								_context19.next = 2;
+								_context18.next = 2;
 								break;
 
-							case 9:
+							case 10:
 							case 'end':
-								return _context19.stop();
+								return _context18.stop();
 						}
 					}
 				}, bannedPostsData, this);
@@ -15609,32 +16570,7 @@ true, true],
 		return DOMPostsBuilder;
 	}();
 
-	DOMPostsBuilder.fixFileName = function (name, maxLength) {
-		var decodedName = name.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-		if (decodedName.length > maxLength) {
-			return {
-				isFixed: true,
-				name: decodedName.slice(0, 25).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#039;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-			};
-		}
-		return { isFixed: false, name: name };
-	};
-
 	var _4chanPostsBuilder = function () {
-		_createClass(_4chanPostsBuilder, null, [{
-			key: '_setCustomSpoiler',
-			value: function _setCustomSpoiler(board, val) {
-				if (!_4chanPostsBuilder._customSpoiler[board] && (val = parseInt(val))) {
-					var s = void 0;
-					if (board === aib.brd && (s = $q('.imgspoiler'))) {
-						_4chanPostsBuilder._customSpoiler.set(board, s.firstChild.src.match(/spoiler(-[a-z0-9]+)\.png$/)[1]);
-					}
-				} else {
-					_4chanPostsBuilder._customSpoiler.set(board, '-' + board + (Math.floor(Math.random() * val) + 1));
-				}
-			}
-		}]);
-
 		function _4chanPostsBuilder(json, brd) {
 			_classCallCheck(this, _4chanPostsBuilder);
 
@@ -15650,8 +16586,16 @@ true, true],
 		_createClass(_4chanPostsBuilder, [{
 			key: 'getOpMessage',
 			value: function getOpMessage() {
-				var data = this._posts[0];
-				return $add(aib.fixHTML('<blockquote class="postMessage" id="m' + data.no + '"> ' + data.com + '</blockquote>'));
+				var _posts$ = this._posts[0],
+				    no = _posts$.no,
+				    com = _posts$.com;
+
+				return $add(aib.fixHTML('<blockquote class="postMessage" id="m' + no + '"> ' + com + '</blockquote>'));
+			}
+		}, {
+			key: 'getPNum',
+			value: function getPNum(i) {
+				return this._posts[i + 1].no;
 			}
 		}, {
 			key: 'getPostEl',
@@ -15665,16 +16609,16 @@ true, true],
 				var num = data.no;
 				var brd = this._brd;
 				var _icon = function _icon(id) {
-					return '//s.4cdn.org/image/' + id + (window.devicePixelRatio >= 2 ? '@2x.gif' : '.gif');
+					return '//s.4cdn.org/image/' + id + (window.devicePixelRatio < 2 ? '.gif' : '@2x.gif');
 				};
 
 				var fileHTML = '';
 				if (data.filedeleted) {
 					fileHTML = '<div id="f' + num + '" class="file"><span class="fileThumb">\n\t\t\t\t<img src="' + _icon('filedeleted-res') + '" class="fileDeletedRes" alt="File deleted.">\n\t\t\t</span></div>';
 				} else if (typeof data.filename === 'string') {
-					var _DOMPostsBuilder$fixF = DOMPostsBuilder.fixFileName(data.filename, 30),
-					    _name2 = _DOMPostsBuilder$fixF.name,
-					    needTitle = _DOMPostsBuilder$fixF.isFixed;
+					var _chanPostsBuilder$fi = _4chanPostsBuilder.fixFileName(data.filename, 30),
+					    _name2 = _chanPostsBuilder$fi.name,
+					    needTitle = _chanPostsBuilder$fi.isFixed;
 
 					_name2 += data.ext;
 					if (!data.tn_w && !data.tn_h && data.ext === '.gif') {
@@ -15688,7 +16632,10 @@ true, true],
 						needTitle = false;
 					}
 					var size = prettifySize(data.fsize);
-					fileHTML = '<div class="file" id="f' + num + '">\n\t\t\t\t<div class="fileText" id="fT' + num + '" ' + (isSpoiler ? 'title="' + (data.filename + data.ext) + '"' : '') + '>File: <a href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" ' + (needTitle ? 'title="' + (data.filename + data.ext) + '"' : '') + ' target="_blank">' + _name2 + '</a> (' + size + ', ' + (data.ext === '.pdf' ? 'PDF' : data.w + 'x' + data.h) + ')</div>\n\t\t\t\t<a class="fileThumb ' + (isSpoiler ? 'imgSpoiler' : '') + '" href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" target="_blank">\n\t\t\t\t\t<img src="' + (isSpoiler ? '//s.4cdn.org/image/spoiler' + _4chanPostsBuilder._customSpoiler.get(brd) || '' + '.png' : '//i.4cdn.org/' + brd + '/' + data.tim + 's.jpg') + '" alt="' + size + '" data-md5="' + data.md5 + '" style="height: ' + data.tn_h + 'px; width: ' + data.tn_w + 'px;">\n\t\t\t\t\t<div data-tip="" data-tip-cb="mShowFull" class="mFileInfo mobile">' + size + ' ' + data.ext.substr(1).toUpperCase() + '</div>\n\t\t\t\t</a>\n\t\t\t</div>';
+					var fileTextTitle = isSpoiler ? ' title="' + (data.filename + data.ext) + '"' : '';
+					var aHref = needTitle ? 'title="' + (data.filename + data.ext) + '"' : '';
+					var imgSrc = isSpoiler ? '//s.4cdn.org/image/spoiler' + (_4chanPostsBuilder._customSpoiler.get(brd) || '') + '.png' : '//i.4cdn.org/' + brd + '/' + data.tim + 's.jpg';
+					fileHTML = '<div class="file" id="f' + num + '">\n\t\t\t\t<div class="fileText" id="fT' + num + '"' + fileTextTitle + '>File:\n\t\t\t\t\t<a href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext) + '" ' + aHref + ' target="_blank">' + _name2 + '</a>\n\t\t\t\t\t(' + size + ', ' + (data.ext === '.pdf' ? 'PDF' : data.w + 'x' + data.h) + ')\n\t\t\t\t</div>\n\t\t\t\t<a class="fileThumb ' + (isSpoiler ? 'imgSpoiler' : '') + '" href="//i.4cdn.org/' + brd + '/' + (data.tim + data.ext + '" target="_blank">\n\t\t\t\t\t<img src="' + imgSrc + '" alt="' + size + '" data-md5="') + (data.md5 + '" style="height: ' + data.tn_h + 'px; width: ' + data.tn_w + 'px;">\n\t\t\t\t\t<div data-tip="" data-tip-cb="mShowFull" class="mFileInfo mobile">\n\t\t\t\t\t\t' + size + ' ' + data.ext.substr(1).toUpperCase() + '\n\t\t\t\t\t</div>\n\t\t\t\t</a>\n\t\t\t</div>');
 				}
 
 				var highlight = '',
@@ -15699,50 +16646,53 @@ true, true],
 					case 'admin_highlight':
 						highlight = ' highlightPost';
 					case 'admin':
-						capcodeText = '<strong class="capcode hand id_admin" title="Highlight posts by Administrators">## Admin</strong>';
+						capcodeText = '<strong class="capcode hand id_admin" ' + 'title="Highlight posts by Administrators">## Admin</strong>';
 						capcodeClass = 'capcodeAdmin';
-						capcodeImg = '<img src="' + _icon('adminicon') + '" alt="This user is a 4chan Administrator." title="This user is a 4chan Administrator." class="identityIcon">';
+						capcodeImg = '<img src="' + _icon('adminicon') + '" alt="This user is a 4chan Administrator." ' + 'title="This user is a 4chan Administrator." class="identityIcon">';
 						break;
 					case 'mod':
-						capcodeText = '<strong class="capcode hand id_mod" title="Highlight posts by Moderators">## Mod</strong>';
+						capcodeText = '<strong class="capcode hand id_mod" ' + 'title="Highlight posts by Moderators">## Mod</strong>';
 						capcodeClass = 'capcodeMod';
-						capcodeImg = '<img src="' + _icon('modicon') + '" alt="This user is a 4chan Moderator." title="This user is a 4chan Moderator." class="identityIcon">';
+						capcodeImg = '<img src="' + _icon('modicon') + '" alt="This user is a 4chan Moderator." ' + 'title="This user is a 4chan Moderator." class="identityIcon">';
 						break;
 					case 'developer':
-						capcodeText = '<strong class="capcode hand id_developer" title="Highlight posts by Developers">## Developer</strong>';
+						capcodeText = '<strong class="capcode hand id_developer" ' + 'title="Highlight posts by Developers">## Developer</strong>';
 						capcodeClass = 'capcodeDeveloper';
-						capcodeImg = '<img src="' + _icon('developericon') + '" alt="This user is a 4chan Developer." title="This user is a 4chan Developer." class="identityIcon">';
+						capcodeImg = '<img src="' + _icon('developericon') + '" alt="This user is a 4chan Developer." ' + 'title="This user is a 4chan Developer." class="identityIcon">';
 						break;
 					case 'manager':
-						capcodeText = '<strong class="capcode hand id_manager" title="Highlight posts by Managers">## Manager</strong>';
+						capcodeText = '<strong class="capcode hand id_manager" ' + 'title="Highlight posts by Managers">## Manager</strong>';
 						capcodeClass = 'capcodeManager';
-						capcodeImg = '<img src="' + _icon('managericon') + '" alt="This user is a 4chan Manager." title="This user is a 4chan Manager." class="identityIcon">';
+						capcodeImg = '<img src="' + _icon('managericon') + '" alt="This user is a 4chan Manager." ' + 'title="This user is a 4chan Manager." class="identityIcon">';
 						break;
 					case 'founder':
-						capcodeText = '<strong class="capcode hand id_admin" title="Highlight posts by the Founder">## Founder</strong>';
+						capcodeText = '<strong class="capcode hand id_admin" ' + 'title="Highlight posts by the Founder">## Founder</strong>';
 						capcodeClass = ' capcodeAdmin';
-						capcodeImg = '<img src="' + _icon('foundericon') + '" alt="This user is 4chan\'s Founder." title="This user is 4chan\'s Founder." class="identityIcon">';
-						break;
+						capcodeImg = '<img src="' + _icon('foundericon') + '" alt="This user is 4chan\'s Founder." ' + 'title="This user is 4chan\'s Founder." class="identityIcon">';
 				}
 
-				var name = data.name || '';
+				var _data$name = data.name,
+				    name = _data$name === undefined ? '' : _data$name;
 
-				return '<div class="postContainer replyContainer" id="pc' + num + '">\n\t\t\t<div class="sideArrows" id="sa' + num + '">&gt;&gt;</div>\n\t\t\t<div id="p' + num + '" class="post ' + (i === -1 ? 'op' : 'reply') + ' ' + highlight + '">\n\t\t\t\t<div class="postInfoM mobile" id="pim' + num + '">\n\t\t\t\t\t<span class="nameBlock ' + capcodeClass + '">\n\t\t\t\t\t\t' + (name.length > 30 ? '<span class="name" data-tip data-tip-cb="mShowFull">' + name.substring(30) + '(…)</span>' : '<span class="name">' + name + '</span>') + '\n\t\t\t\t\t\t' + (data.trip ? '<span class="postertrip">' + data.trip + '</span>' : '') + '\n\t\t\t\t\t\t' + capcodeText + '\n\t\t\t\t\t\t' + capcodeImg + '\n\t\t\t\t\t\t' + (data.id && !data.capcode ? '<span class="posteruid id_' + data.id + '">(ID: <span class="hand" title="Highlight posts by this ID">' + data.id + '</span>)</span>' : '') + '\n\t\t\t\t\t\t' + (data.country ? '<span title="' + data.country_name + '" class="flag flag-' + data.country.toLowerCase() + '"></span>' : '') + '\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<span class="subject">' + (data.sub || '') + '</span>\n\t\t\t\t\t</span>\n\t\t\t\t\t<span class="dateTime postNum" data-utc="' + data.time + '">' + data.now + ' <a href="#p' + num + '" title="Link to this post">No.</a><a href="javascript:quote(\'' + num + '\');" title="Reply to this post">' + num + '</a></span>\n\t\t\t\t</div>\n\t\t\t\t<div class="postInfo desktop" id="pi' + num + '">\n\t\t\t\t\t<input name="' + num + '" value="delete" type="checkbox">\n\t\t\t\t\t<span class="subject">' + (data.sub || '') + '</span>\n\t\t\t\t\t<span class="nameBlock ' + capcodeClass + '">\n\t\t\t\t\t\t' + (data.email ? '<a href="mailto:' + data.email.replace(/ /g, '%20') + '" class="useremail">' : '') + '\n\t\t\t\t\t\t\t<span class="name">' + name + '</span>\n\t\t\t\t\t\t\t' + (data.trip ? '<span class="postertrip">' + data.trip + '</span>' : '') + '\n\t\t\t\t\t\t\t' + capcodeText + '\n\t\t\t\t\t\t' + (data.email ? '</a>' : '') + '\n\t\t\t\t\t\t' + capcodeImg + '\n\t\t\t\t\t\t' + (data.id && !data.capcode ? '<span class="posteruid id_' + data.id + '">(ID: <span class="hand" title="Highlight posts by this ID">' + data.id + '</span>)</span>' : '') + '\n\t\t\t\t\t\t' + (data.country ? '<span title="' + data.country_name + '" class="flag flag-' + data.country.toLowerCase() + '"></span>' : '') + '\n\t\t\t\t\t</span>\n\t\t\t\t\t<span class="dateTime" data-utc="' + data.time + '">' + data.now + '</span>\n\t\t\t\t\t<span class="postNum desktop"><a href="#p' + num + '" title="Link to this post">No.</a><a href="javascript:quote(\'' + num + '\');" title="Reply to this post">' + num + '</a></span>\n\t\t\t\t</div>\n\t\t\t\t' + fileHTML + '\n\t\t\t\t<blockquote class="postMessage" id="m' + num + '"> ' + (data.com || '') + '</blockquote>\n\t\t\t</div>\n\t\t</div>';
-			}
-		}, {
-			key: 'getPNum',
-			value: function getPNum(i) {
-				return this._posts[i + 1].no;
+				var nameEl = '<span class="name">' + name + '</span>';
+				var mobNameEl = name.length <= 30 ? nameEl : '<span class="name" data-tip data-tip-cb="mShowFull">' + name.substring(30) + '(\u2026)</span>';
+				var tripEl = '' + (data.trip ? '<span class="postertrip">' + data.trip + '</span>' : '');
+				var posteruidEl = data.id && !data.capcode ? '<span class="posteruid id_' + data.id + ('">(ID: <span class="hand" title="Highlight posts by this ID">' + data.id + '</span>)</span>') : '';
+				var flagEl = data.country ? '<span title="' + data.country_name + '" class="flag flag-' + data.country.toLowerCase() + '"></span>' : '';
+				var emailEl = data.email ? '<a href="mailto:' + data.email.replace(/ /g, '%20') + '" class="useremail">' : '';
+				var replyEl = '<a href="#p' + num + '" title="Link to this post">No.</a><a href="javascript:quote(\'' + num + '\');" title="Reply to this post">' + num + '</a>';
+				var subjEl = '<span class="subject">' + (data.sub || '') + '</span>';
+				return '<div class="postContainer replyContainer" id="pc' + num + '">\n\t\t\t<div class="sideArrows" id="sa' + num + '">&gt;&gt;</div>\n\t\t\t<div id="p' + num + '" class="post ' + (i === -1 ? 'op' : 'reply') + ' ' + highlight + '">\n\t\t\t\t<div class="postInfoM mobile" id="pim' + num + '">\n\t\t\t\t\t<span class="nameBlock ' + capcodeClass + '">\n\t\t\t\t\t\t' + mobNameEl + '\n\t\t\t\t\t\t' + tripEl + '\n\t\t\t\t\t\t' + capcodeText + '\n\t\t\t\t\t\t' + capcodeImg + '\n\t\t\t\t\t\t' + posteruidEl + '\n\t\t\t\t\t\t' + flagEl + '<br>\n\t\t\t\t\t\t' + subjEl + '\n\t\t\t\t\t</span>\n\t\t\t\t\t<span class="dateTime postNum" data-utc="' + data.time + '">' + data.now + ' ' + replyEl + '</span>\n\t\t\t\t</div>\n\t\t\t\t<div class="postInfo desktop" id="pi' + num + '">\n\t\t\t\t\t<input name="' + num + '" value="delete" type="checkbox">\n\t\t\t\t\t' + subjEl + '\n\t\t\t\t\t<span class="nameBlock ' + capcodeClass + '">\n\t\t\t\t\t\t' + emailEl + '\n\t\t\t\t\t\t\t' + nameEl + '\n\t\t\t\t\t\t\t' + tripEl + '\n\t\t\t\t\t\t\t' + capcodeText + '\n\t\t\t\t\t\t' + (data.email ? '</a>' : '') + '\n\t\t\t\t\t\t' + capcodeImg + '\n\t\t\t\t\t\t' + posteruidEl + '\n\t\t\t\t\t\t' + flagEl + '\n\t\t\t\t\t</span>\n\t\t\t\t\t<span class="dateTime" data-utc="' + data.time + '">' + data.now + '</span>\n\t\t\t\t\t<span class="postNum desktop">' + replyEl + '</span>\n\t\t\t\t</div>\n\t\t\t\t' + fileHTML + '\n\t\t\t\t<blockquote class="postMessage" id="m' + num + '"> ' + (data.com || '') + '</blockquote>\n\t\t\t</div>\n\t\t</div>';
 			}
 		}, {
 			key: 'bannedPostsData',
 			value: regeneratorRuntime.mark(function bannedPostsData() {
-				return regeneratorRuntime.wrap(function bannedPostsData$(_context20) {
+				return regeneratorRuntime.wrap(function bannedPostsData$(_context19) {
 					while (1) {
-						switch (_context20.prev = _context20.next) {
+						switch (_context19.prev = _context19.next) {
 							case 0:
 							case 'end':
-								return _context20.stop();
+								return _context19.stop();
 						}
 					}
 				}, bannedPostsData, this);
@@ -15751,6 +16701,27 @@ true, true],
 			key: 'isClosed',
 			get: function get() {
 				return !!(this._posts[0].closed || this._posts[0].archived);
+			}
+		}], [{
+			key: 'fixFileName',
+			value: function fixFileName(name, maxLength) {
+				var decodedName = name.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+				return decodedName.length <= maxLength ? { isFixed: false, name: name } : {
+					isFixed: true,
+					name: decodedName.slice(0, 25).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#039;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+				};
+			}
+		}, {
+			key: '_setCustomSpoiler',
+			value: function _setCustomSpoiler(board, val) {
+				if (!_4chanPostsBuilder._customSpoiler[board] && (val = parseInt(val))) {
+					var spoilerEl = void 0;
+					if (board === aib.brd && (spoilerEl = $q('.imgspoiler'))) {
+						_4chanPostsBuilder._customSpoiler.set(board, spoilerEl.firstChild.src.match(/spoiler(-[a-z0-9]+)\.png$/)[1]);
+					}
+				} else {
+					_4chanPostsBuilder._customSpoiler.set(board, '-' + board + (Math.floor(Math.random() * val) + 1));
+				}
 			}
 		}]);
 
@@ -15779,6 +16750,11 @@ true, true],
 				return $add(aib.fixHTML('<div class="postbody"> ' + this._posts[0].message_html + '</div>'));
 			}
 		}, {
+			key: 'getPNum',
+			value: function getPNum(i) {
+				return this._posts[i + 1].display_id;
+			}
+		}, {
 			key: 'getPostEl',
 			value: function getPostEl(i) {
 				return $add(aib.fixHTML(this.getPostHTML(i))).firstChild.firstChild.lastElementChild;
@@ -15792,73 +16768,75 @@ true, true],
 				var multiFile = data.files.length > 1;
 
 				var filesHTML = '';
-				for (var _iterator26 = data.files, _isArray26 = Array.isArray(_iterator26), _i36 = 0, _iterator26 = _isArray26 ? _iterator26 : _iterator26[Symbol.iterator]();;) {
-					var _ref48;
+				for (var _iterator27 = data.files, _isArray27 = Array.isArray(_iterator27), _i38 = 0, _iterator27 = _isArray27 ? _iterator27 : _iterator27[Symbol.iterator]();;) {
+					var _ref83;
 
-					if (_isArray26) {
-						if (_i36 >= _iterator26.length) break;
-						_ref48 = _iterator26[_i36++];
+					if (_isArray27) {
+						if (_i38 >= _iterator27.length) break;
+						_ref83 = _iterator27[_i38++];
 					} else {
-						_i36 = _iterator26.next();
-						if (_i36.done) break;
-						_ref48 = _i36.value;
+						_i38 = _iterator27.next();
+						if (_i38.done) break;
+						_ref83 = _i38.value;
 					}
 
-					var file = _ref48;
+					var _ref84 = _ref83,
+					    file_id = _ref84.file_id,
+					    metadata = _ref84.metadata,
+					    rating = _ref84.rating,
+					    size = _ref84.size,
+					    src = _ref84.src,
+					    thumb = _ref84.thumb,
+					    thumb_height = _ref84.thumb_height,
+					    thumb_width = _ref84.thumb_width;
 
 					var fileName = void 0,
-					    fullFileName = void 0;
-					var thumb = file.thumb;
-					var thumb_w = 200;
-					var thumb_h = 200;
-					var ext = file.src.split('.').pop();
+					    fullFileName = void 0,
+					    th = thumb;
+					var thumbW = 200;
+					var thumbH = 200;
+					var ext = src.split('.').pop();
 					if (brd === 'b' || brd === 'rf') {
-						fileName = fullFileName = thumb.split('/').pop();
+						fileName = fullFileName = th.split('/').pop();
 					} else {
-						fileName = fullFileName = file.src.split('/').pop();
+						fileName = fullFileName = src.split('/').pop();
 						if (multiFile && fileName.length > 20) {
 							fileName = fileName.substr(0, 20 - ext.length) + '(…)' + ext;
 						}
 					}
-					var max_rating = 'r15'; 
-					if (file.rating === 'r-18g' && max_rating !== 'r-18g') {
-						thumb = "images/r-18g.png";
-					} else if (file.rating === 'r-18' && (max_rating !== 'r-18g' || max_rating !== 'r-18')) {
-						thumb = "images/r-18.png";
-					} else if (file.rating === 'r-15' && max_rating === 'sfw') {
-						thumb = "images/r-15.png";
-					} else if (file.rating === 'illegal') {
-						thumb = "images/illegal.png";
+					var maxRating = 'r15'; 
+					if (rating === 'r-18g' && maxRating !== 'r-18g') {
+						th = 'images/r-18g.png';
+					} else if (rating === 'r-18' && (maxRating !== 'r-18g' || maxRating !== 'r-18')) {
+						th = 'images/r-18.png';
+					} else if (rating === 'r-15' && maxRating === 'sfw') {
+						th = 'images/r-15.png';
+					} else if (rating === 'illegal') {
+						th = 'images/illegal.png';
 					} else {
-						thumb_w = file.thumb_width;
-						thumb_h = file.thumb_height;
+						thumbW = thumb_width;
+						thumbH = thumb_height;
 					}
-					var fileInfo = '<div class="fileinfo' + (multiFile ? ' limited' : '') + '">\u0424\u0430\u0439\u043B:\n\t\t\t\t<a href="/' + file.src + '" title="' + fullFileName + '" target="_blank">' + fileName + '</a><br>\n\t\t\t\t<em>' + ext + ', ' + prettifySize(file.size) + ', ' + file.metadata.width + 'x' + file.metadata.height + '</em>' + (multiFile ? '' : ' - Нажмите на картинку для увеличения') + '<br>\n\t\t\t\t<a class="edit_ icon" href="/utils/image/edit/' + file.file_id + '/' + num + '">\n\t\t\t\t\t<img title="edit" alt="edit" src="/images/blank.png">\n\t\t\t\t</a>\n\t\t\t</div>';
-					filesHTML += (multiFile ? '' : fileInfo) + '\n\t\t\t<div id="file_' + num + '_' + file.file_id + '" class="file">' + (multiFile ? fileInfo : '') + '\n\t\t\t\t<a href="/' + file.src + '" target="_blank">\n\t\t\t\t\t<img class="thumb" src="/' + thumb + '" width="' + thumb_w + '" height="' + thumb_h + '">\n\t\t\t\t</a>\n\t\t\t</div>';
+					var fileInfo = '<div class="fileinfo' + (multiFile ? ' limited' : '') + '">\u0424\u0430\u0439\u043B:\n\t\t\t\t<a href="/' + src + '" title="' + fullFileName + '" target="_blank">' + fileName + '</a><br>\n\t\t\t\t<em>' + ext + ', ' + prettifySize(size) + ', ' + metadata.width + 'x' + metadata.height + '\n\t\t\t\t</em>' + (multiFile ? '' : ' - Нажмите на картинку для увеличения') + '<br>\n\t\t\t\t<a class="edit_ icon" href="/utils/image/edit/' + file_id + '/' + num + '">\n\t\t\t\t\t<img title="edit" alt="edit" src="/images/blank.png">\n\t\t\t\t</a>\n\t\t\t</div>';
+					filesHTML += (multiFile ? '' : fileInfo) + '\n\t\t\t<div id="file_' + num + '_' + file_id + '" class="file">' + (multiFile ? fileInfo : '') + '\n\t\t\t\t<a href="/' + src + '" target="_blank">\n\t\t\t\t\t<img class="thumb" src="/' + th + '" width="' + thumbW + '" height="' + thumbH + '">\n\t\t\t\t</a>\n\t\t\t</div>';
 				}
 
 				var date = data.date.replace(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/, function (_, y, mo, d, h, m, s) {
 					var dt = new Date(y, +mo - 1, d, h, m, s);
 					return pad2(dt.getDate()) + ' ' + Lng.fullMonth[1][dt.getMonth()] + ' ' + dt.getFullYear() + ' (' + Lng.week[1][dt.getDay()] + ') ' + pad2(dt.getHours()) + ':' + pad2(dt.getMinutes());
 				});
-
 				var isOp = i === -1;
-				return (isOp ? '<div id="post_' + num + '" class="oppost post">' : '<table id="post_' + num + '" class="replypost post"><tbody><tr>\n\t\t\t<td class="doubledash">&gt;&gt;</td>\n\t\t\t<td class="reply" id="reply' + num + '">') + '\n\t\t\t\t<a name="i' + num + '"></a>\n\t\t\t\t<label>\n\t\t\t\t\t<input name="' + num + '" value="' + data.thread_id + '" class="delete_checkbox" id="delbox_' + num + '" type="checkbox">\n\t\t\t\t\t' + (data.subject ? '<span class="replytitle">' + data.subject + '</span>' : '') + '\n\t\t\t\t\t<span class="postername">' + (data.name || 'Анонимус') + '</span> ' + date + '\n\t\t\t\t</label>\n\t\t\t\t<span class="reflink">\n\t\t\t\t\t<a href="/' + brd + '/res/' + data.thread_id + '.xhtml#i' + num + '"> No.' + num + '</a>\n\t\t\t\t</span><br>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + (multiFile ? '<div style="clear: both;"></div>' : '') + '\n\t\t\t\t<div class="postbody"> ' + data.message_html + '</div>\n\t\t\t' + (isOp ? '</div>' : '</td></tr></tbody></table>');
-			}
-		}, {
-			key: 'getPNum',
-			value: function getPNum(i) {
-				return this._posts[i + 1].display_id;
+				return (isOp ? '<div id="post_' + num + '" class="oppost post">' : '<table id="post_' + num + '" class="replypost post"><tbody><tr>\n\t\t\t<td class="doubledash">&gt;&gt;</td>\n\t\t\t<td class="reply" id="reply' + num + '">') + '\n\t\t\t\t<a name="i' + num + '"></a>\n\t\t\t\t<label>\n\t\t\t\t\t<input name="' + num + '" value="' + data.thread_id + '" ' + ('class="delete_checkbox" id="delbox_' + num + '" type="checkbox">\n\t\t\t\t\t' + (data.subject ? '<span class="replytitle">' + data.subject + '</span>' : '') + '\n\t\t\t\t\t<span class="postername">' + (data.name || 'Анонимус') + '</span> ' + date + '\n\t\t\t\t</label>\n\t\t\t\t<span class="reflink">\n\t\t\t\t\t<a href="/' + brd + '/res/' + data.thread_id + '.xhtml#i' + num + '"> No.' + num + '</a>\n\t\t\t\t</span><br>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + (multiFile ? '<div style="clear: both;"></div>' : '') + '\n\t\t\t\t<div class="postbody"> ' + data.message_html + '</div>\n\t\t\t' + (isOp ? '</div>' : '</td></tr></tbody></table>'));
 			}
 		}, {
 			key: 'bannedPostsData',
 			value: regeneratorRuntime.mark(function bannedPostsData() {
-				return regeneratorRuntime.wrap(function bannedPostsData$(_context21) {
+				return regeneratorRuntime.wrap(function bannedPostsData$(_context20) {
 					while (1) {
-						switch (_context21.prev = _context21.next) {
+						switch (_context20.prev = _context20.next) {
 							case 0:
 							case 'end':
-								return _context21.stop();
+								return _context20.stop();
 						}
 					}
 				}, bannedPostsData, this);
@@ -15893,6 +16871,11 @@ true, true],
 				return $add(aib.fixHTML(this._getPostMsg(this._posts[0])));
 			}
 		}, {
+			key: 'getPNum',
+			value: function getPNum(i) {
+				return this._posts[i + 1].num;
+			}
+		}, {
 			key: 'getPostEl',
 			value: function getPostEl(i) {
 				return $add(aib.fixHTML(this.getPostHTML(i))).firstElementChild;
@@ -15902,122 +16885,123 @@ true, true],
 			value: function getPostHTML(i) {
 				var data = this._posts[i + 1];
 				var num = data.num;
-				var brd = this._brd;
 
+				var brd = this._brd;
 				var _switch = function _switch(val, obj) {
 					return val in obj ? obj[val] : obj['@@default'];
 				};
 
 				var filesHTML = '';
 				if (data.files && data.files.length !== 0) {
-					filesHTML = '<div class="images ' + (data.files.length === 1 ? 'images-single' : 'images-multi') + '">';
-					for (var _iterator27 = data.files, _isArray27 = Array.isArray(_iterator27), _i37 = 0, _iterator27 = _isArray27 ? _iterator27 : _iterator27[Symbol.iterator]();;) {
-						var _ref49;
+					filesHTML = '<div class="images images-' + (data.files.length === 1 ? 'single' : 'multi') + '">';
+					for (var _iterator28 = data.files, _isArray28 = Array.isArray(_iterator28), _i39 = 0, _iterator28 = _isArray28 ? _iterator28 : _iterator28[Symbol.iterator]();;) {
+						var _ref85;
 
-						if (_isArray27) {
-							if (_i37 >= _iterator27.length) break;
-							_ref49 = _iterator27[_i37++];
+						if (_isArray28) {
+							if (_i39 >= _iterator28.length) break;
+							_ref85 = _iterator28[_i39++];
 						} else {
-							_i37 = _iterator27.next();
-							if (_i37.done) break;
-							_ref49 = _i37.value;
+							_i39 = _iterator28.next();
+							if (_i39.done) break;
+							_ref85 = _i39.value;
 						}
 
-						var file = _ref49;
+						var file = _ref85;
 
 						var imgId = num + '-' + file.md5;
-						var fullName = file.fullname || file.name;
-						var dispName = file.displayname || file.name;
-						var isWebm = fullName.substr(-5) === '.webm';
-						filesHTML += '<figure class="image">\n\t\t\t\t\t<figcaption class="file-attr">\n\t\t\t\t\t\t<a id="title-' + imgId + '" class="desktop" target="_blank" href="' + file.path + '"' + (dispName === fullName ? '' : ' title="' + fullName + '"') + '>' + dispName + '</a>\n\t\t\t\t\t\t<span class="filesize">(' + file.size + '\u041A\u0431, ' + file.width + 'x' + file.height + (isWebm ? ', ' + file.duration : '') + ')</span>\n\t\t\t\t\t</figcaption>\n\t\t\t\t\t<div id="exlink-' + imgId + '" class="image-link">\n\t\t\t\t\t\t<a href="' + file.path + '">\n\t\t\t\t\t\t\t<img src="' + file.thumbnail + '" width="' + file.tn_width + '" height="' + file.tn_height + '" alt="' + file.size + '" class="img preview' + (isWebm ? ' webm-file' : '') + '">\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t</figure>';
+						var _file$fullname = file.fullname,
+						    fullname = _file$fullname === undefined ? file.name : _file$fullname,
+						    _file$displayname = file.displayname,
+						    dispName = _file$displayname === undefined ? file.name : _file$displayname;
+
+						var isWebm = fullname.substr(-5) === '.webm';
+						filesHTML += '<figure class="image">\n\t\t\t\t\t<figcaption class="file-attr">\n\t\t\t\t\t\t<a id="title-' + imgId + '" class="desktop" target="_blank" href="' + file.path + '"' + ((dispName === fullname ? '' : ' title="' + fullname + '"') + '>' + dispName + '</a>\n\t\t\t\t\t\t<span class="filesize">(' + file.size + '\u041A\u0431, ' + file.width + 'x' + file.height) + ((isWebm ? ', ' + file.duration : '') + ')</span>\n\t\t\t\t\t</figcaption>\n\t\t\t\t\t<div id="exlink-' + imgId + '" class="image-link">\n\t\t\t\t\t\t<a href="' + file.path + '">\n\t\t\t\t\t\t\t<img class="img preview' + (isWebm ? ' webm-file' : '') + '" src="') + (file.thumbnail + '" alt="' + file.size + '" width="') + (file.tn_width + '" height="' + file.tn_height + '">\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t</figure>');
 					}
 					filesHTML += '</div>';
 				} else if (data.video) {
-					filesHTML = '<div class="images">\n\t\t\t\t<div style="float: left; margin: 5px; margin-right:10px">\n\t\t\t\t\t' + post.video + '\n\t\t\t\t</div>\n\t\t\t</div>';
+					filesHTML = '<div class="images">\n\t\t\t\t<div style="float: left; margin: 5px; margin-right:10px">' + data.video + '</div>\n\t\t\t</div>';
 				}
 
-				return '<div id="post-' + num + '" class="post-wrapper">\n\t\t\t<div class="post ' + (i === -1 ? 'oppost' : 'reply') + '" id="post-body-' + num + '" data-num="' + num + '">\n\t\t\t\t<div id="post-details-' + num + '" class="post-details">\n\t\t\t\t\t<input type="checkbox" name="delete" value="' + num + '">\n\t\t\t\t\t' + (!data.subject ? '' : '<span class="post-title">' + (data.subject + (data.tags ? ' /' + data.tags + '/' : '')) + '</span>') + '\n\t\t\t\t\t' + (data.email ? '<a href="' + data.email + '" class="post-email">' + data.name + '</a>' : '<span class="ananimas">' + data.name + '</span>') + '\n\t\t\t\t\t' + (data.icon ? '<span class="post-icon">' + data.icon + '</span>' : '') + '\n\t\t\t\t\t<span class="' + (!data.trip ? '' : _switch(data.trip, {
+				var emailEl = data.email ? '<a href="' + data.email + '" class="post-email">' + data.name + '</a>' : '<span class="ananimas">' + data.name + '</span>';
+				var tripEl = !data.trip ? '' : _switch(data.trip, {
 					'!!%adm%!!': 'adm">## Abu ##',
 					'!!%mod%!!': 'mod">## Mod ##',
 					'!!%Inquisitor%!!': 'inquisitor">## Applejack ##',
 					'!!%coder%!!': 'mod">## Кодер ##',
 					'@@default': 'postertrip">' + data.trip
-				})) + '</span>\n\t\t\t\t\t' + (data.op === 1 ? '<span class="ophui"># OP</span>&nbsp;' : '') + '\n\t\t\t\t\t<span class="posttime-reflink">\n\t\t\t\t\t\t<span class="posttime">' + data.date + '&nbsp;</span>\n\t\t\t\t\t\t<span class="reflink">\n\t\t\t\t\t\t\t<a href="/' + brd + '/res/' + (parseInt(data.parent) || num) + '.html#' + num + '">\u2116</a><a href="/' + brd + '/res/' + (parseInt(data.parent) || num) + '.html#' + num + '" class="postbtn-reply-href" name="' + num + '">' + num + '</a>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</span>\n\t\t\t\t\t' + (this._brd === 'po' ? '<div id="like-div' + num + '" class="like-div">\n\t\t\t\t\t\t\t<span class="like-icon"><i class="fa fa-bolt"></i></span>\n\t\t\t\t\t\t\t<span class="like-caption">\u0414\u0432\u0430\u0447\u0443\u044E</span>\n\t\t\t\t\t\t\t<span id="like-count' + num + '" class="like-count">' + (data.likes || '') + '</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id="dislike-div' + num + '" class="dislike-div">\n\t\t\t\t\t\t\t<span class="dislike-icon"><i class="fa fa-thumbs-down"></i></span>\n\t\t\t\t\t\t\t<span class="dislike-caption">RRRAGE!</span>\n\t\t\t\t\t\t\t<span id="dislike-count' + num + '" class="dislike-count">' + (data.dislikes || '') + '</span>\n\t\t\t\t\t\t</div>' : '') + '\n\t\t\t\t</div>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + this._getPostMsg(data) + '\n\t\t\t</div>\n\t\t</div>';
-			}
-		}, {
-			key: 'getPNum',
-			value: function getPNum(i) {
-				return this._posts[i + 1].num;
+				});
+				var refHref = '/' + brd + '/res/' + (parseInt(data.parent) || num) + '.html#' + num;
+				return '<div id="post-' + num + '" class="post-wrapper">\n\t\t\t<div class="post ' + (i === -1 ? 'oppost' : 'reply') + '" id="post-body-' + num + '" data-num="' + num + '">\n\t\t\t\t<div id="post-details-' + num + '" class="post-details">\n\t\t\t\t\t<input type="checkbox" name="delete" value="' + num + '">\n\t\t\t\t\t' + (!data.subject ? '' : '<span class="post-title">' + (data.subject + (data.tags ? ' /' + data.tags + '/' : '')) + '</span>') + '\n\t\t\t\t\t' + emailEl + '\n\t\t\t\t\t' + (data.icon ? '<span class="post-icon">' + data.icon + '</span>' : '') + '\n\t\t\t\t\t<span class="' + tripEl + '</span>\n\t\t\t\t\t' + (data.op === 1 ? '<span class="ophui"># OP</span>&nbsp;' : '') + '\n\t\t\t\t\t<span class="posttime-reflink">\n\t\t\t\t\t\t<span class="posttime">' + data.date + '&nbsp;</span>\n\t\t\t\t\t\t<span class="reflink">\n\t\t\t\t\t\t\t<a href="' + refHref + '">\u2116</a>' + ('<a href="' + refHref + '" class="postbtn-reply-href" name="' + num + '">' + num + '</a>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</span>\n\t\t\t\t\t' + (this._brd === 'po' ? '<div id="like-div' + num + '" class="like-div">\n\t\t\t\t\t\t\t<span class="like-icon"><i class="fa fa-bolt"></i></span>\n\t\t\t\t\t\t\t<span class="like-caption">\u0414\u0432\u0430\u0447\u0443\u044E</span>\n\t\t\t\t\t\t\t<span id="like-count' + num + '" class="like-count">' + (data.likes || '') + '</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id="dislike-div' + num + '" class="dislike-div">\n\t\t\t\t\t\t\t<span class="dislike-icon"><i class="fa fa-thumbs-down"></i></span>\n\t\t\t\t\t\t\t<span class="dislike-caption">RRRAGE!</span>\n\t\t\t\t\t\t\t<span id="dislike-count' + num + '" class="dislike-count">\n\t\t\t\t\t\t\t\t' + (data.dislikes || '') + '</span>\n\t\t\t\t\t\t</div>' : '') + '\n\t\t\t\t</div>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + this._getPostMsg(data) + '\n\t\t\t</div>\n\t\t</div>');
 			}
 		}, {
 			key: 'bannedPostsData',
 			value: regeneratorRuntime.mark(function bannedPostsData() {
-				var _iterator28, _isArray28, _i38, _ref50, _post4;
+				var _iterator29, _isArray29, _i40, _ref86, _ref87, banned, num;
 
-				return regeneratorRuntime.wrap(function bannedPostsData$(_context22) {
+				return regeneratorRuntime.wrap(function bannedPostsData$(_context21) {
 					while (1) {
-						switch (_context22.prev = _context22.next) {
+						switch (_context21.prev = _context21.next) {
 							case 0:
-								_iterator28 = this._posts, _isArray28 = Array.isArray(_iterator28), _i38 = 0, _iterator28 = _isArray28 ? _iterator28 : _iterator28[Symbol.iterator]();
+								_iterator29 = this._posts, _isArray29 = Array.isArray(_iterator29), _i40 = 0, _iterator29 = _isArray29 ? _iterator29 : _iterator29[Symbol.iterator]();
 
 							case 1:
-								if (!_isArray28) {
-									_context22.next = 7;
+								if (!_isArray29) {
+									_context21.next = 7;
 									break;
 								}
 
-								if (!(_i38 >= _iterator28.length)) {
-									_context22.next = 4;
+								if (!(_i40 >= _iterator29.length)) {
+									_context21.next = 4;
 									break;
 								}
 
-								return _context22.abrupt('break', 23);
+								return _context21.abrupt('break', 23);
 
 							case 4:
-								_ref50 = _iterator28[_i38++];
-								_context22.next = 11;
+								_ref86 = _iterator29[_i40++];
+								_context21.next = 11;
 								break;
 
 							case 7:
-								_i38 = _iterator28.next();
+								_i40 = _iterator29.next();
 
-								if (!_i38.done) {
-									_context22.next = 10;
+								if (!_i40.done) {
+									_context21.next = 10;
 									break;
 								}
 
-								return _context22.abrupt('break', 23);
+								return _context21.abrupt('break', 23);
 
 							case 10:
-								_ref50 = _i38.value;
+								_ref86 = _i40.value;
 
 							case 11:
-								_post4 = _ref50;
-								_context22.t0 = _post4.banned;
-								_context22.next = _context22.t0 === 1 ? 15 : _context22.t0 === 2 ? 18 : 21;
+								_ref87 = _ref86, banned = _ref87.banned, num = _ref87.num;
+								_context21.t0 = banned;
+								_context21.next = _context21.t0 === 1 ? 15 : _context21.t0 === 2 ? 18 : 21;
 								break;
 
 							case 15:
-								_context22.next = 17;
-								return [1, _post4.num, $add('<span class="pomyanem">(Автор этого поста был забанен. Помянем.)</span>')];
+								_context21.next = 17;
+								return [1, num, $add('<span class="pomyanem">' + '(Автор этого поста был забанен. Помянем.)</span>')];
 
 							case 17:
-								return _context22.abrupt('break', 21);
+								return _context21.abrupt('break', 21);
 
 							case 18:
-								_context22.next = 20;
-								return [2, _post4.num, $add('<span class="pomyanem">(Автор этого поста был предупрежден.)</span>')];
+								_context21.next = 20;
+								return [2, num, $add('<span class="pomyanem">' + '(Автор этого поста был предупрежден.)</span>')];
 
 							case 20:
-								return _context22.abrupt('break', 21);
+								return _context21.abrupt('break', 21);
 
 							case 21:
-								_context22.next = 1;
+								_context21.next = 1;
 								break;
 
 							case 23:
 							case 'end':
-								return _context22.stop();
+								return _context21.stop();
 						}
 					}
 				}, bannedPostsData, this);
@@ -16029,7 +17013,7 @@ true, true],
 					return val in obj ? obj[val] : obj['@@default'];
 				};
 				var comment = data.comment.replace(/<script /ig, '<!--<textarea ').replace(/<\/script>/ig, '</textarea>-->');
-				return '<blockquote id="m' + data.num + '" class="post-message">\n\t\t\t' + comment + '\n\t\t\t' + _switch(data.banned, {
+				return '<blockquote id="m' + data.num + '" class="post-message">' + comment + _switch(data.banned, {
 					1: '<br><span class="pomyanem">(Автор этого поста был забанен. Помянем.)</span>',
 					2: '<br><span class="pomyanem">(Автор этого поста был предупрежден.)</span>',
 					'@@default': ''
@@ -16046,7 +17030,7 @@ true, true],
 	}();
 
 	var _0chanPostsBuilder = function () {
-		function _0chanPostsBuilder(json, brd) {
+		function _0chanPostsBuilder(json) {
 			_classCallCheck(this, _0chanPostsBuilder);
 
 			if (json.error) {
@@ -16064,6 +17048,11 @@ true, true],
 				return $add(aib.fixHTML('<div class="post-body-message"><div> ' + this._posts[0].message + '</div></div>'));
 			}
 		}, {
+			key: 'getPNum',
+			value: function getPNum(i) {
+				return +this._posts[i + 1].id; 
+			}
+		}, {
 			key: 'getPostEl',
 			value: function getPostEl(i) {
 				return $add(aib.fixHTML(this.getPostHTML(i)));
@@ -16071,46 +17060,42 @@ true, true],
 		}, {
 			key: 'getPostHTML',
 			value: function getPostHTML(i) {
-				var data = this._posts[i + 1];
-				var num = data.id;
-				var brd = data.boardDir;
-				var parId = data.parentId;
-				var isOp = i === -1;
 				var filesHTML = '';
+				var isOp = i === -1;
+				var data = this._posts[i + 1];
+				var num = data.id,
+				    brd = data.boardDir,
+				    parId = data.parentId;
+
 				if (data.attachments.length) {
 					filesHTML += '<div class="post-attachments">';
-					for (var _iterator29 = data.attachments, _isArray29 = Array.isArray(_iterator29), _i39 = 0, _iterator29 = _isArray29 ? _iterator29 : _iterator29[Symbol.iterator]();;) {
-						var _ref51;
+					for (var _iterator30 = data.attachments, _isArray30 = Array.isArray(_iterator30), _i41 = 0, _iterator30 = _isArray30 ? _iterator30 : _iterator30[Symbol.iterator]();;) {
+						var _ref88;
 
-						if (_isArray29) {
-							if (_i39 >= _iterator29.length) break;
-							_ref51 = _iterator29[_i39++];
+						if (_isArray30) {
+							if (_i41 >= _iterator30.length) break;
+							_ref88 = _iterator30[_i41++];
 						} else {
-							_i39 = _iterator29.next();
-							if (_i39.done) break;
-							_ref51 = _i39.value;
+							_i41 = _iterator30.next();
+							if (_i41.done) break;
+							_ref88 = _i41.value;
 						}
 
-						var file = _ref51;
+						var _ref89 = _ref88,
+						    images = _ref89.images;
+						var orig = images.original,
+						    thumb200 = images.thumb_200px,
+						    thumb400 = images.thumb_400px;
 
-						var id = file.id;
-						var img = file.images;
-						var orig = img.original;
-						var thumb200 = img.thumb_200px;
-						var thumb400 = img.thumb_400px;
-						filesHTML += '<figure class="post-img"><span>\n\t\t\t\t\t<figcaption>\n\t\t\t\t\t\t<span class="pull-left">' + orig.width + 'x' + orig.height + ', ' + orig.size_kb + '\u041A\u0431</span>\n\t\t\t\t\t</figcaption>\n\t\t\t\t\t<a href="' + orig.url + '" target="_blank"><img src="' + thumb200.url + '" srcset="' + thumb400.url + ' 2x" class="post-img-thumbnail" style="width: ' + thumb200.width + 'px; height: ' + thumb200.height + 'px;"></a>\n\t\t\t\t</span></figure>';
+						filesHTML += '<figure class="post-img"><span>\n\t\t\t\t\t<figcaption>\n\t\t\t\t\t\t<span class="pull-left">' + orig.width + 'x' + orig.height + ', ' + orig.size_kb + '\u041A\u0431</span>\n\t\t\t\t\t</figcaption>\n\t\t\t\t\t<a href="' + orig.url + '" target="_blank"><img src="' + thumb200.url + '" srcset="' + (thumb400.url + ' 2x" class="post-img-thumbnail" style="width: ') + (thumb200.width + 'px; height: ' + thumb200.height + 'px;"></a>\n\t\t\t\t</span></figure>');
 					}
 					filesHTML += '</div>';
 				}
 
 				var d = new Date(data.date * 1e3);
 				var date = d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
-				return '<div><div class="block post' + (isOp ? ' post-op' : '') + '">\n\t\t\t<div class="post-header">\n\t\t\t\t<a name="' + num + '"></a>\n\t\t\t\t<span class="post-id">\n\t\t\t\t\t<a href="/' + brd + '" class="router-link-active">/' + brd + '/</a>\n\t\t\t\t\t' + (isOp ? '<span>\u2014 ' + this._json.thread.board.name + ' \u2014</span>' : '') + '\n\t\t\t\t\t<a href="/' + brd + '/' + (data.threadId + (isOp ? '' : '#' + num)) + '">#' + num + '</a>\n\t\t\t\t</span>\n\t\t\t\t<span class="pull-right">\n\t\t\t\t\t<span class="post-thread-options"></span>\n\t\t\t\t\t<span class="post-date">' + date + '</span>\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t<div class="post-body' + (data.attachments.length > 1 ? '' : ' post-inline-attachment') + '">\n\t\t\t\t' + filesHTML + '\n\t\t\t\t<div class="post-body-message">\n\t\t\t\t\t' + (parId === this._json.posts[0].id ? '' : '<div class="post-parent"><a data-post="' + parId + '" href="/' + brd + '/' + data.threadId + '#' + parId + '">&gt;&gt;' + parId + '</a></div>') + '\n\t\t\t\t\t<div> ' + (data.messageHtml || '') + '</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class="post-footer"></div>\n\t\t</div></div>';
-			}
-		}, {
-			key: 'getPNum',
-			value: function getPNum(i) {
-				return +this._posts[i + 1].id; 
+				var postParentEl = parId === this._json.posts[0].id ? '' : '<div class="post-parent"><a data-post="' + parId + '" href="/' + brd + '/' + data.threadId + '#' + parId + '">&gt;&gt;' + parId + '</a></div>';
+				return '<div><div class="block post' + (isOp ? ' post-op' : '') + '">\n\t\t\t<div class="post-header">\n\t\t\t\t<a name="' + num + '"></a>\n\t\t\t\t<span class="post-id">\n\t\t\t\t\t<a href="/' + brd + '" class="router-link-active">/' + brd + '/</a>\n\t\t\t\t\t' + (isOp ? '<span>\u2014 ' + this._json.thread.board.name + ' \u2014</span>' : '') + '\n\t\t\t\t\t<a href="/' + brd + '/' + (data.threadId + (isOp ? '' : '#' + num)) + '">#' + num + '</a>\n\t\t\t\t</span>\n\t\t\t\t<span class="pull-right">\n\t\t\t\t\t<span class="post-thread-options"></span>\n\t\t\t\t\t<span class="post-date">' + date + '</span>\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t<div class="post-body' + (data.attachments.length > 1 ? '' : ' post-inline-attachment') + '">\n\t\t\t\t' + filesHTML + '\n\t\t\t\t<div class="post-body-message">\n\t\t\t\t\t' + postParentEl + '\n\t\t\t\t\t<div> ' + (data.messageHtml || '') + '</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class="post-footer"></div>\n\t\t</div></div>';
 			}
 		}]);
 
@@ -16119,113 +17104,6 @@ true, true],
 
 
 	var RefMap = function () {
-		_createClass(RefMap, null, [{
-			key: 'gen',
-			value: function gen(posts, thrURL) {
-				var opNums = DelForm.tNums;
-				for (var _iterator30 = posts, _isArray30 = Array.isArray(_iterator30), _i40 = 0, _iterator30 = _isArray30 ? _iterator30 : _iterator30[Symbol.iterator]();;) {
-					var _ref52;
-
-					if (_isArray30) {
-						if (_i40 >= _iterator30.length) break;
-						_ref52 = _iterator30[_i40++];
-					} else {
-						_i40 = _iterator30.next();
-						if (_i40.done) break;
-						_ref52 = _i40.value;
-					}
-
-					var _ref53 = _ref52,
-					    _ref54 = _slicedToArray(_ref53, 2),
-					    pNum = _ref54[0],
-					    _post5 = _ref54[1];
-
-					var links = $Q('a', _post5.msg);
-					for (var lNum, i = 0, len = links.length; i < len; ++i) {
-						var link = links[i];
-						var tc = link.textContent;
-						if (tc[0] !== '>' || tc[1] !== '>' || !(lNum = parseInt(tc.substr(2), 10))) {
-							continue;
-						}
-						if (MyPosts.has(lNum)) {
-							link.classList.add('de-ref-my');
-							_post5.el.classList.add('de-reply-post');
-						}
-						if (!posts.has(lNum)) {
-							continue;
-						}
-						var ref = posts.get(lNum).ref;
-						if (ref._inited) {
-							ref.add(_post5, pNum);
-						} else {
-							ref._set.add(pNum);
-							ref.hasMap = true;
-						}
-						if (!aib.hasOPNum && opNums.has(lNum)) {
-							link.classList.add('de-ref-op');
-						}
-						if (thrURL) {
-							var url = link.getAttribute('href');
-							if (url[0] === '#') {
-								link.setAttribute('href', thrURL + url);
-							}
-						}
-					}
-				}
-			}
-		}, {
-			key: 'init',
-			value: function init(form) {
-				var post = form.firstThr && form.firstThr.op;
-				if (post && Cfg.linksNavig) {
-					this.gen(pByNum, '');
-					var strNums = Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
-					for (; post; post = post.next) {
-						if (post.ref.hasMap) {
-							post.ref.init('', strNums);
-						}
-					}
-				}
-			}
-		}, {
-			key: 'upd',
-			value: function upd(post, isAdd) {
-				var pNum = post.num;
-				var strNums = isAdd && Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
-				var links = $Q('a', post.msg);
-				for (var lNum, i = 0, len = links.length; i < len; ++i) {
-					var link = links[i];
-					var tc = link.textContent;
-					if (tc[0] !== '>' || tc[1] !== '>' || !(lNum = parseInt(tc.substr(2), 10))) {
-						continue;
-					}
-					if (isAdd && MyPosts.has(lNum)) {
-						link.classList.add('de-ref-my');
-						post.el.classList.add('de-reply-post');
-						updater.refToYou();
-					}
-					if (!pByNum.has(lNum)) {
-						continue;
-					}
-					var lPost = pByNum.get(lNum);
-					if (!aib.t) {
-						link.href = '#' + (aib.fch ? 'p' : '') + lNum;
-					}
-					if (isAdd) {
-						if (strNums && strNums.has(lNum)) {
-							link.classList.add('de-link-hid');
-						}
-						if (!aib.hasOPNum && DelForm.tNums.has(lNum)) {
-							link.classList.add('de-ref-op');
-						}
-						lPost.ref.add(post, pNum, strNums && strNums.has(pNum));
-					} else {
-						lPost.ref.remove(pNum);
-					}
-				}
-			}
-		}]);
-
 		function RefMap(post) {
 			_classCallCheck(this, RefMap);
 
@@ -16273,28 +17151,28 @@ true, true],
 					return;
 				}
 				this._hidden = true;
-				for (var _iterator31 = this._set, _isArray31 = Array.isArray(_iterator31), _i41 = 0, _iterator31 = _isArray31 ? _iterator31 : _iterator31[Symbol.iterator]();;) {
-					var _ref55;
+				for (var _iterator31 = this._set, _isArray31 = Array.isArray(_iterator31), _i42 = 0, _iterator31 = _isArray31 ? _iterator31 : _iterator31[Symbol.iterator]();;) {
+					var _ref90;
 
 					if (_isArray31) {
-						if (_i41 >= _iterator31.length) break;
-						_ref55 = _iterator31[_i41++];
+						if (_i42 >= _iterator31.length) break;
+						_ref90 = _iterator31[_i42++];
 					} else {
-						_i41 = _iterator31.next();
-						if (_i41.done) break;
-						_ref55 = _i41.value;
+						_i42 = _iterator31.next();
+						if (_i42.done) break;
+						_ref90 = _i42.value;
 					}
 
-					var num = _ref55;
+					var num = _ref90;
 
-					var pst = pByNum.get(num);
-					if (pst && !pst.hidden) {
+					var post = pByNum.get(num);
+					if (post && !post.hidden) {
 						if (isForced) {
-							pst.setUserVisib(true, true, 'reference to >>' + this._post.num);
-							pst.ref.hide(true);
-						} else if (!pst.userToggled) {
-							pst.setVisib(true, 'reference to >>' + this._post.num);
-							pst.ref.hide();
+							post.setUserVisib(true, true, 'reference to >>' + this._post.num);
+							post.ref.hide(true);
+						} else if (!post.userToggled) {
+							post.setVisib(true, 'reference to >>' + this._post.num);
+							post.ref.hide();
 						}
 					}
 				}
@@ -16303,19 +17181,19 @@ true, true],
 			key: 'init',
 			value: function init(tUrl, strNums) {
 				var html = '';
-				for (var _iterator32 = this._set, _isArray32 = Array.isArray(_iterator32), _i42 = 0, _iterator32 = _isArray32 ? _iterator32 : _iterator32[Symbol.iterator]();;) {
-					var _ref56;
+				for (var _iterator32 = this._set, _isArray32 = Array.isArray(_iterator32), _i43 = 0, _iterator32 = _isArray32 ? _iterator32 : _iterator32[Symbol.iterator]();;) {
+					var _ref91;
 
 					if (_isArray32) {
-						if (_i42 >= _iterator32.length) break;
-						_ref56 = _iterator32[_i42++];
+						if (_i43 >= _iterator32.length) break;
+						_ref91 = _iterator32[_i43++];
 					} else {
-						_i42 = _iterator32.next();
-						if (_i42.done) break;
-						_ref56 = _i42.value;
+						_i43 = _iterator32.next();
+						if (_i43.done) break;
+						_ref91 = _i43.value;
 					}
 
-					var num = _ref56;
+					var num = _ref91;
 
 					html += this._getHTML(num, tUrl, strNums && strNums.has(num));
 				}
@@ -16332,7 +17210,7 @@ true, true],
 		}, {
 			key: 'remove',
 			value: function remove(num) {
-				this._set['delete'](num);
+				this._set.delete(num);
 				if (this._set.size === 0) {
 					this.removeMap();
 				} else {
@@ -16360,28 +17238,28 @@ true, true],
 					return;
 				}
 				this._hidden = false;
-				for (var _iterator33 = this._set, _isArray33 = Array.isArray(_iterator33), _i43 = 0, _iterator33 = _isArray33 ? _iterator33 : _iterator33[Symbol.iterator]();;) {
-					var _ref57;
+				for (var _iterator33 = this._set, _isArray33 = Array.isArray(_iterator33), _i44 = 0, _iterator33 = _isArray33 ? _iterator33 : _iterator33[Symbol.iterator]();;) {
+					var _ref92;
 
 					if (_isArray33) {
-						if (_i43 >= _iterator33.length) break;
-						_ref57 = _iterator33[_i43++];
+						if (_i44 >= _iterator33.length) break;
+						_ref92 = _iterator33[_i44++];
 					} else {
-						_i43 = _iterator33.next();
-						if (_i43.done) break;
-						_ref57 = _i43.value;
+						_i44 = _iterator33.next();
+						if (_i44.done) break;
+						_ref92 = _i44.value;
 					}
 
-					var num = _ref57;
+					var num = _ref92;
 
-					var pst = pByNum.get(num);
-					if (pst && pst.hidden && !pst.spellHidden) {
+					var post = pByNum.get(num);
+					if (post && post.hidden && !post.spellHidden) {
 						if (isForced) {
-							pst.setUserVisib(false);
-							pst.ref.unhide(true);
-						} else if (!pst.userToggled) {
-							pst.setVisib(false);
-							pst.ref.unhide();
+							post.setUserVisib(false);
+							post.ref.unhide(true);
+						} else if (!post.userToggled) {
+							post.setVisib(false);
+							post.ref.unhide();
 						}
 					}
 				}
@@ -16389,9 +17267,10 @@ true, true],
 		}, {
 			key: '_createEl',
 			value: function _createEl(innerHTML, isHidden) {
-				var el,
-				    msg = this._post.msg,
-				    html = '<div class="de-refmap' + (isHidden ? ' de-post-hiddencontent' : '') + '">' + innerHTML + '</div>';
+				var el = void 0;
+				var msg = this._post.msg;
+
+				var html = '<div class="de-refmap' + (isHidden ? ' de-post-hiddencontent' : '') + '">' + innerHTML + '</div>';
 				if (aib.dobr && (el = msg.nextElementSibling)) {
 					el.insertAdjacentHTML('beforeend', html);
 				} else {
@@ -16411,8 +17290,117 @@ true, true],
 					this._createEl('', this._post.hidden);
 					value = $q('.de-refmap', this._post.el);
 				}
-				Object.defineProperty(this, '_el', { configurable: true, value: value });
+				Object.defineProperty(this, '_el', { value: value, configurable: true });
 				return value;
+			}
+		}], [{
+			key: 'gen',
+			value: function gen(posts, thrURL) {
+				var tNums = DelForm.tNums;
+
+				for (var _iterator34 = posts, _isArray34 = Array.isArray(_iterator34), _i45 = 0, _iterator34 = _isArray34 ? _iterator34 : _iterator34[Symbol.iterator]();;) {
+					var _ref93;
+
+					if (_isArray34) {
+						if (_i45 >= _iterator34.length) break;
+						_ref93 = _iterator34[_i45++];
+					} else {
+						_i45 = _iterator34.next();
+						if (_i45.done) break;
+						_ref93 = _i45.value;
+					}
+
+					var _ref94 = _ref93,
+					    _ref95 = _slicedToArray(_ref94, 2),
+					    pNum = _ref95[0],
+					    post = _ref95[1];
+
+					var links = $Q('a', post.msg);
+					for (var lNum, i = 0, len = links.length; i < len; ++i) {
+						var link = links[i];
+						var tc = link.textContent;
+						if (tc[0] !== '>' || tc[1] !== '>' || !(lNum = parseInt(tc.substr(2), 10))) {
+							continue;
+						}
+						if (MyPosts.has(lNum)) {
+							link.classList.add('de-ref-my');
+							post.el.classList.add('de-reply-post');
+						}
+						if (!posts.has(lNum)) {
+							continue;
+						}
+
+						var _posts$get = posts.get(lNum),
+						    ref = _posts$get.ref;
+
+						if (ref._inited) {
+							ref.add(post, pNum);
+						} else {
+							ref._set.add(pNum);
+							ref.hasMap = true;
+						}
+						if (!aib.hasOPNum && tNums.has(lNum)) {
+							link.classList.add('de-ref-op');
+						}
+						if (thrURL) {
+							var _url4 = link.getAttribute('href');
+							if (_url4[0] === '#') {
+								link.setAttribute('href', thrURL + _url4);
+							}
+						}
+					}
+				}
+			}
+		}, {
+			key: 'init',
+			value: function init(form) {
+				var post = form.firstThr && form.firstThr.op;
+				if (post && Cfg.linksNavig) {
+					this.gen(pByNum, '');
+					var strNums = Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
+					for (; post; post = post.next) {
+						if (post.ref.hasMap) {
+							post.ref.init('', strNums);
+						}
+					}
+				}
+			}
+		}, {
+			key: 'upd',
+			value: function upd(post, isAdd) {
+				var pNum = post.num;
+				var strNums = isAdd && Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
+				var links = $Q('a', post.msg);
+				for (var lNum, i = 0, len = links.length; i < len; ++i) {
+					var link = links[i];
+					var tc = link.textContent;
+					if (tc[0] !== '>' || tc[1] !== '>' || !(lNum = parseInt(tc.substr(2), 10))) {
+						continue;
+					}
+					if (isAdd && MyPosts.has(lNum)) {
+						link.classList.add('de-ref-my');
+						post.el.classList.add('de-reply-post');
+						updater.refToYou();
+					}
+					if (!pByNum.has(lNum)) {
+						continue;
+					}
+					var lPost = pByNum.get(lNum);
+					if (!aib.t) {
+						link.href = '#' + (aib.fch ? 'p' : '') + lNum;
+					}
+					if (!isAdd) {
+						lPost.ref.remove(pNum);
+						return;
+					}
+					if (strNums && strNums.has(lNum)) {
+						link.classList.add('de-link-hid');
+					}
+					if (!aib.hasOPNum && DelForm.tNums.has(lNum)) {
+						link.classList.add('de-ref-op');
+					}
+					lPost.ref.add(post, pNum, strNums && strNums.has(pNum));
+				}
 			}
 		}]);
 
@@ -16420,10 +17408,11 @@ true, true],
 	}();
 
 
+
 	var Thread = function () {
 		_createClass(Thread, null, [{
 			key: 'removeSavedData',
-			value: function removeSavedData(brd, num) {
+			value: function removeSavedData() {
 			}
 		}, {
 			key: 'first',
@@ -16438,7 +17427,7 @@ true, true],
 		}]);
 
 		function Thread(el, num, prev, form) {
-			var _this51 = this;
+			var _this58 = this;
 
 			_classCallCheck(this, Thread);
 
@@ -16482,16 +17471,16 @@ true, true],
 				var updBtn = this.btns.firstChild;
 				updBtn.onclick = function (e) {
 					$pd(e);
-					_this51.loadPosts('new');
+					_this58.loadPosts('new');
 				};
 				if (Cfg.hideReplies) {
 					var repBtn = $bEnd(this.btns, ' <span class="de-replies-btn">[<a class="de-abtn" href="#"></a>]</span>');
 					repBtn.onclick = function (e) {
 						$pd(e);
-						var nextCoord = !_this51.next || _this51.last.omitted ? null : _this51.next.top;
-						_this51._toggleReplies(repBtn, updBtn);
+						var nextCoord = !_this58.next || _this58.last.omitted ? null : _this58.next.top;
+						_this58._toggleReplies(repBtn, updBtn);
 						if (nextCoord) {
-							scrollTo(window.pageXOffset, windows.pageYOffset + _this51.next.top - nextCoord);
+							scrollTo(window.pageXOffset, window.pageYOffset + _this58.next.top - nextCoord);
 						}
 					};
 					this._toggleReplies(repBtn, updBtn);
@@ -16505,13 +17494,12 @@ true, true],
 			key: 'deletePost',
 			value: function deletePost(post, delAll, removePost) {
 				SpellsRunner.cachedData = null;
-				var count = 0,
-				    idx = post.count;
+				var count = 0;
 				do {
 					if (removePost && this.last === post) {
 						this.last = post.prev;
 					}
-					post['delete'](removePost);
+					post.delete(removePost);
 					post = post.nextNotDeleted;
 					count++;
 				} while (delAll && post);
@@ -16525,7 +17513,7 @@ true, true],
 		}, {
 			key: 'loadPosts',
 			value: function loadPosts(task) {
-				var _this52 = this;
+				var _this59 = this;
 
 				var isSmartScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 				var isInformUser = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -16534,7 +17522,7 @@ true, true],
 					$popup('load-thr', Lng.loading[lang], true);
 				}
 				return ajaxPostsLoad(aib.b, this.thrId, false).then(function (pBuilder) {
-					return _this52._loadFromBuilder(task, isSmartScroll, pBuilder);
+					return _this59._loadFromBuilder(task, isSmartScroll, pBuilder);
 				}, function (e) {
 					return $popup('load-thr', getErrorMessage(e));
 				});
@@ -16543,22 +17531,24 @@ true, true],
 		}, {
 			key: 'loadNewPosts',
 			value: function loadNewPosts() {
-				var _this53 = this;
+				var _this60 = this;
 
 				return ajaxPostsLoad(aib.b, this.thrId, true).then(function (pBuilder) {
-					return pBuilder ? _this53._loadNewFromBuilder(pBuilder) : { newCount: 0, locked: false };
+					return pBuilder ? _this60._loadNewFromBuilder(pBuilder) : { newCount: 0, locked: false };
 				});
 			}
 		}, {
 			key: 'setFavorState',
 			value: function setFavorState(val, type) {
-				var _this54 = this;
+				var _this61 = this;
 
 				this.op.setFavBtn(val);
 				readFavorites().then(function (fav) {
-					var b = aib.b;
-					var h = aib.host;
-					var num = _this54.thrId;
+					var _aib = aib,
+					    b = _aib.b,
+					    h = _aib.host;
+
+					var num = _this61.thrId;
 					if (val) {
 						if (!fav[h]) {
 							fav[h] = {};
@@ -16568,13 +17558,13 @@ true, true],
 						}
 						fav[h][b].url = aib.prot + '//' + aib.host + aib.getPageUrl(b, 0);
 						fav[h][b][num] = {
-							'cnt': _this54.pcount,
-							'new': 0,
-							'you': 0,
-							'txt': _this54.op.title,
-							'url': aib.getThrUrl(b, num),
-							'last': aib.anchor + _this54.last.num,
-							'type': type
+							cnt: _this61.pcount,
+							new: 0,
+							you: 0,
+							txt: _this61.op.title,
+							url: aib.getThrUrl(b, num),
+							last: aib.anchor + _this61.last.num,
+							type: type
 						};
 					} else {
 						removeFavoriteEntry(fav, h, b, num);
@@ -16602,8 +17592,8 @@ true, true],
 			key: '_updatePost',
 			value: function _updatePost(post, el, maybeVParser, maybeSpells) {
 				SpellsRunner.cachedData = null;
-				pByEl['delete'](post.el);
-				pByNum['delete'](post.num);
+				pByEl.delete(post.el);
+				pByNum.delete(post.num);
 				if (post.hidden) {
 					post.ref.unhide();
 				}
@@ -16627,19 +17617,19 @@ true, true],
 				}
 				if (post.ref._set.size) {
 					var html = '';
-					for (var _iterator34 = post.ref._set, _isArray34 = Array.isArray(_iterator34), _i44 = 0, _iterator34 = _isArray34 ? _iterator34 : _iterator34[Symbol.iterator]();;) {
-						var _ref58;
+					for (var _iterator35 = post.ref._set, _isArray35 = Array.isArray(_iterator35), _i46 = 0, _iterator35 = _isArray35 ? _iterator35 : _iterator35[Symbol.iterator]();;) {
+						var _ref96;
 
-						if (_isArray34) {
-							if (_i44 >= _iterator34.length) break;
-							_ref58 = _iterator34[_i44++];
+						if (_isArray35) {
+							if (_i46 >= _iterator35.length) break;
+							_ref96 = _iterator35[_i46++];
 						} else {
-							_i44 = _iterator34.next();
-							if (_i44.done) break;
-							_ref58 = _i44.value;
+							_i46 = _iterator35.next();
+							if (_i46.done) break;
+							_ref96 = _i46.value;
 						}
 
-						var num = _ref58;
+						var num = _ref96;
 
 						newp.ref._set.add(num);
 						html += newp.ref._getHTML(num, '', Cfg.strikeHidd && Post.hiddenNums.has(num));
@@ -16678,7 +17668,7 @@ true, true],
 				}
 				if (this.userTouched.has(num)) {
 					post.setUserVisib(this.userTouched.get(num), false);
-					this.userTouched['delete'](num);
+					this.userTouched.delete(num);
 				}
 				if (maybeVParser.value) {
 					maybeVParser.value.parse(post);
@@ -16697,29 +17687,29 @@ true, true],
 				if (!aib.qBan) {
 					return;
 				}
-				for (var _iterator35 = pBuilder.bannedPostsData(), _isArray35 = Array.isArray(_iterator35), _i45 = 0, _iterator35 = _isArray35 ? _iterator35 : _iterator35[Symbol.iterator]();;) {
-					var _ref59;
+				for (var _iterator36 = pBuilder.bannedPostsData(), _isArray36 = Array.isArray(_iterator36), _i47 = 0, _iterator36 = _isArray36 ? _iterator36 : _iterator36[Symbol.iterator]();;) {
+					var _ref97;
 
-					if (_isArray35) {
-						if (_i45 >= _iterator35.length) break;
-						_ref59 = _iterator35[_i45++];
+					if (_isArray36) {
+						if (_i47 >= _iterator36.length) break;
+						_ref97 = _iterator36[_i47++];
 					} else {
-						_i45 = _iterator35.next();
-						if (_i45.done) break;
-						_ref59 = _i45.value;
+						_i47 = _iterator36.next();
+						if (_i47.done) break;
+						_ref97 = _i47.value;
 					}
 
-					var _ref60 = _ref59,
-					    _ref61 = _slicedToArray(_ref60, 3),
-					    banId = _ref61[0],
-					    bNum = _ref61[1],
-					    bEl = _ref61[2];
+					var _ref98 = _ref97,
+					    _ref99 = _slicedToArray(_ref98, 3),
+					    banId = _ref99[0],
+					    bNum = _ref99[1],
+					    bEl = _ref99[2];
 
-					var _post6 = bNum ? pByNum.get(bNum) : this.op;
-					if (_post6 && _post6.banned !== banId) {
-						$del($q(aib.qBan, _post6.el));
-						_post6.msg.appendChild(bEl);
-						_post6.banned = banId;
+					var post = bNum ? pByNum.get(bNum) : this.op;
+					if (post && post.banned !== banId) {
+						$del($q(aib.qBan, post.el));
+						post.msg.appendChild(bEl);
+						post.banned = banId;
 					}
 				}
 			}
@@ -16756,18 +17746,18 @@ true, true],
 				    newCount = end - begin,
 				    newVisCount = newCount,
 				    nums = [];
-				if (aib.jsonBuilder && nav.hasTemplate) {
-					var temp = document.createElement('template');
+				if (aib.JsonBuilder && nav.hasTemplate) {
 					var html = [];
 					for (var i = begin; i < end; ++i) {
 						html.push(pBuilder.getPostHTML(i));
 						nums.push(pBuilder.getPNum(i));
 					}
+					var temp = document.createElement('template');
 					temp.innerHTML = aib.fixHTML(html.join(''));
 					fragm = temp.content;
 					var _posts = $Q(aib.qRPost, fragm);
-					for (var _i46 = 0, _len9 = _posts.length; _i46 < _len9; ++_i46) {
-						last = this._addPost(fragm, _posts[_i46], begin + _i46 + 1, last, maybeVParser);
+					for (var _i48 = 0, _len9 = _posts.length; _i48 < _len9; ++_i48) {
+						last = this._addPost(fragm, _posts[_i48], begin + _i48 + 1, last, maybeVParser);
 						newVisCount -= maybeSpells.value.run(last);
 					}
 				} else {
@@ -16785,12 +17775,10 @@ true, true],
 		}, {
 			key: '_loadFromBuilder',
 			value: function _loadFromBuilder(last, smartScroll, pBuilder) {
-				var _this55 = this;
+				var _this62 = this;
 
-				var nextCoord,
-				    maybeSpells = new Maybe(SpellsRunner),
-				    op = this.op,
-				    thrEl = this.el;
+				var nextCoord = void 0;
+				var maybeSpells = new Maybe(SpellsRunner);
 				if (smartScroll) {
 					if (this.next) {
 						nextCoord = this.next.top;
@@ -16799,6 +17787,9 @@ true, true],
 					}
 				}
 				pr.closeReply();
+				var op = this.op,
+				    thrEl = this.el;
+
 				$del($q(aib.qOmitted + ', .de-omitted', thrEl));
 				if (this.loadCount === 0) {
 					if (op.trunc) {
@@ -16842,14 +17833,14 @@ true, true],
 						post = post.next;
 					}
 				} else {
-					var nonExisted = pBuilder.length - existed,
-					    maybeVParser = new Maybe(Cfg.addYouTube ? VideosParser : null),
-					    iprv = this._importPosts(op, pBuilder, Math.max(0, nonExisted + existed - needToShow), nonExisted, maybeVParser, maybeSpells);
+					var nonExisted = pBuilder.length - existed;
+					var maybeVParser = new Maybe(Cfg.addYouTube ? VideosParser : null);
 
-					var _iprv = _slicedToArray(iprv, 5),
-					    fragm = _iprv[2],
-					    _last = _iprv[3],
-					    nums = _iprv[4];
+					var _importPosts2 = this._importPosts(op, pBuilder, Math.max(0, nonExisted + existed - needToShow), nonExisted, maybeVParser, maybeSpells),
+					    _importPosts3 = _slicedToArray(_importPosts2, 5),
+					    fragm = _importPosts3[2],
+					    _last = _importPosts3[3],
+					    nums = _importPosts3[4];
 
 					maybeVParser.end();
 					$after(op.wrap, fragm);
@@ -16884,7 +17875,7 @@ true, true],
 				if (!$q('.de-thread-collapse', btn)) {
 					$bEnd(btn, '<span class="de-thread-collapse"> [<a class="de-abtn" href="' + aib.getThrUrl(aib.b, this.thrId) + '"></a>]</span>').onclick = function (e) {
 						$pd(e);
-						_this55.loadPosts(visPosts, true);
+						_this62.loadPosts(visPosts, true);
 					};
 				}
 				if (needToShow > visPosts) {
@@ -16921,8 +17912,8 @@ true, true],
 				if (lastOffset !== null) {
 					scrollTo(window.pageXOffset, window.pageYOffset + pr.top - lastOffset);
 				}
-				if (newPosts !== 0 || panel.isNew) {
-					panel.updateCounter(pBuilder.length + 1 - this.hidCounter, $Q(aib.qPostImg, this.el).length, pBuilder.postersCount);
+				if (newPosts !== 0 || Panel.isNew) {
+					Panel.updateCounter(pBuilder.length + 1 - this.hidCounter, $Q(aib.qPostImg, this.el).length, pBuilder.postersCount);
 					Pview.updatePosition(true);
 				}
 				if (pBuilder.isClosed) {
@@ -16934,7 +17925,7 @@ true, true],
 		}, {
 			key: '_parsePosts',
 			value: function _parsePosts(pBuilder) {
-				var _this56 = this;
+				var _this63 = this;
 
 				this._checkBans(pBuilder);
 				var maybeSpells = new Maybe(SpellsRunner),
@@ -17034,19 +18025,19 @@ true, true],
 					if (!f || !f[aib.b]) {
 						return;
 					}
-					if (f = f[aib.b][_this56.op.num]) {
+					if (f = f[aib.b][_this63.op.num]) {
 						var el = $q('#de-win-fav > .de-win-body');
 						if (el && el.hasChildNodes()) {
-							el = $q('.de-fav-current > .de-fav-entries > .de-entry[de-num="' + _this56.op.num + '"] .de-fav-inf-new', el);
+							el = $q('.de-fav-current > .de-fav-entries > .de-entry[de-num="' + _this63.op.num + '"] .de-fav-inf-new', el);
 							$hide(el);
 							el.textContent = 0;
 							el = el.nextElementSibling; 
-							el.textContent = _this56.pcount;
+							el.textContent = _this63.pcount;
 						}
-						f.cnt = _this56.pcount;
-						f['new'] = 0;
+						f.cnt = _this63.pcount;
+						f.new = 0;
 						f.you = 0;
-						f.last = aib.anchor + _this56.last.num;
+						f.last = aib.anchor + _this63.last.num;
 						setStored('DESU_Favorites', JSON.stringify(fav));
 					}
 				});
@@ -17071,13 +18062,15 @@ true, true],
 		}, {
 			key: 'nextNotHidden',
 			get: function get() {
-				for (var thr = this.next; thr && thr.hidden; thr = thr.next) {}
+				var thr = void 0;
+				for (thr = this.next; thr && thr.hidden; thr = thr.next) {}
 				return thr;
 			}
 		}, {
 			key: 'prevNotHidden',
 			get: function get() {
-				for (var thr = this.prev; thr && thr.hidden; thr = thr.prev) {}
+				var thr = void 0;
+				for (thr = this.prev; thr && thr.hidden; thr = thr.prev) {}
 				return thr;
 			}
 		}, {
@@ -17108,12 +18101,12 @@ true, true],
 			}
 		},
 		handleEvent: function handleEvent(e) {
-			var _this57 = this;
+			var _this64 = this;
 
 			switch (e.type) {
 				case 'scroll':
 					window.requestAnimationFrame(function () {
-						return _this57._checkThreads();
+						return _this64._checkThreads();
 					});break;
 				case 'mouseover':
 					this._expandCollapse(true, fixEventEl(e.relatedTarget));break;
@@ -17132,7 +18125,7 @@ true, true],
 			this._thrs = new Set();
 		},
 		removeThr: function removeThr(thr) {
-			this._thrs['delete'](thr.el);
+			this._thrs.delete(thr.el);
 			if (this._thrs.size === 0) {
 				$hide(this._el);
 				this._currentThr = null;
@@ -17142,10 +18135,10 @@ true, true],
 		},
 
 
+		_currentThr: null,
 		_el: null,
 		_showhideTO: 0,
 		_thrs: null,
-		_currentThr: null,
 		_visible: false,
 		_checkThreads: function _checkThreads() {
 			var el = this._findCurrentThread();
@@ -17162,10 +18155,10 @@ true, true],
 			if ('elementsFromPoint' in doc) {
 				Object.defineProperty(this, '_findCurrentThread', {
 					value: function value() {
-						var _this58 = this;
+						var _this65 = this;
 
 						return doc.elementsFromPoint(Post.sizing.wWidth / 2, Post.sizing.wHeight / 2).find(function (el) {
-							return _this58._thrs.has(el);
+							return _this65._thrs.has(el);
 						});
 					}
 				});
@@ -17200,14 +18193,14 @@ true, true],
 			}
 		},
 		_expandCollapse: function _expandCollapse(expand, rt) {
-			var _this59 = this;
+			var _this66 = this;
 
 			if (!rt || !this._el.contains(rt.farthestViewportElement || rt)) {
 				clearTimeout(this._showhideTO);
 				this._showhideTO = setTimeout(expand ? function () {
-					return _this59._el.classList.remove('de-thr-navpanel-hidden');
+					return _this66._el.classList.remove('de-thr-navpanel-hidden');
 				} : function () {
-					return _this59._el.classList.add('de-thr-navpanel-hidden');
+					return _this66._el.classList.add('de-thr-navpanel-hidden');
 				}, Cfg.linksOver);
 			}
 		},
@@ -17241,7 +18234,7 @@ true, true],
 				}
 			},
 			play: function play() {
-				var _this60 = this;
+				var _this67 = this;
 
 				this.stop();
 				if (this.repeatMS === 0) {
@@ -17249,7 +18242,7 @@ true, true],
 					return;
 				}
 				this._playInterval = setInterval(function () {
-					return _this60._el.play();
+					return _this67._el.play();
 				}, this.repeatMS);
 			},
 			stop: function stop() {
@@ -17280,7 +18273,7 @@ true, true],
 				$hide(this._el);
 			},
 			count: function count(delayMS, useCounter, callback) {
-				var _this61 = this;
+				var _this68 = this;
 
 				if (this._enabled && useCounter) {
 					var seconds = delayMS / 1000;
@@ -17288,15 +18281,15 @@ true, true],
 					this._countingIV = setInterval(function () {
 						seconds--;
 						if (seconds === 0) {
-							_this61._stop();
+							_this68._stop();
 							callback();
 						} else {
-							_this61._set(seconds);
+							_this68._set(seconds);
 						}
 					}, 1000);
 				} else {
 					this._countingTO = setTimeout(function () {
-						_this61._countingTO = null;
+						_this68._countingTO = null;
 						callback();
 					}, delayMS);
 				}
@@ -17309,8 +18302,8 @@ true, true],
 			},
 
 
-			_countingIV: null,
 			_countingTO: null,
+			_countingIV: null,
 			_enabled: false,
 			get _el() {
 				var value = $id('de-updater-count');
@@ -17341,7 +18334,7 @@ true, true],
 				return this._iconEl ? this._iconEl.href : null;
 			},
 			initIcons: function initIcons() {
-				var _this62 = this;
+				var _this69 = this;
 
 				if (this._isInited) {
 					return;
@@ -17350,7 +18343,7 @@ true, true],
 				var icon = new Image();
 				icon.onload = function (e) {
 					try {
-						_this62._initIconsHelper(e.target);
+						_this69._initIconsHelper(e.target);
 					} catch (err) {
 						console.warn('Icon error:', err);
 					}
@@ -17381,18 +18374,18 @@ true, true],
 				this._startBlink(this._hasIcons ? this._iconError : this._emptyIcon);
 			},
 			stopBlink: function stopBlink() {
-				if (this._blinkInterval) {
-					clearInterval(this._blinkInterval);
-					this._blinkInterval = null;
+				if (this._blinkInterv) {
+					clearInterval(this._blinkInterv);
+					this._blinkInterv = null;
 				}
-				if (!this._isOriginalIcon) {
+				if (!this._isOrigIcon) {
 					this._setIcon(this.originalIcon);
-					this._isOriginalIcon = true;
+					this._isOrigIcon = true;
 				}
 			},
 
 
-			_blinkInterval: null,
+			_blinkInterv: null,
 			_blinkMS: 800,
 			_currentIcon: null,
 			_emptyIcon: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
@@ -17401,12 +18394,12 @@ true, true],
 			_iconNew: null,
 			_iconYou: null,
 			_isInited: false,
-			_isOriginalIcon: true,
+			_isOrigIcon: true,
 			get _iconEl() {
 				var el = $q('link[rel="shortcut icon"]', doc.head) || $bEnd(doc.head, '<link href="/favicon.ico" rel="shortcut icon"/>');
 				Object.defineProperties(this, {
-					'_iconEl': { value: el, writable: true },
-					'originalIcon': { value: el.href }
+					_iconEl: { value: el, writable: true },
+					originalIcon: { value: el.href }
 				});
 				return el;
 			},
@@ -17446,18 +18439,18 @@ true, true],
 				this._iconEl = $aBegin(doc.head, '<link rel="shortcut icon" href="' + iconUrl + '">');
 			},
 			_startBlink: function _startBlink(iconUrl) {
-				var _this63 = this;
+				var _this70 = this;
 
-				if (this._blinkInterval) {
+				if (this._blinkInterv) {
 					if (this._currentIcon === iconUrl) {
 						return;
 					}
-					clearInterval(this._blinkInterval);
+					clearInterval(this._blinkInterv);
 				}
 				this._currentIcon = iconUrl;
-				this._blinkInterval = setInterval(function () {
-					_this63._setIcon(_this63._isOriginalIcon ? _this63._currentIcon : _this63.originalIcon);
-					_this63._isOriginalIcon = !_this63._isOriginalIcon;
+				this._blinkInterv = setInterval(function () {
+					_this70._setIcon(_this70._isOrigIcon ? _this70._currentIcon : _this70.originalIcon);
+					_this70._isOrigIcon = !_this70._isOrigIcon;
 				}, this._blinkMS);
 			}
 		};
@@ -17477,18 +18470,20 @@ true, true],
 				}
 			},
 			show: function show() {
-				var _this64 = this;
+				var _this71 = this;
 
-				var post = Thread.first.last,
-				    notif = new Notification(aib.dm + '/' + aib.b + '/' + aib.t + ': ' + newPosts + ' ' + Lng.newPost[lang][lang !== 0 ? +(newPosts !== 1) : newPosts % 10 > 4 || newPosts % 10 === 0 || (newPosts % 100 / 10 | 0) === 1 ? 2 : newPosts % 10 === 1 ? 0 : 1] + '. ' + Lng.newPost[lang][3] + ':', {
-					'body': post.text.substring(0, 250).replace(/\s+/g, ' '),
-					'tag': aib.dm + aib.b + aib.t,
-					'icon': post.images.firstAttach ? post.images.firstAttach.src : favicon.originalIcon
+				var new10 = newPosts % 10;
+				var quantity = lang !== 0 ? +(newPosts !== 1) : new10 > 4 || new10 === 0 || (newPosts % 100 / 10 | 0) === 1 ? 2 : new10 === 1 ? 0 : 1;
+				var post = Thread.first.last;
+				var notif = new Notification(aib.dm + '/' + aib.b + '/' + aib.t + ': ' + newPosts + ' ' + Lng.newPost[lang][quantity] + '. ' + Lng.newPost[lang][3] + ':', {
+					body: post.text.substring(0, 250).replace(/\s+/g, ' '),
+					icon: post.images.firstAttach ? post.images.firstAttach.src : favicon.originalIcon,
+					tag: aib.dm + aib.b + aib.t
 				});
 				notif.onshow = function () {
 					return setTimeout(function () {
-						if (notif === _this64._notifEl) {
-							_this64.close();
+						if (notif === _this71._notifEl) {
+							_this71.close();
 						}
 					}, 12e3);
 				};
@@ -17497,7 +18492,7 @@ true, true],
 				};
 				notif.onerror = function () {
 					window.focus();
-					_this64._requestPermission();
+					_this71._requestPermission();
 				};
 				this._notifEl = notif;
 			},
@@ -17509,19 +18504,19 @@ true, true],
 			},
 
 
-			_granted: true,
 			_closeTO: null,
+			_granted: true,
 			_notifEl: null,
 
 			_requestPermission: function _requestPermission() {
-				var _this65 = this;
+				var _this72 = this;
 
 				this._granted = false;
 				Notification.requestPermission(function (state) {
 					if (state.toLowerCase() === 'denied') {
 						saveCfg('desktNotif', 0);
 					} else {
-						_this65._granted = true;
+						_this72._granted = true;
 					}
 				});
 			}
@@ -17562,8 +18557,8 @@ true, true],
 
 			_delay: 0,
 			_initDelay: 0,
-			_loadPromise: null,
 			_loadOnce: false,
+			_loadPromise: null,
 			_seconds: 0,
 			_state: -1,
 			get _panelButton() {
@@ -17628,7 +18623,7 @@ true, true],
 				this._makeStep();
 			},
 			_makeStep: function _makeStep() {
-				var _this66 = this;
+				var _this73 = this;
 
 				var needSleep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
@@ -17638,19 +18633,19 @@ true, true],
 							if (needSleep) {
 								this._state = 1;
 								counter.count(this._delay, !doc.hidden, function () {
-									return _this66._makeStep();
+									return _this73._makeStep();
 								});
 								return;
 							}
 						case 1:
 							counter.setWait();
 							this._state = 2;
-							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref62) {
-								var newCount = _ref62.newCount,
-								    locked = _ref62.locked;
-								return _this66._handleNewPosts(newCount, locked ? AjaxError.Locked : AjaxError.Success);
+							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref100) {
+								var newCount = _ref100.newCount,
+								    locked = _ref100.locked;
+								return _this73._handleNewPosts(newCount, locked ? AjaxError.Locked : AjaxError.Success);
 							}, function (e) {
-								return _this66._handleNewPosts(0, e);
+								return _this73._handleNewPosts(0, e);
 							});
 							return;
 						case 2:
@@ -17671,7 +18666,7 @@ true, true],
 				if (this._panelButton) {
 					this._panelButton.id = 'de-panel-upd-' + status;
 					this._panelButton.title = Lng.panelBtn['upd-' + (status === 'off' ? 'off' : 'on')][lang];
-					if (nav.Presto) {
+					if (nav.isPresto) {
 						this._panelButton.innerHTML = '<svg class="de-panel-svg"><use xlink:href="#de-symbol-panel-upd"/></svg>';
 					}
 				}
@@ -17776,7 +18771,7 @@ true, true],
 					paused = true;
 				}
 			},
-			'continue': function _continue() {
+			continue: function _continue() {
 				var needSleep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 				if (enabled && paused) {
@@ -17851,11 +18846,11 @@ true, true],
 		}, {
 			key: '_parseClasslessThreads',
 			value: function _parseClasslessThreads(formEl) {
-				var i,
-				    len,
-				    threads = [],
-				    fNodes = Array.from(formEl.childNodes),
+				var i = void 0,
+				    len = void 0,
 				    cThr = doc.createElement('div');
+				var threads = [];
+				var fNodes = [].concat(_toConsumableArray(formEl.childNodes));
 				for (i = 0, len = fNodes.length - 1; i < len; ++i) {
 					var node = fNodes[i];
 					if (node.tagName === 'HR') {
@@ -17936,6 +18931,7 @@ true, true],
 			key: 'addStuff',
 			value: function addStuff() {
 				var el = this.el;
+
 				if (!localData && Cfg.ajaxPosting) {
 					el.onsubmit = $pd;
 					var btn = $q(aib.qDelBut, el);
@@ -17944,7 +18940,7 @@ true, true],
 							$pd(e);
 							pr.closeReply();
 							$popup('delete', Lng.deleting[lang], true);
-							html5Submit(el, e.target).then(checkDelete)['catch'](function (e) {
+							html5Submit(el, e.target).then(checkDelete).catch(function (e) {
 								return $popup('delete', getErrorMessage(e));
 							});
 						};
@@ -18003,17 +18999,18 @@ true, true],
 
 	function initNavFuncs() {
 		var ua = navigator.userAgent;
-		var firefox = ua.includes('Gecko/');
-		var webkit = ua.includes('WebKit/');
-		var chrome = webkit && ua.includes('Chrome/');
-		var safari = webkit && !chrome;
-		var isChromeStorage = !!window.chrome && !!window.chrome.storage;
+		var isFirefox = ua.includes('Gecko/');
+		var firefoxVer = isFirefox ? (ua.match(/Gecko\/[^/]+\/(\d+)/) || [0, 0])[1] : 0;
+		var isWebkit = ua.includes('WebKit/');
+		var isChrome = isWebkit && ua.includes('Chrome/');
+		var isSafari = isWebkit && !isChrome;
+		var isChromeStorage = (typeof chrome === 'undefined' ? 'undefined' : _typeof(chrome)) === 'object' && !!chrome && !!chrome.storage;
 		var isScriptStorage = !!scriptStorage && !ua.includes('Opera Mobi');
+		var isNewGM = typeof GM !== 'undefined' && typeof GM.xmlHttpRequest === 'function';
 		var isGM = false;
-		var isNewGM = typeof GM !== 'undefined' && typeof GM.setValue === 'function';
 		if (!isNewGM) {
 			try {
-				isGM = typeof GM_setValue === 'function' && (!chrome || !GM_setValue.toString().includes('not supported'));
+				isGM = typeof GM_setValue === 'function' && (!isChrome || !GM_setValue.toString().includes('not supported'));
 			} catch (e) {
 				isGM = e.message === 'Permission denied to access property "toString"';
 			}
@@ -18033,68 +19030,61 @@ true, true],
 		var needFileHack = false;
 		try {
 			new File([''], '');
-			if (firefox || safari) {
+			if (isFirefox || isSafari) {
 				needFileHack = !FormData.prototype.get;
 			}
 		} catch (e) {
 			needFileHack = true;
 		}
 		if (needFileHack && FormData) {
-			(function () {
-				var origFormData = FormData;
-				var origAppend = FormData.prototype.append;
-				FormData = function FormData(form) {
-					var rv = form ? new origFormData(form) : new origFormData();
-					rv.append = function append(name, value) {
-						var fileName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+			var OrigFormData = FormData;
+			var origAppend = FormData.prototype.append;
+			FormData = function FormData(form) {
+				var rv = form ? new OrigFormData(form) : new OrigFormData();
+				rv.append = function append(name, value) {
+					var fileName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-						if (value instanceof Blob && 'name' in value && fileName === null) {
-							return origAppend.call(this, name, value, value.name);
-						}
-						return origAppend.apply(this, arguments);
-					};
-					return rv;
+					if (value instanceof Blob && 'name' in value && fileName === null) {
+						return origAppend.call(this, name, value, value.name);
+					}
+					return origAppend.apply(this, arguments);
 				};
-				window.File = function File(arr, name) {
-					var rv = new Blob(arr);
-					rv.name = name;
-					return rv;
-				};
-			})();
-		}
-		if ('toJSON' in aProto) {
-			delete aProto.toJSON;
+				return rv;
+			};
+			window.File = function File(arr, name) {
+				var rv = new Blob(arr);
+				rv.name = name;
+				return rv;
+			};
 		}
 		nav = {
 			get ua() {
-				return navigator.userAgent + (this.Firefox ? ' [' + navigator.buildID + ']' : '');
+				return navigator.userAgent + (this.isFirefox ? ' [' + navigator.buildID + ']' : '');
 			},
-			Firefox: firefox,
-			WebKit: webkit,
-			Chrome: chrome,
-			Safari: safari,
-			Presto: !!window.opera,
-			MsEdge: ua.includes('Edge/'),
+			firefoxVer: firefoxVer,
+			isChrome: isChrome,
+			isChromeStorage: isChromeStorage,
+			isFirefox: isFirefox,
 			isGM: isGM,
 			isNewGM: isNewGM,
-			get isESNext() {
-				return typeof de_main_func_outer === 'undefined';
-			},
-			isChromeStorage: isChromeStorage,
+			isSafari: isSafari,
 			isScriptStorage: isScriptStorage,
-			isGlobal: isGM || isNewGM || isChromeStorage || isScriptStorage,
+			isWebkit: isWebkit,
 			hasGMXHR: typeof GM_xmlhttpRequest === 'function' || isNewGM && typeof GM.xmlHttpRequest === 'function',
+			isMsEdge: ua.includes('Edge/'),
+			isGlobal: isGM || isNewGM || isChromeStorage || isScriptStorage,
+			isPresto: !!window.opera,
+			get isESNext() {
+				return typeof deMainFuncOuter === 'undefined';
+			},
 			get scriptInstall() {
-				if (this.Firefox) {
-					if (this.isNewGM) {
-						if (GM.info) {
-							return GM.info.scriptHandler + ' ' + GM.info.version;
-						}
-						return 'Greasemonkey';
-					}
-					return typeof GM_info !== 'undefined' ? 'Greasemonkey' : 'Scriptish';
+				if (this.isNewGM) {
+					return GM.info ? GM.info.scriptHandler + ' ' + GM.info.version : 'Greasemonkey';
 				}
-				return isChromeStorage ? 'Chrome extension' : isGM ? 'Monkey' : 'Native userscript';
+				if (this.isFirefox) {
+					return typeof GM_info !== 'undefined' ? GM_info.scriptHandler || 'Greasemonkey' : 'Scriptish';
+				}
+				return isChromeStorage ? 'WebExtension' : isGM ? 'Monkey' : 'Native userscript';
 			},
 			cssMatches: function cssMatches(leftSel) {
 				for (var _len10 = arguments.length, rules = Array(_len10 > 1 ? _len10 - 1 : 0), _key3 = 1; _key3 < _len10; _key3++) {
@@ -18104,7 +19094,7 @@ true, true],
 				return leftSel + rules.join(', ' + leftSel);
 			},
 
-			fixLink: safari ? getAbsLink : function fixLink(url) {
+			fixLink: isSafari ? getAbsLink : function fixLink(url) {
 				return url;
 			},
 			get hasTemplate() {
@@ -18113,20 +19103,20 @@ true, true],
 				return value;
 			},
 			get hasWorker() {
-				var val = false;
+				var value = false;
 				try {
-					val = 'Worker' in window && 'URL' in window;
+					value = 'Worker' in window && 'URL' in window;
 				} catch (e) {}
-				if (val && this.Firefox) {
-					val = +(navigator.userAgent.match(/rv:(\d{2,})\./) || [])[1] >= 40;
+				if (value && this.isFirefox) {
+					value = +(navigator.userAgent.match(/rv:(\d{2,})\./) || [])[1] >= 40;
 				}
-				Object.defineProperty(this, 'hasWorker', { value: val });
-				return val;
+				Object.defineProperty(this, 'hasWorker', { value: value });
+				return value;
 			},
 			get canPlayMP3() {
-				var val = !!new Audio().canPlayType('audio/mpeg;');
-				Object.defineProperty(this, 'canPlayMP3', { value: val });
-				return val;
+				var value = !!new Audio().canPlayType('audio/mpeg;');
+				Object.defineProperty(this, 'canPlayMP3', { value: value });
+				return value;
 			},
 			get matchesSelector() {
 				var dE = doc.documentElement;
@@ -18138,7 +19128,7 @@ true, true],
 				return value;
 			},
 			get viewportHeight() {
-				var value = document.compatMode && document.compatMode == 'CSS1Compat' ? function () {
+				var value = document.compatMode && document.compatMode === 'CSS1Compat' ? function () {
 					return doc.documentElement.clientHeight;
 				} : function () {
 					return docBody.clientHeight;
@@ -18147,7 +19137,7 @@ true, true],
 				return value;
 			},
 			get viewportWidth() {
-				var value = document.compatMode && document.compatMode == 'CSS1Compat' ? function () {
+				var value = document.compatMode && document.compatMode === 'CSS1Compat' ? function () {
 					return doc.documentElement.clientWidth;
 				} : function () {
 					return docBody.clientWidth;
@@ -18156,29 +19146,29 @@ true, true],
 				return value;
 			},
 			getUnsafeUint8Array: function getUnsafeUint8Array(data, i, len) {
-				var ctor = Uint8Array;
-				if (!nav.isNewGM && nav.Firefox) {
+				var Ctor = Uint8Array;
+				if (!nav.isNewGM && nav.isFirefox) {
 					try {
 						if (!(new Uint8Array(data) instanceof Uint8Array)) {
-							ctor = unsafeWindow.Uint8Array;
+							Ctor = unsafeWindow.Uint8Array;
 						}
 					} catch (e) {
-						ctor = unsafeWindow.Uint8Array;
+						Ctor = unsafeWindow.Uint8Array;
 					}
 				}
 				switch (arguments.length) {
 					case 1:
-						return new ctor(data);
+						return new Ctor(data);
 					case 2:
-						return new ctor(data, i);
+						return new Ctor(data, i);
 					case 3:
-						return new ctor(data, i, len);
+						return new Ctor(data, i, len);
 				}
 				throw new Error();
 			},
 			getUnsafeDataView: function getUnsafeDataView(data, offset) {
 				var rv = new DataView(data, offset || 0);
-				return nav.isNewGM || !nav.Firefox || rv instanceof DataView ? rv : new unsafeWindow.DataView(data, offset || 0);
+				return nav.isNewGM || !nav.isFirefox || rv instanceof DataView ? rv : new unsafeWindow.DataView(data, offset || 0);
 			}
 		};
 	}
@@ -18224,7 +19214,7 @@ true, true],
 			this.hasPicWrap = false;
 			this.hasTextLinks = false;
 			this.host = window.location.hostname;
-			this.jsonBuilder = null;
+			this.JsonBuilder = null;
 			this.jsonSubmit = false;
 			this.markupBB = false;
 			this.multiFile = false;
@@ -18335,7 +19325,7 @@ true, true],
 		}, {
 			key: 'getCaptchaSrc',
 			value: function getCaptchaSrc(src, tNum) {
-				var tmp = src.replace(/pl$/, 'pl?key=mainpage&amp;dummy=').replace(/dummy=[\d\.]*/, 'dummy=' + Math.random());
+				var tmp = src.replace(/pl$/, 'pl?key=mainpage&amp;dummy=').replace(/dummy=[\d.]*/, 'dummy=' + Math.random());
 				return tNum ? tmp.replace(/mainpage|res\d+/, 'res' + tNum) : tmp.replace(/res\d+/, 'mainpage');
 			}
 		}, {
@@ -18347,7 +19337,7 @@ true, true],
 		}, {
 			key: 'getImgRealName',
 			value: function getImgRealName(wrap) {
-				return $q(this.qImgNameLink, wrap);
+				return $q(this.qImgNameLink, wrap)[Cfg.delImgNames ? 'title' : 'textContent'];
 			}
 		}, {
 			key: 'getImgSrcLink',
@@ -18361,10 +19351,10 @@ true, true],
 			}
 		}, {
 			key: 'getJsonApiUrl',
-			value: function getJsonApiUrl(brd, tNum) {}
+			value: function getJsonApiUrl() {}
 		}, {
 			key: 'getOmitted',
-			value: function getOmitted(el, len) {
+			value: function getOmitted(el) {
 				var txt;
 				return el && (txt = el.textContent) ? +(txt.match(/\d+/) || [0])[0] + 1 : 1;
 			}
@@ -18427,7 +19417,7 @@ true, true],
 					});
 				} else {
 					Object.defineProperty(this, 'getPostWrap', {
-						value: function value(el, isOp) {
+						value: function value(el) {
 							return el;
 						}
 					});
@@ -18465,9 +19455,9 @@ true, true],
 					this.t = +temp[1].match(/^\d+/)[0];
 					this.page = this.firstPage;
 				} else {
-					var _temp2 = url.match(/\/?(\d+)[^\/]*?$/);
+					var _temp2 = url.match(/\/?(\d+)[^/]*?$/);
 					this.page = _temp2 && +_temp2[1] || this.firstPage;
-					this.b = url.replace(_temp2 && this.page ? _temp2[0] : /\/(?:[^\/]+\.[a-z]+)?$/, '');
+					this.b = url.replace(_temp2 && this.page ? _temp2[0] : /\/(?:[^/]+\.[a-z]+)?$/, '');
 				}
 				if (this.docExt === null) {
 					this.docExt = (url.match(/\.[a-z]+$/) || ['.html'])[0];
@@ -18491,7 +19481,7 @@ true, true],
 		}, {
 			key: 'qImgNameLink',
 			get: function get() {
-				var value = nav.cssMatches(this.qImgInfo + ' a', '[href$=".jpg"]', '[href$=".jpeg"]', '[href$=".png"]', '[href$=".gif"]', '[href$=".webm"]', '[href$=".mp4"]', '[href$=".apng"]');
+				var value = nav.cssMatches(this.qImgInfo + ' a', '[href$=".jpg"]', '[href$=".jpeg"]', '[href$=".png"]', '[href$=".gif"]', '[href$=".webm"]', '[href$=".mp4"]', '[href$=".ogv"]', '[href$=".apng"]', ', [href^="blob:"]');
 				Object.defineProperty(this, 'qImgNameLink', { value: value });
 				return value;
 			}
@@ -18505,9 +19495,9 @@ true, true],
 		}, {
 			key: 'qThread',
 			get: function get() {
-				var val = $q('.thread') ? '.thread' : '[id^="thread"]';
-				Object.defineProperty(this, 'qThread', { value: val });
-				return val;
+				var value = $q('.thread') ? '.thread' : '[id^="thread"]';
+				Object.defineProperty(this, 'qThread', { value: value });
+				return value;
 			}
 		}, {
 			key: 'capLang',
@@ -18562,13 +19552,13 @@ true, true],
 		}, {
 			key: 'lastPage',
 			get: function get() {
-				var el = $q(this.qPages),
-				    val = el && +aProto.pop.call(el.textContent.match(/\d+/g) || []) || 0;
-				if (this.page === val + 1) {
-					val++;
+				var el = $q(this.qPages);
+				var value = el && +aProto.pop.call(el.textContent.match(/\d+/g) || []) || 0;
+				if (this.page === value + 1) {
+					value++;
 				}
-				Object.defineProperty(this, 'lastPage', { value: val });
-				return val;
+				Object.defineProperty(this, 'lastPage', { value: value });
+				return value;
 			}
 		}, {
 			key: 'markupTags',
@@ -18583,9 +19573,9 @@ true, true],
 		}, {
 			key: 'reCrossLinks',
 			get: function get() {
-				var val = new RegExp('>https?:\\/\\/[^\\/]*' + this.dm + '\\/([a-z0-9]+)\\/' + quoteReg(this.res) + '(\\d+)(?:[^#<]+)?(?:#i?(\\d+))?<', 'g');
-				Object.defineProperty(this, 'reCrossLinks', { value: val });
-				return val;
+				var value = new RegExp('>https?:\\/\\/[^\\/]*' + this.dm + '\\/([a-z0-9]+)\\/' + quoteReg(this.res) + '(\\d+)(?:[^#<]+)?(?:#i?(\\d+))?<', 'g');
+				Object.defineProperty(this, 'reCrossLinks', { value: value });
+				return value;
 			}
 		}, {
 			key: 'thrId',
@@ -18614,43 +19604,43 @@ true, true],
 			function Makaba(prot, dm) {
 				_classCallCheck(this, Makaba);
 
-				var _this67 = _possibleConstructorReturn(this, (Makaba.__proto__ || Object.getPrototypeOf(Makaba)).call(this, prot, dm));
+				var _this74 = _possibleConstructorReturn(this, (Makaba.__proto__ || Object.getPrototypeOf(Makaba)).call(this, prot, dm));
 
-				_this67.mak = true;
+				_this74.mak = true;
 
-				_this67.cReply = 'post reply';
-				_this67.qBan = '.pomyanem';
-				_this67.qClosed = '.sticky-img[src$="locked.png"]';
-				_this67.qDForm = '#posts-form';
-				_this67.qFormRedir = null;
-				_this67.qFormRules = '.rules-area';
-				_this67.qImgInfo = '.file-attr';
-				_this67.qOmitted = '.mess-post';
-				_this67.qPostHeader = '.post-details';
-				_this67.qPostImg = '.preview';
-				_this67.qPostMsg = '.post-message';
-				_this67.qPostName = '.ananimas, .post-email';
-				_this67.qPostSubj = '.post-title';
-				_this67.qRPost = '.post.reply[data-num]';
-				_this67.qTrunc = null;
+				_this74.cReply = 'post reply';
+				_this74.qBan = '.pomyanem';
+				_this74.qClosed = '.sticky-img[src$="locked.png"]';
+				_this74.qDForm = '#posts-form';
+				_this74.qFormRedir = null;
+				_this74.qFormRules = '.rules-area';
+				_this74.qImgInfo = '.file-attr';
+				_this74.qOmitted = '.mess-post';
+				_this74.qPostHeader = '.post-details';
+				_this74.qPostImg = '.preview';
+				_this74.qPostMsg = '.post-message';
+				_this74.qPostName = '.ananimas, .post-email';
+				_this74.qPostSubj = '.post-title';
+				_this74.qRPost = '.post.reply[data-num]';
+				_this74.qTrunc = null;
 
-				_this67.formParent = 'thread';
-				_this67.hasCatalog = true;
-				_this67.hasOPNum = true;
-				_this67.hasPicWrap = true;
-				_this67.jsonBuilder = MakabaPostsBuilder;
-				_this67.jsonSubmit = true;
-				_this67.markupBB = true;
-				_this67.multiFile = true;
-				_this67.timePattern = 'dd+nn+yy+w+hh+ii+ss';
+				_this74.formParent = 'thread';
+				_this74.hasCatalog = true;
+				_this74.hasOPNum = true;
+				_this74.hasPicWrap = true;
+				_this74.JsonBuilder = MakabaPostsBuilder;
+				_this74.jsonSubmit = true;
+				_this74.markupBB = true;
+				_this74.multiFile = true;
+				_this74.timePattern = 'dd+nn+yy+w+hh+ii+ss';
 
-				_this67._capUpdPromise = null;
-				return _this67;
+				_this74._capUpdPromise = null;
+				return _this74;
 			}
 
 			_createClass(Makaba, [{
 				key: 'delTruncMsg',
-				value: function delTruncMsg(post, el, isInit) {
+				value: function delTruncMsg(post, el) {
 					$del(el.previousSibling);
 					$show(el.previousSibling);
 					$del(el);
@@ -18659,8 +19649,8 @@ true, true],
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i47 = 0; _i47 < 8; ++_i47) {
-						str += '<div' + (_i47 ? ' style="display: none;"' : '') + '><input type="file" name="image' + (_i47 + 1) + '"></div>';
+					for (var _i49 = 0; _i49 < 8; ++_i49) {
+						str += '<div' + (_i49 ? ' style="display: none;"' : '') + '><input type="file" name="image' + (_i49 + 1) + '"></div>';
 					}
 					el.innerHTML = str;
 				}
@@ -18690,7 +19680,7 @@ true, true],
 				}
 			}, {
 				key: 'getPostWrap',
-				value: function getPostWrap(el, isOp) {
+				value: function getPostWrap(el) {
 					return el.parentNode;
 				}
 			}, {
@@ -18723,7 +19713,7 @@ true, true],
 			}, {
 				key: 'init',
 				value: function init() {
-					$script('(function() {\n\t\t\t\tvar emptyFn = function() {};\n\t\t\t\tfunction fixGlobalFunc(name) {\n\t\t\t\t\tObject.defineProperty(window, name, { value: emptyFn, writable: false, configurable: false });\n\t\t\t\t}\n\t\t\t\tfixGlobalFunc("$alert");\n\t\t\t\tfixGlobalFunc("autorefresh_start");\n\t\t\t\tfixGlobalFunc("linkremover");\n\t\t\t\tfixGlobalFunc("scrollTo");\n\t\t\t\twindow.FormData = void 0;\n\t\t\t\t$(function() { $(window).off(); });\n\t\t\t})();');
+					$script('(function() {\n\t\t\t\tvar emptyFn = Function.prototype;\n\t\t\t\tfunction fixGlobalFunc(name) {\n\t\t\t\t\tObject.defineProperty(window, name,\n\t\t\t\t\t\t{ value: emptyFn, writable: false, configurable: false });\n\t\t\t\t}\n\t\t\t\tfixGlobalFunc("$alert");\n\t\t\t\tfixGlobalFunc("autorefresh_start");\n\t\t\t\tfixGlobalFunc("linkremover");\n\t\t\t\tfixGlobalFunc("scrollTo");\n\t\t\t\twindow.FormData = void 0;\n\t\t\t\t$(function() { $(window).off(); });\n\t\t\t})();');
 					$each($Q('.autorefresh'), $del);
 					var el = $q('td > .anoniconsselectlist');
 					if (el) {
@@ -18744,19 +19734,22 @@ true, true],
 			}, {
 				key: 'initCaptcha',
 				value: function initCaptcha(cap) {
-					cap.textEl.tabIndex = 999;
+					if (cap.textEl) {
+						cap.textEl.tabIndex = 999;
+					}
 					return this.updateCaptcha(cap);
 				}
 			}, {
 				key: 'updateCaptcha',
-				value: function updateCaptcha(cap, isErr) {
+				value: function updateCaptcha(cap) {
 					var type = void 0;
 					try {
 						type = JSON.parse(locStorage.store).other.captcha_provider || '2chaptcha';
 					} catch (e) {
 						type = '2chaptcha';
 					}
-					return cap.updateHelper('/api/captcha/' + type + '/id?board=' + this.b + '&thread=' + pr.tNum, function (xhr) {
+					var url = cap.textEl ? '/api/captcha/' + type + '/id?board=' + this.b + '&thread=' + pr.tNum : '/api/captcha/invisible_recaptcha/id';
+					return cap.updateHelper(url, function (xhr) {
 						var box = $q('.captcha-box', cap.parentEl);
 						var data = xhr.responseText;
 						try {
@@ -18772,18 +19765,13 @@ true, true],
 							case 3:
 								return CancelablePromise.reject(); 
 							case 1:
-								if (type === '2chaptcha') {
-									var src = '/api/captcha/' + type + '/image/' + data.id;
-									var image = $id('de-image-captcha');
-									if (image) {
-										image.src = '';
-										image.src = src;
+								if (data.type === 'invisible_recaptcha') {
+									$q('.captcha-key').value = data.id;
+									if (!$id('captcha-widget').hasChildNodes()) {
+										$script('deCapWidget = grecaptcha.render(\'captcha-widget\', {\n\t\t\t\t\t\t\t\t\tsitekey : \'' + data.id + '\',\n\t\t\t\t\t\t\t\t\ttheme   : \'light\',\n\t\t\t\t\t\t\t\t\tsize    : \'invisible\',\n\t\t\t\t\t\t\t\t\tcallback: function() {\n\t\t\t\t\t\t\t\t\t\tvar el = document.getElementById(\'captcha-widget-main\');\n\t\t\t\t\t\t\t\t\t\tel.innerHTML = \'<input type="hidden" name="g-recaptcha-response">\';\n\t\t\t\t\t\t\t\t\t\tel.firstChild.value = grecaptcha.getResponse();\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t});\n\t\t\t\t\t\t\t\tgrecaptcha.execute(deCapWidget);');
 									} else {
-										image = $q('.captcha-image', cap.parentEl);
-										image.innerHTML = '<img id="de-image-captcha" src="' + src + '">';
-										cap.initImage(image.firstChild);
+										$script('grecaptcha.reset(deCapWidget);\n\t\t\t\t\t\t\t\tgrecaptcha.execute(deCapWidget);');
 									}
-									$q('input[name="2chaptcha_id"]', cap.parentEl).value = data.id;
 									break;
 								}
 							default:
@@ -18799,15 +19787,15 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.ABU-refmap, .box[onclick="ToggleSage()"], img[alt="webm file"], .kupi-passcode-suka, .fa-media-icon, .logo + hr, .media-expand-button, .nav-arrows, .news, .norm-reply, .message-byte-len, .postform-hr, .postpanel > :not(img), .prerekl-hr, .posts > hr, .reflink::before, .thread-nav, .toolbar-area, #ABU-alert-wait, #media-thumbnail { display: none !important; }\n\t\t\t\t.captcha-image > img { cursor: pointer; }\n\t\t\t\t#de-txt-panel { font-size: 16px !important; }\n\t\t\t\t.mess-post { display: block; }\n\t\t\t\t.oekaki-height, .oekaki-width { width: 36px !important; }\n\t\t\t\t.post.reply .post-message { max-height: initial !important; }\n\t\t\t\t.tmp_postform { width: auto; }\n\t\t\t\t.de-win-inpost { position: static !important; }\n\t\t\t\t' + (Cfg.expandTrunc ? '.expand-large-comment, div[id^="shrinked-post"] { display: none !important; } div[id^="original-post"] { display: block !important; }' : '') + '\n\t\t\t\t' + (Cfg.delImgNames ? '.filesize { display: inline !important; } .file-attr { margin-bottom: 1px; }' : '') + '\n\t\t\t\t' + (Cfg.expandImgs ? '#fullscreen-container { display: none !important; }' : '') + '\n\t\t\t\t' + (Cfg.txtBtnsLoc ? '.message-sticker-btn, .message-sticker-preview { bottom: 25px !important; }' : '');
+					return '#ABU-alert-wait, .ABU-refmap, .box[onclick="ToggleSage()"], .fa-media-icon,\n\t\t\t\t\timg[alt="webm file"], .kupi-passcode-suka, .logo + hr, .media-expand-button,\n\t\t\t\t\t#media-thumbnail, .message-byte-len, .nav-arrows, .news, .norm-reply, .postform-hr,\n\t\t\t\t\t.postpanel > :not(img), .posts > hr, .prerekl-hr, .reflink::before, .thread-nav,\n\t\t\t\t\t.toolbar-area, .top-user-boards + hr { display: none !important; }\n\t\t\t\t.captcha-image > img { cursor: pointer; }\n\t\t\t\t#de-txt-panel { font-size: 16px !important; }\n\t\t\t\t.mess-post { display: block; }\n\t\t\t\t.oekaki-height, .oekaki-width { width: 36px !important; }\n\t\t\t\t.post.reply .post-message { max-height: initial !important; }\n\t\t\t\t.tmp_postform { width: auto; }\n\t\t\t\t.de-win-inpost { position: static !important; }\n\t\t\t\t' + (Cfg.expandTrunc ? '.expand-large-comment,\n\t\t\t\t\tdiv[id^="shrinked-post"] { display: none !important; }\n\t\t\t\t\tdiv[id^="original-post"] { display: block !important; }' : '') + '\n\t\t\t\t' + (Cfg.delImgNames ? '.filesize { display: inline !important; }\n\t\t\t\t\t.file-attr { margin-bottom: 1px; }' : '') + '\n\t\t\t\t' + (Cfg.expandImgs ? '#fullscreen-container { display: none !important; }' : '') + '\n\t\t\t\t' + (Cfg.txtBtnsLoc ? '.message-sticker-btn, .message-sticker-preview {\n\t\t\t\t\tbottom: 25px !important; }' : '');
 				}
 			}, {
 				key: 'lastPage',
 				get: function get() {
-					var els = $Q('.pager > a:not([class])'),
-					    val = els ? els.length : 1;
-					Object.defineProperty(this, 'lastPage', { value: val });
-					return val;
+					var els = $Q('.pager > a:not([class])');
+					var value = els ? els.length : 1;
+					Object.defineProperty(this, 'lastPage', { value: value });
+					return value;
 				}
 			}, {
 				key: 'markupTags',
@@ -18829,35 +19817,35 @@ true, true],
 			function Tinyboard(prot, dm) {
 				_classCallCheck(this, Tinyboard);
 
-				var _this68 = _possibleConstructorReturn(this, (Tinyboard.__proto__ || Object.getPrototypeOf(Tinyboard)).call(this, prot, dm));
+				var _this75 = _possibleConstructorReturn(this, (Tinyboard.__proto__ || Object.getPrototypeOf(Tinyboard)).call(this, prot, dm));
 
-				_this68.tiny = true;
+				_this75.tiny = true;
 
-				_this68.cReply = 'post reply';
-				_this68.qClosed = '.fa-lock';
-				_this68.qDForm = 'form[name*="postcontrols"]';
-				_this68.qForm = 'form[name="post"]';
-				_this68.qFormPassw = 'input[name="password"]';
-				_this68.qFormRedir = null;
-				_this68.qImgInfo = '.fileinfo';
-				_this68.qOmitted = '.omitted';
-				_this68.qPages = '.pages > a:nth-last-of-type(2)';
-				_this68.qPostHeader = '.intro';
-				_this68.qPostMsg = '.body';
-				_this68.qPostName = '.name';
-				_this68.qPostRef = '.post_no + a';
-				_this68.qPostSubj = '.subject';
-				_this68.qPostTrip = '.trip';
-				_this68.qTrunc = '.toolong';
+				_this75.cReply = 'post reply';
+				_this75.qClosed = '.fa-lock';
+				_this75.qDForm = 'form[name*="postcontrols"]';
+				_this75.qForm = 'form[name="post"]';
+				_this75.qFormPassw = 'input[name="password"]';
+				_this75.qFormRedir = null;
+				_this75.qImgInfo = '.fileinfo';
+				_this75.qOmitted = '.omitted';
+				_this75.qPages = '.pages';
+				_this75.qPostHeader = '.intro';
+				_this75.qPostMsg = '.body';
+				_this75.qPostName = '.name';
+				_this75.qPostRef = '.post_no + a';
+				_this75.qPostSubj = '.subject';
+				_this75.qPostTrip = '.trip';
+				_this75.qTrunc = '.toolong';
 
-				_this68.firstPage = 1;
-				_this68.formParent = 'thread';
-				_this68.hasCatalog = true;
-				_this68.jsonSubmit = true;
-				_this68.timePattern = 'nn+dd+yy++w++hh+ii+ss';
+				_this75.firstPage = 1;
+				_this75.formParent = 'thread';
+				_this75.hasCatalog = true;
+				_this75.jsonSubmit = true;
+				_this75.timePattern = 'nn+dd+yy++w++hh+ii+ss';
 
-				_this68._qTable = '.post.reply';
-				return _this68;
+				_this75._qTable = '.post.reply';
+				return _this75;
 			}
 
 			_createClass(Tinyboard, [{
@@ -18875,7 +19863,7 @@ true, true],
 			}, {
 				key: 'getImgRealName',
 				value: function getImgRealName(wrap) {
-					return $q('.postfilename, .unimportant > a', wrap);
+					return ($q('.postfilename, .unimportant > a[download]', wrap) || $q(this.qImgNameLink, wrap)).textContent;
 				}
 			}, {
 				key: 'getPageUrl',
@@ -18910,7 +19898,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.banner, ' + (this.t ? '' : '.de-btn-rep,') + ' .hide-thread-link, .mentioned, .post-hover { display: none !important; }\n\t\t\t\tdiv.post.reply:not(.de-entry):not(.de-cfg-tab):not(.de-win-body) { float: left !important; clear: left; display: block; }';
+					return '.banner, ' + (this.t ? '' : '.de-btn-rep,') + ' .hide-thread-link, .mentioned,\n\t\t\t\t\t.post-hover { display: none !important; }\n\t\t\t\tdiv.post.reply:not(.de-entry):not(.de-cfg-tab):not(.de-win-body) {\n\t\t\t\t\tfloat: left !important; clear: left; display: block; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -18930,21 +19918,21 @@ true, true],
 			function Vichan(prot, dm) {
 				_classCallCheck(this, Vichan);
 
-				var _this69 = _possibleConstructorReturn(this, (Vichan.__proto__ || Object.getPrototypeOf(Vichan)).call(this, prot, dm));
+				var _this76 = _possibleConstructorReturn(this, (Vichan.__proto__ || Object.getPrototypeOf(Vichan)).call(this, prot, dm));
 
-				_this69.qDelPassw = '#password';
-				_this69.qPostImg = '.post-image';
+				_this76.qDelPassw = '#password';
+				_this76.qPostImg = '.post-image[alt]';
 
-				_this69.multiFile = true;
-				return _this69;
+				_this76.multiFile = true;
+				return _this76;
 			}
 
 			_createClass(Vichan, [{
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i48 = 0; _i48 < 5; ++_i48) {
-						str += '<div' + (_i48 ? ' style="display: none;"' : '') + '><input type="file" name="file' + (_i48 ? _i48 + 1 : '') + '"></div>';
+					for (var _i50 = 0; _i50 < 5; ++_i50) {
+						str += '<div' + (_i50 ? ' style="display: none;"' : '') + '><input type="file" name="file' + (_i50 ? _i50 + 1 : '') + '"></div>';
 					}
 					el.innerHTML = str;
 				}
@@ -18952,6 +19940,12 @@ true, true],
 				key: 'init',
 				value: function init() {
 					_get(Vichan.prototype.__proto__ || Object.getPrototypeOf(Vichan.prototype), 'init', this).call(this);
+					if (locStorage.file_dragdrop !== 'false') {
+						locStorage.file_dragdrop = false;
+						window.location.reload();
+						return true;
+					}
+					$script('highlightReply = Function.prototype');
 					setTimeout(function () {
 						return $del($id('updater'));
 					}, 0);
@@ -18959,18 +19953,19 @@ true, true],
 					if (textarea) {
 						textarea.removeAttribute('id');
 					}
-					$script('highlightReply = function() {}');
-					if (locStorage.file_dragdrop !== 'false') {
-						locStorage.file_dragdrop = false;
-						window.location.reload();
-						return true;
+					var el = $q('#upload > td > input:not([name="file"])');
+					if (el) {
+						$q(this.qForm).appendChild(el);
 					}
+					$each($Q('.file[href^="/player.php?v="]'), function (link) {
+						link.href = $q('.fileinfo > a', link.parentNode).href;
+					});
 					return false;
 				}
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Vichan.prototype.__proto__ || Object.getPrototypeOf(Vichan.prototype), 'css', this) + '.boardlist { position: static !important; }\n\t\t\t\tbody { padding: 0 5px !important; }\n\t\t\t\t.fileinfo { width: 250px; }\n\t\t\t\t.multifile { width: auto !important; }\n\t\t\t\t#expand-all-images, #expand-all-images + .unimportant, .post-btn, small { display: none !important; }';
+					return _get(Vichan.prototype.__proto__ || Object.getPrototypeOf(Vichan.prototype), 'css', this) + '.boardlist { position: static !important; }\n\t\t\t\tbody { padding: 0 5px !important; }\n\t\t\t\t.fileinfo { width: 250px; }\n\t\t\t\t.multifile { width: auto !important; }\n\t\t\t\t#expand-all-images, #expand-all-images + .unimportant, .fileinfo > .unimportant + span,\n\t\t\t\t\t.fileinfo > .unimportant + span + span, .post-btn, small { display: none !important; }';
 				}
 			}]);
 
@@ -18985,22 +19980,28 @@ true, true],
 			function Kusaba(prot, dm) {
 				_classCallCheck(this, Kusaba);
 
-				var _this70 = _possibleConstructorReturn(this, (Kusaba.__proto__ || Object.getPrototypeOf(Kusaba)).call(this, prot, dm));
+				var _this77 = _possibleConstructorReturn(this, (Kusaba.__proto__ || Object.getPrototypeOf(Kusaba)).call(this, prot, dm));
 
-				_this70.kus = true;
+				_this77.kus = true;
 
-				_this70.qError = 'h1, h2, div[style*="1.25em"]';
-				_this70.qFormRedir = 'input[name="redirecttothread"][value="1"]';
+				_this77.qError = 'h1, h2, div[style*="1.25em"]';
+				_this77.qFormRedir = 'input[name="redirecttothread"][value="1"]';
 
-				_this70.formParent = 'replythread';
-				_this70.markupBB = true;
-				return _this70;
+				_this77.formParent = 'replythread';
+				_this77.markupBB = true;
+				return _this77;
 			}
 
 			_createClass(Kusaba, [{
 				key: 'getCaptchaSrc',
-				value: function getCaptchaSrc(src, tNum) {
+				value: function getCaptchaSrc(src) {
 					return src.replace(/\?[^?]+$|$/, '?' + Math.random());
+				}
+			}, {
+				key: 'getImgRealName',
+				value: function getImgRealName(wrap) {
+					var el = $q('.filesize', wrap).textContent.split(',')[2];
+					return !el && _get(Kusaba.prototype.__proto__ || Object.getPrototypeOf(Kusaba.prototype), 'getImgRealName', this).call(this, wrap) || el.replace(')', '');
 				}
 			}, {
 				key: 'init',
@@ -19013,7 +20014,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.extrabtns > a, .extrabtns > span, #newposts_get, .replymode, .ui-resizable-handle, blockquote + a { display: none !important; }\n\t\t\t\t.ui-wrapper { display: inline-block; width: auto !important; height: auto !important; padding: 0 !important; }';
+					return '.extrabtns > a, .extrabtns > span, #newposts_get, .replymode,\n\t\t\t\t\t.ui-resizable-handle, blockquote + a { display: none !important; }\n\t\t\t\t.ui-wrapper { display: inline-block; width: auto !important;\n\t\t\t\t\theight: auto !important; padding: 0 !important; }';
 				}
 			}]);
 
@@ -19028,13 +20029,13 @@ true, true],
 			function TinyIB(prot, dm) {
 				_classCallCheck(this, TinyIB);
 
-				var _this71 = _possibleConstructorReturn(this, (TinyIB.__proto__ || Object.getPrototypeOf(TinyIB)).call(this, prot, dm));
+				var _this78 = _possibleConstructorReturn(this, (TinyIB.__proto__ || Object.getPrototypeOf(TinyIB)).call(this, prot, dm));
 
-				_this71.tinyib = true;
+				_this78.tinyib = true;
 
-				_this71.qError = 'body[align=center] div, div[style="margin-top: 50px;"]';
-				_this71.qPostMsg = '.message';
-				return _this71;
+				_this78.qError = 'body[align=center] div, div[style="margin-top: 50px;"]';
+				_this78.qPostMsg = '.message';
+				return _this78;
 			}
 
 			_createClass(TinyIB, [{
@@ -19074,24 +20075,24 @@ true, true],
 			function _0chanHk(prot, dm) {
 				_classCallCheck(this, _0chanHk);
 
-				var _this72 = _possibleConstructorReturn(this, (_0chanHk.__proto__ || Object.getPrototypeOf(_0chanHk)).call(this, prot, dm));
+				var _this79 = _possibleConstructorReturn(this, (_0chanHk.__proto__ || Object.getPrototypeOf(_0chanHk)).call(this, prot, dm));
 
-				_this72.cReply = 'block post';
-				_this72.qDForm = '#content > div > .threads-scroll-spy + div, .threads > div:first-of-type';
-				_this72.qForm = '.reply-form';
-				_this72.qImgInfo = 'figcaption';
-				_this72.qOmitted = 'div[style="margin-left: 25px; font-weight: bold;"]';
-				_this72.qOPost = '.post-op';
-				_this72.qPostHeader = '.post-header';
-				_this72.qPostImg = '.post-img-thumbnail';
-				_this72.qPostMsg = '.post-body-message';
-				_this72.qPostRef = '.post-id';
-				_this72.qRPost = '.block.post:not(.post-op)';
+				_this79.cReply = 'block post';
+				_this79.qDForm = '#content > div > .threads-scroll-spy + div, .threads > div:first-of-type';
+				_this79.qForm = '.reply-form';
+				_this79.qImgInfo = 'figcaption';
+				_this79.qOmitted = 'div[style="margin-left: 25px; font-weight: bold;"]';
+				_this79.qOPost = '.post-op';
+				_this79.qPostHeader = '.post-header';
+				_this79.qPostImg = '.post-img-thumbnail';
+				_this79.qPostMsg = '.post-body-message';
+				_this79.qPostRef = '.post-id';
+				_this79.qRPost = '.block.post:not(.post-op)';
 
-				_this72.docExt = '';
-				_this72.jsonBuilder = _0chanPostsBuilder;
-				_this72.res = '';
-				return _this72;
+				_this79.docExt = '';
+				_this79.JsonBuilder = _0chanPostsBuilder;
+				_this79.res = '';
+				return _this79;
 			}
 
 			_createClass(_0chanHk, [{
@@ -19111,7 +20112,7 @@ true, true],
 				}
 			}, {
 				key: 'getPostWrap',
-				value: function getPostWrap(el, isOp) {
+				value: function getPostWrap(el) {
 					return el.parentNode;
 				}
 			}, {
@@ -19136,8 +20137,8 @@ true, true],
 						var el = mutations[0].addedNodes[0];
 						if (el && el.id === 'app') {
 							initObserver.disconnect();
-							doc.defaultView.addEventListener('message', function (_ref63) {
-								var data = _ref63.data;
+							doc.defaultView.addEventListener('message', function (_ref101) {
+								var data = _ref101.data;
 
 								if (data !== '0chan-content-done') {
 									return;
@@ -19185,45 +20186,18 @@ true, true],
 
 		ibDomains['0chan.hk'] = _0chanHk;
 
-		var _02chNet = function (_BaseBoard6) {
-			_inherits(_02chNet, _BaseBoard6);
-
-			function _02chNet(prot, dm) {
-				_classCallCheck(this, _02chNet);
-
-				var _this73 = _possibleConstructorReturn(this, (_02chNet.__proto__ || Object.getPrototypeOf(_02chNet)).call(this, prot, dm));
-
-				_this73.qFormRedir = 'input[name="gb2"][value="thread"]';
-
-				_this73.ru = true;
-				_this73.timePattern = 'yyyy+nn+dd++w++hh+ii+ss';
-				return _this73;
-			}
-
-			_createClass(_02chNet, [{
-				key: 'getImgWrap',
-				value: function getImgWrap(img) {
-					return img.parentNode.parentNode.parentNode;
-				}
-			}]);
-
-			return _02chNet;
-		}(BaseBoard);
-
-		ibDomains['02ch.net'] = _02chNet;
-
 		var _02chSu = function (_Kusaba) {
 			_inherits(_02chSu, _Kusaba);
 
 			function _02chSu(prot, dm) {
 				_classCallCheck(this, _02chSu);
 
-				var _this74 = _possibleConstructorReturn(this, (_02chSu.__proto__ || Object.getPrototypeOf(_02chSu)).call(this, prot, dm));
+				var _this80 = _possibleConstructorReturn(this, (_02chSu.__proto__ || Object.getPrototypeOf(_02chSu)).call(this, prot, dm));
 
-				_this74.hasCatalog = true;
+				_this80.hasCatalog = true;
 
-				_this74._capUpdPromise = null;
-				return _this74;
+				_this80._capUpdPromise = null;
+				return _this80;
 			}
 
 			_createClass(_02chSu, [{
@@ -19243,26 +20217,26 @@ true, true],
 
 		ibDomains['02ch.su'] = _02chSu;
 
-		var _2chan = function (_BaseBoard7) {
-			_inherits(_2chan, _BaseBoard7);
+		var _2chan = function (_BaseBoard6) {
+			_inherits(_2chan, _BaseBoard6);
 
 			function _2chan(prot, dm) {
 				_classCallCheck(this, _2chan);
 
-				var _this75 = _possibleConstructorReturn(this, (_2chan.__proto__ || Object.getPrototypeOf(_2chan)).call(this, prot, dm));
+				var _this81 = _possibleConstructorReturn(this, (_2chan.__proto__ || Object.getPrototypeOf(_2chan)).call(this, prot, dm));
 
-				_this75.qDForm = 'form:not([enctype])';
-				_this75.qForm = 'form[enctype]';
-				_this75.qFormRedir = null;
-				_this75.qFormRules = '.chui';
-				_this75.qOmitted = 'font[color="#707070"]';
-				_this75.qPostImg = 'a[href$=".jpg"] > img, a[href$=".png"] > img, a[href$=".gif"] > img';
-				_this75.qPostRef = '.del';
-				_this75.qRPost = 'td:nth-child(2)';
+				_this81.qDForm = 'form:not([enctype])';
+				_this81.qForm = 'form[enctype]';
+				_this81.qFormRedir = null;
+				_this81.qFormRules = '.chui';
+				_this81.qOmitted = 'font[color="#707070"]';
+				_this81.qPostImg = 'a[href$=".jpg"] > img, a[href$=".png"] > img, a[href$=".gif"] > img';
+				_this81.qPostRef = '.del';
+				_this81.qRPost = 'td:nth-child(2)';
 
-				_this75.docExt = '.htm';
-				_this75.formParent = 'resto';
-				return _this75;
+				_this81.docExt = '.htm';
+				_this81.formParent = 'resto';
+				return _this81;
 			}
 
 			_createClass(_2chan, [{
@@ -19316,18 +20290,18 @@ true, true],
 
 		ibDomains['2chan.net'] = _2chan;
 
-		var _2chRip = function (_BaseBoard8) {
-			_inherits(_2chRip, _BaseBoard8);
+		var _2chRip = function (_BaseBoard7) {
+			_inherits(_2chRip, _BaseBoard7);
 
 			function _2chRip(prot, dm) {
 				_classCallCheck(this, _2chRip);
 
-				var _this76 = _possibleConstructorReturn(this, (_2chRip.__proto__ || Object.getPrototypeOf(_2chRip)).call(this, prot, dm));
+				var _this82 = _possibleConstructorReturn(this, (_2chRip.__proto__ || Object.getPrototypeOf(_2chRip)).call(this, prot, dm));
 
-				_this76.ru = true;
+				_this82.ru = true;
 
-				_this76._capUpdPromise = null;
-				return _this76;
+				_this82._capUpdPromise = null;
+				return _this82;
 			}
 
 			_createClass(_2chRip, [{
@@ -19357,25 +20331,25 @@ true, true],
 		ibDomains['2ch.rip'] = _2chRip;
 		ibDomains['dva-ch.com'] = _2chRip;
 
-		var _2chRu = function (_BaseBoard9) {
-			_inherits(_2chRu, _BaseBoard9);
+		var _2chRu = function (_BaseBoard8) {
+			_inherits(_2chRu, _BaseBoard8);
 
 			function _2chRu(prot, dm) {
 				_classCallCheck(this, _2chRu);
 
-				var _this77 = _possibleConstructorReturn(this, (_2chRu.__proto__ || Object.getPrototypeOf(_2chRu)).call(this, prot, dm));
+				var _this83 = _possibleConstructorReturn(this, (_2chRu.__proto__ || Object.getPrototypeOf(_2chRu)).call(this, prot, dm));
 
-				_this77.qPages = 'table[border="1"] td > a:last-of-type';
+				_this83.qPages = 'table[border="1"] td > a:last-of-type';
 
-				_this77.docExt = '.html';
-				_this77.hasPicWrap = true;
-				_this77.jsonSubmit = true;
-				_this77.markupBB = true;
-				_this77.multiFile = true;
-				_this77.ru = true;
+				_this83.docExt = '.html';
+				_this83.hasPicWrap = true;
+				_this83.jsonSubmit = true;
+				_this83.markupBB = true;
+				_this83.multiFile = true;
+				_this83.ru = true;
 
-				_this77._qTable = 'table:not(.postfiles)';
-				return _this77;
+				_this83._qTable = 'table:not(.postfiles)';
+				return _this83;
 			}
 
 			_createClass(_2chRu, [{
@@ -19391,7 +20365,7 @@ true, true],
 				}
 			}, {
 				key: 'getCaptchaSrc',
-				value: function getCaptchaSrc(src, tNum) {
+				value: function getCaptchaSrc() {
 					return '/' + this.b + '/captcha.fpl?' + Math.random();
 				}
 			}, {
@@ -19466,45 +20440,41 @@ true, true],
 			function _410chanOrg(prot, dm) {
 				_classCallCheck(this, _410chanOrg);
 
-				var _this78 = _possibleConstructorReturn(this, (_410chanOrg.__proto__ || Object.getPrototypeOf(_410chanOrg)).call(this, prot, dm));
+				var _this84 = _possibleConstructorReturn(this, (_410chanOrg.__proto__ || Object.getPrototypeOf(_410chanOrg)).call(this, prot, dm));
 
-				_this78.qFormRedir = 'input#noko';
-				_this78.qPages = '.pgstbl > table > tbody > tr > td:nth-child(2)';
+				_this84.qFormRedir = 'input#noko';
+				_this84.qPages = '.pgstbl > table > tbody > tr > td:nth-child(2)';
 
-				_this78.ru = true;
-				_this78.hasCatalog = true;
-				_this78.markupBB = false;
-				_this78.timePattern = 'dd+nn+yyyy++w++hh+ii+ss';
+				_this84.ru = true;
+				_this84.hasCatalog = true;
+				_this84.markupBB = false;
+				_this84.timePattern = 'dd+nn+yyyy++w++hh+ii+ss';
 
-				_this78._capUpdPromise = null;
-				return _this78;
+				_this84._capUpdPromise = null;
+				return _this84;
 			}
 
 			_createClass(_410chanOrg, [{
 				key: 'fixHTML',
 				value: function fixHTML(data, isForm) {
-					var _this79 = this;
-
 					var el = _get(_410chanOrg.prototype.__proto__ || Object.getPrototypeOf(_410chanOrg.prototype), 'fixHTML', this).call(this, data, isForm);
 					if (aib.t) {
 						try {
-							(function () {
-								var backBtn = $q(_this79.qThread + ' > span[style]', el);
-								if (backBtn) {
-									var modBtn = $q('a[accesskey="m"]', el);
-									$after(backBtn.parentElement, backBtn);
-									[modBtn.previousSibling, modBtn, modBtn.nextSibling].forEach(function (elm) {
-										return $after(backBtn.lastChild, elm);
-									});
-								}
-							})();
+							var backBtn = $q(this.qThread + ' > span[style]', el);
+							if (backBtn) {
+								var modBtn = $q('a[accesskey="m"]', el);
+								$after(backBtn.parentElement, backBtn);
+								[modBtn.previousSibling, modBtn, modBtn.nextSibling].forEach(function (elm) {
+									return $after(backBtn.lastChild, elm);
+								});
+							}
 						} catch (e) {}
 					}
 					return el;
 				}
 			}, {
 				key: 'getCaptchaSrc',
-				value: function getCaptchaSrc(src, tNum) {
+				value: function getCaptchaSrc(src) {
 					return src.replace(/\?[^?]+$|$/, '?board=' + aib.b + '&' + Math.random());
 				}
 			}, {
@@ -19522,7 +20492,7 @@ true, true],
 			}, {
 				key: 'updateCaptcha',
 				value: function updateCaptcha(cap) {
-					var _this80 = this;
+					var _this85 = this;
 
 					return cap.updateHelper('/api_adaptive.php?board=' + this.b, function (xhr) {
 						if (xhr.responseText === '1') {
@@ -19536,7 +20506,7 @@ true, true],
 							var img = $q('img', cap.parentEl);
 							var src = img.getAttribute('src');
 							img.src = '';
-							img.src = _this80.getCaptchaSrc(src);
+							img.src = _this85.getCaptchaSrc(src);
 						}
 					});
 				}
@@ -19562,45 +20532,45 @@ true, true],
 
 		ibDomains['410chan.org'] = _410chanOrg;
 
-		var _4chanOrg = function (_BaseBoard10) {
-			_inherits(_4chanOrg, _BaseBoard10);
+		var _4chanOrg = function (_BaseBoard9) {
+			_inherits(_4chanOrg, _BaseBoard9);
 
 			function _4chanOrg(prot, dm) {
 				_classCallCheck(this, _4chanOrg);
 
-				var _this81 = _possibleConstructorReturn(this, (_4chanOrg.__proto__ || Object.getPrototypeOf(_4chanOrg)).call(this, prot, dm));
+				var _this86 = _possibleConstructorReturn(this, (_4chanOrg.__proto__ || Object.getPrototypeOf(_4chanOrg)).call(this, prot, dm));
 
-				_this81.fch = true;
+				_this86.fch = true;
 
-				_this81.cReply = 'post reply';
-				_this81.qBan = 'strong[style="color: red;"]';
-				_this81.qClosed = '.archivedIcon';
-				_this81.qDelBut = '.deleteform > input[type="submit"]';
-				_this81.qError = '#errmsg';
-				_this81.qForm = 'form[name="post"]';
-				_this81.qFormRedir = null;
-				_this81.qImgInfo = '.fileText';
-				_this81.qOmitted = '.summary.desktop';
-				_this81.qOPost = '.op';
-				_this81.qPages = '.pagelist > .pages:not(.cataloglink) > a:last-of-type';
-				_this81.qPostHeader = '.postInfo';
-				_this81.qPostImg = '.fileThumb > img:not(.fileDeletedRes)';
-				_this81.qPostName = '.name';
-				_this81.qPostRef = '.postInfo > .postNum';
-				_this81.qPostSubj = '.subject';
+				_this86.cReply = 'post reply';
+				_this86.qBan = 'strong[style="color: red;"]';
+				_this86.qClosed = '.archivedIcon';
+				_this86.qDelBut = '.deleteform > input[type="submit"]';
+				_this86.qError = '#errmsg';
+				_this86.qForm = 'form[name="post"]';
+				_this86.qFormRedir = null;
+				_this86.qImgInfo = '.fileText';
+				_this86.qOmitted = '.summary.desktop';
+				_this86.qOPost = '.op';
+				_this86.qPages = '.pagelist > .pages:not(.cataloglink) > a:last-of-type';
+				_this86.qPostHeader = '.postInfo';
+				_this86.qPostImg = '.fileThumb > img:not(.fileDeletedRes)';
+				_this86.qPostName = '.name';
+				_this86.qPostRef = '.postInfo > .postNum';
+				_this86.qPostSubj = '.subject';
 
-				_this81.anchor = '#p';
-				_this81.docExt = '';
-				_this81.firstPage = 1;
-				_this81.formParent = 'resto';
-				_this81.hasCatalog = true;
-				_this81.hasTextLinks = true;
-				_this81.jsonBuilder = _4chanPostsBuilder;
-				_this81.res = 'thread/';
-				_this81.timePattern = 'nn+dd+yy+w+hh+ii-?s?s?';
+				_this86.anchor = '#p';
+				_this86.docExt = '';
+				_this86.firstPage = 1;
+				_this86.formParent = 'resto';
+				_this86.hasCatalog = true;
+				_this86.hasTextLinks = true;
+				_this86.JsonBuilder = _4chanPostsBuilder;
+				_this86.res = 'thread/';
+				_this86.timePattern = 'nn+dd+yy+w+hh+ii-?s?s?';
 
-				_this81._qTable = '.replyContainer';
-				return _this81;
+				_this86._qTable = '.replyContainer';
+				return _this86;
 			}
 
 			_createClass(_4chanOrg, [{
@@ -19611,7 +20581,7 @@ true, true],
 			}, {
 				key: 'fixHTMLHelper',
 				value: function fixHTMLHelper(str) {
-					return str.replace(/<\/?wbr>/g, '').replace(/ \(OP\)<\/a/g, '</a');
+					return str.replace(/<span>([^<]+)(?:<\/?wbr>)?([^<]+)<\/span> \[<a [^>]+>Embed<\/a>\]/g, '$1$2').replace(/<\/?wbr>/g, '').replace(/ \(OP\)<\/a/g, '</a');
 				}
 			}, {
 				key: 'getImgInfo',
@@ -19636,7 +20606,7 @@ true, true],
 				}
 			}, {
 				key: 'getPostWrap',
-				value: function getPostWrap(el, isOp) {
+				value: function getPostWrap(el) {
 					return el.parentNode;
 				}
 			}, {
@@ -19668,6 +20638,7 @@ true, true],
 				key: 'init',
 				value: function init() {
 					Cfg.findImgFile = 0;
+					Cfg.txtBtnsLoc = 0;
 					var el = $id('styleSelector');
 					if (el) {
 						el.setAttribute('onchange', 'setActiveStyleSheet(this.value);');
@@ -19687,12 +20658,12 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.backlink, #blotter, .extButton, hr.desktop, .navLinks, .postMenuBtn, #togglePostFormLink { display: none !important; }\n\t\t\t\t#bottomReportBtn { display: initial !important; }\n\t\t\t\t.postForm { display: table !important; width: auto !important; }\n\t\t\t\ttextarea { margin-right: 0 !important; }';
+					return '.backlink, #blotter, .extButton, hr.desktop, .navLinks, .postMenuBtn,\n\t\t\t\t\t#togglePostFormLink { display: none !important; }\n\t\t\t\t#bottomReportBtn { display: initial !important; }\n\t\t\t\t.postForm { display: table !important; width: auto !important; }\n\t\t\t\ttextarea { margin-right: 0 !important; }\n\t\t\t\t' + (Cfg.widePosts ? '.sideArrows { display: none; }' : '');
 				}
 			}, {
 				key: 'markupTags',
 				get: function get() {
-					return ['', '', '', '', '[spoiler'];
+					return ['', '', '', '', $q('input[type="checkbox"][name="spoiler"]') ? '[spoiler' : ''];
 				}
 			}, {
 				key: 'updateCaptcha',
@@ -19700,38 +20671,36 @@ true, true],
 					var value = null;
 					var tr = $id('captchaFormPart');
 					if (tr) {
-						(function () {
-							var capClick = $bEnd(docBody, '<div onclick="initRecaptcha();"></div>');
-							var altCapClick = $bEnd(docBody, '<div onclick="QR.initCaptchaAlt();"></div>');
-							var waitForReload = function waitForReload() {
-								return setTimeout(function () {
-									var input = $id('recaptcha_response_field');
-									if (input) {
-										input.tabIndex = 5;
-									} else {
-										waitForReload();
-									}
-								}, 1e3);
-							};
-							value = function value() {
-								if (!Cfg.cap4chanAlt || !pr.tNum) {
-									$replace($q('#g-recaptcha, #qrCaptchaContainerAlt'), '<div id="g-recaptcha"></div>');
-									capClick.click();
-									tr.removeAttribute('onclick');
-									return null;
+						var capClick = $bEnd(docBody, '<div onclick="initRecaptcha();"></div>');
+						var altCapClick = $bEnd(docBody, '<div onclick="QR.initCaptchaAlt();"></div>');
+						var waitForReload = function waitForReload() {
+							return setTimeout(function () {
+								var input = $id('recaptcha_response_field');
+								if (input) {
+									input.tabIndex = 5;
+								} else {
+									waitForReload();
 								}
-								var container = $id('qrCaptchaContainerAlt');
-								if (container) {
-									container.click();
-									return null;
-								}
-								$replace($id('g-recaptcha'), '<div id="qrCaptchaContainerAlt"></div>');
-								altCapClick.click();
-								tr.setAttribute('onclick', "if(event.target.tagName !== 'INPUT') { Recaptcha.reload(); }");
-								waitForReload();
+							}, 1e3);
+						};
+						value = function value() {
+							if (!Cfg.cap4chanAlt || !pr.tNum) {
+								$replace($q('#g-recaptcha, #qrCaptchaContainerAlt'), '<div id="g-recaptcha"></div>');
+								capClick.click();
+								tr.removeAttribute('onclick');
 								return null;
-							};
-						})();
+							}
+							var container = $id('qrCaptchaContainerAlt');
+							if (container) {
+								container.click();
+								return null;
+							}
+							$replace($id('g-recaptcha'), '<div id="qrCaptchaContainerAlt"></div>');
+							altCapClick.click();
+							tr.setAttribute('onclick', "if(event.target.tagName !== 'INPUT') Recaptcha.reload();");
+							waitForReload();
+							return null;
+						};
 					}
 					Object.defineProperty(this, 'updateCaptcha', { value: value });
 					return value;
@@ -19749,18 +20718,18 @@ true, true],
 			function _8chNet(prot, dm) {
 				_classCallCheck(this, _8chNet);
 
-				var _this82 = _possibleConstructorReturn(this, (_8chNet.__proto__ || Object.getPrototypeOf(_8chNet)).call(this, prot, dm));
+				var _this87 = _possibleConstructorReturn(this, (_8chNet.__proto__ || Object.getPrototypeOf(_8chNet)).call(this, prot, dm));
 
-				_this82._8ch = true;
+				_this87._8ch = true;
 
-				_this82._capUpdPromise = null;
-				return _this82;
+				_this87._capUpdPromise = null;
+				return _this87;
 			}
 
 			_createClass(_8chNet, [{
 				key: 'initCaptcha',
 				value: function initCaptcha(cap) {
-					$q('td', cap.parentEl).innerHTML = '\n\t\t\t<input placeholder="{ Lng.cap[lang] }" class="captcha_text" type="text" name="captcha_text" size="25" maxlength="8" autocomplete="off">\n\t\t\t<input class="captcha_cookie" name="captcha_cookie" type="hidden">\n\t\t\t<div class="captcha_html"></div>';
+					$q('td', cap.parentEl).innerHTML = '<input placeholder="' + Lng.cap[lang] + '" class="captcha_text" type="text" ' + 'name="captcha_text" size="25" maxlength="8" autocomplete="off">' + '<input class="captcha_cookie" name="captcha_cookie" type="hidden">' + '<div class="captcha_html"></div>';
 					cap.textEl = $q('.captcha_text', cap.parentEl);
 					return this.updateCaptcha(cap, true);
 				}
@@ -19796,12 +20765,12 @@ true, true],
 			function _55chan(prot, dm) {
 				_classCallCheck(this, _55chan);
 
-				var _this83 = _possibleConstructorReturn(this, (_55chan.__proto__ || Object.getPrototypeOf(_55chan)).call(this, prot, dm));
+				var _this88 = _possibleConstructorReturn(this, (_55chan.__proto__ || Object.getPrototypeOf(_55chan)).call(this, prot, dm));
 
-				_this83._8ch = null;
+				_this88._8ch = null;
 
-				_this83.qFormRules = '.regras';
-				return _this83;
+				_this88.qFormRules = '.regras';
+				return _this88;
 			}
 
 			_createClass(_55chan, [{
@@ -19816,8 +20785,8 @@ true, true],
 
 		ibDomains['55chan.org'] = _55chan;
 
-		var _7chanOrg = function (_BaseBoard11) {
-			_inherits(_7chanOrg, _BaseBoard11);
+		var _7chanOrg = function (_BaseBoard10) {
+			_inherits(_7chanOrg, _BaseBoard10);
 
 			function _7chanOrg() {
 				_classCallCheck(this, _7chanOrg);
@@ -19837,26 +20806,26 @@ true, true],
 
 		ibDomains['7chan.org'] = _7chanOrg;
 
-		var Arhivach = function (_BaseBoard12) {
-			_inherits(Arhivach, _BaseBoard12);
+		var Arhivach = function (_BaseBoard11) {
+			_inherits(Arhivach, _BaseBoard11);
 
 			function Arhivach(prot, dm) {
 				_classCallCheck(this, Arhivach);
 
-				var _this85 = _possibleConstructorReturn(this, (Arhivach.__proto__ || Object.getPrototypeOf(Arhivach)).call(this, prot, dm));
+				var _this90 = _possibleConstructorReturn(this, (Arhivach.__proto__ || Object.getPrototypeOf(Arhivach)).call(this, prot, dm));
 
-				_this85.cReply = 'post';
-				_this85.qDForm = 'body > .container-fluid';
-				_this85.qPostHeader = '.post_head';
-				_this85.qPostImg = '.post_image > img';
-				_this85.qPostMsg = '.post_comment_body';
-				_this85.qPostRef = '.post_id, .post_head > b';
-				_this85.qPostSubj = '.post_subject';
-				_this85.qRPost = '.post:not(:first-child):not([postid=""])';
+				_this90.cReply = 'post';
+				_this90.qDForm = 'body > .container-fluid';
+				_this90.qPostHeader = '.post_head';
+				_this90.qPostImg = '.post_image > img';
+				_this90.qPostMsg = '.post_comment_body';
+				_this90.qPostRef = '.post_id, .post_head > b';
+				_this90.qPostSubj = '.post_subject';
+				_this90.qRPost = '.post:not(:first-child):not([postid=""])';
 
-				_this85.docExt = '';
-				_this85.res = 'thread/';
-				return _this85;
+				_this90.docExt = '';
+				_this90.res = 'thread/';
+				return _this90;
 			}
 
 			_createClass(Arhivach, [{
@@ -19865,8 +20834,8 @@ true, true],
 					var el = _get(Arhivach.prototype.__proto__ || Object.getPrototypeOf(Arhivach.prototype), 'fixHTML', this).call(this, data, isForm);
 					try {
 						var _els4 = $Q('.expand_image', el);
-						for (var _i49 = 0, tLen = _els4.length; _i49 < tLen; ++_i49) {
-							_els4[_i49].href = _els4[_i49].getAttribute('onclick').match(/http:\/[^']+/)[0];
+						for (var _i51 = 0, tLen = _els4.length; _i51 < tLen; ++_i51) {
+							_els4[_i51].href = _els4[_i51].getAttribute('onclick').match(/http:\/[^']+/)[0];
 						}
 					} catch (e) {}
 					return el;
@@ -19899,7 +20868,7 @@ true, true],
 				}
 			}, {
 				key: 'getThrUrl',
-				value: function getThrUrl(b, tNum) {
+				value: function getThrUrl() {
 					return $q('link[rel="canonical"]', doc.head).href;
 				}
 			}, {
@@ -19940,7 +20909,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.de-cfg-inptxt, .de-cfg-label, .de-cfg-select { display: inline; width: auto; height: auto !important; font: 13px/15px arial !important; }\n\t\t\t\t.de-cfg-label.de-block { display: block; }\n\t\t\t\t.post_replies, .post_num, .poster_sage, .post[postid=""] { display: none !important; }\n\t\t\t\t.post { overflow-x: auto !important; }';
+					return '.de-cfg-inptxt, .de-cfg-label, .de-cfg-select { display: inline; width: auto;\n\t\t\t\t\theight: auto !important; font: 13px/15px arial !important; }\n\t\t\t\t.de-cfg-label.de-block { display: block; }\n\t\t\t\t.post_replies, .post_num, .poster_sage, .post[postid=""] { display: none !important; }\n\t\t\t\t.post { overflow-x: auto !important; }';
 				}
 			}, {
 				key: 'isArchived',
@@ -19960,14 +20929,12 @@ true, true],
 			function Brchan(prot, dm) {
 				_classCallCheck(this, Brchan);
 
-				var _this86 = _possibleConstructorReturn(this, (Brchan.__proto__ || Object.getPrototypeOf(Brchan)).call(this, prot, dm));
+				var _this91 = _possibleConstructorReturn(this, (Brchan.__proto__ || Object.getPrototypeOf(Brchan)).call(this, prot, dm));
 
-				_this86.brchan = true;
+				_this91.qPostTrip = '.poster_id';
 
-				_this86.qPostTrip = '.poster_id';
-
-				_this86.markupBB = true;
-				return _this86;
+				_this91.markupBB = true;
+				return _this91;
 			}
 
 			_createClass(Brchan, [{
@@ -19976,30 +20943,13 @@ true, true],
 					return img.parentNode.parentNode.parentNode;
 				}
 			}, {
-				key: 'getSage',
-				value: function getSage(post) {
-					return !!$q('.sage', post);
-				}
-			}, {
 				key: 'init',
 				value: function init() {
 					_get(Brchan.prototype.__proto__ || Object.getPrototypeOf(Brchan.prototype), 'init', this).call(this);
-					defaultCfg.timePattern = 'dd+nn+yy+++++hh+ii+ss';
-					defaultCfg.timeRPattern = '_d/_n/_y(_w)_h:_i:_s';
 					if (Cfg.ajaxUpdThr) {
 						locStorage.auto_thread_update = false;
 					}
-					var el1 = $id('upload_embed');
-					var el2 = $id('upload');
-					if (el1 && el2) {
-						$after(el2, el1);
-					}
 					return false;
-				}
-			}, {
-				key: 'css',
-				get: function get() {
-					return _get(Brchan.prototype.__proto__ || Object.getPrototypeOf(Brchan.prototype), 'css', this).replace('.de-btn-rep,', '') + 'input[name="embed"] { width: 100% !important; }\n\t\t\t\t#upload_embed > td > .unimportant.hint { display: none; }\n\t\t\t\t.reflink::after { content: "" !important; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -20012,8 +20962,46 @@ true, true],
 		}(Vichan);
 
 		ibDomains['brchan.org'] = Brchan;
-		ibDomains['brchanansdnhvvnm.onion'] = Brchan;
-		ibDomains['lolifox.org'] = Brchan;
+
+		var Lolifox = function (_Brchan) {
+			_inherits(Lolifox, _Brchan);
+
+			function Lolifox() {
+				_classCallCheck(this, Lolifox);
+
+				return _possibleConstructorReturn(this, (Lolifox.__proto__ || Object.getPrototypeOf(Lolifox)).apply(this, arguments));
+			}
+
+			_createClass(Lolifox, [{
+				key: 'getImgWrap',
+				value: function getImgWrap(img) {
+					return img.parentNode.parentNode;
+				}
+			}, {
+				key: 'getSage',
+				value: function getSage(post) {
+					return !!$q('.sage', post);
+				}
+			}, {
+				key: 'init',
+				value: function init() {
+					_get(Lolifox.prototype.__proto__ || Object.getPrototypeOf(Lolifox.prototype), 'init', this).call(this);
+					defaultCfg.timePattern = 'dd+nn+yy+++++hh+ii+ss';
+					defaultCfg.timeRPattern = '_d/_n/_y(_w)_h:_i:_s';
+					return false;
+				}
+			}, {
+				key: 'css',
+				get: function get() {
+					return _get(Lolifox.prototype.__proto__ || Object.getPrototypeOf(Lolifox.prototype), 'css', this) + ((Cfg.noSpoilers ? 'span.spoiler, span.spoiler:hover { ' + (Cfg.noSpoilers === 1 ? 'color: #F5F5F5 !important; background-color: #888 !important' : 'color: inherit !important') + '; transition: none !important; }' : '') + '\n\t\t\t#thread-interactions { display: none; }\n\t\t\t.reflink::after { content: "" !important; }');
+				}
+			}]);
+
+			return Lolifox;
+		}(Brchan);
+
+		ibDomains['lolifox.org'] = Lolifox;
+		ibDomains['brchanansdnhvvnm.onion'] = Lolifox;
 
 		var Diochan = function (_Kusaba3) {
 			_inherits(Diochan, _Kusaba3);
@@ -20021,10 +21009,10 @@ true, true],
 			function Diochan(prot, dm) {
 				_classCallCheck(this, Diochan);
 
-				var _this87 = _possibleConstructorReturn(this, (Diochan.__proto__ || Object.getPrototypeOf(Diochan)).call(this, prot, dm));
+				var _this93 = _possibleConstructorReturn(this, (Diochan.__proto__ || Object.getPrototypeOf(Diochan)).call(this, prot, dm));
 
-				_this87.multiFile = true;
-				return _this87;
+				_this93.multiFile = true;
+				return _this93;
 			}
 
 			_createClass(Diochan, [{
@@ -20046,35 +21034,35 @@ true, true],
 
 		ibDomains['diochan.com'] = Diochan;
 
-		var Dobrochan = function (_BaseBoard13) {
-			_inherits(Dobrochan, _BaseBoard13);
+		var Dobrochan = function (_BaseBoard12) {
+			_inherits(Dobrochan, _BaseBoard12);
 
 			function Dobrochan(prot, dm) {
 				_classCallCheck(this, Dobrochan);
 
-				var _this88 = _possibleConstructorReturn(this, (Dobrochan.__proto__ || Object.getPrototypeOf(Dobrochan)).call(this, prot, dm));
+				var _this94 = _possibleConstructorReturn(this, (Dobrochan.__proto__ || Object.getPrototypeOf(Dobrochan)).call(this, prot, dm));
 
-				_this88.dobr = true;
+				_this94.dobr = true;
 
-				_this88.qClosed = 'img[src="/images/locked.png"]';
-				_this88.qDForm = 'form[action*="delete"]';
-				_this88.qError = '.post-error, h2';
-				_this88.qFormRedir = 'select[name="goto"]';
-				_this88.qImgInfo = '.fileinfo';
-				_this88.qOmitted = '.abbrev > span:last-of-type';
-				_this88.qPages = '.pages > tbody > tr > td';
-				_this88.qPostMsg = '.postbody';
-				_this88.qPostSubj = '.replytitle';
-				_this88.qTrunc = '.abbrev > span:first-of-type';
+				_this94.qClosed = 'img[src="/images/locked.png"]';
+				_this94.qDForm = 'form[action*="delete"]';
+				_this94.qError = '.post-error, h2';
+				_this94.qFormRedir = 'select[name="goto"]';
+				_this94.qImgInfo = '.fileinfo';
+				_this94.qOmitted = '.abbrev > span:last-of-type';
+				_this94.qPages = '.pages > tbody > tr > td';
+				_this94.qPostMsg = '.postbody';
+				_this94.qPostSubj = '.replytitle';
+				_this94.qTrunc = '.abbrev > span:first-of-type';
 
-				_this88.anchor = '#i';
-				_this88.formParent = 'thread_id';
-				_this88.hasPicWrap = true;
-				_this88.jsonBuilder = DobrochanPostsBuilder;
-				_this88.multiFile = true;
-				_this88.ru = true;
-				_this88.timePattern = 'dd+m+?+?+?+?+?+yyyy++w++hh+ii-?s?s?';
-				return _this88;
+				_this94.anchor = '#i';
+				_this94.formParent = 'thread_id';
+				_this94.hasPicWrap = true;
+				_this94.JsonBuilder = DobrochanPostsBuilder;
+				_this94.multiFile = true;
+				_this94.ru = true;
+				_this94.timePattern = 'dd+m+?+?+?+?+?+yyyy++w++hh+ii-?s?s?';
+				return _this94;
 			}
 
 			_createClass(Dobrochan, [{
@@ -20122,7 +21110,7 @@ true, true],
 				}
 			}, {
 				key: 'getOmitted',
-				value: function getOmitted(el, len) {
+				value: function getOmitted(el) {
 					while (el) {
 						var m = el.textContent.match(/(\d+) posts are omitted/);
 						if (m) {
@@ -20153,7 +21141,7 @@ true, true],
 						});
 						return true;
 					}
-					$script('window.UploadProgress = function() {}');
+					$script('window.UploadProgress = Function.prototype');
 					var el = $id('postform');
 					if (el) {
 						el.appendChild($q('.rules'));
@@ -20183,14 +21171,14 @@ true, true],
 						return null;
 					}
 					if (cap.textEl) {
-						var src = img.getAttribute('src').split('/').slice(0, -1).join('/') + '/' + Date.now() + '.png';
+						var src = img.getAttribute('src').split('/').slice(0, -1).join('/') + ('/' + Date.now() + '.png');
 						img.src = '';
 						img.src = src;
 						cap.textEl.value = '';
 					} else if (isErr) {
-						var _el8 = img.parentNode;
-						_el8.innerHTML = '';
-						_el8.appendChild(img);
+						var el = img.parentNode;
+						el.innerHTML = '';
+						el.appendChild(img);
 						img.insertAdjacentHTML('afterend', '<br><input placeholder="Капча" autocomplete="off"' + ' id="captcha" name="captcha" size="35" type="text">');
 						$show(img);
 						cap.isAdded = false;
@@ -20213,32 +21201,32 @@ true, true],
 		ibDomains['dobrochan.org'] = Dobrochan;
 		ibDomains['dobrochan.ru'] = Dobrochan;
 
-		var Ernstchan = function (_BaseBoard14) {
-			_inherits(Ernstchan, _BaseBoard14);
+		var Ernstchan = function (_BaseBoard13) {
+			_inherits(Ernstchan, _BaseBoard13);
 
 			function Ernstchan(prot, dm) {
 				_classCallCheck(this, Ernstchan);
 
-				var _this89 = _possibleConstructorReturn(this, (Ernstchan.__proto__ || Object.getPrototypeOf(Ernstchan)).call(this, prot, dm));
+				var _this95 = _possibleConstructorReturn(this, (Ernstchan.__proto__ || Object.getPrototypeOf(Ernstchan)).call(this, prot, dm));
 
-				_this89.cReply = 'post';
-				_this89.qError = '.error';
-				_this89.qFormRedir = 'input[name="gb2"][value="thread"]';
-				_this89.qOPost = '.thread_OP';
-				_this89.qPages = '.pagelist > li:nth-last-child(2)';
-				_this89.qPostHeader = '.post_head';
-				_this89.qPostMsg = '.text';
-				_this89.qPostSubj = '.subject';
-				_this89.qPostTrip = '.tripcode';
-				_this89.qRPost = '.thread_reply';
-				_this89.qTrunc = '.tldr';
+				_this95.cReply = 'post';
+				_this95.qError = '.error';
+				_this95.qFormRedir = 'input[name="gb2"][value="thread"]';
+				_this95.qOPost = '.thread_OP';
+				_this95.qPages = '.pagelist > li:nth-last-child(2)';
+				_this95.qPostHeader = '.post_head';
+				_this95.qPostMsg = '.text';
+				_this95.qPostSubj = '.subject';
+				_this95.qPostTrip = '.tripcode';
+				_this95.qRPost = '.thread_reply';
+				_this95.qTrunc = '.tldr';
 
-				_this89.docExt = '';
-				_this89.firstPage = 1;
-				_this89.markupBB = true;
-				_this89.multiFile = true;
-				_this89.res = 'thread/';
-				return _this89;
+				_this95.docExt = '';
+				_this95.firstPage = 1;
+				_this95.markupBB = true;
+				_this95.multiFile = true;
+				_this95.res = 'thread/';
+				return _this95;
 			}
 
 			_createClass(Ernstchan, [{
@@ -20278,7 +21266,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.content > hr, .de-parea > hr, .de-pview > .doubledash { display: none !important }\n\t\t\t\t.de-pview > .post { margin-left: 0; border: none; }\n\t\t\t\t#de-win-reply { float:left; margin-left:2em }';
+					return '.content > hr, .de-parea > hr, .de-pview > .doubledash { display: none !important }\n\t\t\t\t.de-pview > .post { margin-left: 0; border: none; }\n\t\t\t\t#de-win-reply { float:left; margin-left:2em }\n\t\t\t\t' + (Cfg.widePosts ? '.doubledash { display: none; }\n\t\t\t\t\t.thread_reply { float: none; }' : '');
 				}
 			}]);
 
@@ -20287,53 +21275,30 @@ true, true],
 
 		ibDomains['ernstchan.com'] = Ernstchan;
 
-		var Ichan = function (_Kusaba4) {
-			_inherits(Ichan, _Kusaba4);
-
-			function Ichan() {
-				_classCallCheck(this, Ichan);
-
-				return _possibleConstructorReturn(this, (Ichan.__proto__ || Object.getPrototypeOf(Ichan)).apply(this, arguments));
-			}
-
-			_createClass(Ichan, [{
-				key: 'init',
-				value: function init() {
-					_get(Ichan.prototype.__proto__ || Object.getPrototypeOf(Ichan.prototype), 'init', this).call(this);
-					var el = $q('div[id^="thread"]');
-					if (el) {
-						var node = void 0;
-						while ((node = el.nextElementSibling) && node.tagName === 'TABLE') {
-							el.appendChild(node);
-						}
-					}
-				}
-			}]);
-
-			return Ichan;
-		}(Kusaba);
-
-		ibDomains['ichan.net'] = Ichan;
-
-		var Iichan = function (_BaseBoard15) {
-			_inherits(Iichan, _BaseBoard15);
+		var Iichan = function (_BaseBoard14) {
+			_inherits(Iichan, _BaseBoard14);
 
 			function Iichan(prot, dm) {
 				_classCallCheck(this, Iichan);
 
-				var _this91 = _possibleConstructorReturn(this, (Iichan.__proto__ || Object.getPrototypeOf(Iichan)).call(this, prot, dm));
+				var _this96 = _possibleConstructorReturn(this, (Iichan.__proto__ || Object.getPrototypeOf(Iichan)).call(this, prot, dm));
 
-				_this91.iichan = true;
+				_this96.iichan = true;
 
-				_this91.hasCatalog = true;
-				return _this91;
+				_this96.hasCatalog = true;
+				return _this96;
 			}
 
 			_createClass(Iichan, [{
+				key: 'getImgRealName',
+				value: function getImgRealName(wrap) {
+					return $q('.filesize > em', wrap).textContent.split(',')[2] || _get(Iichan.prototype.__proto__ || Object.getPrototypeOf(Iichan.prototype), 'getImgRealName', this).call(this, wrap);
+				}
+			}, {
 				key: 'init',
 				value: function init() {
 					defaultCfg.addSageBtn = 0;
-					$script('highlight = function() {}');
+					$script('highlight = Function.prototype');
 					return false;
 				}
 			}, {
@@ -20359,7 +21324,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return (!this.t ? '' : '#de-main { margin-top: -37px; } .logo { margin-bottom: 14px; }') + '\n\t\t\t.iichan-hide-thread-btn { display: none; }';
+					return (!this.t ? '' : '#de-main { margin-top: -37px; } .logo { margin-bottom: 14px; }') + '\n\t\t\t.iichan-hide-thread-btn { display: none; }\n\t\t\t.replypage div[id^="thread"] span.reflink::after { content: none; }';
 				}
 			}, {
 				key: 'isArchived',
@@ -20373,41 +21338,41 @@ true, true],
 
 		ibDomains['iichan.hk'] = Iichan;
 
-		var Krautchan = function (_BaseBoard16) {
-			_inherits(Krautchan, _BaseBoard16);
+		var Krautchan = function (_BaseBoard15) {
+			_inherits(Krautchan, _BaseBoard15);
 
 			function Krautchan(prot, dm) {
 				_classCallCheck(this, Krautchan);
 
-				var _this92 = _possibleConstructorReturn(this, (Krautchan.__proto__ || Object.getPrototypeOf(Krautchan)).call(this, prot, dm));
+				var _this97 = _possibleConstructorReturn(this, (Krautchan.__proto__ || Object.getPrototypeOf(Krautchan)).call(this, prot, dm));
 
-				_this92.krau = true;
+				_this97.krau = true;
 
-				_this92.cReply = 'postreply';
-				_this92.qBan = '.ban_mark';
-				_this92.qClosed = 'img[src="/images/locked.gif"]';
-				_this92.qDForm = 'form[action*="delete"]';
-				_this92.qError = '.message_text';
-				_this92.qFormRedir = 'input#forward_thread';
-				_this92.qFormRules = '#rules_row';
-				_this92.qImgInfo = '.fileinfo';
-				_this92.qOmitted = '.omittedinfo';
-				_this92.qPages = 'table[border="1"] > tbody > tr > td > a:nth-last-child(2) + a';
-				_this92.qPostHeader = '.postheader';
-				_this92.qPostImg = 'img[id^="thumbnail_"]';
-				_this92.qPostRef = '.postnumber';
-				_this92.qPostSubj = '.postsubject';
-				_this92.qRPost = '.postreply';
-				_this92.qTrunc = 'p[id^="post_truncated"]';
+				_this97.cReply = 'postreply';
+				_this97.qBan = '.ban_mark';
+				_this97.qClosed = 'img[src="/images/locked.gif"]';
+				_this97.qDForm = 'form[action*="delete"]';
+				_this97.qError = '.message_text';
+				_this97.qFormRedir = 'input#forward_thread';
+				_this97.qFormRules = '#rules_row';
+				_this97.qImgInfo = '.fileinfo';
+				_this97.qOmitted = '.omittedinfo';
+				_this97.qPages = 'table[border="1"] > tbody > tr > td > a:nth-last-child(2) + a';
+				_this97.qPostHeader = '.postheader';
+				_this97.qPostImg = 'img[id^="thumbnail_"]';
+				_this97.qPostRef = '.postnumber';
+				_this97.qPostSubj = '.postsubject';
+				_this97.qRPost = '.postreply';
+				_this97.qTrunc = 'p[id^="post_truncated"]';
 
-				_this92.hasCatalog = true;
-				_this92.hasPicWrap = true;
-				_this92.hasTextLinks = true;
-				_this92.markupBB = true;
-				_this92.multiFile = true;
-				_this92.res = 'thread-';
-				_this92.timePattern = 'yyyy+nn+dd+hh+ii+ss+--?-?-?-?-?';
-				return _this92;
+				_this97.hasCatalog = true;
+				_this97.hasPicWrap = true;
+				_this97.hasTextLinks = true;
+				_this97.markupBB = true;
+				_this97.multiFile = true;
+				_this97.res = 'thread-';
+				_this97.timePattern = 'yyyy+nn+dd+hh+ii+ss+--?-?-?-?-?';
+				return _this97;
 			}
 
 			_createClass(Krautchan, [{
@@ -20419,8 +21384,8 @@ true, true],
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i50 = 0; _i50 < 4; ++_i50) {
-						str += '<div' + (_i50 ? ' style="display: none;"' : '') + '><input type="file" name="file_' + _i50 + '" tabindex="7"></div>';
+					for (var _i52 = 0; _i52 < 4; ++_i52) {
+						str += '<div' + (_i52 ? ' style="display: none;"' : '') + '>' + ('<input type="file" name="file_' + _i52 + '" tabindex="7"></div>');
 					}
 					el.innerHTML = str;
 					el.removeAttribute('id');
@@ -20448,7 +21413,7 @@ true, true],
 			}, {
 				key: 'init',
 				value: function init() {
-					$script('highlightPost = function() {}');
+					$script('highlightPost = Function.prototype');
 					return false;
 				}
 			}, {
@@ -20456,8 +21421,8 @@ true, true],
 				value: function initCaptcha(cap) {
 					cap.hasCaptcha = false;
 					var scripts = $Q('script:not([src])', doc);
-					for (var _i51 = 0, _len11 = scripts.length; _i51 < _len11; ++_i51) {
-						var m = scripts[_i51].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
+					for (var _i53 = 0, _len11 = scripts.length; _i53 < _len11; ++_i53) {
+						var m = scripts[_i53].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
 						if (m) {
 							if (m[1] === 'true') {
 								cap.hasCaptcha = true;
@@ -20491,20 +21456,21 @@ true, true],
 					}
 					var sessionId = null;
 					var cookie = doc.cookie;
-					if (cookie.includes('desuchan.session')) {
-						for (var _iterator36 = cookie.split(';'), _isArray36 = Array.isArray(_iterator36), _i52 = 0, _iterator36 = _isArray36 ? _iterator36 : _iterator36[Symbol.iterator]();;) {
-							var _ref64;
 
-							if (_isArray36) {
-								if (_i52 >= _iterator36.length) break;
-								_ref64 = _iterator36[_i52++];
+					if (cookie.includes('desuchan.session')) {
+						for (var _iterator37 = cookie.split(';'), _isArray37 = Array.isArray(_iterator37), _i54 = 0, _iterator37 = _isArray37 ? _iterator37 : _iterator37[Symbol.iterator]();;) {
+							var _ref102;
+
+							if (_isArray37) {
+								if (_i54 >= _iterator37.length) break;
+								_ref102 = _iterator37[_i54++];
 							} else {
-								_i52 = _iterator36.next();
-								if (_i52.done) break;
-								_ref64 = _i52.value;
+								_i54 = _iterator37.next();
+								if (_i54.done) break;
+								_ref102 = _i54.value;
 							}
 
-							var c = _ref64;
+							var c = _ref102;
 
 							var m = c.match(/^\s*desuchan\.session=(.*)$/);
 							if (m) {
@@ -20548,7 +21514,7 @@ true, true],
 			}, {
 				key: 'css',
 				get: function get() {
-					return 'img[src$="button-expand.gif"], img[src$="button-close.gif"], body > center > hr, form > div:first-of-type > hr, h2, .sage { display: none; }\n\t\t\t\t.de-thr-hid { float: none; }\n\t\t\t\t.de-video-obj-inline { margin-left: 5px; }\t\t\t\tdiv[id^="Wz"] { z-index: 10000 !important; }\n\t\t\t\tform[action="/paint"] > select { width: 105px; }\n\t\t\t\tform[action="/paint"] > input[type="text"] { width: 24px !important; }';
+					return 'img[src$="button-expand.gif"], img[src$="button-close.gif"], body > center > hr,\n\t\t\t\t\tform > div:first-of-type > hr, h2, .sage { display: none; }\n\t\t\t\t.de-thr-hid { float: none; }\n\t\t\t\t.de-video-obj-inline { margin-left: 5px; }\n\t\t\t\tdiv[id^="Wz"] { z-index: 10000 !important; }\n\t\t\t\tform[action="/paint"] > select { width: 105px; }\n\t\t\t\tform[action="/paint"] > input[type="text"] { width: 24px !important; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -20568,10 +21534,10 @@ true, true],
 			function Kropyvach(prot, dm) {
 				_classCallCheck(this, Kropyvach);
 
-				var _this93 = _possibleConstructorReturn(this, (Kropyvach.__proto__ || Object.getPrototypeOf(Kropyvach)).call(this, prot, dm));
+				var _this98 = _possibleConstructorReturn(this, (Kropyvach.__proto__ || Object.getPrototypeOf(Kropyvach)).call(this, prot, dm));
 
-				_this93.markupBB = true;
-				return _this93;
+				_this98.markupBB = true;
+				return _this98;
 			}
 
 			_createClass(Kropyvach, [{
@@ -20592,10 +21558,10 @@ true, true],
 			function Lainchan(prot, dm) {
 				_classCallCheck(this, Lainchan);
 
-				var _this94 = _possibleConstructorReturn(this, (Lainchan.__proto__ || Object.getPrototypeOf(Lainchan)).call(this, prot, dm));
+				var _this99 = _possibleConstructorReturn(this, (Lainchan.__proto__ || Object.getPrototypeOf(Lainchan)).call(this, prot, dm));
 
-				_this94.qOPost = '.op';
-				return _this94;
+				_this99.qOPost = '.op';
+				return _this99;
 			}
 
 			_createClass(Lainchan, [{
@@ -20619,8 +21585,8 @@ true, true],
 
 		ibDomains['lainchan.org'] = Lainchan;
 
-		var Niuchan = function (_Kusaba5) {
-			_inherits(Niuchan, _Kusaba5);
+		var Niuchan = function (_Kusaba4) {
+			_inherits(Niuchan, _Kusaba4);
 
 			function Niuchan() {
 				_classCallCheck(this, Niuchan);
@@ -20631,7 +21597,7 @@ true, true],
 			_createClass(Niuchan, [{
 				key: 'css',
 				get: function get() {
-					return _get(Niuchan.prototype.__proto__ || Object.getPrototypeOf(Niuchan.prototype), 'css', this) + '.resize { display: none; }';
+					return _get(Niuchan.prototype.__proto__ || Object.getPrototypeOf(Niuchan.prototype), 'css', this) + '.replybacklinks, .resize { display: none; }';
 				}
 			}]);
 
@@ -20640,8 +21606,8 @@ true, true],
 
 		ibDomains['niuchan.org'] = Niuchan;
 
-		var Nowere = function (_BaseBoard17) {
-			_inherits(Nowere, _BaseBoard17);
+		var Nowere = function (_BaseBoard16) {
+			_inherits(Nowere, _BaseBoard16);
 
 			function Nowere() {
 				_classCallCheck(this, Nowere);
@@ -20652,7 +21618,7 @@ true, true],
 			_createClass(Nowere, [{
 				key: 'init',
 				value: function init() {
-					$script('highlight = function() {}');
+					$script('highlight = Function.prototype');
 					return false;
 				}
 			}, {
@@ -20667,28 +21633,28 @@ true, true],
 
 		ibDomains['nowere.net'] = Nowere;
 
-		var Ponyach = function (_BaseBoard18) {
-			_inherits(Ponyach, _BaseBoard18);
+		var Ponyach = function (_BaseBoard17) {
+			_inherits(Ponyach, _BaseBoard17);
 
 			function Ponyach(prot, dm) {
 				_classCallCheck(this, Ponyach);
 
-				var _this97 = _possibleConstructorReturn(this, (Ponyach.__proto__ || Object.getPrototypeOf(Ponyach)).call(this, prot, dm));
+				var _this102 = _possibleConstructorReturn(this, (Ponyach.__proto__ || Object.getPrototypeOf(Ponyach)).call(this, prot, dm));
 
-				_this97.qBan = 'font[color="#FF0000"]';
-				_this97.qImgInfo = '.filesize[style="display: inline;"]';
+				_this102.qBan = 'font[color="#FF0000"]';
+				_this102.qImgInfo = '.filesize[style="display: inline;"]';
 
-				_this97.formParent = 'replythread';
-				_this97.jsonSubmit = true;
-				_this97.multiFile = true;
-				_this97.pony = true;
-				return _this97;
+				_this102.formParent = 'replythread';
+				_this102.jsonSubmit = true;
+				_this102.multiFile = true;
+				_this102.pony = true;
+				return _this102;
 			}
 
 			_createClass(Ponyach, [{
 				key: 'getImgRealName',
 				value: function getImgRealName(wrap) {
-					return $q('.filesize[style="display: inline;"] > .mobile_filename_hide', wrap);
+					return $q('.filesize[style="display: inline;"] > .mobile_filename_hide', wrap).textContent;
 				}
 			}, {
 				key: 'getImgWrap',
@@ -20745,13 +21711,18 @@ true, true],
 			function Ponychan(prot, dm) {
 				_classCallCheck(this, Ponychan);
 
-				var _this98 = _possibleConstructorReturn(this, (Ponychan.__proto__ || Object.getPrototypeOf(Ponychan)).call(this, prot, dm));
+				var _this103 = _possibleConstructorReturn(this, (Ponychan.__proto__ || Object.getPrototypeOf(Ponychan)).call(this, prot, dm));
 
-				_this98.qOPost = '.opContainer';
-				return _this98;
+				_this103.qOPost = '.opContainer';
+				return _this103;
 			}
 
 			_createClass(Ponychan, [{
+				key: 'getImgRealName',
+				value: function getImgRealName(wrap) {
+					return $q('.post-filename', wrap).textContent;
+				}
+			}, {
 				key: 'init',
 				value: function init() {
 					_get(Ponychan.prototype.__proto__ || Object.getPrototypeOf(Ponychan.prototype), 'init', this).call(this);
@@ -20778,12 +21749,12 @@ true, true],
 			function Synch(prot, dm) {
 				_classCallCheck(this, Synch);
 
-				var _this99 = _possibleConstructorReturn(this, (Synch.__proto__ || Object.getPrototypeOf(Synch)).call(this, prot, dm));
+				var _this104 = _possibleConstructorReturn(this, (Synch.__proto__ || Object.getPrototypeOf(Synch)).call(this, prot, dm));
 
-				_this99.qImgInfo = '.unimportant';
+				_this104.qImgInfo = '.unimportant';
 
-				_this99.markupBB = true;
-				return _this99;
+				_this104.markupBB = true;
+				return _this104;
 			}
 
 			_createClass(Synch, [{
@@ -20800,6 +21771,11 @@ true, true],
 					defaultCfg.timeOffset = 4;
 					defaultCfg.correctTime = 1;
 					return false;
+				}
+			}, {
+				key: 'qImgNameLink',
+				get: function get() {
+					return '.file-info > .btn-group > .btn-xs > a';
 				}
 			}, {
 				key: 'css',
@@ -20820,11 +21796,28 @@ true, true],
 		ibDomains['syn-ch.com'] = Synch;
 		ibDomains['syn-ch.org'] = Synch;
 
-		var dm = localData ? localData.dm : window.location.hostname.match(/(?:(?:[^.]+\.)(?=org\.|net\.|com\.))?[^.]+\.[^.]+$|^\d+\.\d+\.\d+\.\d+$|localhost/)[0];
 		var prot = window.location.protocol;
-		if (checkDomains && dm in ibDomains) {
-			return new ibDomains[dm](prot, dm);
+		var dm = localData && localData.dm;
+		if (checkDomains) {
+			if (!dm) {
+				var ibKeys = Object.keys(ibDomains);
+				var _i55 = ibKeys.length;
+				var host = window.location.hostname.toLowerCase();
+				while (_i55--) {
+					dm = ibKeys[_i55];
+					if (host === dm || host.endsWith('.' + dm)) {
+						return new ibDomains[dm](prot, dm);
+					}
+				}
+			} else if (dm in ibDomains) {
+				return new ibDomains[dm](prot, dm);
+			}
 		}
+		dm = window.location.hostname;
+		if (!dm) {
+			return null;
+		}
+		dm = dm.match(/(?:(?:[^.]+\.)(?=org\.|net\.|com\.))?[^.]+\.[^.]+$|^\d+\.\d+\.\d+\.\d+$|localhost/)[0];
 		if (checkEngines) {
 			for (var i = ibEngines.length - 1; i >= 0; --i) {
 				var _ibEngines$i = _slicedToArray(ibEngines[i], 2),
@@ -20841,102 +21834,85 @@ true, true],
 	}
 
 
+	var DollchanAPI = {
+		init: function init() {
+			var _this105 = this;
 
-	var DollchanAPI = function () {
-		function DollchanAPI() {
-			_classCallCheck(this, DollchanAPI);
-		}
-
-		_createClass(DollchanAPI, null, [{
-			key: 'init',
-			value: function init() {
-				DollchanAPI.hasListeners = false;
-				if (!('MessageChannel' in window)) {
-					return;
-				}
-				var channel = new MessageChannel();
-				DollchanAPI.port = channel.port1;
-				DollchanAPI.port.onmessage = DollchanAPI._handleMessage;
-				DollchanAPI.activeListeners = new Set();
-				var port = channel.port2;
-				doc.defaultView.addEventListener('message', function (_ref65) {
-					var data = _ref65.data;
-
-					if (data === 'de-request-api-message') {
-						DollchanAPI.hasListeners = true;
-						document.defaultView.postMessage('de-answer-api-message', '*', [port]);
-					}
-				});
+			this.hasListeners = false;
+			if (!('MessageChannel' in window)) {
+				return;
 			}
-		}, {
-			key: 'hasListener',
-			value: function hasListener(name) {
-				return DollchanAPI.hasListeners && DollchanAPI.activeListeners.has(name);
-			}
-		}, {
-			key: 'notify',
-			value: function notify(name, data) {
-				if (DollchanAPI.hasListener(name)) {
-					DollchanAPI.port.postMessage({ name: name, data: data });
+			var channel = new MessageChannel();
+			this.port = channel.port1;
+			this.port.onmessage = this._handleMessage;
+			this.activeListeners = new Set();
+			var port = channel.port2;
+			doc.defaultView.addEventListener('message', function (_ref103) {
+				var data = _ref103.data;
+
+				if (data === 'de-request-api-message') {
+					_this105.hasListeners = true;
+					document.defaultView.postMessage('de-answer-api-message', '*', [port]);
 				}
+			});
+		},
+		hasListener: function hasListener(name) {
+			return this.hasListeners && this.activeListeners.has(name);
+		},
+		notify: function notify(name, data) {
+			if (this.hasListener(name)) {
+				this.port.postMessage({ name: name, data: data });
 			}
-		}, {
-			key: '_handleMessage',
-			value: function _handleMessage(_ref66) {
-				var arg = _ref66.data;
+		},
+		_handleMessage: function _handleMessage(_ref104) {
+			var arg = _ref104.data;
 
-				if (!arg || !arg.name) {
-					return;
-				}
-				var name = arg.name;
-				var data = arg.data;
-				var rv = null;
-				switch (arg.name.toLowerCase()) {
-					case 'registerapi':
-						if (data) {
-							rv = {};
-							for (var _iterator37 = data, _isArray37 = Array.isArray(_iterator37), _i53 = 0, _iterator37 = _isArray37 ? _iterator37 : _iterator37[Symbol.iterator]();;) {
-								var _ref67;
+			if (!arg || !arg.name) {
+				return;
+			}
+			var rv = null;
+			var name = arg.name,
+			    data = arg.data;
 
-								if (_isArray37) {
-									if (_i53 >= _iterator37.length) break;
-									_ref67 = _iterator37[_i53++];
-								} else {
-									_i53 = _iterator37.next();
-									if (_i53.done) break;
-									_ref67 = _i53.value;
-								}
+			switch (name.toLowerCase()) {
+				case 'registerapi':
+					if (data) {
+						rv = {};
+						for (var _iterator38 = data, _isArray38 = Array.isArray(_iterator38), _i56 = 0, _iterator38 = _isArray38 ? _iterator38 : _iterator38[Symbol.iterator]();;) {
+							var _ref105;
 
-								var aName = _ref67;
-
-								rv[aName] = DollchanAPI._register(aName.toLowerCase());
+							if (_isArray38) {
+								if (_i56 >= _iterator38.length) break;
+								_ref105 = _iterator38[_i56++];
+							} else {
+								_i56 = _iterator38.next();
+								if (_i56.done) break;
+								_ref105 = _i56.value;
 							}
+
+							var aName = _ref105;
+
+							rv[aName] = DollchanAPI._register(aName.toLowerCase());
 						}
-						break;
-				}
-				DollchanAPI.port.postMessage({ name: name, data: rv });
+					}
+					break;
 			}
-		}, {
-			key: '_register',
-			value: function _register(name) {
-				switch (name) {
-					case 'expandmedia':
-					case 'filechange':
-					case 'newpost':
-					case 'submitform':
-						break;
-					default:
-						return false;
-				}
-				DollchanAPI.activeListeners.add(name);
-				return true;
+			DollchanAPI.port.postMessage({ name: name, data: rv });
+		},
+		_register: function _register(name) {
+			switch (name) {
+				case 'expandmedia':
+				case 'filechange':
+				case 'newpost':
+				case 'submitform':
+					break;
+				default:
+					return false;
 			}
-		}]);
-
-		return DollchanAPI;
-	}();
-
-
+			this.activeListeners.add(name);
+			return true;
+		}
+	};
 
 	function checkForUpdates(isManual, lastUpdateTime) {
 		if (!isManual) {
@@ -20944,27 +21920,30 @@ true, true],
 				return Promise.reject();
 			}
 		}
-		return $ajax(gitRaw + 'Dollchan_Extension_Tools.meta.js', { 'Content-Type': 'text/plain' }, false).then(function (xhr) {
-			var m = xhr.responseText.match(/@version\s+([0-9.]+)/);
-			var remoteVer = m && m[1] ? m[1].split('.') : null;
+		return $ajax(gitRaw + 'src/modules/Wrap.js', { 'Content-Type': 'text/plain' }, false).then(function (xhr) {
+			var v = xhr.responseText.match(/const version = '([0-9.]+)';/);
+			var remoteVer = v && v[1] ? v[1].split('.') : null;
 			if (remoteVer) {
 				var currentVer = version.split('.');
-				var src = gitRaw + (nav.isESNext ? 'src/' : '') + 'Dollchan_Extension_Tools.' + (nav.isESNext ? 'es6.' : '') + 'user.js';
+				var src = '' + gitRaw + (nav.isESNext ? 'src/' : '') + 'Dollchan_Extension_Tools.' + (nav.isESNext ? 'es6.' : '') + 'user.js';
 				saveCfgObj('lastUpd', Date.now());
+				var link = '<a style="color: blue; font-weight: bold;" href="' + src + '">';
 				for (var i = 0, _len12 = Math.max(currentVer.length, remoteVer.length); i < _len12; ++i) {
 					if ((+remoteVer[i] || 0) > (+currentVer[i] || 0)) {
-						return '<a style="color: blue; font-weight: bold;" href="' + src + '">' + Lng.updAvail[lang] + '</a>';
+						return '' + link + Lng.updAvail[lang].replace('%s', v[1]) + '</a>';
 					} else if ((+remoteVer[i] || 0) < (+currentVer[i] || 0)) {
 						break;
 					}
 				}
 				if (isManual) {
-					return Lng.haveLatest[lang];
+					var c = xhr.responseText.match(/const commit = '([0-9abcdef]+)';/)[1];
+					var vc = version + '.' + c;
+					return c === commit ? Lng.haveLatestCommit[lang].replace('%s', vc) : Lng.haveLatestStable[lang].replace('%s', version) + '\n' + Lng.newCommitsAvail[lang].replace('%s', '' + link + vc + '</a>');
 				}
 			}
 			return Promise.reject();
 		}, function () {
-			return isManual ? '<div style="color: red; font-weigth: bold;">' + Lng.noConnect[lang] + '</div>' : Promise.reject();
+			return !isManual ? Promise.reject() : '<div style="color: red; font-weigth: bold;">' + Lng.noConnect[lang] + '</div>';
 		});
 	}
 
@@ -21000,18 +21979,22 @@ true, true],
 			return;
 		}
 		setTimeout(function () {
-			var post,
-			    num,
-			    hash,
-			    val = +sesStorage['de-scroll-' + aib.b + aib.t];
+			var val = +sesStorage['de-scroll-' + aib.b + aib.t];
 			if (val) {
 				scrollTo(0, val);
 				sesStorage.removeItem('de-scroll-' + aib.b + aib.t);
-			} else if ((hash = window.location.hash) && (num = hash.match(/#[ip]?(\d+)$/)) && (num = +num[1]) && (post = pByNum.get(num)) && !post.isOp) {
-				post.selectAndScrollTo();
+			} else {
+				var post = void 0,
+				    num = void 0;
+				var hash = window.location.hash;
+
+				if (hash && (num = hash.match(/#[ip]?(\d+)$/)) && (num = +num[1]) && (post = pByNum.get(num)) && !post.isOp) {
+					post.selectAndScrollTo();
+				}
 			}
 		}, 0);
 	}
+
 
 
 	function addSVGIcons() {
@@ -21019,16 +22002,18 @@ true, true],
 	}
 
 
+
+
 	function scriptCSS() {
 		var cont = function cont(id, src) {
-			return id + ('::before { content: ""; padding-right: 16px; margin-right: 4px; background: url(' + src + ') no-repeat center; background-size: contain; }');
+			return id + ('::before { content: ""; display: inline-block; vertical-align: -3px; padding: 16px 16px 0 0; margin-right: 4px; background: url(' + src + ') no-repeat center; background-size: contain; }');
 		};
 		var gif = function gif(id, src) {
 			return id + (' { background-image: url(data:image/gif;base64,' + src + '); background-repeat: no-repeat; background-position: center; }');
 		};
 
 		var p = void 0,
-		    x = '#de-panel { position: fixed; right: 0; bottom: 0; z-index: 9999; border-radius: 15px 0 0 0; cursor: default; display: flex; min-height: 25px; color: #F5F5F5; }\n\t#de-panel-logo { flex: none; margin: auto 3px auto 0; cursor: pointer; }\n\t#de-panel-buttons { flex: 0 1 auto; display: flex; flex-flow: row wrap; align-items: center; padding: 0 0 0 2px; margin: 0; border-left: 1px solid #616b86; }\n\t.de-panel-button { display: block; flex: none; margin: 0 1px; padding: 0; transition: all .3s ease; }\n\ta.de-panel-button, a.de-panel-button:hover { color: inherit !important; }\n\t.de-panel-svg, #de-panel-logo, .de-panel-logo-svg, .de-panel-button { width: 25px; height: 25px; }\n\t#de-panel-goback { transform: rotate(180deg); will-change: transform; }\n\t#de-panel-godown { transform: rotate(90deg); will-change: transform; }\n\t#de-panel-goup { transform: rotate(-90deg); will-change: transform; }\n\t#de-panel-upd-on { fill: #32ff32; }\n\t#de-panel-upd-warn { fill: #fff441; }\n\t#de-panel-upd-off { fill: #ff3232; }\n\t#de-panel-audio-on > .de-panel-svg > .de-use-audio-off, #de-panel-audio-off > .de-panel-svg > .de-use-audio-on { display: none; }\n\t#de-panel-info { flex: none; padding: 0 6px; margin-left: 2px; border-left: 1px solid #616b86; font: 18px serif; }\n\t#de-panel-info-icount::before, #de-panel-info-acount:not(:empty)::before { content: "/"; }\n\t.de-svg-stroke { stroke: currentColor; fill: none; }\n\t.de-svg-fill { stroke: none; fill: currentColor; }\n\tuse { fill: inherit; pointer-events: none; }';
+		    x = '#de-panel { position: fixed; right: 0; bottom: 0; z-index: 9999; border-radius: 15px 0 0 0; cursor: default; display: flex; min-height: 25px; color: #F5F5F5; }\n\t#de-panel-logo { flex: none; margin: auto 3px auto 0; cursor: pointer; }\n\t#de-panel-buttons { flex: 0 1 auto; display: flex; flex-flow: row wrap; align-items: center; padding: 0 0 0 2px; margin: 0; border-left: 1px solid #616b86; }\n\t.de-panel-button { display: block; flex: none; margin: 0 1px; padding: 0; transition: all .3s ease; }\n\ta.de-panel-button, a.de-panel-button:hover { color: inherit !important; }\n\t.de-panel-svg, #de-panel-logo, .de-panel-logo-svg, .de-panel-button { width: 25px; height: 25px; }\n\t#de-panel-goback { transform: rotate(180deg); will-change: transform; }\n\t#de-panel-godown { transform: rotate(90deg); will-change: transform; }\n\t#de-panel-goup { transform: rotate(-90deg); will-change: transform; }\n\t#de-panel-upd-on { fill: #32ff32; }\n\t#de-panel-upd-warn { fill: #fff441; }\n\t#de-panel-upd-off { fill: #ff3232; }\n\t#de-panel-audio-on > .de-panel-svg > .de-use-audio-off, #de-panel-audio-off > .de-panel-svg > .de-use-audio-on { display: none; }\n\t#de-panel-info { display: flex; flex: none; padding: 0 6px; margin-left: 2px; border-left: 1px solid #616b86; font: 18px serif; }\n\t#de-panel-info-icount::before, #de-panel-info-acount:not(:empty)::before { content: "/"; }\n\t.de-svg-stroke { stroke: currentColor; fill: none; }\n\t.de-svg-fill { stroke: none; fill: currentColor; }\n\tuse { fill: inherit; pointer-events: none; }';
 
 		switch (Cfg.scriptStyle) {
 			case 0:
@@ -21059,7 +22044,7 @@ true, true],
 
 		x += '.de-win .de-btn-toggle { transform: rotate(180deg); }\n\t.de-resizer { position: absolute; }\n\t.de-resizer-bottom { height: 6px; bottom: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-resizer-left { width: 6px; top: 0px; bottom: 0px; left: -3px; cursor: ew-resize; }\n\t.de-resizer-right { width: 6px; top: 0px; bottom: 0px; right: -3px; cursor: ew-resize; }\n\t.de-resizer-top { height: 6px; top: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-win > .de-win-head { cursor: move; }\n\t.de-win-buttons { position: absolute; right: 0; margin: 0 2px 0 0; font-size: 0; cursor: pointer; }\n\t.de-win-buttons > svg { transition: background .3s ease, box-shadow .3s ease; }\n\t.de-win-buttons > svg:hover { background-color: rgba(255,255,255,.2); box-shadow: 0 0 2px rgba(255,255,255,.4); }\n\t.de-win-inpost > .de-win-head > .de-win-buttons > svg:hover { background-color: rgba(64,64,64,.15); box-shadow: 0 0 2px rgba(64,64,64,.3); }\n\t#de-win-cfg { width: 355px; }\n\t#de-win-cfg, #de-win-fav, #de-win-hid, #de-win-vid { position: fixed; max-height: 92%; overflow-x: hidden; overflow-y: auto; }\n\t#de-win-cfg > .de-win-body { float: none; display: block; width: auto; min-width: 0; max-width: 100% !important; padding: 0; margin: 0 !important; border: none; }\n\t#de-win-fav > .de-win-body, #de-win-hid > .de-win-body, #de-win-vid > .de-win-body { padding: 9px; border: 1px solid gray; }\n\t#de-win-hid { max-width: 60%; }\n\t#de-win-vid > .de-win-body { display: flex; flex-direction: column; align-items: center; }\n\t#de-win-vid .de-entry { white-space: normal; }\n\t.de-win-head { position: relative; padding: 2px; border-radius: 10px 10px 0 0; color: #F5F5F5; font: bold 14px/16px arial; text-align: center; cursor: default; }' + (
 
-		'.de-block { display: block; }\n\t#de-btn-spell-add { margin-left: auto; }\n\t#de-cfg-bar { display: flex; margin: 0; padding: 0; }\n\t.de-cfg-body { min-height: 327px; padding: 9px 7px 7px; margin-top: -1px; font: 13px/15px arial !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-cfg-body, #de-cfg-buttons { border: 1px solid #183d77; border-top: none; }\n\t.de-cfg-button { padding: 0 ' + (nav.Firefox ? '2' : '4') + 'px !important; margin: 0 4px; height: 21px; font: 12px arial !important; }\n\t#de-cfg-buttons { display: flex; align-items: center; padding: 3px; }\n\t#de-cfg-buttons > label { flex: 1 0 auto; }\n\t.de-cfg-chkbox { ' + (nav.Presto ? '' : 'vertical-align: -1px !important; ') + 'margin: 2px 1px !important; }\n\t.de-cfg-depend { padding-left: 17px; }\n\t.de-cfg-inptxt { width: auto; padding: 0 2px !important; margin: 1px 4px 1px 0 !important; font: 13px arial !important; }\n\t.de-cfg-label { padding: 0; margin: 0; }\n\t.de-cfg-select { padding: 0 2px; margin: 1px 0; font: 13px arial !important; }\n\t.de-cfg-tab { flex: 1 0 auto; display: block !important; margin: 0 !important; float: none !important; width: auto !important; min-width: 0 !important; padding: 4px 0 !important; box-shadow: none !important; border: 1px solid #444 !important; border-radius: 4px 4px 0 0 !important; opacity: 1; font: bold 12px arial; text-align: center; cursor: default; background-image: linear-gradient(to bottom, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab:hover { background-image: linear-gradient(to top, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab[selected], .de-cfg-tab[selected]:hover { background-image: none !important; border-bottom: none !important; }\n\t.de-cfg-tab::' + (nav.Firefox ? '-moz-' : '') + 'selection { background: transparent; }\n\t.de-cfg-unvis { display: none; }\n\t#de-info-log, #de-info-stats { width: 100%; padding: 0px 7px; }\n\t#de-info-log { overflow-y: auto; border-left: 1px solid grey; }\n\t.de-info-name { flex: 1 0 auto; }\n\t.de-info-row { display: flex; }\n\t#de-info-table { display: flex; height: 267px; }\n\t.de-spell-btn { padding: 0 4px; }\n\t#de-spell-editor { display: flex; align-items: stretch; height: 235px; padding: 2px 0; }\n\t#de-spell-panel { display: flex; }\n\t#de-spell-txt { padding: 2px !important; margin: 0; width: 100%; min-width: 0; border: none !important; outline: none !important; font: 12px courier new; ' + (nav.Presto ? '' : 'resize: none !important; ') + '}\n\t#de-spell-rowmeter { padding: 2px 3px 0 0; overflow: hidden; min-width: 2em; background-color: #616b86; text-align: right; color: #fff; font: 12px courier new; }');
+		'.de-block { display: block; }\n\t#de-btn-spell-add { margin-left: auto; }\n\t#de-cfg-bar { display: flex; margin: 0; padding: 0; }\n\t.de-cfg-body { min-height: 328px; padding: 9px 7px 7px; margin-top: -1px; font: 13px/15px arial !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-cfg-body, #de-cfg-buttons { border: 1px solid #183d77; border-top: none; }\n\t.de-cfg-button { padding: 0 ' + (nav.isFirefox ? '2' : '4') + 'px !important; margin: 0 4px; height: 21px; font: 12px arial !important; }\n\t#de-cfg-buttons { display: flex; align-items: center; padding: 3px; }\n\t#de-cfg-buttons > label { flex: 1 0 auto; }\n\t.de-cfg-chkbox { ' + (nav.isPresto ? '' : 'vertical-align: -1px !important; ') + 'margin: 2px 1px !important; }\n\t.de-cfg-depend { padding-left: 17px; }\n\t.de-cfg-inptxt { width: auto; padding: 0 2px !important; margin: 1px 4px 1px 0 !important; font: 13px arial !important; }\n\t.de-cfg-label { padding: 0; margin: 0; }\n\t.de-cfg-select { padding: 0 2px; margin: 1px 0; font: 13px arial !important; }\n\t.de-cfg-tab { flex: 1 0 auto; display: block !important; margin: 0 !important; float: none !important; width: auto !important; min-width: 0 !important; padding: 4px 0 !important; box-shadow: none !important; border: 1px solid #444 !important; border-radius: 4px 4px 0 0 !important; opacity: 1; font: bold 12px arial; text-align: center; cursor: default; background-image: linear-gradient(to bottom, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab:hover { background-image: linear-gradient(to top, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab[selected], .de-cfg-tab[selected]:hover { background-image: none !important; border-bottom: none !important; }\n\t.de-cfg-tab::' + (nav.isFirefox ? '-moz-' : '') + 'selection { background: transparent; }\n\t.de-cfg-unvis { display: none; }\n\t#de-info-log, #de-info-stats { width: 100%; padding: 0px 7px; }\n\t#de-info-log { overflow-y: auto; border-left: 1px solid grey; }\n\t.de-info-name { flex: 1 0 auto; }\n\t.de-info-row { display: flex; }\n\t#de-info-table { display: flex; height: 267px; }\n\t.de-spell-btn { padding: 0 4px; }\n\t#de-spell-editor { display: flex; align-items: stretch; height: 235px; padding: 2px 0; }\n\t#de-spell-panel { display: flex; }\n\t#de-spell-txt { padding: 2px !important; margin: 0; width: 100%; min-width: 0; border: none !important; outline: none !important; font: 12px courier new; ' + (nav.isPresto ? '' : 'resize: none !important; ') + '}\n\t#de-spell-rowmeter { padding: 2px 3px 0 0; overflow: hidden; min-width: 2em; background-color: #616b86; text-align: right; color: #fff; font: 12px courier new; }');
 
 		switch (Cfg.scriptStyle) {
 			case 0:
@@ -21082,7 +22067,7 @@ true, true],
 
 		cont('.de-src-google', 'https://google.com/favicon.ico') + cont('.de-src-yandex', 'https://yandex.ru/favicon.ico') + cont('.de-src-tineye', 'https://tineye.com/favicon.ico') + cont('.de-src-saucenao', 'https://saucenao.com/favicon.ico') + cont('.de-src-iqdb', '//iqdb.org/favicon.ico') + cont('.de-src-whatanime', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAMAAADarb8dAAAAWlBMVEX////29fbT1NOOj44dGx0SEhIHCAfX2NfQ0NDBwcGztLOwsbA7Ozs4ODgeHh7/2Nf/1dTMsbGpkZGWZWRyRUQ8NTYoIyMZAAAAAAAGBASBaGeBZ2Z2XVtmTUw2fryxAAAAGHRSTlP+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v4W3wyUAAAAZElEQVQI152OSQ6AMBRCadU6zxN1uP81/Y2NSY0r2fBgA+BL/wrbWEcewEqrrHa5zpSuCJMC0IY0WiA1iJW4ikkPYCFeUlQKFASTKI8SyTc8s8sc/rBDvwbF1LVjUJzbftjv6xfbkBHGT8GSnQAAAABJRU5ErkJggg==') + (
 
-		'.de-post-counter::after { counter-increment: de-cnt 1; content: counter(de-cnt); margin: 0 4px 0 2px; vertical-align: 1px; color: #4f7942; font: bold 11px tahoma; cursor: default; }\n\t.de-post-deleted::after { content: "' + Lng.deleted[lang] + '"; margin: 0 4px 0 2px; vertical-align: 1px; color: #727579; font: bold 11px tahoma; cursor: default; }') +
+		'.de-post-counter::after, .de-post-counter-pview, .de-post-deleted::after { margin: 0 4px 0 2px; vertical-align: 1px;  font: bold 11px tahoma; cursor: default; }\n\t.de-post-counter::after { counter-increment: de-cnt 1; content: counter(de-cnt); color: #4f7942; }\n\t.de-post-counter-pview { color: #4f7942; }\n\t.de-post-deleted::after { content: "' + Lng.deleted[lang] + '"; color: #727579; }') +
 
 		'#de-txt-panel { display: block; font-weight: bold; cursor: pointer; }\n\t#de-txt-panel > div { display: inline-block; }\n\t#de-txt-panel > div > svg { width: 23px; height: 22px; margin: 0 2px; }\n\t.de-markup-back { fill: #f0f0f0; stroke: #808080; }';
 
@@ -21093,19 +22078,19 @@ true, true],
 		}
 
 		p = Math.max(Cfg.minImgSize || 0, 50);
-		x += '.de-img-pre, .de-img-full { display: block; border: none; outline: none; cursor: pointer; image-orientation: from-image; }\n\t.de-img-pre { max-width: 200px; max-height: 200px; }\n\t.de-img-load { position: absolute; z-index: 2; width: 50px; height: 50px; top: 50%; left: 50%; margin: -25px; }\n\t.de-img-full { width: 100%; }\n\t.de-img-wrapper-inpost { min-width: ' + p + 'px; min-height: ' + p + 'px; float: left; ' + (aib.multiFile ? '' : 'padding: 2px 5px; -moz-box-sizing: border-box; box-sizing: border-box; ') + ' }\n\t.de-img-wrapper-nosize { position: relative; width: 100%; height: 100%; }\n\t.de-img-wrapper-nosize > .de-img-full { position: absolute; z-index: 1; opacity: .3; }\n\t.de-img-center { position: fixed; margin: 0 !important; z-index: 9999; background-color: #ccc; border: 1px solid black !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t#de-img-btn-next, #de-img-btn-prev { position: fixed; top: 50%; z-index: 10000; height: 36px; width: 36px; margin-top: -18px; background-repeat: no-repeat; background-position: center; background-color: black; cursor: pointer; }\n\t#de-img-btn-next { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJPjI8JkO1vlpzS0YvzhUdX/nigR2ZgSJ6IqY5Uy5UwJK/l/eI6A9etP1N8grQhUbg5RlLKAJD4DAJ3uCX1isU4s6xZ9PR1iY7j5nZibixgBQA7); right: 0; border-radius: 10px 0 0 10px; }\n\t#de-img-btn-prev { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJOjI8JkO24ooxPzYvzfJrWf3Rg2JUYVI4qea1g6zZmPLvmDeM6Y4mxU/v1eEKOpziUIA1BW+rXXEVVu6o1dQ1mNcnTckp7In3LAKyMchUAADs=); left: 0; border-radius: 0 10px 10px 0; }' +
+		x += '.de-img-pre, .de-fullimg { display: block; border: none; outline: none; cursor: pointer; image-orientation: from-image; }\n\t.de-img-pre { max-width: 200px; max-height: 200px; }\n\t.de-fullimg-after { clear: left; }\n\t.de-fullimg-center { position: fixed; margin: 0 !important; z-index: 9999; background-color: #ccc; border: 1px solid black !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-fullimg-info { text-align: center; }\n\t.de-fullimg-load { position: absolute; z-index: 2; width: 50px; height: 50px; top: 50%; left: 50%; margin: -25px; }\n\t.de-fullimg-src { float: none !important; display: inline-block; padding: 2px 4px; margin: 2px 0 2px -1px; background: rgba(64,64,64,.8); font: bold 12px tahoma; color: #fff  !important; text-decoration: none; outline: none; }\n\t.de-fullimg-src:hover { color: #fff !important; background: rgba(64,64,64,.6); }\n\t' + (nav.firefoxVer > 57 ? '.de-fullimg-video { position: relative; }\n\t\t.de-fullimg-video::before { content: "X"; color: #fff; background-color: rgba(64, 64, 64, 0.8); text-align: center; width: 20px; height: 20px; position: absolute; right: 0; font: bold 14px tahoma; cursor:pointer; }' : '') + '\n\t.de-fullimg-wrap-center, .de-fullimg-wrap-center > .de-fullimg, .de-fullimg-wrap-link { width: inherit; height: inherit; }\n\t.de-fullimg-wrap-inpost { min-width: ' + p + 'px; min-height: ' + p + 'px; float: left; ' + (aib.multiFile ? '' : 'margin: 2px 5px; -moz-box-sizing: border-box; box-sizing: border-box; ') + ' }\n\t.de-fullimg-wrap-nosize > .de-fullimg { opacity: .3; }\n\t#de-img-btn-next, #de-img-btn-prev { position: fixed; top: 50%; z-index: 10000; height: 36px; width: 36px; margin-top: -18px; background-repeat: no-repeat; background-position: center; background-color: black; cursor: pointer; }\n\t#de-img-btn-next { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJPjI8JkO1vlpzS0YvzhUdX/nigR2ZgSJ6IqY5Uy5UwJK/l/eI6A9etP1N8grQhUbg5RlLKAJD4DAJ3uCX1isU4s6xZ9PR1iY7j5nZibixgBQA7); right: 0; border-radius: 10px 0 0 10px; }\n\t#de-img-btn-prev { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJOjI8JkO24ooxPzYvzfJrWf3Rg2JUYVI4qea1g6zZmPLvmDeM6Y4mxU/v1eEKOpziUIA1BW+rXXEVVu6o1dQ1mNcnTckp7In3LAKyMchUAADs=); left: 0; border-radius: 0 10px 10px 0; }' +
 
-		cont('.de-video-link.de-ytube', 'https://youtube.com/favicon.ico') + cont('.de-video-link.de-vimeo', 'https://vimeo.com/favicon.ico') + cont('.de-img-arch', 'data:image/gif;base64,R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + cont('.de-img-audio', 'data:image/gif;base64,R0lGODlhEAAQAKIAAGya4wFLukKG4oq3802i7Bqy9P///wAAACH5BAEAAAYALAAAAAAQABAAQANBaLrcHsMN4QQYhE01OoCcQIyOYQGooKpV1GwNuAwAa9RkqTPpWqGj0YTSELg0RIYM+TjOkgba0sOaAEbGBW7HTQAAOw==') + '.de-current::after { content: " \u25CF"; }\n\t.de-img-arch, .de-img-audio { margin-left: 4px; color: inherit; text-decoration: none; font-weight: bold; }\n\t.de-mp3 { margin: 5px 20px; }\n\t.de-video-obj { margin: 5px 20px; white-space: nowrap; }\n\t.de-video-obj-inline { display: inline-block; }\n\t#de-video-btn-resize { padding: 0 14px 8px 0; margin: 0 8px; border: 2px solid; border-radius: 2px; }\n\t#de-video-btn-hide, #de-video-btn-prev { margin-left: auto; }\n\t#de-video-buttons { display: flex; align-items: center; width: 100%; line-height: 16px; }\n\t.de-video-expanded { width: 854px !important; height: 480px !important; }\n\t#de-video-list { padding: 0 0 4px; overflow-y: auto; width: 100%; }\n\t.de-video-refpost { margin: 0 3px; text-decoration: none; cursor: pointer; }\n\t.de-video-resizer::after { content: "\u2795"; margin: 0 -15px 0 3px; vertical-align: 6px; color: #000; font-size: 12px; cursor: pointer; }\n\t.de-video-player, .de-video-thumb { width: 100%; height: 100%; }\n\ta.de-video-player { display: inline-block; position: relative; border-spacing: 0; border: none; }\n\ta.de-video-player::after { content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAWCAQAAACMYb/JAAAArklEQVR4AYXSr05CYRjA4cPGxjRosTijdvNJzmD1CrwAvQWugASNwGg0MoErOIVCPCMx0hmBMaAA4mPX8/2rT/i+9/1lPu0M3MtCN1OAvS+NEFkDmHqoJwcAbHzUkb9n7C5FqLynCAzdpAhLrynCRc9VnEDpKUWYpUmZIlt5nBQeY889amvGPj33HBvdt45WbAELeWyNP/qu/8dwBrDyVp9UBRi5DYXZdTLxEs77F5bCVAHlDJ1UAAAAAElFTkSuQmCC"); position: absolute;top: 50%; left: 50%; padding: 12px 24px; margin: -22px 0 0 -32px; background-color: rgba(255,0,0,.4); border-radius: 8px; line-height: 0; }\n\ta.de-video-player:hover::after { background-color: rgba(255,0,0,.7); }\n\t.de-video-title[de-time]::after { content: " [" attr(de-time) "]"; color: red; }\n\t.de-vocaroo > embed { display: inline-block; }\n\tvideo { background: black; }' + (
+		cont('.de-video-link.de-ytube', 'https://youtube.com/favicon.ico') + cont('.de-video-link.de-vimeo', 'https://vimeo.com/favicon.ico') + cont('.de-img-arch', 'data:image/gif;base64,R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + cont('.de-img-audio', 'data:image/gif;base64,R0lGODlhEAAQAKIAAGya4wFLukKG4oq3802i7Bqy9P///wAAACH5BAEAAAYALAAAAAAQABAAQANBaLrcHsMN4QQYhE01OoCcQIyOYQGooKpV1GwNuAwAa9RkqTPpWqGj0YTSELg0RIYM+TjOkgba0sOaAEbGBW7HTQAAOw==') + '.de-current::after { content: " \u25CF"; }\n\t.de-img-arch, .de-img-audio { margin-left: 4px; color: inherit; text-decoration: none; font-weight: bold; }\n\t.de-mp3 { margin: 5px 20px; }\n\t.de-video-obj { margin: 5px 20px; white-space: nowrap; }\n\t.de-video-obj-inline { display: inline-block; }\n\t#de-video-btn-resize { padding: 0 14px 8px 0; margin: 0 8px; border: 2px solid; border-radius: 2px; }\n\t#de-video-btn-hide, #de-video-btn-prev { margin-left: auto; }\n\t#de-video-buttons { display: flex; margin-bottom: 2px; align-items: center; width: 100%; line-height: 16px; }\n\t.de-video-expanded { width: 854px !important; height: 480px !important; }\n\t#de-video-list { padding: 0 0 4px; overflow-y: auto; width: 100%; }\n\t.de-video-refpost { margin: 0 3px; text-decoration: none; cursor: pointer; }\n\t.de-video-resizer::after { content: "\u2795"; margin: 0 -15px 0 3px; vertical-align: 6px; color: #000; font-size: 12px; cursor: pointer; }\n\t.de-video-player, .de-video-thumb { width: 100%; height: 100%; }\n\ta.de-video-player { display: inline-block; position: relative; border-spacing: 0; border: none; }\n\ta.de-video-player::after { content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAWCAQAAACMYb/JAAAArklEQVR4AYXSr05CYRjA4cPGxjRosTijdvNJzmD1CrwAvQWugASNwGg0MoErOIVCPCMx0hmBMaAA4mPX8/2rT/i+9/1lPu0M3MtCN1OAvS+NEFkDmHqoJwcAbHzUkb9n7C5FqLynCAzdpAhLrynCRc9VnEDpKUWYpUmZIlt5nBQeY889amvGPj33HBvdt45WbAELeWyNP/qu/8dwBrDyVp9UBRi5DYXZdTLxEs77F5bCVAHlDJ1UAAAAAElFTkSuQmCC"); position: absolute;top: 50%; left: 50%; padding: 12px 24px; margin: -22px 0 0 -32px; background-color: rgba(255,0,0,.4); border-radius: 8px; line-height: 0; }\n\ta.de-video-player:hover::after { background-color: rgba(255,0,0,.7); }\n\t.de-video-title[de-time]::after { content: " [" attr(de-time) "]"; color: red; }\n\t.de-vocaroo > embed { display: inline-block; }\n\tvideo { background: black; }' + (
 
 		'.de-file { display: inline-block; vertical-align: top; margin: 1px; height: ' + (p = aib.multiFile ? 90 : 130) + 'px; width: ' + p + 'px; text-align: center; }\n\t.de-file, .de-file-txt-input { background-color: rgba(96,96,96,.15); border: 1px dashed grey; }\n\t.de-file > .de-file-img { display: table; width: 100%; height: 100%; cursor: pointer; }\n\t.de-file > .de-file-img > div { display: table-cell; vertical-align: middle; }\n\t.de-file > .de-file-utils { display: none; height: 16px; margin-top: -18px; padding: 1px 0; background: rgba(64,64,64,.6); position: relative; }\n\t.de-file > .de-file-utils > .de-file-rarmsg { color: #fff; }\n\t#de-file-area { border-spacing: 0; margin-top: 1px; width: 275px; min-width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }\n\t.de-file-drag { background: rgba(96,96,96,.8); border: 1px solid grey; opacity: .7; }\n\t.de-file:hover:not(.de-file-drag) > .de-file-utils { display: block !important; }\n\timg.de-file-img, video.de-file-img { max-width: ' + (p - 4) + 'px; max-height: ' + (p - 4) + 'px; }\n\t.de-file-input { max-width: 300px; }\n\t.de-file-input + .de-file-utils { margin-left: 4px; }\n\t.de-file-off > .de-file-img > div::after { content: "' + Lng.dropFileHere[lang] + '"; display: block; width: 80px; margin: 0 auto; font: 11px arial; opacity: .8; white-space: initial; }\n\t.de-file-rarmsg { margin: 0 2px; vertical-align: 4px; font: bold 11px tahoma; cursor: default; }\n\t.de-file-btn-del, .de-file-btn-rar, .de-file-btn-txt { display: inline-block; margin: 0 1px; padding: 0 16px 16px 0; cursor: pointer; }\n\t.de-file-spoil, .de-file-rate { background-color: #fff; border: 1px dotted darkcyan; cursor: pointer; display: inline-block; -webkit-user-select: none; user-select: none; border-radius: 3px; }\n\t.de-file-spoil { padding: 0 12px 12px 0; margin: 0 1px; }\n\t.de-file-spoil.de-active { background-color: darkcyan; border: 1px inset aliceblue; }\n\t.de-file-spoil.de-active:before { content: "!"; color: white; position: absolute; font: 12px "Times"; font-weight: bold; padding: 0 4px; }\n\t.de-file-rate { font: 11px sans; padding: 7px 17px; position: relative; }\n\t.de-file-rate:before { content: "\u25B2" attr(title); position: absolute; left: 0; top: 0; font-size: 10px; line-height: 14.5px; }\n\t.de-file-rate > ul { position: absolute; list-style: outside none none; padding: 0; margin: 0; bottom: 100%; border: 1px outset; visibility: hidden; }\n\t.de-file-rate.de-active > ul { visibility: visible; left: -15%; right: -15%; background-color: #fff; }\n\t.de-file-rate > ul > * { display: list-item; text-align: center; } .de-file-rate > ul > *:hover { background-color: rgba(96,96,96,.15); }\n\t.de-file-txt-add { font-weight: bold; width: 21px; padding: 0 !important; }\n\t.de-file-txt-input { padding: 2px; font: 12px/16px sans-serif; }\n\t.de-file-txt-drop { cursor: pointer; position: absolute; left: 0; right: 0; top: -3px; bottom: -3px; z-index: 1; }\n\t.de-file-txt-wrap { position: relative; }\n\t.de-file-utils { display: inline-block; float: none; vertical-align: -2px; }') + gif('.de-file-btn-del', 'R0lGODlhEAAQALMOAP8zAMopAJMAAP/M//+DIP8pAP86Av9MDP9sFP9zHv9aC/9gFf9+HJsAAP///wAAACH5BAEAAA4ALAAAAAAQABAAAARU0MlJKw3B4hrGyFP3hQNBjE5nooLJMF/3msIkJAmCeDpeU4LFQkFUCH8VwWHJRHIM0CiIMwBYryhS4XotZDuFLUAg6LLC1l/5imykgW+gU0K22C0RADs=') + gif('.de-file-btn-rar', 'R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + gif('.de-file-btn-txt', 'R0lGODlhEAAQAJEAACyr4e/19////wAAACH5BAEAAAIALAAAAAAQABAAAAIrlI+pwK3WokMyBEmjxbBeLgEbKFrmyXTn+nXaF7nNGMslZ9NpFu4L/ggeCgA7') + (
 
-		'.de-parea { text-align: center; }\n\t.de-parea-btn-close::after { content: "' + Lng.hideForm[lang] + '"; }\n\t.de-parea-btn-thr::after { content: "' + Lng.makeThr[lang] + '"; }\n\t.de-parea-btn-reply::after { content: "' + Lng.makeReply[lang] + '"; }\n\t#de-pform > form { padding: 0; margin: 0; border: none; }\n\t#de-pform input[type="text"], #de-pform input[type="file"] { width: 200px; }\n\t#de-resizer-text { display: inline-block !important; float: none !important; padding: 5px; margin: ' + (nav.Presto ? '-2px -10px' : '0 0 -2px -10px') + '; vertical-align: bottom; border-bottom: 2px solid #666; border-right: 2px solid #666; cursor: se-resize; }\n\t.de-win-inpost { float: none; clear: left; display: inline-block; width: auto; padding: 3px; margin: 2px 0; }\n\t.de-win-inpost > .de-resizer { display: none; }\n\t.de-win-inpost > .de-win-head { background: none; color: inherit; }\n\t#de-win-reply { width: auto !important; min-width: 0; padding: 0 !important; border: none !important; }\n\t#de-win-reply.de-win { position: fixed !important; padding: 0 !important; margin: 0 !important; border-radius: 10px 10px 0 0; }\n\t#de-win-reply.de-win > .de-win-body { padding: 2px 2px 0 1px; border: 1px solid gray; }\n\t#de-win-reply.de-win .de-textarea { min-width: 98% !important; resize: none !important; }\n\t#de-win-reply.de-win #de-resizer-text { display: none !important; }\n\t#de-sagebtn { margin: 4px !important; vertical-align: top; cursor: pointer; }\n\t.de-textarea { display: inline-block; padding: 3px !important; min-width: 275px !important; min-height: 90px !important; resize: both; transition: none !important; }') +
+		'.de-parea { text-align: center; }\n\t.de-parea-btn-close::after { content: "' + Lng.hideForm[lang] + '"; }\n\t.de-parea-btn-thr::after { content: "' + Lng.makeThr[lang] + '"; }\n\t.de-parea-btn-reply::after { content: "' + Lng.makeReply[lang] + '"; }\n\t#de-pform > form { padding: 0; margin: 0; border: none; }\n\t#de-pform input[type="text"], #de-pform input[type="file"] { width: 200px; }\n\t#de-resizer-text { display: inline-block !important; float: none !important; padding: 5px; margin: ' + (nav.isPresto ? '-2px -10px' : '0 0 -2px -10px') + '; vertical-align: bottom; border-bottom: 2px solid #666; border-right: 2px solid #666; cursor: se-resize; }\n\t.de-win-inpost { float: none; clear: left; display: inline-block; width: auto; padding: 3px; margin: 2px 0; }\n\t.de-win-inpost > .de-resizer { display: none; }\n\t.de-win-inpost > .de-win-head { background: none; color: inherit; }\n\t#de-win-reply { width: auto !important; min-width: 0; padding: 0 !important; border: none !important; }\n\t#de-win-reply.de-win { position: fixed !important; padding: 0 !important; margin: 0 !important; border-radius: 10px 10px 0 0; }\n\t#de-win-reply.de-win > .de-win-body { padding: 2px 2px 0 1px; border: 1px solid gray; }\n\t#de-win-reply.de-win .de-textarea { min-width: 98% !important; resize: none !important; }\n\t#de-win-reply.de-win #de-resizer-text { display: none !important; }\n\t#de-sagebtn { margin: 4px !important; vertical-align: top; cursor: pointer; }\n\t.de-textarea { display: inline-block; padding: 3px !important; min-width: 275px !important; min-height: 90px !important; resize: both; transition: none !important; }') +
 
 		'.de-fav-del > #de-fav-buttons { display: none; }\n\t.de-fav-del > #de-fav-delbuttons { display: block !important; }\n\t.de-fav-del .de-fav-header-switch, .de-fav-del .de-fav-switch { display: block !important; margin: 2px 0 2px 4px !important; flex: none; }\n\t#de-fav-delbuttons { display: none; }\n\t.de-fav-header-switch, .de-fav-switch { display: none; }\n\t.de-fav-header { margin-top: 0; margin-bottom: 0; padding: 1px 0; display: flex; }\n\t.de-fav-entries { border-top: 1px solid rgba(80,80,80,.3); }\n\t.de-fav-header-link { margin-left: 4px; color: inherit; font-weight: bold; font-size: 14px; flex: auto; text-decoration: none; outline: none; }\n\t.de-entry { display: flex !important; align-items: center; float: none !important; padding: 0 !important; margin: 2px 0 !important; border: none !important; font-size: 14px; overflow: hidden !important; white-space: nowrap; }\n\t.de-fav-link { flex: none; margin-left: 4px; text-decoration: none; border: none; }\n\t.de-entry-title { flex: auto; padding-left: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n\t.de-fav-inf { flex: none; padding: 0 4px 0 10px; font: bold 14px serif; cursor: default; }\n\t.de-fav-inf-icon, .de-fav-inf-iwrap  { width: 16px; height: 16px; }\n\t.de-fav-inf-icon { margin-bottom: -3px; }\n\t.de-fav-inf-icon:not(.de-fav-closed):not(.de-fav-unavail):not(.de-fav-wait), .de-fav-closed > .de-fav-unavail-use, .de-fav-closed > .de-fav-wait-use, .de-fav-unavail > .de-fav-closed-use, .de-fav-unavail > .de-fav-wait-use, .de-fav-wait > .de-fav-closed-use, .de-fav-wait > .de-fav-unavail-use { display: none; }\n\t.de-fav-inf-new { color: #424f79; }\n\t.de-fav-inf-new::after { content: " +"; }\n\t.de-fav-inf-old { color: #4f7942; }\n\t.de-fav-inf-you { padding: 0 4px; margin-right: 4px; border-radius: 3px; color: #fff; background-color: #424f79; opacity: 0.65; }\n\t.de-fav-unavail { color: #cf4436; }\n\t.de-fold-block { border: 1px solid rgba(120,120,120,.8); border-radius: 2px; }\n\t.de-fold-block:not(:first-child) { border-top: none; }' +
 
 		'#de-thr-navpanel { color: #F5F5F5; height: 98px; width: 41px; position: fixed; top: 50%; left: 0px; padding: 0; margin: -49px 0 0; background: #777; border: 1px solid #525252; border-left: none; border-radius: 0 5px 5px 0; cursor: pointer; z-index: 1000; }\n\t.de-thr-navpanel-hidden { opacity: .7; margin-left: -34px !important; }\n\t#de-thr-navarrow { display: none; position: absolute; top: 50%; left: 34px; transform: translateY(-50%); width: 7px; height: 7px; }\n\t.de-thr-navpanel-hidden > #de-thr-navarrow { display: initial; }\n\t#de-thr-navup { padding: 12px 9px 13px 8px; border-radius: 0 5px 0 0; }\n\t#de-thr-navdown { padding: 13px 9px 12px 8px; border-radius: 0 0 5px 0; }\n\t#de-thr-navup, #de-thr-navdown { width: 41px; height: 49px; -moz-box-sizing: border-box; box-sizing: border-box; }\n\t:not(.de-thr-navpanel-hidden) > #de-thr-navup:hover, :not(.de-thr-navpanel-hidden) > #de-thr-navdown:hover { background: #555; }' + (
 
-		'@keyframes de-wait-anim { to { transform: rotate(360deg); } }\n\t.de-wait, .de-fav-wait , .de-img-load { animation: de-wait-anim 1s linear infinite; }\n\t.de-wait { margin: 0 2px -3px 0 !important; width: 16px; height: 16px; }\n\t.de-abtn { text-decoration: none !important; outline: none; }\n\t.de-after-fimg { clear: left; }\n\t#de-wrapper-popup { overflow-x: hidden !important; overflow-y: auto !important; -moz-box-sizing: border-box; box-sizing: border-box; max-height: 100vh; position: fixed; right: 0; top: 0; z-index: 9999; font: 14px arial; cursor: default; }\n\t.de-popup { overflow: visible !important; clear: both !important; width: auto !important; min-width: 0pt !important; padding: 8px !important; margin: 1px !important; border: 1px solid grey !important; display: block !important; float: right !important; max-width: initial !important; }\n\t.de-popup-btn { display: inline-block; vertical-align: top; color: green; cursor: pointer; line-height: 1.15; }\n\t.de-popup-msg { display: inline-block; white-space: pre-wrap; }\n\t.de-button { flex: none; padding: 0 ' + (nav.Firefox ? 2 : 4) + 'px !important; margin: 1px 2px; height: 24px; font: 13px arial; }\n\t.de-editor { display: block; font: 12px courier new; width: 619px; height: 337px; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; }\n\t.de-hidden { float: left; overflow: hidden !important; margin: 0 !important; padding: 0 !important; border: none !important; width: 0 !important; height: 0 !important; display: inline !important; }\n\t.de-input-key { padding: 0 2px !important; margin: 0 !important; font: 13px/15px arial !important; }\n\t.de-link-parent { outline: 1px dotted !important; }\n\t.de-link-pview { font-weight: bold; }\n\t.de-link-ref { text-decoration: none; }\n\t.de-list { padding-top: 4px; }\n\t.de-list::before { content: "\u25CF"; margin-right: 4px; }\n\t.de-menu { padding: 0 !important; margin: 0 !important; width: auto !important; min-width: 0 !important; z-index: 9999; border: 1px solid grey !important;}\n\t.de-menu-item { display: block; padding: 3px 10px; color: inherit; text-decoration: none; font: 13px arial; white-space: nowrap; cursor: pointer; }\n\t.de-menu-item:hover { background-color: #222; color: #fff; }\n\t.de-omitted { color: grey; }\n\t.de-omitted::before { content: "' + Lng.postsOmitted[lang] + '"; }\n\t.de-post-hiddencontent { display: none !important; }\n\t.de-pview { position: absolute; width: auto; min-width: 0; z-index: 9999; border: 1px solid grey !important; margin: 0 !important; display: block !important; }\n\t.de-pview-info { padding: 3px 6px !important; }\n\t.de-ref-op::after { content: " (OP)"; }\n\t.de-ref-del::after { content: " (Del)"; }\n\t.de-refmap { margin: 10px 4px 4px 4px; font-size: 75%; font-style: italic; }\n\t.de-refmap::before { content: "' + Lng.replies[lang] + ' "; }\n\t.de-refcomma:last-child { display: none; }\n\t.de-replies-hide::after { content: "' + Lng.hidePosts[lang] + '"; }\n\t.de-replies-show::after { content: "' + Lng.showPosts[lang] + '"; }\n\t.de-thread-buttons { clear: left; margin-top: 5px; }\n\t.de-thread-collapse > a::after { content: "' + Lng.collapseThr[lang] + '"; }\n\t.de-thread-updater > a::after { content: "' + Lng.getNewPosts[lang] + '"; }\n\t#de-updater-count::before { content: ": "; }\n\t.de-viewed { color: #747488 !important; }\n\tform > hr { clear: both }');
+		'@keyframes de-wait-anim { to { transform: rotate(360deg); } }\n\t.de-wait, .de-fav-wait , .de-fullimg-load { animation: de-wait-anim 1s linear infinite; }\n\t.de-wait { margin: 0 2px -3px 0 !important; width: 16px; height: 16px; }\n\t.de-abtn { text-decoration: none !important; outline: none; }\n\t#de-wrapper-popup { overflow-x: hidden !important; overflow-y: auto !important; -moz-box-sizing: border-box; box-sizing: border-box; max-height: 100vh; position: fixed; right: 0; top: 0; z-index: 9999; font: 14px arial; cursor: default; }\n\t.de-popup { overflow: visible !important; clear: both !important; width: auto !important; min-width: 0pt !important; padding: 8px !important; margin: 1px !important; border: 1px solid grey !important; display: block !important; float: right !important; max-width: initial !important; }\n\t.de-popup-btn { display: inline-block; vertical-align: top; color: green; cursor: pointer; line-height: 1.15; }\n\t.de-popup-msg { display: inline-block; white-space: pre-wrap; }\n\t.de-button { flex: none; padding: 0 ' + (nav.isFirefox ? 2 : 4) + 'px !important; margin: 1px 2px; height: 24px; font: 13px arial; }\n\t.de-editor { display: block; font: 12px courier new; width: 619px; height: 337px; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; }\n\t.de-hidden { float: left; overflow: hidden !important; margin: 0 !important; padding: 0 !important; border: none !important; width: 0 !important; height: 0 !important; display: inline !important; }\n\t.de-input-key { padding: 0 2px !important; margin: 0 !important; font: 13px/15px arial !important; }\n\t.de-link-parent { outline: 1px dotted !important; }\n\t.de-link-pview { font-weight: bold; }\n\t.de-link-ref { text-decoration: none; }\n\t.de-list { padding-top: 4px; }\n\t.de-list::before { content: "\u25CF"; margin-right: 4px; }\n\t.de-menu { padding: 0 !important; margin: 0 !important; width: auto !important; min-width: 0 !important; z-index: 9999; border: 1px solid grey !important; }\n\t.de-menu-item { display: block; padding: 3px 10px; color: inherit; text-decoration: none; font: 13px arial; white-space: nowrap; cursor: pointer; }\n\t.de-menu-item:hover { background-color: #222; color: #fff; }\n\t.de-omitted { color: grey; }\n\t.de-omitted::before { content: "' + Lng.postsOmitted[lang] + '"; }\n\t.de-post-hiddencontent { display: none !important; }\n\t.de-pview { position: absolute; width: auto; min-width: 0; z-index: 9999; border: 1px solid grey !important; margin: 0 !important; display: block !important; }\n\t.de-pview-info { padding: 3px 6px !important; }\n\t.de-ref-op::after { content: " (OP)"; }\n\t.de-ref-del::after { content: " (Del)"; }\n\t.de-refmap { margin: 10px 4px 4px 4px; font-size: 75%; font-style: italic; }\n\t.de-refmap::before { content: "' + Lng.replies[lang] + ' "; }\n\t.de-refcomma:last-child { display: none; }\n\t.de-replies-hide::after { content: "' + Lng.hidePosts[lang] + '"; }\n\t.de-replies-show::after { content: "' + Lng.showPosts[lang] + '"; }\n\t.de-thread-buttons { clear: left; margin-top: 5px; }\n\t.de-thread-collapse > a::after { content: "' + Lng.collapseThr[lang] + '"; }\n\t.de-thread-updater > a::after { content: "' + Lng.getNewPosts[lang] + '"; }\n\t#de-updater-count::before { content: ": "; }\n\t.de-viewed { color: #747488 !important; }\n\tform > hr { clear: both }');
 
 		$css(x).id = 'de-css';
 		$css('').id = 'de-css-dynamic';
@@ -21114,285 +22099,57 @@ true, true],
 	}
 
 	function updateCSS() {
-		var str = '.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.Presto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + '; }\n\t.de-selected, .de-error-input { ' + (nav.Presto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + '; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.Presto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + '; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user, .de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick, .de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.Presto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t' + (Cfg.resizeImgs ? '' : '.de-img-wrapper-inpost > .de-img-full { width: auto; }') + '\n\t' + (Cfg.maskImgs ? aib.qPostImg + (', .de-img-pre, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; } ' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-pre:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }') : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.' + aib.cReply.replace(/\s/, '.') + ':not(.de-pview) { float: none; width: 100%; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input, .rating_select { display: inline !important; } .de-file-rate { display: none !important; }') + '\n\t' + (!Cfg.addSageBtn ? '#de-sagebtn, ' : '') + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + (!Cfg.imgNavBtns ? '#de-img-btn-next, #de-img-btn-prev, ' : '') + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + (!Cfg.panelCounter ? '#de-panel-info, ' : '') + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + (!Cfg.showHideBtn ? '.de-btn-hide, ' : '') + (!Cfg.showRepBtn ? '.de-btn-rep, ' : '') + (!Cfg.updThrBtns && !aib.t ? '.de-thread-updater, ' : '') + (!Cfg.ajaxPosting ? '.de-file-btn-rar, .de-file-btn-txt, ' : '') + (!Cfg.fileInputs ? '.de-file-txt-wrap, .de-file-btn-txt, ' : '') + (!aib.kus && (aib.multiFile || Cfg.fileInputs !== 2) ? '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ' : '') + ' body > hr, .postarea, small[id^="rfmap"], .theader { display: none !important; }';
+		var str = '.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.isPresto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + '; }\n\t.de-selected, .de-error-input { ' + (nav.isPresto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + '; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.isPresto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + '; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user,\n\t\t.de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick,\n\t\t.de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.isPresto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t.de-fullimg-wrap-inpost > .de-fullimg { width: ' + (Cfg.resizeImgs ? '100%' : 'auto') + '; }\n\t' + (Cfg.maskImgs ? aib.qPostImg + (', .de-img-pre, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; }\n\t\t' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-pre:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }') : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.' + aib.cReply.replace(/\s/, '.') + ':not(.de-pview) { float: none; width: 99.9%; margin-left: 0; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input, .rating_select { display: inline !important; } .de-file-rate { display: none !important; }') + '\n\t' + (Cfg.addSageBtn ? '' : '#de-sagebtn, ') + '\n\t' + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + '\n\t' + (Cfg.imgNavBtns ? '' : '#de-img-btn-next, #de-img-btn-prev, ') + '\n\t' + (Cfg.imgInfoLink ? '' : '.de-fullimg-info, ') + '\n\t' + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + '\n\t' + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + '\n\t' + (Cfg.panelCounter ? '' : '#de-panel-info, ') + '\n\t' + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + '\n\t' + (Cfg.showHideBtn ? '' : '.de-btn-hide, ') + '\n\t' + (Cfg.showRepBtn ? '' : '.de-btn-rep, ') + '\n\t' + (Cfg.updThrBtns || aib.t ? '' : '.de-thread-updater, ') + '\n\t' + (Cfg.ajaxPosting ? '' : '.de-file-btn-rar, .de-file-btn-txt, ') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-txt-wrap, .de-file-btn-txt, ') + '\n\t' + (aib.kus || !aib.multiFile && Cfg.fileInputs === 2 ? '' : '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ') + '\n\t\tbody > hr, .postarea, small[id^="rfmap"], .theader { display: none !important; }';
 		$id('de-css-dynamic').textContent = str + '\n' + aib.css;
 		$id('de-css-user').textContent = Cfg.userCSS ? Cfg.userCSSTxt : '';
-	}
-
-
-	function runMain(checkDomains, dataPromise) {
-		var formEl, eList, fav, _ref68, _ref69, _ref70, _ref71, storageName, firstThr;
-
-		return regeneratorRuntime.async(function runMain$(_context23) {
-			while (1) {
-				switch (_context23.prev = _context23.next) {
-					case 0:
-						Logger.init();
-						docBody = doc.body;
-
-						if (docBody) {
-							_context23.next = 4;
-							break;
-						}
-
-						return _context23.abrupt('return');
-
-					case 4:
-						if (!aib) {
-							aib = getImageBoard(checkDomains, true);
-						}
-						formEl = $q(aib.qDForm + ', form[de-form]');
-
-						if (formEl) {
-							_context23.next = 9;
-							break;
-						}
-
-						if (aib.observeContent) {
-							aib.observeContent(checkDomains, dataPromise);
-						}
-						return _context23.abrupt('return');
-
-					case 9:
-						Logger.log('Imageboard check');
-
-						if (locStorage) {
-							_context23.next = 14;
-							break;
-						}
-
-						if (checkStorage()) {
-							_context23.next = 13;
-							break;
-						}
-
-						return _context23.abrupt('return');
-
-					case 13:
-						initNavFuncs();
-
-					case 14:
-						eList = void 0, fav = void 0;
-
-						if (!dataPromise) {
-							_context23.next = 24;
-							break;
-						}
-
-						_context23.next = 18;
-						return regeneratorRuntime.awrap(dataPromise);
-
-					case 18:
-						_ref68 = _context23.sent;
-						_ref69 = _slicedToArray(_ref68, 2);
-						eList = _ref69[0];
-						fav = _ref69[1];
-						_context23.next = 30;
-						break;
-
-					case 24:
-						_context23.next = 26;
-						return regeneratorRuntime.awrap(readData());
-
-					case 26:
-						_ref70 = _context23.sent;
-						_ref71 = _slicedToArray(_ref70, 2);
-						eList = _ref71[0];
-						fav = _ref71[1];
-
-					case 30:
-						if (!(eList && eList.includes(aib.dm))) {
-							_context23.next = 32;
-							break;
-						}
-
-						return _context23.abrupt('return');
-
-					case 32:
-						excludeList = eList || '';
-						Logger.log('Data loading');
-
-						if (!(!Cfg.disabled && (aib.init && aib.init() || $id('de-panel')))) {
-							_context23.next = 36;
-							break;
-						}
-
-						return _context23.abrupt('return');
-
-					case 36:
-						addSVGIcons();
-
-						if (!Cfg.disabled) {
-							_context23.next = 41;
-							break;
-						}
-
-						panel.init(formEl);
-						scriptCSS();
-						return _context23.abrupt('return');
-
-					case 41:
-						initStorageEvent();
-						DollchanAPI.init();
-						if (localData) {
-							aib.prot = 'http:';
-							aib.host = aib.dm;
-							aib.b = localData.b;
-							aib.t = localData.t;
-							aib.docExt = '.html';
-						} else {
-							aib.parseURL();
-						}
-						if (aib.t || !Cfg.scrollToTop) {
-							doc.defaultView.addEventListener('beforeunload', function (e) {
-								sesStorage['de-scroll-' + aib.b + aib.t] = window.pageYOffset;
-							});
-						}
-						Logger.log('Init');
-						if (Cfg.correctTime) {
-							dTime = new DateTime(Cfg.timePattern, Cfg.timeRPattern, Cfg.timeOffset, lang, function (rp) {
-								return saveCfg('timeRPattern', rp);
-							});
-							Logger.log('Time correction');
-						}
-						MyPosts.read();
-						Logger.log('Read my posts');
-						$hide(docBody);
-						dummy = doc.createElement('div');
-						formEl = aib.fixHTML(formEl, true);
-						Logger.log('Replace delform');
-						pByEl = new Map();
-						pByNum = new Map();
-						_context23.prev = 55;
-
-						DelForm.last = DelForm.first = new DelForm(formEl, aib.page, false);
-
-						if (Thread.first) {
-							_context23.next = 59;
-							break;
-						}
-
-						throw 'No threads detected!';
-
-					case 59:
-						_context23.next = 66;
-						break;
-
-					case 61:
-						_context23.prev = 61;
-						_context23.t0 = _context23['catch'](55);
-
-						console.error('Delform parsing error:', getErrorMessage(_context23.t0));
-						$show(docBody);
-						return _context23.abrupt('return');
-
-					case 66:
-						Logger.log('Parse delform');
-						storageName = 'de-lastpcount-' + aib.b + '-' + aib.t;
-
-						if (aib.t && !!sesStorage[storageName]) {
-							if (sesStorage[storageName] > Thread.first.pcount) {
-								sesStorage.removeItem(storageName);
-								window.location.reload();
-							}
-						}
-						pr = new PostForm($q(aib.qForm));
-						Logger.log('Parse postform');
-						if (Cfg.hotKeys) {
-							HotKeys.enable();
-							Logger.log('Init keybinds');
-						}
-						initPage();
-						Logger.log('Init page');
-						panel.init(formEl);
-						Logger.log('Add panel');
-						DelForm.first.addStuff();
-						readViewedPosts();
-						scriptCSS();
-						Logger.log('Apply CSS');
-						$show(docBody);
-						Logger.log('Display page');
-						toggleInfinityScroll();
-						Logger.log('Infinity scroll');
-						firstThr = DelForm.first.firstThr;
-
-						if (firstThr) {
-							readPostsData(firstThr.op, fav);
-						}
-						Logger.log('Hide posts');
-						scrollPage();
-						Logger.log('Scroll page');
-						if (localData) {
-							$each($Q('.de-post-removed'), function (el) {
-								var post = pByEl.get(el);
-								if (post) {
-									post['delete'](false);
-								}
-							});
-							Logger.log('Local changings');
-						}
-						Logger.finish();
-
-					case 91:
-					case 'end':
-						return _context23.stop();
-				}
-			}
-		}, null, this, [[55, 61]]);
-	}
-
-	if (/^(?:about|chrome|opera|res):$/i.test(window.location.protocol)) {
+	}if (/^(?:about|chrome|opera|res):$/i.test(window.location.protocol)) {
 		return;
 	}
 	if (doc.readyState !== 'loading') {
 		needScroll = false;
 		runMain(true, null);
 	} else {
-		var _ret12 = function () {
-			var dataPromise = null;
-			if (aib = getImageBoard(true, false)) {
-				if (!checkStorage()) {
-					return {
-						v: void 0
-					};
-				}
-				initNavFuncs();
-				dataPromise = readData();
+		var dataPromise = null;
+		if (aib = getImageBoard(true, false)) {
+			if (!checkStorage()) {
+				return;
 			}
-			needScroll = true;
-			doc.addEventListener('onwheel' in doc.defaultView ? 'wheel' : 'mousewheel', function wFunc(e) {
-				needScroll = false;
-				doc.removeEventListener(e.type, wFunc);
-			});
-			doc.addEventListener('DOMContentLoaded', function () {
-				return runMain(false, dataPromise);
-			});
-		}();
-
-		if ((typeof _ret12 === 'undefined' ? 'undefined' : _typeof(_ret12)) === "object") return _ret12.v;
+			initNavFuncs();
+			dataPromise = readData();
+		}
+		needScroll = true;
+		doc.addEventListener('onwheel' in doc.defaultView ? 'wheel' : 'mousewheel', function wFunc(e) {
+			needScroll = false;
+			doc.removeEventListener(e.type, wFunc);
+		});
+		doc.addEventListener('DOMContentLoaded', function () {
+			return runMain(false, dataPromise);
+		});
 	}
 
 })(window.opera && window.opera.scriptStorage, window.FormData, function (x, y) {
 	return window.scrollTo(x, y);
-}, (typeof localData === 'undefined' ? 'undefined' : _typeof(localData)) === 'object' ? localData : null);
+},
+(typeof localData === 'undefined' ? 'undefined' : _typeof(localData)) === 'object' ? localData : null);
 
-},{}],122:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 'use strict';
 
-require('core-js/fn/object/assign');
 require('core-js/fn/array/from');
 require('core-js/fn/array/iterator');
+require('core-js/fn/map');
+require('core-js/fn/math/clz32');
 require('core-js/fn/number/max-safe-integer');
+require('core-js/fn/object/assign');
+require('core-js/fn/promise');
+require('core-js/fn/set');
+require('core-js/fn/string/ends-with');
 require('core-js/fn/string/includes');
 require('core-js/fn/string/repeat');
 require('core-js/fn/string/starts-with');
-require('core-js/fn/math/clz32');
 require('core-js/fn/symbol');
-require('core-js/fn/map');
-require('core-js/fn/set');
 require('core-js/fn/weak-map');
-require('core-js/fn/promise');
 require('regenerator-runtime/runtime');
 
-},{"core-js/fn/array/from":1,"core-js/fn/array/iterator":2,"core-js/fn/map":3,"core-js/fn/math/clz32":4,"core-js/fn/number/max-safe-integer":5,"core-js/fn/object/assign":6,"core-js/fn/promise":7,"core-js/fn/set":8,"core-js/fn/string/includes":9,"core-js/fn/string/repeat":10,"core-js/fn/string/starts-with":11,"core-js/fn/symbol":12,"core-js/fn/weak-map":13,"regenerator-runtime/runtime":120}]},{},[122,121]);
+},{"core-js/fn/array/from":1,"core-js/fn/array/iterator":2,"core-js/fn/map":3,"core-js/fn/math/clz32":4,"core-js/fn/number/max-safe-integer":5,"core-js/fn/object/assign":6,"core-js/fn/promise":7,"core-js/fn/set":8,"core-js/fn/string/ends-with":9,"core-js/fn/string/includes":10,"core-js/fn/string/repeat":11,"core-js/fn/string/starts-with":12,"core-js/fn/symbol":13,"core-js/fn/weak-map":14,"regenerator-runtime/runtime":122}]},{},[124,123]);
 })(null);

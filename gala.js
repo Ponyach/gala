@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 3.6.2
+	: version 4.0.0
 	© magicode
 */
 var _z = _z();
@@ -60,12 +60,7 @@ var MAX_FILE = {
 	}
 }
 // этот стиль лучше бы перенести в глобальный css
-var EXT_STYLE = _z.setup('style', { text: '.stylesheet-list { list-style: inside none none; } .options-cell { padding: 5px; margin: 5px; } .menu-head { text-align: center; margin: 0px; font-weight: bold; } .set-style, .used-style { text-decoration: none; margin-left: 15px; } .list-item-checked:before { content: "•"; position: absolute; } .menu-group { display: table; text-align: center; margin: auto; font-size: small; } .menu-group > .group-cell { display: table-cell; padding: 0 15px; } #tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } #prepreview { position: absolute; z-index: -1; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { padding: 0 8px; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }\
-.modal__prev, .modal__next { position: fixed; width: 2em; height: 5em; cursor: pointer; background-color: rgba(0,0,0,.2); border-radius: 3px; top: 50%; } .modal__prev { left: 10px; } .modal__next { right: 10px; }\
-.modal__prev:after, .modal__prev:before, .modal__next:after, .modal__next:before { content: ""; position: absolute; border-right: 2px solid; height: 50%; border-color: whitesmoke; display: block; left: 50%; }\
-.modal__prev:before { top: 3px; transform: rotate(25deg); } .modal__prev:after { bottom: 3px; transform: rotate(-25deg); }.modal__next:before { top: 3px; transform: rotate(-25deg); } .modal__next:after { bottom: 3px; transform: rotate(25deg);} .modal__prev:hover, .modal__next:hover { background-color: rgba(0,0,0,.5); }\
-.modal__prev:hover:after, .modal__prev:hover:before, .modal__next:hover:after, .modal__next:hover:before { border-color: #ddd; }\
-.de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }'});
+var EXT_STYLE = _z.setup('style', { text: '#tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { width: 16px; height: 16px; display: inline-block; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }'});
 
 Object.defineProperty(window, 'isCaptchaNeeded', {
 	value: function(/* no, yes */) {
@@ -75,62 +70,6 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		});
 	}
 });
-// MobileСheck более кошерным способом: проверяется не userAgent а размер экрана.
-(function(sW, s700, s500) {
-	if ('matchMedia' in window) {
-		EXT_STYLE.appendChild(document.createTextNode('shwd { display: none; }\
-@media screen and (max-width: 700px) { shwd { display: inline; } .mobile_filename_hide, fwd { display: none; } '+ s700 +' }\
-@media screen and (max-width: 500px) { '+ s500 +' }'));
-		Object.defineProperty(window, 'isMobileScreen', {
-			get: function() {
-				document.querySelectorAll('.mobile_date').forEach(function(dd) {
-					dd.classList.remove('mobile_date');
-					dd.innerHTML = dd.textContent.replace(
-						/(([А-Я])[а-я]?([а-я])(?:идельник|орник|еда|верг|ница|бота|кресенье))/, '<shwd>$2$3</shwd><fwd>$1</fwd>');
-				});
-			}
-		});
-	} else if ((sW = screen.width < outerWidth ? screen.width : outerWidth) < 701) {
-		EXT_STYLE.appendChild(document.createTextNode('.mobile_filename_hide { display: none; }'+ (sW < 501 ? s500 : s700)));
-		Object.defineProperty(window, 'isMobileScreen', {
-			get: function() {
-				document.querySelectorAll('.mobile_date').forEach(function(dd) {
-					dd.classList.remove('mobile_date');
-					dd.textContent = dd.textContent
-					.replace('Понидельник', 'Пн')
-					.replace('Вторник',     'Вт')
-					.replace('Среда',       'Ср')
-					.replace('Четверг',     'Чт')
-					.replace('Пятница',     'Пт')
-					.replace('Суббота',     'Сб')
-					.replace('Воскресенье', 'Вс');
-				});
-			}
-		});
-	} else {
-		Object.defineProperty(window, 'isMobileScreen', { value: 'is not mobile' });
-	}
-})(0, '.file .thumb { max-width: 200px; max-height: 200px; width: auto!important; height: auto!important; } body { margin: 0!important; padding: 4px; } .post-body blockquote { margin: 8px 1em 0 1em; }', '.file .thumb { max-width: 150px; max-height: 150px; width: auto!important; height: auto!important; margin: 1px 10px; } body { margin: 0!important; padding: 0 1px; font-size: 14px; } .post-body blockquote { margin: 4px 5px 0 5px; } .psttable { width: 100%; }');
-
-function _RebuildFileSizeInfo() {
-	// переработанная логика подмены информации о файле
-	Array.prototype.slice.call(                              // вместо перерисовывания верхней строки по наведению на файлы,
-		document.querySelectorAll('[id^="fake_filesize_"]'), 0) // вставляем вместо нее оригинальные спрятанные над картинками хидеры по порядку,
-	.forEach(function(fk, i) {                               // функцией show_filesize делаем видимый целевой, а предыдущий скрываем.
-		var pfiles = fk.parentNode,
-			fs_inf = pfiles.getElementsByClassName('filesize');
-			fs_inf[0].style['display'] = 'inline';         // + меньше тревожим DOM, меньше сообщений ловим в MutationObserver, быстрей работа
-		for (var i = 0, len = fs_inf.length; i < len; i++){// + не нужно изобретать костыли для переноса изменений вносимых куклой
-			fs_inf[i].className += ' fake_filesize'
-			pfiles.insertBefore(fs_inf[i], fk);
-		}
-		if (len > 1) { // выравнивание блока с текстом
-			pfiles.parentNode.querySelector('.post-body').classList.add('clearancent');
-		}
-		fk.remove();
-	});
-	isMobileScreen;
-}
 
 !(function() {
 	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
@@ -205,12 +144,11 @@ function _RebuildFileSizeInfo() {
 			// записываем наш конфиг в локальное хранилище
 			localStorage.setItem('DESU_Config', JSON.stringify(DESU_Config));
 		}
-	
 		// собираем куклоскрипт  ~  добавляем на страницу
-		document.head.appendChild(_z.setup('script', {
-			type: 'text/javascript', src: '/lib/javascript/boardscript.js'
-		}, {
-			load: function(e) {
+		document.head.appendChild( _z.setup('script', {
+			type : 'text/javascript',
+			src  : '/lib/javascript/boardscript.js' }, {
+			load : function(e) {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
 		         однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
@@ -219,12 +157,16 @@ function _RebuildFileSizeInfo() {
 					// регестрируем функции в API куклоскрипта
 					window.postMessage('de-request-api-message', '*');
 					
-					var deFiles = document.getElementsByClassName('de-file'),
-						dbTHMB = {},
-						modal = (deFiles.length > 0 ? deFiles[0] : document.getElementById('dollchan_send')).parentNode;
-						modal.appendChild(passcode_up);
-						modal.appendChild(dbpic_vi);
+					var dbTHMB  = {},
+						deFiles = document.getElementsByClassName('de-file'),
+						deWHead = document.getElementsByClassName('de-win-head')[0];
 					
+						deWHead.prepend( passcode_up, dbpic_vi );
+						
+					EXT_STYLE.append(
+						'.modal-btn[for="modal-1"] { left: 20px; position: absolute; }'+
+						'.modal-btn[for="modal-2"] { left: 0; position: absolute; }' );
+						
 					de_rpiChange = function(k, src, title, rate) {
 						if (deFiles.length > 0) {
 							if (!dbTHMB[k]) {
@@ -247,7 +189,13 @@ function _RebuildFileSizeInfo() {
 		$DOMReady(function() {
 			// check highlight
 			if (location.hash) {
-				scrollHighlight(location.hash.substring(1));
+				var reply = document.getElementById('reply'+ location.hash.substring(1));
+				if (reply) {
+					reply.scrollIntoView({ block: 'start', behavior: 'smooth' });
+					if (!reply.classList.contains('oppost')) {
+						reply.classList.add('highlight');
+					}
+				}
 			}
 			// вставляем имя пользователя и адресс почты в поля формы
 			if ('postform' in document.forms) {
@@ -258,14 +206,11 @@ function _RebuildFileSizeInfo() {
 						postform.submit();
 					}
 				}
-				postform.elements['upload-image-1'].parentNode.appendChild(passcode_up);
-				postform.elements['upload-image-1'].parentNode.appendChild(dbpic_vi);
+				postform.elements['upload-image-1'].parentNode.append( passcode_up, dbpic_vi );
 				// добавляем поле редактирования
 				postform.elements['msgbox'].parentNode.appendChild(
 					markup_buttons).className       = 'buttons-style-text';
 					markup_buttons.style['display'] = 'block';
-				
-				window.insert = 'setSelectionRange' in HTMLInputElement.prototype ? insertLS : insertIE;
 			}
 			if (_PONY) {
 				_PONY.genRefmap();
@@ -273,39 +218,6 @@ function _RebuildFileSizeInfo() {
 			// на случай если подключена внешняя кукла - регестрируемся в ней
 			window.postMessage('de-request-api-message', '*');
 		});
-		
-		//reader need this function and onclick elements on thumbs
-		var box_image = new Image, onWinResize;
-		var box_video = _z.setup('video', { id: 'v-play', controls: true });
-			box_video.style = box_image.style = 'border-radius: 3px; border-width: 0px; position: absolute; display: inline-block;';
-		var preview_layer = _z.setup('div', {
-			style: 'position: fixed; bottom: 0; top: 0; right: 0; left: 0; background-color: rgba(17,17,17,.9); z-index: 99999;',
-			html : '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><span></span></div>'
-		},{ click: function(e) {
-			if (e.target.id !== 'v-play') {
-				this.remove();
-				box_image.src = box_video.src = '';
-				window.removeEventListener('resize', onWinResize, false);
-			}
-		}});
-	
-		window.expandimg = function expandimg(sid, src, thumb, oW, oH, tW, tH) {
-			var i = /\.webm$/.test(src) ? box_video : box_image,
-				s = Number(oW),
-				n = Number(oH);
-		
-			i.src = src;
-		
-			calcScale(i, s, n)
-		
-			window.addEventListener('resize', (onWinResize = function() {
-				calcScale(i, s, n)
-			}), false);
-		
-			document.body.appendChild(preview_layer);
-		
-			preview_layer.firstElementChild.replaceChild(i, preview_layer.firstElementChild.firstElementChild);
-		}
 		
 		if (!MAIN_SETTINGS['ponymapoff']) {
 			// востановленные понирефлинки, попытка сделать универсальный интерфейсм всплывающих окон для устройств с тачем и десктопа
@@ -437,7 +349,7 @@ function _RebuildFileSizeInfo() {
 									pony_ref.className = 'bot|'+ LOCATION_PATH.board +'||'+ map.from;
 									pony_ref.href = '#'+ map.from;
 									pony_ref[handler.over] = _PONY.openPopup;
-									pony_ref.onclick = function() { return scrollHighlight(map.from, false); }
+									pony_ref.onclick = function(e) { scrollHighlight(e, map.from); }
 							});
 						}
 					}
@@ -480,49 +392,17 @@ function _RebuildFileSizeInfo() {
 		$DOMReady(function() {
 			// устанавливаем выбранный пользователем стиль
 			document.selectedStyleSheetSet = (localStorage.getItem('main_style') || 'Photon');
-			// fix селектора styles_mobile, можно перенести в html
-			$('.styles_mobile').attr('onchange', 'document.selectedStyleSheetSet = this.value; localStorage.setItem("main_style", this.value)');
 			// переделываем панель стилей
 			var styles_panel = $(document.getElementById('settings-styles')).draggable({
 					snap: '#snapper, .droppable',
 					snapMode: 'both',
 					snapTolerance: 50 })[0];
 			if (styles_panel) {
-				// (это ▼ можно перенести в html)
-				styles_panel.innerHTML = '<div class="settings-section">'+
-					'<ul class="stylesheet-list options-cell">'+
-						'<p class="menu-head">Обычные</p>'+
-						'<li><a class="set-style" href="#Photon">Фотон</a></li>'+
-						'<li><a class="set-style" href="#Neutron">Нейтрон</a></li>'+
-						'<li><a class="set-style" href="#Niceroom">Niceroom</a></li>'+
-						'<li><a class="set-style" href="#Darktile">Darktile</a><br></li>'+
-						'<li><a class="set-style" href="#Cyborg">Cyborg</a></li>'+
-						'<li><a class="set-style" href="#Aska">Aska</a></li>'+
-						'<li><a class="set-style" href="#Rei">Rei</a></li>'+
-					'</ul>'+
-					'</div><div class="settings-section">'+
-					'<ul class="stylesheet-list options-cell">'+
-						'<p class="menu-head">Пони</p>'+
-						'<li><a class="set-style" href="#Applejack">Эпплджек</a></li>'+
-						'<li><a class="set-style" href="#Fluttershy">Флаттершай</a></li>'+
-						'<li><a class="set-style" href="#Pinkie">Пинки Пай</a></li>'+
-						'<li><a class="set-style" href="#Rainbow">Рейнбоу Дэш</a></li>'+
-						'<li><a class="set-style" href="#Rarity">Рэрити</a></li>'+
-						'<li><a class="set-style" href="#Twilight">Твайлайт Спаркл</a></li>'+
-						'<li><a class="set-style" href="#Lunalight">Луна</a></li>'+
-						'<li><a class="set-style" href="#Nighthard">Найтмэр</a></li>'+
-						'<li><a class="set-style" href="#Octavia">Октавия</a></li>'+
-						'<li><a class="set-style" href="#Derpy">Дерпи</a></li>'+
-						'<li><a class="set-style" href="#Celestialight">Селестия</a></li>'+
-						'<li><a class="set-style" href="#Chrysalis">Кризалис</a></li></ul></div>';
-				
 				used_style = styles_panel.querySelector('a[href="#'+ document.selectedStyleSheetSet +'"]') || trashObj;
 				used_style.className = 'used-style';
 				used_style.parentNode.className = 'list-item-checked';
 				styles_panel.addEventListener('click', setStylesheet, false);
 			}
-			// фикс строки с информацией о файле(ах), можно перенести то что он делает потом в html 
-			_RebuildFileSizeInfo();
 			
 			// обрабатываем верхнюю понель
 			var fixed_header = document.getElementsByClassName('fixed-header-placeholder')[0];
@@ -592,7 +472,7 @@ function _RebuildFileSizeInfo() {
 	window.addEventListener('message', function(e) {
 		if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
 			this.removeEventListener('message', arguments.callee, false);
-			this.handleFileSelect = trashObj.fn;
+			this.handleFileSelect = this.scrollHighlight = trashObj.fn;
 			e.ports[0].onmessage = function(deApi) {
 				var result = deApi.data.data;
 				switch (deApi.data.name) {
@@ -672,11 +552,11 @@ function _RebuildFileSizeInfo() {
 	});
 	
 	// кроссбраузерный аналог $(document).ready()
-	$DOMReady(onDocReadyHandler);
-	
-	function onDocReadyHandler() {
+	$DOMReady(function onDocReadyHandler() {
 		// скрываем неугодных
 		MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
+		MAIN_SETTINGS['userposts_hide'].length && EXT_STYLE.append(
+			'.de-refmap, .PONY_refmap { overflow: hidden; line-height: 0!important; } .de-refmap > a, .PONY_refmap > a { line-height: 15px; }');
 		// подкладываем динамический стиль
 		document.body.appendChild(EXT_STYLE);
 		// добавляем снегопад ( если включен в настройках )
@@ -863,21 +743,14 @@ function _RebuildFileSizeInfo() {
 			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
 			
 			for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
-			
-				_FileArea[i] = postform.elements['token'].parentNode.appendChild(document.createElement('div'));
-				               postform.elements['token'].parentNode.removeChild(postform.elements['file-clear-'+ i]);
-				
-				_DelBtn[i]   = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton' }, { click: cleanInputs });
 				
 				var md5      = postform.elements['md5-'+ i];
 				var passcode = postform.elements['md5passcode-'+ i];
-				var upload   = _z.setup(postform.elements['upload-image-'+ i], { style: undefined });
-				var rating   = _z.setup(postform.elements['upload-rating-'+ i], { style: undefined, onchange: undefined });
+				var upload   = postform.elements['upload-image-'+ i];
+				var rating   = postform.elements['upload-rating-'+ i];
 				
-				if (rating) {
-					upload.parentNode.insertBefore(rating, upload);
-				}
-				_z.append(_FileArea[i], [ md5, passcode, upload.parentNode ]);
+				_FileArea[i] = upload.parentNode;
+				_DelBtn[i]   = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton', text: '\n[X]' }, { click: cleanInputs });
 				
 				if (upload.files.length) {
 					_FileArea[i].className = 'file-area';
@@ -932,7 +805,7 @@ function _RebuildFileSizeInfo() {
 					alertify.error(msg);
 				});
 			};
-			window.postform_submit = function() {
+			window.submitPostform = function() {
 				// убираем поле для детекта отправки через кукловский ctrl+enter
 				postform.elements['dollchan_send'].value = 0;
 				postform.elements['fake_go'].dispatchEvent(
@@ -944,7 +817,7 @@ function _RebuildFileSizeInfo() {
 			var fileSlots = postform.getElementsByClassName('file-area-empty');
 			
 			// passcode uploader
-			var passcode_preview = $(document.getElementById('preview_passcode_div')).removeAttr('class style')[0];
+			var passcode_preview = document.getElementById('preview_passcode_div');
 			var passcode_images = document.getElementById('passcodeimages');
 				passcode_images.onclick = function(e) {
 					if (e.target.className === 'passcode_image' && fileSlots.length > 0) {
@@ -976,7 +849,7 @@ function _RebuildFileSizeInfo() {
 			
 			// derpibooru uploader
 			var _db_ = {
-				version : '2.8.2',
+				version : '2.8.4',
 				apiKey  : localStorage.getItem('derpibooru_api_key') || '',
 				timr    : null, page: {}, pic: {},
 				save    : function(kword, index, dev) {
@@ -984,7 +857,7 @@ function _RebuildFileSizeInfo() {
 				}
 			}
 			
-			var dbPREVIEW = $(document.getElementById('prepreview')).removeAttr('class style')[0];
+			var dbPREVIEW = document.getElementById('prepreview');
 			var dbASKKEY = _z.setup('center', {
 				id: 'dbaskkey',
 				html: ('<p>Вы можете ввести свой API Key для использования ваших фильтров или использовать встроенный</p>'+
@@ -1006,14 +879,10 @@ function _RebuildFileSizeInfo() {
 				}
 			}});
 			
-			
 			var dbIMGPLACE = document.getElementById('imagesgoeshere');
 				dbIMGPLACE.onclick = function(e) {
-					
 					if (e.target.className === 'imagedb' && fileSlots.length > 0) {
-						
-						var full_img     = _db_.pic[e.target.id.split('_')[2]].representations.full;
-						
+						var full_img = _db_.pic[e.target.id.split('_')[2]].representations.full;
 						addBoundThumbnail(fileSlots[0], //free file slot
 							e.target,                   //selected image
 							'[derpi]'+ btoa(full_img.replace(/^\/\/[a-z0-9\.]+\//g,'')), //md hash
@@ -1045,10 +914,8 @@ function _RebuildFileSizeInfo() {
 				}
 				
 			var dbINFO = document.getElementById('infodb'),
-				dbVERS = dbINFO.parentNode.parentNode.insertBefore(document.createElement('span'), dbINFO.parentNode.parentNode.childNodes[0]);
-				dbVERS.className = 'versdb';
-				dbVERS.setAttribute('style', 'top: 10px; position: absolute; right: 3%;');
-				dbVERS.innerHTML = '<a style="cursor: pointer;">Очистить API Key</a>\n&nbsp;\n'+ _db_.version +'\n&nbsp;\n';
+				dbVERS = document.getElementById('versdb');
+				dbVERS.lastChild.textContent = '\n \n'+ _db_.version +'\n \n';
 				dbVERS.firstElementChild.onclick = function() {
 					delete localStorage['derpibooru_api_key'] && alertify.log('Ключ сброшен');
 					$(dbSEARCH.parentNode).hide().before(dbASKKEY);
@@ -1062,11 +929,9 @@ function _RebuildFileSizeInfo() {
 					dbThumbRender({target: { response: sessionStorage.db_last_page } });
 				}
 			
-			var dbPREV = dbPREVIEW.parentNode.appendChild(document.createElement('label'));
-				dbPREV.className = 'modal__prev';
+			var dbPREV = document.querySelector('.modal__prev');
 				dbPREV.onclick = function() { dbPAGE.value = Math.max(1, dbPAGE.valueAsNumber - 1); updatesq(); };
-			var dbNEXT = dbPREVIEW.parentNode.appendChild(document.createElement('label'));
-				dbNEXT.className = 'modal__next';
+			var dbNEXT = document.querySelector('.modal__next');
 				dbNEXT.onclick = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); };
 			
 			recapt2 = document.getElementById('recapt-2')
@@ -1095,7 +960,8 @@ function _RebuildFileSizeInfo() {
 			}
 		});
 		// превращаем ссылку в футере в кнопку переключения между адаптивным и классическим интерфейсом
-		_z.setup(_z.query('.footer > a'), { id: 'ponyaba', href: 'javascript:void(0)', title: IS_TOUCH_DEVICE ? 'версия для ПК' : 'мобильная версия',
+		_z.setup(document.querySelector('.footer > a'), {
+			id: 'ponyaba', href: 'javascript:void(0)', title: IS_TOUCH_DEVICE ? 'версия для ПК' : 'мобильная версия',
 			onclick: function(event) {
 				event.preventDefault();
 				MAIN_SETTINGS['dast_enable'] = !MAIN_SETTINGS['dast_enable'] ? 1 : 0;
@@ -1105,7 +971,7 @@ function _RebuildFileSizeInfo() {
 		});
 		function updatesq() {
 			clearTimeout(_db_.timr);
-			_db_.timr = setTimeout(function(){
+			_db_.timr = setTimeout(function() {
 				var s = dbSEARCH.value.trim();
 				var j = dbPAGE.value;
 		
@@ -1170,7 +1036,7 @@ function _RebuildFileSizeInfo() {
 				dbINFO.textContent = 'Некорректный запрос';
 			}
 		}
-	}
+	});
 	
 	function cleanInputs(e) {
 		var k = this.id.slice(-1),
@@ -1222,41 +1088,6 @@ function _RebuildFileSizeInfo() {
 				}
 				reader.readAsBinaryString(file);
 		}
-	}
-	
-	function scrollHighlight(pid, y) {
-		var reply = document.getElementById('reply'+ pid);
-		if (reply && !reply.classList.contains('de-pview')) {
-			location.hash = pid;
-			$forEachClass('highlight', function(hl, i) {
-				hl.classList.remove('highlight');
-			});
-			if (!reply.classList.contains('oppost')) {
-				reply.classList.add('highlight');
-			}
-			reply.scrollIntoView({ block: (y ? 'start' : 'end'), behavior: 'smooth' });
-			return false;
-		}
-	}; window.highlight = scrollHighlight;
-	
-	function insertLS(txt) {
-		var msgbox = (document.forms['gala-edit-form'] || postform).elements['message'],
-			start = msgbox.selectionStart,
-			end = msgbox.selectionEnd,
-			val = msgbox.value;
-		msgbox.value = val.substring(0, start) + txt + val.substring(end);
-		msgbox.selectionStart = msgbox.selectionEnd = start + txt.length;
-		msgbox.focus();
-		return false;
-	}
-	
-	function insertIE(txt) {
-		var c = (document.forms['gala-edit-form'] || postform).elements['message'].caretPos;
-		if (c) {
-			c.text = c.text.charAt(c.text.length - 1) == ' ' ? txt +' ' : txt;
-		} else
-			postform.elements['msgbox'].value += txt + ' ';
-		return false;
 	}
 	
 	function addBoundThumbnail(file_slot, img_selected, hash, preview_area, title, _p_) {
@@ -1558,19 +1389,17 @@ function _RebuildFileSizeInfo() {
 	//--> Derpibooroo Reverse Search
 	var _DerpBtn = _z.setup('a', {class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: derpSearch });
 	function derpSearch(e) {
-		var _DerpForm = _z.setup('form', {
-		  'accept-charset': 'UTF-8', 
+		var _DerpForm = document.body.appendChild( _z.setup('form', {
+		  'accept-charset': 'UTF-8',
 		   enctype : 'multipart/form-data',
-		   action  : 'https://www.derpibooru.org/search/reverse',
+		   action  : '//derpibooru.org/search/reverse',
 		   target  : '_blank',
 		   method  : 'post',
 		   hidden  :  true,
-		   html    : '<input name="scraper_url" type="url" value=""><input name="fuzziness" value="0.25" type="number">'
-		});
+		   html    : '<input name="scraper_url" type="url" value=""><input name="fuzziness" value="0.25" type="number"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="BUmHjxWqyqeZ5Sh+rght/aEaL7TyXP89L5v9vlt8tWf7SGiIasN/ctm2Gt4hQVhWDCXunjWXNizSDacWu1Hw3Q==" type="hidden">'}));
 		(derpSearch = function(e) {
-			_DerpForm.firstElementChild.value = decodeURIComponent(e.target.previousElementSibling.href.split('=')[1]);
-			document.body.appendChild(_DerpForm).submit();
-			_DerpForm.remove();
+			_DerpForm.elements['scraper_url'].value = decodeURIComponent(e.target.previousElementSibling.href.split('=')[1]);
+			_DerpForm.submit();
 		})(e);
 		this.onclick = derpSearch;
 	} //<---*
@@ -1578,26 +1407,6 @@ function _RebuildFileSizeInfo() {
 	// кнопки аплоада картинок с дерпибуры и паскодов (собираем их заранее)
 	var dbpic_vi    = _z.setup('label', { class: 'modal-btn', for: 'modal-1', style: 'background-image: url(https://derpicdn.net/favicon.ico)' });
 	var passcode_up = _z.setup('label', { class: 'modal-btn', for: 'modal-2', style: 'background-image: url(https://ponyach.ru/images/fsto.ico)' });
-		
-	// переработанное post-menu, лучше собирать здесь и вытаскивать на страничку динамически, а из html убрать вообще.
-	var _pmct, postmenu = _z.setup('ul', {
-		html: '<li class="show-irc post-menu-item de-menu-item">Диалоги</li><li class="edit-post post-menu-item de-menu-item">Редактировать</li>',
-		class: 'post-menu reply de-menu'
-	}, {
-		mouseleave: function(e) { _pmct = setTimeout(function(){e.target.remove()}, 500) },
-		mouseenter: function(e) { clearTimeout(_pmct) }
-	});
-	
-	window.showpostmenu = function showpostmenu(pid) {
-		var menubtn = document.getElementById('postmenuclick'+ pid),
-			position = menubtn.getBoundingClientRect();
-		
-		postmenu.setAttribute('data-num', pid);
-		postmenu.style['top' ] = (position.top  + pageYOffset  + menubtn.offsetHeight) +'px';
-		postmenu.style['left'] = (position.left + pageXOffset) +'px';
-		
-		document.body.appendChild(postmenu);
-	};
 	
 	// динамически загружаемый снежный буран
 	function snowStormToggle() {
@@ -1614,35 +1423,10 @@ function _RebuildFileSizeInfo() {
 		};
 	}
 	
-	function calcScale(i, s, n) {
-	
-		var r, w = 'innerWidth' in window ? {
-			width: window.innerWidth,
-			height: window.innerHeight
-		} : document.documentElement ? {
-			width: document.documentElement.clientWidth,
-			height: document.documentElement.clientHeight
-		} : {
-			width: document.body.clientWidth,
-			height: document.body.clientHeight
-		}
-	
-		if (w.width / w.height < s / n) {
-			r = w.width * 0.85;
-			r > s && ('high-res' == i.className || i.style.maxWidth) ? (i.width = s, i.height = n)  : (i.height = n * (r / s), i.width = r);
-		} else {
-			r = 0.85 * w.height;
-			r > n && ('high-res' == i.className || i.style.maxHeight) ? (i.width = s, i.height = n)  : (i.width = s * (r / n), i.height = r);
-		}
-	
-		i.style.left = (0 - i.width / 2) +'px';
-		i.style.top = (0 - i.height / 2) +'px';
-	}
-	
 })(function() {
 	
 	//затычки --X
-	window.expandimg = window.insert = window.handleFileSelect = window.next = window.prev = window.postform_submit = window.highlight = function() {return 0;}
+	window.handleFileSelect = window.submitPostform = function() {return 0;}
 
 	window.ku_boardspath = location.origin;
 	// X-- затычки
@@ -1729,6 +1513,38 @@ function _RebuildFileSizeInfo() {
 			this.cancelBubble = true;
 		};
 	}
+	if (!Element.prototype.append) {
+		Element.prototype.append = Document.prototype.append = DocumentFragment.prototype.append = function() {
+			for (var i = 0, arg = arguments; i < arg.length; i++) {
+				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+				this.appendChild( node );
+			}
+		};
+	}
+	if (!Element.prototype.prepend) {
+		Element.prototype.prepend = Document.prototype.prepend = DocumentFragment.prototype.prepend = function() {
+			for (var i = 0, arg = arguments; i < arg.length; i++) {
+				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+				this.insertBefore( node, this.childNodes[i] );
+			}
+		};
+	}
+	if (!Element.prototype.before) {
+		Element.prototype.before = function() {
+			for (var i = 0, arg = arguments; i < arg.length; i++) {
+				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+				this.parentNode.insertBefore( node, this );
+			}
+		};
+	}
+	if (!Element.prototype.after) {
+		Element.prototype.after = function() {
+			for (var i = 0, arg = arguments; i < arg.length; i++) {
+				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+				this.parentNode.insertBefore( node, this.nextSibling );
+			}
+		};
+	}
 	if (!String.prototype.includes) {
 		String.prototype.includes = function() {
 			return String.prototype.indexOf.apply(this, arguments) >= 0;
@@ -1809,12 +1625,119 @@ function setCookie(name, value, days, host) {
 	document.cookie = name +'='+ encodeURIComponent(value) + expires;
 }
 
-function show_filesize(pid, num) {
-	var fid = 'fs_'+pid+'_'+num;
-	$forEachClass('fs_'+pid, function(fs, i) {
+function showPostMenu(/* target, pid */) {
+	// переработанное post-menu: при первом вызове создается html элемент, при последующих только перемещаем в нужное место
+	var _pmct, postmenu = _z.setup('ul', {
+		html: '<li class="show-irc post-menu-item de-menu-item">Диалоги</li><li class="edit-post post-menu-item de-menu-item">Редактировать</li>',
+		class: 'post-menu reply de-menu'
+	}, {
+		mouseleave: function(e) { _pmct = setTimeout(function(){e.target.remove()}, 500) },
+		mouseenter: function(e) { clearTimeout(_pmct) }
+	});
+	!(window.showPostMenu = function(target, pid) {
+		var position = target.getBoundingClientRect();
+		
+		postmenu.setAttribute('data-num', pid);
+		postmenu.style['top' ] = (position.top  + pageYOffset  + target.offsetHeight) +'px';
+		postmenu.style['left'] = (position.left + pageXOffset) +'px';
+		
+		document.body.appendChild(postmenu);
+	}).apply(this, arguments);
+}
+
+//reader need this function and onclick elements on thumbs
+function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
+	
+	var box_image = new Image;
+	var box_video = _z.setup('video', { id: 'v-play', controls: true });
+		box_video.style = box_image.style = 'border-radius: 3px; border-width: 0px; position: absolute; display: inline-block;';
+	
+	var onWinResize, layer = _z.setup('div', {
+		style : 'position: fixed; bottom: 0; top: 0; right: 0; left: 0; background-color: rgba(17,17,17,.9); z-index: 99999;',
+		html  : '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><span></span></div>'
+	},{ click : function(e) {
+		if (e.target.id !== 'v-play') {
+			this.remove();
+			box_image.src = box_video.src = '';
+			window.removeEventListener('resize', onWinResize, false);
+		}
+	}});
+	
+	var f = 'innerWidth' in window ? 'window.inner': document.documentElement ? 'document.documentElement.client' : 'document.body.client',
+		getWasp = new Function('return { width: '+ f +'Width, height: '+ f +'Height }');
+	
+	!(expandImage = function(evt, src, thumb, oW, oH, tW, tH) {
+		evt.preventDefault();
+		
+		var ctx = /\.webm$/.test(src) ? box_video : box_image;
+			ctx.src = src;
+		
+		calcScale(ctx, oW, oH);
+		
+		window.addEventListener('resize', (onWinResize = function() {
+			calcScale(ctx, oW, oH)
+		}), false);
+		
+		document.body.appendChild(layer).firstElementChild.replaceChild(
+			ctx, layer.firstElementChild.firstElementChild
+		);
+	}).apply(this, arguments);
+	
+	function calcScale(i, s, n) {
+		var r, w = getWasp();
+		if (w.width / w.height < s / n) {
+			r = w.width * 0.85;
+			r > s && ('high-res' == i.className || i.style.maxWidth) ? (i.width = s, i.height = n)  : (i.height = n * (r / s), i.width = r);
+		} else {
+			r = 0.85 * w.height;
+			r > n && ('high-res' == i.className || i.style.maxHeight) ? (i.width = s, i.height = n)  : (i.width = s * (r / n), i.height = r);
+		}
+		i.style.left = (0 - i.width / 2) +'px';
+		i.style.top = (0 - i.height / 2) +'px';
+	}
+}
+
+function scrollHighlight(evt, pid) {
+	var reply = document.getElementById('reply'+ pid);
+	if (reply && !reply.classList.contains('de-pview')) {
+		evt.preventDefault();
+		if (evt.target.parentNode.className === 'reflink') {
+			history.replaceState(null, document.title, location.pathname +'#'+ pid);
+			$forEachClass('highlight', function(hl, i) {
+				hl.classList.remove('highlight');
+			});
+			if (!reply.classList.contains('oppost')) {
+				reply.classList.add('highlight');
+			}
+			if (!reply.classList.contains('PONY_popup'))
+				return;
+		}
+		reply.parentNode.scrollIntoView({ block: 'start', behavior: 'smooth' });
+	}
+}
+
+function showFileSize(pid, num) {
+	var fid = 'fs_'+ pid +'_'+ num;
+	$forEachClass('fs_'+ pid, function(fs, i) {
 		fs.style['display'] = fs.id === fid ? 'inline' : 'none';
 	});
 }
+
+window.insertText = new Function('evt', 'txt', 'evt.preventDefault();\
+   var msgbox = (document.forms["gala-edit-form"] || document.forms["postform"]).elements["message"],'+
+   ('setSelectionRange' in HTMLInputElement.prototype ? '\
+        start = msgbox.selectionStart,\
+          end = msgbox.selectionEnd,\
+          val = msgbox.value;\
+   msgbox.value = val.substring(0, start) + txt + val.substring(end);\
+   msgbox.selectionStart = msgbox.selectionEnd = start + txt.length;\
+   msgbox.focus();' : '\
+   c = msgbox.caretPos;\
+   if (c) {\
+      c.text = c.text.charAt(c.text.length - 1) == " " ? txt +" " : txt;\
+   } else\
+      msgbox.value += txt + " ";')
+);
 
 function _PonyRateHiglight(el, val) {
 	el.className = el.className.replace(
@@ -1835,7 +1758,10 @@ function $forEachClass(name, func) {
 		document.getElementsByClassName(name), 0)
 	.forEach(func);
 }
-
+function highlight(pid, y) {
+	var reply = document.querySelector('#reply'+ pid +':not(.de-pview)');
+	return !reply || !!reply.parentNode.scrollIntoView({ block: 'start', behavior: 'smooth' });
+}
 function show_message_text(id) {
 	$GET('/messages.php?m=view&id='+id, function(e) {
 		$("#message_text").html('<br><a class="textbutton" title="Скрыть сообщение" onclick="hide_message_text()">[Скрыть]</a>'+
@@ -1988,14 +1914,14 @@ function galamarK(tgOpen, tgClose, tgClass) {
 }
 
 function getDataResponse(uri, Fn) {
-	var xhReq = new XMLHttpRequest();
+	var xhReq = new XMLHttpRequest;
 	xhReq.open('GET', uri, true);
 	xhReq.onreadystatechange = function() {
 		if (this.readyState !== 4)
 			return;
 		if (this.status === 200) {
 			try {
-				var json = JSON.parse(this.responseText);
+				var json = JSON.parse(this.responseText.trim());
 			} finally {
 				Fn((json === undefined ? this.responseText : json), this.responseURL);
 			}
@@ -2067,12 +1993,6 @@ function _z() {
 		}
 		return el;
 	}
-	function __node_util(Parent, Child, insertFunct, Nodes) {
-		Nodes = Array.isArray(Nodes) ? Nodes : [Nodes];
-		for (var i = 0, node; node = Nodes[i++];) {
-			Parent[insertFunct](node, Child);
-		}
-	}
 	function __find_node(el, Fn) {
 		var pat, tun;
 		if (typeof Fn === 'string') {
@@ -2097,37 +2017,15 @@ function _z() {
 		document[fun +'EventListener']('moz'+ type, callback, false);
 		document[fun +'EventListener']('MS'+ type, callback, false);
 	}
-	function __el_query(All, path, targetNode) {
-		if (!('2' in arguments)) targetNode = document;
-		return targetNode['querySelector'+ All](path);
-	}
-	
 	return {
 		each : __for_each,
 		setup: __node_build,
 		route: __find_node,
-		queryAll: __el_query.bind(null, 'All'),
-		query: __el_query.bind(null, ''),
 		documentListener: {
 			add: __prefixed_listener.bind(null, 'add'),
 			rm: __prefixed_listener.bind(null, 'rm')
 		},
-		append: function(element /*, node or [n, o, d, e, s] to insert append */) {
-			element && __node_util((typeof element === 'string' ? document.querySelector(element) : element), null, 'appendChild', arguments[1]);
-		},
-		prepend: function(/* element, node or [n, o, d, e, s] to insert prepend */) {
-			var el = typeof arguments[0] === 'string' ? document.querySelector(arguments[0]) : arguments[0];
-				el && __node_util(el, el.childNodes[0], 'insertBefore', arguments[1]);
-		},
-		after: function(/* element, node or [n, o, d, e, s] to insert after */) {
-			var el = typeof arguments[0] === 'string' ? document.querySelector(arguments[0]) : arguments[0];
-				el && el.parentNode && __node_util(el.parentNode, el.nextSibling, 'insertBefore', arguments[1]);
-		},
-		before: function(/* element, node or [n, o, d, e, s] to insert before */) {
-			var el = typeof arguments[0] === 'string' ? document.querySelector(arguments[0]) : arguments[0];
-				el && el.parentNode && __node_util(el.parentNode, el, 'insertBefore', arguments[1]);
-		},
-		replace: function(elems, nodes /*to replace with*/) {
+		replace: function(elems, nodes /* to replace with */) {
 			if (elems && nodes) {
 				elems = typeof elems === 'string' ? document.querySelectorAll(elems) : elems instanceof Element ? [elems] : elems;
 				nodes = nodes instanceof Element ? [nodes] : nodes;
@@ -2532,13 +2430,13 @@ var SCPurePlayer = (function() {
 			div.className = 'sc-player loading';
 			div.innerHTML = '<ol class="sc-artwork-list"></ol>\n'+
 				'<div class="sc-info"><h3></h3><h4></h4><p></p><a class="sc-download">—=&gt;Download&lt;=—</a>\n'+
-				'	<a href="#x" class="sc-info-close">X</a>\n'+
+				'	<div class="sc-info-close">X</div>\n'+
 				'</div>\n'+
 				'<div class="sc-controls">\n'+
-				'	<a href="#control" class="sc-play">Play</a>\n'+
+				'	<div class="sc-play">Play</div>\n'+
 				'</div>\n'+
 				'<ol class="sc-trackslist">'+ _li(hash, len) +'</ol>\n'+
-				'<a href="#info" class="sc-info-toggle">Info</a>\n'+
+				'<div class="sc-info-toggle">Info</div>\n'+
 				'<div class="sc-time-indicators">\n'+
 				'	<span class="sc-position"></span>&nbsp;|&nbsp;<span class="sc-duration"></span>\n'+
 				'</div>\n'+
@@ -2582,7 +2480,7 @@ var SCPurePlayer = (function() {
 	
 	function updateTrackInfo(node, track) {
 		var artwork = track.artwork_url || track.user.avatar_url;
-		if (artwork && artwork.indexOf('avatars-000044695144-c5ssgx-large.jpg') < 0){
+		if (artwork && !/\/(?:default_avatar_|avatars-000044695144-c5ssgx-)/.test(artwork)) {
 			var img = node['_artwork_'].firstElementChild || document.createElement('img');
 			if (node['_artwork_'].clientWidth > 100) {
 				var s = findBestMatch([200, 250, 300, 500], node['_artwork_'].clientWidth);
@@ -2765,7 +2663,7 @@ var Gala = (function() {
 		loadFrame: function(frame) {
 			var exist = this['OVERLAY'].lastElementChild.children[frame.id];
 			if (!this['OVERLAY'].parentNode)
-				_z.append(document.body, [this['OVERLAY'], this['Marker']]);
+				document.body.append( this['OVERLAY'], this['Marker'] );
 			if (!exist) {
 				if ((exist = this['OVERLAY'].lastElementChild.querySelector('.'+ frame.className))) {
 					this['OVERLAY'].lastElementChild.replaceChild(frame, exist);
@@ -2790,10 +2688,10 @@ var Gala = (function() {
 					cont = _z.setup('span', {'class': name});
 					switch (name) {
 						case 'mediacontent':
-							_z.before(node, cont);
+							node.before( cont );
 							break;
 						case 'imagecontent':
-							_z.prepend(node.parentNode, cont);
+							node.parentNode.prepend( cont );
 					}
 				}
 				return cont;
@@ -2986,7 +2884,7 @@ var Gala = (function() {
 							} else if ($btn.nextElementSibling === $btn._container) {
 								$btn._container.remove();
 							} else
-								_z.after($btn, $btn._container);
+								$btn.after( $btn._container );
 							break;
 						case 'audiolnk':
 							_z.each('.cm-stop', function($cm) { $cm.className = 'cm-button cm-play'; })
@@ -2994,7 +2892,7 @@ var Gala = (function() {
 								$btn.nextElementSibling.remove();
 							} else {
 								$btn.className = 'cm-button cm-stop';
-								_z.after($btn, _Container['Audio']);
+								$btn.after( _Container['Audio'] );
 								_Container['Audio'].id = 'audio_'+ $Id[1];
 								_Container['Audio'].src = $btn.href;
 								_Container['Audio'].play();
@@ -3054,8 +2952,9 @@ var Gala = (function() {
 							e.target.parentNode.style['height'] = '85%';
 						}
 					} else {
+						var pblnk = document.getElementById('PBlnk_'+ e.target.parentNode.id.split('_')[1]);
+						pblnk && pblnk.after( e.target.parentNode );
 						e.target.className = 'mv-frame to-win';
-						_z.after(document.getElementById('PBlnk_'+ e.target.parentNode.id.split('_')[1]), e.target.parentNode);
 						_Container['Marker'].classList.remove('hidout');
 						_Container['OVERLAY'].classList.add('hidup');
 					}
@@ -3098,7 +2997,7 @@ var Gala = (function() {
 										_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
 										_EditForm.elements['em'].value = data.email;
 										_EditForm.querySelector('.sagearrow').classList[data.email === 'sage' ? 'remove' : 'add']('inactive');
-										_z.prepend(el, _EditForm);
+										el.prepend( _EditForm );
 									}
 							}
 						});
@@ -3118,7 +3017,7 @@ var Gala = (function() {
 						break;
 				case 'rep-use1':
 				case 'gcall-write-reply':
-					_z.after(_z.route(e.target, function(rp) {
+					_z.route(e.target, function(rp) {
 						if ( /reply\d+/.test(rp.id) ) {
 							var res = parseBoardURL(rp.querySelector('.reflink a').href);
 							_GalaForm.elements['board'].value = res.board;
@@ -3127,9 +3026,13 @@ var Gala = (function() {
 							_GalaForm.children['gala-replytitle'].lastElementChild.textContent = (document.querySelector('#reply'+ res.thread +
 								' .filetitle') || { textContent: '(без названия) №.'+ res.thread }).textContent;
 						}
-						return (rp.classList.contains('psttable') || rp.classList.contains('oppost')) ? rp :
-								rp.classList.contains('de-pview') ? rp.lastElementChild : null;
-					}), _GalaForm);
+						if (rp.classList.contains('psttable') || rp.classList.contains('oppost') ||
+							rp.classList.contains('de-pview') && (rp = rp.lastElementChild)) {
+							rp.after( _GalaForm );
+							return true;
+						}
+						return false;
+					});
 					break;
 				case 'sc-download':
 					window.open(e.target.href, '_blank', 'width=400,height=200');
@@ -3369,7 +3272,15 @@ var Gala = (function() {
 		tempForm.elements['message'].textMark = galamarK;
 		
 		if (formPosition != null) {
-			var galaSafe = JSON.parse(sessionStorage.getItem('GalaSafe')) || {};
+			var galaSafe  = JSON.parse(sessionStorage.getItem('GalaSafe')) || {},
+				safeValue = function(e) {
+					var name = e.target.name;
+					galaSafe[name] = e.target.value;
+					clearTimeout(e.target.safe_timer);
+					e.target.safe_timer = setTimeout(function() {
+						sessionStorage.setItem('GalaSafe',  JSON.stringify(galaSafe));
+					}, 800);
+				}
 			
 			_z.setup(tempForm.elements['default_file_rating'], { value: (galaSafe['default_file_rating'] || 'N') },
 				{ change: function(e) {
@@ -3382,15 +3293,6 @@ var Gala = (function() {
 			
 			_z.setup(tempForm.elements['name'   ], { value: (galaSafe['name'   ] || '')}, { input: safeValue });
 			_z.setup(tempForm.elements['message'], { value: (galaSafe['message'] || '')}, { input: safeValue });
-			
-			function safeValue(e) {
-				var name = e.target.name;
-				galaSafe[name] = e.target.value;
-				clearTimeout(e.target.safe_timer);
-				e.target.safe_timer = setTimeout(function() {
-					sessionStorage.setItem('GalaSafe',  JSON.stringify(galaSafe));
-				}, 800);
-			}
 		}
 		Object.defineProperties(tempForm, {
 			MAX_FILES_LIMIT: {
@@ -3771,7 +3673,7 @@ var Gala = (function() {
 					continue;
 				}
 				if (form.elements['remove_jpeg_exif'].checked && form.files[i].blob.type == 'image/jpeg')
-					form.files[i].blob = new Blob([form.files[i].dataStriped], {type: 'image/jpeg'});
+					form.files[i].blob = new Blob([form.files[i].dataStriped], { type: 'image/jpeg' });
 				if (form.elements['clear_files_name'].checked)
 					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
 				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
@@ -3796,7 +3698,7 @@ var Gala = (function() {
 					if (this.status === 200) {
 						var data = (function(json, o) {
 							try {
-								o = /<meta http-equiv=\"\w+\" content=\"\d+;url=\/\w+\/\">/.test(json) ? { error: content_error } : JSON.parse(json);
+								o = /<meta http-equiv=\"\w+\" content=\"\d+;url=\/\w+\/\">/.test(json) ? {error:content_error} : JSON.parse(json);
 							} catch (g) {
 								o = { error: json };
 							}
@@ -3823,14 +3725,25 @@ var Gala = (function() {
 									abtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 								});
 							}
-						} else
+						} else {
 							msg_error = data.error;
+						}
 					} else {
 						msg_error = this.status +' '+ this.statusText;
 					}
 					
-					form.children['gala-error-msg'].textContent = msg_error;
+					if (/Я запретила тебе отправлять сообщения\!/.test(msg_error)) {
+						var banMSG = new DOMParser().parseFromString(data.error, 'text/html').body.firstElementChild;
+						form.children['gala-error-msg'].innerHTML = '';
+						form.children['gala-error-msg'].style['background-color'] = '#1E2E3E';
+						form.children['gala-error-msg'].appendChild(banMSG).style = 'width: 650px; font-size: 90%;';
+						form.elements['submit_this_form'].disabled = false;
+						form.elements['submit_this_form'].value = 'Отправить';
+						return;
+					}
+					
 					form.children['gala-error-msg'].style['background-color'] = '#E04000';
+					form.children['gala-error-msg'].textContent = msg_error;
 					
 					switch (msg_error) {
 						case 'Ты отправляешь сообщения слишком быстро':
@@ -3878,7 +3791,7 @@ var Gala = (function() {
 				reply.classList.add('de-mypost');
 			}
 			if (_GalaForm) {
-				_z.before(reply.querySelector('.extrabtns').previousSibling, _z.setup('a', {
+				reply.querySelector('.extrabtns').previousSibling.before( _z.setup('a', {
 					html: '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#gala-rep-arrow"></use></svg>'}));
 			}
 			var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
@@ -3911,14 +3824,23 @@ var Gala = (function() {
 	});
 	_z.setup(document, null, {
 		'hasNewPostsComing': function(e) {
-			_RebuildFileSizeInfo();
 			e.detail.forEach(handlePostNode);
-		}});
+		}
+	});
 	$DOMReady(function(e) {
 		if ('postform' in document.forms && _GalaForm) {
-			var globalform_area = _z.setup('div', { class: 'gala-globalform-area', html: '<div>[<a class="gala-globalform-open"></a>]</div><div style="text-align: left; display: none;"></div><hr>'});
-			_z.after(_z.setup(document.querySelector('.postarea'), { style: 'display:block!important;' }), globalform_area);
-			_z.after((document.forms.delform || document.querySelector('form[de-form]')), globalform_area.cloneNode(true));
+			
+			var globalform_area = _z.setup('div', {
+				class: 'gala-globalform-area',
+				html: '<div>[<a class="gala-globalform-open"></a>]</div><div style="text-align: left; display: none;"></div><hr>'
+			});
+			
+			var postarea = _z.setup(document.querySelector('.postarea'), { style: 'display:block!important;' });
+			postarea && postarea.after( globalform_area );
+			
+			var delform = (document.forms.delform || document.querySelector('form[de-form]'))
+			delform && delform.after( globalform_area.cloneNode(true) );
+			
 			document.body.appendChild(
 				_z.setup('div', { style: 'height: 0; width: 0; position: fixed;', html: 
 					'<style>.de-parea, #de-main > hr, .postarea > #postform, .de-btn-rep { display: none; } .de-svg-back { fill: inherit; stroke: none; } .de-svg-fill { stroke: none; fill: currentColor; } .de-svg-stroke { stroke: currentColor; fill: none; } .de-btn-sage { margin: 0 2px -3px; cursor: pointer; width: 12px; height: 16px; } .rep-arrow-svg{ margin: 0 2px -4px 3px; cursor: pointer; width: 20px; height: 16px; }</style>'+
@@ -3946,11 +3868,14 @@ var Gala = (function() {
 					'</svg>'}));
 		}
 		if (SCPurePlayer.io['AudioDevice'].tagName === 'OBJECT') {
-			var engineContainer = document.body.appendChild( _z.setup('span', { class: 'sc-engine-container', style: 'position: absolute; left: -9000px;' }));
-				engineContainer.appendChild(SCPurePlayer.io['AudioDevice']);
+			document.body.appendChild( _z.setup('span', {
+					class: 'sc-engine-container',
+					style: 'position: absolute; left: -9000px;'
+				})
+			).appendChild( SCPurePlayer.io['AudioDevice'] );
 		}
 		_z.each('.psttable *[id^="reply"], .oppost[id^="reply"]', handlePostNode);
-		document.body.appendChild(dynamicCSS);
+		document.body.appendChild( dynamicCSS );
 	});
 	return {
 		handleLinks: handleLinks

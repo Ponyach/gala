@@ -1,0 +1,7 @@
+*.node
+*.pid
+*.swp
+.build
+.lock*
+.DS_Store
+Dollchan-Extension-Tools*
