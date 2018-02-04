@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.0.0
+	: version 4.0.1
 	© magicode
 */
 var _z = _z();
@@ -147,7 +147,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		// собираем куклоскрипт  ~  добавляем на страницу
 		document.head.appendChild( _z.setup('script', {
 			type : 'text/javascript',
-			src  : '/lib/javascript/boardscript.js' }, {
+			src  : window.boardscript_ver }, {
 			load : function(e) {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
@@ -1646,7 +1646,7 @@ function showPostMenu(/* target, pid */) {
 }
 
 //reader need this function and onclick elements on thumbs
-function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
+function expandimg(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
 	
 	var box_image = new Image;
 	var box_video = _z.setup('video', { id: 'v-play', controls: true });
@@ -1666,7 +1666,7 @@ function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_
 	var f = 'innerWidth' in window ? 'window.inner': document.documentElement ? 'document.documentElement.client' : 'document.body.client',
 		getWasp = new Function('return { width: '+ f +'Width, height: '+ f +'Height }');
 	
-	!(expandImage = function(evt, src, thumb, oW, oH, tW, tH) {
+	!(expandimg = function(evt, src, thumb, oW, oH, tW, tH) {
 		evt.preventDefault();
 		
 		var ctx = /\.webm$/.test(src) ? box_video : box_image;
