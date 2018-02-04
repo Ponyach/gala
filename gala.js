@@ -1646,7 +1646,7 @@ function showPostMenu(/* target, pid */) {
 }
 
 //reader need this function and onclick elements on thumbs
-function expandimg(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
+function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
 	
 	var box_image = new Image;
 	var box_video = _z.setup('video', { id: 'v-play', controls: true });
@@ -1666,7 +1666,7 @@ function expandimg(/* event, img_src, img_thumb, img_width, img_height, thumb_wi
 	var f = 'innerWidth' in window ? 'window.inner': document.documentElement ? 'document.documentElement.client' : 'document.body.client',
 		getWasp = new Function('return { width: '+ f +'Width, height: '+ f +'Height }');
 	
-	!(expandimg = function(evt, src, thumb, oW, oH, tW, tH) {
+	!(expandImage = function(evt, src, thumb, oW, oH, tW, tH) {
 		evt.preventDefault();
 		
 		var ctx = /\.webm$/.test(src) ? box_video : box_image;
