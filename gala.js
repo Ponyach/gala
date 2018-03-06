@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.0.1
+	: version 4.0.2
 	© magicode
 */
 var _z = _z();
@@ -1387,8 +1387,9 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	}
 	
 	//--> Derpibooroo Reverse Search
-	var _DerpBtn = _z.setup('a', {class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: derpSearch });
+	var _DerpBtn = _z.setup('a', { class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: derpSearch });
 	function derpSearch(e) {
+		var reverse_token = localStorage.getItem('reverse_token') || 'y6GoECgRb541VTJPH7g0kR1owGee9KEi3KdCuBUiQ/3GBUb1aQdYjJNbApZdeZUA8o3WBPSOVy7ZHRj+/46uuw==';
 		var _DerpForm = document.body.appendChild( _z.setup('form', {
 		  'accept-charset': 'UTF-8',
 		   enctype : 'multipart/form-data',
@@ -1396,12 +1397,12 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		   target  : '_blank',
 		   method  : 'post',
 		   hidden  :  true,
-		   html    : '<input name="scraper_url" type="url" value=""><input name="fuzziness" value="0.25" type="number"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="BUmHjxWqyqeZ5Sh+rght/aEaL7TyXP89L5v9vlt8tWf7SGiIasN/ctm2Gt4hQVhWDCXunjWXNizSDacWu1Hw3Q==" type="hidden">'}));
-		(derpSearch = function(e) {
+		   html    : '<input name="scraper_url" type="url" value=""><input name="fuzziness" value="0.25" type="number"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="'+ reverse_token +'" type="hidden">'}));
+		!(derpSearch = function(e) {
 			_DerpForm.elements['scraper_url'].value = decodeURIComponent(e.target.previousElementSibling.href.split('=')[1]);
 			_DerpForm.submit();
 		})(e);
-		this.onclick = derpSearch;
+		e.target.onclick = derpSearch;
 	} //<---*
 	
 	// кнопки аплоада картинок с дерпибуры и паскодов (собираем их заранее)
@@ -3777,7 +3778,7 @@ var Gala = (function() {
 	
 	if (MAIN_SETTINGS.galaform) {
 		_GalaForm = makeGalaForm(MAIN_SETTINGS.galaform);
-		isCaptchaNeeded(null, _GalaForm.captcha_needed);
+		isCaptchaNeeded(null, function(){ _GalaForm.captcha_needed() });
 	}
 	
 	function handlePostNode(pst) {
