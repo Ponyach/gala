@@ -17782,7 +17782,7 @@ true, true];
 				if (post.hidden) {
 					post.ref.unhide();
 				}
-				RefMap.upd(post, false);
+				RefMap.updateRefMap(post, false);
 
 				var val = ['videos', 'images', 'subj', 'posterName', 'posterTrip', 'html', 'msg'];
 				var newp = new Post(el, this, post.num, post.count, post.isOp, post.prev);
@@ -17832,9 +17832,9 @@ true, true];
 					maybeVParser.value.parse(newp.el);
 				}
 				if (maybeSpells.value) {
-					maybeSpells.value.run(newp);
+					maybeSpells.value.runSpells(newp);
 				}
-				processImagesLinks(newp.el);
+				processImgInfoLinks(newp.el);
 				newp.addFuncs();
 				preloadImages(newp);
 
