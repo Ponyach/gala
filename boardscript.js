@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            Dollchan Extension Tools
-// @version         18.1.15.0
+// @version         18.2.19.0
 // @namespace       http://www.freedollchan.org/scripts/*
 // @author          Sthephan Shinkufag @ FreeDollChan
 // @copyright       © Dollchan Extension Team. See the LICENSE file for license rights and limitations (MIT).
@@ -22,283 +22,317 @@
 // @nocompat        Chrome
 // ==/UserScript==
 (function deMainFuncOuter(localData) {
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 require('../../modules/es6.string.iterator');
 require('../../modules/es6.array.from');
 module.exports = require('../../modules/_core').Array.from;
-},{"../../modules/_core":30,"../../modules/es6.array.from":100,"../../modules/es6.string.iterator":111}],2:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.array.from":105,"../../modules/es6.string.iterator":116}],2:[function(require,module,exports){
 require('../../modules/es6.array.iterator');
 module.exports = require('../../modules/_core').Array.values;
-},{"../../modules/_core":30,"../../modules/es6.array.iterator":101}],3:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.array.iterator":106}],3:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.map');
 require('../modules/es7.map.to-json');
+require('../modules/es7.map.of');
+require('../modules/es7.map.from');
 module.exports = require('../modules/_core').Map;
-},{"../modules/_core":30,"../modules/es6.map":102,"../modules/es6.object.to-string":106,"../modules/es6.string.iterator":111,"../modules/es7.map.to-json":116,"../modules/web.dom.iterable":120}],4:[function(require,module,exports){
+
+},{"../modules/_core":30,"../modules/es6.map":107,"../modules/es6.object.to-string":111,"../modules/es6.string.iterator":116,"../modules/es7.map.from":121,"../modules/es7.map.of":122,"../modules/es7.map.to-json":123,"../modules/web.dom.iterable":133}],4:[function(require,module,exports){
 require('../../modules/es6.math.clz32');
 module.exports = require('../../modules/_core').Math.clz32;
-},{"../../modules/_core":30,"../../modules/es6.math.clz32":103}],5:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.math.clz32":108}],5:[function(require,module,exports){
 require('../../modules/es6.number.max-safe-integer');
 module.exports = 0x1fffffffffffff;
-},{"../../modules/es6.number.max-safe-integer":104}],6:[function(require,module,exports){
+
+},{"../../modules/es6.number.max-safe-integer":109}],6:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/_core').Object.assign;
-},{"../../modules/_core":30,"../../modules/es6.object.assign":105}],7:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.object.assign":110}],7:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.promise');
+require('../modules/es7.promise.finally');
+require('../modules/es7.promise.try');
 module.exports = require('../modules/_core').Promise;
-},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.promise":107,"../modules/es6.string.iterator":111,"../modules/web.dom.iterable":120}],8:[function(require,module,exports){
+
+},{"../modules/_core":30,"../modules/es6.object.to-string":111,"../modules/es6.promise":112,"../modules/es6.string.iterator":116,"../modules/es7.promise.finally":124,"../modules/es7.promise.try":125,"../modules/web.dom.iterable":133}],8:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
 require('../modules/es6.set');
 require('../modules/es7.set.to-json');
+require('../modules/es7.set.of');
+require('../modules/es7.set.from');
 module.exports = require('../modules/_core').Set;
-},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.set":108,"../modules/es6.string.iterator":111,"../modules/es7.set.to-json":117,"../modules/web.dom.iterable":120}],9:[function(require,module,exports){
+
+},{"../modules/_core":30,"../modules/es6.object.to-string":111,"../modules/es6.set":113,"../modules/es6.string.iterator":116,"../modules/es7.set.from":126,"../modules/es7.set.of":127,"../modules/es7.set.to-json":128,"../modules/web.dom.iterable":133}],9:[function(require,module,exports){
 require('../../modules/es6.string.ends-with');
 module.exports = require('../../modules/_core').String.endsWith;
-},{"../../modules/_core":30,"../../modules/es6.string.ends-with":109}],10:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.string.ends-with":114}],10:[function(require,module,exports){
 require('../../modules/es6.string.includes');
 module.exports = require('../../modules/_core').String.includes;
-},{"../../modules/_core":30,"../../modules/es6.string.includes":110}],11:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.string.includes":115}],11:[function(require,module,exports){
 require('../../modules/es6.string.repeat');
 module.exports = require('../../modules/_core').String.repeat;
-},{"../../modules/_core":30,"../../modules/es6.string.repeat":112}],12:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.string.repeat":117}],12:[function(require,module,exports){
 require('../../modules/es6.string.starts-with');
 module.exports = require('../../modules/_core').String.startsWith;
-},{"../../modules/_core":30,"../../modules/es6.string.starts-with":113}],13:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.string.starts-with":118}],13:[function(require,module,exports){
 require('../../modules/es6.symbol');
 require('../../modules/es6.object.to-string');
 require('../../modules/es7.symbol.async-iterator');
 require('../../modules/es7.symbol.observable');
 module.exports = require('../../modules/_core').Symbol;
-},{"../../modules/_core":30,"../../modules/es6.object.to-string":106,"../../modules/es6.symbol":114,"../../modules/es7.symbol.async-iterator":118,"../../modules/es7.symbol.observable":119}],14:[function(require,module,exports){
+
+},{"../../modules/_core":30,"../../modules/es6.object.to-string":111,"../../modules/es6.symbol":119,"../../modules/es7.symbol.async-iterator":129,"../../modules/es7.symbol.observable":130}],14:[function(require,module,exports){
 require('../modules/es6.object.to-string');
 require('../modules/web.dom.iterable');
 require('../modules/es6.weak-map');
+require('../modules/es7.weak-map.of');
+require('../modules/es7.weak-map.from');
 module.exports = require('../modules/_core').WeakMap;
-},{"../modules/_core":30,"../modules/es6.object.to-string":106,"../modules/es6.weak-map":115,"../modules/web.dom.iterable":120}],15:[function(require,module,exports){
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+
+},{"../modules/_core":30,"../modules/es6.object.to-string":111,"../modules/es6.weak-map":120,"../modules/es7.weak-map.from":131,"../modules/es7.weak-map.of":132,"../modules/web.dom.iterable":133}],15:[function(require,module,exports){
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
   return it;
 };
+
 },{}],16:[function(require,module,exports){
-var UNSCOPABLES = require('./_wks')('unscopables')
-  , ArrayProto  = Array.prototype;
-if(ArrayProto[UNSCOPABLES] == undefined)require('./_hide')(ArrayProto, UNSCOPABLES, {});
-module.exports = function(key){
+var UNSCOPABLES = require('./_wks')('unscopables');
+var ArrayProto = Array.prototype;
+if (ArrayProto[UNSCOPABLES] == undefined) require('./_hide')(ArrayProto, UNSCOPABLES, {});
+module.exports = function (key) {
   ArrayProto[UNSCOPABLES][key] = true;
 };
-},{"./_hide":44,"./_wks":98}],17:[function(require,module,exports){
-module.exports = function(it, Constructor, name, forbiddenField){
-  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
+
+},{"./_hide":44,"./_wks":103}],17:[function(require,module,exports){
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
+
 },{}],18:[function(require,module,exports){
 var isObject = require('./_is-object');
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
 };
+
 },{"./_is-object":52}],19:[function(require,module,exports){
 var forOf = require('./_for-of');
 
-module.exports = function(iter, ITERATOR){
+module.exports = function (iter, ITERATOR) {
   var result = [];
   forOf(iter, false, result.push, result, ITERATOR);
   return result;
 };
 
 },{"./_for-of":41}],20:[function(require,module,exports){
-var toIObject = require('./_to-iobject')
-  , toLength  = require('./_to-length')
-  , toIndex   = require('./_to-index');
-module.exports = function(IS_INCLUDES){
-  return function($this, el, fromIndex){
-    var O      = toIObject($this)
-      , length = toLength(O.length)
-      , index  = toIndex(fromIndex, length)
-      , value;
-    if(IS_INCLUDES && el != el)while(length > index){
+var toIObject = require('./_to-iobject');
+var toLength = require('./_to-length');
+var toAbsoluteIndex = require('./_to-absolute-index');
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    if (IS_INCLUDES && el != el) while (length > index) {
       value = O[index++];
-      if(value != value)return true;
-    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
-      if(O[index] === el)return IS_INCLUDES || index || 0;
+      if (value != value) return true;
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
 };
-},{"./_to-index":89,"./_to-iobject":91,"./_to-length":92}],21:[function(require,module,exports){
-var ctx      = require('./_ctx')
-  , IObject  = require('./_iobject')
-  , toObject = require('./_to-object')
-  , toLength = require('./_to-length')
-  , asc      = require('./_array-species-create');
-module.exports = function(TYPE, $create){
-  var IS_MAP        = TYPE == 1
-    , IS_FILTER     = TYPE == 2
-    , IS_SOME       = TYPE == 3
-    , IS_EVERY      = TYPE == 4
-    , IS_FIND_INDEX = TYPE == 6
-    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX
-    , create        = $create || asc;
-  return function($this, callbackfn, that){
-    var O      = toObject($this)
-      , self   = IObject(O)
-      , f      = ctx(callbackfn, that, 3)
-      , length = toLength(self.length)
-      , index  = 0
-      , result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined
-      , val, res;
-    for(;length > index; index++)if(NO_HOLES || index in self){
+
+},{"./_to-absolute-index":93,"./_to-iobject":95,"./_to-length":96}],21:[function(require,module,exports){
+var ctx = require('./_ctx');
+var IObject = require('./_iobject');
+var toObject = require('./_to-object');
+var toLength = require('./_to-length');
+var asc = require('./_array-species-create');
+module.exports = function (TYPE, $create) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  var create = $create || asc;
+  return function ($this, callbackfn, that) {
+    var O = toObject($this);
+    var self = IObject(O);
+    var f = ctx(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
+    var val, res;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
       val = self[index];
       res = f(val, index, O);
-      if(TYPE){
-        if(IS_MAP)result[index] = res;            
-        else if(res)switch(TYPE){
-          case 3: return true;                    
-          case 5: return val;                     
-          case 6: return index;                   
-          case 2: result.push(val);               
-        } else if(IS_EVERY)return false;          
+      if (TYPE) {
+        if (IS_MAP) result[index] = res;   
+        else if (res) switch (TYPE) {
+          case 3: return true;             
+          case 5: return val;              
+          case 6: return index;            
+          case 2: result.push(val);        
+        } else if (IS_EVERY) return false; 
       }
     }
     return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
   };
 };
-},{"./_array-species-create":23,"./_ctx":32,"./_iobject":49,"./_to-length":92,"./_to-object":93}],22:[function(require,module,exports){
-var isObject = require('./_is-object')
-  , isArray  = require('./_is-array')
-  , SPECIES  = require('./_wks')('species');
 
-module.exports = function(original){
+},{"./_array-species-create":23,"./_ctx":32,"./_iobject":49,"./_to-length":96,"./_to-object":97}],22:[function(require,module,exports){
+var isObject = require('./_is-object');
+var isArray = require('./_is-array');
+var SPECIES = require('./_wks')('species');
+
+module.exports = function (original) {
   var C;
-  if(isArray(original)){
+  if (isArray(original)) {
     C = original.constructor;
-    if(typeof C == 'function' && (C === Array || isArray(C.prototype)))C = undefined;
-    if(isObject(C)){
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
+    if (isObject(C)) {
       C = C[SPECIES];
-      if(C === null)C = undefined;
+      if (C === null) C = undefined;
     }
   } return C === undefined ? Array : C;
 };
-},{"./_is-array":51,"./_is-object":52,"./_wks":98}],23:[function(require,module,exports){
+
+},{"./_is-array":51,"./_is-object":52,"./_wks":103}],23:[function(require,module,exports){
 var speciesConstructor = require('./_array-species-constructor');
 
-module.exports = function(original, length){
+module.exports = function (original, length) {
   return new (speciesConstructor(original))(length);
 };
-},{"./_array-species-constructor":22}],24:[function(require,module,exports){
-var cof = require('./_cof')
-  , TAG = require('./_wks')('toStringTag')
-  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
-var tryGet = function(it, key){
+},{"./_array-species-constructor":22}],24:[function(require,module,exports){
+var cof = require('./_cof');
+var TAG = require('./_wks')('toStringTag');
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+var tryGet = function (it, key) {
   try {
     return it[key];
-  } catch(e){  }
+  } catch (e) {  }
 };
 
-module.exports = function(it){
+module.exports = function (it) {
   var O, T, B;
   return it === undefined ? 'Undefined' : it === null ? 'Null'
     : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
     : ARG ? cof(O)
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
-},{"./_cof":25,"./_wks":98}],25:[function(require,module,exports){
+
+},{"./_cof":25,"./_wks":103}],25:[function(require,module,exports){
 var toString = {}.toString;
 
-module.exports = function(it){
+module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
+
 },{}],26:[function(require,module,exports){
 'use strict';
-var dP          = require('./_object-dp').f
-  , create      = require('./_object-create')
-  , redefineAll = require('./_redefine-all')
-  , ctx         = require('./_ctx')
-  , anInstance  = require('./_an-instance')
-  , defined     = require('./_defined')
-  , forOf       = require('./_for-of')
-  , $iterDefine = require('./_iter-define')
-  , step        = require('./_iter-step')
-  , setSpecies  = require('./_set-species')
-  , DESCRIPTORS = require('./_descriptors')
-  , fastKey     = require('./_meta').fastKey
-  , SIZE        = DESCRIPTORS ? '_s' : 'size';
+var dP = require('./_object-dp').f;
+var create = require('./_object-create');
+var redefineAll = require('./_redefine-all');
+var ctx = require('./_ctx');
+var anInstance = require('./_an-instance');
+var forOf = require('./_for-of');
+var $iterDefine = require('./_iter-define');
+var step = require('./_iter-step');
+var setSpecies = require('./_set-species');
+var DESCRIPTORS = require('./_descriptors');
+var fastKey = require('./_meta').fastKey;
+var validate = require('./_validate-collection');
+var SIZE = DESCRIPTORS ? '_s' : 'size';
 
-var getEntry = function(that, key){
-  var index = fastKey(key), entry;
-  if(index !== 'F')return that._i[index];
-  for(entry = that._f; entry; entry = entry.n){
-    if(entry.k == key)return entry;
+var getEntry = function (that, key) {
+  var index = fastKey(key);
+  var entry;
+  if (index !== 'F') return that._i[index];
+  for (entry = that._f; entry; entry = entry.n) {
+    if (entry.k == key) return entry;
   }
 };
 
 module.exports = {
-  getConstructor: function(wrapper, NAME, IS_MAP, ADDER){
-    var C = wrapper(function(that, iterable){
+  getConstructor: function (wrapper, NAME, IS_MAP, ADDER) {
+    var C = wrapper(function (that, iterable) {
       anInstance(that, C, NAME, '_i');
+      that._t = NAME;         
       that._i = create(null); 
       that._f = undefined;    
       that._l = undefined;    
       that[SIZE] = 0;         
-      if(iterable != undefined)forOf(iterable, IS_MAP, that[ADDER], that);
+      if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
     });
     redefineAll(C.prototype, {
-      clear: function clear(){
-        for(var that = this, data = that._i, entry = that._f; entry; entry = entry.n){
+      clear: function clear() {
+        for (var that = validate(this, NAME), data = that._i, entry = that._f; entry; entry = entry.n) {
           entry.r = true;
-          if(entry.p)entry.p = entry.p.n = undefined;
+          if (entry.p) entry.p = entry.p.n = undefined;
           delete data[entry.i];
         }
         that._f = that._l = undefined;
         that[SIZE] = 0;
       },
-      'delete': function(key){
-        var that  = this
-          , entry = getEntry(that, key);
-        if(entry){
-          var next = entry.n
-            , prev = entry.p;
+      'delete': function (key) {
+        var that = validate(this, NAME);
+        var entry = getEntry(that, key);
+        if (entry) {
+          var next = entry.n;
+          var prev = entry.p;
           delete that._i[entry.i];
           entry.r = true;
-          if(prev)prev.n = next;
-          if(next)next.p = prev;
-          if(that._f == entry)that._f = next;
-          if(that._l == entry)that._l = prev;
+          if (prev) prev.n = next;
+          if (next) next.p = prev;
+          if (that._f == entry) that._f = next;
+          if (that._l == entry) that._l = prev;
           that[SIZE]--;
         } return !!entry;
       },
-      forEach: function forEach(callbackfn ){
-        anInstance(this, C, 'forEach');
-        var f = ctx(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3)
-          , entry;
-        while(entry = entry ? entry.n : this._f){
+      forEach: function forEach(callbackfn ) {
+        validate(this, NAME);
+        var f = ctx(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3);
+        var entry;
+        while (entry = entry ? entry.n : this._f) {
           f(entry.v, entry.k, this);
-          while(entry && entry.r)entry = entry.p;
+          while (entry && entry.r) entry = entry.p;
         }
       },
-      has: function has(key){
-        return !!getEntry(this, key);
+      has: function has(key) {
+        return !!getEntry(validate(this, NAME), key);
       }
     });
-    if(DESCRIPTORS)dP(C.prototype, 'size', {
-      get: function(){
-        return defined(this[SIZE]);
+    if (DESCRIPTORS) dP(C.prototype, 'size', {
+      get: function () {
+        return validate(this, NAME)[SIZE];
       }
     });
     return C;
   },
-  def: function(that, key, value){
-    var entry = getEntry(that, key)
-      , prev, index;
-    if(entry){
+  def: function (that, key, value) {
+    var entry = getEntry(that, key);
+    var prev, index;
+    if (entry) {
       entry.v = value;
     } else {
       that._l = entry = {
@@ -309,191 +343,196 @@ module.exports = {
         n: undefined,                  
         r: false                       
       };
-      if(!that._f)that._f = entry;
-      if(prev)prev.n = entry;
+      if (!that._f) that._f = entry;
+      if (prev) prev.n = entry;
       that[SIZE]++;
-      if(index !== 'F')that._i[index] = entry;
+      if (index !== 'F') that._i[index] = entry;
     } return that;
   },
   getEntry: getEntry,
-  setStrong: function(C, NAME, IS_MAP){
-    $iterDefine(C, NAME, function(iterated, kind){
-      this._t = iterated;  
-      this._k = kind;      
-      this._l = undefined; 
-    }, function(){
-      var that  = this
-        , kind  = that._k
-        , entry = that._l;
-      while(entry && entry.r)entry = entry.p;
-      if(!that._t || !(that._l = entry = entry ? entry.n : that._t._f)){
+  setStrong: function (C, NAME, IS_MAP) {
+    $iterDefine(C, NAME, function (iterated, kind) {
+      this._t = validate(iterated, NAME); 
+      this._k = kind;                     
+      this._l = undefined;                
+    }, function () {
+      var that = this;
+      var kind = that._k;
+      var entry = that._l;
+      while (entry && entry.r) entry = entry.p;
+      if (!that._t || !(that._l = entry = entry ? entry.n : that._t._f)) {
         that._t = undefined;
         return step(1);
       }
-      if(kind == 'keys'  )return step(0, entry.k);
-      if(kind == 'values')return step(0, entry.v);
+      if (kind == 'keys') return step(0, entry.k);
+      if (kind == 'values') return step(0, entry.v);
       return step(0, [entry.k, entry.v]);
-    }, IS_MAP ? 'entries' : 'values' , !IS_MAP, true);
+    }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
 
     setSpecies(NAME);
   }
 };
-},{"./_an-instance":17,"./_ctx":32,"./_defined":33,"./_descriptors":34,"./_for-of":41,"./_iter-define":56,"./_iter-step":58,"./_meta":62,"./_object-create":65,"./_object-dp":66,"./_redefine-all":77,"./_set-species":80}],27:[function(require,module,exports){
-var classof = require('./_classof')
-  , from    = require('./_array-from-iterable');
-module.exports = function(NAME){
-  return function toJSON(){
-    if(classof(this) != NAME)throw TypeError(NAME + "#toJSON isn't generic");
+
+},{"./_an-instance":17,"./_ctx":32,"./_descriptors":34,"./_for-of":41,"./_iter-define":56,"./_iter-step":58,"./_meta":61,"./_object-create":65,"./_object-dp":66,"./_redefine-all":79,"./_set-species":84,"./_validate-collection":100}],27:[function(require,module,exports){
+var classof = require('./_classof');
+var from = require('./_array-from-iterable');
+module.exports = function (NAME) {
+  return function toJSON() {
+    if (classof(this) != NAME) throw TypeError(NAME + "#toJSON isn't generic");
     return from(this);
   };
 };
+
 },{"./_array-from-iterable":19,"./_classof":24}],28:[function(require,module,exports){
 'use strict';
-var redefineAll       = require('./_redefine-all')
-  , getWeak           = require('./_meta').getWeak
-  , anObject          = require('./_an-object')
-  , isObject          = require('./_is-object')
-  , anInstance        = require('./_an-instance')
-  , forOf             = require('./_for-of')
-  , createArrayMethod = require('./_array-methods')
-  , $has              = require('./_has')
-  , arrayFind         = createArrayMethod(5)
-  , arrayFindIndex    = createArrayMethod(6)
-  , id                = 0;
+var redefineAll = require('./_redefine-all');
+var getWeak = require('./_meta').getWeak;
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var anInstance = require('./_an-instance');
+var forOf = require('./_for-of');
+var createArrayMethod = require('./_array-methods');
+var $has = require('./_has');
+var validate = require('./_validate-collection');
+var arrayFind = createArrayMethod(5);
+var arrayFindIndex = createArrayMethod(6);
+var id = 0;
 
-var uncaughtFrozenStore = function(that){
-  return that._l || (that._l = new UncaughtFrozenStore);
+var uncaughtFrozenStore = function (that) {
+  return that._l || (that._l = new UncaughtFrozenStore());
 };
-var UncaughtFrozenStore = function(){
+var UncaughtFrozenStore = function () {
   this.a = [];
 };
-var findUncaughtFrozen = function(store, key){
-  return arrayFind(store.a, function(it){
+var findUncaughtFrozen = function (store, key) {
+  return arrayFind(store.a, function (it) {
     return it[0] === key;
   });
 };
 UncaughtFrozenStore.prototype = {
-  get: function(key){
+  get: function (key) {
     var entry = findUncaughtFrozen(this, key);
-    if(entry)return entry[1];
+    if (entry) return entry[1];
   },
-  has: function(key){
+  has: function (key) {
     return !!findUncaughtFrozen(this, key);
   },
-  set: function(key, value){
+  set: function (key, value) {
     var entry = findUncaughtFrozen(this, key);
-    if(entry)entry[1] = value;
+    if (entry) entry[1] = value;
     else this.a.push([key, value]);
   },
-  'delete': function(key){
-    var index = arrayFindIndex(this.a, function(it){
+  'delete': function (key) {
+    var index = arrayFindIndex(this.a, function (it) {
       return it[0] === key;
     });
-    if(~index)this.a.splice(index, 1);
+    if (~index) this.a.splice(index, 1);
     return !!~index;
   }
 };
 
 module.exports = {
-  getConstructor: function(wrapper, NAME, IS_MAP, ADDER){
-    var C = wrapper(function(that, iterable){
+  getConstructor: function (wrapper, NAME, IS_MAP, ADDER) {
+    var C = wrapper(function (that, iterable) {
       anInstance(that, C, NAME, '_i');
+      that._t = NAME;      
       that._i = id++;      
       that._l = undefined; 
-      if(iterable != undefined)forOf(iterable, IS_MAP, that[ADDER], that);
+      if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
     });
     redefineAll(C.prototype, {
-      'delete': function(key){
-        if(!isObject(key))return false;
+      'delete': function (key) {
+        if (!isObject(key)) return false;
         var data = getWeak(key);
-        if(data === true)return uncaughtFrozenStore(this)['delete'](key);
+        if (data === true) return uncaughtFrozenStore(validate(this, NAME))['delete'](key);
         return data && $has(data, this._i) && delete data[this._i];
       },
-      has: function has(key){
-        if(!isObject(key))return false;
+      has: function has(key) {
+        if (!isObject(key)) return false;
         var data = getWeak(key);
-        if(data === true)return uncaughtFrozenStore(this).has(key);
+        if (data === true) return uncaughtFrozenStore(validate(this, NAME)).has(key);
         return data && $has(data, this._i);
       }
     });
     return C;
   },
-  def: function(that, key, value){
+  def: function (that, key, value) {
     var data = getWeak(anObject(key), true);
-    if(data === true)uncaughtFrozenStore(that).set(key, value);
+    if (data === true) uncaughtFrozenStore(that).set(key, value);
     else data[that._i] = value;
     return that;
   },
   ufstore: uncaughtFrozenStore
 };
-},{"./_an-instance":17,"./_an-object":18,"./_array-methods":21,"./_for-of":41,"./_has":43,"./_is-object":52,"./_meta":62,"./_redefine-all":77}],29:[function(require,module,exports){
-'use strict';
-var global            = require('./_global')
-  , $export           = require('./_export')
-  , redefine          = require('./_redefine')
-  , redefineAll       = require('./_redefine-all')
-  , meta              = require('./_meta')
-  , forOf             = require('./_for-of')
-  , anInstance        = require('./_an-instance')
-  , isObject          = require('./_is-object')
-  , fails             = require('./_fails')
-  , $iterDetect       = require('./_iter-detect')
-  , setToStringTag    = require('./_set-to-string-tag')
-  , inheritIfRequired = require('./_inherit-if-required');
 
-module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
-  var Base  = global[NAME]
-    , C     = Base
-    , ADDER = IS_MAP ? 'set' : 'add'
-    , proto = C && C.prototype
-    , O     = {};
-  var fixMethod = function(KEY){
+},{"./_an-instance":17,"./_an-object":18,"./_array-methods":21,"./_for-of":41,"./_has":43,"./_is-object":52,"./_meta":61,"./_redefine-all":79,"./_validate-collection":100}],29:[function(require,module,exports){
+'use strict';
+var global = require('./_global');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var redefineAll = require('./_redefine-all');
+var meta = require('./_meta');
+var forOf = require('./_for-of');
+var anInstance = require('./_an-instance');
+var isObject = require('./_is-object');
+var fails = require('./_fails');
+var $iterDetect = require('./_iter-detect');
+var setToStringTag = require('./_set-to-string-tag');
+var inheritIfRequired = require('./_inherit-if-required');
+
+module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
+  var Base = global[NAME];
+  var C = Base;
+  var ADDER = IS_MAP ? 'set' : 'add';
+  var proto = C && C.prototype;
+  var O = {};
+  var fixMethod = function (KEY) {
     var fn = proto[KEY];
     redefine(proto, KEY,
-      KEY == 'delete' ? function(a){
+      KEY == 'delete' ? function (a) {
         return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
-      } : KEY == 'has' ? function has(a){
+      } : KEY == 'has' ? function has(a) {
         return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
-      } : KEY == 'get' ? function get(a){
+      } : KEY == 'get' ? function get(a) {
         return IS_WEAK && !isObject(a) ? undefined : fn.call(this, a === 0 ? 0 : a);
-      } : KEY == 'add' ? function add(a){ fn.call(this, a === 0 ? 0 : a); return this; }
-        : function set(a, b){ fn.call(this, a === 0 ? 0 : a, b); return this; }
+      } : KEY == 'add' ? function add(a) { fn.call(this, a === 0 ? 0 : a); return this; }
+        : function set(a, b) { fn.call(this, a === 0 ? 0 : a, b); return this; }
     );
   };
-  if(typeof C != 'function' || !(IS_WEAK || proto.forEach && !fails(function(){
+  if (typeof C != 'function' || !(IS_WEAK || proto.forEach && !fails(function () {
     new C().entries().next();
-  }))){
+  }))) {
     C = common.getConstructor(wrapper, NAME, IS_MAP, ADDER);
     redefineAll(C.prototype, methods);
     meta.NEED = true;
   } else {
-    var instance             = new C
-      , HASNT_CHAINING       = instance[ADDER](IS_WEAK ? {} : -0, 1) != instance
-      , THROWS_ON_PRIMITIVES = fails(function(){ instance.has(1); })
-      , ACCEPT_ITERABLES     = $iterDetect(function(iter){ new C(iter); }) 
-      , BUGGY_ZERO = !IS_WEAK && fails(function(){
-        var $instance = new C()
-          , index     = 5;
-        while(index--)$instance[ADDER](index, index);
-        return !$instance.has(-0);
-      });
-    if(!ACCEPT_ITERABLES){ 
-      C = wrapper(function(target, iterable){
+    var instance = new C();
+    var HASNT_CHAINING = instance[ADDER](IS_WEAK ? {} : -0, 1) != instance;
+    var THROWS_ON_PRIMITIVES = fails(function () { instance.has(1); });
+    var ACCEPT_ITERABLES = $iterDetect(function (iter) { new C(iter); }); 
+    var BUGGY_ZERO = !IS_WEAK && fails(function () {
+      var $instance = new C();
+      var index = 5;
+      while (index--) $instance[ADDER](index, index);
+      return !$instance.has(-0);
+    });
+    if (!ACCEPT_ITERABLES) {
+      C = wrapper(function (target, iterable) {
         anInstance(target, C, NAME);
-        var that = inheritIfRequired(new Base, target, C);
-        if(iterable != undefined)forOf(iterable, IS_MAP, that[ADDER], that);
+        var that = inheritIfRequired(new Base(), target, C);
+        if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
         return that;
       });
       C.prototype = proto;
       proto.constructor = C;
     }
-    if(THROWS_ON_PRIMITIVES || BUGGY_ZERO){
+    if (THROWS_ON_PRIMITIVES || BUGGY_ZERO) {
       fixMethod('delete');
       fixMethod('has');
       IS_MAP && fixMethod('get');
     }
-    if(BUGGY_ZERO || HASNT_CHAINING)fixMethod(ADDER);
-    if(IS_WEAK && proto.clear)delete proto.clear;
+    if (BUGGY_ZERO || HASNT_CHAINING) fixMethod(ADDER);
+    if (IS_WEAK && proto.clear) delete proto.clear;
   }
 
   setToStringTag(C, NAME);
@@ -501,103 +540,112 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
   O[NAME] = C;
   $export($export.G + $export.W + $export.F * (C != Base), O);
 
-  if(!IS_WEAK)common.setStrong(C, NAME, IS_MAP);
+  if (!IS_WEAK) common.setStrong(C, NAME, IS_MAP);
 
   return C;
 };
-},{"./_an-instance":17,"./_export":38,"./_fails":40,"./_for-of":41,"./_global":42,"./_inherit-if-required":47,"./_is-object":52,"./_iter-detect":57,"./_meta":62,"./_redefine":78,"./_redefine-all":77,"./_set-to-string-tag":81}],30:[function(require,module,exports){
-var core = module.exports = {version: '2.4.0'};
-if(typeof __e == 'number')__e = core; 
+
+},{"./_an-instance":17,"./_export":38,"./_fails":40,"./_for-of":41,"./_global":42,"./_inherit-if-required":47,"./_is-object":52,"./_iter-detect":57,"./_meta":61,"./_redefine":80,"./_redefine-all":79,"./_set-to-string-tag":85}],30:[function(require,module,exports){
+var core = module.exports = { version: '2.5.3' };
+if (typeof __e == 'number') __e = core; 
+
 },{}],31:[function(require,module,exports){
 'use strict';
-var $defineProperty = require('./_object-dp')
-  , createDesc      = require('./_property-desc');
+var $defineProperty = require('./_object-dp');
+var createDesc = require('./_property-desc');
 
-module.exports = function(object, index, value){
-  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+module.exports = function (object, index, value) {
+  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
 };
-},{"./_object-dp":66,"./_property-desc":76}],32:[function(require,module,exports){
+
+},{"./_object-dp":66,"./_property-desc":78}],32:[function(require,module,exports){
 var aFunction = require('./_a-function');
-module.exports = function(fn, that, length){
+module.exports = function (fn, that, length) {
   aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
       return fn.call(that, a);
     };
-    case 2: return function(a, b){
+    case 2: return function (a, b) {
       return fn.call(that, a, b);
     };
-    case 3: return function(a, b, c){
+    case 3: return function (a, b, c) {
       return fn.call(that, a, b, c);
     };
   }
-  return function(){
+  return function () {
     return fn.apply(that, arguments);
   };
 };
+
 },{"./_a-function":15}],33:[function(require,module,exports){
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
   return it;
 };
+
 },{}],34:[function(require,module,exports){
-module.exports = !require('./_fails')(function(){
-  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+module.exports = !require('./_fails')(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
+
 },{"./_fails":40}],35:[function(require,module,exports){
-var isObject = require('./_is-object')
-  , document = require('./_global').document
-  , is = isObject(document) && isObject(document.createElement);
-module.exports = function(it){
+var isObject = require('./_is-object');
+var document = require('./_global').document;
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
+
 },{"./_global":42,"./_is-object":52}],36:[function(require,module,exports){
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
+
 },{}],37:[function(require,module,exports){
-var getKeys = require('./_object-keys')
-  , gOPS    = require('./_object-gops')
-  , pIE     = require('./_object-pie');
-module.exports = function(it){
-  var result     = getKeys(it)
-    , getSymbols = gOPS.f;
-  if(getSymbols){
-    var symbols = getSymbols(it)
-      , isEnum  = pIE.f
-      , i       = 0
-      , key;
-    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
+var getKeys = require('./_object-keys');
+var gOPS = require('./_object-gops');
+var pIE = require('./_object-pie');
+module.exports = function (it) {
+  var result = getKeys(it);
+  var getSymbols = gOPS.f;
+  if (getSymbols) {
+    var symbols = getSymbols(it);
+    var isEnum = pIE.f;
+    var i = 0;
+    var key;
+    while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
   } return result;
 };
-},{"./_object-gops":71,"./_object-keys":74,"./_object-pie":75}],38:[function(require,module,exports){
-var global    = require('./_global')
-  , core      = require('./_core')
-  , hide      = require('./_hide')
-  , redefine  = require('./_redefine')
-  , ctx       = require('./_ctx')
-  , PROTOTYPE = 'prototype';
 
-var $export = function(type, name, source){
-  var IS_FORCED = type & $export.F
-    , IS_GLOBAL = type & $export.G
-    , IS_STATIC = type & $export.S
-    , IS_PROTO  = type & $export.P
-    , IS_BIND   = type & $export.B
-    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] || (global[name] = {}) : (global[name] || {})[PROTOTYPE]
-    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
-    , expProto  = exports[PROTOTYPE] || (exports[PROTOTYPE] = {})
-    , key, own, out, exp;
-  if(IS_GLOBAL)source = name;
-  for(key in source){
+},{"./_object-gops":71,"./_object-keys":74,"./_object-pie":75}],38:[function(require,module,exports){
+var global = require('./_global');
+var core = require('./_core');
+var hide = require('./_hide');
+var redefine = require('./_redefine');
+var ctx = require('./_ctx');
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] || (global[name] = {}) : (global[name] || {})[PROTOTYPE];
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE] || (exports[PROTOTYPE] = {});
+  var key, own, out, exp;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
     own = !IS_FORCED && target && target[key] !== undefined;
     out = (own ? target : source)[key];
     exp = IS_BIND && own ? ctx(out, global) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    if(target)redefine(target, key, out, type & $export.U);
-    if(exports[key] != out)hide(exports, key, exp);
-    if(IS_PROTO && expProto[key] != out)expProto[key] = out;
+    if (target) redefine(target, key, out, type & $export.U);
+    if (exports[key] != out) hide(exports, key, exp);
+    if (IS_PROTO && expProto[key] != out) expProto[key] = out;
   }
 };
 global.core = core;
@@ -610,89 +658,102 @@ $export.W = 32;
 $export.U = 64;  
 $export.R = 128; 
 module.exports = $export;
-},{"./_core":30,"./_ctx":32,"./_global":42,"./_hide":44,"./_redefine":78}],39:[function(require,module,exports){
+
+},{"./_core":30,"./_ctx":32,"./_global":42,"./_hide":44,"./_redefine":80}],39:[function(require,module,exports){
 var MATCH = require('./_wks')('match');
-module.exports = function(KEY){
+module.exports = function (KEY) {
   var re = /./;
   try {
     '/./'[KEY](re);
-  } catch(e){
+  } catch (e) {
     try {
       re[MATCH] = false;
       return !'/./'[KEY](re);
-    } catch(f){  }
+    } catch (f) {  }
   } return true;
 };
-},{"./_wks":98}],40:[function(require,module,exports){
-module.exports = function(exec){
+
+},{"./_wks":103}],40:[function(require,module,exports){
+module.exports = function (exec) {
   try {
     return !!exec();
-  } catch(e){
+  } catch (e) {
     return true;
   }
 };
+
 },{}],41:[function(require,module,exports){
-var ctx         = require('./_ctx')
-  , call        = require('./_iter-call')
-  , isArrayIter = require('./_is-array-iter')
-  , anObject    = require('./_an-object')
-  , toLength    = require('./_to-length')
-  , getIterFn   = require('./core.get-iterator-method')
-  , BREAK       = {}
-  , RETURN      = {};
-var exports = module.exports = function(iterable, entries, fn, that, ITERATOR){
-  var iterFn = ITERATOR ? function(){ return iterable; } : getIterFn(iterable)
-    , f      = ctx(fn, that, entries ? 2 : 1)
-    , index  = 0
-    , length, step, iterator, result;
-  if(typeof iterFn != 'function')throw TypeError(iterable + ' is not iterable!');
-  if(isArrayIter(iterFn))for(length = toLength(iterable.length); length > index; index++){
+var ctx = require('./_ctx');
+var call = require('./_iter-call');
+var isArrayIter = require('./_is-array-iter');
+var anObject = require('./_an-object');
+var toLength = require('./_to-length');
+var getIterFn = require('./core.get-iterator-method');
+var BREAK = {};
+var RETURN = {};
+var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
+  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
+  var f = ctx(fn, that, entries ? 2 : 1);
+  var index = 0;
+  var length, step, iterator, result;
+  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
+  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
     result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
-    if(result === BREAK || result === RETURN)return result;
-  } else for(iterator = iterFn.call(iterable); !(step = iterator.next()).done; ){
+    if (result === BREAK || result === RETURN) return result;
+  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
     result = call(iterator, f, step.value, entries);
-    if(result === BREAK || result === RETURN)return result;
+    if (result === BREAK || result === RETURN) return result;
   }
 };
-exports.BREAK  = BREAK;
+exports.BREAK = BREAK;
 exports.RETURN = RETURN;
-},{"./_an-object":18,"./_ctx":32,"./_is-array-iter":50,"./_iter-call":54,"./_to-length":92,"./core.get-iterator-method":99}],42:[function(require,module,exports){
+
+},{"./_an-object":18,"./_ctx":32,"./_is-array-iter":50,"./_iter-call":54,"./_to-length":96,"./core.get-iterator-method":104}],42:[function(require,module,exports){
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; 
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; 
+
 },{}],43:[function(require,module,exports){
 var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function(it, key){
+module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
+
 },{}],44:[function(require,module,exports){
-var dP         = require('./_object-dp')
-  , createDesc = require('./_property-desc');
-module.exports = require('./_descriptors') ? function(object, key, value){
+var dP = require('./_object-dp');
+var createDesc = require('./_property-desc');
+module.exports = require('./_descriptors') ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
-} : function(object, key, value){
+} : function (object, key, value) {
   object[key] = value;
   return object;
 };
-},{"./_descriptors":34,"./_object-dp":66,"./_property-desc":76}],45:[function(require,module,exports){
-module.exports = require('./_global').document && document.documentElement;
+
+},{"./_descriptors":34,"./_object-dp":66,"./_property-desc":78}],45:[function(require,module,exports){
+var document = require('./_global').document;
+module.exports = document && document.documentElement;
+
 },{"./_global":42}],46:[function(require,module,exports){
-module.exports = !require('./_descriptors') && !require('./_fails')(function(){
-  return Object.defineProperty(require('./_dom-create')('div'), 'a', {get: function(){ return 7; }}).a != 7;
+module.exports = !require('./_descriptors') && !require('./_fails')(function () {
+  return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
+
 },{"./_descriptors":34,"./_dom-create":35,"./_fails":40}],47:[function(require,module,exports){
-var isObject       = require('./_is-object')
-  , setPrototypeOf = require('./_set-proto').set;
-module.exports = function(that, target, C){
-  var P, S = target.constructor;
-  if(S !== C && typeof S == 'function' && (P = S.prototype) !== C.prototype && isObject(P) && setPrototypeOf){
+var isObject = require('./_is-object');
+var setPrototypeOf = require('./_set-proto').set;
+module.exports = function (that, target, C) {
+  var S = target.constructor;
+  var P;
+  if (S !== C && typeof S == 'function' && (P = S.prototype) !== C.prototype && isObject(P) && setPrototypeOf) {
     setPrototypeOf(that, P);
   } return that;
 };
-},{"./_is-object":52,"./_set-proto":79}],48:[function(require,module,exports){
-module.exports = function(fn, args, that){
+
+},{"./_is-object":52,"./_set-proto":83}],48:[function(require,module,exports){
+module.exports = function (fn, args, that) {
   var un = that === undefined;
-  switch(args.length){
+  switch (args.length) {
     case 0: return un ? fn()
                       : fn.call(that);
     case 1: return un ? fn(args[0])
@@ -703,317 +764,341 @@ module.exports = function(fn, args, that){
                       : fn.call(that, args[0], args[1], args[2]);
     case 4: return un ? fn(args[0], args[1], args[2], args[3])
                       : fn.call(that, args[0], args[1], args[2], args[3]);
-  } return              fn.apply(that, args);
+  } return fn.apply(that, args);
 };
+
 },{}],49:[function(require,module,exports){
 var cof = require('./_cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
-},{"./_cof":25}],50:[function(require,module,exports){
-var Iterators  = require('./_iterators')
-  , ITERATOR   = require('./_wks')('iterator')
-  , ArrayProto = Array.prototype;
 
-module.exports = function(it){
+},{"./_cof":25}],50:[function(require,module,exports){
+var Iterators = require('./_iterators');
+var ITERATOR = require('./_wks')('iterator');
+var ArrayProto = Array.prototype;
+
+module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
-},{"./_iterators":59,"./_wks":98}],51:[function(require,module,exports){
+
+},{"./_iterators":59,"./_wks":103}],51:[function(require,module,exports){
 var cof = require('./_cof');
-module.exports = Array.isArray || function isArray(arg){
+module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
 };
+
 },{"./_cof":25}],52:[function(require,module,exports){
-module.exports = function(it){
+module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
+
 },{}],53:[function(require,module,exports){
-var isObject = require('./_is-object')
-  , cof      = require('./_cof')
-  , MATCH    = require('./_wks')('match');
-module.exports = function(it){
+var isObject = require('./_is-object');
+var cof = require('./_cof');
+var MATCH = require('./_wks')('match');
+module.exports = function (it) {
   var isRegExp;
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
 };
-},{"./_cof":25,"./_is-object":52,"./_wks":98}],54:[function(require,module,exports){
+
+},{"./_cof":25,"./_is-object":52,"./_wks":103}],54:[function(require,module,exports){
 var anObject = require('./_an-object');
-module.exports = function(iterator, fn, value, entries){
+module.exports = function (iterator, fn, value, entries) {
   try {
     return entries ? fn(anObject(value)[0], value[1]) : fn(value);
-  } catch(e){
+  } catch (e) {
     var ret = iterator['return'];
-    if(ret !== undefined)anObject(ret.call(iterator));
+    if (ret !== undefined) anObject(ret.call(iterator));
     throw e;
   }
 };
+
 },{"./_an-object":18}],55:[function(require,module,exports){
 'use strict';
-var create         = require('./_object-create')
-  , descriptor     = require('./_property-desc')
-  , setToStringTag = require('./_set-to-string-tag')
-  , IteratorPrototype = {};
+var create = require('./_object-create');
+var descriptor = require('./_property-desc');
+var setToStringTag = require('./_set-to-string-tag');
+var IteratorPrototype = {};
 
-require('./_hide')(IteratorPrototype, require('./_wks')('iterator'), function(){ return this; });
+require('./_hide')(IteratorPrototype, require('./_wks')('iterator'), function () { return this; });
 
-module.exports = function(Constructor, NAME, next){
-  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
+module.exports = function (Constructor, NAME, next) {
+  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
   setToStringTag(Constructor, NAME + ' Iterator');
 };
-},{"./_hide":44,"./_object-create":65,"./_property-desc":76,"./_set-to-string-tag":81,"./_wks":98}],56:[function(require,module,exports){
+
+},{"./_hide":44,"./_object-create":65,"./_property-desc":78,"./_set-to-string-tag":85,"./_wks":103}],56:[function(require,module,exports){
 'use strict';
-var LIBRARY        = require('./_library')
-  , $export        = require('./_export')
-  , redefine       = require('./_redefine')
-  , hide           = require('./_hide')
-  , has            = require('./_has')
-  , Iterators      = require('./_iterators')
-  , $iterCreate    = require('./_iter-create')
-  , setToStringTag = require('./_set-to-string-tag')
-  , getPrototypeOf = require('./_object-gpo')
-  , ITERATOR       = require('./_wks')('iterator')
-  , BUGGY          = !([].keys && 'next' in [].keys()) 
-  , FF_ITERATOR    = '@@iterator'
-  , KEYS           = 'keys'
-  , VALUES         = 'values';
+var LIBRARY = require('./_library');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var hide = require('./_hide');
+var has = require('./_has');
+var Iterators = require('./_iterators');
+var $iterCreate = require('./_iter-create');
+var setToStringTag = require('./_set-to-string-tag');
+var getPrototypeOf = require('./_object-gpo');
+var ITERATOR = require('./_wks')('iterator');
+var BUGGY = !([].keys && 'next' in [].keys()); 
+var FF_ITERATOR = '@@iterator';
+var KEYS = 'keys';
+var VALUES = 'values';
 
-var returnThis = function(){ return this; };
+var returnThis = function () { return this; };
 
-module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
   $iterCreate(Constructor, NAME, next);
-  var getMethod = function(kind){
-    if(!BUGGY && kind in proto)return proto[kind];
-    switch(kind){
-      case KEYS: return function keys(){ return new Constructor(this, kind); };
-      case VALUES: return function values(){ return new Constructor(this, kind); };
-    } return function entries(){ return new Constructor(this, kind); };
+  var getMethod = function (kind) {
+    if (!BUGGY && kind in proto) return proto[kind];
+    switch (kind) {
+      case KEYS: return function keys() { return new Constructor(this, kind); };
+      case VALUES: return function values() { return new Constructor(this, kind); };
+    } return function entries() { return new Constructor(this, kind); };
   };
-  var TAG        = NAME + ' Iterator'
-    , DEF_VALUES = DEFAULT == VALUES
-    , VALUES_BUG = false
-    , proto      = Base.prototype
-    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-    , $default   = $native || getMethod(DEFAULT)
-    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
-    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
-    , methods, key, IteratorPrototype;
-  if($anyNative){
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
-    if(IteratorPrototype !== Object.prototype){
+  var TAG = NAME + ' Iterator';
+  var DEF_VALUES = DEFAULT == VALUES;
+  var VALUES_BUG = false;
+  var proto = Base.prototype;
+  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
+  var $default = (!BUGGY && $native) || getMethod(DEFAULT);
+  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
+  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
+  var methods, key, IteratorPrototype;
+  if ($anyNative) {
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
+    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
       setToStringTag(IteratorPrototype, TAG, true);
-      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+      if (!LIBRARY && !has(IteratorPrototype, ITERATOR)) hide(IteratorPrototype, ITERATOR, returnThis);
     }
   }
-  if(DEF_VALUES && $native && $native.name !== VALUES){
+  if (DEF_VALUES && $native && $native.name !== VALUES) {
     VALUES_BUG = true;
-    $default = function values(){ return $native.call(this); };
+    $default = function values() { return $native.call(this); };
   }
-  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
     hide(proto, ITERATOR, $default);
   }
   Iterators[NAME] = $default;
-  Iterators[TAG]  = returnThis;
-  if(DEFAULT){
+  Iterators[TAG] = returnThis;
+  if (DEFAULT) {
     methods = {
-      values:  DEF_VALUES ? $default : getMethod(VALUES),
-      keys:    IS_SET     ? $default : getMethod(KEYS),
+      values: DEF_VALUES ? $default : getMethod(VALUES),
+      keys: IS_SET ? $default : getMethod(KEYS),
       entries: $entries
     };
-    if(FORCED)for(key in methods){
-      if(!(key in proto))redefine(proto, key, methods[key]);
+    if (FORCED) for (key in methods) {
+      if (!(key in proto)) redefine(proto, key, methods[key]);
     } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
   }
   return methods;
 };
-},{"./_export":38,"./_has":43,"./_hide":44,"./_iter-create":55,"./_iterators":59,"./_library":61,"./_object-gpo":72,"./_redefine":78,"./_set-to-string-tag":81,"./_wks":98}],57:[function(require,module,exports){
-var ITERATOR     = require('./_wks')('iterator')
-  , SAFE_CLOSING = false;
+
+},{"./_export":38,"./_has":43,"./_hide":44,"./_iter-create":55,"./_iterators":59,"./_library":60,"./_object-gpo":72,"./_redefine":80,"./_set-to-string-tag":85,"./_wks":103}],57:[function(require,module,exports){
+var ITERATOR = require('./_wks')('iterator');
+var SAFE_CLOSING = false;
 
 try {
   var riter = [7][ITERATOR]();
-  riter['return'] = function(){ SAFE_CLOSING = true; };
-  Array.from(riter, function(){ throw 2; });
-} catch(e){  }
+  riter['return'] = function () { SAFE_CLOSING = true; };
+  Array.from(riter, function () { throw 2; });
+} catch (e) {  }
 
-module.exports = function(exec, skipClosing){
-  if(!skipClosing && !SAFE_CLOSING)return false;
+module.exports = function (exec, skipClosing) {
+  if (!skipClosing && !SAFE_CLOSING) return false;
   var safe = false;
   try {
-    var arr  = [7]
-      , iter = arr[ITERATOR]();
-    iter.next = function(){ return {done: safe = true}; };
-    arr[ITERATOR] = function(){ return iter; };
+    var arr = [7];
+    var iter = arr[ITERATOR]();
+    iter.next = function () { return { done: safe = true }; };
+    arr[ITERATOR] = function () { return iter; };
     exec(arr);
-  } catch(e){  }
+  } catch (e) {  }
   return safe;
 };
-},{"./_wks":98}],58:[function(require,module,exports){
-module.exports = function(done, value){
-  return {value: value, done: !!done};
+
+},{"./_wks":103}],58:[function(require,module,exports){
+module.exports = function (done, value) {
+  return { value: value, done: !!done };
 };
+
 },{}],59:[function(require,module,exports){
 module.exports = {};
+
 },{}],60:[function(require,module,exports){
-var getKeys   = require('./_object-keys')
-  , toIObject = require('./_to-iobject');
-module.exports = function(object, el){
-  var O      = toIObject(object)
-    , keys   = getKeys(O)
-    , length = keys.length
-    , index  = 0
-    , key;
-  while(length > index)if(O[key = keys[index++]] === el)return key;
-};
-},{"./_object-keys":74,"./_to-iobject":91}],61:[function(require,module,exports){
 module.exports = false;
-},{}],62:[function(require,module,exports){
-var META     = require('./_uid')('meta')
-  , isObject = require('./_is-object')
-  , has      = require('./_has')
-  , setDesc  = require('./_object-dp').f
-  , id       = 0;
-var isExtensible = Object.isExtensible || function(){
+
+},{}],61:[function(require,module,exports){
+var META = require('./_uid')('meta');
+var isObject = require('./_is-object');
+var has = require('./_has');
+var setDesc = require('./_object-dp').f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
   return true;
 };
-var FREEZE = !require('./_fails')(function(){
+var FREEZE = !require('./_fails')(function () {
   return isExtensible(Object.preventExtensions({}));
 });
-var setMeta = function(it){
-  setDesc(it, META, {value: {
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
     i: 'O' + ++id, 
     w: {}          
-  }});
+  } });
 };
-var fastKey = function(it, create){
-  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if(!has(it, META)){
-    if(!isExtensible(it))return 'F';
-    if(!create)return 'E';
+var fastKey = function (it, create) {
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    if (!isExtensible(it)) return 'F';
+    if (!create) return 'E';
     setMeta(it);
   } return it[META].i;
 };
-var getWeak = function(it, create){
-  if(!has(it, META)){
-    if(!isExtensible(it))return true;
-    if(!create)return false;
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    if (!isExtensible(it)) return true;
+    if (!create) return false;
     setMeta(it);
   } return it[META].w;
 };
-var onFreeze = function(it){
-  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
   return it;
 };
 var meta = module.exports = {
-  KEY:      META,
-  NEED:     false,
-  fastKey:  fastKey,
-  getWeak:  getWeak,
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
   onFreeze: onFreeze
 };
-},{"./_fails":40,"./_has":43,"./_is-object":52,"./_object-dp":66,"./_uid":95}],63:[function(require,module,exports){
-var global    = require('./_global')
-  , macrotask = require('./_task').set
-  , Observer  = global.MutationObserver || global.WebKitMutationObserver
-  , process   = global.process
-  , Promise   = global.Promise
-  , isNode    = require('./_cof')(process) == 'process';
 
-module.exports = function(){
+},{"./_fails":40,"./_has":43,"./_is-object":52,"./_object-dp":66,"./_uid":99}],62:[function(require,module,exports){
+var global = require('./_global');
+var macrotask = require('./_task').set;
+var Observer = global.MutationObserver || global.WebKitMutationObserver;
+var process = global.process;
+var Promise = global.Promise;
+var isNode = require('./_cof')(process) == 'process';
+
+module.exports = function () {
   var head, last, notify;
 
-  var flush = function(){
+  var flush = function () {
     var parent, fn;
-    if(isNode && (parent = process.domain))parent.exit();
-    while(head){
-      fn   = head.fn;
+    if (isNode && (parent = process.domain)) parent.exit();
+    while (head) {
+      fn = head.fn;
       head = head.next;
       try {
         fn();
-      } catch(e){
-        if(head)notify();
+      } catch (e) {
+        if (head) notify();
         else last = undefined;
         throw e;
       }
     } last = undefined;
-    if(parent)parent.enter();
+    if (parent) parent.enter();
   };
 
-  if(isNode){
-    notify = function(){
+  if (isNode) {
+    notify = function () {
       process.nextTick(flush);
     };
-  } else if(Observer){
-    var toggle = true
-      , node   = document.createTextNode('');
-    new Observer(flush).observe(node, {characterData: true}); 
-    notify = function(){
+  } else if (Observer && !(global.navigator && global.navigator.standalone)) {
+    var toggle = true;
+    var node = document.createTextNode('');
+    new Observer(flush).observe(node, { characterData: true }); 
+    notify = function () {
       node.data = toggle = !toggle;
     };
-  } else if(Promise && Promise.resolve){
+  } else if (Promise && Promise.resolve) {
     var promise = Promise.resolve();
-    notify = function(){
+    notify = function () {
       promise.then(flush);
     };
   } else {
-    notify = function(){
+    notify = function () {
       macrotask.call(global, flush);
     };
   }
 
-  return function(fn){
-    var task = {fn: fn, next: undefined};
-    if(last)last.next = task;
-    if(!head){
+  return function (fn) {
+    var task = { fn: fn, next: undefined };
+    if (last) last.next = task;
+    if (!head) {
       head = task;
       notify();
     } last = task;
   };
 };
-},{"./_cof":25,"./_global":42,"./_task":88}],64:[function(require,module,exports){
-'use strict';
-var getKeys  = require('./_object-keys')
-  , gOPS     = require('./_object-gops')
-  , pIE      = require('./_object-pie')
-  , toObject = require('./_to-object')
-  , IObject  = require('./_iobject')
-  , $assign  = Object.assign;
 
-module.exports = !$assign || require('./_fails')(function(){
-  var A = {}
-    , B = {}
-    , S = Symbol()
-    , K = 'abcdefghijklmnopqrst';
+},{"./_cof":25,"./_global":42,"./_task":92}],63:[function(require,module,exports){
+'use strict';
+var aFunction = require('./_a-function');
+
+function PromiseCapability(C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+}
+
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
+
+},{"./_a-function":15}],64:[function(require,module,exports){
+'use strict';
+var getKeys = require('./_object-keys');
+var gOPS = require('./_object-gops');
+var pIE = require('./_object-pie');
+var toObject = require('./_to-object');
+var IObject = require('./_iobject');
+var $assign = Object.assign;
+
+module.exports = !$assign || require('./_fails')(function () {
+  var A = {};
+  var B = {};
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
   A[S] = 7;
-  K.split('').forEach(function(k){ B[k] = k; });
+  K.split('').forEach(function (k) { B[k] = k; });
   return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
-}) ? function assign(target, source){ 
-  var T     = toObject(target)
-    , aLen  = arguments.length
-    , index = 1
-    , getSymbols = gOPS.f
-    , isEnum     = pIE.f;
-  while(aLen > index){
-    var S      = IObject(arguments[index++])
-      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
-      , length = keys.length
-      , j      = 0
-      , key;
-    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+}) ? function assign(target, source) { 
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
   } return T;
 } : $assign;
-},{"./_fails":40,"./_iobject":49,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_to-object":93}],65:[function(require,module,exports){
-var anObject    = require('./_an-object')
-  , dPs         = require('./_object-dps')
-  , enumBugKeys = require('./_enum-bug-keys')
-  , IE_PROTO    = require('./_shared-key')('IE_PROTO')
-  , Empty       = function(){  }
-  , PROTOTYPE   = 'prototype';
 
-var createDict = function(){
-  var iframe = require('./_dom-create')('iframe')
-    , i      = enumBugKeys.length
-    , lt     = '<'
-    , gt     = '>'
-    , iframeDocument;
+},{"./_fails":40,"./_iobject":49,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_to-object":97}],65:[function(require,module,exports){
+var anObject = require('./_an-object');
+var dPs = require('./_object-dps');
+var enumBugKeys = require('./_enum-bug-keys');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var Empty = function () {  };
+var PROTOTYPE = 'prototype';
+
+var createDict = function () {
+  var iframe = require('./_dom-create')('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
   iframe.style.display = 'none';
   require('./_html').appendChild(iframe);
   iframe.src = 'javascript:'; 
@@ -1022,466 +1107,577 @@ var createDict = function(){
   iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
   iframeDocument.close();
   createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
   return createDict();
 };
 
-module.exports = Object.create || function create(O, Properties){
+module.exports = Object.create || function create(O, Properties) {
   var result;
-  if(O !== null){
+  if (O !== null) {
     Empty[PROTOTYPE] = anObject(O);
-    result = new Empty;
+    result = new Empty();
     Empty[PROTOTYPE] = null;
     result[IE_PROTO] = O;
   } else result = createDict();
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"./_an-object":18,"./_dom-create":35,"./_enum-bug-keys":36,"./_html":45,"./_object-dps":67,"./_shared-key":82}],66:[function(require,module,exports){
-var anObject       = require('./_an-object')
-  , IE8_DOM_DEFINE = require('./_ie8-dom-define')
-  , toPrimitive    = require('./_to-primitive')
-  , dP             = Object.defineProperty;
+},{"./_an-object":18,"./_dom-create":35,"./_enum-bug-keys":36,"./_html":45,"./_object-dps":67,"./_shared-key":86}],66:[function(require,module,exports){
+var anObject = require('./_an-object');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var toPrimitive = require('./_to-primitive');
+var dP = Object.defineProperty;
 
-exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes){
+exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
   anObject(O);
   P = toPrimitive(P, true);
   anObject(Attributes);
-  if(IE8_DOM_DEFINE)try {
+  if (IE8_DOM_DEFINE) try {
     return dP(O, P, Attributes);
-  } catch(e){  }
-  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
-  if('value' in Attributes)O[P] = Attributes.value;
+  } catch (e) {  }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
   return O;
 };
-},{"./_an-object":18,"./_descriptors":34,"./_ie8-dom-define":46,"./_to-primitive":94}],67:[function(require,module,exports){
-var dP       = require('./_object-dp')
-  , anObject = require('./_an-object')
-  , getKeys  = require('./_object-keys');
 
-module.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties){
+},{"./_an-object":18,"./_descriptors":34,"./_ie8-dom-define":46,"./_to-primitive":98}],67:[function(require,module,exports){
+var dP = require('./_object-dp');
+var anObject = require('./_an-object');
+var getKeys = require('./_object-keys');
+
+module.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
-  var keys   = getKeys(Properties)
-    , length = keys.length
-    , i = 0
-    , P;
-  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
+  var keys = getKeys(Properties);
+  var length = keys.length;
+  var i = 0;
+  var P;
+  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
   return O;
 };
-},{"./_an-object":18,"./_descriptors":34,"./_object-dp":66,"./_object-keys":74}],68:[function(require,module,exports){
-var pIE            = require('./_object-pie')
-  , createDesc     = require('./_property-desc')
-  , toIObject      = require('./_to-iobject')
-  , toPrimitive    = require('./_to-primitive')
-  , has            = require('./_has')
-  , IE8_DOM_DEFINE = require('./_ie8-dom-define')
-  , gOPD           = Object.getOwnPropertyDescriptor;
 
-exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor(O, P){
+},{"./_an-object":18,"./_descriptors":34,"./_object-dp":66,"./_object-keys":74}],68:[function(require,module,exports){
+var pIE = require('./_object-pie');
+var createDesc = require('./_property-desc');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var has = require('./_has');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor(O, P) {
   O = toIObject(O);
   P = toPrimitive(P, true);
-  if(IE8_DOM_DEFINE)try {
+  if (IE8_DOM_DEFINE) try {
     return gOPD(O, P);
-  } catch(e){  }
-  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
+  } catch (e) {  }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
 };
-},{"./_descriptors":34,"./_has":43,"./_ie8-dom-define":46,"./_object-pie":75,"./_property-desc":76,"./_to-iobject":91,"./_to-primitive":94}],69:[function(require,module,exports){
-var toIObject = require('./_to-iobject')
-  , gOPN      = require('./_object-gopn').f
-  , toString  = {}.toString;
+
+},{"./_descriptors":34,"./_has":43,"./_ie8-dom-define":46,"./_object-pie":75,"./_property-desc":78,"./_to-iobject":95,"./_to-primitive":98}],69:[function(require,module,exports){
+var toIObject = require('./_to-iobject');
+var gOPN = require('./_object-gopn').f;
+var toString = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
   ? Object.getOwnPropertyNames(window) : [];
 
-var getWindowNames = function(it){
+var getWindowNames = function (it) {
   try {
     return gOPN(it);
-  } catch(e){
+  } catch (e) {
     return windowNames.slice();
   }
 };
 
-module.exports.f = function getOwnPropertyNames(it){
+module.exports.f = function getOwnPropertyNames(it) {
   return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
 };
 
-},{"./_object-gopn":70,"./_to-iobject":91}],70:[function(require,module,exports){
-var $keys      = require('./_object-keys-internal')
-  , hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
+},{"./_object-gopn":70,"./_to-iobject":95}],70:[function(require,module,exports){
+var $keys = require('./_object-keys-internal');
+var hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
 
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return $keys(O, hiddenKeys);
 };
+
 },{"./_enum-bug-keys":36,"./_object-keys-internal":73}],71:[function(require,module,exports){
 exports.f = Object.getOwnPropertySymbols;
-},{}],72:[function(require,module,exports){
-var has         = require('./_has')
-  , toObject    = require('./_to-object')
-  , IE_PROTO    = require('./_shared-key')('IE_PROTO')
-  , ObjectProto = Object.prototype;
 
-module.exports = Object.getPrototypeOf || function(O){
+},{}],72:[function(require,module,exports){
+var has = require('./_has');
+var toObject = require('./_to-object');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function (O) {
   O = toObject(O);
-  if(has(O, IE_PROTO))return O[IE_PROTO];
-  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
-},{"./_has":43,"./_shared-key":82,"./_to-object":93}],73:[function(require,module,exports){
-var has          = require('./_has')
-  , toIObject    = require('./_to-iobject')
-  , arrayIndexOf = require('./_array-includes')(false)
-  , IE_PROTO     = require('./_shared-key')('IE_PROTO');
 
-module.exports = function(object, names){
-  var O      = toIObject(object)
-    , i      = 0
-    , result = []
-    , key;
-  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
-  while(names.length > i)if(has(O, key = names[i++])){
+},{"./_has":43,"./_shared-key":86,"./_to-object":97}],73:[function(require,module,exports){
+var has = require('./_has');
+var toIObject = require('./_to-iobject');
+var arrayIndexOf = require('./_array-includes')(false);
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  while (names.length > i) if (has(O, key = names[i++])) {
     ~arrayIndexOf(result, key) || result.push(key);
   }
   return result;
 };
-},{"./_array-includes":20,"./_has":43,"./_shared-key":82,"./_to-iobject":91}],74:[function(require,module,exports){
-var $keys       = require('./_object-keys-internal')
-  , enumBugKeys = require('./_enum-bug-keys');
 
-module.exports = Object.keys || function keys(O){
+},{"./_array-includes":20,"./_has":43,"./_shared-key":86,"./_to-iobject":95}],74:[function(require,module,exports){
+var $keys = require('./_object-keys-internal');
+var enumBugKeys = require('./_enum-bug-keys');
+
+module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
+
 },{"./_enum-bug-keys":36,"./_object-keys-internal":73}],75:[function(require,module,exports){
 exports.f = {}.propertyIsEnumerable;
+
 },{}],76:[function(require,module,exports){
-module.exports = function(bitmap, value){
+module.exports = function (exec) {
+  try {
+    return { e: false, v: exec() };
+  } catch (e) {
+    return { e: true, v: e };
+  }
+};
+
+},{}],77:[function(require,module,exports){
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var newPromiseCapability = require('./_new-promise-capability');
+
+module.exports = function (C, x) {
+  anObject(C);
+  if (isObject(x) && x.constructor === C) return x;
+  var promiseCapability = newPromiseCapability.f(C);
+  var resolve = promiseCapability.resolve;
+  resolve(x);
+  return promiseCapability.promise;
+};
+
+},{"./_an-object":18,"./_is-object":52,"./_new-promise-capability":63}],78:[function(require,module,exports){
+module.exports = function (bitmap, value) {
   return {
-    enumerable  : !(bitmap & 1),
+    enumerable: !(bitmap & 1),
     configurable: !(bitmap & 2),
-    writable    : !(bitmap & 4),
-    value       : value
+    writable: !(bitmap & 4),
+    value: value
   };
 };
-},{}],77:[function(require,module,exports){
+
+},{}],79:[function(require,module,exports){
 var redefine = require('./_redefine');
-module.exports = function(target, src, safe){
-  for(var key in src)redefine(target, key, src[key], safe);
+module.exports = function (target, src, safe) {
+  for (var key in src) redefine(target, key, src[key], safe);
   return target;
 };
-},{"./_redefine":78}],78:[function(require,module,exports){
-var global    = require('./_global')
-  , hide      = require('./_hide')
-  , has       = require('./_has')
-  , SRC       = require('./_uid')('src')
-  , TO_STRING = 'toString'
-  , $toString = Function[TO_STRING]
-  , TPL       = ('' + $toString).split(TO_STRING);
 
-require('./_core').inspectSource = function(it){
+},{"./_redefine":80}],80:[function(require,module,exports){
+var global = require('./_global');
+var hide = require('./_hide');
+var has = require('./_has');
+var SRC = require('./_uid')('src');
+var TO_STRING = 'toString';
+var $toString = Function[TO_STRING];
+var TPL = ('' + $toString).split(TO_STRING);
+
+require('./_core').inspectSource = function (it) {
   return $toString.call(it);
 };
 
-(module.exports = function(O, key, val, safe){
+(module.exports = function (O, key, val, safe) {
   var isFunction = typeof val == 'function';
-  if(isFunction)has(val, 'name') || hide(val, 'name', key);
-  if(O[key] === val)return;
-  if(isFunction)has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
-  if(O === global){
+  if (isFunction) has(val, 'name') || hide(val, 'name', key);
+  if (O[key] === val) return;
+  if (isFunction) has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
+  if (O === global) {
+    O[key] = val;
+  } else if (!safe) {
+    delete O[key];
+    hide(O, key, val);
+  } else if (O[key]) {
     O[key] = val;
   } else {
-    if(!safe){
-      delete O[key];
-      hide(O, key, val);
-    } else {
-      if(O[key])O[key] = val;
-      else hide(O, key, val);
-    }
+    hide(O, key, val);
   }
-})(Function.prototype, TO_STRING, function toString(){
+})(Function.prototype, TO_STRING, function toString() {
   return typeof this == 'function' && this[SRC] || $toString.call(this);
 });
-},{"./_core":30,"./_global":42,"./_has":43,"./_hide":44,"./_uid":95}],79:[function(require,module,exports){
-var isObject = require('./_is-object')
-  , anObject = require('./_an-object');
-var check = function(O, proto){
+
+},{"./_core":30,"./_global":42,"./_has":43,"./_hide":44,"./_uid":99}],81:[function(require,module,exports){
+'use strict';
+var $export = require('./_export');
+var aFunction = require('./_a-function');
+var ctx = require('./_ctx');
+var forOf = require('./_for-of');
+
+module.exports = function (COLLECTION) {
+  $export($export.S, COLLECTION, { from: function from(source ) {
+    var mapFn = arguments[1];
+    var mapping, A, n, cb;
+    aFunction(this);
+    mapping = mapFn !== undefined;
+    if (mapping) aFunction(mapFn);
+    if (source == undefined) return new this();
+    A = [];
+    if (mapping) {
+      n = 0;
+      cb = ctx(mapFn, arguments[2], 2);
+      forOf(source, false, function (nextItem) {
+        A.push(cb(nextItem, n++));
+      });
+    } else {
+      forOf(source, false, A.push, A);
+    }
+    return new this(A);
+  } });
+};
+
+},{"./_a-function":15,"./_ctx":32,"./_export":38,"./_for-of":41}],82:[function(require,module,exports){
+'use strict';
+var $export = require('./_export');
+
+module.exports = function (COLLECTION) {
+  $export($export.S, COLLECTION, { of: function of() {
+    var length = arguments.length;
+    var A = new Array(length);
+    while (length--) A[length] = arguments[length];
+    return new this(A);
+  } });
+};
+
+},{"./_export":38}],83:[function(require,module,exports){
+var isObject = require('./_is-object');
+var anObject = require('./_an-object');
+var check = function (O, proto) {
   anObject(O);
-  if(!isObject(proto) && proto !== null)throw TypeError(proto + ": can't set as prototype!");
+  if (!isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
 };
 module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? 
-    function(test, buggy, set){
+    function (test, buggy, set) {
       try {
         set = require('./_ctx')(Function.call, require('./_object-gopd').f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
-      } catch(e){ buggy = true; }
-      return function setPrototypeOf(O, proto){
+      } catch (e) { buggy = true; }
+      return function setPrototypeOf(O, proto) {
         check(O, proto);
-        if(buggy)O.__proto__ = proto;
+        if (buggy) O.__proto__ = proto;
         else set(O, proto);
         return O;
       };
     }({}, false) : undefined),
   check: check
 };
-},{"./_an-object":18,"./_ctx":32,"./_is-object":52,"./_object-gopd":68}],80:[function(require,module,exports){
-'use strict';
-var global      = require('./_global')
-  , dP          = require('./_object-dp')
-  , DESCRIPTORS = require('./_descriptors')
-  , SPECIES     = require('./_wks')('species');
 
-module.exports = function(KEY){
+},{"./_an-object":18,"./_ctx":32,"./_is-object":52,"./_object-gopd":68}],84:[function(require,module,exports){
+'use strict';
+var global = require('./_global');
+var dP = require('./_object-dp');
+var DESCRIPTORS = require('./_descriptors');
+var SPECIES = require('./_wks')('species');
+
+module.exports = function (KEY) {
   var C = global[KEY];
-  if(DESCRIPTORS && C && !C[SPECIES])dP.f(C, SPECIES, {
+  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
     configurable: true,
-    get: function(){ return this; }
+    get: function () { return this; }
   });
 };
-},{"./_descriptors":34,"./_global":42,"./_object-dp":66,"./_wks":98}],81:[function(require,module,exports){
-var def = require('./_object-dp').f
-  , has = require('./_has')
-  , TAG = require('./_wks')('toStringTag');
 
-module.exports = function(it, tag, stat){
-  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+},{"./_descriptors":34,"./_global":42,"./_object-dp":66,"./_wks":103}],85:[function(require,module,exports){
+var def = require('./_object-dp').f;
+var has = require('./_has');
+var TAG = require('./_wks')('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
 };
-},{"./_has":43,"./_object-dp":66,"./_wks":98}],82:[function(require,module,exports){
-var shared = require('./_shared')('keys')
-  , uid    = require('./_uid');
-module.exports = function(key){
+
+},{"./_has":43,"./_object-dp":66,"./_wks":103}],86:[function(require,module,exports){
+var shared = require('./_shared')('keys');
+var uid = require('./_uid');
+module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
-},{"./_shared":83,"./_uid":95}],83:[function(require,module,exports){
-var global = require('./_global')
-  , SHARED = '__core-js_shared__'
-  , store  = global[SHARED] || (global[SHARED] = {});
-module.exports = function(key){
+
+},{"./_shared":87,"./_uid":99}],87:[function(require,module,exports){
+var global = require('./_global');
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+module.exports = function (key) {
   return store[key] || (store[key] = {});
 };
-},{"./_global":42}],84:[function(require,module,exports){
-var anObject  = require('./_an-object')
-  , aFunction = require('./_a-function')
-  , SPECIES   = require('./_wks')('species');
-module.exports = function(O, D){
-  var C = anObject(O).constructor, S;
+
+},{"./_global":42}],88:[function(require,module,exports){
+var anObject = require('./_an-object');
+var aFunction = require('./_a-function');
+var SPECIES = require('./_wks')('species');
+module.exports = function (O, D) {
+  var C = anObject(O).constructor;
+  var S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
 };
-},{"./_a-function":15,"./_an-object":18,"./_wks":98}],85:[function(require,module,exports){
-var toInteger = require('./_to-integer')
-  , defined   = require('./_defined');
-module.exports = function(TO_STRING){
-  return function(that, pos){
-    var s = String(defined(that))
-      , i = toInteger(pos)
-      , l = s.length
-      , a, b;
-    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+
+},{"./_a-function":15,"./_an-object":18,"./_wks":103}],89:[function(require,module,exports){
+var toInteger = require('./_to-integer');
+var defined = require('./_defined');
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
     a = s.charCodeAt(i);
     return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
       ? TO_STRING ? s.charAt(i) : a
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
-},{"./_defined":33,"./_to-integer":90}],86:[function(require,module,exports){
-var isRegExp = require('./_is-regexp')
-  , defined  = require('./_defined');
 
-module.exports = function(that, searchString, NAME){
-  if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
+},{"./_defined":33,"./_to-integer":94}],90:[function(require,module,exports){
+var isRegExp = require('./_is-regexp');
+var defined = require('./_defined');
+
+module.exports = function (that, searchString, NAME) {
+  if (isRegExp(searchString)) throw TypeError('String#' + NAME + " doesn't accept regex!");
   return String(defined(that));
 };
-},{"./_defined":33,"./_is-regexp":53}],87:[function(require,module,exports){
-'use strict';
-var toInteger = require('./_to-integer')
-  , defined   = require('./_defined');
 
-module.exports = function repeat(count){
-  var str = String(defined(this))
-    , res = ''
-    , n   = toInteger(count);
-  if(n < 0 || n == Infinity)throw RangeError("Count can't be negative");
-  for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
+},{"./_defined":33,"./_is-regexp":53}],91:[function(require,module,exports){
+'use strict';
+var toInteger = require('./_to-integer');
+var defined = require('./_defined');
+
+module.exports = function repeat(count) {
+  var str = String(defined(this));
+  var res = '';
+  var n = toInteger(count);
+  if (n < 0 || n == Infinity) throw RangeError("Count can't be negative");
+  for (;n > 0; (n >>>= 1) && (str += str)) if (n & 1) res += str;
   return res;
 };
-},{"./_defined":33,"./_to-integer":90}],88:[function(require,module,exports){
-var ctx                = require('./_ctx')
-  , invoke             = require('./_invoke')
-  , html               = require('./_html')
-  , cel                = require('./_dom-create')
-  , global             = require('./_global')
-  , process            = global.process
-  , setTask            = global.setImmediate
-  , clearTask          = global.clearImmediate
-  , MessageChannel     = global.MessageChannel
-  , counter            = 0
-  , queue              = {}
-  , ONREADYSTATECHANGE = 'onreadystatechange'
-  , defer, channel, port;
-var run = function(){
+
+},{"./_defined":33,"./_to-integer":94}],92:[function(require,module,exports){
+var ctx = require('./_ctx');
+var invoke = require('./_invoke');
+var html = require('./_html');
+var cel = require('./_dom-create');
+var global = require('./_global');
+var process = global.process;
+var setTask = global.setImmediate;
+var clearTask = global.clearImmediate;
+var MessageChannel = global.MessageChannel;
+var Dispatch = global.Dispatch;
+var counter = 0;
+var queue = {};
+var ONREADYSTATECHANGE = 'onreadystatechange';
+var defer, channel, port;
+var run = function () {
   var id = +this;
-  if(queue.hasOwnProperty(id)){
+  if (queue.hasOwnProperty(id)) {
     var fn = queue[id];
     delete queue[id];
     fn();
   }
 };
-var listener = function(event){
+var listener = function (event) {
   run.call(event.data);
 };
-if(!setTask || !clearTask){
-  setTask = function setImmediate(fn){
-    var args = [], i = 1;
-    while(arguments.length > i)args.push(arguments[i++]);
-    queue[++counter] = function(){
+if (!setTask || !clearTask) {
+  setTask = function setImmediate(fn) {
+    var args = [];
+    var i = 1;
+    while (arguments.length > i) args.push(arguments[i++]);
+    queue[++counter] = function () {
       invoke(typeof fn == 'function' ? fn : Function(fn), args);
     };
     defer(counter);
     return counter;
   };
-  clearTask = function clearImmediate(id){
+  clearTask = function clearImmediate(id) {
     delete queue[id];
   };
-  if(require('./_cof')(process) == 'process'){
-    defer = function(id){
+  if (require('./_cof')(process) == 'process') {
+    defer = function (id) {
       process.nextTick(ctx(run, id, 1));
     };
-  } else if(MessageChannel){
-    channel = new MessageChannel;
-    port    = channel.port2;
+  } else if (Dispatch && Dispatch.now) {
+    defer = function (id) {
+      Dispatch.now(ctx(run, id, 1));
+    };
+  } else if (MessageChannel) {
+    channel = new MessageChannel();
+    port = channel.port2;
     channel.port1.onmessage = listener;
     defer = ctx(port.postMessage, port, 1);
-  } else if(global.addEventListener && typeof postMessage == 'function' && !global.importScripts){
-    defer = function(id){
+  } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
+    defer = function (id) {
       global.postMessage(id + '', '*');
     };
     global.addEventListener('message', listener, false);
-  } else if(ONREADYSTATECHANGE in cel('script')){
-    defer = function(id){
-      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function(){
+  } else if (ONREADYSTATECHANGE in cel('script')) {
+    defer = function (id) {
+      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function () {
         html.removeChild(this);
         run.call(id);
       };
     };
   } else {
-    defer = function(id){
+    defer = function (id) {
       setTimeout(ctx(run, id, 1), 0);
     };
   }
 }
 module.exports = {
-  set:   setTask,
+  set: setTask,
   clear: clearTask
 };
-},{"./_cof":25,"./_ctx":32,"./_dom-create":35,"./_global":42,"./_html":45,"./_invoke":48}],89:[function(require,module,exports){
-var toInteger = require('./_to-integer')
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
+
+},{"./_cof":25,"./_ctx":32,"./_dom-create":35,"./_global":42,"./_html":45,"./_invoke":48}],93:[function(require,module,exports){
+var toInteger = require('./_to-integer');
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
   index = toInteger(index);
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
-},{"./_to-integer":90}],90:[function(require,module,exports){
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
+
+},{"./_to-integer":94}],94:[function(require,module,exports){
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
-},{}],91:[function(require,module,exports){
-var IObject = require('./_iobject')
-  , defined = require('./_defined');
-module.exports = function(it){
+
+},{}],95:[function(require,module,exports){
+var IObject = require('./_iobject');
+var defined = require('./_defined');
+module.exports = function (it) {
   return IObject(defined(it));
 };
-},{"./_defined":33,"./_iobject":49}],92:[function(require,module,exports){
-var toInteger = require('./_to-integer')
-  , min       = Math.min;
-module.exports = function(it){
+
+},{"./_defined":33,"./_iobject":49}],96:[function(require,module,exports){
+var toInteger = require('./_to-integer');
+var min = Math.min;
+module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; 
 };
-},{"./_to-integer":90}],93:[function(require,module,exports){
+
+},{"./_to-integer":94}],97:[function(require,module,exports){
 var defined = require('./_defined');
-module.exports = function(it){
+module.exports = function (it) {
   return Object(defined(it));
 };
-},{"./_defined":33}],94:[function(require,module,exports){
+
+},{"./_defined":33}],98:[function(require,module,exports){
 var isObject = require('./_is-object');
-module.exports = function(it, S){
-  if(!isObject(it))return it;
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
   var fn, val;
-  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
   throw TypeError("Can't convert object to primitive value");
 };
-},{"./_is-object":52}],95:[function(require,module,exports){
-var id = 0
-  , px = Math.random();
-module.exports = function(key){
+
+},{"./_is-object":52}],99:[function(require,module,exports){
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
-},{}],96:[function(require,module,exports){
-var global         = require('./_global')
-  , core           = require('./_core')
-  , LIBRARY        = require('./_library')
-  , wksExt         = require('./_wks-ext')
-  , defineProperty = require('./_object-dp').f;
-module.exports = function(name){
-  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
-  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
-};
-},{"./_core":30,"./_global":42,"./_library":61,"./_object-dp":66,"./_wks-ext":97}],97:[function(require,module,exports){
-exports.f = require('./_wks');
-},{"./_wks":98}],98:[function(require,module,exports){
-var store      = require('./_shared')('wks')
-  , uid        = require('./_uid')
-  , Symbol     = require('./_global').Symbol
-  , USE_SYMBOL = typeof Symbol == 'function';
 
-var $exports = module.exports = function(name){
+},{}],100:[function(require,module,exports){
+var isObject = require('./_is-object');
+module.exports = function (it, TYPE) {
+  if (!isObject(it) || it._t !== TYPE) throw TypeError('Incompatible receiver, ' + TYPE + ' required!');
+  return it;
+};
+
+},{"./_is-object":52}],101:[function(require,module,exports){
+var global = require('./_global');
+var core = require('./_core');
+var LIBRARY = require('./_library');
+var wksExt = require('./_wks-ext');
+var defineProperty = require('./_object-dp').f;
+module.exports = function (name) {
+  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
+};
+
+},{"./_core":30,"./_global":42,"./_library":60,"./_object-dp":66,"./_wks-ext":102}],102:[function(require,module,exports){
+exports.f = require('./_wks');
+
+},{"./_wks":103}],103:[function(require,module,exports){
+var store = require('./_shared')('wks');
+var uid = require('./_uid');
+var Symbol = require('./_global').Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
   return store[name] || (store[name] =
     USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
 };
 
 $exports.store = store;
-},{"./_global":42,"./_shared":83,"./_uid":95}],99:[function(require,module,exports){
-var classof   = require('./_classof')
-  , ITERATOR  = require('./_wks')('iterator')
-  , Iterators = require('./_iterators');
-module.exports = require('./_core').getIteratorMethod = function(it){
-  if(it != undefined)return it[ITERATOR]
+
+},{"./_global":42,"./_shared":87,"./_uid":99}],104:[function(require,module,exports){
+var classof = require('./_classof');
+var ITERATOR = require('./_wks')('iterator');
+var Iterators = require('./_iterators');
+module.exports = require('./_core').getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
 };
-},{"./_classof":24,"./_core":30,"./_iterators":59,"./_wks":98}],100:[function(require,module,exports){
-'use strict';
-var ctx            = require('./_ctx')
-  , $export        = require('./_export')
-  , toObject       = require('./_to-object')
-  , call           = require('./_iter-call')
-  , isArrayIter    = require('./_is-array-iter')
-  , toLength       = require('./_to-length')
-  , createProperty = require('./_create-property')
-  , getIterFn      = require('./core.get-iterator-method');
 
-$export($export.S + $export.F * !require('./_iter-detect')(function(iter){ Array.from(iter); }), 'Array', {
-  from: function from(arrayLike){
-    var O       = toObject(arrayLike)
-      , C       = typeof this == 'function' ? this : Array
-      , aLen    = arguments.length
-      , mapfn   = aLen > 1 ? arguments[1] : undefined
-      , mapping = mapfn !== undefined
-      , index   = 0
-      , iterFn  = getIterFn(O)
-      , length, result, step, iterator;
-    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
-    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
-      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+},{"./_classof":24,"./_core":30,"./_iterators":59,"./_wks":103}],105:[function(require,module,exports){
+'use strict';
+var ctx = require('./_ctx');
+var $export = require('./_export');
+var toObject = require('./_to-object');
+var call = require('./_iter-call');
+var isArrayIter = require('./_is-array-iter');
+var toLength = require('./_to-length');
+var createProperty = require('./_create-property');
+var getIterFn = require('./core.get-iterator-method');
+
+$export($export.S + $export.F * !require('./_iter-detect')(function (iter) { Array.from(iter); }), 'Array', {
+  from: function from(arrayLike ) {
+    var O = toObject(arrayLike);
+    var C = typeof this == 'function' ? this : Array;
+    var aLen = arguments.length;
+    var mapfn = aLen > 1 ? arguments[1] : undefined;
+    var mapping = mapfn !== undefined;
+    var index = 0;
+    var iterFn = getIterFn(O);
+    var length, result, step, iterator;
+    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
         createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
       }
     } else {
       length = toLength(O.length);
-      for(result = new C(length); length > index; index++){
+      for (result = new C(length); length > index; index++) {
         createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
       }
     }
@@ -1490,27 +1686,27 @@ $export($export.S + $export.F * !require('./_iter-detect')(function(iter){ Array
   }
 });
 
-},{"./_create-property":31,"./_ctx":32,"./_export":38,"./_is-array-iter":50,"./_iter-call":54,"./_iter-detect":57,"./_to-length":92,"./_to-object":93,"./core.get-iterator-method":99}],101:[function(require,module,exports){
+},{"./_create-property":31,"./_ctx":32,"./_export":38,"./_is-array-iter":50,"./_iter-call":54,"./_iter-detect":57,"./_to-length":96,"./_to-object":97,"./core.get-iterator-method":104}],106:[function(require,module,exports){
 'use strict';
-var addToUnscopables = require('./_add-to-unscopables')
-  , step             = require('./_iter-step')
-  , Iterators        = require('./_iterators')
-  , toIObject        = require('./_to-iobject');
+var addToUnscopables = require('./_add-to-unscopables');
+var step = require('./_iter-step');
+var Iterators = require('./_iterators');
+var toIObject = require('./_to-iobject');
 
-module.exports = require('./_iter-define')(Array, 'Array', function(iterated, kind){
+module.exports = require('./_iter-define')(Array, 'Array', function (iterated, kind) {
   this._t = toIObject(iterated); 
   this._i = 0;                   
   this._k = kind;                
-}, function(){
-  var O     = this._t
-    , kind  = this._k
-    , index = this._i++;
-  if(!O || index >= O.length){
+}, function () {
+  var O = this._t;
+  var kind = this._k;
+  var index = this._i++;
+  if (!O || index >= O.length) {
     this._t = undefined;
     return step(1);
   }
-  if(kind == 'keys'  )return step(0, index);
-  if(kind == 'values')return step(0, O[index]);
+  if (kind == 'keys') return step(0, index);
+  if (kind == 'values') return step(0, O[index]);
   return step(0, [index, O[index]]);
 }, 'values');
 
@@ -1519,212 +1715,194 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
-},{"./_add-to-unscopables":16,"./_iter-define":56,"./_iter-step":58,"./_iterators":59,"./_to-iobject":91}],102:[function(require,module,exports){
+
+},{"./_add-to-unscopables":16,"./_iter-define":56,"./_iter-step":58,"./_iterators":59,"./_to-iobject":95}],107:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
+var validate = require('./_validate-collection');
+var MAP = 'Map';
 
-module.exports = require('./_collection')('Map', function(get){
-  return function Map(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };
+module.exports = require('./_collection')(MAP, function (get) {
+  return function Map() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
-  get: function get(key){
-    var entry = strong.getEntry(this, key);
+  get: function get(key) {
+    var entry = strong.getEntry(validate(this, MAP), key);
     return entry && entry.v;
   },
-  set: function set(key, value){
-    return strong.def(this, key === 0 ? 0 : key, value);
+  set: function set(key, value) {
+    return strong.def(validate(this, MAP), key === 0 ? 0 : key, value);
   }
 }, strong, true);
-},{"./_collection":29,"./_collection-strong":26}],103:[function(require,module,exports){
+
+},{"./_collection":29,"./_collection-strong":26,"./_validate-collection":100}],108:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.S, 'Math', {
-  clz32: function clz32(x){
+  clz32: function clz32(x) {
     return (x >>>= 0) ? 31 - Math.floor(Math.log(x + 0.5) * Math.LOG2E) : 32;
   }
 });
-},{"./_export":38}],104:[function(require,module,exports){
+
+},{"./_export":38}],109:[function(require,module,exports){
 var $export = require('./_export');
 
-$export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
-},{"./_export":38}],105:[function(require,module,exports){
+$export($export.S, 'Number', { MAX_SAFE_INTEGER: 0x1fffffffffffff });
+
+},{"./_export":38}],110:[function(require,module,exports){
 var $export = require('./_export');
 
-$export($export.S + $export.F, 'Object', {assign: require('./_object-assign')});
-},{"./_export":38,"./_object-assign":64}],106:[function(require,module,exports){
+$export($export.S + $export.F, 'Object', { assign: require('./_object-assign') });
+
+},{"./_export":38,"./_object-assign":64}],111:[function(require,module,exports){
 'use strict';
-var classof = require('./_classof')
-  , test    = {};
+var classof = require('./_classof');
+var test = {};
 test[require('./_wks')('toStringTag')] = 'z';
-if(test + '' != '[object z]'){
-  require('./_redefine')(Object.prototype, 'toString', function toString(){
+if (test + '' != '[object z]') {
+  require('./_redefine')(Object.prototype, 'toString', function toString() {
     return '[object ' + classof(this) + ']';
   }, true);
 }
-},{"./_classof":24,"./_redefine":78,"./_wks":98}],107:[function(require,module,exports){
-'use strict';
-var LIBRARY            = require('./_library')
-  , global             = require('./_global')
-  , ctx                = require('./_ctx')
-  , classof            = require('./_classof')
-  , $export            = require('./_export')
-  , isObject           = require('./_is-object')
-  , aFunction          = require('./_a-function')
-  , anInstance         = require('./_an-instance')
-  , forOf              = require('./_for-of')
-  , speciesConstructor = require('./_species-constructor')
-  , task               = require('./_task').set
-  , microtask          = require('./_microtask')()
-  , PROMISE            = 'Promise'
-  , TypeError          = global.TypeError
-  , process            = global.process
-  , $Promise           = global[PROMISE]
-  , process            = global.process
-  , isNode             = classof(process) == 'process'
-  , empty              = function(){  }
-  , Internal, GenericPromiseCapability, Wrapper;
 
-var USE_NATIVE = !!function(){
+},{"./_classof":24,"./_redefine":80,"./_wks":103}],112:[function(require,module,exports){
+'use strict';
+var LIBRARY = require('./_library');
+var global = require('./_global');
+var ctx = require('./_ctx');
+var classof = require('./_classof');
+var $export = require('./_export');
+var isObject = require('./_is-object');
+var aFunction = require('./_a-function');
+var anInstance = require('./_an-instance');
+var forOf = require('./_for-of');
+var speciesConstructor = require('./_species-constructor');
+var task = require('./_task').set;
+var microtask = require('./_microtask')();
+var newPromiseCapabilityModule = require('./_new-promise-capability');
+var perform = require('./_perform');
+var promiseResolve = require('./_promise-resolve');
+var PROMISE = 'Promise';
+var TypeError = global.TypeError;
+var process = global.process;
+var $Promise = global[PROMISE];
+var isNode = classof(process) == 'process';
+var empty = function () {  };
+var Internal, newGenericPromiseCapability, OwnPromiseCapability, Wrapper;
+var newPromiseCapability = newGenericPromiseCapability = newPromiseCapabilityModule.f;
+
+var USE_NATIVE = !!function () {
   try {
-    var promise     = $Promise.resolve(1)
-      , FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function(exec){ exec(empty, empty); };
+    var promise = $Promise.resolve(1);
+    var FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function (exec) {
+      exec(empty, empty);
+    };
     return (isNode || typeof PromiseRejectionEvent == 'function') && promise.then(empty) instanceof FakePromise;
-  } catch(e){  }
+  } catch (e) {  }
 }();
 
-var sameConstructor = function(a, b){
-  return a === b || a === $Promise && b === Wrapper;
-};
-var isThenable = function(it){
+var isThenable = function (it) {
   var then;
   return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
 };
-var newPromiseCapability = function(C){
-  return sameConstructor($Promise, C)
-    ? new PromiseCapability(C)
-    : new GenericPromiseCapability(C);
-};
-var PromiseCapability = GenericPromiseCapability = function(C){
-  var resolve, reject;
-  this.promise = new C(function($$resolve, $$reject){
-    if(resolve !== undefined || reject !== undefined)throw TypeError('Bad Promise constructor');
-    resolve = $$resolve;
-    reject  = $$reject;
-  });
-  this.resolve = aFunction(resolve);
-  this.reject  = aFunction(reject);
-};
-var perform = function(exec){
-  try {
-    exec();
-  } catch(e){
-    return {error: e};
-  }
-};
-var notify = function(promise, isReject){
-  if(promise._n)return;
+var notify = function (promise, isReject) {
+  if (promise._n) return;
   promise._n = true;
   var chain = promise._c;
-  microtask(function(){
-    var value = promise._v
-      , ok    = promise._s == 1
-      , i     = 0;
-    var run = function(reaction){
-      var handler = ok ? reaction.ok : reaction.fail
-        , resolve = reaction.resolve
-        , reject  = reaction.reject
-        , domain  = reaction.domain
-        , result, then;
+  microtask(function () {
+    var value = promise._v;
+    var ok = promise._s == 1;
+    var i = 0;
+    var run = function (reaction) {
+      var handler = ok ? reaction.ok : reaction.fail;
+      var resolve = reaction.resolve;
+      var reject = reaction.reject;
+      var domain = reaction.domain;
+      var result, then;
       try {
-        if(handler){
-          if(!ok){
-            if(promise._h == 2)onHandleUnhandled(promise);
+        if (handler) {
+          if (!ok) {
+            if (promise._h == 2) onHandleUnhandled(promise);
             promise._h = 1;
           }
-          if(handler === true)result = value;
+          if (handler === true) result = value;
           else {
-            if(domain)domain.enter();
+            if (domain) domain.enter();
             result = handler(value);
-            if(domain)domain.exit();
+            if (domain) domain.exit();
           }
-          if(result === reaction.promise){
+          if (result === reaction.promise) {
             reject(TypeError('Promise-chain cycle'));
-          } else if(then = isThenable(result)){
+          } else if (then = isThenable(result)) {
             then.call(result, resolve, reject);
           } else resolve(result);
         } else reject(value);
-      } catch(e){
+      } catch (e) {
         reject(e);
       }
     };
-    while(chain.length > i)run(chain[i++]); 
+    while (chain.length > i) run(chain[i++]); 
     promise._c = [];
     promise._n = false;
-    if(isReject && !promise._h)onUnhandled(promise);
+    if (isReject && !promise._h) onUnhandled(promise);
   });
 };
-var onUnhandled = function(promise){
-  task.call(global, function(){
-    var value = promise._v
-      , abrupt, handler, console;
-    if(isUnhandled(promise)){
-      abrupt = perform(function(){
-        if(isNode){
+var onUnhandled = function (promise) {
+  task.call(global, function () {
+    var value = promise._v;
+    var unhandled = isUnhandled(promise);
+    var result, handler, console;
+    if (unhandled) {
+      result = perform(function () {
+        if (isNode) {
           process.emit('unhandledRejection', value, promise);
-        } else if(handler = global.onunhandledrejection){
-          handler({promise: promise, reason: value});
-        } else if((console = global.console) && console.error){
+        } else if (handler = global.onunhandledrejection) {
+          handler({ promise: promise, reason: value });
+        } else if ((console = global.console) && console.error) {
           console.error('Unhandled promise rejection', value);
         }
       });
       promise._h = isNode || isUnhandled(promise) ? 2 : 1;
     } promise._a = undefined;
-    if(abrupt)throw abrupt.error;
+    if (unhandled && result.e) throw result.v;
   });
 };
-var isUnhandled = function(promise){
-  if(promise._h == 1)return false;
-  var chain = promise._a || promise._c
-    , i     = 0
-    , reaction;
-  while(chain.length > i){
-    reaction = chain[i++];
-    if(reaction.fail || !isUnhandled(reaction.promise))return false;
-  } return true;
+var isUnhandled = function (promise) {
+  return promise._h !== 1 && (promise._a || promise._c).length === 0;
 };
-var onHandleUnhandled = function(promise){
-  task.call(global, function(){
+var onHandleUnhandled = function (promise) {
+  task.call(global, function () {
     var handler;
-    if(isNode){
+    if (isNode) {
       process.emit('rejectionHandled', promise);
-    } else if(handler = global.onrejectionhandled){
-      handler({promise: promise, reason: promise._v});
+    } else if (handler = global.onrejectionhandled) {
+      handler({ promise: promise, reason: promise._v });
     }
   });
 };
-var $reject = function(value){
+var $reject = function (value) {
   var promise = this;
-  if(promise._d)return;
+  if (promise._d) return;
   promise._d = true;
   promise = promise._w || promise; 
   promise._v = value;
   promise._s = 2;
-  if(!promise._a)promise._a = promise._c.slice();
+  if (!promise._a) promise._a = promise._c.slice();
   notify(promise, true);
 };
-var $resolve = function(value){
-  var promise = this
-    , then;
-  if(promise._d)return;
+var $resolve = function (value) {
+  var promise = this;
+  var then;
+  if (promise._d) return;
   promise._d = true;
   promise = promise._w || promise; 
   try {
-    if(promise === value)throw TypeError("Promise can't be resolved itself");
-    if(then = isThenable(value)){
-      microtask(function(){
-        var wrapper = {_w: promise, _d: false}; 
+    if (promise === value) throw TypeError("Promise can't be resolved itself");
+    if (then = isThenable(value)) {
+      microtask(function () {
+        var wrapper = { _w: promise, _d: false }; 
         try {
           then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
-        } catch(e){
+        } catch (e) {
           $reject.call(wrapper, e);
         }
       });
@@ -1733,23 +1911,23 @@ var $resolve = function(value){
       promise._s = 1;
       notify(promise, false);
     }
-  } catch(e){
-    $reject.call({_w: promise, _d: false}, e); 
+  } catch (e) {
+    $reject.call({ _w: promise, _d: false }, e); 
   }
 };
 
-if(!USE_NATIVE){
-  $Promise = function Promise(executor){
+if (!USE_NATIVE) {
+  $Promise = function Promise(executor) {
     anInstance(this, $Promise, PROMISE, '_h');
     aFunction(executor);
     Internal.call(this);
     try {
       executor(ctx($resolve, this, 1), ctx($reject, this, 1));
-    } catch(err){
+    } catch (err) {
       $reject.call(this, err);
     }
   };
-  Internal = function Promise(executor){
+  Internal = function Promise(executor) {
     this._c = [];             
     this._a = undefined;      
     this._s = 0;              
@@ -1759,354 +1937,364 @@ if(!USE_NATIVE){
     this._n = false;          
   };
   Internal.prototype = require('./_redefine-all')($Promise.prototype, {
-    then: function then(onFulfilled, onRejected){
-      var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
-      reaction.ok     = typeof onFulfilled == 'function' ? onFulfilled : true;
-      reaction.fail   = typeof onRejected == 'function' && onRejected;
+    then: function then(onFulfilled, onRejected) {
+      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
+      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
+      reaction.fail = typeof onRejected == 'function' && onRejected;
       reaction.domain = isNode ? process.domain : undefined;
       this._c.push(reaction);
-      if(this._a)this._a.push(reaction);
-      if(this._s)notify(this, false);
+      if (this._a) this._a.push(reaction);
+      if (this._s) notify(this, false);
       return reaction.promise;
     },
-    'catch': function(onRejected){
+    'catch': function (onRejected) {
       return this.then(undefined, onRejected);
     }
   });
-  PromiseCapability = function(){
-    var promise  = new Internal;
+  OwnPromiseCapability = function () {
+    var promise = new Internal();
     this.promise = promise;
     this.resolve = ctx($resolve, promise, 1);
-    this.reject  = ctx($reject, promise, 1);
+    this.reject = ctx($reject, promise, 1);
+  };
+  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
+    return C === $Promise || C === Wrapper
+      ? new OwnPromiseCapability(C)
+      : newGenericPromiseCapability(C);
   };
 }
 
-$export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
 require('./_set-to-string-tag')($Promise, PROMISE);
 require('./_set-species')(PROMISE);
 Wrapper = require('./_core')[PROMISE];
 
 $export($export.S + $export.F * !USE_NATIVE, PROMISE, {
-  reject: function reject(r){
-    var capability = newPromiseCapability(this)
-      , $$reject   = capability.reject;
+  reject: function reject(r) {
+    var capability = newPromiseCapability(this);
+    var $$reject = capability.reject;
     $$reject(r);
     return capability.promise;
   }
 });
 $export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
-  resolve: function resolve(x){
-    if(x instanceof $Promise && sameConstructor(x.constructor, this))return x;
-    var capability = newPromiseCapability(this)
-      , $$resolve  = capability.resolve;
-    $$resolve(x);
-    return capability.promise;
+  resolve: function resolve(x) {
+    return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
   }
 });
-$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function(iter){
+$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function (iter) {
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
-  all: function all(iterable){
-    var C          = this
-      , capability = newPromiseCapability(C)
-      , resolve    = capability.resolve
-      , reject     = capability.reject;
-    var abrupt = perform(function(){
-      var values    = []
-        , index     = 0
-        , remaining = 1;
-      forOf(iterable, false, function(promise){
-        var $index        = index++
-          , alreadyCalled = false;
+  all: function all(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var resolve = capability.resolve;
+    var reject = capability.reject;
+    var result = perform(function () {
+      var values = [];
+      var index = 0;
+      var remaining = 1;
+      forOf(iterable, false, function (promise) {
+        var $index = index++;
+        var alreadyCalled = false;
         values.push(undefined);
         remaining++;
-        C.resolve(promise).then(function(value){
-          if(alreadyCalled)return;
-          alreadyCalled  = true;
+        C.resolve(promise).then(function (value) {
+          if (alreadyCalled) return;
+          alreadyCalled = true;
           values[$index] = value;
           --remaining || resolve(values);
         }, reject);
       });
       --remaining || resolve(values);
     });
-    if(abrupt)reject(abrupt.error);
+    if (result.e) reject(result.v);
     return capability.promise;
   },
-  race: function race(iterable){
-    var C          = this
-      , capability = newPromiseCapability(C)
-      , reject     = capability.reject;
-    var abrupt = perform(function(){
-      forOf(iterable, false, function(promise){
+  race: function race(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var reject = capability.reject;
+    var result = perform(function () {
+      forOf(iterable, false, function (promise) {
         C.resolve(promise).then(capability.resolve, reject);
       });
     });
-    if(abrupt)reject(abrupt.error);
+    if (result.e) reject(result.v);
     return capability.promise;
   }
 });
-},{"./_a-function":15,"./_an-instance":17,"./_classof":24,"./_core":30,"./_ctx":32,"./_export":38,"./_for-of":41,"./_global":42,"./_is-object":52,"./_iter-detect":57,"./_library":61,"./_microtask":63,"./_redefine-all":77,"./_set-species":80,"./_set-to-string-tag":81,"./_species-constructor":84,"./_task":88,"./_wks":98}],108:[function(require,module,exports){
+
+},{"./_a-function":15,"./_an-instance":17,"./_classof":24,"./_core":30,"./_ctx":32,"./_export":38,"./_for-of":41,"./_global":42,"./_is-object":52,"./_iter-detect":57,"./_library":60,"./_microtask":62,"./_new-promise-capability":63,"./_perform":76,"./_promise-resolve":77,"./_redefine-all":79,"./_set-species":84,"./_set-to-string-tag":85,"./_species-constructor":88,"./_task":92,"./_wks":103}],113:[function(require,module,exports){
 'use strict';
 var strong = require('./_collection-strong');
+var validate = require('./_validate-collection');
+var SET = 'Set';
 
-module.exports = require('./_collection')('Set', function(get){
-  return function Set(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };
+module.exports = require('./_collection')(SET, function (get) {
+  return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
-  add: function add(value){
-    return strong.def(this, value = value === 0 ? 0 : value, value);
+  add: function add(value) {
+    return strong.def(validate(this, SET), value = value === 0 ? 0 : value, value);
   }
 }, strong);
-},{"./_collection":29,"./_collection-strong":26}],109:[function(require,module,exports){
+
+},{"./_collection":29,"./_collection-strong":26,"./_validate-collection":100}],114:[function(require,module,exports){
 'use strict';
-var $export   = require('./_export')
-  , toLength  = require('./_to-length')
-  , context   = require('./_string-context')
-  , ENDS_WITH = 'endsWith'
-  , $endsWith = ''[ENDS_WITH];
+var $export = require('./_export');
+var toLength = require('./_to-length');
+var context = require('./_string-context');
+var ENDS_WITH = 'endsWith';
+var $endsWith = ''[ENDS_WITH];
 
 $export($export.P + $export.F * require('./_fails-is-regexp')(ENDS_WITH), 'String', {
-  endsWith: function endsWith(searchString ){
-    var that = context(this, searchString, ENDS_WITH)
-      , endPosition = arguments.length > 1 ? arguments[1] : undefined
-      , len    = toLength(that.length)
-      , end    = endPosition === undefined ? len : Math.min(toLength(endPosition), len)
-      , search = String(searchString);
+  endsWith: function endsWith(searchString ) {
+    var that = context(this, searchString, ENDS_WITH);
+    var endPosition = arguments.length > 1 ? arguments[1] : undefined;
+    var len = toLength(that.length);
+    var end = endPosition === undefined ? len : Math.min(toLength(endPosition), len);
+    var search = String(searchString);
     return $endsWith
       ? $endsWith.call(that, search, end)
       : that.slice(end - search.length, end) === search;
   }
 });
-},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86,"./_to-length":92}],110:[function(require,module,exports){
+
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":90,"./_to-length":96}],115:[function(require,module,exports){
 'use strict';
-var $export  = require('./_export')
-  , context  = require('./_string-context')
-  , INCLUDES = 'includes';
+var $export = require('./_export');
+var context = require('./_string-context');
+var INCLUDES = 'includes';
 
 $export($export.P + $export.F * require('./_fails-is-regexp')(INCLUDES), 'String', {
-  includes: function includes(searchString ){
+  includes: function includes(searchString ) {
     return !!~context(this, searchString, INCLUDES)
       .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86}],111:[function(require,module,exports){
-'use strict';
-var $at  = require('./_string-at')(true);
 
-require('./_iter-define')(String, 'String', function(iterated){
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":90}],116:[function(require,module,exports){
+'use strict';
+var $at = require('./_string-at')(true);
+
+require('./_iter-define')(String, 'String', function (iterated) {
   this._t = String(iterated); 
   this._i = 0;                
-}, function(){
-  var O     = this._t
-    , index = this._i
-    , point;
-  if(index >= O.length)return {value: undefined, done: true};
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
   point = $at(O, index);
   this._i += point.length;
-  return {value: point, done: false};
+  return { value: point, done: false };
 });
-},{"./_iter-define":56,"./_string-at":85}],112:[function(require,module,exports){
+
+},{"./_iter-define":56,"./_string-at":89}],117:[function(require,module,exports){
 var $export = require('./_export');
 
 $export($export.P, 'String', {
   repeat: require('./_string-repeat')
 });
-},{"./_export":38,"./_string-repeat":87}],113:[function(require,module,exports){
+
+},{"./_export":38,"./_string-repeat":91}],118:[function(require,module,exports){
 'use strict';
-var $export     = require('./_export')
-  , toLength    = require('./_to-length')
-  , context     = require('./_string-context')
-  , STARTS_WITH = 'startsWith'
-  , $startsWith = ''[STARTS_WITH];
+var $export = require('./_export');
+var toLength = require('./_to-length');
+var context = require('./_string-context');
+var STARTS_WITH = 'startsWith';
+var $startsWith = ''[STARTS_WITH];
 
 $export($export.P + $export.F * require('./_fails-is-regexp')(STARTS_WITH), 'String', {
-  startsWith: function startsWith(searchString ){
-    var that   = context(this, searchString, STARTS_WITH)
-      , index  = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length))
-      , search = String(searchString);
+  startsWith: function startsWith(searchString ) {
+    var that = context(this, searchString, STARTS_WITH);
+    var index = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length));
+    var search = String(searchString);
     return $startsWith
       ? $startsWith.call(that, search, index)
       : that.slice(index, index + search.length) === search;
   }
 });
-},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":86,"./_to-length":92}],114:[function(require,module,exports){
+
+},{"./_export":38,"./_fails-is-regexp":39,"./_string-context":90,"./_to-length":96}],119:[function(require,module,exports){
 'use strict';
-var global         = require('./_global')
-  , has            = require('./_has')
-  , DESCRIPTORS    = require('./_descriptors')
-  , $export        = require('./_export')
-  , redefine       = require('./_redefine')
-  , META           = require('./_meta').KEY
-  , $fails         = require('./_fails')
-  , shared         = require('./_shared')
-  , setToStringTag = require('./_set-to-string-tag')
-  , uid            = require('./_uid')
-  , wks            = require('./_wks')
-  , wksExt         = require('./_wks-ext')
-  , wksDefine      = require('./_wks-define')
-  , keyOf          = require('./_keyof')
-  , enumKeys       = require('./_enum-keys')
-  , isArray        = require('./_is-array')
-  , anObject       = require('./_an-object')
-  , toIObject      = require('./_to-iobject')
-  , toPrimitive    = require('./_to-primitive')
-  , createDesc     = require('./_property-desc')
-  , _create        = require('./_object-create')
-  , gOPNExt        = require('./_object-gopn-ext')
-  , $GOPD          = require('./_object-gopd')
-  , $DP            = require('./_object-dp')
-  , $keys          = require('./_object-keys')
-  , gOPD           = $GOPD.f
-  , dP             = $DP.f
-  , gOPN           = gOPNExt.f
-  , $Symbol        = global.Symbol
-  , $JSON          = global.JSON
-  , _stringify     = $JSON && $JSON.stringify
-  , PROTOTYPE      = 'prototype'
-  , HIDDEN         = wks('_hidden')
-  , TO_PRIMITIVE   = wks('toPrimitive')
-  , isEnum         = {}.propertyIsEnumerable
-  , SymbolRegistry = shared('symbol-registry')
-  , AllSymbols     = shared('symbols')
-  , OPSymbols      = shared('op-symbols')
-  , ObjectProto    = Object[PROTOTYPE]
-  , USE_NATIVE     = typeof $Symbol == 'function'
-  , QObject        = global.QObject;
+var global = require('./_global');
+var has = require('./_has');
+var DESCRIPTORS = require('./_descriptors');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var META = require('./_meta').KEY;
+var $fails = require('./_fails');
+var shared = require('./_shared');
+var setToStringTag = require('./_set-to-string-tag');
+var uid = require('./_uid');
+var wks = require('./_wks');
+var wksExt = require('./_wks-ext');
+var wksDefine = require('./_wks-define');
+var enumKeys = require('./_enum-keys');
+var isArray = require('./_is-array');
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var createDesc = require('./_property-desc');
+var _create = require('./_object-create');
+var gOPNExt = require('./_object-gopn-ext');
+var $GOPD = require('./_object-gopd');
+var $DP = require('./_object-dp');
+var $keys = require('./_object-keys');
+var gOPD = $GOPD.f;
+var dP = $DP.f;
+var gOPN = gOPNExt.f;
+var $Symbol = global.Symbol;
+var $JSON = global.JSON;
+var _stringify = $JSON && $JSON.stringify;
+var PROTOTYPE = 'prototype';
+var HIDDEN = wks('_hidden');
+var TO_PRIMITIVE = wks('toPrimitive');
+var isEnum = {}.propertyIsEnumerable;
+var SymbolRegistry = shared('symbol-registry');
+var AllSymbols = shared('symbols');
+var OPSymbols = shared('op-symbols');
+var ObjectProto = Object[PROTOTYPE];
+var USE_NATIVE = typeof $Symbol == 'function';
+var QObject = global.QObject;
 var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
 
-var setSymbolDesc = DESCRIPTORS && $fails(function(){
+var setSymbolDesc = DESCRIPTORS && $fails(function () {
   return _create(dP({}, 'a', {
-    get: function(){ return dP(this, 'a', {value: 7}).a; }
+    get: function () { return dP(this, 'a', { value: 7 }).a; }
   })).a != 7;
-}) ? function(it, key, D){
+}) ? function (it, key, D) {
   var protoDesc = gOPD(ObjectProto, key);
-  if(protoDesc)delete ObjectProto[key];
+  if (protoDesc) delete ObjectProto[key];
   dP(it, key, D);
-  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);
+  if (protoDesc && it !== ObjectProto) dP(ObjectProto, key, protoDesc);
 } : dP;
 
-var wrap = function(tag){
+var wrap = function (tag) {
   var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
   sym._k = tag;
   return sym;
 };
 
-var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){
+var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function (it) {
   return typeof it == 'symbol';
-} : function(it){
+} : function (it) {
   return it instanceof $Symbol;
 };
 
-var $defineProperty = function defineProperty(it, key, D){
-  if(it === ObjectProto)$defineProperty(OPSymbols, key, D);
+var $defineProperty = function defineProperty(it, key, D) {
+  if (it === ObjectProto) $defineProperty(OPSymbols, key, D);
   anObject(it);
   key = toPrimitive(key, true);
   anObject(D);
-  if(has(AllSymbols, key)){
-    if(!D.enumerable){
-      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));
+  if (has(AllSymbols, key)) {
+    if (!D.enumerable) {
+      if (!has(it, HIDDEN)) dP(it, HIDDEN, createDesc(1, {}));
       it[HIDDEN][key] = true;
     } else {
-      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
-      D = _create(D, {enumerable: createDesc(0, false)});
+      if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
+      D = _create(D, { enumerable: createDesc(0, false) });
     } return setSymbolDesc(it, key, D);
   } return dP(it, key, D);
 };
-var $defineProperties = function defineProperties(it, P){
+var $defineProperties = function defineProperties(it, P) {
   anObject(it);
-  var keys = enumKeys(P = toIObject(P))
-    , i    = 0
-    , l = keys.length
-    , key;
-  while(l > i)$defineProperty(it, key = keys[i++], P[key]);
+  var keys = enumKeys(P = toIObject(P));
+  var i = 0;
+  var l = keys.length;
+  var key;
+  while (l > i) $defineProperty(it, key = keys[i++], P[key]);
   return it;
 };
-var $create = function create(it, P){
+var $create = function create(it, P) {
   return P === undefined ? _create(it) : $defineProperties(_create(it), P);
 };
-var $propertyIsEnumerable = function propertyIsEnumerable(key){
+var $propertyIsEnumerable = function propertyIsEnumerable(key) {
   var E = isEnum.call(this, key = toPrimitive(key, true));
-  if(this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return false;
+  if (this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return false;
   return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
 };
-var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
-  it  = toIObject(it);
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key) {
+  it = toIObject(it);
   key = toPrimitive(key, true);
-  if(it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return;
+  if (it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return;
   var D = gOPD(it, key);
-  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
+  if (D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) D.enumerable = true;
   return D;
 };
-var $getOwnPropertyNames = function getOwnPropertyNames(it){
-  var names  = gOPN(toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i){
-    if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
+var $getOwnPropertyNames = function getOwnPropertyNames(it) {
+  var names = gOPN(toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META) result.push(key);
   } return result;
 };
-var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
-  var IS_OP  = it === ObjectProto
-    , names  = gOPN(IS_OP ? OPSymbols : toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i){
-    if(has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true))result.push(AllSymbols[key]);
+var $getOwnPropertySymbols = function getOwnPropertySymbols(it) {
+  var IS_OP = it === ObjectProto;
+  var names = gOPN(IS_OP ? OPSymbols : toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true)) result.push(AllSymbols[key]);
   } return result;
 };
 
-if(!USE_NATIVE){
-  $Symbol = function Symbol(){
-    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');
+if (!USE_NATIVE) {
+  $Symbol = function Symbol() {
+    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor!');
     var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
-    var $set = function(value){
-      if(this === ObjectProto)$set.call(OPSymbols, value);
-      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;
+    var $set = function (value) {
+      if (this === ObjectProto) $set.call(OPSymbols, value);
+      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
       setSymbolDesc(this, tag, createDesc(1, value));
     };
-    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});
+    if (DESCRIPTORS && setter) setSymbolDesc(ObjectProto, tag, { configurable: true, set: $set });
     return wrap(tag);
   };
-  redefine($Symbol[PROTOTYPE], 'toString', function toString(){
+  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
     return this._k;
   });
 
   $GOPD.f = $getOwnPropertyDescriptor;
-  $DP.f   = $defineProperty;
+  $DP.f = $defineProperty;
   require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;
-  require('./_object-pie').f  = $propertyIsEnumerable;
+  require('./_object-pie').f = $propertyIsEnumerable;
   require('./_object-gops').f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !require('./_library')){
+  if (DESCRIPTORS && !require('./_library')) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
-  wksExt.f = function(name){
+  wksExt.f = function (name) {
     return wrap(wks(name));
-  }
+  };
 }
 
-$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Symbol: $Symbol });
 
-for(var symbols = (
+for (var es6Symbols = (
   'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
-).split(','), i = 0; symbols.length > i; )wks(symbols[i++]);
+).split(','), j = 0; es6Symbols.length > j;)wks(es6Symbols[j++]);
 
-for(var symbols = $keys(wks.store), i = 0; symbols.length > i; )wksDefine(symbols[i++]);
+for (var wellKnownSymbols = $keys(wks.store), k = 0; wellKnownSymbols.length > k;) wksDefine(wellKnownSymbols[k++]);
 
 $export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
-  'for': function(key){
+  'for': function (key) {
     return has(SymbolRegistry, key += '')
       ? SymbolRegistry[key]
       : SymbolRegistry[key] = $Symbol(key);
   },
-  keyFor: function keyFor(key){
-    if(isSymbol(key))return keyOf(SymbolRegistry, key);
-    throw TypeError(key + ' is not a symbol!');
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol!');
+    for (var key in SymbolRegistry) if (SymbolRegistry[key] === sym) return key;
   },
-  useSetter: function(){ setter = true; },
-  useSimple: function(){ setter = false; }
+  useSetter: function () { setter = true; },
+  useSimple: function () { setter = false; }
 });
 
 $export($export.S + $export.F * !USE_NATIVE, 'Object', {
@@ -2118,21 +2306,20 @@ $export($export.S + $export.F * !USE_NATIVE, 'Object', {
   getOwnPropertySymbols: $getOwnPropertySymbols
 });
 
-$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){
+$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
   var S = $Symbol();
-  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';
+  return _stringify([S]) != '[null]' || _stringify({ a: S }) != '{}' || _stringify(Object(S)) != '{}';
 })), 'JSON', {
-  stringify: function stringify(it){
-    if(it === undefined || isSymbol(it))return; 
-    var args = [it]
-      , i    = 1
-      , replacer, $replacer;
-    while(arguments.length > i)args.push(arguments[i++]);
-    replacer = args[1];
-    if(typeof replacer == 'function')$replacer = replacer;
-    if($replacer || !isArray(replacer))replacer = function(key, value){
-      if($replacer)value = $replacer.call(this, key, value);
-      if(!isSymbol(value))return value;
+  stringify: function stringify(it) {
+    var args = [it];
+    var i = 1;
+    var replacer, $replacer;
+    while (arguments.length > i) args.push(arguments[i++]);
+    $replacer = replacer = args[1];
+    if (!isObject(replacer) && it === undefined || isSymbol(it)) return; 
+    if (!isArray(replacer)) replacer = function (key, value) {
+      if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
+      if (!isSymbol(value)) return value;
     };
     args[1] = replacer;
     return _stringify.apply($JSON, args);
@@ -2143,271 +2330,201 @@ $Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PR
 setToStringTag($Symbol, 'Symbol');
 setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
-},{"./_an-object":18,"./_descriptors":34,"./_enum-keys":37,"./_export":38,"./_fails":40,"./_global":42,"./_has":43,"./_hide":44,"./_is-array":51,"./_keyof":60,"./_library":61,"./_meta":62,"./_object-create":65,"./_object-dp":66,"./_object-gopd":68,"./_object-gopn":70,"./_object-gopn-ext":69,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_property-desc":76,"./_redefine":78,"./_set-to-string-tag":81,"./_shared":83,"./_to-iobject":91,"./_to-primitive":94,"./_uid":95,"./_wks":98,"./_wks-define":96,"./_wks-ext":97}],115:[function(require,module,exports){
-'use strict';
-var each         = require('./_array-methods')(0)
-  , redefine     = require('./_redefine')
-  , meta         = require('./_meta')
-  , assign       = require('./_object-assign')
-  , weak         = require('./_collection-weak')
-  , isObject     = require('./_is-object')
-  , getWeak      = meta.getWeak
-  , isExtensible = Object.isExtensible
-  , uncaughtFrozenStore = weak.ufstore
-  , tmp          = {}
-  , InternalMap;
 
-var wrapper = function(get){
-  return function WeakMap(){
+},{"./_an-object":18,"./_descriptors":34,"./_enum-keys":37,"./_export":38,"./_fails":40,"./_global":42,"./_has":43,"./_hide":44,"./_is-array":51,"./_is-object":52,"./_library":60,"./_meta":61,"./_object-create":65,"./_object-dp":66,"./_object-gopd":68,"./_object-gopn":70,"./_object-gopn-ext":69,"./_object-gops":71,"./_object-keys":74,"./_object-pie":75,"./_property-desc":78,"./_redefine":80,"./_set-to-string-tag":85,"./_shared":87,"./_to-iobject":95,"./_to-primitive":98,"./_uid":99,"./_wks":103,"./_wks-define":101,"./_wks-ext":102}],120:[function(require,module,exports){
+'use strict';
+var each = require('./_array-methods')(0);
+var redefine = require('./_redefine');
+var meta = require('./_meta');
+var assign = require('./_object-assign');
+var weak = require('./_collection-weak');
+var isObject = require('./_is-object');
+var fails = require('./_fails');
+var validate = require('./_validate-collection');
+var WEAK_MAP = 'WeakMap';
+var getWeak = meta.getWeak;
+var isExtensible = Object.isExtensible;
+var uncaughtFrozenStore = weak.ufstore;
+var tmp = {};
+var InternalMap;
+
+var wrapper = function (get) {
+  return function WeakMap() {
     return get(this, arguments.length > 0 ? arguments[0] : undefined);
   };
 };
 
 var methods = {
-  get: function get(key){
-    if(isObject(key)){
+  get: function get(key) {
+    if (isObject(key)) {
       var data = getWeak(key);
-      if(data === true)return uncaughtFrozenStore(this).get(key);
+      if (data === true) return uncaughtFrozenStore(validate(this, WEAK_MAP)).get(key);
       return data ? data[this._i] : undefined;
     }
   },
-  set: function set(key, value){
-    return weak.def(this, key, value);
+  set: function set(key, value) {
+    return weak.def(validate(this, WEAK_MAP), key, value);
   }
 };
 
-var $WeakMap = module.exports = require('./_collection')('WeakMap', wrapper, methods, weak, true, true);
+var $WeakMap = module.exports = require('./_collection')(WEAK_MAP, wrapper, methods, weak, true, true);
 
-if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
-  InternalMap = weak.getConstructor(wrapper);
+if (fails(function () { return new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7; })) {
+  InternalMap = weak.getConstructor(wrapper, WEAK_MAP);
   assign(InternalMap.prototype, methods);
   meta.NEED = true;
-  each(['delete', 'has', 'get', 'set'], function(key){
-    var proto  = $WeakMap.prototype
-      , method = proto[key];
-    redefine(proto, key, function(a, b){
-      if(isObject(a) && !isExtensible(a)){
-        if(!this._f)this._f = new InternalMap;
+  each(['delete', 'has', 'get', 'set'], function (key) {
+    var proto = $WeakMap.prototype;
+    var method = proto[key];
+    redefine(proto, key, function (a, b) {
+      if (isObject(a) && !isExtensible(a)) {
+        if (!this._f) this._f = new InternalMap();
         var result = this._f[key](a, b);
         return key == 'set' ? this : result;
       } return method.call(this, a, b);
     });
   });
 }
-},{"./_array-methods":21,"./_collection":29,"./_collection-weak":28,"./_is-object":52,"./_meta":62,"./_object-assign":64,"./_redefine":78}],116:[function(require,module,exports){
-var $export  = require('./_export');
 
-$export($export.P + $export.R, 'Map', {toJSON: require('./_collection-to-json')('Map')});
-},{"./_collection-to-json":27,"./_export":38}],117:[function(require,module,exports){
-var $export  = require('./_export');
+},{"./_array-methods":21,"./_collection":29,"./_collection-weak":28,"./_fails":40,"./_is-object":52,"./_meta":61,"./_object-assign":64,"./_redefine":80,"./_validate-collection":100}],121:[function(require,module,exports){
+require('./_set-collection-from')('Map');
 
-$export($export.P + $export.R, 'Set', {toJSON: require('./_collection-to-json')('Set')});
-},{"./_collection-to-json":27,"./_export":38}],118:[function(require,module,exports){
+},{"./_set-collection-from":81}],122:[function(require,module,exports){
+require('./_set-collection-of')('Map');
+
+},{"./_set-collection-of":82}],123:[function(require,module,exports){
+var $export = require('./_export');
+
+$export($export.P + $export.R, 'Map', { toJSON: require('./_collection-to-json')('Map') });
+
+},{"./_collection-to-json":27,"./_export":38}],124:[function(require,module,exports){
+'use strict';
+var $export = require('./_export');
+var core = require('./_core');
+var global = require('./_global');
+var speciesConstructor = require('./_species-constructor');
+var promiseResolve = require('./_promise-resolve');
+
+$export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
+  var C = speciesConstructor(this, core.Promise || global.Promise);
+  var isFunction = typeof onFinally == 'function';
+  return this.then(
+    isFunction ? function (x) {
+      return promiseResolve(C, onFinally()).then(function () { return x; });
+    } : onFinally,
+    isFunction ? function (e) {
+      return promiseResolve(C, onFinally()).then(function () { throw e; });
+    } : onFinally
+  );
+} });
+
+},{"./_core":30,"./_export":38,"./_global":42,"./_promise-resolve":77,"./_species-constructor":88}],125:[function(require,module,exports){
+'use strict';
+var $export = require('./_export');
+var newPromiseCapability = require('./_new-promise-capability');
+var perform = require('./_perform');
+
+$export($export.S, 'Promise', { 'try': function (callbackfn) {
+  var promiseCapability = newPromiseCapability.f(this);
+  var result = perform(callbackfn);
+  (result.e ? promiseCapability.reject : promiseCapability.resolve)(result.v);
+  return promiseCapability.promise;
+} });
+
+},{"./_export":38,"./_new-promise-capability":63,"./_perform":76}],126:[function(require,module,exports){
+require('./_set-collection-from')('Set');
+
+},{"./_set-collection-from":81}],127:[function(require,module,exports){
+require('./_set-collection-of')('Set');
+
+},{"./_set-collection-of":82}],128:[function(require,module,exports){
+var $export = require('./_export');
+
+$export($export.P + $export.R, 'Set', { toJSON: require('./_collection-to-json')('Set') });
+
+},{"./_collection-to-json":27,"./_export":38}],129:[function(require,module,exports){
 require('./_wks-define')('asyncIterator');
-},{"./_wks-define":96}],119:[function(require,module,exports){
-require('./_wks-define')('observable');
-},{"./_wks-define":96}],120:[function(require,module,exports){
-var $iterators    = require('./es6.array.iterator')
-  , redefine      = require('./_redefine')
-  , global        = require('./_global')
-  , hide          = require('./_hide')
-  , Iterators     = require('./_iterators')
-  , wks           = require('./_wks')
-  , ITERATOR      = wks('iterator')
-  , TO_STRING_TAG = wks('toStringTag')
-  , ArrayValues   = Iterators.Array;
 
-for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
-  var NAME       = collections[i]
-    , Collection = global[NAME]
-    , proto      = Collection && Collection.prototype
-    , key;
-  if(proto){
-    if(!proto[ITERATOR])hide(proto, ITERATOR, ArrayValues);
-    if(!proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
+},{"./_wks-define":101}],130:[function(require,module,exports){
+require('./_wks-define')('observable');
+
+},{"./_wks-define":101}],131:[function(require,module,exports){
+require('./_set-collection-from')('WeakMap');
+
+},{"./_set-collection-from":81}],132:[function(require,module,exports){
+require('./_set-collection-of')('WeakMap');
+
+},{"./_set-collection-of":82}],133:[function(require,module,exports){
+var $iterators = require('./es6.array.iterator');
+var getKeys = require('./_object-keys');
+var redefine = require('./_redefine');
+var global = require('./_global');
+var hide = require('./_hide');
+var Iterators = require('./_iterators');
+var wks = require('./_wks');
+var ITERATOR = wks('iterator');
+var TO_STRING_TAG = wks('toStringTag');
+var ArrayValues = Iterators.Array;
+
+var DOMIterables = {
+  CSSRuleList: true, 
+  CSSStyleDeclaration: false,
+  CSSValueList: false,
+  ClientRectList: false,
+  DOMRectList: false,
+  DOMStringList: false,
+  DOMTokenList: true,
+  DataTransferItemList: false,
+  FileList: false,
+  HTMLAllCollection: false,
+  HTMLCollection: false,
+  HTMLFormElement: false,
+  HTMLSelectElement: false,
+  MediaList: true, 
+  MimeTypeArray: false,
+  NamedNodeMap: false,
+  NodeList: true,
+  PaintRequestList: false,
+  Plugin: false,
+  PluginArray: false,
+  SVGLengthList: false,
+  SVGNumberList: false,
+  SVGPathSegList: false,
+  SVGPointList: false,
+  SVGStringList: false,
+  SVGTransformList: false,
+  SourceBufferList: false,
+  StyleSheetList: true, 
+  TextTrackCueList: false,
+  TextTrackList: false,
+  TouchList: false
+};
+
+for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++) {
+  var NAME = collections[i];
+  var explicit = DOMIterables[NAME];
+  var Collection = global[NAME];
+  var proto = Collection && Collection.prototype;
+  var key;
+  if (proto) {
+    if (!proto[ITERATOR]) hide(proto, ITERATOR, ArrayValues);
+    if (!proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
     Iterators[NAME] = ArrayValues;
-    for(key in $iterators)if(!proto[key])redefine(proto, key, $iterators[key], true);
+    if (explicit) for (key in $iterators) if (!proto[key]) redefine(proto, key, $iterators[key], true);
   }
 }
-},{"./_global":42,"./_hide":44,"./_iterators":59,"./_redefine":78,"./_wks":98,"./es6.array.iterator":101}],121:[function(require,module,exports){
-var process = module.exports = {};
 
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        return setTimeout(fun, 0);
-    }
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        return clearTimeout(marker);
-    }
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; 
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],122:[function(require,module,exports){
-(function (process,global){
+},{"./_global":42,"./_hide":44,"./_iterators":59,"./_object-keys":74,"./_redefine":80,"./_wks":103,"./es6.array.iterator":106}],134:[function(require,module,exports){
 
 !(function(global) {
   "use strict";
 
-  var hasOwn = Object.prototype.hasOwnProperty;
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
   var undefined; 
   var $Symbol = typeof Symbol === "function" ? Symbol : {};
   var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
   var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
 
   var inModule = typeof module === "object";
@@ -2451,10 +2568,25 @@ process.umask = function() { return 0; };
   function GeneratorFunction() {}
   function GeneratorFunctionPrototype() {}
 
-  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
   GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
   GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction";
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
 
   function defineIteratorMethods(prototype) {
     ["next", "throw", "return"].forEach(function(method) {
@@ -2486,12 +2618,8 @@ process.umask = function() { return 0; };
   };
 
   runtime.awrap = function(arg) {
-    return new AwaitArgument(arg);
+    return { __await: arg };
   };
-
-  function AwaitArgument(arg) {
-    this.arg = arg;
-  }
 
   function AsyncIterator(generator) {
     function invoke(method, arg, resolve, reject) {
@@ -2501,8 +2629,10 @@ process.umask = function() { return 0; };
       } else {
         var result = record.arg;
         var value = result.value;
-        if (value instanceof AwaitArgument) {
-          return Promise.resolve(value.arg).then(function(value) {
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function(value) {
             invoke("next", value, resolve, reject);
           }, function(err) {
             invoke("throw", err, resolve, reject);
@@ -2514,10 +2644,6 @@ process.umask = function() { return 0; };
           resolve(result);
         }, reject);
       }
-    }
-
-    if (typeof process === "object" && process.domain) {
-      invoke = process.domain.bind(invoke);
     }
 
     var previousPromise;
@@ -2540,6 +2666,10 @@ process.umask = function() { return 0; };
   }
 
   defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  runtime.AsyncIterator = AsyncIterator;
 
   runtime.async = function(innerFn, outerFn, self, tryLocsList) {
     var iter = new AsyncIterator(
@@ -2569,73 +2699,32 @@ process.umask = function() { return 0; };
         return doneResult();
       }
 
+      context.method = method;
+      context.arg = arg;
+
       while (true) {
         var delegate = context.delegate;
         if (delegate) {
-          if (method === "return" ||
-              (method === "throw" && delegate.iterator[method] === undefined)) {
-            context.delegate = null;
-
-            var returnMethod = delegate.iterator["return"];
-            if (returnMethod) {
-              var record = tryCatch(returnMethod, delegate.iterator, arg);
-              if (record.type === "throw") {
-                method = "throw";
-                arg = record.arg;
-                continue;
-              }
-            }
-
-            if (method === "return") {
-              continue;
-            }
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
           }
-
-          var record = tryCatch(
-            delegate.iterator[method],
-            delegate.iterator,
-            arg
-          );
-
-          if (record.type === "throw") {
-            context.delegate = null;
-
-            method = "throw";
-            arg = record.arg;
-            continue;
-          }
-
-          method = "next";
-          arg = undefined;
-
-          var info = record.arg;
-          if (info.done) {
-            context[delegate.resultName] = info.value;
-            context.next = delegate.nextLoc;
-          } else {
-            state = GenStateSuspendedYield;
-            return info;
-          }
-
-          context.delegate = null;
         }
 
-        if (method === "next") {
-          context.sent = context._sent = arg;
+        if (context.method === "next") {
+          context.sent = context._sent = context.arg;
 
-        } else if (method === "throw") {
+        } else if (context.method === "throw") {
           if (state === GenStateSuspendedStart) {
             state = GenStateCompleted;
-            throw arg;
+            throw context.arg;
           }
 
-          if (context.dispatchException(arg)) {
-            method = "next";
-            arg = undefined;
-          }
+          context.dispatchException(context.arg);
 
-        } else if (method === "return") {
-          context.abrupt("return", arg);
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
         }
 
         state = GenStateExecuting;
@@ -2646,35 +2735,91 @@ process.umask = function() { return 0; };
             ? GenStateCompleted
             : GenStateSuspendedYield;
 
-          var info = {
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
             value: record.arg,
             done: context.done
           };
 
-          if (record.arg === ContinueSentinel) {
-            if (context.delegate && method === "next") {
-              arg = undefined;
-            }
-          } else {
-            return info;
-          }
-
         } else if (record.type === "throw") {
           state = GenStateCompleted;
-          method = "throw";
-          arg = record.arg;
+          context.method = "throw";
+          context.arg = record.arg;
         }
       }
     };
   }
 
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        if (delegate.iterator.return) {
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      context[delegate.resultName] = info.value;
+
+      context.next = delegate.nextLoc;
+
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      return info;
+    }
+
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
   defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
 
   Gp[iteratorSymbol] = function() {
     return this;
   };
-
-  Gp[toStringTagSymbol] = "Generator";
 
   Gp.toString = function() {
     return "[object Generator]";
@@ -2779,6 +2924,9 @@ process.umask = function() { return 0; };
       this.done = false;
       this.delegate = null;
 
+      this.method = "next";
+      this.arg = undefined;
+
       this.tryEntries.forEach(resetTryEntry);
 
       if (!skipTempReset) {
@@ -2814,7 +2962,13 @@ process.umask = function() { return 0; };
         record.type = "throw";
         record.arg = exception;
         context.next = loc;
-        return !!caught;
+
+        if (caught) {
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
       }
 
       for (var i = this.tryEntries.length - 1; i >= 0; --i) {
@@ -2877,12 +3031,12 @@ process.umask = function() { return 0; };
       record.arg = arg;
 
       if (finallyEntry) {
+        this.method = "next";
         this.next = finallyEntry.finallyLoc;
-      } else {
-        this.complete(record);
+        return ContinueSentinel;
       }
 
-      return ContinueSentinel;
+      return this.complete(record);
     },
 
     complete: function(record, afterLoc) {
@@ -2894,11 +3048,14 @@ process.umask = function() { return 0; };
           record.type === "continue") {
         this.next = record.arg;
       } else if (record.type === "return") {
-        this.rval = record.arg;
+        this.rval = this.arg = record.arg;
+        this.method = "return";
         this.next = "end";
       } else if (record.type === "normal" && afterLoc) {
         this.next = afterLoc;
       }
+
+      return ContinueSentinel;
     },
 
     finish: function(finallyLoc) {
@@ -2935,17 +3092,18 @@ process.umask = function() { return 0; };
         nextLoc: nextLoc
       };
 
+      if (this.method === "next") {
+        this.arg = undefined;
+      }
+
       return ContinueSentinel;
     }
   };
 })(
-  typeof global === "object" ? global :
-  typeof window === "object" ? window :
-  typeof self === "object" ? self : this
+  (function() { return this })() || Function("return this")()
 );
 
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":121}],123:[function(require,module,exports){
+},{}],135:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -3013,7 +3171,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										resolve(obj[id]);
 									} else {
 										chrome.storage.sync.get(id, function (obj) {
-											resolve(obj[id]);
+											return resolve(obj[id]);
 										});
 									}
 								});
@@ -3146,12 +3304,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								Cfg.preLoadImgs = 0;
 								Cfg.findImgFile = 0;
 								if (!nav.isGM) {
-									Cfg.updScript = 0;
+									Cfg.updDollchan = 0;
 								}
 								Cfg.fileInputs = 0;
 							}
 							if (nav.isChromeStorage) {
-								Cfg.updScript = 0;
+								Cfg.updDollchan = 0;
 							}
 							if (Cfg.updThrDelay < 10) {
 								Cfg.updThrDelay = 10;
@@ -3167,7 +3325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 							setStored('DESU_Config', JSON.stringify(val));
 							lang = Cfg.language;
-							if (Cfg.updScript) {
+							if (Cfg.updDollchan && !localData) {
 								checkForUpdates(false, val.lastUpd).then(function (html) {
 									if (doc.readyState === 'loading') {
 										doc.addEventListener('DOMContentLoaded', function () {
@@ -3195,7 +3353,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 	var checkDelete = function () {
-		var _ref63 = _asyncToGenerator( regeneratorRuntime.mark(function _callee13(data) {
+		var _ref65 = _asyncToGenerator( regeneratorRuntime.mark(function _callee13(data) {
 			var err, els, threads, isThr, i, len, el;
 			return regeneratorRuntime.wrap(function _callee13$(_context14) {
 				while (1) {
@@ -3268,15 +3426,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}));
 
 		return function checkDelete(_x38) {
-			return _ref63.apply(this, arguments);
+			return _ref65.apply(this, arguments);
 		};
 	}();
 
 	var html5Submit = function () {
-		var _ref64 = _asyncToGenerator( regeneratorRuntime.mark(function _callee14(form, submitter) {
+		var _ref66 = _asyncToGenerator( regeneratorRuntime.mark(function _callee14(form, submitter) {
 			var needProgress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-			var data, hasFiles, _iterator23, _isArray23, _i32, _ref65, _ref66, name, value, type, el, val, fileName, newFileName, cleanData, ajaxParams, xhr;
+			var data, hasFiles, _iterator23, _isArray23, _i32, _ref67, _ref68, name, value, type, el, val, fileName, newFileName, mime, cleanData, ajaxParams, xhr;
 
 			return regeneratorRuntime.wrap(function _callee14$(_context15) {
 				while (1) {
@@ -3297,10 +3455,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								break;
 							}
 
-							return _context15.abrupt('break', 37);
+							return _context15.abrupt('break', 38);
 
 						case 6:
-							_ref65 = _iterator23[_i32++];
+							_ref67 = _iterator23[_i32++];
 							_context15.next = 13;
 							break;
 
@@ -3312,13 +3470,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								break;
 							}
 
-							return _context15.abrupt('break', 37);
+							return _context15.abrupt('break', 38);
 
 						case 12:
-							_ref65 = _i32.value;
+							_ref67 = _i32.value;
 
 						case 13:
-							_ref66 = _ref65, name = _ref66.name, value = _ref66.value, type = _ref66.type, el = _ref66.el;
+							_ref68 = _ref67, name = _ref68.name, value = _ref68.value, type = _ref68.type, el = _ref68.el;
 							val = value;
 
 							if (!(name === 'de-file-txt')) {
@@ -3326,90 +3484,102 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								break;
 							}
 
-							return _context15.abrupt('continue', 35);
+							return _context15.abrupt('continue', 36);
 
 						case 17:
 							if (!(type === 'file')) {
-								_context15.next = 34;
+								_context15.next = 35;
 								break;
 							}
 
 							hasFiles = true;
 							fileName = value.name;
 							newFileName = Cfg.removeFName ? ' ' + fileName.substring(fileName.lastIndexOf('.')) : fileName;
+							mime = value.type;
 
-							if (!((Cfg.postSameImg || Cfg.removeEXIF) && (value.type === 'image/jpeg' || value.type === 'image/png' || value.type === 'video/webm' && !aib.mak))) {
-								_context15.next = 33;
+							if (!((Cfg.postSameImg || Cfg.removeEXIF) && (mime === 'image/jpeg' || mime === 'image/png' || mime === 'video/webm' && !aib.mak))) {
+								_context15.next = 34;
 								break;
 							}
 
 							_context15.t0 = cleanFile;
-							_context15.next = 25;
+							_context15.next = 26;
 							return readFile(value);
 
-						case 25:
+						case 26:
 							_context15.t1 = _context15.sent.data;
 							_context15.t2 = el.obj ? el.obj.extraFile : null;
 							cleanData = (0, _context15.t0)(_context15.t1, _context15.t2);
 
 							if (cleanData) {
-								_context15.next = 30;
+								_context15.next = 31;
 								break;
 							}
 
 							return _context15.abrupt('return', Promise.reject(new Error(Lng.fileCorrupt[lang] + ': ' + fileName)));
 
-						case 30:
-							val = new File(cleanData, newFileName);
-							_context15.next = 34;
+						case 31:
+							val = new File(cleanData, newFileName, { type: mime });
+							_context15.next = 35;
 							break;
 
-						case 33:
+						case 34:
 							if (Cfg.removeFName) {
-								val = new File([value], newFileName);
+								val = new File([value], newFileName, { type: mime });
 							}
 
-						case 34:
+						case 35:
 							data.append(name, val);
 
-						case 35:
+						case 36:
 							_context15.next = 3;
 							break;
 
-						case 37:
-							ajaxParams = { data: data, method: 'POST' };
+						case 38:
+							if (!aib.sendHTML5Post) {
+								_context15.next = 40;
+								break;
+							}
+
+							return _context15.abrupt('return', aib.sendHTML5Post(form, data, needProgress, hasFiles));
+
+						case 40:
+							ajaxParams = {
+								data: data,
+								method: 'POST'
+							};
 
 							if (needProgress && hasFiles) {
 								ajaxParams.onprogress = getUploadFunc();
 							}
-							_context15.prev = 39;
-							_context15.next = 42;
+							_context15.prev = 42;
+							_context15.next = 45;
 							return $ajax(form.action, ajaxParams);
 
-						case 42:
+						case 45:
 							xhr = _context15.sent;
 							return _context15.abrupt('return', aib.jsonSubmit ? xhr.responseText : $DOM(xhr.responseText));
 
-						case 46:
-							_context15.prev = 46;
-							_context15.t3 = _context15['catch'](39);
+						case 49:
+							_context15.prev = 49;
+							_context15.t3 = _context15['catch'](42);
 							return _context15.abrupt('return', Promise.reject(_context15.t3));
 
-						case 49:
+						case 52:
 						case 'end':
 							return _context15.stop();
 					}
 				}
-			}, _callee14, this, [[39, 46]]);
+			}, _callee14, this, [[42, 49]]);
 		}));
 
 		return function html5Submit(_x40, _x41) {
-			return _ref64.apply(this, arguments);
+			return _ref66.apply(this, arguments);
 		};
 	}();
 
 	var readFile = function () {
-		var _ref67 = _asyncToGenerator( regeneratorRuntime.mark(function _callee15(file) {
+		var _ref69 = _asyncToGenerator( regeneratorRuntime.mark(function _callee15(file) {
 			var asText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 			return regeneratorRuntime.wrap(function _callee15$(_context16) {
 				while (1) {
@@ -3436,143 +3606,98 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}));
 
 		return function readFile(_x43) {
-			return _ref67.apply(this, arguments);
+			return _ref69.apply(this, arguments);
 		};
 	}();
 
 
+
 	var runMain = function () {
-		var _ref106 = _asyncToGenerator( regeneratorRuntime.mark(function _callee17(checkDomains, dataPromise) {
-			var formEl, eList, fav, _ref107, _ref108, _ref109, _ref110, oldMain, storageName, firstThr;
+		var _ref116 = _asyncToGenerator( regeneratorRuntime.mark(function _callee21(checkDomains, dataPromise) {
+			var formEl, favObj, oldMain, _ref117, _ref118, storageName, firstThr;
 
-			return regeneratorRuntime.wrap(function _callee17$(_context22) {
+			return regeneratorRuntime.wrap(function _callee21$(_context26) {
 				while (1) {
-					switch (_context22.prev = _context22.next) {
+					switch (_context26.prev = _context26.next) {
 						case 0:
-							Logger.init();
-							docBody = doc.body;
+							Logger.initLogger();
 
-							if (docBody) {
-								_context22.next = 4;
+							if (!(!(docBody = doc.body) || !aib && !(aib = getImageBoard(checkDomains, true)))) {
+								_context26.next = 3;
 								break;
 							}
 
-							return _context22.abrupt('return');
+							return _context26.abrupt('return');
 
-						case 4:
-							if (aib) {
-								_context22.next = 8;
-								break;
-							}
-
-							aib = getImageBoard(checkDomains, true);
-
-							if (aib) {
-								_context22.next = 8;
-								break;
-							}
-
-							return _context22.abrupt('return');
-
-						case 8:
+						case 3:
 							formEl = $q(aib.qDForm + ', form[de-form]');
 
 							if (formEl) {
-								_context22.next = 12;
+								_context26.next = 7;
 								break;
 							}
 
 							if (aib.observeContent) {
 								aib.observeContent(checkDomains, dataPromise);
 							}
-							return _context22.abrupt('return');
+							return _context26.abrupt('return');
 
-						case 12:
+						case 7:
 							Logger.log('Imageboard check');
 
 							if (locStorage) {
-								_context22.next = 17;
+								_context26.next = 12;
 								break;
 							}
 
 							if (checkStorage()) {
-								_context22.next = 16;
+								_context26.next = 11;
 								break;
 							}
 
-							return _context22.abrupt('return');
+							return _context26.abrupt('return');
 
-						case 16:
+						case 11:
 							initNavFuncs();
 
-						case 17:
-							eList = void 0, fav = void 0;
+						case 12:
+							favObj = void 0, oldMain = void 0;
+							_context26.next = 15;
+							return dataPromise || readData();
 
-							if (!dataPromise) {
-								_context22.next = 27;
+						case 15:
+							_ref117 = _context26.sent;
+							_ref118 = _slicedToArray(_ref117, 2);
+							excludeList = _ref118[0];
+							favObj = _ref118[1];
+
+							if (!((excludeList = excludeList || '').includes(aib.dm) || !Cfg.disabled && aib.init && aib.init() || !localData && docBody.classList.contains('de-mode-local') || (oldMain = $id('de-main')) && $id('de-panel-buttons').children.length > 1)) {
+								_context26.next = 21;
 								break;
 							}
 
-							_context22.next = 21;
-							return dataPromise;
+							return _context26.abrupt('return');
 
 						case 21:
-							_ref107 = _context22.sent;
-							_ref108 = _slicedToArray(_ref107, 2);
-							eList = _ref108[0];
-							fav = _ref108[1];
-							_context22.next = 33;
-							break;
-
-						case 27:
-							_context22.next = 29;
-							return readData();
-
-						case 29:
-							_ref109 = _context22.sent;
-							_ref110 = _slicedToArray(_ref109, 2);
-							eList = _ref110[0];
-							fav = _ref110[1];
-
-						case 33:
-							if (!(eList && eList.includes(aib.dm))) {
-								_context22.next = 35;
-								break;
-							}
-
-							return _context22.abrupt('return');
-
-						case 35:
-							excludeList = eList || '';
-							Logger.log('Data loading');
-							oldMain = void 0;
-
-							if (!(!Cfg.disabled && aib.init && aib.init() || (oldMain = $id('de-main')) && $id('de-panel-buttons').children.length > 1)) {
-								_context22.next = 40;
-								break;
-							}
-
-							return _context22.abrupt('return');
-
-						case 40:
+							Logger.log('Storage loading');
 							$del(oldMain);
-							if ('toJSON' in aProto) {
-								delete aProto.toJSON;
-							}
 							addSVGIcons();
 
 							if (!Cfg.disabled) {
-								_context22.next = 47;
+								_context26.next = 28;
 								break;
 							}
 
-							Panel.init(formEl);
+							Panel.initPanel(formEl);
 							scriptCSS();
-							return _context22.abrupt('return');
+							return _context26.abrupt('return');
 
-						case 47:
+						case 28:
+							if ('toJSON' in aProto) {
+								delete aProto.toJSON;
+							}
 							initStorageEvent();
-							DollchanAPI.init();
+							DollchanAPI.initAPI();
 							if (localData) {
 								aib.prot = 'http:';
 								aib.host = aib.dm;
@@ -3594,7 +3719,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								});
 								Logger.log('Time correction');
 							}
-							MyPosts.read();
+							MyPosts.readStorage();
 							Logger.log('Read my posts');
 							$hide(docBody);
 							dummy = doc.createElement('div');
@@ -3602,42 +3727,40 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							Logger.log('Replace delform');
 							pByEl = new Map();
 							pByNum = new Map();
-							_context22.prev = 61;
+							_context26.prev = 43;
 
 							DelForm.last = DelForm.first = new DelForm(formEl, aib.page, false);
 							if (!Thread.first) {
 								console.error('No threads detected!');
 							}
-							_context22.next = 71;
+							_context26.next = 53;
 							break;
 
-						case 66:
-							_context22.prev = 66;
-							_context22.t0 = _context22['catch'](61);
+						case 48:
+							_context26.prev = 48;
+							_context26.t0 = _context26['catch'](43);
 
-							console.error('Delform parsing error:', getErrorMessage(_context22.t0));
+							console.error('Delform parsing error:', getErrorMessage(_context26.t0));
 							$show(docBody);
-							return _context22.abrupt('return');
+							return _context26.abrupt('return');
 
-						case 71:
+						case 53:
 							Logger.log('Parse delform');
 							storageName = 'de-lastpcount-' + aib.b + '-' + aib.t;
 
-							if (aib.t && !!sesStorage[storageName]) {
-								if (sesStorage[storageName] > Thread.first.pcount) {
-									sesStorage.removeItem(storageName);
-									window.location.reload();
-								}
+							if (aib.t && !!sesStorage[storageName] && sesStorage[storageName] > Thread.first.pcount) {
+								sesStorage.removeItem(storageName);
+								window.location.reload();
 							}
 							pr = new PostForm($q(aib.qForm));
 							Logger.log('Parse postform');
 							if (Cfg.hotKeys) {
-								HotKeys.enable();
+								HotKeys.enableHotKeys();
 								Logger.log('Init keybinds');
 							}
 							initPage();
 							Logger.log('Init page');
-							Panel.init(formEl);
+							Panel.initPanel(formEl);
 							Logger.log('Add panel');
 							DelForm.first.addStuff();
 							readViewedPosts();
@@ -3650,32 +3773,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							firstThr = DelForm.first.firstThr;
 
 							if (firstThr) {
-								readPostsData(firstThr.op, fav);
+								readPostsData(firstThr.op, favObj);
 							}
 							Logger.log('Hide posts');
+							embedPostMsgImages(DelForm.first.el);
+							Logger.log('Image-links');
 							scrollPage();
 							Logger.log('Scroll page');
 							if (localData) {
 								$each($Q('.de-post-removed'), function (el) {
 									var post = pByEl.get(el);
 									if (post) {
-										post.delete(false);
+										post.deletePost(false);
 									}
 								});
 								Logger.log('Local changings');
 							}
 							Logger.finish();
 
-						case 96:
+						case 80:
 						case 'end':
-							return _context22.stop();
+							return _context26.stop();
 					}
 				}
-			}, _callee17, this, [[61, 66]]);
+			}, _callee21, this, [[43, 48]]);
 		}));
 
-		return function runMain(_x70, _x71) {
-			return _ref106.apply(this, arguments);
+		return function runMain(_x81, _x82) {
+			return _ref116.apply(this, arguments);
 		};
 	}();
 
@@ -3683,8 +3808,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	var _marked = regeneratorRuntime.mark(getFormElements);
 
-	var version = '18.1.15.0';
-	var commit = '2b0056e';
+	var version = '18.2.19.0';
+	var commit = 'dc1fdb2';
 
 
 	var defaultCfg = {
@@ -3772,7 +3897,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		addSageBtn: 1, 
 		saveSage: 1, 
 		sageReply: 0, 
-		cap4chanAlt: 1, 
+		altCaptcha: 0, 
 		capUpdTime: 300, 
 		captchaLang: 1, 
 		addTextBtns: 1, 
@@ -3796,9 +3921,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		scrollToTop: 0, 
 		hotKeys: 1, 
 		loadPages: 1, 
-		updScript: 1, 
-		scrUpdIntrv: 1, 
-		turnOff: 0, 
+		updDollchan: 2, 
 		textaWidth: 300, 
 		textaHeight: 115, 
 		replyWinDrag: 0, 
@@ -3891,10 +4014,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			webmTitles: ['Получать названия WebM из метаданных', 'Load titles from WebM metadata', 'Отримувати назви WebM з метаданих'],
 			webmVolume: ['Громкость WebM по умолчанию [0-100%]', 'Default volume for WebM [0-100%]', 'Гучність WebM по замовчуванню [0-100%]'],
 			minWebmWidth: ['Минимальная ширина WebM (px)', 'Minimal width for WebM (px)', 'Мінімальна ширина WebM (px)'],
-			preLoadImgs: ['Предварительно загружать картинки*', 'Preload images*', 'Наперед завантажувати зображення *'],
+			preLoadImgs: {
+				sel: [['Откл.', 'Все', 'Без WebM'], ['Disable', 'All', 'Non-WebM'], ['Вимк.', 'Всі', 'Крім WebM']],
+				txt: ['Предварительно загружать картинки*', 'Preload images*', 'Наперед завантажувати зображення *']
+			},
 			findImgFile: ['Распознавать файлы, встроенные в картинках*', 'Detect embedded files in images*', 'Розпізнавати файли, що вбудовані в зображення*'],
 			openImgs: {
-				sel: [['Откл.', 'Все подряд', 'Только GIF', 'Кроме GIF'], ['Disable', 'All types', 'Only GIF', 'Non-GIF'], ['Вимк.', 'Всі', 'Лише GIF', 'Окрім GIF']],
+				sel: [['Откл.', 'Все подряд', 'Только GIF', 'Кроме GIF'], ['Disable', 'All types', 'Only GIF', 'Non-GIF'], ['Вимк.', 'Всі', 'Лише GIF', 'Крім GIF']],
 				txt: ['Заменять картинки на оригиналы*', 'Replace thumbnails with original images*', 'Замінювати зображення на оригінали*']
 			},
 			imgSrcBtns: ['Добавлять кнопки "Поиск" для картинок', 'Add "Search" buttons for images', 'Додавати кнопки "Пошук" для зображень'],
@@ -3943,7 +4069,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			warnSubjTrip: ['Оповещать о трипкоде в поле "Тема"', 'Warn about a tripcode in "Subject" field', 'Сповіщувати про трипкод в полі "Тема"'],
 			addSageBtn: ['Кнопка Sage вместо поля "Email" ', 'Replace "Email" with Sage button ', 'Кнопка Sage замість "E-mail" '],
 			saveSage: ['Помнить сажу', 'Remember sage', 'Памʼятати сажу'],
-			cap4chanAlt: ['4chan: альтернативная капча*', '4chan: use alternative captcha*', '4chan: альтернативна капча*'],
+			altCaptcha: ['Использовать альтернативную капчу', 'Use alternative captcha', 'Використовувати альтернативну капчу'],
 			capUpdTime: ['Интервал обновления капчи (сек)', 'Captcha update interval (sec)', 'Інтервал оновлення капчі (сек)'],
 			captchaLang: {
 				sel: [['Откл.', 'Eng', 'Rus'], ['Disable', 'Eng', 'Rus'], ['Вимк.', 'Eng', 'Ukr']],
@@ -3975,13 +4101,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			closePopups: ['Автоматически закрывать уведомления', 'Close popups automatically', 'Автоматично закривати сповіщення'],
 			inftyScroll: ['Бесконечная прокрутка страниц', 'Infinite scrolling for pages', 'Нескінченна прокрутка сторінок'],
 			scrollToTop: ['Всегда перемещаться вверх в списке тредов', 'Always scroll to top in the threads list', 'Завжди гортати догори в списку тредів'],
-			updScript: ['Автоматически проверять обновления Dollchan', 'Auto check for Dollchan updates', 'Автоматично перевіряти оновлення Dollchan'],
-			scrUpdIntrv: {
-				sel: [['Каждый день', 'Каждые 2 дня', 'Каждую неделю', 'Каждые 2 недели', 'Каждый месяц'], ['Every day', 'Every 2 days', 'Every week', 'Every 2 weeks', 'Every month'], ['Щодня', 'Кожні 2 дні', 'Щотижня', 'Кожні 2 тижні', 'Щомісяця']],
-				txt: ['', '', '']
+			updDollchan: {
+				sel: [['Откл.', 'Каждый день', 'Каждые 2 дня', 'Каждую неделю', 'Каждые 2 недели', 'Каждый месяц'], ['Disable', 'Every day', 'Every 2 days', 'Every week', 'Every 2 weeks', 'Every month'], ['Вимкн.', 'Щодня', 'Кожні 2 дні', 'Щотижня', 'Кожні 2 тижні', 'Щомісяця']],
+				txt: ['Проверять обновления Dollchan', 'Check for Dollchan updates', 'Перевіряти оновлення Dollchan']
 			},
-			excludeList: ['Не запускать Dollchan на:', 'Prevent Dollchan launch on:', 'Не запускати Dollchan на:'],
-			turnOff: ['Запускать Dollchan только на этом сайте', 'Run Dollchan only on this site', 'Запускати Dollchan лише на цьому сайті']
+			excludeList: ['Не запускать Dollchan на:', 'Prevent Dollchan launch on:', 'Не запускати Dollchan на:']
 		},
 
 		panelBtn: {
@@ -4037,7 +4161,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			noimg: ['Скрывать без картинок', 'Hide without images', 'Ховати без зображень'],
 			notext: ['Скрывать без текста', 'Hide without text', 'Ховати без тексту'],
 			text: ['Скрыть схожий текст', 'Hide similar text', 'Сховати схожий текст'],
-			refs: ['Скрыть с ответами', 'Hide with answers', 'Сховати з відповідями']
+			refs: ['Скрыть с ответами', 'Hide with answers', 'Сховати з відповідями'],
+			refsonly: ['Скрывать ответы', 'Hide answers', 'Ховати відповіді']
 		},
 		selExpandThr: [
 		['+10 постов', 'Последние 30', 'Последние 50', 'Последние 100', 'Весь тред'], ['+10 posts', 'Last 30 posts', 'Last 50 posts', 'Last 100 posts', 'Entire thread'], ['+10 постів', 'Останні 30', 'Останні 50', 'Останні 100', 'Весь тред']],
@@ -4120,6 +4245,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		newPosts: ['Количество новых постов', 'Number of new posts', 'Кількість нових постів'],
 		myPostsRep: ['Ответов на ваши посты', 'Replies to your posts', 'Відповідей на ваші пости'],
 		thrPage: ['Тред на @странице', 'Thread on @page', 'Тред на @сторінці'],
+		goToThread: ['Перейти к треду', 'Go to the thread', 'Перейти до треду'],
+		goToBoard: ['Перейти к доске', 'Go to the board', 'Перейти до дошки'],
+		toggleEntries: ['Скрыть/раскрыть записи', 'Hide/expand entries', 'Сховати/розкрити записи'],
 
 		hideLnkList: ['Скрыть/Показать список ссылок', 'Hide/Unhide list of links', 'Сховати/показати перелік посилань'],
 		expandVideo: ['Развернуть/Свернуть видео', 'Expand/Collapse video', 'Розгорнути/згорнути відео'],
@@ -4143,6 +4271,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		expImgFull: ['[Click] открыть по центру, [Ctrl+Click] в посте', '[Click] expand by center, [Ctrl+Click] in post', '[Click] розгорнути в центрі, [Ctrl+Click] в пості'],
 		nextImg: ['Следующая картинка', 'Next image', 'Наступне зображення'],
 		prevImg: ['Предыдущая картинка', 'Previous image', 'Попереднє зображення'],
+		rotateImg: ['Повернуть в право', 'Rotate right', 'Повернути в право'],
+		autoPlayOn: ['Автоматически воспроизводить следующее видео', 'Automatically play the next video', 'Автоматично відтворювати наступне відео'],
+		autoPlayOff: ['Отключить автовоспроизведение', 'Disable autoplay', 'Відключити автовідтворення'],
 		downloadFile: ['Скачать содержащийся в картинке файл', 'Download embedded file from the image', 'Завантажити файл, що міститься в зображенні'],
 		openOriginal: ['Открыть оригинал в новой вкладке', 'Open the original image in new tab', 'Відкрити оригінал в новій вкладці'],
 
@@ -4170,6 +4301,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		noGlobalCfg: ['Глобальные настройки не найдены', 'Global config not found', 'Глобальні налаштування не знайдено'],
 		subjHasTrip: ['Поле "Тема" содержит трипкод!', '"Subject" field contains a tripcode!', 'Поле "Тема" містить трипкод!'],
 		errMsEdgeWebm: ['Загрузите скрипт для воспроизведения WebM (VP9/Opus)', 'Please load a script to play WebM (VP9/Opus)', 'Завантажте скрипт для відтворення WebM (VP9/Opus)'],
+		errFormLoad: ['Не удаётся загрузить форму ответа', 'Can`t load the reply form', 'Не вдалося завантажити форму відповіді'],
 
 		second: ['с', 's', 'с'],
 		sizeByte: [' Байт', ' Byte', ' Байт'],
@@ -4228,23 +4360,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	var gitWiki = 'https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/';
 	var gitRaw = 'https://raw.githubusercontent.com/SthephanShinkufag/Dollchan-Extension-Tools/master/';
 
-	var docBody = void 0,
-	    locStorage = void 0,
-	    sesStorage = void 0,
-	    Cfg = void 0,
-	    pByEl = void 0,
-	    pByNum = void 0,
+	var $each = void 0,
 	    aib = void 0,
-	    nav = void 0,
-	    updater = void 0,
+	    Cfg = void 0,
+	    docBody = void 0,
 	    dTime = void 0,
-	    pr = void 0,
 	    dummy = void 0,
-	    lang = void 0,
+	    excludeList = void 0,
 	    isExpImg = void 0,
 	    isPreImg = void 0,
+	    lang = void 0,
+	    locStorage = void 0,
+	    nav = void 0,
 	    needScroll = void 0,
-	    excludeList = void 0;
+	    pByEl = void 0,
+	    pByNum = void 0,
+	    pr = void 0,
+	    sesStorage = void 0,
+	    updater = void 0;
 	var quotetxt = '';
 	var nativeXHRworks = true;
 	var visPosts = 2;
@@ -4266,10 +4399,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		return doc.getElementById(id);
 	};
 
-	var $each = function $each(els, cb) {
-		return aProto.forEach.call(els, cb);
-	};
-
 	function $parent(el, tagName) {
 		do {
 			el = el.parentElement;
@@ -4283,9 +4412,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function $after(el, node) {
-		var next = el.nextSibling;
-		if (next) {
-			el.parentNode.insertBefore(node, next);
+		var nextEl = el.nextSibling;
+		if (nextEl) {
+			el.parentNode.insertBefore(node, nextEl);
 		} else {
 			el.parentNode.appendChild(node);
 		}
@@ -4387,11 +4516,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function $animate(el, cName) {
-		var remove = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+		var isRemove = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
 		el.addEventListener('animationend', function aEvent() {
 			el.removeEventListener('animationend', aEvent);
-			if (remove) {
+			if (isRemove) {
 				el.remove();
 			} else {
 				el.classList.remove(cName);
@@ -4423,7 +4552,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		return (i < 10 ? '0' : '') + i;
 	};
 
-	var $join = function $join(arr, start, end) {
+	var arrTags = function arrTags(arr, start, end) {
 		return start + arr.join(end + start) + end;
 	};
 
@@ -4488,7 +4617,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this._finished = true;
 			this._marks.push(['LoggerFinish', Date.now()]);
 		},
-		getData: function getData(full) {
+		getLogData: function getLogData(isFull) {
 			var marks = this._marks;
 			var timeLog = [];
 			var duration = void 0,
@@ -4496,7 +4625,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var lastExtra = 0;
 			for (var len = marks.length - 1; i < len; ++i) {
 				duration = marks[i][1] - marks[i - 1][1] + lastExtra;
-				if (full || duration > 1) {
+				if (isFull || duration > 1) {
 					lastExtra = 0;
 					timeLog.push([marks[i][0], duration]);
 				} else {
@@ -4507,7 +4636,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			timeLog.push([Lng.total[lang], duration]);
 			return timeLog;
 		},
-		init: function init() {
+		initLogger: function initLogger() {
 			this._marks.push(['LoggerInit', Date.now()]);
 		},
 		log: function log(text) {
@@ -4544,8 +4673,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(CancelablePromise, [{
-			key: 'cancel',
-			value: function cancel() {
+			key: 'cancelPromise',
+			value: function cancelPromise() {
 				this._reject(new CancelError());
 				if (!this._isResolved && this._cancelFn) {
 					this._cancelFn();
@@ -4588,9 +4717,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						var child = _ref;
 
-						child.cancel();
+						child.cancelPromise();
 					}
-					_this2.cancel();
+					_this2.cancelPromise();
 				});
 			}
 		}], [{
@@ -4621,13 +4750,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(Maybe, [{
-			key: 'end',
-			value: function end() {
-				if (this.hasValue) {
-					this.value.end();
-				}
-			}
-		}, {
 			key: 'value',
 			get: function get() {
 				var Ctor = this._ctor;
@@ -4683,8 +4805,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this.data = null;
 			}
 		}, {
-			key: 'remove',
-			value: function remove(key) {
+			key: 'removeTempData',
+			value: function removeTempData(key) {
 				if (this.data) {
 					this.data.delete(key);
 				}
@@ -4710,8 +4832,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(TasksPool, [{
-			key: 'complete',
-			value: function complete() {
+			key: 'completeTasks',
+			value: function completeTasks() {
 				if (!this.stopped) {
 					if (this.array.length === 0 && this.running === 0) {
 						this.endFn();
@@ -4721,8 +4843,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			}
 		}, {
-			key: 'continue',
-			value: function _continue() {
+			key: 'pauseTasks',
+			value: function pauseTasks() {
+				this.paused = true;
+			}
+		}, {
+			key: 'runTask',
+			value: function runTask(data) {
+				if (!this.stopped) {
+					if (this.paused || this.running === this.max) {
+						this.array.push(data);
+					} else {
+						this._runTask(data);
+						this.running++;
+					}
+				}
+			}
+		}, {
+			key: 'stopTasks',
+			value: function stopTasks() {
+				this.stopped = true;
+				this.endFn();
+			}
+		}, {
+			key: '_continueTasks',
+			value: function _continueTasks() {
 				if (!this.stopped) {
 					this.paused = false;
 					if (this.array.length === 0) {
@@ -4732,40 +4877,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						return;
 					}
 					while (this.array.length !== 0 && this.running !== this.max) {
-						this._run(this.array.shift());
+						this._runTask(this.array.shift());
 						this.running++;
 					}
 				}
 			}
 		}, {
-			key: 'pause',
-			value: function pause() {
-				this.paused = true;
-			}
-		}, {
-			key: 'run',
-			value: function run(data) {
-				if (!this.stopped) {
-					if (this.paused || this.running === this.max) {
-						this.array.push(data);
-					} else {
-						this._run(data);
-						this.running++;
-					}
-				}
-			}
-		}, {
-			key: 'stop',
-			value: function stop() {
-				this.stopped = true;
-				this.endFn();
-			}
-		}, {
-			key: '_end',
-			value: function _end() {
+			key: '_endTask',
+			value: function _endTask() {
 				if (!this.stopped) {
 					if (!this.paused && this.array.length !== 0) {
-						this._run(this.array.shift());
+						this._runTask(this.array.shift());
 						return;
 					}
 					this.running--;
@@ -4775,22 +4897,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			}
 		}, {
-			key: '_run',
-			value: function _run(data) {
+			key: '_runTask',
+			value: function _runTask(data) {
 				var _this3 = this;
 
 				this.func(this.num++, data).then(function () {
-					return _this3._end();
+					return _this3._endTask();
 				}, function (e) {
 					if (e instanceof TasksPool.PauseError) {
-						_this3.pause();
+						_this3.pauseTasks();
 						if (e.duration !== -1) {
 							setTimeout(function () {
-								return _this3.continue();
+								return _this3._continueTasks();
 							}, e.duration);
 						}
 					} else {
-						_this3._end();
+						_this3._endTask();
 						throw e;
 					}
 				});
@@ -4812,7 +4934,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			_classCallCheck(this, WorkerPool);
 
 			if (!nav.hasWorker) {
-				this.run = function (data, transferObjs, fn) {
+				this.runWorker = function (data, transferObjs, fn) {
 					return fn(wrkFn(data));
 				};
 				return;
@@ -4830,8 +4952,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(WorkerPool, [{
-			key: 'clear',
-			value: function clear() {
+			key: 'clearWorkers',
+			value: function clearWorkers() {
 				window.URL.revokeObjectURL(this._url);
 				this._freeWorkers.forEach(function (w) {
 					return w.terminate();
@@ -4839,9 +4961,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this._freeWorkers = [];
 			}
 		}, {
-			key: 'run',
-			value: function run(data, transferObjs, fn) {
-				this._pool.run([data, transferObjs, fn]);
+			key: 'runWorker',
+			value: function runWorker(data, transferObjs, fn) {
+				this._pool.runTask([data, transferObjs, fn]);
 			}
 		}, {
 			key: '_createWorker',
@@ -4849,24 +4971,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				var _this5 = this;
 
 				return new Promise(function (resolve) {
-					var w = _this5._freeWorkers.pop();
+					var worker = _this5._freeWorkers.pop();
 
 					var _data = _slicedToArray(data, 3),
 					    sendData = _data[0],
 					    transferObjs = _data[1],
 					    fn = _data[2];
 
-					w.onmessage = function (e) {
+					worker.onmessage = function (e) {
 						fn(e.data);
-						_this5._freeWorkers.push(w);
+						_this5._freeWorkers.push(worker);
 						resolve();
 					};
-					w.onerror = function (err) {
+					worker.onerror = function (err) {
 						resolve();
-						_this5._freeWorkers.push(w);
+						_this5._freeWorkers.push(worker);
 						_this5._errFn(err);
 					};
-					w.postMessage(sendData, transferObjs);
+					worker.postMessage(sendData, transferObjs);
 				});
 			}
 		}]);
@@ -4896,7 +5018,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				TarBuilder._padSet(header, 108, '0', 8); 
 				TarBuilder._padSet(header, 116, '0', 8); 
 				TarBuilder._padSet(header, 124, fileSize.toString(8), 13); 
-				TarBuilder._padSet(header, 136, Math.floor(Date.now() / 1000).toString(8), 12); 
+				TarBuilder._padSet(header, 136, Math.floor(Date.now() / 1e3).toString(8), 12); 
 				TarBuilder._padSet(header, 148, '        ', 8); 
 				header[156] = 0x30;
 				for (i = 0; i < 157; i++) {
@@ -4990,8 +5112,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(WebmParser, [{
-			key: 'addData',
-			value: function addData(data) {
+			key: 'addWebmData',
+			value: function addWebmData(data) {
 				if (this.error || !data) {
 					return this;
 				}
@@ -5004,8 +5126,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				return this;
 			}
 		}, {
-			key: 'getData',
-			value: function getData() {
+			key: 'getWebmData',
+			value: function getWebmData() {
 				if (this.error) {
 					return null;
 				}
@@ -5302,7 +5424,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	function downloadBlob(blob, name) {
 		var url = nav.isMsEdge ? navigator.msSaveOrOpenBlob(blob, name) : window.URL.createObjectURL(blob);
-		var link = docBody.appendChild($add('<a href="' + url + '" download="' + name + '"></a>'));
+		var link = $bEnd(docBody, '<a href="' + url + '" download="' + name + '"></a>');
 		link.click();
 		setTimeout(function () {
 			window.URL.revokeObjectURL(url);
@@ -5367,7 +5489,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	function readData() {
 		return Promise.all([getStored('DESU_Exclude'), readFavorites(), readCfg()]);
-	}function readPostsData(firstPost, fav) {
+	}function readPostsData(firstPost, favObj) {
 		var sVis = null;
 		try {
 			var str = aib.t ? sesStorage['de-hidden-' + aib.b + aib.t] : null;
@@ -5384,7 +5506,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			return;
 		}
 		var updateFav = false;
-		var favBrd = aib.host in fav && aib.b in fav[aib.host] ? fav[aib.host][aib.b] : {};
+		var favBrd = aib.host in favObj && aib.b in favObj[aib.host] ? favObj[aib.host][aib.b] : {};
 		var spellsHide = Cfg.hideBySpell;
 		var maybeSpells = new Maybe(SpellsRunner);
 
@@ -5438,7 +5560,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				continue;
 			}
 			if (!hideData) {
-				maybeSpells.value.run(post); 
+				maybeSpells.value.runSpells(post); 
 			} else if (hideData[0]) {
 				if (post.hidden) {
 					post.spellHidden = true;
@@ -5447,12 +5569,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			}
 		}
-		maybeSpells.end();
+		if (maybeSpells.hasValue) {
+			maybeSpells.value.endSpells();
+		}
 		if (Cfg.panelCounter === 2) {
 			$id('de-panel-info-pcount').textContent = Thread.first.pcount - Thread.first.hidCounter;
 		}
 		if (updateFav) {
-			setStored('DESU_Favorites', JSON.stringify(fav));
+			saveFavorites(favObj);
 		}
 		if (sesStorage['de-win-fav'] === '1') {
 			toggleWindow('fav', false, null, true);
@@ -5464,21 +5588,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		return getStoredObj('DESU_Favorites');
 	}
 
-	function saveFavorites(fav) {
-		setStored('DESU_Favorites', JSON.stringify(fav));
-		toggleWindow('fav', true, fav);
-	}
-
-	function removeFavoriteEntry(fav, h, b, num) {
-		if (h in fav && b in fav[h] && num in fav[h][b]) {
-			delete fav[h][b][num];
-			if (fav[h][b].hasOwnProperty('url') && Object.keys(fav[h][b]).length === 1) {
-				delete fav[h][b];
-				if ($isEmpty(fav[h])) {
-					delete fav[h];
-				}
-			}
-		}
+	function saveFavorites(data) {
+		setStored('DESU_Favorites', JSON.stringify(data));
 	}
 
 	function readViewedPosts() {
@@ -5529,8 +5640,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this._cacheTO = this.__cachedTime = this._cachedStorage = null;
 			}
 		}, {
-			key: 'remove',
-			value: function remove(num) {
+			key: 'removeStorage',
+			value: function removeStorage(num) {
 				var board = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : aib.b;
 
 				var storage = this._readStorage();
@@ -5549,8 +5660,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
 				var storage = this._readStorage();
-				if (storage && storage.$count > 5000) {
-					var minDate = Date.now() - 5 * 24 * 3600 * 1000;
+				if (storage && storage.$count > 5e3) {
+					var minDate = Date.now() - 5 * 24 * 3600 * 1e3;
 					for (var b in storage) {
 						if (storage.hasOwnProperty(b)) {
 							var _data2 = storage[b];
@@ -5707,8 +5818,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this._readStorage();
 			}
 		}, {
-			key: 'read',
-			value: function read() {
+			key: 'readStorage',
+			value: function readStorage() {
 				this._readStorage();
 			}
 		}, {
@@ -5716,8 +5827,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			value: function set(num, thrNum) {
 				_get(MyPostsClass.prototype.__proto__ || Object.getPrototypeOf(MyPostsClass.prototype), 'set', this).call(this, num, thrNum);
 				this._cachedData.add(+num);
-				locStorage['__de-mypost'] = 1; 
-				locStorage.removeItem('__de-mypost');
+				sendStorageEvent('__de-mypost', 1);
 			}
 		}, {
 			key: '_readStorage',
@@ -5737,6 +5847,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		return MyPostsClass;
 	}(PostsStorage))();
 
+	function sendStorageEvent(name, value) {
+		locStorage[name] = typeof value === 'string' ? value : JSON.stringify(value);
+		locStorage.removeItem(name);
+	}
+
 	function initStorageEvent() {
 		doc.defaultView.addEventListener('storage', function (e) {
 			var data = void 0,
@@ -5746,6 +5861,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				return;
 			}
 			switch (e.key) {
+				case '__de-favorites':
+					{
+						try {
+							data = JSON.parse(val);
+						} catch (err) {
+							return;
+						}
+						updateFavWindow.apply(undefined, _toConsumableArray(data));
+						return;
+					}
 				case '__de-mypost':
 					MyPosts.purge();return;
 				case '__de-webmvolume':
@@ -5803,7 +5928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 						} else {
 							SpellsRunner.unhideAll();
-							Spells.disable();
+							Spells.disableSpells();
 							temp = $id('de-spell-txt');
 							if (temp) {
 								temp.value = '';
@@ -5818,7 +5943,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	var Panel = Object.create({
 		isVidEnabled: false,
-		init: function init(formEl) {
+		initPanel: function initPanel(formEl) {
 			var imgLen = $Q(aib.qPostImg, formEl).length;
 			var isThr = aib.t;
 			(pr && pr.pArea[0] || formEl).insertAdjacentHTML('beforebegin', '<div id="de-main">\n\t\t\t<div id="de-panel">\n\t\t\t\t<div id="de-panel-logo" title="' + Lng.panelBtn.attach[lang] + '">\n\t\t\t\t\t<svg class="de-panel-logo-svg">\n\t\t\t\t\t\t<use xlink:href="#de-symbol-panel-logo"/>\n\t\t\t\t\t</svg>\n\t\t\t\t</div>\n\t\t\t\t<span id="de-panel-buttons"' + (Cfg.expandPanel ? '' : ' style="display: none;"') + '>\n\t\t\t\t' + (Cfg.disabled ? this._getButton('enable') : this._getButton('cfg') + this._getButton('hid') + this._getButton('fav') + (!Cfg.addYouTube ? '' : this._getButton('vid')) + (localData ? '' : this._getButton('refresh') + (!isThr && aib.page === aib.firstPage ? '' : this._getButton('goback')) + (isThr || aib.page === aib.lastPage ? '' : this._getButton('gonext'))) + this._getButton('goup') + this._getButton('godown') + (imgLen === 0 ? '' : this._getButton('expimg') + this._getButton('maskimg')) + (nav.isPresto || localData ? '' : (imgLen === 0 || Cfg.preLoadImgs ? '' : this._getButton('preimg')) + (!isThr ? '' : this._getButton('savethr'))) + (!isThr || localData ? '' : this._getButton(Cfg.ajaxUpdThr && !aib.isArchived ? 'upd-on' : 'upd-off') + (nav.isSafari ? '' : this._getButton('audio-off'))) + (!aib.hasCatalog ? '' : this._getButton('catalog')) + this._getButton('enable') + (!isThr ? '' : '<span id="de-panel-info">\n\t\t\t\t\t\t<span id="de-panel-info-pcount" title="' + (Lng.panelBtn[Cfg.panelCounter !== 2 ? 'pcount' : 'pcountNotHid'][lang] + '">') + (Thread.first.pcount + '</span>\n\t\t\t\t\t\t<span id="de-panel-info-icount" title="' + Lng.panelBtn.imglen[lang] + '">\n\t\t\t\t\t\t\t' + imgLen + '</span>\n\t\t\t\t\t\t<span id="de-panel-info-acount" title="' + Lng.panelBtn.posters[lang] + '"></span>\n\t\t\t\t\t</span>'))) + '\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t\t' + (Cfg.disabled ? '' : '<div id="de-wrapper-popup"></div><hr style="clear: both;">') + '\n\t\t</div>');
@@ -5829,7 +5954,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this._buttons = $id('de-panel-buttons');
 			this.isNew = true;
 		},
-		remove: function remove() {
+		removeMain: function removeMain() {
 			this._el.removeEventListener('click', this, true);
 			this._el.removeEventListener('mouseover', this);
 			this._el.removeEventListener('mouseout', this);
@@ -5877,7 +6002,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							isExpImg = !isExpImg;
 							$del($q('.de-fullimg-center'));
 							for (var post = Thread.first.op; post; post = post.next) {
-								post.toggleImages(isExpImg);
+								post.toggleImages(isExpImg, false);
 							}
 							break;
 						case 'de-panel-preimg':
@@ -5914,7 +6039,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						case 'de-panel-audio-on':
 						case 'de-panel-audio-off':
 							if (updater.toggleAudio(0)) {
-								updater.enable();
+								updater.enableUpdater();
 								el.id = 'de-panel-audio-on';
 							} else {
 								el.id = 'de-panel-audio-off';
@@ -6171,10 +6296,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'mousemove':
 						if (this.vertical) {
 							val = e.clientY;
-							this.tStyle.height = Math.max(parseInt(this.tStyle.height, 10) + (this.dir === 'top' ? cr.top - (val < 20 ? 0 : val) : (val > maxY - 45 ? maxY - 25 : val) - cr.bottom), 90) + 'px';
+							this.tStyle.setProperty('height', Math.max(parseInt(this.tStyle.height, 10) + (this.dir === 'top' ? cr.top - (val < 20 ? 0 : val) : (val > maxY - 45 ? maxY - 25 : val) - cr.bottom), 90) + 'px', 'important');
 						} else {
 							val = e.clientX;
-							this.tStyle.width = Math.max(parseInt(this.tStyle.width, 10) + (this.dir === 'left' ? cr.left - (val < 20 ? 0 : val) : (val > maxX - 20 ? maxX : val) - cr.right), this.name === 'reply' ? 275 : 400) + 'px';
+							this.tStyle.setProperty('width', Math.max(parseInt(this.tStyle.width, 10) + (this.dir === 'left' ? cr.left - (val < 20 ? 0 : val) : (val > maxX - 20 ? maxX : val) - cr.right), this.name === 'reply' ? 275 : 400) + 'px', 'important');
 						}
 						return;
 					default:
@@ -6259,8 +6384,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			makeDraggable(name, win, $q('.de-win-head', win));
 		}
 		updateWinZ(win.style);
-		var remove = !isUpd && isActive;
-		if (!remove && !win.classList.contains('de-win') && (el = $q('.de-win-active.de-win-fixed:not(#de-win-' + name + ')', win.parentNode))) {
+		var isRemove = !isUpd && isActive;
+		if (!isRemove && !win.classList.contains('de-win') && (el = $q('.de-win-active.de-win-fixed:not(#de-win-' + name + ')', win.parentNode))) {
 			toggleWindow(el.id.substr(7), false);
 		}
 		var isAnim = !noAnim && !isUpd && Cfg.animation;
@@ -6268,19 +6393,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if (isAnim && body.hasChildNodes()) {
 			win.addEventListener('animationend', function aEvent(e) {
 				e.target.removeEventListener('animationend', aEvent);
-				showWindow(win, body, name, remove, data, Cfg.animation);
-				win = body = name = remove = data = null;
+				showWindow(win, body, name, isRemove, data, Cfg.animation);
+				win = body = name = isRemove = data = null;
 			});
 			win.classList.remove('de-win-open');
 			win.classList.add('de-win-close');
 		} else {
-			showWindow(win, body, name, remove, data, isAnim);
+			showWindow(win, body, name, isRemove, data, isAnim);
 		}
 	}
 
-	function showWindow(win, body, name, remove, data, isAnim) {
+	function showWindow(win, body, name, isRemove, data, isAnim) {
 		body.innerHTML = '';
-		if (remove) {
+		if (isRemove) {
 			win.classList.remove('de-win-active');
 			win.classList.remove('de-win-close');
 			$hide(win);
@@ -6299,8 +6424,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					showFavoritesWindow(body, data);
 					break;
 				}
-				readFavorites().then(function (fav) {
-					showFavoritesWindow(body, fav);
+				readFavorites().then(function (favObj) {
+					showFavoritesWindow(body, favObj);
 					$show(win);
 					if (isAnim) {
 						win.classList.add('de-win-open');
@@ -6308,7 +6433,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				});
 				return;
 			case 'cfg':
-				CfgWindow.init(body);break;
+				CfgWindow.initCfgWindow(body);break;
 			case 'hid':
 				showHiddenWindow(body);break;
 			case 'vid':
@@ -6351,16 +6476,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				var el = e.target;
 				if (el.classList.contains('de-abtn')) {
 					var node = void 0;
-					switch (e.target.id) {
+					switch (el.id) {
 						case 'de-video-btn-hide':
-							if (this.listHidden = !this.listHidden) {
-								$hide(this.linkList);
-								e.target.textContent = '\u25BC';
-							} else {
-								$show(this.linkList);
-								e.target.textContent = '\u25B2';
+							{
+								var isHide = this.listHidden = !this.listHidden;
+								$toggle(this.linkList, !isHide);
+								el.textContent = isHide ? '\u25BC' : '\u25B2';
+								break;
 							}
-							break;
 						case 'de-video-btn-prev':
 							node = this.currentLink.parentNode;
 							node = node.previousElementSibling || node.parentNode.lastElementChild;
@@ -6382,7 +6505,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					$pd(e);
 					return;
 				} else if (!el.classList.contains('de-video-link')) {
-					pByNum.get(+e.target.getAttribute('de-num')).selectAndScrollTo();
+					pByNum.get(+el.getAttribute('de-num')).selectAndScrollTo();
 					return;
 				}
 				var info = el.videoInfo;
@@ -6413,6 +6536,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 	function showHiddenWindow(body) {
+		var _this12 = this;
+
 		var hThr = HiddenThreads.getRawData();
 		var hasThreads = !$isEmpty(hThr);
 		if (hasThreads) {
@@ -6478,8 +6603,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								_context5.t0 = _context5['catch'](4);
 
 								if (_context5.t0.code === 404) {
-									HiddenThreads.remove(tNum, b); 
-									HiddenPosts.remove(tNum, b); 
+									HiddenThreads.removeStorage(tNum, b);
+									HiddenPosts.removeStorage(tNum, b);
 								}
 
 							case 12:
@@ -6495,7 +6620,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return _context5.stop();
 						}
 					}
-				}, _callee4, this, [[4, 9]]);
+				}, _callee4, _this12, [[4, 9]]);
 			}));
 
 			return function (_x10) {
@@ -6518,10 +6643,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (pByNum.has(num)) {
 					pByNum.get(num).setUserVisib(false);
 				} else {
-					locStorage['__de-post'] = JSON.stringify({ brd: brd, num: num, hide: false, thrNum: num });
-					locStorage.removeItem('__de-post');
+					sendStorageEvent('__de-post', { brd: brd, num: num, hide: false, thrNum: num });
 				}
-				HiddenThreads.remove(num, brd); 
+				HiddenThreads.removeStorage(num, brd);
 				HiddenPosts.set(num, num, false); 
 			});
 			toggleWindow('hid', true);
@@ -6529,38 +6653,118 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	}
 
 
+	function saveRenewFavorites(favObj) {
+		saveFavorites(favObj);
+		toggleWindow('fav', true, favObj);
+	}
+
+	function removeFavEntry(favObj, h, b, num) {
+		var f = void 0;
+		if (h in favObj && b in favObj[h] && num in (f = favObj[h][b])) {
+			delete f[num];
+			if (f.hasOwnProperty('url') && Object.keys(f).length === 1) {
+				delete favObj[h][b];
+				if ($isEmpty(favObj[h])) {
+					delete favObj[h];
+				}
+			}
+		}
+	}
+
+	function toggleThrFavBtn(h, b, num, isEnable) {
+		if (h === aib.host && b === aib.b && pByNum.has(num)) {
+			pByNum.get(num).setFavBtn(isEnable);
+		}
+	}
+
+	function updateFavorites(num, value, mode) {
+		readFavorites().then(function (favObj) {
+			var f = favObj[aib.host];
+			if (!f || !f[aib.b] || !(f = f[aib.b][num])) {
+				return;
+			}
+			switch (mode) {
+				case 'error':
+					f.err = value;break;
+				case 'update':
+					f.cnt = value[0];
+					f.new = 0;
+					f.you = 0;
+					f.last = aib.anchor + value[1];
+			}
+			var data = [aib.host, aib.b, num, value, mode];
+			updateFavWindow.apply(undefined, data);
+			saveFavorites(favObj);
+			sendStorageEvent('__de-favorites', data);
+		});
+	}
+
+	function updateFavWindow(h, b, num, value, mode) {
+		if (mode === 'add' || mode === 'delete') {
+			toggleThrFavBtn(h, b, num, mode === 'add');
+			toggleWindow('fav', true, value);
+			return;
+		}
+		var winEl = $q('#de-win-fav > .de-win-body');
+		if (!winEl || !winEl.hasChildNodes()) {
+			return;
+		}
+		var el = $q('.de-entry[de-host="' + h + '"][de-board="' + b + '"][de-num="' + num + '"] > .de-fav-inf', winEl);
+		if (!el) {
+			return;
+		}
+
+		var _ref9 = [].concat(_toConsumableArray(el.children)),
+		    iconEl = _ref9[0],
+		    youEl = _ref9[1],
+		    newEl = _ref9[2],
+		    oldEl = _ref9[3];
+
+		$hide(youEl);
+		$hide(newEl);
+		if (mode === 'error') {
+			iconEl.firstElementChild.setAttribute('class', 'de-fav-inf-icon de-fav-unavail');
+			iconEl.title = value;
+			return;
+		}
+		youEl.textContent = 0;
+		newEl.textContent = 0;
+		oldEl.textContent = value[0];
+	}
+
 	function cleanFavorites() {
 		var els = $Q('.de-entry[de-removed]');
 		var len = els.length;
 		if (!len) {
 			return;
 		}
-		readFavorites().then(function (data) {
+		readFavorites().then(function (favObj) {
 			for (var i = 0; i < len; ++i) {
 				var el = els[i];
 				var h = el.getAttribute('de-host');
 				var b = el.getAttribute('de-board');
 				var num = +el.getAttribute('de-num');
-				removeFavoriteEntry(data, h, b, num);
-				if (h === aib.host && b === aib.b && pByNum.has(num)) {
-					pByNum.get(num).thr.op.setFavBtn(false);
-				}
+				removeFavEntry(favObj, h, b, num);
+				toggleThrFavBtn(h, b, num, false);
 			}
-			saveFavorites(data);
+			saveRenewFavorites(favObj);
 		});
 	}
 
-	function showFavoritesWindow(body, data) {
+	function showFavoritesWindow(body, favObj) {
+		var _this13 = this;
+
 		var html = '';
-		for (var h in data) {
-			for (var b in data[h]) {
-				var d = data[h][b];
+		for (var h in favObj) {
+			for (var b in favObj[h]) {
+				var f = favObj[h][b];
+				var hb = 'de-host="' + h + '" de-board="' + b + '"';
 				var innerHtml = '';
-				for (var tNum in d) {
-					if (tNum === 'url') {
+				for (var tNum in f) {
+					if (tNum === 'url' || tNum === 'hide') {
 						continue;
 					}
-					var t = d[tNum];
+					var t = f[tNum];
 					if (!t.url.startsWith('http')) {
 						t.url = (h === aib.host ? aib.prot + '//' : 'http://') + h + t.url;
 					}
@@ -6570,12 +6774,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					var favInfIconClass = !t.err ? '' : t.err === 'Closed' || t.err === 'Archived' ? 'de-fav-closed' : 'de-fav-unavail';
 					var favInfYouDisp = t.you ? '' : ' style="display: none;"';
 					var favInfNewDisp = t.new ? '' : ' style="display: none;"';
-					innerHtml += '<div class="de-entry ' + aib.cReply + '" de-host="' + h + '" de-board="' + b + '" de-num="' + tNum + '" de-url="' + t.url + '">\n\t\t\t\t\t<input class="de-fav-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-link" href="' + favLinkHref + '" rel="noreferrer">' + tNum + '</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + t.txt + '</div>\n\t\t\t\t\t<div class="de-fav-inf">\n\t\t\t\t\t\t<span class="de-fav-inf-iwrap" ' + favInfIwrapTitle + '>\n\t\t\t\t\t\t\t<svg class="de-fav-inf-icon ' + favInfIconClass + '">\n\t\t\t\t\t\t\t\t<use class="de-fav-closed-use" xlink:href="#de-symbol-closed"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-unavail-use" xlink:href="#de-symbol-unavail"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-wait-use" xlink:href="#de-symbol-wait"/>\n\t\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<span class="de-fav-inf-you" title="' + Lng.myPostsRep[lang] + '"' + favInfYouDisp + '>\n\t\t\t\t\t\t\t' + (t.you || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-new" title="' + Lng.newPosts[lang] + '"' + favInfNewDisp + '>\n\t\t\t\t\t\t\t' + (t.new || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-old" title="' + Lng.oldPosts[lang] + '">' + t.cnt + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-page" title="' + Lng.thrPage[lang] + '"></span>\n\t\t\t\t\t</div>\n\t\t\t\t</div>';
+					innerHtml += '<div class="de-entry ' + aib.cReply + '" ' + hb + ' de-num="' + tNum + '" de-url="' + t.url + '">\n\t\t\t\t\t<input class="de-fav-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-link" title="' + Lng.goToThread[lang] + '"' + (' href="' + favLinkHref + '" rel="noreferrer">' + tNum + '</a>\n\t\t\t\t\t<div class="de-entry-title">- ' + t.txt + '</div>\n\t\t\t\t\t<div class="de-fav-inf">\n\t\t\t\t\t\t<span class="de-fav-inf-iwrap" ' + favInfIwrapTitle + '>\n\t\t\t\t\t\t\t<svg class="de-fav-inf-icon ' + favInfIconClass + '">\n\t\t\t\t\t\t\t\t<use class="de-fav-closed-use" xlink:href="#de-symbol-closed"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-unavail-use" xlink:href="#de-symbol-unavail"/>\n\t\t\t\t\t\t\t\t<use class="de-fav-wait-use" xlink:href="#de-symbol-wait"/>\n\t\t\t\t\t\t\t</svg>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<span class="de-fav-inf-you" title="' + Lng.myPostsRep[lang] + '"' + favInfYouDisp + '>\n\t\t\t\t\t\t\t' + (t.you || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-new" title="' + Lng.newPosts[lang] + '"' + favInfNewDisp + '>\n\t\t\t\t\t\t\t' + (t.new || 0) + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-old" title="' + Lng.oldPosts[lang] + '">' + t.cnt + '</span>\n\t\t\t\t\t\t<span class="de-fav-inf-page" title="' + Lng.thrPage[lang] + '"></span>\n\t\t\t\t\t</div>\n\t\t\t\t</div>');
 				}
 				if (!innerHtml) {
 					continue;
 				}
-				html += '<div class="de-fold-block' + (h === aib.host && b === aib.b ? ' de-fav-current' : '') + '">\n\t\t\t\t<div class="de-fav-header">\n\t\t\t\t\t<input class="de-fav-header-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-header-link" href="' + d.url + '" rel="noreferrer">' + h + '/' + b + '</a>\n\t\t\t\t</div>\n\t\t\t\t<div class="de-fav-entries"' + (h === aib.host ? ' de-opened' : ' style="display: none;"') + '>\n\t\t\t\t\t' + innerHtml + '\n\t\t\t\t</div>\n\t\t\t</div>';
+				var isHide = f.hide === undefined ? h !== aib.host : f.hide;
+				html += '<div class="de-fold-block' + (isHide || b !== aib.b ? '' : ' de-fav-current') + '">\n\t\t\t\t<div class="de-fav-header">\n\t\t\t\t\t<input class="de-fav-header-switch" type="checkbox">\n\t\t\t\t\t<a class="de-fav-header-link" title="' + Lng.goToBoard[lang] + '"' + (' href="' + f.url + '" rel="noreferrer">' + h + '/' + b + '</a>\n\t\t\t\t\t<a class="de-abtn de-fav-header-btn" title="' + Lng.toggleEntries[lang] + '"') + (' href="#">' + (isHide ? '&#x25BC;' : '&#x25B2;') + '</a>\n\t\t\t\t</div>\n\t\t\t\t<div class="de-fav-entries' + (isHide ? ' de-fav-entries-hide' : '') + '" ' + hb + '>\n\t\t\t\t\t' + innerHtml + '\n\t\t\t\t</div>\n\t\t\t</div>');
 			}
 		}
 
@@ -6594,27 +6799,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							    checked = _el3.checked;
 
 							el = el.parentNode.nextElementSibling;
-							$each($Q('.de-entry > input', el), function (checkBox) {
-								return checkBox.checked = checked;
+							$each($Q('.de-entry > input', el), function (inputEl) {
+								return inputEl.checked = checked;
 							});
-							if (!checked || el.hasAttribute('de-opened')) {
-								return;
+							if (checked && el.classList.contains('de-fav-entries-hide')) {
+								el.classList.remove('de-fav-entries-hide');
 							}
 							break;
 						}
-					case 'de-fav-header-link':
-						el = el.parentNode.nextElementSibling;
-						$pd(e); 
-						break;
-					default:
-						return;
-				}
-				if (el.hasAttribute('de-opened')) {
-					el.style.display = 'none';
-					el.removeAttribute('de-opened');
-				} else {
-					el.removeAttribute('style');
-					el.setAttribute('de-opened', '');
+					case 'de-abtn de-fav-header-btn':
+						{
+							el = el.parentNode.nextElementSibling;
+							var _isHide = !el.classList.contains('de-fav-entries-hide');
+							e.target.innerHTML = _isHide ? '&#x25BC' : '&#x25B2';
+							favObj[el.getAttribute('de-host')][el.getAttribute('de-board')].hide = _isHide;
+							saveFavorites(favObj);
+							$pd(e);
+							el.classList.toggle('de-fav-entries-hide');
+						}
 				}
 			});
 		} else {
@@ -6624,25 +6826,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		var div = $bEnd(body, '<hr><div id="de-fav-buttons"></div>');
 
 		div.appendChild(getEditButton('favor', function (fn) {
-			return readFavorites().then(function (data) {
-				return fn(data, true, saveFavorites);
+			return readFavorites().then(function (favObj) {
+				return fn(favObj, true, saveRenewFavorites);
 			});
 		}));
 
 		div.appendChild($btn(Lng.refresh[lang], Lng.infoCount[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee5() {
-			var fav, isUpdate, last404, myposts, els, i, len, el, host, _b, num, f, countEl, youEl, iconEl, titleEl, form, isArchived, _ref10, _ref11, bArch, posts, cnt, j, links, a, _len, tc;
+			var favObj, isUpdate, last404, myposts, els, i, len, el, host, _b, num, _f, _ref11, titleEl, youEl, countEl, iconEl, form, isArchived, _ref12, _ref13, bArch, posts, cnt, j, links, a, _len, tc;
 
 			return regeneratorRuntime.wrap(function _callee5$(_context6) {
 				while (1) {
 					switch (_context6.prev = _context6.next) {
 						case 0:
 							_context6.next = 2;
-							return getStoredObj('DESU_Favorites');
+							return readFavorites();
 
 						case 2:
-							fav = _context6.sent;
+							favObj = _context6.sent;
 
-							if (fav[aib.host]) {
+							if (favObj[aib.host]) {
 								_context6.next = 5;
 								break;
 							}
@@ -6658,7 +6860,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 						case 10:
 							if (!(i < len)) {
-								_context6.next = 66;
+								_context6.next = 64;
 								break;
 							}
 
@@ -6666,114 +6868,112 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							host = el.getAttribute('de-host');
 							_b = el.getAttribute('de-board');
 							num = el.getAttribute('de-num');
-							f = fav[host][_b][num];
+							_f = favObj[host][_b][num];
 
-							if (!(host !== aib.host || f.err === 'Closed' || f.err === 'Archived')) {
+							if (!(host !== aib.host || _f.err === 'Closed' || _f.err === 'Archived')) {
 								_context6.next = 18;
 								break;
 							}
 
-							return _context6.abrupt('continue', 63);
+							return _context6.abrupt('continue', 61);
 
 						case 18:
-							countEl = $q('.de-fav-inf-new', el);
-							youEl = countEl.previousElementSibling;
-							iconEl = $q('.de-fav-inf-icon', el);
-							titleEl = iconEl.parentNode;
+							_ref11 = [].concat(_toConsumableArray(el.lastElementChild.children)), titleEl = _ref11[0], youEl = _ref11[1], countEl = _ref11[2];
+							iconEl = titleEl.firstElementChild;
 
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-wait');
 							titleEl.title = Lng.updating[lang];
 							form = void 0, isArchived = void 0;
-							_context6.prev = 25;
+							_context6.prev = 23;
 
 							if (aib.iichan) {
-								_context6.next = 32;
+								_context6.next = 30;
 								break;
 							}
 
-							_context6.next = 29;
+							_context6.next = 27;
 							return ajaxLoad(aib.getThrUrl(_b, num));
 
-						case 29:
+						case 27:
 							form = _context6.sent;
-							_context6.next = 38;
+							_context6.next = 36;
 							break;
+
+						case 30:
+							_context6.next = 32;
+							return ajaxLoad(aib.getThrUrl(_b, num), true, false, true);
 
 						case 32:
-							_context6.next = 34;
-							return ajaxLoad(aib.getThrUrl(_b, num), true, false, aib.iichan);
+							_ref12 = _context6.sent;
+							_ref13 = _slicedToArray(_ref12, 2);
+							form = _ref13[0];
+							isArchived = _ref13[1];
 
-						case 34:
-							_ref10 = _context6.sent;
-							_ref11 = _slicedToArray(_ref10, 2);
-							form = _ref11[0];
-							isArchived = _ref11[1];
-
-						case 38:
+						case 36:
 							last404 = false;
-							_context6.next = 58;
+							_context6.next = 56;
 							break;
 
-						case 41:
-							_context6.prev = 41;
-							_context6.t0 = _context6['catch'](25);
+						case 39:
+							_context6.prev = 39;
+							_context6.t0 = _context6['catch'](23);
 
 							if (!(_context6.t0 instanceof AjaxError && _context6.t0.code === 404)) {
-								_context6.next = 51;
+								_context6.next = 49;
 								break;
 							}
 
 							if (!last404) {
-								_context6.next = 48;
+								_context6.next = 46;
 								break;
 							}
 
 							Thread.removeSavedData(_b, num); 
-							_context6.next = 51;
+							_context6.next = 49;
 							break;
 
-						case 48:
+						case 46:
 							last404 = true;
 							--i; 
-							return _context6.abrupt('continue', 63);
+							return _context6.abrupt('continue', 61);
 
-						case 51:
+						case 49:
 							last404 = false;
 							$hide(countEl);
 							$hide(youEl);
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-unavail');
-							f.err = titleEl.title = getErrorMessage(_context6.t0);
+							_f.err = titleEl.title = getErrorMessage(_context6.t0);
 							isUpdate = true;
-							return _context6.abrupt('continue', 63);
+							return _context6.abrupt('continue', 61);
 
-						case 58:
+						case 56:
 							if (aib.qClosed && $q(aib.qClosed, form)) {
 								iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-closed');
 								titleEl.title = Lng.thrClosed[lang];
-								f.err = 'Closed';
+								_f.err = 'Closed';
 								isUpdate = true;
 							} else if (isArchived) {
 								iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-closed');
 								titleEl.title = Lng.thrArchived[lang];
-								f.err = 'Archived';
+								_f.err = 'Archived';
 								bArch = _b + '/arch';
 
-								if (!fav[host][bArch]) {
-									fav[host][bArch] = { url: fav[host][_b].url + 'arch/' };
+								if (!favObj[host][bArch]) {
+									favObj[host][bArch] = { url: favObj[host][_b].url + 'arch/' };
 								}
-								fav[host][bArch][num] = Object.assign({}, f);
-								removeFavoriteEntry(fav, host, _b, num);
+								favObj[host][bArch][num] = Object.assign({}, _f);
+								removeFavEntry(favObj, host, _b, num);
 								isUpdate = true;
 							} else {
 								iconEl.setAttribute('class', 'de-fav-inf-icon');
 								titleEl.removeAttribute('title');
-								if (f.err) {
-									delete f.err;
+								if (_f.err) {
+									delete _f.err;
 									isUpdate = true;
 								}
 							}
 							posts = $Q(aib.qRPost, form);
-							cnt = posts.length + 1 - f.cnt;
+							cnt = posts.length + 1 - _f.cnt;
 
 							countEl.textContent = cnt;
 							if (cnt === 0) {
@@ -6781,10 +6981,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								$hide(youEl);
 							} else {
 								$show(countEl);
-								f.new = cnt;
+								_f.new = cnt;
 								isUpdate = true;
 								if (myposts && myposts[_b]) {
-									f.you = 0;
+									_f.you = 0;
 									for (j = 0; j < cnt; ++j) {
 										links = $Q(aib.qPostMsg + ' a', posts[posts.length - 1 - j]);
 
@@ -6792,34 +6992,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 											tc = links[a].textContent;
 
 											if (tc[0] === '>' && tc[1] === '>' && myposts[_b][tc.substr(2)]) {
-												f.you++;
+												_f.you++;
 											}
 										}
 									}
-									if (f.you) {
-										youEl.textContent = f.you;
+									if (_f.you) {
+										youEl.textContent = _f.you;
 										$show(youEl);
 									}
 								}
 							}
 
-						case 63:
+						case 61:
 							++i;
 							_context6.next = 10;
 							break;
 
-						case 66:
-							AjaxCache.clear();
+						case 64:
+							AjaxCache.clearCache();
 							if (isUpdate) {
-								setStored('DESU_Favorites', JSON.stringify(fav));
+								saveFavorites(favObj);
 							}
 
-						case 68:
+						case 66:
 						case 'end':
 							return _context6.stop();
 					}
 				}
-			}, _callee5, this, [[25, 41]]);
+			}, _callee5, _this13, [[23, 39]]);
 		}))));
 
 		div.appendChild($btn(Lng.page[lang], Lng.infoPage[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee6() {
@@ -6939,22 +7139,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							return _context7.stop();
 					}
 				}
-			}, _callee6, this, [[12, 19]]);
+			}, _callee6, _this13, [[12, 19]]);
 		}))));
 
 		div.appendChild($btn(Lng.clear[lang], Lng.clrDeleted[lang], _asyncToGenerator( regeneratorRuntime.mark(function _callee7() {
-			var last404, els, len, i, el, iconEl, titleEl;
+			var last404, els, parent, i, len, el, iconEl, titleEl;
 			return regeneratorRuntime.wrap(function _callee7$(_context8) {
 				while (1) {
 					switch (_context8.prev = _context8.next) {
 						case 0:
 							last404 = false;
-							els = $Q('.de-entry'), len = els.length;
-							i = 0;
+							els = $Q('.de-entry');
+							parent = $q('.de-fav-table');
 
-						case 3:
+							parent.classList.add('de-fav-table-unfold');
+							i = 0, len = els.length;
+
+						case 5:
 							if (!(i < len)) {
-								_context8.next = 33;
+								_context8.next = 35;
 								break;
 							}
 
@@ -6964,62 +7167,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-wait');
 							titleEl.title = Lng.updating[lang];
-							_context8.prev = 9;
-							_context8.next = 12;
+							_context8.prev = 11;
+							_context8.next = 14;
 							return $ajax(el.getAttribute('de-url'), null, false);
 
-						case 12:
+						case 14:
 							iconEl.setAttribute('class', 'de-fav-inf-icon');
 							titleEl.removeAttribute('title');
-							_context8.next = 29;
+							_context8.next = 31;
 							break;
 
-						case 16:
-							_context8.prev = 16;
-							_context8.t0 = _context8['catch'](9);
+						case 18:
+							_context8.prev = 18;
+							_context8.t0 = _context8['catch'](11);
 
 							if (!(_context8.t0.code === 404)) {
-								_context8.next = 27;
+								_context8.next = 29;
 								break;
 							}
 
 							if (!last404) {
-								_context8.next = 24;
+								_context8.next = 26;
 								break;
 							}
 
 							Thread.removeSavedData(el.getAttribute('de-board'), 
 							+el.getAttribute('de-num'));
 							el.setAttribute('de-removed', ''); 
-							_context8.next = 27;
+							_context8.next = 29;
 							break;
 
-						case 24:
+						case 26:
 							last404 = true;
 							--i; 
-							return _context8.abrupt('continue', 30);
+							return _context8.abrupt('continue', 32);
 
-						case 27:
+						case 29:
 							iconEl.setAttribute('class', 'de-fav-inf-icon de-fav-unavail');
 							titleEl.title = getErrorMessage(_context8.t0);
 
-						case 29:
+						case 31:
 							last404 = false;
 
-						case 30:
+						case 32:
 							++i;
-							_context8.next = 3;
+							_context8.next = 5;
 							break;
 
-						case 33:
+						case 35:
 							cleanFavorites(); 
+							parent.classList.remove('de-fav-table-unfold');
 
-						case 34:
+						case 37:
 						case 'end':
 							return _context8.stop();
 					}
 				}
-			}, _callee7, this, [[9, 16]]);
+			}, _callee7, _this13, [[11, 18]]);
 		}))));
 
 		div.appendChild($btn(Lng.deletion[lang], Lng.delEntries[lang], function () {
@@ -7028,10 +7232,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		div = $bEnd(body, '<div id="de-fav-delbuttons"></div>');
 
 		div.appendChild($btn(Lng.apply[lang], Lng.delEntries[lang], function () {
-			$each($Q('.de-entry > input[type="checkbox"]', body), function (el) {
-				if (el.checked) {
-					el.parentNode.setAttribute('de-removed', '');
-				}
+			$each($Q('.de-entry > input[type="checkbox"]', body), 
+			function (el) {
+				return el.checked && el.parentNode.setAttribute('de-removed', '');
 			});
 			cleanFavorites(); 
 			body.classList.remove('de-fav-del'); 
@@ -7047,8 +7250,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 	var CfgWindow = {
-		init: function init(body) {
-			var _this12 = this;
+		initCfgWindow: function initCfgWindow(body) {
+			var _this14 = this;
 
 			body.addEventListener('click', this);
 			body.addEventListener('mouseover', this);
@@ -7099,15 +7302,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}));
 
 			!nav.isPresto && div.appendChild($btn(Lng.file[lang], Lng.fileImpExp[lang], function () {
-				$popup('cfg-file', '<b>' + Lng.fileImpExp[lang] + ':</b><hr>' + ('<div class="de-list">' + Lng.fileToData[lang] + ':<div class="de-cfg-depend">') + '<input type="file" accept=".json" id="de-import-file"></div></div><hr>' + '<div class="de-list"><a id="de-export-file" href="#">' + Lng.dataToFile[lang] + ':<div class="de-cfg-depend">' + _this12._getList([Lng.panelBtn.cfg[lang] + ' ' + Lng.allDomains[lang], Lng.panelBtn.fav[lang], Lng.hidPostThr[lang] + (' (' + aib.dm + ')'), Lng.myPosts[lang] + (' (' + aib.dm + ')')]) + '</div></div>');
+				$popup('cfg-file', '<b>' + Lng.fileImpExp[lang] + ':</b><hr>' + ('<div class="de-list">' + Lng.fileToData[lang] + ':<div class="de-cfg-depend">') + '<input type="file" accept=".json" id="de-import-file"></div></div><hr>' + '<div class="de-list"><a id="de-export-file" href="#">' + Lng.dataToFile[lang] + ':<div class="de-cfg-depend">' + _this14._getList([Lng.panelBtn.cfg[lang] + ' ' + Lng.allDomains[lang], Lng.panelBtn.fav[lang], Lng.hidPostThr[lang] + (' (' + aib.dm + ')'), Lng.myPosts[lang] + (' (' + aib.dm + ')')]) + '</div></div>');
 
 				$id('de-import-file').onchange = function (e) {
 					var file = e.target.files[0];
 					if (!file) {
 						return;
 					}
-					readFile(file, true).then(function (_ref14) {
-						var data = _ref14.data;
+					readFile(file, true).then(function (_ref16) {
+						var data = _ref16.data;
 
 						var obj = void 0;
 						try {
@@ -7131,7 +7334,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							} catch (e) {}
 						}
 						if (favObj) {
-							saveFavorites(favObj);
+							saveRenewFavorites(favObj);
 						}
 						if (dmObj) {
 							if (dmObj.posts) {
@@ -7157,7 +7360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				var els = $Q('input', expFile.nextElementSibling);
 				els[0].checked = true;
 				expFile.addEventListener('click', function () {
-					var _ref15 = _asyncToGenerator( regeneratorRuntime.mark(function _callee8(e) {
+					var _ref17 = _asyncToGenerator( regeneratorRuntime.mark(function _callee8(e) {
 						var name, nameDm, d, val, valDm, i, len, cfgData;
 						return regeneratorRuntime.wrap(function _callee8$(_context9) {
 							while (1) {
@@ -7248,18 +7451,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 										return _context9.stop();
 								}
 							}
-						}, _callee8, _this12);
+						}, _callee8, _this14);
 					}));
 
 					return function (_x11) {
-						return _ref15.apply(this, arguments);
+						return _ref17.apply(this, arguments);
 					};
 				}(), true);
 			}));
 
 			div.appendChild($btn(Lng.reset[lang] + '…', Lng.resetCfg[lang], function () {
-				return $popup('cfg-reset', '<b>' + Lng.resetData[lang] + ':</b><hr>' + ('<div class="de-list"><b>' + aib.dm + ':</b>' + _this12._getList([Lng.panelBtn.cfg[lang], Lng.hidPostThr[lang], Lng.myPosts[lang]]) + '</div><hr>') + ('<div class="de-list"><b>' + Lng.allDomains[lang] + ':</b>' + _this12._getList([Lng.panelBtn.cfg[lang], Lng.panelBtn.fav[lang]]) + '</div><hr>')).appendChild($btn(Lng.clear[lang], '', function (_ref16) {
-					var target = _ref16.target;
+				return $popup('cfg-reset', '<b>' + Lng.resetData[lang] + ':</b><hr>' + ('<div class="de-list"><b>' + aib.dm + ':</b>' + _this14._getList([Lng.panelBtn.cfg[lang], Lng.hidPostThr[lang], Lng.myPosts[lang]]) + '</div><hr>') + ('<div class="de-list"><b>' + Lng.allDomains[lang] + ':</b>' + _this14._getList([Lng.panelBtn.cfg[lang], Lng.panelBtn.fav[lang]]) + '</div><hr>')).appendChild($btn(Lng.clear[lang], '', function (_ref18) {
+					var target = _ref18.target;
 
 					var els = $Q('input[type="checkbox"]', target.parentNode);
 					for (var i = 1, len = els.length; i < len; ++i) {
@@ -7314,11 +7517,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				switch (_info) {
 					case 'language':
 						lang = el.selectedIndex;
-						Panel.remove();
+						Panel.removeMain();
 						if (pr.form) {
 							pr.addMarkupPanel();
 							pr.setPlaceholders();
 							pr.updateLanguage();
+							aib.updateSubmitBtn(pr.subm);
 							if (pr.files) {
 								$each($Q('.de-file-img, .de-file-txt-input', pr.form), function (el) {
 									return el.title = Lng.youCanDrag[lang];
@@ -7326,7 +7530,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 						}
 						this._updateCSS();
-						Panel.init(DelForm.first.el);
+						Panel.initPanel(DelForm.first.el);
 						toggleWindow('cfg', false);
 						break;
 					case 'delHiddPost':
@@ -7355,9 +7559,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						updateCSS();break;
 					case 'expandImgs':
 						updateCSS();
-						if (Attachment.viewer) {
-							Attachment.viewer.close();
-						}
+						AttachedImage.closeImg();
 						break;
 					case 'fileInputs':
 						pr.files.changeMode();
@@ -7371,6 +7573,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'addTextBtns':
 						pr.addMarkupPanel();break;
 					case 'scriptStyle':
+					case 'panelCounter':
 						this._updateCSS();
 				}
 				return;
@@ -7391,7 +7594,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'strikeHidd':
 					case 'removeHidd':
 					case 'noBoardRule':
-					case 'panelCounter':
 					case 'userCSS':
 						updateCSS();break;
 					case 'hideBySpell':
@@ -7404,18 +7606,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'hideRefPsts':
 						for (var _post3 = Thread.first.op; _post3; _post3 = _post3.next) {
 							if (!Cfg.hideRefPsts) {
-								_post3.ref.unhide();
+								_post3.ref.unhideRef();
 							} else if (_post3.hidden) {
-								_post3.ref.hide();
+								_post3.ref.hideRef();
 							}
 						}
 						break;
 					case 'ajaxUpdThr':
 						if (aib.t) {
 							if (Cfg.ajaxUpdThr) {
-								updater.enable();
+								updater.enableUpdater();
 							} else {
-								updater.disable();
+								updater.disableUpdater();
 							}
 						}
 						break;
@@ -7451,52 +7653,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					case 'imgSrcBtns':
 						if (Cfg.imgSrcBtns) {
 							for (var _iterator3 = DelForm, _isArray3 = Array.isArray(_iterator3), _i5 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-								var _ref17;
+								var _ref19;
 
 								if (_isArray3) {
 									if (_i5 >= _iterator3.length) break;
-									_ref17 = _iterator3[_i5++];
+									_ref19 = _iterator3[_i5++];
 								} else {
 									_i5 = _iterator3.next();
 									if (_i5.done) break;
-									_ref17 = _i5.value;
+									_ref19 = _i5.value;
 								}
 
-								var _ref18 = _ref17,
-								    _el4 = _ref18.el;
+								var _ref20 = _ref19,
+								    _el4 = _ref20.el;
 
-								processImagesLinks(_el4, 1, 0);
+								processImgInfoLinks(_el4, 1, 0);
+								$each($Q('.de-img-embed'), function (el) {
+									return addImgSrcButtons(el.parentNode.nextSibling);
+								});
 							}
 						} else {
-							$each($Q('.de-btn-src'), function (el) {
-								return el.remove();
-							});
+							$each($Q('.de-btn-src'), $del);
 						}
 						break;
 					case 'delImgNames':
 						if (Cfg.delImgNames) {
 							for (var _iterator4 = DelForm, _isArray4 = Array.isArray(_iterator4), _i6 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
-								var _ref19;
+								var _ref21;
 
 								if (_isArray4) {
 									if (_i6 >= _iterator4.length) break;
-									_ref19 = _iterator4[_i6++];
+									_ref21 = _iterator4[_i6++];
 								} else {
 									_i6 = _iterator4.next();
 									if (_i6.done) break;
-									_ref19 = _i6.value;
+									_ref21 = _i6.value;
 								}
 
-								var _ref20 = _ref19,
-								    _el5 = _ref20.el;
+								var _ref22 = _ref21,
+								    _el5 = _ref22.el;
 
-								processImagesLinks(_el5, 0, 1);
+								processImgInfoLinks(_el5, 0, 1);
 							}
 						} else {
-							$each($Q('.de-img-name'), function (link) {
-								link.classList.remove('de-img-name');
-								link.textContent = link.title;
-								link.removeAttribute('title');
+							$each($Q('.de-img-name'), function (el) {
+								el.classList.remove('de-img-name');
+								el.textContent = el.title;
+								el.removeAttribute('title');
 							});
 						}
 						updateCSS();
@@ -7512,6 +7715,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						PostForm.hideField($parent(pr.mail, 'LABEL') || pr.mail);
 						updateCSS();
 						break;
+					case 'altCaptcha':
+						pr.cap.initCapPromise();break;
 					case 'txtBtnsLoc':
 						pr.addMarkupPanel();break;
 					case 'userName':
@@ -7526,21 +7731,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						toggleInfinityScroll();break;
 					case 'hotKeys':
 						if (Cfg.hotKeys) {
-							HotKeys.enable();
+							HotKeys.enableHotKeys();
 						} else {
-							HotKeys.disable();
+							HotKeys.disableHotKeys();
 						}
-						break;
-					case 'turnOff':
-						getStoredObj('DESU_Config').then(function (data) {
-							for (var dm in data) {
-								if (dm !== aib.dm && dm !== 'global' && dm !== 'lastUpd') {
-									data[dm].disabled = Cfg.turnOff;
-								}
-							}
-							data[aib.dm].turnOff = Cfg.turnOff;
-							setStored('DESU_Config', JSON.stringify(data));
-						});
 				}
 				return;
 			}
@@ -7582,7 +7776,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							Cfg: Cfg,
 							sSpells: Spells.list.split('\n'),
 							oSpells: sesStorage['de-spells-' + aib.b + (aib.t || '')],
-							perf: Logger.getData(true)
+							perf: Logger.getLogData(true).reduce(function (obj, el) {
+								obj[el[0]] = el[1];
+								return obj;
+							}, {})
 						}, function (key, value) {
 							switch (key) {
 								case 'stats':
@@ -7615,8 +7812,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						{
 							var val = Math.min(+el.value || 0, 100);
 							saveCfg('webmVolume', val);
-							locStorage['__de-webmvolume'] = val;
-							locStorage.removeItem('__de-webmvolume');
+							sendStorageEvent('__de-webmvolume', val);
 							break;
 						}
 					case 'minWebmWidth':
@@ -7735,33 +7931,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 		_getCfgPosts: function _getCfgPosts() {
-			return '<div id="de-cfg-posts" class="de-cfg-unvis">\n\t\t\t' + (localData ? '' : this._getBox('ajaxUpdThr') + '\n\t\t\t\t' + this._getInp('updThrDelay') + '\n\t\t\t\t<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getBox('updCount') + '<br>\n\t\t\t\t\t' + this._getBox('favIcoBlink') + '<br>\n\t\t\t\t\t' + ('Notification' in window ? this._getBox('desktNotif') + '<br>' : '') + '\n\t\t\t\t\t' + this._getBox('noErrInTitle') + '<br>\n\t\t\t\t\t' + this._getBox('markNewPosts') + '<br>\n\t\t\t\t\t' + (aib.dobr ? this._getBox('useDobrAPI') : '') + '\n\t\t\t\t</div>') + '\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyPosts') + '<br>' : '') + '\n\t\t\t' + this._getBox('hideReplies') + '<br>\n\t\t\t' + this._getBox('expandTrunc') + '<br>\n\t\t\t' + this._getBox('updThrBtns') + '<br>\n\t\t\t' + this._getBox('showHideBtn') + '\n\t\t\t' + this._getBox('showRepBtn') + '<br>\n\t\t\t' + this._getSel('postBtnsCSS') + '\n\t\t\t' + this._getInp('postBtnsBack', false, 8) + '<br>\n\t\t\t' + this._getSel('noSpoilers') + '<br>\n\t\t\t' + this._getBox('noPostNames') + '<br>\n\t\t\t' + this._getBox('widePosts') + '<br>\n\t\t\t' + this._getBox('correctTime') + '\n\t\t\t' + this._getInp('timeOffset') + '\n\t\t\t<a class="de-abtn" target="_blank" href="' + gitWiki + 'Settings-time-' + ((lang ? 'en' : 'ru') + '">[?]</a>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('timePattern', true, 24) + '<br>\n\t\t\t\t' + this._getInp('timeRPattern', true, 24) + '\n\t\t\t</div>\n\t\t</div>');
+			return '<div id="de-cfg-posts" class="de-cfg-unvis">\n\t\t\t' + (localData ? '' : this._getBox('ajaxUpdThr') + '\n\t\t\t\t' + this._getInp('updThrDelay') + '\n\t\t\t\t<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getBox('updCount') + '<br>\n\t\t\t\t\t' + this._getBox('favIcoBlink') + '<br>\n\t\t\t\t\t' + ('Notification' in window ? this._getBox('desktNotif') + '<br>' : '') + '\n\t\t\t\t\t' + this._getBox('noErrInTitle') + '<br>\n\t\t\t\t\t' + this._getBox('markNewPosts') + '<br>\n\t\t\t\t\t' + (aib.dobr ? this._getBox('useDobrAPI') : '') + '\n\t\t\t\t</div>') + '\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyPosts') + '<br>' : '') + '\n\t\t\t' + (!localData ? this._getBox('hideReplies') + '<br>\n\t\t\t\t' + this._getBox('expandTrunc') + '<br>\n\t\t\t\t' + this._getBox('updThrBtns') + '<br>' : '') + '\n\t\t\t' + this._getBox('showHideBtn') + '\n\t\t\t' + (!localData ? this._getBox('showRepBtn') : '') + '<br>\n\t\t\t' + this._getSel('postBtnsCSS') + '\n\t\t\t' + this._getInp('postBtnsBack', false, 8) + '<br>\n\t\t\t' + this._getSel('noSpoilers') + '<br>\n\t\t\t' + this._getBox('noPostNames') + '<br>\n\t\t\t' + this._getBox('widePosts') + '<br>\n\t\t\t' + this._getBox('correctTime') + '\n\t\t\t' + this._getInp('timeOffset') + '\n\t\t\t<a class="de-abtn" target="_blank" href="' + gitWiki + 'Settings-time-' + ((lang ? 'en' : 'ru') + '">[?]</a>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('timePattern', true, 24) + '<br>\n\t\t\t\t' + this._getInp('timeRPattern', true, 24) + '\n\t\t\t</div>\n\t\t</div>');
 		},
 
 
 		_getCfgImages: function _getCfgImages() {
-			return '<div id="de-cfg-images" class="de-cfg-unvis">\n\t\t\t' + this._getSel('expandImgs') + '<br>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('imgNavBtns') + '<br>\n\t\t\t\t' + this._getBox('imgInfoLink') + '<br>\n\t\t\t\t' + this._getBox('resizeImgs') + '<br>\n\t\t\t\t' + (Post.sizing.dPxRatio > 1 ? this._getBox('resizeDPI') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('minImgSize') + '<br>\n\t\t\t\t' + this._getInp('zoomFactor') + '<br>\n\t\t\t\t' + this._getBox('webmControl') + '<br>\n\t\t\t\t' + this._getBox('webmTitles') + '<br>\n\t\t\t\t' + this._getInp('webmVolume') + '<br>\n\t\t\t\t' + this._getInp('minWebmWidth') + '\n\t\t\t</div>\n\t\t\t' + (nav.isPresto ? '' : this._getBox('preLoadImgs') + '<br>') + '\n\t\t\t' + (nav.isPresto || aib.fch ? '' : '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('findImgFile') + '\n\t\t\t</div>') + '\n\t\t\t' + this._getSel('openImgs') + '<br>\n\t\t\t' + this._getBox('imgSrcBtns') + '<br>\n\t\t\t' + this._getBox('delImgNames') + '<br>\n\t\t\t' + this._getInp('maskVisib') + '\n\t\t</div>';
+			return '<div id="de-cfg-images" class="de-cfg-unvis">\n\t\t\t' + this._getSel('expandImgs') + '<br>\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('imgNavBtns') + '<br>\n\t\t\t\t' + this._getBox('imgInfoLink') + '<br>\n\t\t\t\t' + this._getBox('resizeImgs') + '<br>\n\t\t\t\t' + (Post.sizing.dPxRatio > 1 ? this._getBox('resizeDPI') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('minImgSize') + '<br>\n\t\t\t\t' + this._getInp('zoomFactor') + '<br>\n\t\t\t\t' + this._getBox('webmControl') + '<br>\n\t\t\t\t' + this._getBox('webmTitles') + '<br>\n\t\t\t\t' + this._getInp('webmVolume') + '<br>\n\t\t\t\t' + this._getInp('minWebmWidth') + '\n\t\t\t</div>\n\t\t\t' + (nav.isPresto ? '' : this._getSel('preLoadImgs') + '<br>') + '\n\t\t\t' + (nav.isPresto || aib.fch ? '' : '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('findImgFile') + '\n\t\t\t</div>') + '\n\t\t\t' + this._getSel('openImgs') + '<br>\n\t\t\t' + this._getBox('imgSrcBtns') + '<br>\n\t\t\t' + this._getBox('delImgNames') + '<br>\n\t\t\t' + this._getInp('maskVisib') + '\n\t\t</div>';
 		},
 
 
 		_getCfgLinks: function _getCfgLinks() {
-			return '<div id="de-cfg-links" class="de-cfg-unvis">\n\t\t\t' + this._getBox('linksNavig') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('linksOver') + '\n\t\t\t\t' + this._getInp('linksOut') + '<br>\n\t\t\t\t' + this._getBox('markViewed') + '<br>\n\t\t\t\t' + this._getBox('strikeHidd') + '\n\t\t\t\t<div class="de-cfg-depend">' + this._getBox('removeHidd') + '</div>\n\t\t\t\t' + this._getBox('noNavigHidd') + '\n\t\t\t</div>\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyLinks') + '<br>' : '') + '\n\t\t\t' + this._getBox('crossLinks') + '<br>\n\t\t\t' + this._getBox('decodeLinks') + '<br>\n\t\t\t' + this._getBox('insertNum') + '<br>\n\t\t\t' + this._getBox('addOPLink') + '<br>\n\t\t\t' + this._getBox('addImgs') + '<br>\n\t\t\t<div>\n\t\t\t\t' + this._getBox('addMP3') + '\n\t\t\t\t' + (aib.prot === 'http:' ? this._getBox('addVocaroo') : '') + '\n\t\t\t</div>\n\t\t\t' + this._getSel('addYouTube') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('YTubeWidth', false) + '\xD7\n\t\t\t\t' + this._getInp('YTubeHeigh', false) + '(px)<br>\n\t\t\t\t' + this._getBox('YTubeTitles') + '<br>\n\t\t\t\t' + this._getInp('ytApiKey', true, 25) + '<br>\n\t\t\t\t' + this._getBox('addVimeo') + '\n\t\t\t</div>\n\t\t</div>';
+			return '<div id="de-cfg-links" class="de-cfg-unvis">\n\t\t\t' + this._getBox('linksNavig') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('linksOver') + '\n\t\t\t\t' + this._getInp('linksOut') + '<br>\n\t\t\t\t' + this._getBox('markViewed') + '<br>\n\t\t\t\t' + this._getBox('strikeHidd') + '\n\t\t\t\t<div class="de-cfg-depend">' + this._getBox('removeHidd') + '</div>\n\t\t\t\t' + this._getBox('noNavigHidd') + '\n\t\t\t</div>\n\t\t\t' + (aib.jsonSubmit || aib.fch ? this._getBox('markMyLinks') + '<br>' : '') + '\n\t\t\t' + this._getBox('crossLinks') + '<br>\n\t\t\t' + this._getBox('decodeLinks') + '<br>\n\t\t\t' + this._getBox('insertNum') + '<br>\n\t\t\t' + (!localData ? this._getBox('addOPLink') + '<br>\n\t\t\t\t' + this._getBox('addImgs') + '<br>' : '') + '\n\t\t\t<div>\n\t\t\t\t' + this._getBox('addMP3') + '\n\t\t\t\t' + (aib.prot === 'http:' ? this._getBox('addVocaroo') : '') + '\n\t\t\t</div>\n\t\t\t' + this._getSel('addYouTube') + '\n\t\t\t<div class="de-cfg-depend">\n\t\t\t\t' + this._getInp('YTubeWidth', false) + '\xD7\n\t\t\t\t' + this._getInp('YTubeHeigh', false) + '(px)<br>\n\t\t\t\t' + this._getBox('YTubeTitles') + '<br>\n\t\t\t\t' + this._getInp('ytApiKey', true, 25) + '<br>\n\t\t\t\t' + this._getBox('addVimeo') + '\n\t\t\t</div>\n\t\t</div>';
 		},
 
 
 		_getCfgForm: function _getCfgForm() {
-			return '<div id="de-cfg-form" class="de-cfg-unvis">\n\t\t\t' + this._getBox('ajaxPosting') + '<br>\n\t\t\t' + (pr.form ? '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('postSameImg') + '<br>\n\t\t\t\t' + this._getBox('removeEXIF') + '\n\t\t\t\t' + this._getBox('removeFName') + '<br>\n\t\t\t\t' + this._getBox('sendErrNotif') + '<br>\n\t\t\t\t' + this._getBox('scrAfterRep') + '<br>\n\t\t\t\t' + (pr.files && !nav.isPresto ? this._getSel('fileInputs') : '') + '\n\t\t\t</div>' : '') + '\n\t\t\t' + (pr.form ? this._getSel('addPostForm') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getBox('spacedQuote') + '<br>' : '') + '\n\t\t\t' + this._getBox('favOnReply') + '<br>\n\t\t\t' + (pr.subj ? this._getBox('warnSubjTrip') + '<br>' : '') + '\n\t\t\t' + (pr.mail ? this._getBox('addSageBtn') + '\n\t\t\t\t' + this._getBox('saveSage') + '<br>' : '') + '\n\t\t\t' + (pr.cap ? (aib.fch ? this._getBox('cap4chanAlt') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('capUpdTime') + '<br>\n\t\t\t\t' + this._getSel('captchaLang') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getSel('addTextBtns') + '\n\t\t\t\t' + (!aib.fch ? this._getBox('txtBtnsLoc') : '') + '<br>' : '') + '\n\t\t\t' + (pr.passw ? this._getInp('passwValue', true, 9) + '<input type="button" id="de-cfg-btn-pass' + ('" class="de-cfg-button" value="' + Lng.change[lang] + '"><br>') : '') + '\n\t\t\t' + (pr.name ? this._getInp('nameValue', false, 9) + '\n\t\t\t\t' + this._getBox('userName') + '<br>' : '') + '\n\t\t\t' + (pr.rules || pr.passw || pr.name ? Lng.hide[lang] + (pr.rules ? this._getBox('noBoardRule') : '') + (pr.passw ? this._getBox('noPassword') : '') + (pr.name ? this._getBox('noName') : '') + (pr.subj ? this._getBox('noSubj') : '') : '') + '\n\t\t</div>';
+			return '<div id="de-cfg-form" class="de-cfg-unvis">\n\t\t\t' + this._getBox('ajaxPosting') + '<br>\n\t\t\t' + (pr.form ? '<div class="de-cfg-depend">\n\t\t\t\t' + this._getBox('postSameImg') + '<br>\n\t\t\t\t' + this._getBox('removeEXIF') + '\n\t\t\t\t' + this._getBox('removeFName') + '<br>\n\t\t\t\t' + this._getBox('sendErrNotif') + '<br>\n\t\t\t\t' + this._getBox('scrAfterRep') + '<br>\n\t\t\t\t' + (pr.files && !nav.isPresto ? this._getSel('fileInputs') : '') + '\n\t\t\t</div>' : '') + '\n\t\t\t' + (pr.form ? this._getSel('addPostForm') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getBox('spacedQuote') + '<br>' : '') + '\n\t\t\t' + this._getBox('favOnReply') + '<br>\n\t\t\t' + (pr.subj ? this._getBox('warnSubjTrip') + '<br>' : '') + '\n\t\t\t' + (pr.mail ? this._getBox('addSageBtn') + '\n\t\t\t\t' + this._getBox('saveSage') + '<br>' : '') + '\n\t\t\t' + (pr.cap ? (aib.hasAltCaptcha ? this._getBox('altCaptcha') + '<br>' : '') + '\n\t\t\t\t' + this._getInp('capUpdTime') + '<br>\n\t\t\t\t' + this._getSel('captchaLang') + '<br>' : '') + '\n\t\t\t' + (pr.txta ? this._getSel('addTextBtns') + '\n\t\t\t\t' + (!aib.fch ? this._getBox('txtBtnsLoc') : '') + '<br>' : '') + '\n\t\t\t' + (pr.passw ? this._getInp('passwValue', true, 9) + '<input type="button" id="de-cfg-btn-pass' + ('" class="de-cfg-button" value="' + Lng.change[lang] + '"><br>') : '') + '\n\t\t\t' + (pr.name ? this._getInp('nameValue', false, 9) + '\n\t\t\t\t' + this._getBox('userName') + '<br>' : '') + '\n\t\t\t' + (pr.rules || pr.passw || pr.name ? Lng.hide[lang] + (pr.rules ? this._getBox('noBoardRule') : '') + (pr.passw ? this._getBox('noPassword') : '') + (pr.name ? this._getBox('noName') : '') + (pr.subj ? this._getBox('noSubj') : '') : '') + '\n\t\t</div>';
 		},
 
 
 		_getCfgCommon: function _getCfgCommon() {
-			return '<div id="de-cfg-common" class="de-cfg-unvis">\n\t\t\t' + this._getSel('scriptStyle') + '<br>\n\t\t\t' + this._getBox('userCSS') + '\n\t\t\t<a href="' + gitWiki + 'css-tricks" class="de-abtn" target="_blank">[?]</a><br>\n\t\t\t' + this._getSel('panelCounter') + '<br>\n\t\t\t' + this._getBox('rePageTitle') + '<br>\n\t\t\t' + ('animation' in docBody.style ? this._getBox('animation') + '<br>' : '') + '\n\t\t\t' + this._getBox('closePopups') + '<br>\n\t\t\t' + this._getBox('inftyScroll') + '<br>\n\t\t\t' + this._getBox('scrollToTop') + '<br>\n\t\t\t' + this._getBox('hotKeys') + '\n\t\t\t<input type="button" id="de-cfg-btn-keys" class="de-cfg-button" value="' + Lng.edit[lang] + '">\n\t\t\t<div class="de-cfg-depend">' + this._getInp('loadPages') + '</div>\n\t\t\t' + (!nav.isChromeStorage && !nav.isPresto || nav.hasGMXHR ? this._getBox('updScript') + '\n\t\t\t\t<div class="de-cfg-depend">\n\t\t\t\t\t' + this._getSel('scrUpdIntrv') + '\n\t\t\t\t\t<input type="button" id="de-cfg-btn-updnow" class="de-cfg-button" value="' + (Lng.checkNow[lang] + '">\n\t\t\t\t</div>') : '') + '\n\t\t\t' + (nav.isGlobal ? Lng.cfg.excludeList[lang] + '\n\t\t\t\t<input type="text" info="excludeList" class="de-cfg-inptxt" style="display: block;' + (' width: 80%;" placeholder="4chan.org, 8ch.net, \u2026">' + this._getBox('turnOff')) : '') + '\n\t\t</div>';
+			return '<div id="de-cfg-common" class="de-cfg-unvis">\n\t\t\t' + this._getSel('scriptStyle') + '<br>\n\t\t\t' + this._getBox('userCSS') + '\n\t\t\t<a href="' + gitWiki + 'css-tricks" class="de-abtn" target="_blank">[?]</a><br>\n\t\t\t' + this._getSel('panelCounter') + '<br>\n\t\t\t' + this._getBox('rePageTitle') + '<br>\n\t\t\t' + ('animation' in docBody.style ? this._getBox('animation') + '<br>' : '') + '\n\t\t\t' + this._getBox('closePopups') + '<br>\n\t\t\t' + (!localData ? this._getBox('inftyScroll') + '<br>\n\t\t\t\t' + this._getBox('scrollToTop') + '<br>' : '') + '\n\t\t\t' + this._getBox('hotKeys') + '\n\t\t\t<input type="button" id="de-cfg-btn-keys" class="de-cfg-button" value="' + Lng.edit[lang] + '">\n\t\t\t<div class="de-cfg-depend">' + this._getInp('loadPages') + '</div>\n\t\t\t' + (nav.isGlobal ? Lng.cfg.excludeList[lang] + '\n\t\t\t\t<input type="text" info="excludeList" class="de-cfg-inptxt" style="display: block;' + ' width: 80%;" placeholder="4chan.org, 8ch.net, …">' : '') + '\n\t\t</div>';
 		},
 
 
 		_getCfgInfo: function _getCfgInfo() {
 			var statsTable = this._getInfoTable([[Lng.thrViewed[lang], Cfg.stats.view], [Lng.thrCreated[lang], Cfg.stats.op], [Lng.thrHidden[lang], HiddenThreads.getCount()], [Lng.postsSent[lang], Cfg.stats.reply]], false);
-			return '<div id="de-cfg-info" class="de-cfg-unvis">\n\t\t\t<div style="padding-bottom: 10px;">\n\t\t\t\t<a href="' + gitWiki + 'versions" target="_blank">v' + version + '.' + commit + ((nav.isESNext ? '.es6' : '') + '</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="http://www.freedollchan.org/scripts/" target="_blank">Freedollchan</a>&nbsp;|&nbsp;\n\t\t\t\t<a href="' + gitWiki + (lang ? 'home-en/' : '') + '" target="_blank">Github</a>\n\t\t\t</div>\n\t\t\t<div id="de-info-table">\n\t\t\t\t<div id="de-info-stats">' + statsTable + '</div>\n\t\t\t\t<div id="de-info-log">' + this._getInfoTable(Logger.getData(false), true) + '</div>\n\t\t\t</div>\n\t\t\t<input type="button" id="de-cfg-btn-debug" value="') + (Lng.debug[lang] + '" title="' + Lng.infoDebug[lang] + '">\n\t\t</div>');
+			return '<div id="de-cfg-info" class="de-cfg-unvis">\n\t\t\t<div style="padding-bottom: 10px;">\n\t\t\t\t<a href="' + gitWiki + 'versions" target="_blank">v' + version + '.' + commit + ((nav.isESNext ? '.es6' : '') + '</a> |\n\t\t\t\t<a href="http://www.freedollchan.org/scripts/" target="_blank">Freedollchan</a> |\n\t\t\t\t<a href="' + gitWiki + (lang ? 'home-en/' : '') + '" target="_blank">Github</a>\n\t\t\t</div>\n\t\t\t<div id="de-info-table">\n\t\t\t\t<div id="de-info-stats">' + statsTable + '</div>\n\t\t\t\t<div id="de-info-log">\n\t\t\t\t\t' + this._getInfoTable(Logger.getLogData(false), true) + '\n\t\t\t\t\t<input type="button" id="de-cfg-btn-debug" style="margin-top: 3px;" value="') + (Lng.debug[lang] + '" title="' + Lng.infoDebug[lang] + '">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t' + (!nav.isChromeStorage && !nav.isPresto && !localData || nav.hasGMXHR ? '\n\t\t\t\t<div style="margin-top: 3px; text-align: center;">&gt;&gt;\n\t\t\t\t\t<input type="button" id="de-cfg-btn-updnow" value="' + Lng.checkNow[lang] + '">\n\t\t\t\t&lt;&lt;</div><br>\n\t\t\t\t' + this._getSel('updDollchan') : '') + '\n\t\t</div>');
 		},
 
 
@@ -7783,7 +7979,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		},
 
 		_getList: function _getList(a) {
-			return $join(a, '<label class="de-block"><input type="checkbox"> ', '</label>');
+			return arrTags(a, '<label class="de-block"><input type="checkbox"> ', '</label>');
 		},
 
 		_getSel: function _getSel(id) {
@@ -7811,18 +8007,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			scriptCSS();
 		},
 		_updateDependant: function _updateDependant() {
-			this._toggleBox(Cfg.ajaxUpdThr, ['input[info="updThrDelay"]', 'input[info="updCount"]', 'input[info="favIcoBlink"]', 'input[info="markNewPosts"]', 'input[info="desktNotif"]', 'input[info="noErrInTitle"]']);
-			this._toggleBox(Cfg.postBtnsCSS === 2, ['input[info="postBtnsBack"]']);
-			this._toggleBox(Cfg.expandImgs, ['input[info="imgNavBtns"]', 'input[info="imgInfoLink"]', 'input[info="resizeDPI"]', 'input[info="resizeImgs"]', 'input[info="minImgSize"]', 'input[info="zoomFactor"]', 'input[info="webmControl"]', 'input[info="webmTitles"]', 'input[info="webmVolume"]', 'input[info="minWebmWidth"]']);
-			this._toggleBox(Cfg.preLoadImgs, ['input[info="findImgFile"]']);
-			this._toggleBox(Cfg.linksNavig, ['input[info="linksOver"]', 'input[info="linksOut"]', 'input[info="markViewed"]', 'input[info="strikeHidd"]', 'input[info="noNavigHidd"]']);
-			this._toggleBox(Cfg.strikeHidd && Cfg.linksNavig, ['input[info="removeHidd"]']);
-			this._toggleBox(Cfg.addYouTube, ['input[info="YTubeWidth"]', 'input[info="YTubeHeigh"]', 'input[info="YTubeTitles"]', 'input[info="ytApiKey"]', 'input[info="addVimeo"]']);
-			this._toggleBox(Cfg.YTubeTitles, ['input[info="ytApiKey"]']);
-			this._toggleBox(Cfg.ajaxPosting, ['input[info="postSameImg"]', 'input[info="removeEXIF"]', 'input[info="removeFName"]', 'input[info="sendErrNotif"]', 'input[info="scrAfterRep"]', 'select[info="fileInputs"]']);
-			this._toggleBox(Cfg.addTextBtns, ['input[info="txtBtnsLoc"]']);
-			this._toggleBox(Cfg.updScript, ['select[info="scrUpdIntrv"]']);
-			this._toggleBox(Cfg.hotKeys, ['input[info="loadPages"]']);
+			var fn = this._toggleBox;
+			fn(Cfg.ajaxUpdThr, ['input[info="updThrDelay"]', 'input[info="updCount"]', 'input[info="favIcoBlink"]', 'input[info="markNewPosts"]', 'input[info="desktNotif"]', 'input[info="noErrInTitle"]']);
+			fn(Cfg.postBtnsCSS === 2, ['input[info="postBtnsBack"]']);
+			fn(Cfg.expandImgs, ['input[info="imgNavBtns"]', 'input[info="imgInfoLink"]', 'input[info="resizeDPI"]', 'input[info="resizeImgs"]', 'input[info="minImgSize"]', 'input[info="zoomFactor"]', 'input[info="webmControl"]', 'input[info="webmTitles"]', 'input[info="webmVolume"]', 'input[info="minWebmWidth"]']);
+			fn(Cfg.preLoadImgs, ['input[info="findImgFile"]']);
+			fn(Cfg.linksNavig, ['input[info="linksOver"]', 'input[info="linksOut"]', 'input[info="markViewed"]', 'input[info="strikeHidd"]', 'input[info="noNavigHidd"]']);
+			fn(Cfg.strikeHidd && Cfg.linksNavig, ['input[info="removeHidd"]']);
+			fn(Cfg.addYouTube, ['input[info="YTubeWidth"]', 'input[info="YTubeHeigh"]', 'input[info="YTubeTitles"]', 'input[info="ytApiKey"]', 'input[info="addVimeo"]']);
+			fn(Cfg.YTubeTitles, ['input[info="ytApiKey"]']);
+			fn(Cfg.ajaxPosting, ['input[info="postSameImg"]', 'input[info="removeEXIF"]', 'input[info="removeFName"]', 'input[info="sendErrNotif"]', 'input[info="scrAfterRep"]', 'select[info="fileInputs"]']);
+			fn(Cfg.addTextBtns, ['input[info="txtBtnsLoc"]']);
+			fn(Cfg.hotKeys, ['input[info="loadPages"]']);
 		},
 
 		_updateRowMeter: function _updateRowMeter(node) {
@@ -7867,9 +8063,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				$animate(el, 'de-blink');
 			}
 		} else {
-			el = $id('de-wrapper-popup').appendChild($add('\n\t\t<div class="' + aib.cReply + ' de-popup" id="de-popup-' + id + '">\n\t\t\t<span class="de-popup-btn">' + buttonHTML + '</span>\n\t\t\t<div class="de-popup-msg">' + txt.trim() + '</div>\n\t\t</div>'));
-			el.onclick = function (_ref21) {
-				var target = _ref21.target;
+			el = $bEnd($id('de-wrapper-popup'), '<div class="' + aib.cReply + ' de-popup" id="de-popup-' + id + '">\n\t\t\t<span class="de-popup-btn">' + buttonHTML + '</span>\n\t\t\t<div class="de-popup-msg">' + txt.trim() + '</div>\n\t\t</div>');
+			el.onclick = function (_ref23) {
+				var target = _ref23.target;
 
 				var el = fixEventEl(target);
 				el = el.tagName.toLowerCase() === 'svg' ? el.parentNode : el;
@@ -7944,13 +8140,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		_createClass(Menu, [{
 			key: 'handleEvent',
 			value: function handleEvent(e) {
-				var _this13 = this;
+				var _this15 = this;
 
 				var isOverEvent = false;
 				switch (e.type) {
 					case 'click':
 						if (e.target.className === 'de-menu-item') {
-							this.remove();
+							this.removeMenu();
 							this._clickFn(e.target);
 							if (!Cfg.expandPanel && !$q('.de-win-active')) {
 								$hide($id('de-panel-buttons'));
@@ -7971,7 +8167,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 									}
 								} else if (!rt || rt !== this.parentEl && !this.parentEl.contains(rt)) {
 									this._closeTO = setTimeout(function () {
-										return _this13.remove();
+										return _this15.removeMenu();
 									}, 75);
 									if (this.onout) {
 										this.onout();
@@ -7982,8 +8178,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			}
 		}, {
-			key: 'remove',
-			value: function remove() {
+			key: 'removeMenu',
+			value: function removeMenu() {
 				if (!this._el) {
 					return;
 				}
@@ -8004,7 +8200,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 	function addMenu(el) {
 		var fn = function fn(a) {
-			return $join(a, '<span class="de-menu-item">', '</span>');
+			return arrTags(a, '<span class="de-menu-item">', '</span>');
 		};
 		switch (el.id) {
 			case 'de-btn-spell-add':
@@ -8014,28 +8210,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				});
 			case 'de-panel-refresh':
 				return new Menu(el, fn(Lng.selAjaxPages[lang]), function (el) {
-					Pages.load(aProto.indexOf.call(el.parentNode.children, el) + 1);
+					return Pages.loadPages(aProto.indexOf.call(el.parentNode.children, el) + 1);
 				});
 			case 'de-panel-savethr':
 				return new Menu(el, fn($q(aib.qPostImg, DelForm.first.el) ? Lng.selSaveThr[lang] : [Lng.selSaveThr[lang][0]]), function (el) {
-					if (!$id('de-popup-savethr')) {
-						var imgOnly = !!aProto.indexOf.call(el.parentNode.children, el);
-						if (Images_.preloading) {
-							$popup('savethr', Lng.loading[lang], true);
-							Images_.afterpreload = function () {
-								return loadDocFiles(imgOnly);
-							};
-							Images_.progressId = 'savethr';
-						} else {
-							loadDocFiles(imgOnly);
-						}
+					if ($id('de-popup-savethr')) {
+						return;
+					}
+					var imgOnly = !!aProto.indexOf.call(el.parentNode.children, el);
+					if (Images_.preloading) {
+						$popup('savethr', Lng.loading[lang], true);
+						Images_.afterpreload = function () {
+							return loadDocFiles(imgOnly);
+						};
+						Images_.progressId = 'savethr';
+					} else {
+						loadDocFiles(imgOnly);
 					}
 				});
 			case 'de-panel-audio-off':
 				return new Menu(el, fn(Lng.selAudioNotif[lang]), function (el) {
-					var i = aProto.indexOf.call(el.parentNode.children, el);
-					updater.enable();
-					updater.toggleAudio(i === 0 ? 3e4 : i === 1 ? 6e4 : i === 2 ? 12e4 : 3e5);
+					updater.enableUpdater();
+					updater.toggleAudio([3e4, 6e4, 12e4, 3e5][aProto.indexOf.call(el.parentNode.children, el)]);
 					$id('de-panel-audio-off').id = 'de-panel-audio-on';
 				});
 		}
@@ -8050,36 +8246,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		ntKeys: null,
 		tKeys: null,
 		version: 7,
-		clear: function clear() {
+		clearCPost: function clearCPost() {
 			this.cPost = null;
 			this.lastPageOffset = 0;
 		},
-		disable: function disable() {
+		disableHotKeys: function disableHotKeys() {
 			if (this.enabled) {
 				this.enabled = false;
 				if (this.cPost) {
 					this.cPost.unselect();
 				}
-				this.clear();
+				this.clearCPost();
 				this.gKeys = this.ntKeys = this.tKeys = null;
 				doc.removeEventListener('keydown', this, true);
 			}
 		},
-		enable: function enable() {
-			var _this14 = this;
+		enableHotKeys: function enableHotKeys() {
+			var _this16 = this;
 
 			if (!this.enabled) {
 				this.enabled = true;
 				this._paused = false;
 				Promise.resolve(this.readKeys()).then(function (keys) {
-					if (_this14.enabled) {
+					if (_this16.enabled) {
 						var _keys = _slicedToArray(keys, 5);
 
-						_this14.gKeys = _keys[2];
-						_this14.ntKeys = _keys[3];
-						_this14.tKeys = _keys[4];
+						_this16.gKeys = _keys[2];
+						_this16.ntKeys = _keys[3];
+						_this16.tKeys = _keys[4];
 
-						doc.addEventListener('keydown', _this14, true);
+						doc.addEventListener('keydown', _this16, true);
 					}
 				});
 			}
@@ -8123,21 +8319,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 			var idx = void 0;
 			var isThr = aib.t;
-			var tag = e.target.tagName;
-			var kc = e.keyCode | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (tag === 'TEXTAREA' || tag === 'INPUT' && (e.target.type === 'text' || e.target.type === 'password') ? 0x8000 : 0);
+			var el = e.target;
+			var tag = el.tagName;
+			var kc = e.keyCode | (e.ctrlKey ? 0x1000 : 0) | (e.shiftKey ? 0x2000 : 0) | (e.altKey ? 0x4000 : 0) | (tag === 'TEXTAREA' || tag === 'INPUT' && (el.type === 'text' || el.type === 'password') ? 0x8000 : 0);
 			if (kc === 0x74 || kc === 0x8074) {
 				if (isThr || $id('de-popup-load-pages')) {
 					return;
 				}
-				if (Attachment.viewer) {
-					Attachment.viewer.close(null);
-					Attachment.viewer = null;
-				}
-				Pages.load(+Cfg.loadPages);
+				AttachedImage.closeImg();
+				Pages.loadPages(+Cfg.loadPages);
 			} else if (kc === 0x1B) {
-				if (Attachment.viewer) {
-					Attachment.viewer.close(null);
-					Attachment.viewer = null;
+				if (AttachedImage.viewer) {
+					AttachedImage.closeImg();
 					return;
 				}
 				if (this.cPost) {
@@ -8149,7 +8342,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 				this.lastPageOffset = 0;
 			} else if (kc === 0x801B) {
-				e.target.blur();
+				el.blur();
 			} else {
 				var post = void 0;
 				var globIdx = this.gKeys.indexOf(kc);
@@ -8170,14 +8363,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 						break;
 					case 4:
-						if (Attachment.viewer) {
-							Attachment.viewer.navigate(false);
+						if (AttachedImage.viewer) {
+							AttachedImage.viewer.navigate(false);
 						} else if (isThr || aib.page !== aib.firstPage) {
 							window.location.pathname = aib.getPageUrl(aib.b, isThr ? 0 : aib.page - 1);
 						}
 						break;
 					case 5:
-						if (e.target !== pr.txta && e.target !== pr.cap.textEl) {
+						if (el !== pr.txta && el !== pr.cap.textEl) {
 							return;
 						}
 						pr.subm.click();
@@ -8205,38 +8398,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 						break;
 					case 12:
-						if (e.target !== pr.txta) {
+						if (el !== pr.txta) {
 							return;
 						}
 						$id('de-btn-bold').click();
 						break;
 					case 13:
-						if (e.target !== pr.txta) {
+						if (el !== pr.txta) {
 							return;
 						}
 						$id('de-btn-italic').click();
 						break;
 					case 14:
-						if (e.target !== pr.txta) {
+						if (el !== pr.txta) {
 							return;
 						}
 						$id('de-btn-strike').click();
 						break;
 					case 15:
-						if (e.target !== pr.txta) {
+						if (el !== pr.txta) {
 							return;
 						}
 						$id('de-btn-spoil').click();
 						break;
 					case 16:
-						if (e.target !== pr.txta) {
+						if (el !== pr.txta) {
 							return;
 						}
 						$id('de-btn-code').click();
 						break;
 					case 17:
-						if (Attachment.viewer) {
-							Attachment.viewer.navigate(true);
+						if (AttachedImage.viewer) {
+							AttachedImage.viewer.navigate(true);
 						} else if (!isThr) {
 							var pageNum = DelForm.last.pageNum + 1;
 							if (pageNum <= aib.lastPage) {
@@ -8298,11 +8491,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			e.stopPropagation();
 			$pd(e);
 		},
-		pause: function pause() {
+		pauseHotKeys: function pauseHotKeys() {
 			this._paused = true;
 		},
 		readKeys: function () {
-			var _ref22 = _asyncToGenerator( regeneratorRuntime.mark(function _callee9() {
+			var _ref24 = _asyncToGenerator( regeneratorRuntime.mark(function _callee9() {
 				var str, keys, tKeys, mapFunc;
 				return regeneratorRuntime.wrap(function _callee9$(_context10) {
 					while (1) {
@@ -8403,7 +8596,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}));
 
 			function readKeys() {
-				return _ref22.apply(this, arguments);
+				return _ref24.apply(this, arguments);
 			}
 
 			return readKeys;
@@ -8515,7 +8708,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						return;
 					case 'focus':
 						if (HotKeys.enabled) {
-							HotKeys.pause();
+							HotKeys.pauseHotKeys();
 						}
 						this.cEl = el;
 						return;
@@ -8748,25 +8941,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if (typeof type === 'undefined') {
 			return;
 		}
-		var app = void 0,
-		    ext = void 0;
-		if (type === 2) {
-			app = 'application/x-rar-compressed';
-			ext = 'rar';
-		} else if (type === 1) {
-			app = 'application/zip';
-			ext = 'zip';
-		} else if (type === 0) {
-			app = 'application/x-7z-compressed';
-			ext = '7z';
-		} else if (type === 3) {
-			app = 'audio/ogg';
-			ext = 'ogg';
-		} else {
-			app = 'audio/mpeg';
-			ext = 'mp3';
-		}
-		nameLink.insertAdjacentHTML('afterend', '<a href="' + window.URL.createObjectURL(new Blob([nav.getUnsafeUint8Array(info.data, info.idx)], { type: app })) + '" class="de-img-' + (type > 2 ? 'audio' : 'arch') + '" title="' + Lng.downloadFile[lang] + '" download="' + fName.substring(0, fName.lastIndexOf('.')) + '.' + ext + '">.' + ext + '\'</a>');
+		var ext = ['7z', 'zip', 'rar', 'ogg', 'mp3'][type];
+		nameLink.insertAdjacentHTML('afterend', '<a href="' + window.URL.createObjectURL(new Blob([nav.getUnsafeUint8Array(info.data, info.idx)], {
+			type: ['application/x-7z-compressed', 'application/zip', 'application/x-rar-compressed', 'audio/ogg', 'audio/mpeg'][type]
+		})) + '" class="de-img-' + (type > 2 ? 'audio' : 'arch') + '" title="' + Lng.downloadFile[lang] + '" download="' + fName.substring(0, fName.lastIndexOf('.')) + '.' + ext + '">.' + ext + '</a>');
 	}
 
 	function downloadImgData(url) {
@@ -8806,17 +8984,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if (isPreImg || Cfg.preLoadImgs) {
 			var cImg = 1;
 			var mReqs = isPost ? 1 : 4;
-			var rjf = (isPreImg || Cfg.findImgFile) && new WorkerPool(mReqs, detectImgFile, function (e) {
+			var rarJpgFinder = (isPreImg || Cfg.findImgFile) && new WorkerPool(mReqs, detectImgFile, function (e) {
 				return console.error('File detector error:', 'line: ' + e.lineno + ' - ' + e.message);
 			});
 			pool = new TasksPool(mReqs, function (num, data) {
 				return downloadImgData(data[0]).then(function (imageData) {
-					var _data3 = _slicedToArray(data, 5),
+					var _data3 = _slicedToArray(data, 6),
 					    url = _data3[0],
 					    imgLink = _data3[1],
 					    iType = _data3[2],
-					    nExp = _data3[3],
-					    el = _data3[4];
+					    isRepToOrig = _data3[3],
+					    el = _data3[4],
+					    isVideo = _data3[5];
 
 					if (imageData) {
 						var fName = url.substring(url.lastIndexOf('/') + 1);
@@ -8825,14 +9004,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						nameLink.setAttribute('download', fName);
 						nameLink.setAttribute('de-href', nameLink.href);
 						imgLink.href = nameLink.href = window.URL.createObjectURL(new Blob([imageData], { type: iType }));
-						if (iType === 'video/webm' || iType === 'video/mp4' || iType === 'video/ogv') {
+						if (isVideo) {
 							el.setAttribute('de-video', '');
 						}
-						if (nExp) {
+						if (isRepToOrig) {
 							el.src = imgLink.href;
 						}
-						if (rjf) {
-							rjf.run(imageData.buffer, [imageData.buffer], function (info) {
+						if (rarJpgFinder) {
+							rarJpgFinder.runWorker(imageData.buffer, [imageData.buffer], function (info) {
 								return addImgFileIcon(nameLink, fName, info);
 							});
 						}
@@ -8848,8 +9027,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					Images_.afterpreload();
 					Images_.afterpreload = Images_.progressId = null;
 				}
-				if (rjf) {
-					rjf.clear();
+				if (rarJpgFinder) {
+					rarJpgFinder.clearWorkers();
 				}
 			});
 			Images_.preloading = true;
@@ -8860,27 +9039,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			if (!imgLink) {
 				continue;
 			}
-			var nExp = !!Cfg.openImgs;
+			var isRepToOrig = !!Cfg.openImgs;
 			var _url = imgLink.href;
 			var iType = getFileType(_url);
-			if (!iType) {
+			var isVideo = iType && (iType === 'video/webm' || iType === 'video/mp4' || iType === 'video/ogv');
+			if (!iType || isVideo && Cfg.preLoadImgs === 2) {
 				continue;
 			} else if (iType === 'image/gif') {
-				nExp &= Cfg.openImgs !== 3;
+				isRepToOrig &= Cfg.openImgs !== 3;
 			} else {
-				if (iType === 'video/webm' || iType === 'video/mp4' || iType === 'video/ogv') {
-					nExp = false;
+				if (isVideo) {
+					isRepToOrig = false;
 				}
-				nExp &= Cfg.openImgs !== 2;
+				isRepToOrig &= Cfg.openImgs !== 2;
 			}
 			if (pool) {
-				pool.run([_url, imgLink, iType, nExp, el]);
-			} else if (nExp) {
-				el.src = _url; 
+				pool.runTask([_url, imgLink, iType, isRepToOrig, el, isVideo]);
+			} else if (isRepToOrig) {
+				el.src = _url;
 			}
 		}
 		if (pool) {
-			pool.complete();
+			pool.completeTasks();
 		}
 	}
 
@@ -8901,11 +9081,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	function loadDocFiles(imgOnly) {
 		var progress = void 0,
 		    counter = void 0,
-		    count = 0,
 		    current = 1,
 		    warnings = '',
 		    tar = new TarBuilder();
 		var dc = imgOnly ? doc : doc.documentElement.cloneNode(true);
+		var els = [].concat(_toConsumableArray($Q(aib.qPostImg, $q('[de-form]', dc))));
+		var count = els.length;
 		Images_.pool = new TasksPool(4, function (num, data) {
 			return downloadImgData(data[0]).then(function (imgData) {
 				var _data4 = _slicedToArray(data, 4),
@@ -8952,6 +9133,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var docName = aib.dm + '-' + aib.b.replace(/[\\/:*?"<>|]/g, '') + '-' + aib.t;
 			if (!imgOnly) {
 				$q('head', dc).insertAdjacentHTML('beforeend', '<script type="text/javascript" src="data/dollscript.js" charset="utf-8"></script>');
+				$q('body', dc).classList.add('de-mode-local');
 				$each($Q('#de-css, #de-css-dynamic, #de-css-user', dc), $del);
 				var scriptStr = void 0;
 				var _localData = JSON.stringify({ dm: aib.dm, b: aib.b, t: aib.t });
@@ -8968,13 +9150,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			$del($id('de-popup-load-files'));
 			Images_.pool = tar = warnings = count = current = imgOnly = progress = counter = null;
 		});
-		var els = [].concat(_toConsumableArray($Q(aib.qPostImg, $q('[de-form]', dc))));
-		count += els.length;
 		els.forEach(function (el) {
 			var imgLink = $parent(el, 'A');
 			if (imgLink) {
 				var _url2 = imgLink.href;
-				Images_.pool.run([_url2, imgLink.getAttribute('download') || _url2.substring(_url2.lastIndexOf('/') + 1), el, imgLink]);
+				Images_.pool.runTask([_url2, imgLink.getAttribute('download') || _url2.substring(_url2.lastIndexOf('/') + 1), el, imgLink]);
 			}
 		});
 		if (!imgOnly) {
@@ -8992,7 +9172,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			});
 			$each($Q(aib.qRPost, dc), function (post, i) {
-				post.setAttribute('de-num', i === 0 ? aib.t : aib.getPNum(post));
+				return post.setAttribute('de-num', i === 0 ? aib.t : aib.getPNum(post));
 			});
 			var files = [];
 			var urlRegex = new RegExp('^\\/\\/?|^https?:\\/\\/([^\\/]*\\.)?' + quoteReg(aib.fch ? '4cdn.org' : aib.dm) + '\\/', 'i');
@@ -9020,14 +9200,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					fName = temp;
 				}
 				files.push(fName);
-				Images_.pool.run([url, fName, el, null]);
+				Images_.pool.runTask([url, fName, el, null]);
 				count++;
 			});
 		}
 		$popup('load-files', (imgOnly ? Lng.loadImage[lang] : Lng.loadFile[lang]) + ':<br>' + ('<progress id="de-loadprogress" value="0" max="' + count + '"></progress> <span>1</span>/' + count), true);
 		progress = $id('de-loadprogress');
 		counter = progress.nextElementSibling;
-		Images_.pool.complete();
+		Images_.pool.completeTasks();
 		els = null;
 	}
 
@@ -9094,7 +9274,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}, {
 			key: 'fix',
 			value: function fix(txt) {
-				var _this15 = this;
+				var _this17 = this;
 
 				if (this.disabled || !this.genDateTime && !this.getRPattern(txt)) {
 					return txt;
@@ -9112,7 +9292,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					    year = void 0;
 					for (var i = 0; i < 7; ++i) {
 						var a = args[i];
-						switch (_this15.pattern[i]) {
+						switch (_this17.pattern[i]) {
 							case 's':
 								second = a;break;
 							case 'i':
@@ -9130,8 +9310,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						}
 					}
 					var dtime = new Date(year.length === 2 ? '20' + year : year, month, day, hour, minute, second || 0);
-					dtime.setHours(dtime.getHours() + _this15.diff);
-					return _this15.genDateTime(dtime);
+					dtime.setHours(dtime.getHours() + _this17.diff);
+					return _this17.genDateTime(dtime);
 				});
 			}
 		}], [{
@@ -9225,7 +9405,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 					updateVideoList($id('de-video-list'), link, this.post.num);
 				}
 				if (loader && !dataObj) {
-					loader.run([link, isYtube, this, m[1]]);
+					loader.runTask([link, isYtube, this, m[1]]);
 				}
 			}
 		}, {
@@ -9287,7 +9467,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 				this.currentLink = this.currentLink || newLinks[0];
 				if (loader) {
-					loader.complete();
+					loader.completeTasks();
 				}
 			}
 		}, {
@@ -9336,8 +9516,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				el.innerHTML = txt + (enableJsapi ? '' : '<span class="de-video-resizer" title="' + Lng.expandVideo[lang] + '"></span>');
 				$show(el);
 				if (!enableJsapi) {
-					el.lastChild.onclick = function (_ref23) {
-						var target = _ref23.target;
+					el.lastChild.onclick = function (_ref25) {
+						var target = _ref25.target;
 						return target.parentNode.classList.toggle('de-video-expanded');
 					};
 				}
@@ -9430,12 +9610,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 		}, {
 			key: '_titlesLoaderHelper',
-			value: function _titlesLoaderHelper(_ref24, num) {
-				var _ref25 = _slicedToArray(_ref24, 4),
-				    link = _ref25[0],
-				    isYtube = _ref25[1],
-				    videoObj = _ref25[2],
-				    id = _ref25[3];
+			value: function _titlesLoaderHelper(_ref26, num) {
+				var _ref27 = _slicedToArray(_ref26, 4),
+				    link = _ref27[0],
+				    isYtube = _ref27[1],
+				    videoObj = _ref27[2],
+				    id = _ref27[3];
 
 				for (var _len3 = arguments.length, data = Array(_len3 > 2 ? _len3 - 2 : 0), _key2 = 2; _key2 < _len3; _key2++) {
 					data[_key2 - 2] = arguments[_key2];
@@ -9486,10 +9666,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		}
 
 		_createClass(VideosParser, [{
-			key: 'end',
-			value: function end() {
+			key: 'endParser',
+			value: function endParser() {
 				if (this._loader) {
-					this._loader.complete();
+					this._loader.completeTasks();
 				}
 			}
 		}, {
@@ -9541,7 +9721,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
-	function embedMediaLinks(data) {
+	function embedAudioLinks(data) {
 		var isPost = data instanceof AbstractPost;
 		if (Cfg.addMP3) {
 			var els = $Q('a[href*=".mp3"]', isPost ? data.el : data);
@@ -9599,7 +9779,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						clearTimeout(loadTO);
 					}
 					if (e.readyState === 4) {
-						if (e.status === 200 || aib.tiny && e.status === 400) {
+						if (aib.isAjaxStatusOK(e.status)) {
 							resolve(e);
 						} else {
 							reject(new AjaxError(e.status, e.statusText));
@@ -9641,14 +9821,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			if (params && params.onprogress) {
 				xhr.upload.onprogress = params.onprogress;
 			}
-			xhr.onreadystatechange = function (_ref26) {
-				var target = _ref26.target;
+			xhr.onreadystatechange = function (_ref28) {
+				var target = _ref28.target;
 
 				if (needTO) {
 					clearTimeout(_loadTO);
 				}
 				if (target.readyState === 4) {
-					if (target.status === 200 || aib.tiny && target.status === 400 || target.status === 0 && target.responseType === 'arraybuffer') {
+					if (aib.isAjaxStatusOK(target.status) || target.status === 0 && target.responseType === 'arraybuffer') {
 						resolve(target);
 					} else {
 						reject(new AjaxError(target.status, target.statusText));
@@ -9726,19 +9906,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		fixURL: function fixURL(url) {
 			return '' + url + (url.includes('?') ? '&' : '?') + 'nocache=' + Math.random();
 		},
-		clear: function clear() {
+		clearCache: function clearCache() {
 			this._data = new Map();
 		},
 		runCachedAjax: function runCachedAjax(url, useCache) {
-			var _this16 = this;
+			var _this18 = this;
 
-			var _ref27 = this._data.get(url) || {},
-			    hasCacheControl = _ref27.hasCacheControl,
-			    params = _ref27.params;
+			var _ref29 = this._data.get(url) || {},
+			    hasCacheControl = _ref29.hasCacheControl,
+			    params = _ref29.params;
 
 			var ajaxURL = hasCacheControl === false ? this.fixURL(url) : url;
 			return $ajax(ajaxURL, useCache && params || { useTimeout: true }).then(function (xhr) {
-				return _this16.saveData(url, xhr) ? xhr : $ajax(_this16.fixURL(url), useCache && params);
+				return _this18.saveData(url, xhr) ? xhr : $ajax(_this18.fixURL(url), useCache && params);
 			});
 		},
 		saveData: function saveData(url, xhr) {
@@ -9748,18 +9928,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var hasCacheControl = false;
 			var ajaxHeaders = 'getAllResponseHeaders' in xhr ? xhr.getAllResponseHeaders() : xhr.responseHeaders;
 			for (var _iterator5 = ajaxHeaders.split('\r\n'), _isArray5 = Array.isArray(_iterator5), _i10 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
-				var _ref28;
+				var _ref30;
 
 				if (_isArray5) {
 					if (_i10 >= _iterator5.length) break;
-					_ref28 = _iterator5[_i10++];
+					_ref30 = _iterator5[_i10++];
 				} else {
 					_i10 = _iterator5.next();
 					if (_i10.done) break;
-					_ref28 = _i10.value;
+					_ref30 = _i10.value;
 				}
 
-				var header = _ref28;
+				var header = _ref30;
 
 				var lHeader = header.toLowerCase();
 				if (lHeader.startsWith('cache-control: ')) {
@@ -9809,7 +9989,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			if (text.includes('</html>')) {
 				el = returnForm ? $q(aib.qDForm, $DOM(text)) : $DOM(text);
 			}
-			return el ? !checkArch ? el : [el, (xhr.responseURL || '').includes('/arch/')] : CancelablePromise.reject(new AjaxError(0, Lng.errCorruptData[lang]));
+			return !el ? CancelablePromise.reject(new AjaxError(0, Lng.errCorruptData[lang])) : checkArch ? [el, (xhr.responseURL || '').includes('/arch/')] : el;
 		}, function (err) {
 			return err.code === 304 ? null : CancelablePromise.reject(err);
 		});
@@ -9858,8 +10038,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 	var Pages = {
-		add: function add() {
-			var _this17 = this;
+		addPage: function addPage() {
+			var _this19 = this;
 
 			var pageNum = DelForm.last.pageNum + 1;
 			if (this._adding || pageNum > aib.lastPage) {
@@ -9868,33 +10048,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this._adding = true;
 			DelForm.last.el.insertAdjacentHTML('beforeend', '<div class="de-addpage-wait"><hr>' + ('<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
 			MyPosts.purge();
-			this._addPromise = ajaxLoad(aib.getPageUrl(aib.b, pageNum)).then(function (formEl) {
-				if (!_this17._addForm(formEl, pageNum).firstThr) {
-					_this17._endAdding();
-					_this17.add();
-					return CancelablePromise.reject(new CancelError());
+			this._addingPromise = ajaxLoad(aib.getPageUrl(aib.b, pageNum)).then(function (formEl) {
+				if (_this19._addForm(formEl, pageNum).firstThr) {
+					return _this19._updateForms(DelForm.last);
 				}
-				return _this17._updateForms(DelForm.last);
+				_this19._endAdding();
+				_this19.addPage();
+				return CancelablePromise.reject(new CancelError());
 			}).then(function () {
-				return _this17._endAdding();
+				return _this19._endAdding();
 			}).catch(function (e) {
 				if (!(e instanceof CancelError)) {
 					$popup('add-page', getErrorMessage(e));
-					_this17._endAdding();
+					_this19._endAdding();
 				}
 			});
 		},
-		load: function () {
-			var _ref29 = _asyncToGenerator( regeneratorRuntime.mark(function _callee10(count) {
-				var _iterator6, _isArray6, _i11, _ref30, form, i, len, first;
+		loadPages: function () {
+			var _ref31 = _asyncToGenerator( regeneratorRuntime.mark(function _callee10(count) {
+				var _iterator6, _isArray6, _i11, _ref32, form, i, len, first;
 
 				return regeneratorRuntime.wrap(function _callee10$(_context11) {
 					while (1) {
 						switch (_context11.prev = _context11.next) {
 							case 0:
 								$popup('load-pages', Lng.loading[lang], true);
-								if (this._addPromise) {
-									this._addPromise.cancel();
+								if (this._addingPromise) {
+									this._addingPromise.cancelPromise();
 									this._endAdding();
 								}
 								PviewsCache.purge();
@@ -9902,10 +10082,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								pByEl = new Map();
 								pByNum = new Map();
 								Post.hiddenNums = new Set();
-								if (Attachment.viewer) {
-									Attachment.viewer.close(null);
-									Attachment.viewer = null;
-								}
+								AttachedImage.closeImg();
 								if (pr.isQuick) {
 									pr.clearForm();
 								}
@@ -9926,7 +10103,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return _context11.abrupt('break', 29);
 
 							case 14:
-								_ref30 = _iterator6[_i11++];
+								_ref32 = _iterator6[_i11++];
 								_context11.next = 21;
 								break;
 
@@ -9941,13 +10118,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								return _context11.abrupt('break', 29);
 
 							case 20:
-								_ref30 = _i11.value;
+								_ref32 = _i11.value;
 
 							case 21:
-								form = _ref30;
+								form = _ref32;
 
-								$each($Q('a[href^="blob:"]', form.el), function (a) {
-									return URL.revokeObjectURL(a.href);
+								$each($Q('a[href^="blob:"]', form.el), function (el) {
+									return URL.revokeObjectURL(el.href);
 								});
 								$hide(form.el);
 
@@ -10024,16 +10201,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}, _callee10, this, [[32, 41]]);
 			}));
 
-			function load(_x31) {
-				return _ref29.apply(this, arguments);
+			function loadPages(_x31) {
+				return _ref31.apply(this, arguments);
 			}
 
-			return load;
+			return loadPages;
 		}(),
 
 
 		_adding: false,
-		_addPromise: null,
+		_addingPromise: null,
 		_addForm: function _addForm(formEl, pageNum) {
 			formEl = doc.adoptNode(formEl);
 			$hide(formEl = aib.fixHTML(formEl));
@@ -10050,10 +10227,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		_endAdding: function _endAdding() {
 			$del($q('.de-addpage-wait'));
 			this._adding = false;
-			this._addPromise = null;
+			this._addingPromise = null;
 		},
 		_updateForms: function () {
-			var _ref31 = _asyncToGenerator( regeneratorRuntime.mark(function _callee11(newForm) {
+			var _ref33 = _asyncToGenerator( regeneratorRuntime.mark(function _callee11(newForm) {
 				return regeneratorRuntime.wrap(function _callee11$(_context12) {
 					while (1) {
 						switch (_context12.prev = _context12.next) {
@@ -10061,20 +10238,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 								_context12.t0 = readPostsData;
 								_context12.t1 = newForm.firstThr.op;
 								_context12.next = 4;
-								return getStoredObj('DESU_Favorites');
+								return readFavorites();
 
 							case 4:
 								_context12.t2 = _context12.sent;
 								(0, _context12.t0)(_context12.t1, _context12.t2);
 
+								embedPostMsgImages(newForm.el);
 								if (pr.passw) {
 									PostForm.setUserPassw();
 								}
 								if (HotKeys.enabled) {
-									HotKeys.clear();
+									HotKeys.clearCPost();
 								}
 
-							case 8:
+							case 9:
 							case 'end':
 								return _context12.stop();
 						}
@@ -10083,7 +10261,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}));
 
 			function _updateForms(_x32) {
-				return _ref31.apply(this, arguments);
+				return _ref33.apply(this, arguments);
 			}
 
 			return _updateForms;
@@ -10104,7 +10282,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		if ((e.type === 'wheel' ? e.deltaY : -('wheelDeltaY' in e ? e.wheelDeltaY : e.wheelDelta)) > 0) {
 			window.requestAnimationFrame(function () {
 				if (Thread.last.bottom - 150 < Post.sizing.wHeight) {
-					Pages.add();
+					Pages.addPage();
 				}
 			});
 		}
@@ -10114,7 +10292,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	var Spells = Object.create({
 		hash: null,
 		get hiders() {
-			this._init();
+			this._initSpells();
 			return this.hiders;
 		},
 		get list() {
@@ -10141,36 +10319,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 				if (reps) {
 					for (var _iterator7 = reps, _isArray7 = Array.isArray(_iterator7), _i12 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-						var _ref32;
+						var _ref34;
 
 						if (_isArray7) {
 							if (_i12 >= _iterator7.length) break;
-							_ref32 = _iterator7[_i12++];
+							_ref34 = _iterator7[_i12++];
 						} else {
 							_i12 = _iterator7.next();
 							if (_i12.done) break;
-							_ref32 = _i12.value;
+							_ref34 = _i12.value;
 						}
 
-						var rep = _ref32;
+						var rep = _ref34;
 
 						str += this._decompileRep(rep, false) + '\n';
 					}
 				}
 				if (oreps) {
 					for (var _iterator8 = oreps, _isArray8 = Array.isArray(_iterator8), _i13 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-						var _ref33;
+						var _ref35;
 
 						if (_isArray8) {
 							if (_i13 >= _iterator8.length) break;
-							_ref33 = _iterator8[_i13++];
+							_ref35 = _iterator8[_i13++];
 						} else {
 							_i13 = _iterator8.next();
 							if (_i13.done) break;
-							_ref33 = _i13.value;
+							_ref35 = _i13.value;
 						}
 
-						var orep = _ref33;
+						var orep = _ref35;
 
 						str += this._decompileRep(orep, true) + '\n';
 					}
@@ -10190,14 +10368,14 @@ false, false, false, false, false,
 true, true];
 		},
 		get outreps() {
-			this._init();
+			this._initSpells();
 			return this.outreps;
 		},
 		get reps() {
-			this._init();
+			this._initSpells();
 			return this.reps;
 		},
-		add: function add(type, arg, isNeg) {
+		addSpell: function addSpell(type, arg, isNeg) {
 			var fld = $id('de-spell-txt');
 			var val = fld && fld.value;
 			var chk = $q('input[info="hideBySpell"]');
@@ -10283,10 +10461,10 @@ true, true];
 					return spell;
 				}
 
-				var _ref34 = wipeMsg || [],
-				    _ref35 = _slicedToArray(_ref34, 2),
-				    msgBit = _ref35[0],
-				    msgData = _ref35[1];
+				var _ref36 = wipeMsg || [],
+				    _ref37 = _slicedToArray(_ref36, 2),
+				    msgBit = _ref37[0],
+				    msgData = _ref37[1];
 
 				var names = [];
 				var bits = {
@@ -10332,7 +10510,7 @@ true, true];
 				return spell + '(' + String(val) + ')';
 			}
 		},
-		disable: function disable() {
+		disableSpells: function disableSpells() {
 			var value = null;
 			var configurable = true;
 			Object.defineProperties(this, {
@@ -10344,18 +10522,18 @@ true, true];
 		},
 		outReplace: function outReplace(txt) {
 			for (var _iterator9 = this.outreps, _isArray9 = Array.isArray(_iterator9), _i14 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-				var _ref36;
+				var _ref38;
 
 				if (_isArray9) {
 					if (_i14 >= _iterator9.length) break;
-					_ref36 = _iterator9[_i14++];
+					_ref38 = _iterator9[_i14++];
 				} else {
 					_i14 = _iterator9.next();
 					if (_i14.done) break;
-					_ref36 = _i14.value;
+					_ref38 = _i14.value;
 				}
 
-				var orep = _ref36;
+				var orep = _ref38;
 
 				txt = txt.replace(orep[0], orep[1]);
 			}
@@ -10376,18 +10554,18 @@ true, true];
 		},
 		replace: function replace(txt) {
 			for (var _iterator10 = this.reps, _isArray10 = Array.isArray(_iterator10), _i15 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
-				var _ref37;
+				var _ref39;
 
 				if (_isArray10) {
 					if (_i15 >= _iterator10.length) break;
-					_ref37 = _iterator10[_i15++];
+					_ref39 = _iterator10[_i15++];
 				} else {
 					_i15 = _iterator10.next();
 					if (_i15.done) break;
-					_ref37 = _i15.value;
+					_ref39 = _i15.value;
 				}
 
-				var rep = _ref37;
+				var rep = _ref39;
 
 				txt = txt.replace(rep[0], rep[1]);
 			}
@@ -10399,16 +10577,16 @@ true, true];
 			}
 			if (!Cfg.hideBySpell) {
 				SpellsRunner.unhideAll();
-				this.disable();
+				this.disableSpells();
 				return;
 			}
 			this._optimize(spells);
 			if (this.hiders) {
 				var sRunner = new SpellsRunner();
 				for (var post = Thread.first.op; post; post = post.next) {
-					sRunner.run(post);
+					sRunner.runSpells(post);
 				}
-				sRunner.end();
+				sRunner.endSpells();
 			} else {
 				SpellsRunner.unhideAll();
 			}
@@ -10426,10 +10604,9 @@ true, true];
 				if (!val) {
 					closePopup('err-spell');
 					SpellsRunner.unhideAll();
-					this.disable();
+					this.disableSpells();
 					saveCfg('spells', JSON.stringify([Date.now(), null, null, null]));
-					locStorage['__de-spells'] = '{"hide": false, "data": null}';
-					locStorage.removeItem('__de-spells');
+					sendStorageEvent('__de-spells', '{ hide: false, data: null }');
 				}
 				$q('input[info="hideBySpell"]').checked = false;
 			}
@@ -10465,7 +10642,7 @@ true, true];
 			}
 			return [dScope, dScope.length > 2 || hScope];
 		},
-		_init: function _init() {
+		_initSpells: function _initSpells() {
 			if (!Cfg.hideBySpell) {
 				var value = null;
 				var configurable = true;
@@ -10490,24 +10667,24 @@ true, true];
 			if (spells) {
 				this._optimize(spells);
 			} else {
-				this.disable();
+				this.disableSpells();
 			}
 		},
 		_initHiders: function _initHiders(data) {
 			if (data) {
 				for (var _iterator11 = data, _isArray11 = Array.isArray(_iterator11), _i16 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
-					var _ref38;
+					var _ref40;
 
 					if (_isArray11) {
 						if (_i16 >= _iterator11.length) break;
-						_ref38 = _iterator11[_i16++];
+						_ref40 = _iterator11[_i16++];
 					} else {
 						_i16 = _iterator11.next();
 						if (_i16.done) break;
-						_ref38 = _i16.value;
+						_ref40 = _i16.value;
 					}
 
-					var item = _ref38;
+					var item = _ref40;
 
 					var val = item[1];
 					if (val) {
@@ -10529,18 +10706,18 @@ true, true];
 		_initReps: function _initReps(data) {
 			if (data) {
 				for (var _iterator12 = data, _isArray12 = Array.isArray(_iterator12), _i17 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
-					var _ref39;
+					var _ref41;
 
 					if (_isArray12) {
 						if (_i17 >= _iterator12.length) break;
-						_ref39 = _iterator12[_i17++];
+						_ref41 = _iterator12[_i17++];
 					} else {
 						_i17 = _iterator12.next();
 						if (_i17.done) break;
-						_ref39 = _i17.value;
+						_ref41 = _i17.value;
 					}
 
-					var item = _ref39;
+					var item = _ref41;
 
 					item[0] = toRegExp(item[0], false);
 				}
@@ -10556,23 +10733,23 @@ true, true];
 		_optimizeReps: function _optimizeReps(data) {
 			var rv = [];
 			for (var _iterator13 = data, _isArray13 = Array.isArray(_iterator13), _i18 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
-				var _ref40;
+				var _ref42;
 
 				if (_isArray13) {
 					if (_i18 >= _iterator13.length) break;
-					_ref40 = _iterator13[_i18++];
+					_ref42 = _iterator13[_i18++];
 				} else {
 					_i18 = _iterator13.next();
 					if (_i18.done) break;
-					_ref40 = _i18.value;
+					_ref42 = _i18.value;
 				}
 
-				var _ref41 = _ref40,
-				    _ref42 = _slicedToArray(_ref41, 4),
-				    r0 = _ref42[0],
-				    r1 = _ref42[1],
-				    r2 = _ref42[2],
-				    r3 = _ref42[3];
+				var _ref43 = _ref42,
+				    _ref44 = _slicedToArray(_ref43, 4),
+				    r0 = _ref44[0],
+				    r1 = _ref44[1],
+				    r2 = _ref44[2],
+				    r3 = _ref44[3];
 
 				if (!r0 || r0 === aib.b && (r1 === -1 ? !aib.t : !r1 || +r1 === aib.t)) {
 					rv.push([r2, r3]);
@@ -10668,8 +10845,7 @@ true, true];
 			}
 		},
 		_sync: function _sync(data) {
-			locStorage['__de-spells'] = JSON.stringify({ hide: !!Cfg.hideBySpell, data: data });
-			locStorage.removeItem('__de-spells');
+			sendStorageEvent('__de-spells', { hide: !!Cfg.hideBySpell, data: data });
 		}
 	});
 
@@ -10918,7 +11094,7 @@ true, true];
 				switch (spellIdx) {
 					case 4:
 						m = str.match(/^\((\d+)\)/);
-						if (+m[1] === +m[1]) {
+						if (!isNaN(+m[1])) {
 							return [i + m[0].length, [spellType, +m[1], scope]];
 						}
 						break;
@@ -11055,33 +11231,33 @@ true, true];
 			this._endPromise = null;
 			this._spells = Spells.hiders;
 			if (!this._spells) {
-				this.run = SpellsRunner._unhidePost;
+				this.runSpells = SpellsRunner._unhidePost;
 				SpellsRunner.cachedData = null;
 			}
 		}
 
 		_createClass(SpellsRunner, [{
-			key: 'end',
-			value: function end() {
-				var _this18 = this;
+			key: 'endSpells',
+			value: function endSpells() {
+				var _this20 = this;
 
 				if (this._endPromise) {
 					this._endPromise.then(function () {
-						return _this18._savePostsHelper();
+						return _this20._savePostsHelper();
 					});
 				} else {
 					this._savePostsHelper();
 				}
 			}
 		}, {
-			key: 'run',
-			value: function run(post) {
-				var _this19 = this;
+			key: 'runSpells',
+			value: function runSpells(post) {
+				var _this21 = this;
 
-				var res = new SpellsInterpreter(post, this._spells).run();
+				var res = new SpellsInterpreter(post, this._spells).runInterpreter();
 				if (res instanceof Promise) {
 					res = res.then(function (val) {
-						return _this19._checkRes(post, val);
+						return _this21._checkRes(post, val);
 					});
 					this._endPromise = this._endPromise ? this._endPromise.then(function () {
 						return res;
@@ -11092,11 +11268,11 @@ true, true];
 			}
 		}, {
 			key: '_checkRes',
-			value: function _checkRes(post, _ref43) {
-				var _ref44 = _slicedToArray(_ref43, 3),
-				    hasNumSpell = _ref44[0],
-				    val = _ref44[1],
-				    msg = _ref44[2];
+			value: function _checkRes(post, _ref45) {
+				var _ref46 = _slicedToArray(_ref45, 3),
+				    hasNumSpell = _ref46[0],
+				    val = _ref46[1],
+				    msg = _ref46[2];
 
 				this.hasNumSpell |= hasNumSpell;
 				if (val) {
@@ -11181,9 +11357,9 @@ true, true];
 		}
 
 		_createClass(SpellsInterpreter, [{
-			key: 'run',
-			value: function run() {
-				var _this20 = this;
+			key: 'runInterpreter',
+			value: function runInterpreter() {
+				var _this22 = this;
 
 				var rv = void 0,
 				    stopCheck = void 0;
@@ -11209,7 +11385,7 @@ true, true];
 						if (val instanceof Promise) {
 							this._ctx.push(len, scope, ++i, isNegScope);
 							return val.then(function (v) {
-								return _this20._asyncContinue(v);
+								return _this22._asyncContinue(v);
 							});
 						}
 
@@ -11252,7 +11428,7 @@ true, true];
 				    rv = _checkRes5[0],
 				    stopCheck = _checkRes5[1];
 
-				return stopCheck ? [this.hasNumSpell, rv, rv ? this._getMsg() : null] : this.run();
+				return stopCheck ? [this.hasNumSpell, rv, rv ? this._getMsg() : null] : this.runInterpreter();
 			}
 		}, {
 			key: '_checkRes',
@@ -11272,36 +11448,36 @@ true, true];
 			value: function _getMsg() {
 				var rv = [];
 				for (var _iterator14 = this._triggeredSpellsStack, _isArray14 = Array.isArray(_iterator14), _i20 = 0, _iterator14 = _isArray14 ? _iterator14 : _iterator14[Symbol.iterator]();;) {
-					var _ref45;
+					var _ref47;
 
 					if (_isArray14) {
 						if (_i20 >= _iterator14.length) break;
-						_ref45 = _iterator14[_i20++];
+						_ref47 = _iterator14[_i20++];
 					} else {
 						_i20 = _iterator14.next();
 						if (_i20.done) break;
-						_ref45 = _i20.value;
+						_ref47 = _i20.value;
 					}
 
-					var spellEls = _ref45;
+					var spellEls = _ref47;
 
 					for (var _iterator15 = spellEls, _isArray15 = Array.isArray(_iterator15), _i21 = 0, _iterator15 = _isArray15 ? _iterator15 : _iterator15[Symbol.iterator]();;) {
-						var _ref46;
+						var _ref48;
 
 						if (_isArray15) {
 							if (_i21 >= _iterator15.length) break;
-							_ref46 = _iterator15[_i21++];
+							_ref48 = _iterator15[_i21++];
 						} else {
 							_i21 = _iterator15.next();
 							if (_i21.done) break;
-							_ref46 = _i21.value;
+							_ref48 = _i21.value;
 						}
 
-						var _ref47 = _ref46,
-						    _ref48 = _slicedToArray(_ref47, 3),
-						    isNeg = _ref48[0],
-						    spell = _ref48[1],
-						    wipeMsg = _ref48[2];
+						var _ref49 = _ref48,
+						    _ref50 = _slicedToArray(_ref49, 3),
+						    isNeg = _ref50[0],
+						    spell = _ref50[1],
+						    wipeMsg = _ref50[2];
 
 						rv.push(Spells.decompileSpell(spell[0] & 0xFF, isNeg, spell[1], spell[2], wipeMsg));
 					}
@@ -11367,8 +11543,8 @@ true, true];
 		}, {
 			key: '_ihash',
 			value: function () {
-				var _ref49 = _asyncToGenerator( regeneratorRuntime.mark(function _callee12(val) {
-					var _iterator16, _isArray16, _i22, _ref50, image;
+				var _ref51 = _asyncToGenerator( regeneratorRuntime.mark(function _callee12(val) {
+					var _iterator16, _isArray16, _i22, _ref52, image;
 
 					return regeneratorRuntime.wrap(function _callee12$(_context13) {
 						while (1) {
@@ -11390,7 +11566,7 @@ true, true];
 									return _context13.abrupt('break', 23);
 
 								case 4:
-									_ref50 = _iterator16[_i22++];
+									_ref52 = _iterator16[_i22++];
 									_context13.next = 11;
 									break;
 
@@ -11405,11 +11581,11 @@ true, true];
 									return _context13.abrupt('break', 23);
 
 								case 10:
-									_ref50 = _i22.value;
+									_ref52 = _i22.value;
 
 								case 11:
-									image = _ref50;
-									_context13.t0 = image instanceof Attachment;
+									image = _ref52;
+									_context13.t0 = image instanceof AttachedImage;
 
 									if (!_context13.t0) {
 										_context13.next = 19;
@@ -11448,7 +11624,7 @@ true, true];
 				}));
 
 				function _ihash(_x34) {
-					return _ref49.apply(this, arguments);
+					return _ref51.apply(this, arguments);
 				}
 
 				return _ihash;
@@ -11467,34 +11643,34 @@ true, true];
 					return images.hasAttachments;
 				}
 				for (var _iterator17 = images, _isArray17 = Array.isArray(_iterator17), _i23 = 0, _iterator17 = _isArray17 ? _iterator17 : _iterator17[Symbol.iterator]();;) {
-					var _ref51;
+					var _ref53;
 
 					if (_isArray17) {
 						if (_i23 >= _iterator17.length) break;
-						_ref51 = _iterator17[_i23++];
+						_ref53 = _iterator17[_i23++];
 					} else {
 						_i23 = _iterator17.next();
 						if (_i23.done) break;
-						_ref51 = _i23.value;
+						_ref53 = _i23.value;
 					}
 
-					var image = _ref51;
+					var image = _ref53;
 
-					if (!(image instanceof Attachment)) {
+					if (!(image instanceof AttachedImage)) {
 						continue;
 					}
 					if (weightVals) {
 						var w = image.weight;
-						var hide = void 0;
+						var isHide = void 0;
 						switch (compareRule) {
 							case 0:
-								hide = w >= weightVals[0] && w <= weightVals[1];break;
+								isHide = w >= weightVals[0] && w <= weightVals[1];break;
 							case 1:
-								hide = w < weightVals[0];break;
+								isHide = w < weightVals[0];break;
 							case 2:
-								hide = w > weightVals[0];break;
+								isHide = w > weightVals[0];break;
 						}
-						if (!hide) {
+						if (!isHide) {
 							continue;
 						} else if (!sizeVals) {
 							return true;
@@ -11528,20 +11704,20 @@ true, true];
 			key: '_imgn',
 			value: function _imgn(val) {
 				for (var _iterator18 = this._post.images, _isArray18 = Array.isArray(_iterator18), _i24 = 0, _iterator18 = _isArray18 ? _iterator18 : _iterator18[Symbol.iterator]();;) {
-					var _ref52;
+					var _ref54;
 
 					if (_isArray18) {
 						if (_i24 >= _iterator18.length) break;
-						_ref52 = _iterator18[_i24++];
+						_ref54 = _iterator18[_i24++];
 					} else {
 						_i24 = _iterator18.next();
 						if (_i24.done) break;
-						_ref52 = _i24.value;
+						_ref54 = _i24.value;
 					}
 
-					var image = _ref52;
+					var image = _ref54;
 
-					if (image instanceof Attachment && val.test(image.name)) {
+					if (image instanceof AttachedImage && val.test(image.name)) {
 						return true;
 					}
 				}
@@ -11608,32 +11784,32 @@ true, true];
 					return false;
 				}
 				for (var _iterator19 = videos.vData, _isArray19 = Array.isArray(_iterator19), _i25 = 0, _iterator19 = _isArray19 ? _iterator19 : _iterator19[Symbol.iterator]();;) {
-					var _ref53;
+					var _ref55;
 
 					if (_isArray19) {
 						if (_i25 >= _iterator19.length) break;
-						_ref53 = _iterator19[_i25++];
+						_ref55 = _iterator19[_i25++];
 					} else {
 						_i25 = _iterator19.next();
 						if (_i25.done) break;
-						_ref53 = _i25.value;
+						_ref55 = _i25.value;
 					}
 
-					var siteData = _ref53;
+					var siteData = _ref55;
 
 					for (var _iterator20 = siteData, _isArray20 = Array.isArray(_iterator20), _i26 = 0, _iterator20 = _isArray20 ? _iterator20 : _iterator20[Symbol.iterator]();;) {
-						var _ref54;
+						var _ref56;
 
 						if (_isArray20) {
 							if (_i26 >= _iterator20.length) break;
-							_ref54 = _iterator20[_i26++];
+							_ref56 = _iterator20[_i26++];
 						} else {
 							_i26 = _iterator20.next();
 							if (_i26.done) break;
-							_ref54 = _i26.value;
+							_ref56 = _i26.value;
 						}
 
-						var data = _ref54;
+						var data = _ref56;
 
 						if (isAuthorSpell ? val === data[1] : val.test(data[0])) {
 							return true;
@@ -11794,7 +11970,7 @@ true, true];
 
 	var PostForm = function () {
 		function PostForm(form) {
-			var _this21 = this;
+			var _this23 = this;
 
 			var oeForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 			var ignoreForm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
@@ -11829,7 +12005,7 @@ true, true];
 			this.form = form;
 			this.files = null;
 			this.txta = $q('tr:not([style*="none"]) textarea:not([style*="display:none"])', form);
-			this.subm = $q('tr input[type="submit"]', form);
+			this.subm = $q(aib.qFormSubm, form);
 			this.name = $q(aib.qFormName, form);
 			this.mail = $q(aib.qFormMail, form);
 			this.subj = $q(aib.qFormSubj, form);
@@ -11873,10 +12049,10 @@ true, true];
 				PostForm.hideField(this.subj);
 			}
 			window.addEventListener('load', function () {
-				if (Cfg.userName && _this21.name) {
+				if (Cfg.userName && _this23.name) {
 					setTimeout(PostForm.setUserName, 1e3);
 				}
-				if (_this21.passw) {
+				if (_this23.passw) {
 					setTimeout(PostForm.setUserPassw, 1e3);
 				}
 			});
@@ -11917,7 +12093,7 @@ true, true];
 					this.txta.value = '';
 				}
 				if (this.files) {
-					this.files.clear();
+					this.files.clearInputs();
 				}
 				if (this.video) {
 					this.video.value = '';
@@ -11939,7 +12115,7 @@ true, true];
 			key: 'handleEvent',
 			value: function handleEvent(e) {
 				var el = e.target;
-				if (el.tagName !== 'SPAN') {
+				if (el.tagName !== 'DIV') {
 					el = el.parentNode;
 				}
 				var _el8 = el,
@@ -12093,9 +12269,7 @@ true, true];
 			key: 'updateLanguage',
 			value: function updateLanguage() {
 				this.txta.title = Lng.pasteImage[lang];
-				if (!aib.tiny) {
-					this.subm.value = Lng.reply[lang];
-				}
+				aib.updateSubmitBtn(this.subm);
 			}
 		}, {
 			key: 'updatePAreaBtns',
@@ -12108,7 +12282,7 @@ true, true];
 		}, {
 			key: '_initAjaxPosting',
 			value: function _initAjaxPosting() {
-				var _this22 = this;
+				var _this24 = this;
 
 				var el = void 0;
 				if (aib.qFormRedir && (el = $q(aib.qFormRedir, this.form))) {
@@ -12117,7 +12291,7 @@ true, true];
 				this.form.onsubmit = function (e) {
 					$pd(e);
 					$popup('upload', Lng.sending[lang], true);
-					html5Submit(_this22.form, _this22.subm, true).then(checkUpload).catch(function (e) {
+					html5Submit(_this24.form, _this24.subm, true).then(checkUpload).catch(function (e) {
 						return $popup('upload', getErrorMessage(e));
 					});
 				};
@@ -12125,7 +12299,7 @@ true, true];
 		}, {
 			key: '_initCaptcha',
 			value: function _initCaptcha() {
-				var _this23 = this;
+				var _this25 = this;
 
 				var capEl = $q('input[type="text"][name*="aptcha"], *[id*="captcha"], *[class*="captcha"]', this.form);
 				if (!capEl || aib.fch && doc.cookie.includes('pass_enabled')) {
@@ -12134,21 +12308,21 @@ true, true];
 				}
 				this.cap = new Captcha(capEl, this.tNum);
 				var updCapFn = function updCapFn() {
-					_this23.cap.addCaptcha();
-					_this23.cap.updOutdated();
+					_this25.cap.addCaptcha();
+					_this25.cap.updateOutdated();
 				};
 				this.txta.addEventListener('focus', updCapFn);
 				if (this.files) {
 					this.files.onchange = updCapFn;
 				}
 				this.form.addEventListener('click', function () {
-					return _this23.cap.addCaptcha();
+					return _this25.cap.addCaptcha();
 				}, true);
 			}
 		}, {
 			key: '_initFileInputs',
 			value: function _initFileInputs() {
-				var _this24 = this;
+				var _this26 = this;
 
 				var fileEl = $q('tr input[type="file"]', this.form);
 				if (!fileEl) {
@@ -12160,59 +12334,57 @@ true, true];
 				this.files = new Files(this, $q('tr input[type="file"]', this.form));
 				window.addEventListener('load', function () {
 					return setTimeout(function () {
-						if (!_this24.files.filesCount) {
-							_this24.files.clear();
-						}
+						return !_this26.files.filesCount && _this26.files.clearInputs();
 					}, 0);
 				});
 			}
 		}, {
 			key: '_initSubmit',
 			value: function _initSubmit() {
-				var _this25 = this;
+				var _this27 = this;
 
 				this.subm.addEventListener('click', function (e) {
-					if (Cfg.warnSubjTrip && _this25.subj && /#.|##./.test(_this25.subj.value)) {
+					if (Cfg.warnSubjTrip && _this27.subj && /#.|##./.test(_this27.subj.value)) {
 						$pd(e);
 						$popup('upload', Lng.subjHasTrip[lang]);
 						return;
 					}
-					var val = _this25.txta.value;
+					var val = _this27.txta.value;
 					if (Spells.outreps) {
 						val = Spells.outReplace(val);
 					}
-					if (_this25.tNum && pByNum.get(_this25.tNum).subj === 'Dollchan Extension Tools') {
+					if (_this27.tNum && pByNum.get(_this27.tNum).subj === 'Dollchan Extension Tools') {
 						var temp = '\n\n' + PostForm._wrapText(aib.markupTags[5], '-'.repeat(50) + '\n' + nav.ua + '\nv' + version + '.' + commit + (nav.isESNext ? '.es6' : '') + ' [' + nav.scriptInstall + ']')[1];
 						if (!val.includes(temp)) {
 							val += temp;
 						}
 					}
-					_this25.txta.value = val;
+					_this27.txta.value = val;
 					if (Cfg.ajaxPosting) {
 						$popup('upload', Lng.checking[lang], true);
 					}
-					if (_this25.video && (val = _this25.video.value) && (val = val.match(Videos.ytReg))) {
-						_this25.video.value = 'http://www.youtube.com/watch?v=' + val[1];
+					if (_this27.video && (val = _this27.video.value) && (val = val.match(Videos.ytReg))) {
+						_this27.video.value = 'http://www.youtube.com/watch?v=' + val[1];
 					}
-					if (_this25.isQuick) {
-						$hide(_this25.pForm);
-						$hide(_this25.qArea);
-						$after(_this25._pBtn[+_this25.isBottom], _this25.pForm);
+					if (_this27.isQuick) {
+						$hide(_this27.pForm);
+						$hide(_this27.qArea);
+						$after(_this27._pBtn[+_this27.isBottom], _this27.pForm);
 					}
-					updater.pause();
+					updater.pauseUpdater();
 				});
 			}
 		}, {
 			key: '_initTextarea',
 			value: function _initTextarea() {
-				var _this26 = this;
+				var _this28 = this;
 
 				var el = this.txta;
 				if (aib.dobr) {
 					el.removeAttribute('id');
 				}
 				el.classList.add('de-textarea');
-				el.style.cssText = 'width: ' + Cfg.textaWidth + 'px; height: ' + Cfg.textaHeight + 'px;';
+				el.style.cssText = 'width: ' + Cfg.textaWidth + 'px !important; height: ' + Cfg.textaHeight + 'px !important;';
 				el.addEventListener('keypress', function (e) {
 					var code = e.charCode || e.keyCode;
 					if ((code === 33  || code === 34 ) && e.which === 0) {
@@ -12223,21 +12395,21 @@ true, true];
 				el.addEventListener('paste', function (e) {
 					if ('clipboardData' in e) {
 						for (var _iterator21 = e.clipboardData.items, _isArray21 = Array.isArray(_iterator21), _i30 = 0, _iterator21 = _isArray21 ? _iterator21 : _iterator21[Symbol.iterator]();;) {
-							var _ref55;
+							var _ref57;
 
 							if (_isArray21) {
 								if (_i30 >= _iterator21.length) break;
-								_ref55 = _iterator21[_i30++];
+								_ref57 = _iterator21[_i30++];
 							} else {
 								_i30 = _iterator21.next();
 								if (_i30.done) break;
-								_ref55 = _i30.value;
+								_ref57 = _i30.value;
 							}
 
-							var item = _ref55;
+							var item = _ref57;
 
 							if (item.kind === 'file') {
-								var inputs = _this26.files._inputs;
+								var inputs = _this28.files._inputs;
 								for (var i = 0, len = inputs.length; i < len; ++i) {
 									var input = inputs[i];
 									if (!input.hasFile) {
@@ -12251,11 +12423,15 @@ true, true];
 					}
 				});
 				if (nav.isFirefox) {
-					el.addEventListener('mouseup', function (_ref56) {
-						var target = _ref56.target;
+					el.addEventListener('mouseup', function (_ref58) {
+						var target = _ref58.target;
+						var _target$style = target.style,
+						    width = _target$style.width,
+						    height = _target$style.height;
 
-						saveCfg('textaWidth', parseInt(target.style.width, 10));
-						saveCfg('textaHeight', parseInt(target.style.height, 10));
+						target.style.cssText = 'width: ' + width + ' !important; height: ' + height + ' !important;';
+						saveCfg('textaWidth', parseInt(width, 10));
+						saveCfg('textaHeight', parseInt(height, 10));
 					});
 					return;
 				}
@@ -12272,8 +12448,7 @@ true, true];
 							case 'mousemove':
 								{
 									var cr = this._el.getBoundingClientRect();
-									this._elStyle.width = e.clientX - cr.left + 'px';
-									this._elStyle.height = e.clientY - cr.top + 'px';
+									this._elStyle.cssText = 'width: ' + (e.clientX - cr.left) + 'px !important; height: ' + (e.clientY - cr.top) + 'px !important;';
 									return;
 								}
 							default:
@@ -12288,7 +12463,7 @@ true, true];
 		}, {
 			key: '_makeHideableContainer',
 			value: function _makeHideableContainer() {
-				var _this27 = this;
+				var _this29 = this;
 
 				this.pForm = $add('<div id="de-pform" class="de-win-body"></div>');
 				if (this.form) {
@@ -12301,10 +12476,10 @@ true, true];
 				this.pArea = [$bBegin(DelForm.first.el, html), $aEnd(aib.fch ? $q('.board', DelForm.first.el) : DelForm.first.el, html)];
 				this._pBtn = [this.pArea[0].firstChild, this.pArea[1].firstChild];
 				this._pBtn[0].firstElementChild.onclick = function (e) {
-					return _this27.showMainReply(false, e);
+					return _this29.showMainReply(false, e);
 				};
 				this._pBtn[1].firstElementChild.onclick = function (e) {
-					return _this27.showMainReply(true, e);
+					return _this29.showMainReply(true, e);
 				};
 				this.qArea = $add('<div style="display: none; ' + Cfg.replyWinX + '; ' + Cfg.replyWinY + '; z-index: ' + ++topWinZ + ';" id="de-win-reply" class="' + (aib.cReply + (Cfg.replyWinDrag ? ' de-win' : ' de-win-inpost')) + '"></div>');
 				this.isBottom = Cfg.addPostForm === 1;
@@ -12313,28 +12488,28 @@ true, true];
 		}, {
 			key: '_makeSageBtn',
 			value: function _makeSageBtn() {
-				var _this28 = this;
+				var _this30 = this;
 
 				PostForm.hideField($parent(this.mail, 'LABEL') || this.mail);
 				$aEnd(this.subm, '<svg id="de-sagebtn" class="de-btn-sage">' + '<use xlink:href="#de-symbol-post-sage"/></svg>').onclick = function (e) {
 					e.stopPropagation();
 					$pd(e);
 					toggleCfg('sageReply');
-					_this28._setSage();
+					_this30._setSage();
 				};
 				setTimeout(function () {
-					return _this28._setSage();
+					return _this30._setSage();
 				}, 0);
 			}
 		}, {
 			key: '_makeWindow',
 			value: function _makeWindow() {
-				var _this29 = this;
+				var _this31 = this;
 
 				makeDraggable('reply', this.qArea, $aBegin(this.qArea, '<div class="de-win-head">\n\t\t\t<span class="de-win-title"></span>\n\t\t\t<span class="de-win-buttons">\n\t\t\t\t<svg class="de-btn-clear"><use xlink:href="#de-symbol-unavail"/></svg>\n\t\t\t\t<svg class="de-btn-toggle"><use xlink:href="#de-symbol-win-arrow"/></svg>\n\t\t\t\t<svg class="de-btn-close"><use xlink:href="#de-symbol-win-close"/></svg>\n\t\t\t</span>\n\t\t</div>\n\t\t<div class="de-resizer de-resizer-top"></div>\n\t\t<div class="de-resizer de-resizer-left"></div>\n\t\t<div class="de-resizer de-resizer-right"></div>\n\t\t<div class="de-resizer de-resizer-bottom"></div>'));
 				var buttons = $q('.de-win-buttons', this.qArea);
-				buttons.onmouseover = function (_ref57) {
-					var target = _ref57.target;
+				buttons.onmouseover = function (_ref59) {
+					var target = _ref59.target;
 
 					var el = target.parentNode;
 					switch (fixEventEl(target).classList[0]) {
@@ -12347,33 +12522,31 @@ true, true];
 					}
 				};
 
-				var _ref58 = [].concat(_toConsumableArray(buttons.children)),
-				    clearBtn = _ref58[0],
-				    toggleBtn = _ref58[1],
-				    closeBtn = _ref58[2];
+				var _ref60 = [].concat(_toConsumableArray(buttons.children)),
+				    clearBtn = _ref60[0],
+				    toggleBtn = _ref60[1],
+				    closeBtn = _ref60[2];
 
 				clearBtn.onclick = function () {
 					saveCfg('sageReply', 0);
-					_this29._setSage();
-					_this29.files.clear();
-					[_this29.txta, _this29.name, _this29.mail, _this29.subj, _this29.video, _this29.cap && _this29.cap.textEl].forEach(function (node) {
-						if (node) {
-							node.value = '';
-						}
+					_this31._setSage();
+					_this31.files.clearInputs();
+					[_this31.txta, _this31.name, _this31.mail, _this31.subj, _this31.video, _this31.cap && _this31.cap.textEl].forEach(function (el) {
+						return el && (el.value = '');
 					});
 				};
 				toggleBtn.onclick = function () {
 					toggleCfg('replyWinDrag');
 					if (Cfg.replyWinDrag) {
-						_this29.qArea.className = aib.cReply + ' de-win';
-						updateWinZ(_this29.qArea.style);
+						_this31.qArea.className = aib.cReply + ' de-win';
+						updateWinZ(_this31.qArea.style);
 					} else {
-						_this29.qArea.className = aib.cReply + ' de-win-inpost';
-						_this29.txta.focus();
+						_this31.qArea.className = aib.cReply + ' de-win-inpost';
+						_this31.txta.focus();
 					}
 				};
 				closeBtn.onclick = function () {
-					return _this29.closeReply();
+					return _this31.closeReply();
 				};
 			}
 		}, {
@@ -12411,12 +12584,8 @@ true, true];
 					}
 				}
 				if (this.form) {
-					if (aib.tiny) {
-						if (tNum) {
-							$del($q('input[name="page"]', this.form));
-						} else if (!$q('input[name="page"]', this.form)) {
-							$q('input[name="board"]', this.form).insertAdjacentHTML('afterend', '<input name="page" value="1" type="hidden">');
-						}
+					if (aib.changeReplyMode && tNum !== this.tNum) {
+						aib.changeReplyMode(this.form, tNum);
 					}
 					$del($q('input[name="' + aib.formParent + '"]', this.form));
 					if (tNum) {
@@ -12462,20 +12631,20 @@ true, true];
 				}
 				var value = pr.passw.value = Cfg.passwValue;
 				for (var _iterator22 = DelForm, _isArray22 = Array.isArray(_iterator22), _i31 = 0, _iterator22 = _isArray22 ? _iterator22 : _iterator22[Symbol.iterator]();;) {
-					var _ref59;
+					var _ref61;
 
 					if (_isArray22) {
 						if (_i31 >= _iterator22.length) break;
-						_ref59 = _iterator22[_i31++];
+						_ref61 = _iterator22[_i31++];
 					} else {
 						_i31 = _iterator22.next();
 						if (_i31.done) break;
-						_ref59 = _i31.value;
+						_ref61 = _i31.value;
 					}
 
-					var _ref60 = _ref59,
-					    _ref60$passEl = _ref60.passEl,
-					    passEl = _ref60$passEl === undefined ? {} : _ref60$passEl;
+					var _ref62 = _ref61,
+					    _ref62$passEl = _ref62.passEl,
+					    passEl = _ref62$passEl === undefined ? {} : _ref62$passEl;
 
 					passEl.value = value;
 				}
@@ -12523,7 +12692,7 @@ true, true];
 			err += els[i].innerHTML + '\n';
 		}
 		err = err.replace(/<a [^>]+>Назад.+|<br.+/, '') || Lng.error[lang] + ':\n' + dc.body.innerHTML;
-		return (/successful|uploaded|updating|post deleted|обновл|удален[о.]/i.test(err) ? null : err
+		return (/successful|uploaded|updating|post deleted|post created|обновл|удален[о.]/i.test(err) ? null : err
 		);
 	}
 
@@ -12534,14 +12703,14 @@ true, true];
 		var progress = $id('de-uploadprogress');
 		var counterWrap = progress.nextElementSibling;
 
-		var _ref61 = [].concat(_toConsumableArray(counterWrap.children)),
-		    counterEl = _ref61[0],
-		    totalEl = _ref61[1],
-		    speedEl = _ref61[2];
+		var _ref63 = [].concat(_toConsumableArray(counterWrap.children)),
+		    counterEl = _ref63[0],
+		    totalEl = _ref63[1],
+		    speedEl = _ref63[2];
 
-		return function (_ref62) {
-			var total = _ref62.total,
-			    i = _ref62.loaded;
+		return function (_ref64) {
+			var total = _ref64.total,
+			    i = _ref64.loaded;
 
 			if (!inited) {
 				progress.setAttribute('max', total);
@@ -12584,7 +12753,7 @@ true, true];
 							pr.setReply(true, false);
 						}
 						updater.sendErrNotif();
-						updater.continue();
+						updater.continueUpdater();
 					});
 					return;
 				}
@@ -12612,7 +12781,7 @@ true, true];
 			}
 			$popup('upload', error);
 			updater.sendErrNotif();
-			updater.continue();
+			updater.continueUpdater();
 			DollchanAPI.notify('submitform', { success: false, error: error });
 			return;
 		}
@@ -12651,7 +12820,7 @@ true, true];
 				if (Cfg.scrAfterRep) {
 					scrollTo(0, window.pageYOffset + Thread.first.last.el.getBoundingClientRect().top);
 				}
-				updater.continue(true);
+				updater.continueUpdater(true);
 				closePopup('upload');
 			});
 		} else {
@@ -12740,7 +12909,7 @@ true, true];
 			return rv;
 		}
 		if (img[0] === 0x1a && img[1] === 0x45 && img[2] === 0xDF && img[3] === 0xA3) {
-			return new WebmParser(data).addData(rand).getData();
+			return new WebmParser(data).addWebmData(rand).getWebmData();
 		}
 		return null;
 	}
@@ -12796,7 +12965,7 @@ true, true];
 			}
 			this._inputs = inputs;
 			this._files = [];
-			this.hide();
+			this.hideEmpty();
 		}
 
 		_createClass(Files, [{
@@ -12804,56 +12973,56 @@ true, true];
 			value: function changeMode() {
 				var cfg = Cfg.fileInputs === 2 && Cfg.ajaxPosting;
 				for (var _iterator24 = this._inputs, _isArray24 = Array.isArray(_iterator24), _i33 = 0, _iterator24 = _isArray24 ? _iterator24 : _iterator24[Symbol.iterator]();;) {
-					var _ref68;
+					var _ref70;
 
 					if (_isArray24) {
 						if (_i33 >= _iterator24.length) break;
-						_ref68 = _iterator24[_i33++];
+						_ref70 = _iterator24[_i33++];
 					} else {
 						_i33 = _iterator24.next();
 						if (_i33.done) break;
-						_ref68 = _i33.value;
+						_ref70 = _i33.value;
 					}
 
-					var inp = _ref68;
+					var inp = _ref70;
 
 					inp.changeMode(cfg);
 				}
-				this.hide();
+				this.hideEmpty();
 			}
 		}, {
-			key: 'clear',
-			value: function clear() {
+			key: 'clearInputs',
+			value: function clearInputs() {
 				for (var _iterator25 = this._inputs, _isArray25 = Array.isArray(_iterator25), _i34 = 0, _iterator25 = _isArray25 ? _iterator25 : _iterator25[Symbol.iterator]();;) {
-					var _ref69;
+					var _ref71;
 
 					if (_isArray25) {
 						if (_i34 >= _iterator25.length) break;
-						_ref69 = _iterator25[_i34++];
+						_ref71 = _iterator25[_i34++];
 					} else {
 						_i34 = _iterator25.next();
 						if (_i34.done) break;
-						_ref69 = _i34.value;
+						_ref71 = _i34.value;
 					}
 
-					var inp = _ref69;
+					var inp = _ref71;
 
-					inp.clear();
+					inp.clearInp();
 				}
-				this.hide();
+				this.hideEmpty();
 			}
 		}, {
-			key: 'hide',
-			value: function hide() {
+			key: 'hideEmpty',
+			value: function hideEmpty() {
 				for (var _els2 = this._inputs, i = _els2.length - 1; i > 0; --i) {
 					var inp = _els2[i];
 					if (inp.hasFile) {
 						break;
 					} else if (_els2[i - 1].hasFile) {
-						inp.show();
+						inp.showInp();
 						break;
 					}
-					inp.hide();
+					inp.hideInp();
 				}
 			}
 		}, {
@@ -12868,10 +13037,9 @@ true, true];
 			get: function get() {
 				var value = void 0;
 				if (aib.multiFile) {
-					value = $add('<tr><td></td><td><div id="de-file-area"></div></td></tr>');
-					$after(this.fileTd.parentNode, value);
+					value = $aEnd(this.fileTd.parentNode, '<div id="de-file-area"></div>');
 				} else {
-					value = $q(aib.tiny ? 'th' : 'td', $parent(this._form.txta, 'TR'));
+					value = $q(aib.formTd, $parent(this._form.txta, 'TR'));
 					value.innerHTML = '<div style="display: none;">' + value.innerHTML + '</div><div></div>';
 					value = value.lastChild;
 				}
@@ -12900,12 +13068,12 @@ true, true];
 			this._thumb = null;
 			this._utils = $add('<div class="de-file-utils">\n\t\t\t<div class="de-file-btn-rar" title="' + Lng.helpAddFile[lang] + '" style="display: none;"></div>\n\t\t\t<div class="de-file-spoil" title="' + Lng.spoilFile[lang] + '" style="display: none;"></div>\n\t\t\t<div class="de-file-btn-txt" title="' + Lng.addManually[lang] + '"></div>\n\t\t\t<div class="de-file-btn-del" title="' + Lng.removeFile[lang] + '" style="display: none;"></div>\n\t\t</div>');
 
-			var _ref70 = [].concat(_toConsumableArray(this._utils.children));
+			var _ref72 = [].concat(_toConsumableArray(this._utils.children));
 
-			this._btnRarJpg = _ref70[0];
-			this._btnSpoil = _ref70[1];
-			this._btnTxt = _ref70[2];
-			this._btnDel = _ref70[3];
+			this._btnRarJpg = _ref72[0];
+			this._btnSpoil = _ref72[1];
+			this._btnTxt = _ref72[2];
+			this._btnDel = _ref72[3];
 
 			if (this._spoilEl) {
 				switch (this._spoilEl.type) {
@@ -12922,11 +13090,11 @@ true, true];
 			this._utils.addEventListener('click', this);
 			this._txtWrap = $add('<span class="de-file-txt-wrap">\n\t\t\t<div class="de-file-txt-drop" title="' + Lng.youCanDrag[lang] + '"></div>\n\t\t\t<input type="text" name="de-file-txt" class="de-file-txt-input de-file-off" placeholder="' + Lng.dropFileHere[lang] + '">\n\t\t\t<input type="button" class="de-file-txt-add" value="+" title="' + (Lng.add[lang] + '" style="display: none;"></span>'));
 
-			var _ref71 = [].concat(_toConsumableArray(this._txtWrap.children));
+			var _ref73 = [].concat(_toConsumableArray(this._txtWrap.children));
 
-			this._txtDrop = _ref71[0];
-			this._txtInput = _ref71[1];
-			this._txtAddBtn = _ref71[2];
+			this._txtDrop = _ref73[0];
+			this._txtInput = _ref73[1];
+			this._txtAddBtn = _ref73[2];
 
 			this._txtWrap.addEventListener('click', this);
 			this._toggleDragEvents(this._txtWrap, true);
@@ -12984,8 +13152,8 @@ true, true];
 				}
 			}
 		}, {
-			key: 'clear',
-			value: function clear() {
+			key: 'clearInp',
+			value: function clearInp() {
 				if (FileInput._isThumb) {
 					this._thumb.className = 'de-file de-file-off';
 					if (this._mediaEl) {
@@ -13017,7 +13185,7 @@ true, true];
 		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
-				var _this30 = this;
+				var _this32 = this;
 
 				var el = e.target;
 				var thumb = this._thumb;
@@ -13035,15 +13203,15 @@ true, true];
 									for (var i = 0; i < allowedLen; ++i) {
 										FileInput._readDroppedFile(inpArray[curInpIdx + i], el.files[i]).then(function () {
 											if (! --j) {
-												_this30._removeFileHelper();
+												_this32._removeFileHelper();
 											}
 										});
-										_this30._parent._files[curInpIdx + i] = el.files[i];
+										_this32._parent._files[curInpIdx + i] = el.files[i];
 									}
 								})();
 							} else {
 								setTimeout(function () {
-									return _this30._onFileChange(false);
+									return _this32._onFileChange(false);
 								}, 20);
 								if (filesLen > 0) {
 									this._parent._files[curInpIdx] = el.files[0];
@@ -13058,8 +13226,8 @@ true, true];
 						if (isThumb) {
 							this._input.click();
 						} else if (el === this._btnDel) {
-							this.clear();
-							this._parent.hide();
+							this.clearInp();
+							this._parent.hideEmpty();
 							delete this._parent._files[this._parent._inputs.indexOf(this)];
 							DollchanAPI.notify('filechange', this._parent._files);
 						} else if (el === this._btnSpoil) {
@@ -13115,7 +13283,7 @@ true, true];
 								this._addUrlFile(dt.getData('text/plain'));
 							}
 							setTimeout(function () {
-								return _this30[isThumb].classList.remove('de-file-drag');
+								return _this32[isThumb].classList.remove('de-file-drag');
 							}, 10);
 							e.stopPropagation();
 							$pd(e);
@@ -13123,8 +13291,8 @@ true, true];
 				}
 			}
 		}, {
-			key: 'hide',
-			value: function hide() {
+			key: 'hideInp',
+			value: function hideInp() {
 				if (FileInput._isThumb) {
 					this._showDelBtn(false);
 					$hide(this._thumb);
@@ -13133,8 +13301,8 @@ true, true];
 				$hide(this._wrap);
 			}
 		}, {
-			key: 'show',
-			value: function show() {
+			key: 'showInp',
+			value: function showInp() {
 				if (FileInput._isThumb) {
 					$show(this._thumb);
 				}
@@ -13157,24 +13325,24 @@ true, true];
 		}, {
 			key: '_addRarJpeg',
 			value: function _addRarJpeg() {
-				var _this31 = this;
+				var _this33 = this;
 
 				var el = this._parent.rarInput;
-				el.onchange = function (_ref72) {
-					var target = _ref72.target;
+				el.onchange = function (_ref74) {
+					var target = _ref74.target;
 
-					$hide(_this31._btnRarJpg);
-					var myBtn = _this31._rarMsg = $aBegin(_this31._utils, '<span><svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg></span>');
+					$hide(_this33._btnRarJpg);
+					var myBtn = _this33._rarMsg = $aBegin(_this33._utils, '<span><svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg></span>');
 					var file = target.files[0];
-					readFile(file).then(function (_ref73) {
-						var data = _ref73.data;
+					readFile(file).then(function (_ref75) {
+						var data = _ref75.data;
 
-						if (_this31._rarMsg === myBtn) {
+						if (_this33._rarMsg === myBtn) {
 							myBtn.className = 'de-file-rarmsg';
-							var origFileName = _this31.imgFile ? _this31.imgFile[1] : _this31._input.files[0].name;
+							var origFileName = _this33.imgFile ? _this33.imgFile[1] : _this33._input.files[0].name;
 							myBtn.title = origFileName + ' + ' + file.name;
 							myBtn.textContent = file.name.split('.').pop();
-							_this31.extraFile = data;
+							_this33.extraFile = data;
 						}
 					});
 				};
@@ -13183,7 +13351,7 @@ true, true];
 		}, {
 			key: '_addUrlFile',
 			value: function _addUrlFile(url) {
-				var _this32 = this;
+				var _this34 = this;
 
 				var file = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -13200,7 +13368,7 @@ true, true];
 						return;
 					}
 					closePopup('file-loading');
-					_this32._isTxtEditable = false;
+					_this34._isTxtEditable = false;
 					var name = file ? file.name : url.split('/').pop();
 					var type = file && file.type || getFileType(name);
 					if (!type || name.includes('?')) {
@@ -13221,17 +13389,17 @@ true, true];
 							name = name.split('?').shift() + '.' + ext;
 						}
 					}
-					_this32.imgFile = [data.buffer, name, type || getFileType(name)];
+					_this34.imgFile = [data.buffer, name, type || getFileType(name)];
 					if (!file) {
-						file = new Blob([data], { type: _this32.imgFile[2] });
+						file = new Blob([data], { type: _this34.imgFile[2] });
 						file.name = name;
 					}
-					_this32._parent._files[_this32._parent._inputs.indexOf(_this32)] = file;
-					DollchanAPI.notify('filechange', _this32._parent._files);
+					_this34._parent._files[_this34._parent._inputs.indexOf(_this34)] = file;
+					DollchanAPI.notify('filechange', _this34._parent._files);
 					if (FileInput._isThumb) {
-						$hide(_this32._txtWrap);
+						$hide(_this34._txtWrap);
 					}
-					_this32._onFileChange(true);
+					_this34._onFileChange(true);
 				});
 			}
 		}, {
@@ -13255,7 +13423,7 @@ true, true];
 				this._thumb.appendChild(this._utils);
 				this._toggleDragEvents(this._thumb, true);
 				if (this.hasFile) {
-					this._showPviewImage();
+					this._showFileThumb();
 					_PonyRateHiglight(this._thumb, this._spoilEl.value);
 				}
 			}
@@ -13270,7 +13438,7 @@ true, true];
 					this._parent.onchange();
 				}
 				if (FileInput._isThumb) {
-					this._showPviewImage();
+					this._showFileThumb();
 				}
 				if (this.hasFile) {
 					this.extraFile = null;
@@ -13292,7 +13460,7 @@ true, true];
 					this._txtInput.classList.remove('de-file-off');
 					this._txtInput.placeholder = Lng.dropFileHere[lang];
 				}
-				this._parent.hide();
+				this._parent.hideEmpty();
 				if (!nav.isPresto && !aib.fch && /^image\/(?:png|jpeg)$/.test(hasImgFile ? this.imgFile[2] : this._input.files[0].type)) {
 					$del(this._rarMsg);
 					$show(this._btnRarJpg);
@@ -13323,9 +13491,9 @@ true, true];
 				$toggle(this._btnTxt, !isShow);
 			}
 		}, {
-			key: '_showPviewImage',
-			value: function _showPviewImage() {
-				var _this33 = this;
+			key: '_showFileThumb',
+			value: function _showFileThumb() {
+				var _this35 = this;
 
 				var imgFile = this.imgFile;
 
@@ -13335,19 +13503,19 @@ true, true];
 				}
 				var file = this._input.files[0];
 				if (file) {
-					readFile(file).then(function (_ref74) {
-						var data = _ref74.data;
+					readFile(file).then(function (_ref76) {
+						var data = _ref76.data;
 
-						if (_this33._input.files[0] === file) {
-							_this33._addNewThumb(data, file.name, file.type, file.size);
+						if (_this35._input.files[0] === file) {
+							_this35._addNewThumb(data, file.name, file.type, file.size);
 						}
 					});
 				}
 			}
 		}, {
 			key: '_toggleDragEvents',
-			value: function _toggleDragEvents(el, add) {
-				var name = add ? 'addEventListener' : 'removeEventListener';
+			value: function _toggleDragEvents(el, isAdd) {
+				var name = isAdd ? 'addEventListener' : 'removeEventListener';
 				el[name]('dragover', $pd);
 				el[name]('dragenter', this);
 				el[name]('dragleave', this);
@@ -13361,11 +13529,11 @@ true, true];
 		}], [{
 			key: '_readDroppedFile',
 			value: function _readDroppedFile(input, file) {
-				return readFile(file).then(function (_ref75) {
-					var data = _ref75.data;
+				return readFile(file).then(function (_ref77) {
+					var data = _ref77.data;
 
 					input.imgFile = [data, file.name, file.type];
-					input.show();
+					input.showInp();
 					input._onFileChange(true);
 				});
 			}
@@ -13387,7 +13555,7 @@ true, true];
 			this.hasCaptcha = true;
 			this.textEl = null;
 			this.tNum = initNum;
-			this.parentEl = el.tagName === 'TR' ? el : $parent(el, 'TR');
+			this.parentEl = el.tagName === 'TR' ? el : aib.getCapParent(el);
 			this.isAdded = false;
 			this._isRecap = !!$q('[id*="recaptcha"], [class*="recaptcha"]', this.parentEl);
 			this._lastUpdate = null;
@@ -13401,8 +13569,6 @@ true, true];
 		_createClass(Captcha, [{
 			key: 'addCaptcha',
 			value: function addCaptcha() {
-				var _this34 = this;
-
 				if (this.isAdded) {
 					return;
 				}
@@ -13416,20 +13582,7 @@ true, true];
 					var el = $q('#g-recaptcha, .g-recaptcha' + (aib.fch ? ', #qrCaptchaContainerAlt' : ''));
 					$replace(el, '<div id="g-recaptcha" class="g-recaptcha" data-sitekey="' + el.getAttribute('data-sitekey') + '"></div>');
 				}
-				var initPromise = aib.initCaptcha ? aib.initCaptcha(this) : null;
-				if (initPromise) {
-					initPromise.then(function () {
-						return _this34.showCaptcha();
-					}, function (e) {
-						if (e instanceof AjaxError) {
-							_this34._setUpdateError(e);
-						} else {
-							_this34.hasCaptcha = false;
-						}
-					});
-				} else if (this.hasCaptcha) {
-					this.showCaptcha(true);
-				}
+				this.initCapPromise();
 			}
 		}, {
 			key: 'handleEvent',
@@ -13460,21 +13613,41 @@ true, true];
 							break;
 						}
 					case 'focus':
-						this.updOutdated();
+						this.updateOutdated();
 				}
 				$pd(e);
 				e.stopPropagation();
 			}
 		}, {
+			key: 'initCapPromise',
+			value: function initCapPromise() {
+				var _this36 = this;
+
+				var initPromise = aib.initCaptcha ? aib.initCaptcha(this) : null;
+				if (initPromise) {
+					initPromise.then(function () {
+						return _this36.showCaptcha();
+					}, function (e) {
+						if (e instanceof AjaxError) {
+							_this36._setUpdateError(e);
+						} else {
+							_this36.hasCaptcha = false;
+						}
+					});
+				} else if (this.hasCaptcha) {
+					this.showCaptcha(true);
+				}
+			}
+		}, {
 			key: 'initImage',
 			value: function initImage(img) {
-				var _this35 = this;
+				var _this37 = this;
 
 				img.title = Lng.refresh[lang];
 				img.alt = Lng.loading[lang];
 				img.style.cssText = 'vertical-align: text-bottom; border: none; cursor: pointer;';
 				img.onclick = function () {
-					return _this35.refreshCaptcha(true);
+					return _this37.refreshCaptcha(true);
 				};
 			}
 		}, {
@@ -13524,7 +13697,7 @@ true, true];
 		}, {
 			key: 'refreshCaptcha',
 			value: function refreshCaptcha(isFocus) {
-				var _this36 = this;
+				var _this38 = this;
 
 				var isErr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 				var tNum = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.tNum;
@@ -13545,9 +13718,9 @@ true, true];
 					var updatePromise = aib.updateCaptcha(this, isErr);
 					if (updatePromise) {
 						updatePromise.then(function () {
-							return _this36._updateTextEl(isFocus);
+							return _this38._updateTextEl(isFocus);
 						}, function (e) {
-							return _this36._setUpdateError(e);
+							return _this38._setUpdateError(e);
 						});
 					}
 				} else if (this._isRecap) {
@@ -13573,7 +13746,7 @@ true, true];
 			key: 'updateHelper',
 			value: function updateHelper(url, fn) {
 				if (aib._capUpdPromise) {
-					aib._capUpdPromise.cancel();
+					aib._capUpdPromise.cancelPromise();
 				}
 				return aib._capUpdPromise = $ajax(url).then(function (xhr) {
 					aib._capUpdPromise = null;
@@ -13586,8 +13759,8 @@ true, true];
 				});
 			}
 		}, {
-			key: 'updOutdated',
-			value: function updOutdated() {
+			key: 'updateOutdated',
+			value: function updateOutdated() {
 				if (this._lastUpdate && Date.now() - this._lastUpdate > Cfg.capUpdTime * 1e3) {
 					this.refreshCaptcha(false);
 				}
@@ -13595,19 +13768,19 @@ true, true];
 		}, {
 			key: '_isOldRecap',
 			value: function _isOldRecap() {
-				return !!$id('recaptcha_widget_div') || aib.fch && Cfg.cap4chanAlt && pr.tNum;
+				return !!$id('recaptcha_widget_div');
 			}
 		}, {
 			key: '_setUpdateError',
 			value: function _setUpdateError(e) {
-				var _this37 = this;
+				var _this39 = this;
 
 				if (e) {
 					this.parentEl = e.toString();
 					this.isAdded = false;
 					this.parentEl.onclick = function () {
-						_this37.parentEl.onclick = null;
-						_this37.addCaptcha();
+						_this39.parentEl.onclick = null;
+						_this39.addCaptcha();
 					};
 					$show(this.parentEl);
 				}
@@ -13661,16 +13834,13 @@ true, true];
 		_createClass(AbstractPost, [{
 			key: 'addFuncs',
 			value: function addFuncs() {
-				RefMap.upd(this, true);
-				embedMediaLinks(this);
-				if (Cfg.addImgs) {
-					embedImagesLinks(this.el);
-				}
+				RefMap.updateRefMap(this, true);
+				embedAudioLinks(this);
 			}
 		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
-				var _this38 = this;
+				var _this40 = this;
 
 				var temp = void 0,
 				    el = fixEventEl(e.target);
@@ -13688,7 +13858,7 @@ true, true];
 							return;
 					}
 					if (this._menu) {
-						this._menu.remove();
+						this._menu.removeMenu();
 						this._menu = null;
 					}
 					switch (el.tagName) {
@@ -13706,7 +13876,7 @@ true, true];
 									this._getFullMsg(temp, false);
 									$pd(e);
 									e.stopPropagation();
-								} else if (Cfg.insertNum && pr.form && this._pref === (aib.tiny ? el : temp) && !/Reply|Ответ/.test(el.textContent)) {
+								} else if (Cfg.insertNum && pr.form && (this._pref === temp || this._pref === el) && !/Reply|Ответ/.test(el.textContent)) {
 									$pd(e);
 									e.stopPropagation();
 									if (!Cfg.showRepBtn) {
@@ -13720,7 +13890,7 @@ true, true];
 										var isOnNewLine = formText === '' || formText.slice(-1) === '\n';
 										$txtInsert(pr.txta, '>>' + this.num + (isOnNewLine ? '\n' : ''));
 									} else {
-										window.location = el.href.replace(/#i/, '#');
+										window.location.assign(el.href.replace(/#i/, '#'));
 									}
 								} else if ((temp = el.textContent)[0] === '>' && temp[1] === '>' && !temp[2].includes('/')) {
 									var post = pByNum.get(+temp.match(/\d+/));
@@ -13745,7 +13915,7 @@ true, true];
 							return;
 						case 'OBJECT':
 						case 'VIDEO':
-							if (Cfg.expandImgs !== 0 && !(Cfg.webmControl && e.clientY > el.getBoundingClientRect().top + parseInt(el.style.height, 10) - 30)) {
+							if (Cfg.expandImgs !== 0 && !ExpandableImage.isControlClick(e)) {
 								this._clickImage(el, e);
 							}
 							return;
@@ -13804,7 +13974,7 @@ true, true];
 							quotetxt = '';
 							return;
 						case 'de-btn-sage':
-							Spells.add(9, '', false);return;
+							Spells.addSpell(9, '', false);return;
 						case 'de-btn-stick':
 							this.setSticky(true);return;
 						case 'de-btn-stick-on':
@@ -13841,7 +14011,7 @@ true, true];
 					case 'de-btn-expthr':
 						this.btns.title = Lng.expandThr[lang];
 						if (!(this instanceof Pview)) {
-							this._addMenu(el, isOutEvent, $join(Lng.selExpandThr[lang], '<span class="de-menu-item" info="thr-exp">', '</span>'));
+							this._addMenu(el, isOutEvent, arrTags(Lng.selExpandThr[lang], '<span class="de-menu-item" info="thr-exp">', '</span>'));
 						}
 						return;
 					case 'de-btn-fav':
@@ -13877,7 +14047,7 @@ true, true];
 							}
 						} else {
 							this._linkDelay = setTimeout(function () {
-								return _this38.kid = Pview.show(_this38, el);
+								return _this40.kid = Pview.showPview(_this40, el);
 							}, Cfg.linksOver);
 						}
 						$pd(e);
@@ -13907,7 +14077,7 @@ true, true];
 					msg: { configurable: true, value: newMsg },
 					trunc: { configurable: true, value: null }
 				});
-				Post.Сontent.remove(this);
+				Post.Сontent.removeTempData(this);
 				if (Cfg.addYouTube) {
 					this.videos.updatePost(videoLinks, $Q('a[href*="youtu"], a[href*="vimeo.com"]', newMsg), false);
 					if (videoExt) {
@@ -13915,13 +14085,14 @@ true, true];
 					}
 				}
 				this.addFuncs();
-				sRunner.run(this);
+				sRunner.runSpells(this);
+				embedPostMsgImages(this.el);
 				closePopup('load-fullmsg');
 			}
 		}, {
 			key: '_addMenu',
 			value: function _addMenu(el, isOutEvent, html) {
-				var _this39 = this;
+				var _this41 = this;
 
 				if (this.menu && this.menu.parentEl === el) {
 					return;
@@ -13930,7 +14101,7 @@ true, true];
 					clearTimeout(this._menuDelay);
 				} else {
 					this._menuDelay = setTimeout(function () {
-						return _this39._showMenu(el, html);
+						return _this41._showMenu(el, html);
 					}, Cfg.linksOver);
 				}
 			}
@@ -13941,17 +14112,17 @@ true, true];
 				if (!data || !data.isImage && !data.isVideo) {
 					return;
 				}
-				data.expand(Cfg.expandImgs === 1 ^ e.ctrlKey, e);
+				data.expandImg(Cfg.expandImgs === 1 ^ e.ctrlKey, e);
 				$pd(e);
 				e.stopPropagation();
 			}
 		}, {
 			key: '_getFullMsg',
 			value: function _getFullMsg(el, isInit) {
-				var _this40 = this;
+				var _this42 = this;
 
-				if (aib.delTruncMsg) {
-					aib.delTruncMsg(this, el, isInit);
+				if (aib.deleteTruncMsg) {
+					aib.deleteTruncMsg(this, el, isInit);
 					return;
 				}
 				if (!isInit) {
@@ -13959,35 +14130,37 @@ true, true];
 				}
 				ajaxLoad(aib.getThrUrl(aib.b, this.tNum)).then(function (form) {
 					var maybeSpells = new Maybe(SpellsRunner);
-					if (_this40.isOp) {
-						_this40.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, form))), maybeSpells.value);
+					if (_this42.isOp) {
+						_this42.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, form))), maybeSpells.value);
 						$del(el);
 					} else {
 						var _els3 = $Q(aib.qRPost, form);
 						for (var i = 0, len = _els3.length; i < len; i++) {
-							if (_this40.num === aib.getPNum(_els3[i])) {
-								_this40.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, _els3[i]))), maybeSpells.value);
+							if (_this42.num === aib.getPNum(_els3[i])) {
+								_this42.updateMsg(aib.fixHTML(doc.adoptNode($q(aib.qPostMsg, _els3[i]))), maybeSpells.value);
 								$del(el);
 								break;
 							}
 						}
 					}
-					maybeSpells.end();
+					if (maybeSpells.hasValue) {
+						maybeSpells.value.endSpells();
+					}
 				}, emptyFn);
 			}
 		}, {
 			key: '_showMenu',
 			value: function _showMenu(el, html) {
-				var _this41 = this;
+				var _this43 = this;
 
 				if (this._menu) {
-					this._menu.remove();
+					this._menu.removeMenu();
 				}
 				this._menu = new Menu(el, html, function (el) {
-					return _this41._clickMenu(el);
+					return _this43._clickMenu(el);
 				}, false);
 				this._menu.onremove = function () {
-					return _this41._menu = null;
+					return _this43._menu = null;
 				};
 			}
 		}, {
@@ -14054,47 +14227,48 @@ true, true];
 		function Post(el, thr, num, count, isOp, prev) {
 			_classCallCheck(this, Post);
 
-			var _this42 = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, thr, num, isOp));
+			var _this44 = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, thr, num, isOp));
 
-			_this42.count = count;
-			_this42.deleted = false;
-			_this42.el = el;
-			_this42.hidden = false;
-			_this42.next = null;
-			_this42.omitted = false;
-			_this42.prev = prev;
-			_this42.spellHidden = false;
-			_this42.userToggled = false;
-			_this42.viewed = false;
-			_this42._selRange = null;
-			_this42._selText = '';
+			_this44.count = count;
+			_this44.deleted = false;
+			_this44.el = el;
+			_this44.hidden = false;
+			_this44.next = null;
+			_this44.omitted = false;
+			_this44.prev = prev;
+			_this44.spellHidden = false;
+			_this44.userToggled = false;
+			_this44.viewed = false;
+			_this44._selRange = null;
+			_this44._selText = '';
 			if (prev) {
-				prev.next = _this42;
+				prev.next = _this44;
 			}
-			pByEl.set(el, _this42);
-			pByNum.set(num, _this42);
+			pByEl.set(el, _this44);
+			pByNum.set(num, _this44);
 			if (MyPosts.has(num)) {
-				_this42.el.classList.add('de-mypost');
+				_this44.el.classList.add('de-mypost');
 			}
+			el.classList.add(isOp ? 'de-oppost' : 'de-reply');
 			var refEl = $q(aib.qPostRef, el);
 			var html = '<span class="de-post-btns' + (isOp ? '' : ' de-post-counter') + '">' + '<svg class="de-btn-hide"><use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/>' + '<use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>';
-			_this42._pref = refEl;
+			_this44._pref = refEl;
 			if (isOp) {
 				if (!aib.t) {
 					html += '<svg class="de-btn-expthr"><use xlink:href="#de-symbol-post-expthr"/></svg>';
 				}
 				html += '<svg class="de-btn-fav"><use xlink:href="#de-symbol-post-fav"/></svg>';
 			}
-			_this42.sage = aib.getSage(el);
-			if (_this42.sage) {
+			_this44.sage = aib.getSage(el);
+			if (_this44.sage) {
 				html += '<svg class="de-btn-sage"><use xlink:href="#de-symbol-post-sage"/></svg>';
 			}
-			_this42.btns = $aEnd(refEl, html + '</span>');
-			if (Cfg.expandTrunc && _this42.trunc) {
-				_this42._getFullMsg(_this42.trunc, true);
+			_this44.btns = $aEnd(refEl, html + '</span>');
+			if (Cfg.expandTrunc && _this44.trunc) {
+				_this44._getFullMsg(_this44.trunc, true);
 			}
-			el.addEventListener('mouseover', _this42, true);
-			return _this42;
+			el.addEventListener('mouseover', _this44, true);
+			return _this44;
 		}
 
 		_createClass(Post, [{
@@ -14102,31 +14276,31 @@ true, true];
 			value: function addFuncs() {
 				_get(Post.prototype.__proto__ || Object.getPrototypeOf(Post.prototype), 'addFuncs', this).call(this);
 				if (isExpImg) {
-					this.toggleImages(true);
+					this.toggleImages(true, false);
 				}
 			}
 		}, {
-			key: 'delete',
-			value: function _delete(removeEl) {
-				if (removeEl) {
+			key: 'deletePost',
+			value: function deletePost(isRemovePost) {
+				if (isRemovePost) {
 					$del(this.wrap);
 					pByEl.delete(this.el);
 					pByNum.delete(this.num);
 					if (this.hidden) {
-						this.ref.unhide();
+						this.ref.unhideRef();
 					}
-					RefMap.upd(this, false);
+					RefMap.updateRefMap(this, false);
 					if (this.prev.next = this.next) {
 						this.next.prev = this.prev;
 					}
-				} else {
-					this.deleted = true;
-					this.btns.classList.remove('de-post-counter');
-					this.btns.classList.add('de-post-deleted');
-					this.el.classList.add('de-post-removed');
-					this.wrap.classList.add('de-wrap-removed');
-					($q('input[type="checkbox"]', this.el) || {}).disabled = true;
+					return;
 				}
+				this.deleted = true;
+				this.btns.classList.remove('de-post-counter');
+				this.btns.classList.add('de-post-deleted');
+				this.el.classList.add('de-post-removed');
+				this.wrap.classList.add('de-wrap-removed');
+				($q('input[type="checkbox"]', this.el) || {}).disabled = true;
 			}
 		}, {
 			key: 'getAdjacentVisPost',
@@ -14188,81 +14362,78 @@ true, true];
 			}
 		}, {
 			key: 'setUserVisib',
-			value: function setUserVisib(hide) {
-				var save = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+			value: function setUserVisib(isHide) {
+				var isSave = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 				var note = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 				this.userToggled = true;
-				this.setVisib(hide, note);
-				if (this.isOp || this.hidden === hide) {
-					this.hideBtn.setAttribute('class', hide ? 'de-btn-unhide-user' : 'de-btn-hide-user');
+				this.setVisib(isHide, note);
+				if (this.isOp || this.hidden === isHide) {
+					this.hideBtn.setAttribute('class', isHide ? 'de-btn-unhide-user' : 'de-btn-hide-user');
 				}
-				if (save) {
-					HiddenPosts.set(this.num, this.thr.num, hide);
+				if (isSave) {
+					var num = this.num;
+
+					HiddenPosts.set(num, this.thr.num, isHide);
 					if (this.isOp) {
-						if (hide) {
-							HiddenThreads.set(this.num, this.num, this.title);
+						if (isHide) {
+							HiddenThreads.set(num, num, this.title);
 						} else {
-							HiddenThreads.remove(this.num);
+							HiddenThreads.removeStorage(num);
 						}
 					}
-					locStorage['__de-post'] = JSON.stringify({
-						hide: hide,
+					sendStorageEvent('__de-post', {
+						hide: isHide,
 						brd: aib.b,
-						num: this.num,
+						num: num,
 						thrNum: this.thr.num,
 						title: this.isOp ? this.title : ''
 					});
-					locStorage.removeItem('__de-post');
 				}
-				if (hide) {
-					this.ref.hide();
-				} else {
-					this.ref.unhide();
-				}
+				this.ref.toggleRef(isHide, false);
 			}
 		}, {
 			key: 'setVisib',
-			value: function setVisib(hide) {
-				var _this43 = this;
+			value: function setVisib(isHide) {
+				var _this45 = this;
 
 				var note = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-				if (this.hidden === hide) {
-					if (hide && note) {
+				if (this.hidden === isHide) {
+					if (isHide && note) {
 						this.note.set(note);
 					}
 					return;
 				}
 				if (this.isOp) {
-					this.thr.hidden = hide;
+					this.thr.hidden = isHide;
 				} else {
 					if (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 2) {
-						if (hide) {
+						if (isHide) {
 							this.wrap.classList.add('de-hidden');
 						} else {
 							this.wrap.classList.remove('de-hidden');
 						}
 					} else {
-						this._pref.onmouseover = this._pref.onmouseout = !hide ? null : function (e) {
+						this._pref.onmouseover = this._pref.onmouseout = !isHide ? null : function (e) {
 							var yOffset = window.pageYOffset;
-							_this43.hideContent(e.type === 'mouseout');
+							_this45.hideContent(e.type === 'mouseout');
 							scrollTo(window.pageXOffset, yOffset);
 						};
 					}
 				}
 				if (Cfg.strikeHidd) {
 					setTimeout(function () {
-						return _this43._strikePostNum(hide);
+						return _this45._strikePostNum(isHide);
 					}, 50);
 				}
-				if (hide) {
+				if (isHide) {
 					this.note.set(note);
 				} else {
-					this.note.hide();
+					this.note.hideNote();
 				}
-				this.hidden = hide;
-				this.hideContent(hide);
+				this.hidden = isHide;
+				this.hideContent(isHide);
 			}
 		}, {
 			key: 'spellHide',
@@ -14270,7 +14441,7 @@ true, true];
 				this.spellHidden = true;
 				if (!this.userToggled) {
 					this.setVisib(true, note);
-					this.ref.hide();
+					this.ref.hideRef();
 				}
 			}
 		}, {
@@ -14279,33 +14450,34 @@ true, true];
 				this.spellHidden = false;
 				if (!this.userToggled) {
 					this.setVisib(false);
-					this.ref.unhide();
+					this.ref.unhideRef();
 				}
 			}
 		}, {
 			key: 'toggleImages',
 			value: function toggleImages() {
-				var expand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.images.expanded;
+				var isExpand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : !this.images.expanded;
+				var isExpandVideos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
 				for (var _iterator26 = this.images, _isArray26 = Array.isArray(_iterator26), _i35 = 0, _iterator26 = _isArray26 ? _iterator26 : _iterator26[Symbol.iterator]();;) {
-					var _ref76;
+					var _ref78;
 
 					if (_isArray26) {
 						if (_i35 >= _iterator26.length) break;
-						_ref76 = _iterator26[_i35++];
+						_ref78 = _iterator26[_i35++];
 					} else {
 						_i35 = _iterator26.next();
 						if (_i35.done) break;
-						_ref76 = _i35.value;
+						_ref78 = _i35.value;
 					}
 
-					var image = _ref76;
+					var image = _ref78;
 
-					if (image.isImage && image.expanded ^ expand) {
-						if (expand) {
-							image.expand(true, null);
+					if ((image.isImage || isExpandVideos && image.isVideo) && image.expanded ^ isExpand) {
+						if (isExpand) {
+							image.expandImg(true, null);
 						} else {
-							image.collapse(null);
+							image.collapseImg(null);
 						}
 					}
 				}
@@ -14326,8 +14498,7 @@ true, true];
 		}, {
 			key: '_clickMenu',
 			value: function _clickMenu(el) {
-				var hidden = this.hidden;
-
+				var isHide = !this.hidden;
 				switch (el.getAttribute('info')) {
 					case 'hide-sel':
 						{
@@ -14344,23 +14515,23 @@ true, true];
 							var inMsgSel = aib.qPostMsg + ', ' + aib.qPostMsg + ' *';
 							if (nav.matchesSelector(start, inMsgSel) && nav.matchesSelector(end, inMsgSel) || nav.matchesSelector(start, aib.qPostSubj) && nav.matchesSelector(end, aib.qPostSubj)) {
 								if (this._selText.includes('\n')) {
-									Spells.add(1 
+									Spells.addSpell(1 
 									, '/' + quoteReg(this._selText).replace(/\r?\n/g, '\\n') + '/', false);
 								} else {
-									Spells.add(0 , this._selText.toLowerCase(), false);
+									Spells.addSpell(0 , this._selText.toLowerCase(), false);
 								}
 							} else {
 								dummy.innerHTML = '';
 								dummy.appendChild(this._selRange.cloneContents());
-								Spells.add(2 
+								Spells.addSpell(2 
 								, '/' + quoteReg(dummy.innerHTML.replace(/^<[^>]+>|<[^>]+>$/g, '')) + '/', false);
 							}
 							return;
 						}
 					case 'hide-name':
-						Spells.add(6 , this.posterName, false);return;
+						Spells.addSpell(6 , this.posterName, false);return;
 					case 'hide-trip':
-						Spells.add(7 , this.posterTrip, false);return;
+						Spells.addSpell(7 , this.posterTrip, false);return;
 					case 'hide-img':
 						{
 							var _images$firstAttach = this.images.firstAttach,
@@ -14368,41 +14539,39 @@ true, true];
 							    wi = _images$firstAttach.width,
 							    h = _images$firstAttach.height;
 
-							Spells.add(8 , [0, [w, w], [wi, wi, h, h]], false);
+							Spells.addSpell(8 , [0, [w, w], [wi, wi, h, h]], false);
 							return;
 						}
 					case 'hide-imgn':
-						Spells.add(3 , '/' + quoteReg(this.images.firstAttach.name) + '/', false);
+						Spells.addSpell(3 , '/' + quoteReg(this.images.firstAttach.name) + '/', false);
 						return;
 					case 'hide-ihash':
 						ImagesHashStorage.getHash(this.images.firstAttach).then(function (hash) {
 							if (hash !== -1) {
-								Spells.add(4 , hash, false);
+								Spells.addSpell(4 , hash, false);
 							}
 						});
 						return;
 					case 'hide-noimg':
-						Spells.add(0x108 , '', true);return;
+						Spells.addSpell(0x108 , '', true);return;
 					case 'hide-text':
 						{
 							var num = this.num;
 
 							var words = Post.getWrds(this.text);
 							for (var post = Thread.first.op; post; post = post.next) {
-								Post.findSameText(num, hidden, words, post);
+								Post.findSameText(num, !isHide, words, post);
 							}
 							return;
 						}
 					case 'hide-notext':
-						Spells.add(0x10B , '', true);return;
+						Spells.addSpell(0x10B , '', true);return;
 					case 'hide-refs':
-						if (hidden) {
-							this.ref.unhide(true);
-						} else {
-							this.ref.hide(true);
-						}
-						this.setUserVisib(!hidden);
+						this.ref.toggleRef(isHide, true);
+						this.setUserVisib(isHide);
 						return;
+					case 'hide-refsonly':
+						Spells.addSpell(0 , '>>' + this.num, false);return;
 					case 'thr-exp':
 						{
 							var task = parseInt(el.textContent.match(/\d+/), 10);
@@ -14413,39 +14582,16 @@ true, true];
 		}, {
 			key: '_getMenuHide',
 			value: function _getMenuHide() {
-				var str = '';
-				var sel = window.getSelection();
-				var ssel = sel.toString().trim();
-				var getItem = function getItem(name) {
+				var item = function item(name) {
 					return '<span info="hide-' + name + '" class="de-menu-item">' + Lng.selHiderMenu[name][lang] + '</span>';
 				};
+				var sel = window.getSelection();
+				var ssel = sel.toString().trim();
 				if (ssel) {
 					this._selText = ssel;
 					this._selRange = sel.getRangeAt(0);
-					str += getItem('sel');
 				}
-				if (this.posterName) {
-					str += getItem('name');
-				}
-				if (this.posterTrip) {
-					str += getItem('trip');
-				}
-				if (this.images.hasAttachments) {
-					str += getItem('img');
-					str += getItem('imgn');
-					str += getItem('ihash');
-				} else {
-					str += getItem('noimg');
-				}
-				if (this.text) {
-					str += getItem('text');
-				} else {
-					str += getItem('notext');
-				}
-				if (!Cfg.hideRefPsts && this.ref.hasMap) {
-					str += getItem('refs');
-				}
-				return str;
+				return '' + (ssel ? item('sel') : '') + (this.posterName ? item('name') : '') + (this.posterTrip ? item('trip') : '') + (this.images.hasAttachments ? item('img') + item('imgn') + item('ihash') : item('noimg')) + (this.text ? item('text') : item('notext')) + (!Cfg.hideRefPsts && this.ref.hasMap ? item('refs') : '') + item('refsonly');
 			}
 		}, {
 			key: '_strikePostNum',
@@ -14460,17 +14606,17 @@ true, true];
 				$each($Q('[de-form] a[href*="' + (aib.anchor + num) + '"]'), isHide ? function (el) {
 					el.classList.add('de-link-hid');
 					if (Cfg.removeHidd && el.classList.contains('de-link-ref')) {
-						var refmap = el.parentNode;
-						if (!$q('.de-link-ref:not(.de-link-hid)', refmap)) {
-							$hide(refmap);
+						var refMapEl = el.parentNode;
+						if (!$q('.de-link-ref:not(.de-link-hid)', refMapEl)) {
+							$hide(refMapEl);
 						}
 					}
 				} : function (el) {
 					el.classList.remove('de-link-hid');
 					if (Cfg.removeHidd && el.classList.contains('de-link-ref')) {
-						var refmap = el.parentNode;
-						if ($q('.de-link-ref:not(.de-link-hid)', refmap)) {
-							$show(refmap);
+						var refMapEl = el.parentNode;
+						if ($q('.de-link-ref:not(.de-link-hid)', refMapEl)) {
+							$show(refMapEl);
 						}
 					}
 				});
@@ -14617,7 +14763,7 @@ true, true];
 						curPost.setVisib(false);
 					}
 					if (curPost.userToggled) {
-						HiddenPosts.remove(curPost.num);
+						HiddenPosts.removeStorage(curPost.num);
 						curPost.userToggled = false;
 					}
 				} else {
@@ -14632,22 +14778,22 @@ true, true];
 			}
 		}, {
 			key: 'hideContent',
-			value: function hideContent(headerEl, hideBtn, isUser, hide) {
-				if (hide) {
-					if (aib.t) {
-						Thread.first.hidCounter++;
-					}
-					hideBtn.setAttribute('class', isUser ? 'de-btn-unhide-user' : 'de-btn-unhide');
-					if (headerEl) {
-						for (var el = headerEl.nextElementSibling; el; el = el.nextElementSibling) {
-							el.classList.add('de-post-hiddencontent');
-						}
-					}
-				} else {
+			value: function hideContent(headerEl, hideBtn, isUser, isHide) {
+				if (!isHide) {
 					hideBtn.setAttribute('class', isUser ? 'de-btn-hide-user' : 'de-btn-hide');
 					$each($Q('.de-post-hiddencontent', headerEl.parentNode), function (el) {
 						return el.classList.remove('de-post-hiddencontent');
 					});
+					return;
+				}
+				if (aib.t) {
+					Thread.first.hidCounter++;
+				}
+				hideBtn.setAttribute('class', isUser ? 'de-btn-unhide-user' : 'de-btn-unhide');
+				if (headerEl) {
+					for (var el = headerEl.nextElementSibling; el; el = el.nextElementSibling) {
+						el.classList.add('de-post-hiddencontent');
+					}
 				}
 			}
 		}]);
@@ -14663,15 +14809,15 @@ true, true];
 		function PostContent(post) {
 			_classCallCheck(this, PostContent);
 
-			var _this44 = _possibleConstructorReturn(this, (PostContent.__proto__ || Object.getPrototypeOf(PostContent)).call(this, post));
+			var _this46 = _possibleConstructorReturn(this, (PostContent.__proto__ || Object.getPrototypeOf(PostContent)).call(this, post));
 
-			if (_this44._inited) {
-				return _possibleConstructorReturn(_this44);
+			if (_this46._inited) {
+				return _possibleConstructorReturn(_this46);
 			}
-			_this44._inited = true;
-			_this44.el = post.el;
-			_this44.post = post;
-			return _this44;
+			_this46._inited = true;
+			_this46.el = post.el;
+			_this46.post = post;
+			return _this46;
 		}
 
 		_createClass(PostContent, [{
@@ -14754,8 +14900,8 @@ true, true];
 		}
 
 		_createClass(PostNote, [{
-			key: 'hide',
-			value: function hide() {
+			key: 'hideNote',
+			value: function hideNote() {
 				if (this.isHideThr) {
 					this._aEl.onmouseover = this._aEl.onmouseout = this._aEl.onclick = null;
 				}
@@ -14768,23 +14914,23 @@ true, true];
 				if (this.isHideThr) {
 					this.set(null);
 				} else {
-					this.hide();
+					this.hideNote();
 				}
 			}
 		}, {
 			key: 'set',
 			value: function set(note) {
-				var _this45 = this;
+				var _this47 = this;
 
 				this.text = note;
 				var text = void 0;
 				if (this.isHideThr) {
 					this._aEl.onmouseover = this._aEl.onmouseout = function (e) {
-						return _this45._post.hideContent(e.type === 'mouseout');
+						return _this47._post.hideContent(e.type === 'mouseout');
 					};
 					this._aEl.onclick = function (e) {
 						$pd(e);
-						_this45._post.setUserVisib(!_this45._post.hidden);
+						_this47._post.setUserVisib(!_this47._post.hidden);
 					};
 					text = (this._post.title ? '(' + this._post.title + ') ' : '') + (note ? '[autohide: ' + note + ']' : '');
 				} else {
@@ -14836,81 +14982,6 @@ true, true];
 		_enabled: false
 	};
 
-	var PostImages = function () {
-		function PostImages(post) {
-			_classCallCheck(this, PostImages);
-
-			var first = null,
-			    last = null,
-			    els = $Q(aib.qPostImg, post.el);
-			var hasAttachments = false;
-			var filesMap = new Map();
-			for (var i = 0, len = els.length; i < len; ++i) {
-				var el = els[i];
-				last = new Attachment(post, el, last);
-				filesMap.set(el, last);
-				hasAttachments = true;
-				if (!first) {
-					first = last;
-				}
-			}
-			if (Cfg.addImgs) {
-				els = $Q('.de-img-pre', post.el);
-				for (var _i36 = 0, _len8 = els.length; _i36 < _len8; ++_i36) {
-					var _el9 = els[_i36];
-					last = new EmbeddedImage(post, _el9, last);
-					filesMap.set(_el9, last);
-					if (!first) {
-						first = last;
-					}
-				}
-			}
-			this.first = first;
-			this.last = last;
-			this.hasAttachments = hasAttachments;
-			this._map = filesMap;
-		}
-
-		_createClass(PostImages, [{
-			key: 'getImageByEl',
-			value: function getImageByEl(el) {
-				return this._map.get(el);
-			}
-		}, {
-			key: Symbol.iterator,
-			value: function value() {
-				return {
-					_img: this.first,
-					next: function next() {
-						var value = this._img;
-						if (value) {
-							this._img = value.next;
-							return { value: value, done: false };
-						}
-						return { done: true };
-					}
-				};
-			}
-		}, {
-			key: 'expanded',
-			get: function get() {
-				for (var img = this.first; img; img = img.next) {
-					if (img.expanded) {
-						return true;
-					}
-				}
-				return false;
-			}
-		}, {
-			key: 'firstAttach',
-			get: function get() {
-				return this.hasAttachments ? this.first : null;
-			}
-		}]);
-
-		return PostImages;
-	}();
-
 
 	var Pview = function (_AbstractPost2) {
 		_inherits(Pview, _AbstractPost2);
@@ -14918,71 +14989,71 @@ true, true];
 		function Pview(parent, link, pNum, tNum) {
 			_classCallCheck(this, Pview);
 
-			var _this46 = _possibleConstructorReturn(this, (Pview.__proto__ || Object.getPrototypeOf(Pview)).call(this, parent.thr, pNum, pNum === tNum));
+			var _this48 = _possibleConstructorReturn(this, (Pview.__proto__ || Object.getPrototypeOf(Pview)).call(this, parent.thr, pNum, pNum === tNum));
 
-			_this46.isSticky = false;
-			_this46.parent = parent;
-			_this46.tNum = tNum;
-			_this46._isCached = false;
-			_this46._isLeft = false;
-			_this46._isTop = false;
-			_this46._link = link;
-			_this46._newPos = null;
-			_this46._offsetTop = 0;
-			_this46._readDelay = 0;
+			_this48.isSticky = false;
+			_this48.parent = parent;
+			_this48.tNum = tNum;
+			_this48._isCached = false;
+			_this48._isLeft = false;
+			_this48._isTop = false;
+			_this48._link = link;
+			_this48._newPos = null;
+			_this48._offsetTop = 0;
+			_this48._readDelay = 0;
 			var post = pByNum.get(pNum);
 			if (post && (!post.isOp || !(parent instanceof Pview) || !parent._isCached)) {
-				_this46._showPost(post);
-				return _possibleConstructorReturn(_this46);
+				_this48._showPost(post);
+				return _possibleConstructorReturn(_this48);
 			}
-			_this46._isCached = true;
-			_this46._brd = link.pathname.match(/^\/?(.+\/)/)[1].replace(aib.res, '').replace(/\/$/, '');
-			if (PviewsCache.has(_this46._brd + tNum)) {
-				post = PviewsCache.get(_this46._brd + tNum).getPost(pNum);
+			_this48._isCached = true;
+			_this48._brd = link.pathname.match(/^\/?(.+\/)/)[1].replace(aib.res, '').replace(/\/$/, '');
+			if (PviewsCache.has(_this48._brd + tNum)) {
+				post = PviewsCache.get(_this48._brd + tNum).getPost(pNum);
 				if (post) {
-					_this46._showPost(post);
+					_this48._showPost(post);
 				} else {
-					_this46._showPview(_this46.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t\t\t' + Lng.postNotFound[lang] + '</div>'));
+					_this48._showPview(_this48.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t\t\t' + Lng.postNotFound[lang] + '</div>'));
 				}
-				return _possibleConstructorReturn(_this46);
+				return _possibleConstructorReturn(_this48);
 			}
-			_this46._showPview(_this46.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
+			_this48._showPview(_this48.el = $add('<div class="' + aib.cReply + ' de-pview-info de-pview">\n\t\t\t<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' + Lng.loading[lang] + '</div>'));
 
-			_this46._loadPromise = ajaxPostsLoad(_this46._brd, tNum, false).then(function (pBuilder) {
-				if (aib.JsonBuilder) {
-					var html = [];
-					for (var i = 0, len = pBuilder.length + 1; i < len; ++i) {
-						html.push(pBuilder.getPostHTML(i - 1)); 
-					}
-					_this46._onload($add('<div>' + aib.fixHTML(html.join('')) + '</div>'));
-				} else {
-					_this46._onload(pBuilder._form);
+			_this48._loadPromise = ajaxPostsLoad(_this48._brd, tNum, false).then(function (pBuilder) {
+				if (!aib.JsonBuilder) {
+					_this48._onload(pBuilder._form);
+					return;
 				}
+				var html = [];
+				for (var i = 0, len = pBuilder.length + 1; i < len; ++i) {
+					html.push(pBuilder.getPostHTML(i - 1)); 
+				}
+				_this48._onload($add('<div>' + aib.fixHTML(html.join('')) + '</div>'));
 			}, function (e) {
-				return _this46._onerror(e);
+				return _this48._onerror(e);
 			});
-			return _this46;
+			return _this48;
 		}
 
 		_createClass(Pview, [{
-			key: 'delete',
-			value: function _delete() {
+			key: 'deletePview',
+			value: function deletePview() {
 				this.parent.kid = null;
 				this._link.classList.remove('de-link-parent');
 				if (Pview.top === this) {
 					Pview.top = null;
 				}
 				if (this._loadPromise) {
-					this._loadPromise.cancel();
+					this._loadPromise.cancelPromise();
 					this._loadPromise = null;
 				}
-				var vPost = Attachment.viewer && Attachment.viewer.data.post;
+				var vPost = AttachedImage.viewer && AttachedImage.viewer.data.post;
 				var pv = this;
 				do {
 					clearTimeout(pv._readDelay);
 					if (vPost === pv) {
-						Attachment.viewer.close(null);
-						Attachment.viewer = vPost = null;
+						AttachedImage.closeImg();
+						vPost = null;
 					}
 					var _pv = pv,
 					    el = _pv.el;
@@ -15007,9 +15078,9 @@ true, true];
 					}
 				} while (pv = pv.kid);
 				if (!lastSticky) {
-					this.delete();
+					this.deletePview();
 				} else if (lastSticky.kid) {
-					lastSticky.kid.delete();
+					lastSticky.kid.deletePview();
 				}
 			}
 		}, {
@@ -15050,11 +15121,11 @@ true, true];
 		}, {
 			key: 'markToDel',
 			value: function markToDel() {
-				var _this47 = this;
+				var _this49 = this;
 
 				clearTimeout(Pview._delTO);
 				Pview._delTO = setTimeout(function () {
-					return _this47.deleteNonSticky();
+					return _this49.deleteNonSticky();
 				}, Cfg.linksOut);
 			}
 		}, {
@@ -15155,14 +15226,14 @@ true, true];
 		}, {
 			key: '_showMenu',
 			value: function _showMenu(el, html) {
-				var _this48 = this;
+				var _this50 = this;
 
 				_get(Pview.prototype.__proto__ || Object.getPrototypeOf(Pview.prototype), '_showMenu', this).call(this, el, html);
 				this._menu.onover = function () {
-					return _this48.mouseEnter();
+					return _this50.mouseEnter();
 				};
 				this._menu.onout = function () {
-					return _this48.markToDel();
+					return _this50.markToDel();
 				};
 			}
 		}, {
@@ -15176,8 +15247,8 @@ true, true];
 				pByEl.set(pviewEl, this);
 				pviewEl.className = aib.cReply + ' de-pview' + (post.viewed ? ' de-viewed' : '') + (isMyPost ? ' de-mypost' : '');
 				$show(pviewEl);
-				$each($Q('.de-post-hiddencontent', pviewEl), function (node) {
-					return node.classList.remove('de-post-hiddencontent');
+				$each($Q('.de-post-hiddencontent', pviewEl), function (el) {
+					return el.classList.remove('de-post-hiddencontent');
 				});
 				if (Cfg.linksNavig) {
 					Pview._markLink(pviewEl, this.parent.num);
@@ -15187,14 +15258,12 @@ true, true];
 				var pText = '<svg class="de-btn-rep"><use xlink:href="#de-symbol-post-rep"/></svg>' + (post.sage ? '<svg class="de-btn-sage"><use xlink:href="#de-symbol-post-sage"/></svg>' : '') + '<svg class="de-btn-stick"><use xlink:href="#de-symbol-post-stick"/></svg>' + (post.deleted ? '' : '<span class="de-post-counter-pview">' + (post.isOp ? 'OP' : post.count + +!aib.JsonBuilder) + (isMyPost ? ' (You)' : '') + '</span>');
 				if (post instanceof CacheItem) {
 					this.btns = $aEnd(this._pref, '<span class="de-post-btns">' + pText + '</span>');
-					embedMediaLinks(this);
+					embedAudioLinks(this);
 					if (Cfg.addYouTube) {
-						new VideosParser().parse(this).end();
+						new VideosParser().parse(this).endParser();
 					}
-					if (Cfg.addImgs) {
-						embedImagesLinks(pviewEl);
-					}
-					processImagesLinks(pviewEl);
+					embedPostMsgImages(pviewEl);
+					processImgInfoLinks(pviewEl);
 				} else {
 					var el = this._pref.nextSibling;
 					this.btns = el;
@@ -15205,8 +15274,8 @@ true, true];
 					}
 					el.innerHTML = '<svg class="de-btn-' + (post.hidden ? 'unhide' : 'hide') + (post.userToggled ? '-user' : '') + ' de-btn-pview-hide" de-num="' + this.num + '"><!--\n\t\t\t\t--><use class="de-btn-hide-use" xlink:href="#de-symbol-post-hide"/><!--\n\t\t\t\t--><use class="de-btn-unhide-use" xlink:href="#de-symbol-post-unhide"/></svg>' + pText;
 					$each($Q((!aib.t && post.isOp ? aib.qOmitted + ', ' : '') + '.de-fullimg-wrap, .de-fullimg-after', pviewEl), $del);
-					$each($Q(aib.qPostImg, pviewEl), function (img) {
-						return $show(img.parentNode);
+					$each($Q(aib.qPostImg, pviewEl), function (el) {
+						return $show(el.parentNode);
 					});
 					el = $q('.de-link-parent', pviewEl);
 					if (el) {
@@ -15219,7 +15288,7 @@ true, true];
 						this.videos.updatePost($Q('.de-video-link', post.el), $Q('.de-video-link', pviewEl), true);
 					}
 					if (Cfg.addImgs) {
-						$each($Q('.de-img-pre', pviewEl), $show);
+						$each($Q('.de-img-embed', pviewEl), $show);
 					}
 					if (Cfg.markViewed) {
 						this._readDelay = setTimeout(function (post) {
@@ -15261,8 +15330,8 @@ true, true];
 				return value;
 			}
 		}], [{
-			key: 'show',
-			value: function show(parent, link) {
+			key: 'showPview',
+			value: function showPview(parent, link) {
 				var tNum = +(link.pathname.match(/.+?\/[^\d]*(\d+)/) || [0, aib.getPostOfEl(link).tNum])[1];
 				var pNum = +(link.textContent.trim().match(/\d+$/) || [tNum])[0];
 				var isTop = !(parent instanceof Pview);
@@ -15270,7 +15339,7 @@ true, true];
 				clearTimeout(Pview._delTO);
 				if (pv && pv.num === pNum) {
 					if (pv.kid) {
-						pv.kid.delete();
+						pv.kid.deletePview();
 					}
 					if (pv._link !== link) {
 						pv._setPosition(link, Cfg.animation);
@@ -15279,7 +15348,7 @@ true, true];
 						pv._link = link;
 						if (pv.parent.num !== parent.num) {
 							$each($Q('.de-link-pview', pv.el), function (el) {
-								el.classList.remove('de-link-pview');
+								return el.classList.remove('de-link-pview');
 							});
 							Pview._markLink(pv.el, parent.num);
 						}
@@ -15287,7 +15356,7 @@ true, true];
 					pv.parent = parent;
 				} else if (!Cfg.noNavigHidd || !pByNum.has(pNum) || !pByNum.get(pNum).hidden) {
 					if (pv) {
-						pv.delete();
+						pv.deletePview();
 					}
 					pv = new Pview(parent, link, pNum, tNum);
 					if (isTop) {
@@ -15309,17 +15378,16 @@ true, true];
 				    parent = _pv2.parent;
 
 				if (parent.omitted) {
-					pv.delete();
+					pv.deletePview();
 					return;
 				}
 				if (parent.thr.loadCount === 1 && !parent.el.contains(pv._link)) {
 					var el = parent.ref.getElByNum(pv.num);
-					if (el) {
-						pv._link = el;
-					} else {
-						pv.delete();
+					if (!el) {
+						pv.deletePview();
 						return;
 					}
+					pv._link = el;
 				}
 				var cr = parent.hidden ? parent : pv._link.getBoundingClientRect();
 				var diff = pv._isTop ? pv._offsetTop - window.pageYOffset - cr.bottom : pv._offsetTop + pv.el.offsetHeight - window.pageYOffset - cr.top;
@@ -15337,9 +15405,7 @@ true, true];
 			key: '_markLink',
 			value: function _markLink(el, num) {
 				$each($Q('a[href*="' + num + '"]', el), function (el) {
-					if (el.textContent.startsWith('>>' + num)) {
-						el.classList.add('de-link-pview');
-					}
+					return el.textContent.startsWith('>>' + num) && el.classList.add('de-link-pview');
 				});
 			}
 		}, {
@@ -15399,12 +15465,12 @@ true, true];
 		function PviewsCache(form, b, tNum) {
 			_classCallCheck(this, PviewsCache);
 
-			var _this49 = _possibleConstructorReturn(this, (PviewsCache.__proto__ || Object.getPrototypeOf(PviewsCache)).call(this, b + tNum));
+			var _this51 = _possibleConstructorReturn(this, (PviewsCache.__proto__ || Object.getPrototypeOf(PviewsCache)).call(this, b + tNum));
 
-			if (_this49._inited) {
-				return _possibleConstructorReturn(_this49);
+			if (_this51._inited) {
+				return _possibleConstructorReturn(_this51);
 			}
-			_this49._inited = true;
+			_this51._inited = true;
 			var pByNum = new Map();
 			var thr = $q(aib.qThread, form) || form;
 			var posts = $Q(aib.qRPost + ', ' + aib.qOPost, thr);
@@ -15412,15 +15478,15 @@ true, true];
 				var post = posts[i];
 				pByNum.set(aib.getPNum(post), new CacheItem(post, i + 1));
 			}
-			pByNum.set(tNum, _this49._opObj = new CacheItem(aib.getOp(thr), 0));
-			_this49._b = b;
-			_this49._tNum = tNum;
-			_this49._tUrl = aib.getThrUrl(b, tNum);
-			_this49._posts = pByNum;
+			pByNum.set(tNum, _this51._opObj = new CacheItem(aib.getOp(thr), 0));
+			_this51._b = b;
+			_this51._tNum = tNum;
+			_this51._tUrl = aib.getThrUrl(b, tNum);
+			_this51._posts = pByNum;
 			if (Cfg.linksNavig) {
-				RefMap.gen(pByNum, _this49._tUrl);
+				RefMap.gen(pByNum, _this51._tUrl);
 			}
-			return _this49;
+			return _this51;
 		}
 
 		_createClass(PviewsCache, [{
@@ -15436,7 +15502,7 @@ true, true];
 				post.el = aib.fixHTML(post.el);
 				delete post.msg;
 				if (post.ref.hasMap) {
-					post.ref.init(this._tUrl, Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null);
+					post.ref.initPostRef(this._tUrl, Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null);
 				}
 				post.itemInited = true;
 				return post;
@@ -15449,25 +15515,32 @@ true, true];
 	PviewsCache.purgeSecs = 3e5;
 
 
-	var ImgBtnsShowHider = function () {
-		function ImgBtnsShowHider(nextFn, prevFn) {
-			_classCallCheck(this, ImgBtnsShowHider);
 
-			var btns = $bEnd(docBody, '<div style="display: none;">' + ('<div id="de-img-btn-next" de-title="' + Lng.nextImg[lang] + '"></div>') + ('<div id="de-img-btn-prev" de-title="' + Lng.prevImg[lang] + '"></div></div>'));
+	var ImagesNavigBtns = function () {
+		function ImagesNavigBtns(viewerObj) {
+			_classCallCheck(this, ImagesNavigBtns);
+
+			var btns = $bEnd(docBody, '<div style="display: none;">\n\t\t\t<div id="de-img-btn-prev" class="de-img-btn" de-title="' + Lng.prevImg[lang] + '">\n\t\t\t\t<svg><use xlink:href="#de-symbol-img-btn-arrow"/></svg></div>\n\t\t\t<div id="de-img-btn-next" class="de-img-btn" de-title="' + Lng.nextImg[lang] + '">\n\t\t\t\t<svg><use xlink:href="#de-symbol-img-btn-arrow"/></svg></div>\n\t\t\t<div id="de-img-btn-rotate" class="de-img-btn" style="left: 0; bottom: 0; border-radius: 0 10px 0 0; top: auto;" de-title="' + Lng.rotateImg[lang] + '">\n\t\t\t\t<svg><use xlink:href="#de-symbol-img-btn-circle-arrow"/></svg></div>\n\t\t\t<div id="de-img-btn-auto" class="de-img-btn de-img-btn-none" title="' + Lng.autoPlayOn[lang] + '">\n\t\t\t\t<svg><use xlink:href="#de-symbol-img-btn-auto"/></svg></div></div>');
+
+			var _ref79 = [].concat(_toConsumableArray(btns.children));
+
+			this.prevBtn = _ref79[0];
+			this.nextBtn = _ref79[1];
+			this.rotateBtn = _ref79[2];
+			this.autoBtn = _ref79[3];
+
 			this._btns = btns;
 			this._btnsStyle = btns.style;
-			this._hasEvents = false;
 			this._hidden = true;
 			this._hideTmt = 0;
-			this._nextFn = nextFn;
 			this._oldX = -1;
 			this._oldY = -1;
-			this._prevFn = prevFn;
+			this._viewer = viewerObj;
 			doc.defaultView.addEventListener('mousemove', this);
 			btns.addEventListener('mouseover', this);
 		}
 
-		_createClass(ImgBtnsShowHider, [{
+		_createClass(ImagesNavigBtns, [{
 			key: 'handleEvent',
 			value: function handleEvent(e) {
 				switch (e.type) {
@@ -15479,7 +15552,7 @@ true, true];
 							if (this._oldX !== curX || this._oldY !== curY) {
 								this._oldX = curX;
 								this._oldY = curY;
-								this.show();
+								this.showBtns();
 							}
 							return;
 						}
@@ -15491,38 +15564,48 @@ true, true];
 						}
 						if (!this._hidden) {
 							clearTimeout(this._hideTmt);
-							KeyEditListener.setTitle(this._btns.firstChild, 17);
-							KeyEditListener.setTitle(this._btns.lastChild, 4);
+							KeyEditListener.setTitle(this.prevBtn, 4);
+							KeyEditListener.setTitle(this.nextBtn, 17);
 						}
 						return;
 					case 'mouseout':
 						this._setHideTmt();return;
 					case 'click':
-						switch (e.target.id) {
-							case 'de-img-btn-next':
-								this._nextFn();return;
-							case 'de-img-btn-prev':
-								this._prevFn();
+						{
+							var parent = e.target.parentNode;
+							var viewer = this._viewer;
+							switch (parent.id) {
+								case 'de-img-btn-prev':
+									viewer.navigate(false);return;
+								case 'de-img-btn-next':
+									viewer.navigate(true);return;
+								case 'de-img-btn-rotate':
+									viewer._rotate();return;
+								case 'de-img-btn-auto':
+									this.autoBtn.title = (viewer.isAutoPlay = !viewer.isAutoPlay) ? Lng.autoPlayOff[lang] : Lng.autoPlayOn[lang];
+									viewer.toggleVideoLoop();
+									parent.classList.toggle('de-img-btn-auto-on');
+							}
 						}
 				}
 			}
 		}, {
-			key: 'hide',
-			value: function hide() {
+			key: 'hideBtns',
+			value: function hideBtns() {
 				this._btnsStyle.display = 'none';
 				this._hidden = true;
 				this._oldX = this._oldY = -1;
 			}
 		}, {
-			key: 'remove',
-			value: function remove() {
+			key: 'removeBtns',
+			value: function removeBtns() {
 				$del(this._btns);
 				doc.defaultView.removeEventListener('mousemove', this);
 				clearTimeout(this._hideTmt);
 			}
 		}, {
-			key: 'show',
-			value: function show() {
+			key: 'showBtns',
+			value: function showBtns() {
 				if (this._hidden) {
 					this._btnsStyle.removeProperty('display');
 					this._hidden = false;
@@ -15532,23 +15615,26 @@ true, true];
 		}, {
 			key: '_setHideTmt',
 			value: function _setHideTmt() {
-				var _this50 = this;
+				var _this52 = this;
 
 				clearTimeout(this._hideTmt);
 				this._hideTmt = setTimeout(function () {
-					return _this50.hide();
+					return _this52.hideBtns();
 				}, 2e3);
 			}
 		}]);
 
-		return ImgBtnsShowHider;
+		return ImagesNavigBtns;
 	}();
 
-	var AttachmentViewer = function () {
-		function AttachmentViewer(data) {
-			_classCallCheck(this, AttachmentViewer);
+
+
+	var ImagesViewer = function () {
+		function ImagesViewer(data) {
+			_classCallCheck(this, ImagesViewer);
 
 			this.data = null;
+			this.isAutoPlay = false;
 			this._data = null;
 			this._elStyle = null;
 			this._fullEl = null;
@@ -15561,23 +15647,23 @@ true, true];
 			this._oldX = 0;
 			this._oldY = 0;
 			this._width = 0;
-			this._show(data);
+			this._showFullImg(data);
 		}
 
-		_createClass(AttachmentViewer, [{
-			key: 'close',
-			value: function close(e) {
+		_createClass(ImagesViewer, [{
+			key: 'closeImgViewer',
+			value: function closeImgViewer(e) {
 				if (this.hasOwnProperty('_btns')) {
-					this._btns.remove();
+					this._btns.removeBtns();
 				}
-				this._remove(e);
+				this._removeFullImg(e);
 			}
 		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
 				switch (e.type) {
 					case 'mousedown':
-						if (this.data.isVideo && ExpandableMedia.isControlClick(e)) {
+						if (this.data.isVideo && ExpandableImage.isControlClick(e)) {
 							return;
 						}
 						this._oldX = e.clientX;
@@ -15608,15 +15694,15 @@ true, true];
 					case 'click':
 						{
 							var el = e.target;
-							if (this.data.isVideo && ExpandableMedia.isControlClick(e) || el.tagName !== 'IMG' && el.tagName !== 'VIDEO' && !el.classList.contains('de-fullimg-wrap') && el.target.className !== 'de-fullimg-load') {
+							if (this.data.isVideo && ExpandableImage.isControlClick(e) || el.tagName !== 'IMG' && el.tagName !== 'VIDEO' && !el.classList.contains('de-fullimg-wrap') && el.target.className !== 'de-fullimg-load') {
 								return;
 							}
 							if (e.button === 0) {
 								if (this._moved) {
 									this._moved = false;
 								} else {
-									this.close(e);
-									Attachment.viewer = null;
+									this.closeImgViewer(e);
+									AttachedImage.viewer = null;
 								}
 								e.stopPropagation();
 								break;
@@ -15634,22 +15720,35 @@ true, true];
 		}, {
 			key: 'navigate',
 			value: function navigate(isForward) {
+				var isVideoOnly = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 				var data = this.data;
 
 				data.cancelWebmLoad(this._fullEl);
 				do {
-					data = data.getFollow(isForward);
-				} while (data && !data.isVideo && !data.isImage);
+					data = data.getFollowImg(isForward);
+				} while (data && !data.isVideo && !data.isImage || isVideoOnly && data.isImage);
 				if (data) {
-					this.update(data, true, null);
+					this.updateImgViewer(data, true, null);
 					data.post.selectAndScrollTo(data.post.images.first.el);
 				}
 			}
 		}, {
-			key: 'update',
-			value: function update(data, showButtons, e) {
-				this._remove(e);
-				this._show(data, showButtons);
+			key: 'toggleVideoLoop',
+			value: function toggleVideoLoop() {
+				if (this.data.isVideo) {
+					var el = this._fullEl.firstElementChild;
+					if (this.isAutoPlay) {
+						el.removeAttribute('loop');
+					} else {
+						el.setAttribute('loop', '');
+					}
+				}
+			}
+		}, {
+			key: 'updateImgViewer',
+			value: function updateImgViewer(data, showButtons, e) {
+				this._removeFullImg(e);
+				this._showFullImg(data, showButtons);
 			}
 		}, {
 			key: '_handleWheelEvent',
@@ -15682,47 +15781,8 @@ true, true];
 				this._elStyle.top = this._oldT + 'px';
 			}
 		}, {
-			key: '_show',
-			value: function _show(data) {
-				var _this51 = this;
-
-				var _data$computeFullSize = data.computeFullSize(),
-				    _data$computeFullSize2 = _slicedToArray(_data$computeFullSize, 3),
-				    width = _data$computeFullSize2[0],
-				    height = _data$computeFullSize2[1],
-				    minSize = _data$computeFullSize2[2];
-
-				this._fullEl = data.getFullObject(false, function (el) {
-					return _this51._resize(el);
-				}, function (el) {
-					return _this51._rotate(el);
-				});
-				this._width = width;
-				this._height = height;
-				this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
-				this._oldL = (Post.sizing.wWidth - width) / 2 - 1;
-				this._oldT = (Post.sizing.wHeight - height) / 2 - 1;
-				var obj = $add('<div class="de-fullimg-center" style="top:' + (this._oldT - (Cfg.imgInfoLink ? 11 : 0)) + 'px; left:' + this._oldL + 'px; width:' + width + 'px; height:' + height + 'px; display: block"></div>');
-				(data.isImage ? $aBegin(obj, '<a class="de-fullimg-wrap-link" href="' + data.src + '"></a>') : obj).appendChild(this._fullEl);
-				this._elStyle = obj.style;
-				this.data = data;
-				this._obj = obj;
-				obj.addEventListener('onwheel' in obj ? 'wheel' : 'mousewheel', this, true);
-				obj.addEventListener('mousedown', this, true);
-				obj.addEventListener('click', this, true);
-				if (data.inPview && !data.post.isSticky) {
-					this.data.post.setSticky(true);
-				}
-				if (!data.inPview) {
-					this._btns.show();
-				} else if (this.hasOwnProperty('_btns')) {
-					this._btns.hide();
-				}
-				data.post.thr.form.el.appendChild(obj);
-			}
-		}, {
-			key: '_remove',
-			value: function _remove(e) {
+			key: '_removeFullImg',
+			value: function _removeFullImg(e) {
 				var data = this.data;
 
 				data.cancelWebmLoad(this._fullEl);
@@ -15735,17 +15795,17 @@ true, true];
 				}
 			}
 		}, {
-			key: '_resize',
-			value: function _resize(el) {
+			key: '_resizeFullImg',
+			value: function _resizeFullImg(el) {
 				if (el !== this._fullEl) {
 					return;
 				}
 
-				var _data$computeFullSize3 = this.data.computeFullSize(),
-				    _data$computeFullSize4 = _slicedToArray(_data$computeFullSize3, 3),
-				    width = _data$computeFullSize4[0],
-				    height = _data$computeFullSize4[1],
-				    minSize = _data$computeFullSize4[2];
+				var _data$computeFullSize = this.data.computeFullSize(),
+				    _data$computeFullSize2 = _slicedToArray(_data$computeFullSize, 3),
+				    width = _data$computeFullSize2[0],
+				    height = _data$computeFullSize2[1],
+				    minSize = _data$computeFullSize2[2];
 
 				this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
 				if (Post.sizing.wWidth - this._oldL - this._width < 5 || Post.sizing.wHeight - this._oldT - this._height < 5) {
@@ -15778,31 +15838,59 @@ true, true];
 		}, {
 			key: '_rotate',
 			value: function _rotate(el) {
-				if (el !== this._fullEl) {
-					return;
-				}
-				var _width = this._width,
-				    _height = this._height;
+				this._elStyle.transform = 'rotate(' + (this.data.rotate += this.data.rotate == 270 ? -270 : 90) + 'deg)';
+			}
+		}, {
+			key: '_showFullImg',
+			value: function _showFullImg(data) {
+				var _this53 = this;
 
-				this._width = _height;
-				this._height = _width;
-				this._elStyle.width = _height + 'px';
-				this._elStyle.height = _width + 'px';
-				var halfWidth = _width / 2;
-				var halfHeight = _height / 2;
-				this._elStyle.left = (this._oldL = parseInt(this._oldL + halfWidth - halfHeight, 10)) + 'px';
-				this._elStyle.top = (this._oldT = parseInt(this._oldT + halfHeight - halfWidth, 10)) + 'px';
+				var _data$computeFullSize3 = data.computeFullSize(),
+				    _data$computeFullSize4 = _slicedToArray(_data$computeFullSize3, 3),
+				    width = _data$computeFullSize4[0],
+				    height = _data$computeFullSize4[1],
+				    minSize = _data$computeFullSize4[2];
+
+				this._fullEl = data.getFullImg(false, function (el) {
+					return _this53._resizeFullImg(el);
+				} );
+				this._width = width;
+				this._height = height;
+				this._minSize = minSize ? minSize / this._zoomFactor : Cfg.minImgSize;
+				this._oldL = (Post.sizing.wWidth - width) / 2 - 1;
+				this._oldT = (Post.sizing.wHeight - height) / 2 - 1;
+				if (!data.rotate) {
+					data.rotate = 0;
+				}
+				var el = $add('<div class="de-fullimg-center" style="top:' + (this._oldT - (Cfg.imgInfoLink ? 11 : 0)) + 'px; left:' + this._oldL + 'px; width:' + width + 'px; height:' + height + 'px; transform: rotate(' + data.rotate + 'deg); display: block"></div>');
+				(data.isImage ? $aBegin(el, '<a class="de-fullimg-wrap-link" href="' + data.src + '"></a>') : el).appendChild(this._fullEl);
+				this._elStyle = el.style;
+				this.data = data;
+				this._obj = el;
+				el.addEventListener('onwheel' in el ? 'wheel' : 'mousewheel', this, true);
+				el.addEventListener('mousedown', this, true);
+				el.addEventListener('click', this, true);
+				if (data.inPview && !data.post.isSticky) {
+					this.data.post.setSticky(true);
+				}
+				var btns = this._btns;
+				if (!data.inPview) {
+					btns.showBtns();
+					if (data.isVideo) {
+						btns.autoBtn.classList.remove('de-img-btn-none');
+					} else {
+						btns.autoBtn.classList.add('de-img-btn-none');
+					}
+				} else if (this.hasOwnProperty('_btns')) {
+					btns.hideBtns();
+				}
+				data.post.thr.form.el.appendChild(el);
+				this.toggleVideoLoop();
 			}
 		}, {
 			key: '_btns',
 			get: function get() {
-				var _this52 = this;
-
-				var value = new ImgBtnsShowHider(function () {
-					return _this52.navigate(true);
-				}, function () {
-					return _this52.navigate(false);
-				});
+				var value = new ImagesNavigBtns(this);
 				Object.defineProperty(this, '_btns', { value: value });
 				return value;
 			}
@@ -15815,12 +15903,14 @@ true, true];
 			}
 		}]);
 
-		return AttachmentViewer;
+		return ImagesViewer;
 	}();
 
-	var ExpandableMedia = function () {
-		function ExpandableMedia(post, el, prev) {
-			_classCallCheck(this, ExpandableMedia);
+
+
+	var ExpandableImage = function () {
+		function ExpandableImage(post, el, prev) {
+			_classCallCheck(this, ExpandableImage);
 
 			this.el = el;
 			this.expanded = false;
@@ -15834,7 +15924,7 @@ true, true];
 			}
 		}
 
-		_createClass(ExpandableMedia, [{
+		_createClass(ExpandableImage, [{
 			key: 'cancelWebmLoad',
 			value: function cancelWebmLoad(fullEl) {
 				if (this.isVideo) {
@@ -15844,14 +15934,14 @@ true, true];
 					videoEl.load();
 				}
 				if (this._webmTitleLoad) {
-					this._webmTitleLoad.cancel();
+					this._webmTitleLoad.cancelPromise();
 					this._webmTitleLoad = null;
 				}
 			}
 		}, {
-			key: 'collapse',
-			value: function collapse(e) {
-				if (e && this.isVideo && ExpandableMedia.isControlClick(e)) {
+			key: 'collapseImg',
+			value: function collapseImg(e) {
+				if (e && this.isVideo && ExpandableImage.isControlClick(e)) {
 					return;
 				}
 				this.cancelWebmLoad(this._fullEl);
@@ -15913,40 +16003,42 @@ true, true];
 				return [width, height, null];
 			}
 		}, {
-			key: 'expand',
-			value: function expand(inPost, e) {
-				var _this53 = this;
+			key: 'expandImg',
+			value: function expandImg(inPost, e) {
+				var _this54 = this;
 
 				if (e && !e.bubbles) {
 					return;
 				}
 				if (!inPost) {
-					if (Attachment.viewer) {
-						if (Attachment.viewer.data === this) {
-							Attachment.viewer.close(e);
-							Attachment.viewer = null;
-							return;
-						}
-						Attachment.viewer.update(this, e);
-					} else {
-						Attachment.viewer = new AttachmentViewer(this);
+					var viewer = AttachedImage.viewer;
+
+					if (!viewer) {
+						AttachedImage.viewer = new ImagesViewer(this);
+						return;
 					}
+					if (viewer.data === this) {
+						viewer.closeImgViewer(e);
+						AttachedImage.viewer = null;
+						return;
+					}
+					viewer.updateImgViewer(this, e);
 					return;
 				}
 				this.expanded = true;
 				var el = this.el;
 
 				(aib.hasPicWrap ? this._getImageParent() : el.parentNode).insertAdjacentHTML('afterend', '<div class="de-fullimg-after"></div>');
-				this._fullEl = this.getFullObject(true, null, null);
+				this._fullEl = this.getFullImg(true, null, null);
 				this._fullEl.addEventListener('click', function (e) {
-					return _this53.collapse(e);
-				});
+					return _this54.collapseImg(e);
+				}, true);
 				$hide(el.parentNode);
 				$after(el.parentNode, this._fullEl);
 			}
 		}, {
-			key: 'getFollow',
-			value: function getFollow(isForward) {
+			key: 'getFollowImg',
+			value: function getFollowImg(isForward) {
 				var nImage = isForward ? this.next : this.prev;
 				if (nImage) {
 					return nImage;
@@ -15969,9 +16061,9 @@ true, true];
 				return isForward ? imgs.first : imgs.last;
 			}
 		}, {
-			key: 'getFullObject',
-			value: function getFullObject(inPost, onsizechange, onrotate) {
-				var _this54 = this;
+			key: 'getFullImg',
+			value: function getFullImg(inPost, onsizechange, onrotate) {
+				var _this55 = this;
 
 				var wrapEl = void 0,
 				    name = void 0,
@@ -15979,7 +16071,7 @@ true, true];
 				var src = this.src;
 
 				var parent = this._getImageParent();
-				if (this.el.className !== 'de-img-pre') {
+				if (this.el.className !== 'de-img-embed') {
 					var nameEl = $q(aib.qImgNameLink, parent);
 					origSrc = nameEl.getAttribute('de-href') || nameEl.href;
 					name = this.name;
@@ -15988,13 +16080,13 @@ true, true];
 					name = origSrc.split('/').pop();
 				}
 				var imgNameEl = '<a class="de-fullimg-src" target="_blank" title="' + Lng.openOriginal[lang] + '" href="' + origSrc + '">' + name + '</a>';
-				var wrapClass = (inPost ? ' de-fullimg-wrap-inpost' : ' de-fullimg-wrap-center' + (this._size ? '' : ' de-fullimg-wrap-nosize')) + (this.isVideo ? ' de-fullimg-video' : '');
+				var wrapClass = '' + (inPost ? ' de-fullimg-wrap-inpost' : ' de-fullimg-wrap-center' + (this._size ? '' : ' de-fullimg-wrap-nosize')) + (this.isVideo ? ' de-fullimg-video' : '');
 				if (!this.isVideo) {
 					var waitEl = inPost || this._size ? '' : '<svg class="de-fullimg-load"><use xlink:href="#de-symbol-wait"/></svg>';
 					wrapEl = $add('<div class="de-fullimg-wrap' + wrapClass + '">\n\t\t\t\t' + waitEl + '\n\t\t\t\t<img class="de-fullimg" src="' + src + '" alt="' + src + '">\n\t\t\t\t<div class="de-fullimg-info">' + imgNameEl + '</div>\n\t\t\t</div>');
 					var img = $q('.de-fullimg', wrapEl);
-					img.onload = img.onerror = function (_ref77) {
-						var target = _ref77.target;
+					img.onload = img.onerror = function (_ref80) {
+						var target = _ref80.target;
 
 						if (target.naturalHeight + target.naturalWidth === 0) {
 							if (!target.onceLoaded) {
@@ -16006,10 +16098,18 @@ true, true];
 						var newW = target.naturalWidth,
 						    newH = target.naturalHeight;
 
-						var ar = _this54._size ? _this54._size[1] / _this54._size[0] : newH / newW;
-						var isExifRotated = target.scrollHeight / target.scrollWidth > 1 ? ar < 1 : ar > 1;
-						if (!_this54._size || isExifRotated) {
-							_this54._size = isExifRotated ? [newH, newW] : [newW, newH];
+						if (!_this55._size) {
+							_this55._size = [newW, newH];
+						} else if (_this55._size[0] != newW || _this55._size[1] != newH) {
+							_this55._size = [newW, newH];
+
+							var _computeFullSize = _this55.computeFullSize(),
+							    _computeFullSize2 = _slicedToArray(_computeFullSize, 2),
+							    width = _computeFullSize2[0],
+							    height = _computeFullSize2[1];
+
+							target.parentNode.parentNode.style.width = width + 'px';
+							target.parentNode.parentNode.style.height = height + 'px';
 						}
 						var el = target.previousElementSibling;
 						if (el) {
@@ -16019,8 +16119,6 @@ true, true];
 							if (onsizechange) {
 								onsizechange(p);
 							}
-						} else if (isExifRotated && onrotate) {
-							onrotate(target.parentNode);
 						}
 					};
 					DollchanAPI.notify('expandmedia', src);
@@ -16031,18 +16129,21 @@ true, true];
 				var needTitle = isWebm && Cfg.webmTitles;
 				var inPostSize = '';
 				if (inPost) {
-					var _computeFullSize = this.computeFullSize(),
-					    _computeFullSize2 = _slicedToArray(_computeFullSize, 2),
-					    width = _computeFullSize2[0],
-					    height = _computeFullSize2[1];
+					var _computeFullSize3 = this.computeFullSize(),
+					    _computeFullSize4 = _slicedToArray(_computeFullSize3, 2),
+					    width = _computeFullSize4[0],
+					    height = _computeFullSize4[1];
 
 					inPostSize = ' style="width: ' + width + 'px; height: ' + height + 'px;"';
 				}
 				wrapEl = $add('<div class="de-fullimg-wrap' + wrapClass + '"' + inPostSize + '>\n\t\t\t<video style="width: inherit; height: inherit" src="' + src + '" loop autoplay ' + ('' + (Cfg.webmControl ? 'controls ' : '')) + ((Cfg.webmVolume === 0 ? 'muted ' : '') + '></video>\n\t\t\t<div class="de-fullimg-info">\n\t\t\t\t' + imgNameEl + '\n\t\t\t\t' + (needTitle ? '<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>' : '') + '\n\t\t\t</div>\n\t\t</div>'));
 				var videoEl = wrapEl.firstElementChild;
 				videoEl.volume = Cfg.webmVolume / 100;
-				videoEl.addEventListener('error', function (_ref78) {
-					var target = _ref78.target;
+				videoEl.addEventListener('ended', function () {
+					return AttachedImage.viewer.navigate(true, true);
+				});
+				videoEl.addEventListener('error', function (_ref81) {
+					var target = _ref81.target;
 
 					if (!target.onceLoaded) {
 						target.load();
@@ -16056,8 +16157,7 @@ true, true];
 					var val = e.target.muted ? 0 : Math.round(e.target.volume * 100);
 					if (e.isTrusted && val !== Cfg.webmVolume) {
 						saveCfg('webmVolume', val);
-						locStorage['__de-webmvolume'] = val;
-						locStorage.removeItem('__de-webmvolume');
+						sendStorageEvent('__de-webmvolume', val);
 					}
 				});
 				if (nav.isMsEdge && isWebm && !DollchanAPI.hasListener('expandmedia')) {
@@ -16071,7 +16171,7 @@ true, true];
 							return;
 						}
 						var title = '',
-						    d = new WebmParser(data.buffer).getData();
+						    d = new WebmParser(data.buffer).getWebmData();
 						if (!d) {
 							return;
 						}
@@ -16176,11 +16276,13 @@ true, true];
 			}
 		}]);
 
-		return ExpandableMedia;
+		return ExpandableImage;
 	}();
 
-	var EmbeddedImage = function (_ExpandableMedia) {
-		_inherits(EmbeddedImage, _ExpandableMedia);
+
+
+	var EmbeddedImage = function (_ExpandableImage) {
+		_inherits(EmbeddedImage, _ExpandableImage);
 
 		function EmbeddedImage() {
 			_classCallCheck(this, EmbeddedImage);
@@ -16206,18 +16308,20 @@ true, true];
 		}]);
 
 		return EmbeddedImage;
-	}(ExpandableMedia);
+	}(ExpandableImage);
 
-	var Attachment = function (_ExpandableMedia2) {
-		_inherits(Attachment, _ExpandableMedia2);
 
-		function Attachment() {
-			_classCallCheck(this, Attachment);
 
-			return _possibleConstructorReturn(this, (Attachment.__proto__ || Object.getPrototypeOf(Attachment)).apply(this, arguments));
+	var AttachedImage = function (_ExpandableImage2) {
+		_inherits(AttachedImage, _ExpandableImage2);
+
+		function AttachedImage() {
+			_classCallCheck(this, AttachedImage);
+
+			return _possibleConstructorReturn(this, (AttachedImage.__proto__ || Object.getPrototypeOf(AttachedImage)).apply(this, arguments));
 		}
 
-		_createClass(Attachment, [{
+		_createClass(AttachedImage, [{
 			key: '_getImageParent',
 			value: function _getImageParent() {
 				return aib.getImgWrap(this.el);
@@ -16227,7 +16331,7 @@ true, true];
 			value: function _getImageSize() {
 				if (this.info) {
 					var size = this.info.match(/(?:[\s]|^)(\d+)\s?[x\u00D7]\s?(\d+)(?:[)\s,]|$)/);
-					return [size[1], size[2]];
+					return size ? [size[1], size[2]] : null;
 				}
 				return null;
 			}
@@ -16262,12 +16366,98 @@ true, true];
 				Object.defineProperty(this, 'weight', { value: value });
 				return value;
 			}
+		}], [{
+			key: 'closeImg',
+			value: function closeImg() {
+				var viewer = AttachedImage.viewer;
+
+				if (viewer) {
+					viewer.closeImgViewer(null);
+					AttachedImage.viewer = null;
+				}
+			}
 		}]);
 
-		return Attachment;
-	}(ExpandableMedia);
+		return AttachedImage;
+	}(ExpandableImage);
 
-	Attachment.viewer = null;
+	AttachedImage.viewer = null;
+
+
+	var PostImages = function () {
+		function PostImages(post) {
+			_classCallCheck(this, PostImages);
+
+			var first = null,
+			    last = null,
+			    els = $Q(aib.qPostImg, post.el);
+			var hasAttachments = false;
+			var filesMap = new Map();
+			for (var i = 0, len = els.length; i < len; ++i) {
+				var el = els[i];
+				last = new AttachedImage(post, el, last);
+				filesMap.set(el, last);
+				hasAttachments = true;
+				if (!first) {
+					first = last;
+				}
+			}
+			if (Cfg.addImgs || localData) {
+				els = $Q('.de-img-embed', post.el);
+				for (var _i36 = 0, _len8 = els.length; _i36 < _len8; ++_i36) {
+					var _el9 = els[_i36];
+					last = new EmbeddedImage(post, _el9, last);
+					filesMap.set(_el9, last);
+					if (!first) {
+						first = last;
+					}
+				}
+			}
+			this.first = first;
+			this.last = last;
+			this.hasAttachments = hasAttachments;
+			this._map = filesMap;
+		}
+
+		_createClass(PostImages, [{
+			key: 'getImageByEl',
+			value: function getImageByEl(el) {
+				return this._map.get(el);
+			}
+		}, {
+			key: Symbol.iterator,
+			value: function value() {
+				return {
+					_img: this.first,
+					next: function next() {
+						var value = this._img;
+						if (value) {
+							this._img = value.next;
+							return { value: value, done: false };
+						}
+						return { done: true };
+					}
+				};
+			}
+		}, {
+			key: 'expanded',
+			get: function get() {
+				for (var img = this.first; img; img = img.next) {
+					if (img.expanded) {
+						return true;
+					}
+				}
+				return false;
+			}
+		}, {
+			key: 'firstAttach',
+			get: function get() {
+				return this.hasAttachments ? this.first : null;
+			}
+		}]);
+
+		return PostImages;
+	}();
 
 	var ImagesHashStorage = Object.create({
 		get getHash() {
@@ -16280,7 +16470,7 @@ true, true];
 				sesStorage['de-imageshash'] = JSON.stringify(this._storage);
 			}
 			if (this.hasOwnProperty('_workers')) {
-				this._workers.clear();
+				this._workers.clearWorkers();
 				delete this._workers;
 			}
 		},
@@ -16309,11 +16499,11 @@ true, true];
 			return value;
 		},
 		_getHashHelper: function () {
-			var _ref80 = _asyncToGenerator( regeneratorRuntime.mark(function _callee16(_ref79) {
-				var _this57 = this;
+			var _ref83 = _asyncToGenerator( regeneratorRuntime.mark(function _callee16(_ref82) {
+				var _this58 = this;
 
-				var el = _ref79.el,
-				    src = _ref79.src;
+				var el = _ref82.el,
+				    src = _ref82.src;
 				var data, buffer, val, w, h, imgData, cnv, ctx;
 				return regeneratorRuntime.wrap(function _callee16$(_context17) {
 					while (1) {
@@ -16386,7 +16576,7 @@ true, true];
 
 								_context17.next = 25;
 								return new Promise(function (resolve) {
-									return _this57._workers.run([buffer, w, h], [buffer], function (val) {
+									return _this58._workers.runWorker([buffer, w, h], [buffer], function (val) {
 										return resolve(val);
 									});
 								});
@@ -16410,15 +16600,19 @@ true, true];
 				}, _callee16, this);
 			}));
 
-			function _getHashHelper(_x53) {
-				return _ref80.apply(this, arguments);
+			function _getHashHelper(_x55) {
+				return _ref83.apply(this, arguments);
 			}
 
 			return _getHashHelper;
 		}()
 	});
 
-	function processImagesLinks(el) {
+	function addImgSrcButtons(link) {
+		link.insertAdjacentHTML('beforebegin', '<svg class="de-btn-src"><use xlink:href="#de-symbol-post-src"/></svg>');
+	}
+
+	function processImgInfoLinks(el) {
 		var addSrc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Cfg.imgSrcBtns;
 		var delNames = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Cfg.delImgNames;
 
@@ -16436,7 +16630,7 @@ true, true];
 				continue;
 			}
 			if (addSrc) {
-				link.insertAdjacentHTML('beforebegin', '<svg class="de-btn-src"><use xlink:href="#de-symbol-post-src"/></svg>');
+				addImgSrcButtons(link);
 			}
 			if (delNames) {
 				link.classList.add('de-img-name');
@@ -16447,26 +16641,32 @@ true, true];
 		}
 	}
 
-	function embedImagesLinks(el) {
+	function embedPostMsgImages(el) {
+		if (!Cfg.addImgs || localData) {
+			return;
+		}
 		var els = $Q(aib.qMsgImgLink, el);
 		for (var i = 0, len = els.length; i < len; ++i) {
 			var link = els[i];
 			var _url3 = link.href;
-			if (link.parentNode.tagName === 'SMALL' || _url3.includes('?')) {
-				return;
+			if (_url3.includes('?') || aib.getPostOfEl(link).hidden) {
+				continue;
 			}
 			var a = link.cloneNode(false);
 			a.target = '_blank';
-			a.innerHTML = '<img class="de-img-pre" src="' + _url3 + '">';
+			a.innerHTML = '<img class="de-img-embed" src="' + _url3 + '">';
 			$before(link, a);
+			if (Cfg.imgSrcBtns) {
+				addImgSrcButtons(link);
+			}
 		}
 	}
 
-	function genImgHash(_ref81) {
-		var _ref82 = _slicedToArray(_ref81, 3),
-		    arrBuf = _ref82[0],
-		    oldw = _ref82[1],
-		    oldh = _ref82[2];
+	function genImgHash(_ref84) {
+		var _ref85 = _slicedToArray(_ref84, 3),
+		    arrBuf = _ref85[0],
+		    oldw = _ref85[1],
+		    oldh = _ref85[2];
 
 		var buf = new Uint8Array(arrBuf);
 		var size = oldw * oldh;
@@ -16769,26 +16969,26 @@ true, true];
 
 				var filesHTML = '';
 				for (var _iterator27 = data.files, _isArray27 = Array.isArray(_iterator27), _i38 = 0, _iterator27 = _isArray27 ? _iterator27 : _iterator27[Symbol.iterator]();;) {
-					var _ref83;
+					var _ref86;
 
 					if (_isArray27) {
 						if (_i38 >= _iterator27.length) break;
-						_ref83 = _iterator27[_i38++];
+						_ref86 = _iterator27[_i38++];
 					} else {
 						_i38 = _iterator27.next();
 						if (_i38.done) break;
-						_ref83 = _i38.value;
+						_ref86 = _i38.value;
 					}
 
-					var _ref84 = _ref83,
-					    file_id = _ref84.file_id,
-					    metadata = _ref84.metadata,
-					    rating = _ref84.rating,
-					    size = _ref84.size,
-					    src = _ref84.src,
-					    thumb = _ref84.thumb,
-					    thumb_height = _ref84.thumb_height,
-					    thumb_width = _ref84.thumb_width;
+					var _ref87 = _ref86,
+					    file_id = _ref87.file_id,
+					    metadata = _ref87.metadata,
+					    rating = _ref87.rating,
+					    size = _ref87.size,
+					    src = _ref87.src,
+					    thumb = _ref87.thumb,
+					    thumb_height = _ref87.thumb_height,
+					    thumb_width = _ref87.thumb_width;
 
 					var fileName = void 0,
 					    fullFileName = void 0,
@@ -16895,18 +17095,18 @@ true, true];
 				if (data.files && data.files.length !== 0) {
 					filesHTML = '<div class="images images-' + (data.files.length === 1 ? 'single' : 'multi') + '">';
 					for (var _iterator28 = data.files, _isArray28 = Array.isArray(_iterator28), _i39 = 0, _iterator28 = _isArray28 ? _iterator28 : _iterator28[Symbol.iterator]();;) {
-						var _ref85;
+						var _ref88;
 
 						if (_isArray28) {
 							if (_i39 >= _iterator28.length) break;
-							_ref85 = _iterator28[_i39++];
+							_ref88 = _iterator28[_i39++];
 						} else {
 							_i39 = _iterator28.next();
 							if (_i39.done) break;
-							_ref85 = _i39.value;
+							_ref88 = _i39.value;
 						}
 
-						var file = _ref85;
+						var file = _ref88;
 
 						var imgId = num + '-' + file.md5;
 						var _file$fullname = file.fullname,
@@ -16923,20 +17123,20 @@ true, true];
 				}
 
 				var emailEl = data.email ? '<a href="' + data.email + '" class="post-email">' + data.name + '</a>' : '<span class="ananimas">' + data.name + '</span>';
-				var tripEl = !data.trip ? '' : _switch(data.trip, {
+				var tripEl = !data.trip ? '' : '<span class="' + _switch(data.trip, {
 					'!!%adm%!!': 'adm">## Abu ##',
 					'!!%mod%!!': 'mod">## Mod ##',
 					'!!%Inquisitor%!!': 'inquisitor">## Applejack ##',
 					'!!%coder%!!': 'mod">## Кодер ##',
 					'@@default': 'postertrip">' + data.trip
-				});
+				}) + '</span>';
 				var refHref = '/' + brd + '/res/' + (parseInt(data.parent) || num) + '.html#' + num;
-				return '<div id="post-' + num + '" class="post-wrapper">\n\t\t\t<div class="post ' + (i === -1 ? 'oppost' : 'reply') + '" id="post-body-' + num + '" data-num="' + num + '">\n\t\t\t\t<div id="post-details-' + num + '" class="post-details">\n\t\t\t\t\t<input type="checkbox" name="delete" value="' + num + '">\n\t\t\t\t\t' + (!data.subject ? '' : '<span class="post-title">' + (data.subject + (data.tags ? ' /' + data.tags + '/' : '')) + '</span>') + '\n\t\t\t\t\t' + emailEl + '\n\t\t\t\t\t' + (data.icon ? '<span class="post-icon">' + data.icon + '</span>' : '') + '\n\t\t\t\t\t<span class="' + tripEl + '</span>\n\t\t\t\t\t' + (data.op === 1 ? '<span class="ophui"># OP</span>&nbsp;' : '') + '\n\t\t\t\t\t<span class="posttime-reflink">\n\t\t\t\t\t\t<span class="posttime">' + data.date + '&nbsp;</span>\n\t\t\t\t\t\t<span class="reflink">\n\t\t\t\t\t\t\t<a href="' + refHref + '">\u2116</a>' + ('<a href="' + refHref + '" class="postbtn-reply-href" name="' + num + '">' + num + '</a>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</span>\n\t\t\t\t\t' + (this._brd === 'po' ? '<div id="like-div' + num + '" class="like-div">\n\t\t\t\t\t\t\t<span class="like-icon"><i class="fa fa-bolt"></i></span>\n\t\t\t\t\t\t\t<span class="like-caption">\u0414\u0432\u0430\u0447\u0443\u044E</span>\n\t\t\t\t\t\t\t<span id="like-count' + num + '" class="like-count">' + (data.likes || '') + '</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id="dislike-div' + num + '" class="dislike-div">\n\t\t\t\t\t\t\t<span class="dislike-icon"><i class="fa fa-thumbs-down"></i></span>\n\t\t\t\t\t\t\t<span class="dislike-caption">RRRAGE!</span>\n\t\t\t\t\t\t\t<span id="dislike-count' + num + '" class="dislike-count">\n\t\t\t\t\t\t\t\t' + (data.dislikes || '') + '</span>\n\t\t\t\t\t\t</div>' : '') + '\n\t\t\t\t</div>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + this._getPostMsg(data) + '\n\t\t\t</div>\n\t\t</div>');
+				return '<div id="post-' + num + '" class="post-wrapper">\n\t\t\t<div class="post ' + (i === -1 ? 'oppost' : 'reply') + '" id="post-body-' + num + '" data-num="' + num + '">\n\t\t\t\t<div id="post-details-' + num + '" class="post-details">\n\t\t\t\t\t<input type="checkbox" name="delete" value="' + num + '">\n\t\t\t\t\t' + (!data.subject ? '' : '<span class="post-title">' + (data.subject + (data.tags ? ' /' + data.tags + '/' : '')) + '</span>') + '\n\t\t\t\t\t' + emailEl + '\n\t\t\t\t\t' + (data.icon ? '<span class="post-icon">' + data.icon + '</span>' : '') + '\n\t\t\t\t\t' + tripEl + '\n\t\t\t\t\t' + (data.op === 1 ? '<span class="ophui"># OP</span>&nbsp;' : '') + '\n\t\t\t\t\t<span class="posttime-reflink">\n\t\t\t\t\t\t<span class="posttime">' + data.date + '&nbsp;</span>\n\t\t\t\t\t\t<span class="reflink">\n\t\t\t\t\t\t\t<a href="' + refHref + '">\u2116</a>' + ('<a href="' + refHref + '" class="postbtn-reply-href" name="' + num + '">' + num + '</a>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t</span>\n\t\t\t\t\t' + (this._brd === 'po' ? '<div id="like-div' + num + '" class="like-div">\n\t\t\t\t\t\t\t<span class="like-icon"><i class="fa fa-bolt"></i></span>\n\t\t\t\t\t\t\t<span class="like-caption">\u0414\u0432\u0430\u0447\u0443\u044E</span>\n\t\t\t\t\t\t\t<span id="like-count' + num + '" class="like-count">' + (data.likes || '') + '</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div id="dislike-div' + num + '" class="dislike-div">\n\t\t\t\t\t\t\t<span class="dislike-icon"><i class="fa fa-thumbs-down"></i></span>\n\t\t\t\t\t\t\t<span class="dislike-caption">RRRAGE!</span>\n\t\t\t\t\t\t\t<span id="dislike-count' + num + '" class="dislike-count">\n\t\t\t\t\t\t\t\t' + (data.dislikes || '') + '</span>\n\t\t\t\t\t\t</div>' : '') + '\n\t\t\t\t</div>\n\t\t\t\t' + filesHTML + '\n\t\t\t\t' + this._getPostMsg(data) + '\n\t\t\t</div>\n\t\t</div>');
 			}
 		}, {
 			key: 'bannedPostsData',
 			value: regeneratorRuntime.mark(function bannedPostsData() {
-				var _iterator29, _isArray29, _i40, _ref86, _ref87, banned, num;
+				var _iterator29, _isArray29, _i40, _ref89, _ref90, banned, num;
 
 				return regeneratorRuntime.wrap(function bannedPostsData$(_context21) {
 					while (1) {
@@ -16958,7 +17158,7 @@ true, true];
 								return _context21.abrupt('break', 23);
 
 							case 4:
-								_ref86 = _iterator29[_i40++];
+								_ref89 = _iterator29[_i40++];
 								_context21.next = 11;
 								break;
 
@@ -16973,10 +17173,10 @@ true, true];
 								return _context21.abrupt('break', 23);
 
 							case 10:
-								_ref86 = _i40.value;
+								_ref89 = _i40.value;
 
 							case 11:
-								_ref87 = _ref86, banned = _ref87.banned, num = _ref87.num;
+								_ref90 = _ref89, banned = _ref90.banned, num = _ref90.num;
 								_context21.t0 = banned;
 								_context21.next = _context21.t0 === 1 ? 15 : _context21.t0 === 2 ? 18 : 21;
 								break;
@@ -17070,19 +17270,19 @@ true, true];
 				if (data.attachments.length) {
 					filesHTML += '<div class="post-attachments">';
 					for (var _iterator30 = data.attachments, _isArray30 = Array.isArray(_iterator30), _i41 = 0, _iterator30 = _isArray30 ? _iterator30 : _iterator30[Symbol.iterator]();;) {
-						var _ref88;
+						var _ref91;
 
 						if (_isArray30) {
 							if (_i41 >= _iterator30.length) break;
-							_ref88 = _iterator30[_i41++];
+							_ref91 = _iterator30[_i41++];
 						} else {
 							_i41 = _iterator30.next();
 							if (_i41.done) break;
-							_ref88 = _i41.value;
+							_ref91 = _i41.value;
 						}
 
-						var _ref89 = _ref88,
-						    images = _ref89.images;
+						var _ref92 = _ref91,
+						    images = _ref92.images;
 						var orig = images.original,
 						    thumb200 = images.thumb_200px,
 						    thumb400 = images.thumb_400px;
@@ -17115,8 +17315,8 @@ true, true];
 		}
 
 		_createClass(RefMap, [{
-			key: 'add',
-			value: function add(post, num) {
+			key: 'addRefNum',
+			value: function addRefNum(post, num) {
 				var isHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 				if (isHidden === null) {
@@ -17128,7 +17328,7 @@ true, true];
 					this._el.insertAdjacentHTML('beforeend', this._getHTML(num, '', isHidden));
 					if (Cfg.hideRefPsts && this._post.hidden) {
 						post.setVisib(true, 'reference to >>' + num);
-						post.ref.hide();
+						post.ref.hideRef();
 					}
 				}
 			}
@@ -17143,8 +17343,8 @@ true, true];
 				return this._set.has(num);
 			}
 		}, {
-			key: 'hide',
-			value: function hide() {
+			key: 'hideRef',
+			value: function hideRef() {
 				var isForced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 				if (!isForced && !Cfg.hideRefPsts || !this.hasMap || this._hidden) {
@@ -17152,48 +17352,48 @@ true, true];
 				}
 				this._hidden = true;
 				for (var _iterator31 = this._set, _isArray31 = Array.isArray(_iterator31), _i42 = 0, _iterator31 = _isArray31 ? _iterator31 : _iterator31[Symbol.iterator]();;) {
-					var _ref90;
+					var _ref93;
 
 					if (_isArray31) {
 						if (_i42 >= _iterator31.length) break;
-						_ref90 = _iterator31[_i42++];
+						_ref93 = _iterator31[_i42++];
 					} else {
 						_i42 = _iterator31.next();
 						if (_i42.done) break;
-						_ref90 = _i42.value;
+						_ref93 = _i42.value;
 					}
 
-					var num = _ref90;
+					var num = _ref93;
 
 					var post = pByNum.get(num);
 					if (post && !post.hidden) {
 						if (isForced) {
 							post.setUserVisib(true, true, 'reference to >>' + this._post.num);
-							post.ref.hide(true);
+							post.ref.hideRef(true);
 						} else if (!post.userToggled) {
 							post.setVisib(true, 'reference to >>' + this._post.num);
-							post.ref.hide();
+							post.ref.hideRef();
 						}
 					}
 				}
 			}
 		}, {
-			key: 'init',
-			value: function init(tUrl, strNums) {
+			key: 'initPostRef',
+			value: function initPostRef(tUrl, strNums) {
 				var html = '';
 				for (var _iterator32 = this._set, _isArray32 = Array.isArray(_iterator32), _i43 = 0, _iterator32 = _isArray32 ? _iterator32 : _iterator32[Symbol.iterator]();;) {
-					var _ref91;
+					var _ref94;
 
 					if (_isArray32) {
 						if (_i43 >= _iterator32.length) break;
-						_ref91 = _iterator32[_i43++];
+						_ref94 = _iterator32[_i43++];
 					} else {
 						_i43 = _iterator32.next();
 						if (_i43.done) break;
-						_ref91 = _i43.value;
+						_ref94 = _i43.value;
 					}
 
-					var num = _ref91;
+					var num = _ref94;
 
 					html += this._getHTML(num, tUrl, strNums && strNums.has(num));
 				}
@@ -17208,8 +17408,8 @@ true, true];
 				}));
 			}
 		}, {
-			key: 'remove',
-			value: function remove(num) {
+			key: 'removeLink',
+			value: function removeLink(num) {
 				this._set.delete(num);
 				if (this._set.size === 0) {
 					this.removeMap();
@@ -17230,8 +17430,17 @@ true, true];
 				this.hasMap = false;
 			}
 		}, {
-			key: 'unhide',
-			value: function unhide() {
+			key: 'toggleRef',
+			value: function toggleRef(isHide, isForced) {
+				if (isHide) {
+					this.hideRef(isForced);
+				} else {
+					this.unhideRef(isForced);
+				}
+			}
+		}, {
+			key: 'unhideRef',
+			value: function unhideRef() {
 				var isForced = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 				if (this._hidden && !this.hasMap) {
@@ -17239,27 +17448,27 @@ true, true];
 				}
 				this._hidden = false;
 				for (var _iterator33 = this._set, _isArray33 = Array.isArray(_iterator33), _i44 = 0, _iterator33 = _isArray33 ? _iterator33 : _iterator33[Symbol.iterator]();;) {
-					var _ref92;
+					var _ref95;
 
 					if (_isArray33) {
 						if (_i44 >= _iterator33.length) break;
-						_ref92 = _iterator33[_i44++];
+						_ref95 = _iterator33[_i44++];
 					} else {
 						_i44 = _iterator33.next();
 						if (_i44.done) break;
-						_ref92 = _i44.value;
+						_ref95 = _i44.value;
 					}
 
-					var num = _ref92;
+					var num = _ref95;
 
 					var post = pByNum.get(num);
 					if (post && post.hidden && !post.spellHidden) {
 						if (isForced) {
 							post.setUserVisib(false);
-							post.ref.unhide(true);
+							post.ref.unhideRef(true);
 						} else if (!post.userToggled) {
 							post.setVisib(false);
-							post.ref.unhide();
+							post.ref.unhideRef();
 						}
 					}
 				}
@@ -17299,21 +17508,21 @@ true, true];
 				var tNums = DelForm.tNums;
 
 				for (var _iterator34 = posts, _isArray34 = Array.isArray(_iterator34), _i45 = 0, _iterator34 = _isArray34 ? _iterator34 : _iterator34[Symbol.iterator]();;) {
-					var _ref93;
+					var _ref96;
 
 					if (_isArray34) {
 						if (_i45 >= _iterator34.length) break;
-						_ref93 = _iterator34[_i45++];
+						_ref96 = _iterator34[_i45++];
 					} else {
 						_i45 = _iterator34.next();
 						if (_i45.done) break;
-						_ref93 = _i45.value;
+						_ref96 = _i45.value;
 					}
 
-					var _ref94 = _ref93,
-					    _ref95 = _slicedToArray(_ref94, 2),
-					    pNum = _ref95[0],
-					    post = _ref95[1];
+					var _ref97 = _ref96,
+					    _ref98 = _slicedToArray(_ref97, 2),
+					    pNum = _ref98[0],
+					    post = _ref98[1];
 
 					var links = $Q('a', post.msg);
 					for (var lNum, i = 0, len = links.length; i < len; ++i) {
@@ -17334,7 +17543,7 @@ true, true];
 						    ref = _posts$get.ref;
 
 						if (ref._inited) {
-							ref.add(post, pNum);
+							ref.addRefNum(post, pNum);
 						} else {
 							ref._set.add(pNum);
 							ref.hasMap = true;
@@ -17352,22 +17561,22 @@ true, true];
 				}
 			}
 		}, {
-			key: 'init',
-			value: function init(form) {
+			key: 'initRefMap',
+			value: function initRefMap(form) {
 				var post = form.firstThr && form.firstThr.op;
 				if (post && Cfg.linksNavig) {
 					this.gen(pByNum, '');
 					var strNums = Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
 					for (; post; post = post.next) {
 						if (post.ref.hasMap) {
-							post.ref.init('', strNums);
+							post.ref.initPostRef('', strNums);
 						}
 					}
 				}
 			}
 		}, {
-			key: 'upd',
-			value: function upd(post, isAdd) {
+			key: 'updateRefMap',
+			value: function updateRefMap(post, isAdd) {
 				var pNum = post.num;
 				var strNums = isAdd && Cfg.strikeHidd && Post.hiddenNums.size !== 0 ? Post.hiddenNums : null;
 				var links = $Q('a', post.msg);
@@ -17390,7 +17599,7 @@ true, true];
 						link.href = '#' + (aib.fch ? 'p' : '') + lNum;
 					}
 					if (!isAdd) {
-						lPost.ref.remove(pNum);
+						lPost.ref.removeLink(pNum);
 						return;
 					}
 					if (strNums && strNums.has(lNum)) {
@@ -17399,7 +17608,7 @@ true, true];
 					if (!aib.hasOPNum && DelForm.tNums.has(lNum)) {
 						link.classList.add('de-ref-op');
 					}
-					lPost.ref.add(post, pNum, strNums && strNums.has(pNum));
+					lPost.ref.addRefNum(post, pNum, strNums && strNums.has(pNum));
 				}
 			}
 		}]);
@@ -17408,32 +17617,12 @@ true, true];
 	}();
 
 
-
 	var Thread = function () {
-		_createClass(Thread, null, [{
-			key: 'removeSavedData',
-			value: function removeSavedData() {
-			}
-		}, {
-			key: 'first',
-			get: function get() {
-				return DelForm.first.firstThr;
-			}
-		}, {
-			key: 'last',
-			get: function get() {
-				return DelForm.last.lastThr;
-			}
-		}]);
-
 		function Thread(el, num, prev, form) {
-			var _this58 = this;
+			var _this59 = this;
 
 			_classCallCheck(this, Thread);
 
-			var els = $Q(aib.qRPost, el),
-			    len = els.length,
-			    omt = aib.t ? 1 : aib.getOmitted($q(aib.qOmitted, el), len);
 			this.hasNew = false;
 			this.hidden = false;
 			this.hidCounter = 0;
@@ -17441,6 +17630,9 @@ true, true];
 			this.next = null;
 			this.num = num;
 			this.thrId = aib.thrId ? aib.thrId(el) : num;
+			var els = $Q(aib.qRPost, el);
+			var len = els.length;
+			var omt = aib.t ? 1 : aib.getOmitted($q(aib.qOmitted, el), len);
 			this.pcount = omt + len;
 			this.el = el;
 			this.prev = prev;
@@ -17459,47 +17651,39 @@ true, true];
 			el.style.counterReset = 'de-cnt ' + omt;
 			el.setAttribute('de-thread', null);
 			visPosts = Math.max(visPosts, len);
-			if (aib.tiny) {
-				var temp = el.lastChild;
-				if (temp !== this.op.el) {
-					$after(el, temp);
-				}
-				$del($q('.clear', el));
+			if (aib.t) {
+				return;
 			}
-			if (!aib.t) {
-				this.btns = $bEnd(el, '<div class="de-thread-buttons">' + '<span class="de-thread-updater">[<a class="de-abtn" href="#"></a>]</span></div>');
-				var updBtn = this.btns.firstChild;
-				updBtn.onclick = function (e) {
+			this.btns = $bEnd(el, '<div class="de-thread-buttons">' + '<span class="de-thread-updater">[<a class="de-abtn" href="#"></a>]</span></div>');
+			var updBtn = this.btns.firstChild;
+			updBtn.onclick = function (e) {
+				$pd(e);
+				_this59.loadPosts('new');
+			};
+			if (Cfg.hideReplies) {
+				var repBtn = $bEnd(this.btns, ' <span class="de-replies-btn">[<a class="de-abtn" href="#"></a>]</span>');
+				repBtn.onclick = function (e) {
 					$pd(e);
-					_this58.loadPosts('new');
+					var nextCoord = !_this59.next || _this59.last.omitted ? null : _this59.next.top;
+					_this59._toggleReplies(repBtn, updBtn);
+					if (nextCoord) {
+						scrollTo(window.pageXOffset, window.pageYOffset + _this59.next.top - nextCoord);
+					}
 				};
-				if (Cfg.hideReplies) {
-					var repBtn = $bEnd(this.btns, ' <span class="de-replies-btn">[<a class="de-abtn" href="#"></a>]</span>');
-					repBtn.onclick = function (e) {
-						$pd(e);
-						var nextCoord = !_this58.next || _this58.last.omitted ? null : _this58.next.top;
-						_this58._toggleReplies(repBtn, updBtn);
-						if (nextCoord) {
-							scrollTo(window.pageXOffset, window.pageYOffset + _this58.next.top - nextCoord);
-						}
-					};
-					this._toggleReplies(repBtn, updBtn);
-				}
-			} else if (aib.pony) {
-				this.loadNewPosts();
+				this._toggleReplies(repBtn, updBtn);
 			}
 		}
 
 		_createClass(Thread, [{
-			key: 'deletePost',
-			value: function deletePost(post, delAll, removePost) {
+			key: 'deletePosts',
+			value: function deletePosts(post, delAll, isRemovePost) {
 				SpellsRunner.cachedData = null;
 				var count = 0;
 				do {
-					if (removePost && this.last === post) {
+					if (isRemovePost && this.last === post) {
 						this.last = post.prev;
 					}
-					post.delete(removePost);
+					post.deletePost(isRemovePost);
 					post = post.nextNotDeleted;
 					count++;
 				} while (delAll && post);
@@ -17513,7 +17697,7 @@ true, true];
 		}, {
 			key: 'loadPosts',
 			value: function loadPosts(task) {
-				var _this59 = this;
+				var _this60 = this;
 
 				var isSmartScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 				var isInformUser = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -17522,7 +17706,7 @@ true, true];
 					$popup('load-thr', Lng.loading[lang], true);
 				}
 				return ajaxPostsLoad(aib.b, this.thrId, false).then(function (pBuilder) {
-					return _this59._loadFromBuilder(task, isSmartScroll, pBuilder);
+					return _this60._loadFromBuilder(task, isSmartScroll, pBuilder);
 				}, function (e) {
 					return $popup('load-thr', getErrorMessage(e));
 				});
@@ -17531,45 +17715,46 @@ true, true];
 		}, {
 			key: 'loadNewPosts',
 			value: function loadNewPosts() {
-				var _this60 = this;
+				var _this61 = this;
 
 				return ajaxPostsLoad(aib.b, this.thrId, true).then(function (pBuilder) {
-					return pBuilder ? _this60._loadNewFromBuilder(pBuilder) : { newCount: 0, locked: false };
+					return pBuilder ? _this61._loadNewFromBuilder(pBuilder) : { newCount: 0, locked: false };
 				});
 			}
 		}, {
 			key: 'setFavorState',
 			value: function setFavorState(val, type) {
-				var _this61 = this;
+				var _this62 = this;
 
 				this.op.setFavBtn(val);
-				readFavorites().then(function (fav) {
+				readFavorites().then(function (favObj) {
 					var _aib = aib,
 					    b = _aib.b,
 					    h = _aib.host;
 
-					var num = _this61.thrId;
+					var num = _this62.thrId;
 					if (val) {
-						if (!fav[h]) {
-							fav[h] = {};
+						if (!favObj[h]) {
+							favObj[h] = {};
 						}
-						if (!fav[h][b]) {
-							fav[h][b] = {};
+						if (!favObj[h][b]) {
+							favObj[h][b] = {};
 						}
-						fav[h][b].url = aib.prot + '//' + aib.host + aib.getPageUrl(b, 0);
-						fav[h][b][num] = {
-							cnt: _this61.pcount,
+						favObj[h][b].url = aib.prot + '//' + aib.host + aib.getPageUrl(b, 0);
+						favObj[h][b][num] = {
+							cnt: _this62.pcount,
 							new: 0,
 							you: 0,
-							txt: _this61.op.title,
+							txt: _this62.op.title,
 							url: aib.getThrUrl(b, num),
-							last: aib.anchor + _this61.last.num,
+							last: aib.anchor + _this62.last.num,
 							type: type
 						};
 					} else {
-						removeFavoriteEntry(fav, h, b, num);
+						removeFavEntry(favObj, h, b, num);
 					}
-					saveFavorites(fav);
+					sendStorageEvent('__de-favorites', [h, b, num, favObj, val ? 'add' : 'delete']);
+					saveRenewFavorites(favObj);
 				});
 			}
 		}, {
@@ -17618,18 +17803,18 @@ true, true];
 				if (post.ref._set.size) {
 					var html = '';
 					for (var _iterator35 = post.ref._set, _isArray35 = Array.isArray(_iterator35), _i46 = 0, _iterator35 = _isArray35 ? _iterator35 : _iterator35[Symbol.iterator]();;) {
-						var _ref96;
+						var _ref99;
 
 						if (_isArray35) {
 							if (_i46 >= _iterator35.length) break;
-							_ref96 = _iterator35[_i46++];
+							_ref99 = _iterator35[_i46++];
 						} else {
 							_i46 = _iterator35.next();
 							if (_i46.done) break;
-							_ref96 = _i46.value;
+							_ref99 = _i46.value;
 						}
 
-						var num = _ref96;
+						var num = _ref99;
 
 						newp.ref._set.add(num);
 						html += newp.ref._getHTML(num, '', Cfg.strikeHidd && Post.hiddenNums.has(num));
@@ -17658,10 +17843,9 @@ true, true];
 		}, {
 			key: '_addPost',
 			value: function _addPost(parent, el, i, prev, maybeVParser) {
-				var post,
-				    num = aib.getPNum(el),
-				    wrap = doc.adoptNode(aib.getPostWrap(el, false));
-				post = new Post(el, this, num, i, false, prev);
+				var num = aib.getPNum(el);
+				var wrap = doc.adoptNode(aib.getPostWrap(el, false));
+				var post = new Post(el, this, num, i, false, prev);
 				parent.appendChild(wrap);
 				if (aib.t && !doc.hidden && Cfg.animation) {
 					$animate(post.el, 'de-post-new');
@@ -17673,7 +17857,7 @@ true, true];
 				if (maybeVParser.value) {
 					maybeVParser.value.parse(post);
 				}
-				processImagesLinks(el);
+				processImgInfoLinks(el);
 				post.addFuncs();
 				preloadImages(post);
 				if (aib.t && Cfg.markNewPosts) {
@@ -17688,22 +17872,22 @@ true, true];
 					return;
 				}
 				for (var _iterator36 = pBuilder.bannedPostsData(), _isArray36 = Array.isArray(_iterator36), _i47 = 0, _iterator36 = _isArray36 ? _iterator36 : _iterator36[Symbol.iterator]();;) {
-					var _ref97;
+					var _ref100;
 
 					if (_isArray36) {
 						if (_i47 >= _iterator36.length) break;
-						_ref97 = _iterator36[_i47++];
+						_ref100 = _iterator36[_i47++];
 					} else {
 						_i47 = _iterator36.next();
 						if (_i47.done) break;
-						_ref97 = _i47.value;
+						_ref100 = _i47.value;
 					}
 
-					var _ref98 = _ref97,
-					    _ref99 = _slicedToArray(_ref98, 3),
-					    banId = _ref99[0],
-					    bNum = _ref99[1],
-					    bEl = _ref99[2];
+					var _ref101 = _ref100,
+					    _ref102 = _slicedToArray(_ref101, 3),
+					    banId = _ref102[0],
+					    bNum = _ref102[1],
+					    bEl = _ref102[2];
 
 					var post = bNum ? pByNum.get(bNum) : this.op;
 					if (post && post.banned !== banId) {
@@ -17714,38 +17898,12 @@ true, true];
 				}
 			}
 		}, {
-			key: '_toggleReplies',
-			value: function _toggleReplies(repBtn, updBtn) {
-				var isHide = !this.last.omitted;
-				for (var i = 0, post = this.op; post !== this.last; i++) {
-					post = post.next;
-					if (isHide) {
-						post.wrap.classList.add('de-hidden');
-						post.omitted = true;
-					} else {
-						post.wrap.classList.remove('de-hidden');
-						post.omitted = false;
-					}
-				}
-				repBtn.firstElementChild.className = 'de-abtn ' + (isHide ? 'de-replies-show' : 'de-replies-hide');
-				$toggle(updBtn, !isHide);
-				var colBtn = $q('.de-thread-collapse', this.el);
-				if (colBtn) {
-					$toggle(colBtn, !isHide);
-				}
-				$del($q(aib.qOmitted + ', .de-omitted', this.el));
-				i = this.pcount - 1 - (isHide ? 0 : i);
-				if (i) {
-					this.op.el.insertAdjacentHTML('afterend', '<span class="de-omitted">' + i + '</span> ');
-				}
-			}
-		}, {
 			key: '_importPosts',
 			value: function _importPosts(last, pBuilder, begin, end, maybeVParser, maybeSpells) {
-				var fragm,
-				    newCount = end - begin,
-				    newVisCount = newCount,
-				    nums = [];
+				var nums = [];
+				var newCount = end - begin;
+				var newVisCount = newCount;
+				var fragm = void 0;
 				if (aib.JsonBuilder && nav.hasTemplate) {
 					var html = [];
 					for (var i = begin; i < end; ++i) {
@@ -17758,16 +17916,16 @@ true, true];
 					var _posts = $Q(aib.qRPost, fragm);
 					for (var _i48 = 0, _len9 = _posts.length; _i48 < _len9; ++_i48) {
 						last = this._addPost(fragm, _posts[_i48], begin + _i48 + 1, last, maybeVParser);
-						newVisCount -= maybeSpells.value.run(last);
+						newVisCount -= maybeSpells.value.runSpells(last);
+						embedPostMsgImages(last.el);
 					}
 				} else {
 					fragm = doc.createDocumentFragment();
-					var _temp = this.originPostHtml || {};
 					for (; begin < end; ++begin) {
-						_temp[begin] = pBuilder._posts[begin].outerHTML;
 						last = this._addPost(fragm, pBuilder.getPostEl(begin), begin + 1, last, maybeVParser);
 						nums.push(last.num);
-						newVisCount -= maybeSpells.value.run(last);
+						newVisCount -= maybeSpells.value.runSpells(last);
+						embedPostMsgImages(last.el);
 					}
 				}
 				return [newCount, newVisCount, fragm, last, nums];
@@ -17775,7 +17933,7 @@ true, true];
 		}, {
 			key: '_loadFromBuilder',
 			value: function _loadFromBuilder(last, smartScroll, pBuilder) {
-				var _this62 = this;
+				var _this63 = this;
 
 				var nextCoord = void 0;
 				var maybeSpells = new Maybe(SpellsRunner);
@@ -17799,12 +17957,12 @@ true, true];
 				}
 				this.loadCount++;
 				this._parsePosts(pBuilder);
-				var needToHide,
-				    needToOmit,
-				    needToShow,
-				    post = op.next,
-				    needRMUpdate = false,
-				    existed = this.pcount === 1 ? 0 : this.pcount - post.count;
+				var needToHide = void 0,
+				    needToOmit = void 0,
+				    needToShow = void 0;
+				var post = op.next;
+				var needRMUpdate = false;
+				var existed = this.pcount === 1 ? 0 : this.pcount - post.count;
 				switch (last) {
 					case 'new':
 						needToHide = $Q('.de-hidden', thrEl).length;
@@ -17842,7 +18000,9 @@ true, true];
 					    _last = _importPosts3[3],
 					    nums = _importPosts3[4];
 
-					maybeVParser.end();
+					if (maybeVParser.hasValue) {
+						maybeVParser.value.endParser();
+					}
 					$after(op.wrap, fragm);
 					DollchanAPI.notify('newpost', nums);
 					_last.next = post;
@@ -17862,11 +18022,13 @@ true, true];
 						post.omitted = false;
 					}
 					if (needRMUpdate) {
-						RefMap.upd(post, true);
+						RefMap.updateRefMap(post, true);
 					}
 					post = post.next;
 				}
-				maybeSpells.end();
+				if (maybeSpells.hasValue) {
+					maybeSpells.value.endSpells();
+				}
 				thrEl.style.counterReset = 'de-cnt ' + (needToOmit - needToHide + 1);
 				var btn = this.btns;
 				if (btn !== thrEl.lastChild) {
@@ -17875,14 +18037,14 @@ true, true];
 				if (!$q('.de-thread-collapse', btn)) {
 					$bEnd(btn, '<span class="de-thread-collapse"> [<a class="de-abtn" href="' + aib.getThrUrl(aib.b, this.thrId) + '"></a>]</span>').onclick = function (e) {
 						$pd(e);
-						_this62.loadPosts(visPosts, true);
+						_this63.loadPosts(visPosts, true);
 					};
 				}
 				if (needToShow > visPosts) {
-					navPanel.addThr(this);
+					thrNavPanel.addThr(this);
 					btn.lastChild.style.display = 'initial';
 				} else {
-					navPanel.removeThr(this);
+					thrNavPanel.removeThr(this);
 					$hide(btn.lastChild);
 				}
 				if (needToOmit > 0) {
@@ -17903,8 +18065,9 @@ true, true];
 		}, {
 			key: '_loadNewFromBuilder',
 			value: function _loadNewFromBuilder(pBuilder) {
-				var lastOffset = pr.isVisible ? pr.top : null,
-				    _parsePosts2 = this._parsePosts(pBuilder),
+				var lastOffset = pr.isVisible ? pr.top : null;
+
+				var _parsePosts2 = this._parsePosts(pBuilder),
 				    _parsePosts3 = _slicedToArray(_parsePosts2, 2),
 				    newPosts = _parsePosts3[0],
 				    newVisPosts = _parsePosts3[1];
@@ -17917,97 +18080,94 @@ true, true];
 					Pview.updatePosition(true);
 				}
 				if (pBuilder.isClosed) {
-					AjaxCache.clear();
-					return { newCount: newVisPosts, locked: true };
+					AjaxCache.clearCache();
 				}
-				return { newCount: newVisPosts, locked: false };
+				return { newCount: newVisPosts, locked: pBuilder.isClosed };
 			}
 		}, {
 			key: '_parsePosts',
 			value: function _parsePosts(pBuilder) {
-				var _this63 = this;
-
 				this._checkBans(pBuilder);
-				var maybeSpells = new Maybe(SpellsRunner),
-				    newPosts = 0,
-				    newVisPosts = 0,
-				    len = pBuilder.length,
-				    post = this.lastNotDeleted,
-				    maybeVParser = new Maybe(Cfg.addYouTube ? VideosParser : null);
+				var newPosts = 0;
+				var newVisPosts = 0;
+				var post = this.lastNotDeleted;
+				var len = pBuilder.length;
+				var maybeSpells = new Maybe(SpellsRunner);
+				var maybeVParser = new Maybe(Cfg.addYouTube ? VideosParser : null);
+				var _post4 = post,
+				    count = _post4.count;
+
 				if (aib.pony) {
-					if (!this.originPostHtml) {
-						this.originPostHtml = { '-1': pBuilder._op.outerHTML };
-						for (var i = 0; i < len; i++) {
-							this.originPostHtml[i] = pBuilder._posts[i].outerHTML;
-						}
-					} else {
-						var res = [];
-						var c = -1,
-						    p = this.op,
-						    n = pBuilder._op;
-						if (!aib.t) {
-							p = p.nextNotDeleted, c = p ? p.count - 1 : post.count, n = pBuilder._posts[c];
-						}
-						while (p && n) {
-							if (n.outerHTML !== this.originPostHtml[c]) {
-								this.originPostHtml[c] = n.outerHTML;
-								var parent = p.wrap.parentNode;
-								parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
-								res.push(p.num);
-							}
-							c = p.count, p = p.nextNotDeleted, n = pBuilder._posts[c];
-						}
-						res.length && DollchanAPI.notify('newpost', res);
+					var res = [];
+					var c = 0,
+					    p = this.op,
+					    n = pBuilder._op;
+					if (!aib.t) {
+						p = p.nextNotDeleted, c = p ? p.count - 1 : post.count, n = pBuilder._posts[c];
 					}
+					while (p && n) {
+						if (n.getAttribute('data-lastmodified') !== p.el.getAttribute('data-lastmodified')) {
+							var parent = p.wrap.parentNode;
+							parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
+							res.push(p.num);
+						}
+						c = p.count, p = p.nextNotDeleted, n = pBuilder._posts[c];
+					}
+					res.length && DollchanAPI.notify('newpost', res);
 				}
-				if (post.count !== 0 && (aib.dobr || post.count > len || pBuilder.getPNum(post.count - 1) !== post.num)) {
+				if (count !== 0 && (aib.dobr || count > len || pBuilder.getPNum(count - 1) !== post.num)) {
 					post = this.op.nextNotDeleted;
-					var i,
-					    firstChangedPost = null;
-					for (i = post.count - 1; i < len && post;) {
-						if (post.num === pBuilder.getPNum(i)) {
+					var i = post.count - 1;
+					var firstChangedPost = null;
+					for (; i < len && post;) {
+						var _post5 = post,
+						    num = _post5.num,
+						    prev = _post5.prev;
+
+						var iNum = pBuilder.getPNum(i);
+						if (num === iNum) {
 							i++;
 							post = post.nextNotDeleted;
 							continue;
 						}
-						if (post.num > pBuilder.getPNum(i)) {
-							if (!firstChangedPost) {
-								firstChangedPost = post.prev;
-							}
-							var cnt = 0;
-							do {
-								cnt++;
-								i++;
-							} while (pBuilder.getPNum(i) < post.num);
-							var _res = this._importPosts(post.prev, pBuilder, i - cnt, i, maybeVParser, maybeSpells);
-							newPosts += _res[0];
-							this.pcount += _res[0];
-							newVisPosts += _res[1];
-							$after(post.prev.wrap, _res[2]);
-							_res[3].next = post;
-							post.prev = _res[3];
-							DollchanAPI.notify('newpost', _res[4]);
-							for (var temp = post; temp; temp = temp.nextInThread) {
-								temp.count += cnt;
-							}
-						} else {
+						if (num <= iNum) {
 							if (!firstChangedPost) {
 								firstChangedPost = post;
 							}
-							post = this.deletePost(post, false, !aib.t);
+							post = this.deletePosts(post, false, !aib.t);
+							continue;
+						}
+						if (!firstChangedPost) {
+							firstChangedPost = prev;
+						}
+						var cnt = 0;
+						do {
+							cnt++;
+							i++;
+						} while (pBuilder.getPNum(i) < num);
+						var _res = this._importPosts(prev, pBuilder, i - cnt, i, maybeVParser, maybeSpells);
+						newPosts += _res[0];
+						this.pcount += _res[0];
+						newVisPosts += _res[1];
+						$after(prev.wrap, _res[2]);
+						_res[3].next = post;
+						post.prev = _res[3];
+						DollchanAPI.notify('newpost', _res[4]);
+						for (var temp = post; temp; temp = temp.nextInThread) {
+							temp.count += cnt;
 						}
 					}
 					if (i === len && post) {
-						this.deletePost(post, true, !aib.t);
+						this.deletePosts(post, true, !aib.t);
 					}
 					if (firstChangedPost && maybeSpells.hasValue && maybeSpells.value.hasNumSpell) {
 						for (post = firstChangedPost.nextInThread; post; post = post.nextInThread) {
-							maybeSpells.value.run(post);
+							maybeSpells.value.runSpells(post);
 						}
 					}
 					if (newPosts !== 0) {
 						for (post = firstChangedPost; post; post = post.nextInThread) {
-							RefMap.upd(post, true);
+							RefMap.updateRefMap(post, true);
 						}
 					}
 				}
@@ -18020,30 +18180,42 @@ true, true];
 					DollchanAPI.notify('newpost', _res2[4]);
 					this.pcount = len + 1;
 				}
-				readFavorites().then(function (fav) {
-					var f = fav[aib.host];
-					if (!f || !f[aib.b]) {
-						return;
-					}
-					if (f = f[aib.b][_this63.op.num]) {
-						var el = $q('#de-win-fav > .de-win-body');
-						if (el && el.hasChildNodes()) {
-							el = $q('.de-fav-current > .de-fav-entries > .de-entry[de-num="' + _this63.op.num + '"] .de-fav-inf-new', el);
-							$hide(el);
-							el.textContent = 0;
-							el = el.nextElementSibling; 
-							el.textContent = _this63.pcount;
-						}
-						f.cnt = _this63.pcount;
-						f.new = 0;
-						f.you = 0;
-						f.last = aib.anchor + _this63.last.num;
-						setStored('DESU_Favorites', JSON.stringify(fav));
-					}
-				});
-				maybeVParser.end();
-				maybeSpells.end();
+				updateFavorites(this.op.num, [this.pcount, this.last.num], 'update');
+				if (maybeVParser.hasValue) {
+					maybeVParser.value.endParser();
+				}
+				if (maybeSpells.hasValue) {
+					maybeSpells.value.endSpells();
+				}
 				return [newPosts, newVisPosts];
+			}
+		}, {
+			key: '_toggleReplies',
+			value: function _toggleReplies(repBtn, updBtn) {
+				var isHide = !this.last.omitted;
+				var post = this.op;
+				var i = 0;
+				for (; post !== this.last; i++) {
+					post = post.next;
+					if (isHide) {
+						post.wrap.classList.add('de-hidden');
+						post.omitted = true;
+					} else {
+						post.wrap.classList.remove('de-hidden');
+						post.omitted = false;
+					}
+				}
+				repBtn.firstElementChild.className = 'de-abtn ' + (isHide ? 'de-replies-show' : 'de-replies-hide');
+				$toggle(updBtn, !isHide);
+				var colBtn = $q('.de-thread-collapse', this.el);
+				if (colBtn) {
+					$toggle(colBtn, !isHide);
+				}
+				$del($q(aib.qOmitted + ', .de-omitted', this.el));
+				i = this.pcount - 1 - (isHide ? 0 : i);
+				if (i) {
+					this.op.el.insertAdjacentHTML('afterend', '<span class="de-omitted">' + i + '</span> ');
+				}
 			}
 		}, {
 			key: 'bottom',
@@ -18074,23 +18246,37 @@ true, true];
 				return thr;
 			}
 		}, {
+			key: 'top',
+			get: function get() {
+				return this.op.top;
+			}
+		}, {
 			key: 'userTouched',
 			get: function get() {
 				var value = new Map();
 				Object.defineProperty(this, 'userTouched', { value: value });
 				return value;
 			}
+		}], [{
+			key: 'removeSavedData',
+			value: function removeSavedData() {
+			}
 		}, {
-			key: 'top',
+			key: 'first',
 			get: function get() {
-				return this.op.top;
+				return DelForm.first.firstThr;
+			}
+		}, {
+			key: 'last',
+			get: function get() {
+				return DelForm.last.lastThr;
 			}
 		}]);
 
 		return Thread;
 	}();
 
-	var navPanel = {
+	var thrNavPanel = {
 		addThr: function addThr(thr) {
 			this._thrs.add(thr.el);
 			if (this._thrs.size === 1) {
@@ -18116,8 +18302,8 @@ true, true];
 					this._handleClick(e);break;
 			}
 		},
-		init: function init() {
-			var el = $bEnd(docBody, '\n\t\t<div id="de-thr-navpanel" class="de-thr-navpanel-hidden" style="display: none;">\n\t\t\t<svg id="de-thr-navarrow"><use xlink:href="#de-symbol-nav-arrow"/></svg>\n\t\t\t<div id="de-thr-navup">\n\t\t\t\t<svg viewBox="0 0 24 24"><use xlink:href="#de-symbol-nav-up"/></svg>\n\t\t\t</div>\n\t\t\t<div id="de-thr-navdown">\n\t\t\t\t<svg viewBox="0 0 24 24"><use xlink:href="#de-symbol-nav-down"/></svg>\n\t\t\t</div>\n\t\t</div>');
+		initThrNav: function initThrNav() {
+			var el = $bEnd(docBody, '\n\t\t<div id="de-thr-navpanel" class="de-thr-navpanel-hidden" style="display: none;">\n\t\t\t<svg id="de-thr-navarrow"><use xlink:href="#de-symbol-thr-nav-arrow"/></svg>\n\t\t\t<div id="de-thr-navup">\n\t\t\t\t<svg viewBox="0 0 24 24"><use xlink:href="#de-symbol-thr-nav-up"/></svg>\n\t\t\t</div>\n\t\t\t<div id="de-thr-navdown">\n\t\t\t\t<svg viewBox="0 0 24 24"><use xlink:href="#de-symbol-thr-nav-down"/></svg>\n\t\t\t</div>\n\t\t</div>');
 			el.addEventListener('mouseover', this, true);
 			el.addEventListener('mouseout', this, true);
 			el.addEventListener('click', this, true);
@@ -18137,28 +18323,40 @@ true, true];
 
 		_currentThr: null,
 		_el: null,
-		_showhideTO: 0,
+		_toggleTO: 0,
 		_thrs: null,
 		_visible: false,
 		_checkThreads: function _checkThreads() {
 			var el = this._findCurrentThread();
 			if (el) {
 				if (!this._visible) {
-					this._showHide(true);
+					this._toggleNavPanel(false);
 				}
 				this._currentThr = el;
 			} else if (this._visible) {
-				this._showHide(false);
+				this._toggleNavPanel(true);
+			}
+		},
+		_expandCollapse: function _expandCollapse(isExpand, rt) {
+			var _this65 = this;
+
+			if (!rt || !this._el.contains(rt.farthestViewportElement || rt)) {
+				clearTimeout(this._toggleTO);
+				this._toggleTO = setTimeout(isExpand ? function () {
+					return _this65._el.classList.remove('de-thr-navpanel-hidden');
+				} : function () {
+					return _this65._el.classList.add('de-thr-navpanel-hidden');
+				}, Cfg.linksOver);
 			}
 		},
 		_findCurrentThread: function _findCurrentThread() {
 			if ('elementsFromPoint' in doc) {
 				Object.defineProperty(this, '_findCurrentThread', {
 					value: function value() {
-						var _this65 = this;
+						var _this66 = this;
 
 						return doc.elementsFromPoint(Post.sizing.wWidth / 2, Post.sizing.wHeight / 2).find(function (el) {
-							return _this65._thrs.has(el);
+							return _this66._thrs.has(el);
 						});
 					}
 				});
@@ -18192,51 +18390,39 @@ true, true];
 					break;
 			}
 		},
-		_expandCollapse: function _expandCollapse(expand, rt) {
-			var _this66 = this;
-
-			if (!rt || !this._el.contains(rt.farthestViewportElement || rt)) {
-				clearTimeout(this._showhideTO);
-				this._showhideTO = setTimeout(expand ? function () {
-					return _this66._el.classList.remove('de-thr-navpanel-hidden');
-				} : function () {
-					return _this66._el.classList.add('de-thr-navpanel-hidden');
-				}, Cfg.linksOver);
-			}
-		},
-		_showHide: function _showHide(show) {
-			this._el.style.display = show ? 'initial' : 'none';
-			this._visible = show;
+		_toggleNavPanel: function _toggleNavPanel(isHide) {
+			this._el.style.display = isHide ? 'none' : 'initial';
+			this._visible = isHide;
 		}
 	};
 
 
 	function initThreadUpdater(title, enableUpdate) {
-		var focusLoadTime,
-		    paused = false,
-		    enabled = false,
-		    disabledByUser = true,
-		    lastECode = 200,
-		    sendError = false,
-		    newPosts = 0,
-		    hasYouRefs = false,
-		    storageName = 'de-lastpcount-' + aib.b + '-' + aib.t;
+		var focusLoadTime = void 0,
+		    disabledByUser = true;
+		var enabled = false;
+		var hasYouRefs = false;
+		var lastECode = 200;
+		var newPosts = 0;
+		var paused = false;
+		var sendError = false;
+		var storageName = 'de-lastpcount-' + aib.b + '-' + aib.t;
 
 		var audio = {
 			enabled: false,
 			repeatMS: 0,
-			disable: function disable() {
-				this.stop();
+			disableAudio: function disableAudio() {
+				this.stopAudio();
 				this.enabled = false;
 				var btn = $id('de-panel-audio-on');
 				if (btn) {
 					btn.id = 'de-panel-audio-off';
 				}
 			},
-			play: function play() {
+			playAudio: function playAudio() {
 				var _this67 = this;
 
-				this.stop();
+				this.stopAudio();
 				if (this.repeatMS === 0) {
 					this._el.play();
 					return;
@@ -18245,7 +18431,7 @@ true, true];
 					return _this67._el.play();
 				}, this.repeatMS);
 			},
-			stop: function stop() {
+			stopAudio: function stopAudio() {
 				if (this._playInterval) {
 					clearInterval(this._playInterval);
 					this._playInterval = null;
@@ -18254,48 +18440,48 @@ true, true];
 
 
 			get _el() {
-				var val = doc.createElement('audio');
-				val.setAttribute('preload', 'auto');
-				val.src = gitRaw + 'signal.ogg';
-				Object.defineProperty(this, '_el', { val: val });
-				return val;
+				var value = doc.createElement('audio');
+				value.setAttribute('preload', 'auto');
+				value.src = gitRaw + 'signal.ogg';
+				Object.defineProperty(this, '_el', { value: value });
+				return value;
 			}
 		};
 
 		var counter = {
-			enable: function enable() {
-				this._enabled = true;
-				$show(this._el);
-			},
-			disable: function disable() {
-				this._enabled = false;
-				this._stop();
-				$hide(this._el);
-			},
 			count: function count(delayMS, useCounter, callback) {
 				var _this68 = this;
 
-				if (this._enabled && useCounter) {
-					var seconds = delayMS / 1000;
-					this._set(seconds);
-					this._countingIV = setInterval(function () {
-						seconds--;
-						if (seconds === 0) {
-							_this68._stop();
-							callback();
-						} else {
-							_this68._set(seconds);
-						}
-					}, 1000);
-				} else {
+				if (!this._enabled || !useCounter) {
 					this._countingTO = setTimeout(function () {
 						_this68._countingTO = null;
 						callback();
 					}, delayMS);
+					return;
 				}
+				var seconds = delayMS / 1e3;
+				this._set(seconds);
+				this._countingIV = setInterval(function () {
+					seconds--;
+					if (seconds === 0) {
+						_this68._stopCounter();
+						callback();
+					} else {
+						_this68._set(seconds);
+					}
+				}, 1e3);
+			},
+			disableCounter: function disableCounter() {
+				this._enabled = false;
+				this._stopCounter();
+				$hide(this._el);
+			},
+			enableCounter: function enableCounter() {
+				this._enabled = true;
+				$show(this._el);
 			},
 			setWait: function setWait() {
-				this._stop();
+				this._stopCounter();
 				if (this._enabled) {
 					this._el.innerHTML = '<svg class="de-wait"><use xlink:href="#de-symbol-wait"/></svg>';
 				}
@@ -18310,11 +18496,10 @@ true, true];
 				Object.defineProperty(this, '_el', { value: value });
 				return value;
 			},
-
 			_set: function _set(seconds) {
 				this._el.innerHTML = seconds;
 			},
-			_stop: function _stop() {
+			_stopCounter: function _stopCounter() {
 				if (this._countingIV) {
 					clearInterval(this._countingIV);
 					this._countingIV = null;
@@ -18356,22 +18541,20 @@ true, true];
 				}
 				icon.src = this._iconEl.href;
 			},
-			updateIcon: function updateIcon(isError) {
-				if (!isError && !newPosts) {
-					this._setIcon(this.originalIcon);
-				} else if (this._hasIcons) {
-					this._setIcon(isError ? this._iconError : hasYouRefs ? this._iconYou : this._iconNew);
+			startBlink: function startBlink(isError) {
+				var _this70 = this;
+
+				var iconUrl = !this._hasIcons ? this._emptyIcon : isError ? this._iconError : hasYouRefs ? this._iconYou : this._iconNew;
+				if (this._blinkInterv) {
+					if (this._currentIcon === iconUrl) {
+						return;
+					}
+					clearInterval(this._blinkInterv);
 				}
-			},
-			startBlinkNew: function startBlinkNew() {
-				if (this._hasIcons) {
-					this._startBlink(hasYouRefs ? this._iconYou : this._iconNew);
-				} else {
-					this._startBlink(this._emptyIcon);
-				}
-			},
-			startBlinkError: function startBlinkError() {
-				this._startBlink(this._hasIcons ? this._iconError : this._emptyIcon);
+				this._currentIcon = iconUrl;
+				this._blinkInterv = setInterval(function () {
+					return _this70._setIcon((_this70._isOrigIcon = !_this70._isOrigIcon) ? _this70.originalIcon : _this70._currentIcon);
+				}, this._blinkMS);
 			},
 			stopBlink: function stopBlink() {
 				if (this._blinkInterv) {
@@ -18381,6 +18564,13 @@ true, true];
 				if (!this._isOrigIcon) {
 					this._setIcon(this.originalIcon);
 					this._isOrigIcon = true;
+				}
+			},
+			updateIcon: function updateIcon(isError) {
+				if (!isError && !newPosts) {
+					this._setIcon(this.originalIcon);
+				} else if (this._hasIcons) {
+					this._setIcon(isError ? this._iconError : hasYouRefs ? this._iconYou : this._iconNew);
 				}
 			},
 
@@ -18403,55 +18593,40 @@ true, true];
 				});
 				return el;
 			},
+			_drawLines: function _drawLines(ctx, line1, line2, color, width, scaleFactor) {
+				ctx.beginPath();
+				ctx.strokeStyle = color;
+				ctx.lineWidth = width * scaleFactor;
+				ctx.moveTo(line1[0] * scaleFactor, line1[1] * scaleFactor);
+				ctx.lineTo(line1[2] * scaleFactor, line1[3] * scaleFactor);
+				ctx.moveTo(line2[0] * scaleFactor, line2[1] * scaleFactor);
+				ctx.lineTo(line2[2] * scaleFactor, line2[3] * scaleFactor);
+				ctx.stroke();
+			},
 			_initIconsHelper: function _initIconsHelper(icon) {
-				function drawLines(ctx, line1, line2, color, width, scaleFactor) {
-					ctx.beginPath();
-					ctx.strokeStyle = color;
-					ctx.lineWidth = width * scaleFactor;
-					ctx.moveTo(line1[0] * scaleFactor, line1[1] * scaleFactor);
-					ctx.lineTo(line1[2] * scaleFactor, line1[3] * scaleFactor);
-					ctx.moveTo(line2[0] * scaleFactor, line2[1] * scaleFactor);
-					ctx.lineTo(line2[2] * scaleFactor, line2[3] * scaleFactor);
-					ctx.stroke();
-				}
-				var canvas = doc.createElement('canvas'),
-				    ctx = canvas.getContext('2d'),
-				    wh = Math.max(icon.naturalHeight, 16 * (window.devicePixelRatio || 1)),
-				    scale = wh / 16;
+				var canvas = doc.createElement('canvas');
+				var ctx = canvas.getContext('2d');
+				var wh = Math.max(icon.naturalHeight, 16 * (window.devicePixelRatio || 1));
+				var scale = wh / 16;
 				canvas.width = canvas.height = wh;
 				ctx.drawImage(icon, 0, 0, wh, wh);
 				var original = ctx.getImageData(0, 0, wh, wh);
-				drawLines(ctx, [15, 15, 7, 7], [7, 15, 15, 7], '#780000', 3, scale);
-				drawLines(ctx, [14.5, 14.5, 7.5, 7.5], [7.5, 14.5, 14.5, 7.5], '#fa2020', 1.5, scale);
+				this._drawLines(ctx, [15, 15, 7, 7], [7, 15, 15, 7], '#780000', 3, scale);
+				this._drawLines(ctx, [14.5, 14.5, 7.5, 7.5], [7.5, 14.5, 14.5, 7.5], '#fa2020', 1.5, scale);
 				this._iconError = canvas.toDataURL('image/png');
 				ctx.putImageData(original, 0, 0);
-				drawLines(ctx, [6, 11, 16, 11], [11, 6, 11, 16], '#1c5f23', 4, scale);
-				drawLines(ctx, [7, 11, 15, 11], [11, 7, 11, 15], '#00f51b', 2, scale);
+				this._drawLines(ctx, [6, 11, 16, 11], [11, 6, 11, 16], '#1c5f23', 4, scale);
+				this._drawLines(ctx, [7, 11, 15, 11], [11, 7, 11, 15], '#00f51b', 2, scale);
 				this._iconNew = canvas.toDataURL('image/png');
 				ctx.putImageData(original, 0, 0);
-				drawLines(ctx, [6, 11, 16, 11], [11, 6, 11, 16], '#122091', 4, scale);
-				drawLines(ctx, [7, 11, 15, 11], [11, 7, 11, 15], '#1b6df5', 2, scale);
+				this._drawLines(ctx, [6, 11, 16, 11], [11, 6, 11, 16], '#122091', 4, scale);
+				this._drawLines(ctx, [7, 11, 15, 11], [11, 7, 11, 15], '#1b6df5', 2, scale);
 				this._iconYou = canvas.toDataURL('image/png');
 				this._hasIcons = true;
 			},
 			_setIcon: function _setIcon(iconUrl) {
 				$del(this._iconEl);
 				this._iconEl = $aBegin(doc.head, '<link rel="shortcut icon" href="' + iconUrl + '">');
-			},
-			_startBlink: function _startBlink(iconUrl) {
-				var _this70 = this;
-
-				if (this._blinkInterv) {
-					if (this._currentIcon === iconUrl) {
-						return;
-					}
-					clearInterval(this._blinkInterv);
-				}
-				this._currentIcon = iconUrl;
-				this._blinkInterv = setInterval(function () {
-					_this70._setIcon(_this70._isOrigIcon ? _this70._currentIcon : _this70.originalIcon);
-					_this70._isOrigIcon = !_this70._isOrigIcon;
-				}, this._blinkMS);
 			}
 		};
 
@@ -18469,7 +18644,13 @@ true, true];
 					}
 				}
 			},
-			show: function show() {
+			closeNotif: function closeNotif() {
+				if (this._notifEl) {
+					this._notifEl.close();
+					this._notifEl = null;
+				}
+			},
+			showNotif: function showNotif() {
 				var _this71 = this;
 
 				var new10 = newPosts % 10;
@@ -18482,9 +18663,7 @@ true, true];
 				});
 				notif.onshow = function () {
 					return setTimeout(function () {
-						if (notif === _this71._notifEl) {
-							_this71.close();
-						}
+						return notif === _this71._notifEl && _this71.closeNotif();
 					}, 12e3);
 				};
 				notif.onclick = function () {
@@ -18496,18 +18675,11 @@ true, true];
 				};
 				this._notifEl = notif;
 			},
-			close: function close() {
-				if (this._notifEl) {
-					this._notifEl.close();
-					this._notifEl = null;
-				}
-			},
 
 
 			_closeTO: null,
 			_granted: true,
 			_notifEl: null,
-
 			_requestPermission: function _requestPermission() {
 				var _this72 = this;
 
@@ -18528,7 +18700,7 @@ true, true];
 				var loadOnce = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 				if (this._state !== -1) {
-					this.stop(false);
+					this.stopUpdater(false);
 				}
 				this._state = 0;
 				this._loadOnce = loadOnce;
@@ -18538,13 +18710,13 @@ true, true];
 				}
 				this._makeStep(needSleep);
 			},
-			stop: function stop() {
+			stopUpdater: function stopUpdater() {
 				var updateStatus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
 				if (this._state !== -1) {
 					this._state = -1;
 					if (this._loadPromise) {
-						this._loadPromise.cancel();
+						this._loadPromise.cancelPromise();
 						this._loadPromise = null;
 					}
 					counter.setWait();
@@ -18568,7 +18740,6 @@ true, true];
 				}
 				return value;
 			},
-
 			_handleNewPosts: function _handleNewPosts(lPosts, error) {
 				if (error instanceof CancelError) {
 					return;
@@ -18577,12 +18748,12 @@ true, true];
 				var eCode = error instanceof AjaxError ? error.code : 0;
 				if (eCode !== 200 && eCode !== 304) {
 					if (doc.hidden && favicon.canBlink) {
-						favicon.startBlinkError();
+						favicon.startBlink(true);
 					}
 					if (eCode === -1 || eCode === 404 && lastECode === 404) {
 						Thread.removeSavedData(aib.b, aib.t);
 						updateTitle(eCode);
-						disableUpdater();
+						_disableUpdater();
 					} else {
 						this._setUpdateStatus('warn');
 						if (!Cfg.noErrInTitle) {
@@ -18591,6 +18762,7 @@ true, true];
 						this._makeStep();
 					}
 					lastECode = eCode;
+					updateFavorites(aib.t, getErrorMessage(error), 'error');
 					return;
 				}
 				if (lastECode !== 200) {
@@ -18606,13 +18778,13 @@ true, true];
 						newPosts += lPosts;
 						updateTitle();
 						if (favicon.canBlink) {
-							favicon.startBlinkNew();
+							favicon.startBlink(false);
 						}
 						if (notification.canShow) {
-							notification.show();
+							notification.showNotif();
 						}
 						if (audio.enabled) {
-							audio.play();
+							audio.playAudio();
 						}
 						sesStorage[storageName] = Thread.first.pcount;
 						this._delay = this._initDelay;
@@ -18640,9 +18812,9 @@ true, true];
 						case 1:
 							counter.setWait();
 							this._state = 2;
-							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref100) {
-								var newCount = _ref100.newCount,
-								    locked = _ref100.locked;
+							this._loadPromise = Thread.first.loadNewPosts().then(function (_ref103) {
+								var newCount = _ref103.newCount,
+								    locked = _ref103.locked;
 								return _this73._handleNewPosts(newCount, locked ? AjaxError.Locked : AjaxError.Success);
 							}, function (e) {
 								return _this73._handleNewPosts(0, e);
@@ -18673,23 +18845,23 @@ true, true];
 			}
 		};
 
-		function enableUpdater() {
+		function _enableUpdater() {
 			enabled = true;
 			disabledByUser = paused = hasYouRefs = false;
 			newPosts = 0;
 			focusLoadTime = -1e4;
 			notification.checkPermission();
 			if (Cfg.updCount) {
-				counter.enable();
+				counter.enableCounter();
 			}
 			favicon.initIcons();
 		}
 
-		function disableUpdater() {
+		function _disableUpdater() {
 			if (enabled) {
-				audio.disable();
-				counter.disable();
-				updMachine.stop();
+				audio.disableAudio();
+				counter.disableCounter();
+				updMachine.stopUpdater();
 				enabled = false;
 			}
 		}
@@ -18699,7 +18871,7 @@ true, true];
 				return;
 			}
 			if (!enabled && !disabledByUser) {
-				enableUpdater();
+				_enableUpdater();
 			}
 			updMachine.start(false, !enabled);
 		}
@@ -18715,8 +18887,8 @@ true, true];
 			if (!doc.hidden) {
 				var focusTime = e.timeStamp;
 				favicon.stopBlink();
-				audio.stop();
-				notification.close();
+				audio.stopAudio();
+				notification.closeNotif();
 				newPosts = 0;
 				hasYouRefs = false;
 				sendError = false;
@@ -18732,26 +18904,27 @@ true, true];
 			}
 		});
 		if (enableUpdate) {
-			enableUpdater();
+			_enableUpdater();
 			updMachine.start(true);
 		}
 
 		return {
-			enable: function enable() {
-				if (!enabled) {
-					enableUpdater();
-					updMachine.start();
+			continueUpdater: function continueUpdater() {
+				var needSleep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+				if (enabled && paused) {
+					updMachine.start(needSleep);
+					paused = false;
 				}
 			},
-			disable: function disable() {
+			disableUpdater: function disableUpdater() {
 				disabledByUser = true;
-				disableUpdater();
+				_disableUpdater();
 			},
-			toggle: function toggle() {
-				if (enabled) {
-					this.disable();
-				} else {
-					this.enable();
+			enableUpdater: function enableUpdater() {
+				if (!enabled) {
+					_enableUpdater();
+					updMachine.start();
 				}
 			},
 			forceLoad: function forceLoad(e) {
@@ -18765,23 +18938,27 @@ true, true];
 				$popup('newposts', Lng.loading[lang], true);
 				forceLoadPosts();
 			},
-			pause: function pause() {
+			pauseUpdater: function pauseUpdater() {
 				if (enabled && !paused) {
-					updMachine.stop();
+					updMachine.stopUpdater();
 					paused = true;
 				}
 			},
-			continue: function _continue() {
-				var needSleep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-				if (enabled && paused) {
-					updMachine.start(needSleep);
-					paused = false;
+			refToYou: function refToYou() {
+				if (doc.hidden) {
+					hasYouRefs = true;
+				}
+			},
+			toggle: function toggle() {
+				if (enabled) {
+					this.disableUpdater();
+				} else {
+					this.enableUpdater();
 				}
 			},
 			toggleAudio: function toggleAudio(repeatMS) {
 				if (audio.enabled) {
-					audio.stop();
+					audio.stopAudio();
 					return audio.enabled = false;
 				}
 				audio.repeatMS = repeatMS;
@@ -18789,10 +18966,10 @@ true, true];
 			},
 			toggleCounter: function toggleCounter(enableCnt) {
 				if (enableCnt) {
-					counter.enable();
+					counter.enableCounter();
 					counter.setWait();
 				} else {
-					counter.disable();
+					counter.disableCounter();
 				}
 				forceLoadPosts();
 			},
@@ -18801,18 +18978,118 @@ true, true];
 					sendError = true;
 					updateTitle();
 				}
-			},
-			refToYou: function refToYou() {
-				if (doc.hidden) {
-					hasYouRefs = true;
-				}
 			}
 		};
 	}
 
 
 	var DelForm = function () {
-		_createClass(DelForm, null, [{
+		function DelForm(formEl, pageNum) {
+			var prev = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+			_classCallCheck(this, DelForm);
+
+			var thr = null;
+			this.el = formEl;
+			this.firstThr = null;
+			this.lastThr = null;
+			this.next = null;
+			this.pageNum = pageNum;
+			this.prev = prev;
+			if (prev) {
+				prev.next = this;
+				thr = prev.lastThr;
+			}
+			formEl.setAttribute('de-form', '');
+			formEl.removeAttribute('id');
+			$each($Q('script', this.el), $del);
+			var threads = DelForm.getThreads(this.el);
+			for (var i = 0, _len10 = threads.length; i < _len10; ++i) {
+				var num = aib.getTNum(threads[i]);
+				if (DelForm.tNums.has(num)) {
+					var el = threads[i];
+					var thrNext = threads[i + 1];
+					var elNext = el.nextSibling;
+					while (elNext && elNext !== thrNext) {
+						$del(elNext);
+						elNext = el.nextSibling;
+					}
+					$del(el);
+					console.log('Repeated thread: ' + num);
+				} else {
+					DelForm.tNums.add(num);
+					thr = new Thread(threads[i], num, thr, this);
+					if (this.firstThr === null) {
+						this.firstThr = thr;
+					}
+				}
+			}
+			if (this.firstThr === null) {
+				if (prev) {
+					this.lastThr = prev.lastThr;
+				}
+				return;
+			}
+			this.lastThr = thr;
+		}
+
+		_createClass(DelForm, [{
+			key: 'addStuff',
+			value: function addStuff() {
+				var el = this.el;
+
+				if (Cfg.ajaxPosting && !localData) {
+					el.onsubmit = $pd;
+					var delBtn = $q(aib.qDelBut, el);
+					if (delBtn) {
+						delBtn.onclick = function (e) {
+							$pd(e);
+							pr.closeReply();
+							$popup('delete', Lng.deleting[lang], true);
+							html5Submit(el, e.target).then(checkDelete).catch(function (e) {
+								return $popup('delete', getErrorMessage(e));
+							});
+						};
+					}
+					Logger.log('Init AJAX');
+				}
+				preloadImages(el);
+				Logger.log('Preload images');
+				embedAudioLinks(el);
+				Logger.log('Audio links');
+				if (Cfg.addYouTube) {
+					new VideosParser().parse(el).endParser();
+					Logger.log('Video links');
+				}
+				processImgInfoLinks(el);
+				Logger.log('Image names');
+				RefMap.initRefMap(this);
+				Logger.log('Reflinks map');
+			}
+		}, {
+			key: 'passEl',
+			get: function get() {
+				var value = $q(aib.qDelPassw, this.el);
+				Object.defineProperty(this, 'passEl', { value: value });
+				return value;
+			}
+		}], [{
+			key: 'getThreads',
+			value: function getThreads(formEl) {
+				var threads = $Q(aib.qThread, formEl);
+				var len = threads.length;
+				if (len === 0) {
+					if (localData) {
+						threads = $Q('div[de-thread]');
+						len = threads.length;
+					}
+					if (len === 0) {
+						threads = DelForm._parseClasslessThreads(formEl);
+					}
+				}
+				return threads;
+			}
+		}, {
 			key: Symbol.iterator,
 			value: function value() {
 				return {
@@ -18826,22 +19103,6 @@ true, true];
 						return { done: true };
 					}
 				};
-			}
-		}, {
-			key: 'getThreads',
-			value: function getThreads(formEl) {
-				var threads = $Q(aib.qThread, formEl),
-				    len = threads.length;
-				if (len === 0) {
-					if (localData) {
-						threads = $Q('div[de-thread]');
-						len = threads.length;
-					}
-					if (len === 0) {
-						threads = DelForm._parseClasslessThreads(formEl);
-					}
-				}
-				return threads;
 			}
 		}, {
 			key: '_parseClasslessThreads',
@@ -18874,102 +19135,6 @@ true, true];
 				cThr.appendChild(fNodes[i]);
 				formEl.appendChild(cThr);
 				return threads;
-			}
-		}]);
-
-		function DelForm(formEl, pageNum) {
-			var prev = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-			_classCallCheck(this, DelForm);
-
-			var thr = null;
-			this.el = formEl;
-			this.firstThr = null;
-			this.lastThr = null;
-			this.next = null;
-			this.pageNum = pageNum;
-			this.prev = prev;
-			if (prev) {
-				prev.next = this;
-				thr = prev.lastThr;
-			}
-			formEl.setAttribute('de-form', '');
-			formEl.removeAttribute('id');
-			$each($Q('script', this.el), $del);
-			var threads = DelForm.getThreads(this.el),
-			    len = threads.length;
-			for (var i = 0; i < len; ++i) {
-				var num = aib.getTNum(threads[i]);
-				if (DelForm.tNums.has(num)) {
-					var el = threads[i],
-					    thrNext = threads[i + 1],
-					    elNext = el.nextSibling;
-					while (elNext && elNext !== thrNext) {
-						$del(elNext);
-						elNext = el.nextSibling;
-					}
-					$del(el);
-					console.log('Repeated thread: ' + num);
-				} else {
-					DelForm.tNums.add(num);
-					thr = new Thread(threads[i], num, thr, this);
-					if (this.firstThr === null) {
-						this.firstThr = thr;
-					}
-				}
-			}
-			if (this.firstThr === null) {
-				if (prev) {
-					this.lastThr = prev.lastThr;
-				}
-				return;
-			}
-			this.lastThr = thr;
-		}
-
-		_createClass(DelForm, [{
-			key: 'addStuff',
-			value: function addStuff() {
-				var el = this.el;
-
-				if (!localData && Cfg.ajaxPosting) {
-					el.onsubmit = $pd;
-					var btn = $q(aib.qDelBut, el);
-					if (btn) {
-						btn.onclick = function (e) {
-							$pd(e);
-							pr.closeReply();
-							$popup('delete', Lng.deleting[lang], true);
-							html5Submit(el, e.target).then(checkDelete).catch(function (e) {
-								return $popup('delete', getErrorMessage(e));
-							});
-						};
-					}
-				}
-				Logger.log('Init AJAX');
-				preloadImages(el);
-				Logger.log('Preload images');
-				embedMediaLinks(el);
-				Logger.log('Audio links');
-				if (Cfg.addYouTube) {
-					new VideosParser().parse(el).end();
-					Logger.log('Video links');
-				}
-				if (Cfg.addImgs) {
-					embedImagesLinks(el);
-					Logger.log('Image-links');
-				}
-				processImagesLinks(el);
-				Logger.log('Image names');
-				RefMap.init(this);
-				Logger.log('Reflinks map');
-			}
-		}, {
-			key: 'passEl',
-			get: function get() {
-				var value = $q(aib.qDelPassw, this.el);
-				Object.defineProperty(this, 'passEl', { value: value });
-				return value;
 			}
 		}]);
 
@@ -19022,11 +19187,18 @@ true, true];
 		}
 		if (!('remove' in Element.prototype)) {
 			Element.prototype.remove = function () {
-				if (this.parentNode) {
-					this.parentNode.removeChild(this);
+				var el = this.parentNode;
+				if (el) {
+					el.removeChild(this);
 				}
 			};
 		}
+		var nlProto = NodeList.prototype;
+		$each = 'forEach' in nlProto ? function (els, cb) {
+			return nlProto.forEach.call(els, cb);
+		} : function (els, cb) {
+			return aProto.forEach.call(els, cb);
+		};
 		var needFileHack = false;
 		try {
 			new File([''], '');
@@ -19071,31 +19243,13 @@ true, true];
 			isScriptStorage: isScriptStorage,
 			isWebkit: isWebkit,
 			hasGMXHR: typeof GM_xmlhttpRequest === 'function' || isNewGM && typeof GM.xmlHttpRequest === 'function',
-			isMsEdge: ua.includes('Edge/'),
 			isGlobal: isGM || isNewGM || isChromeStorage || isScriptStorage,
+			isMsEdge: ua.includes('Edge/'),
 			isPresto: !!window.opera,
-			get isESNext() {
-				return typeof deMainFuncOuter === 'undefined';
-			},
-			get scriptInstall() {
-				if (this.isNewGM) {
-					return GM.info ? GM.info.scriptHandler + ' ' + GM.info.version : 'Greasemonkey';
-				}
-				if (this.isFirefox) {
-					return typeof GM_info !== 'undefined' ? GM_info.scriptHandler || 'Greasemonkey' : 'Scriptish';
-				}
-				return isChromeStorage ? 'WebExtension' : isGM ? 'Monkey' : 'Native userscript';
-			},
-			cssMatches: function cssMatches(leftSel) {
-				for (var _len10 = arguments.length, rules = Array(_len10 > 1 ? _len10 - 1 : 0), _key3 = 1; _key3 < _len10; _key3++) {
-					rules[_key3 - 1] = arguments[_key3];
-				}
-
-				return leftSel + rules.join(', ' + leftSel);
-			},
-
-			fixLink: isSafari ? getAbsLink : function fixLink(url) {
-				return url;
+			get canPlayMP3() {
+				var value = !!new Audio().canPlayType('audio/mpeg;');
+				Object.defineProperty(this, 'canPlayMP3', { value: value });
+				return value;
 			},
 			get hasTemplate() {
 				var value = 'content' in document.createElement('template');
@@ -19113,10 +19267,8 @@ true, true];
 				Object.defineProperty(this, 'hasWorker', { value: value });
 				return value;
 			},
-			get canPlayMP3() {
-				var value = !!new Audio().canPlayType('audio/mpeg;');
-				Object.defineProperty(this, 'canPlayMP3', { value: value });
-				return value;
+			get isESNext() {
+				return typeof deMainFuncOuter === 'undefined';
 			},
 			get matchesSelector() {
 				var dE = doc.documentElement;
@@ -19126,6 +19278,15 @@ true, true];
 				};
 				Object.defineProperty(this, 'matchesSelector', { value: value });
 				return value;
+			},
+			get scriptInstall() {
+				if (this.isNewGM) {
+					return GM.info ? GM.info.scriptHandler + ' ' + GM.info.version : 'Greasemonkey';
+				}
+				if (this.isFirefox) {
+					return typeof GM_info !== 'undefined' ? GM_info.scriptHandler || 'Greasemonkey' : 'Scriptish';
+				}
+				return isChromeStorage ? 'WebExtension' : isGM ? 'Monkey' : 'Native userscript';
 			},
 			get viewportHeight() {
 				var value = document.compatMode && document.compatMode === 'CSS1Compat' ? function () {
@@ -19144,6 +19305,17 @@ true, true];
 				};
 				Object.defineProperty(this, 'viewportWidth', { value: value });
 				return value;
+			},
+			cssMatches: function cssMatches(leftSel) {
+				for (var _len11 = arguments.length, rules = Array(_len11 > 1 ? _len11 - 1 : 0), _key3 = 1; _key3 < _len11; _key3++) {
+					rules[_key3 - 1] = arguments[_key3];
+				}
+
+				return leftSel + rules.join(', ' + leftSel);
+			},
+
+			fixLink: isSafari ? getAbsLink : function fixLink(url) {
+				return url;
 			},
 			getUnsafeUint8Array: function getUnsafeUint8Array(data, i, len) {
 				var Ctor = Uint8Array;
@@ -19186,9 +19358,10 @@ true, true];
 			this.qDForm = '#delform, form[name="delform"]';
 			this.qError = 'h1, h2, font[size="5"]';
 			this.qForm = '#postform';
-			this.qFormPassw = 'tr input[type="password"]'; 
+			this.qFormPassw = 'tr input[type="password"]';
 			this.qFormRedir = 'input[name="postredir"][value="1"]';
 			this.qFormRules = '.rules, #rules';
+			this.qFormSubm = 'tr input[type="submit"]'; 
 			this.qImgInfo = '.filesize';
 			this.qOmitted = '.omittedposts';
 			this.qOPost = '.oppost';
@@ -19209,6 +19382,8 @@ true, true];
 			this.docExt = null;
 			this.firstPage = 0;
 			this.formParent = 'parent';
+			this.formTd = 'td';
+			this.hasAltCaptcha = false; 
 			this.hasCatalog = false;
 			this.hasOPNum = false; 
 			this.hasPicWrap = false;
@@ -19242,7 +19417,7 @@ true, true];
 				if (!(dTime || Spells.reps || Cfg.crossLinks || Cfg.decodeLinks || this.fixHTMLHelper || this.fixDeadLinks || this.hasTextLinks)) {
 					return data;
 				}
-				var str;
+				var str = void 0;
 				if (typeof data === 'string') {
 					str = data;
 				} else if (isForm) {
@@ -19269,7 +19444,7 @@ true, true];
 					str = Spells.replace(str);
 				}
 				if (Cfg.crossLinks) {
-					str = str.replace(aib.reCrossLinks, function (str, b, tNum, pNum) {
+					str = str.replace(aib.reCrossLinks, function (_, b, tNum, pNum) {
 						return '>&gt;&gt;/' + b + '/' + (pNum || tNum) + '<';
 					});
 				}
@@ -19298,21 +19473,22 @@ true, true];
 		}, {
 			key: 'fixVideo',
 			value: function fixVideo(isPost, data) {
-				var videos = [],
-				    els = $Q('embed, object, iframe', isPost ? data.el : data);
-				for (var i = 0, len = els.length; i < len; ++i) {
-					var m,
-					    el = els[i],
-					    src = el.src || el.data;
-					if (src) {
-						if (m = src.match(Videos.ytReg)) {
-							videos.push([isPost ? data : this.getPostOfEl(el), m, true]);
-							$del(el);
-						}
-						if (Cfg.addVimeo && (m = src.match(Videos.vimReg))) {
-							videos.push([isPost ? data : this.getPostOfEl(el), m, false]);
-							$del(el);
-						}
+				var videos = [];
+				var els = $Q('embed, object, iframe', isPost ? data.el : data);
+				for (var i = 0, _len12 = els.length; i < _len12; ++i) {
+					var el = els[i];
+					var src = el.src || el.data;
+					if (!src) {
+						continue;
+					}
+					var m = src.match(Videos.ytReg);
+					if (m) {
+						videos.push([isPost ? data : this.getPostOfEl(el), m, true]);
+						$del(el);
+					}
+					if (Cfg.addVimeo && (m = src.match(Videos.vimReg))) {
+						videos.push([isPost ? data : this.getPostOfEl(el), m, false]);
+						$del(el);
 					}
 				}
 				return videos;
@@ -19321,6 +19497,11 @@ true, true];
 			key: 'getBanId',
 			value: function getBanId(postEl) {
 				return this.qBan && $q(this.qBan, postEl) ? 1 : 0;
+			}
+		}, {
+			key: 'getCapParent',
+			value: function getCapParent(el) {
+				return $parent(el, 'TR');
 			}
 		}, {
 			key: 'getCaptchaSrc',
@@ -19355,7 +19536,7 @@ true, true];
 		}, {
 			key: 'getOmitted',
 			value: function getOmitted(el) {
-				var txt;
+				var txt = void 0;
 				return el && (txt = el.textContent) ? +(txt.match(/\d+/) || [0])[0] + 1 : 1;
 			}
 		}, {
@@ -19367,8 +19548,8 @@ true, true];
 				}
 				op = thr.ownerDocument.createElement('div');
 				op.setAttribute('de-oppost', '');
-				var el,
-				    opEnd = $q(this._qTable, thr);
+				var el = void 0;
+				var opEnd = $q(this._qTable, thr);
 				while ((el = thr.firstChild) && el !== opEnd) {
 					op.appendChild(el);
 				}
@@ -19427,8 +19608,8 @@ true, true];
 		}, {
 			key: 'getSage',
 			value: function getSage(post) {
-				var a = $q('a[href^="mailto:"], a[href="sage"]', post);
-				return !!a && /sage/i.test(a.href);
+				var el = $q('a[href^="mailto:"], a[href="sage"]', post);
+				return !!el && /sage/i.test(el.href);
 			}
 		}, {
 			key: 'getThrUrl',
@@ -19446,6 +19627,11 @@ true, true];
 				return $bBegin(msg, playerHtml);
 			}
 		}, {
+			key: 'isAjaxStatusOK',
+			value: function isAjaxStatusOK(status) {
+				return status === 200;
+			}
+		}, {
 			key: 'parseURL',
 			value: function parseURL() {
 				var url = (window.location.pathname || '').replace(/^\//, '');
@@ -19455,13 +19641,18 @@ true, true];
 					this.t = +temp[1].match(/^\d+/)[0];
 					this.page = this.firstPage;
 				} else {
-					var _temp2 = url.match(/\/?(\d+)[^/]*?$/);
-					this.page = _temp2 && +_temp2[1] || this.firstPage;
-					this.b = url.replace(_temp2 && this.page ? _temp2[0] : /\/(?:[^/]+\.[a-z]+)?$/, '');
+					var _temp = url.match(/\/?(\d+)[^/]*?$/);
+					this.page = _temp && +_temp[1] || this.firstPage;
+					this.b = url.replace(_temp && this.page ? _temp[0] : /\/(?:[^/]+\.[a-z]+)?$/, '');
 				}
 				if (this.docExt === null) {
 					this.docExt = (url.match(/\.[a-z]+$/) || ['.html'])[0];
 				}
+			}
+		}, {
+			key: 'updateSubmitBtn',
+			value: function updateSubmitBtn(el) {
+				el.value = Lng.reply[lang];
 			}
 		}, {
 			key: 'qFormMail',
@@ -19510,12 +19701,17 @@ true, true];
 				return this.prot + '//' + this.host + '/' + this.b + '/catalog.html';
 			}
 		}, {
+			key: 'changeReplyMode',
+			get: function get() {
+				return null;
+			}
+		}, {
 			key: 'css',
 			get: function get() {
 				return '';
 			}
 		}, {
-			key: 'delTruncMsg',
+			key: 'deleteTruncMsg',
 			get: function get() {
 				return null;
 			}
@@ -19578,6 +19774,11 @@ true, true];
 				return value;
 			}
 		}, {
+			key: 'sendHTML5Post',
+			get: function get() {
+				return null;
+			}
+		}, {
 			key: 'thrId',
 			get: function get() {
 				return null;
@@ -19625,6 +19826,7 @@ true, true];
 				_this74.qTrunc = null;
 
 				_this74.formParent = 'thread';
+				_this74.hasAltCaptcha = true;
 				_this74.hasCatalog = true;
 				_this74.hasOPNum = true;
 				_this74.hasPicWrap = true;
@@ -19639,8 +19841,8 @@ true, true];
 			}
 
 			_createClass(Makaba, [{
-				key: 'delTruncMsg',
-				value: function delTruncMsg(post, el) {
+				key: 'deleteTruncMsg',
+				value: function deleteTruncMsg(post, el) {
 					$del(el.previousSibling);
 					$show(el.previousSibling);
 					$del(el);
@@ -19649,8 +19851,8 @@ true, true];
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i49 = 0; _i49 < 8; ++_i49) {
-						str += '<div' + (_i49 ? ' style="display: none;"' : '') + '><input type="file" name="image' + (_i49 + 1) + '"></div>';
+					for (var i = 0; i < 8; ++i) {
+						str += '<div' + (i ? ' style="display: none;"' : '') + '><input type="file" name="image' + (i + 1) + '"></div>';
 					}
 					el.innerHTML = str;
 				}
@@ -19658,10 +19860,7 @@ true, true];
 				key: 'getBanId',
 				value: function getBanId(postEl) {
 					var el = $q(this.qBan, postEl);
-					if (!el) {
-						return 0;
-					}
-					return el.textContent.includes('предупрежден') ? 2 : 1;
+					return !el ? 0 : el.textContent.includes('предупрежден') ? 2 : 1;
 				}
 			}, {
 				key: 'getImgWrap',
@@ -19686,9 +19885,11 @@ true, true];
 			}, {
 				key: 'getSage',
 				value: function getSage(post) {
+					var _this75 = this;
+
 					if ($q('.ananimas > span[id^="id_tag_"], .post-email > span[id^="id_tag_"]')) {
 						this.getSage = function (post) {
-							var name = $q(this.qPostName, post);
+							var name = $q(_this75.qPostName, post);
 							return name ? name.childElementCount === 0 && !$q('.ophui', post) : false;
 						};
 					} else {
@@ -19699,8 +19900,8 @@ true, true];
 			}, {
 				key: 'getSubmitData',
 				value: function getSubmitData(json) {
-					var error = null,
-					    postNum = null;
+					var error = null;
+					var postNum = null;
 					if (json.Status === 'OK') {
 						postNum = +json.Num;
 					} else if (json.Status === 'Redirect') {
@@ -19734,21 +19935,30 @@ true, true];
 			}, {
 				key: 'initCaptcha',
 				value: function initCaptcha(cap) {
-					if (cap.textEl) {
-						cap.textEl.tabIndex = 999;
+					var _this76 = this;
+
+					var box = $q('.captcha-box', cap.parentEl);
+					if (Cfg.altCaptcha && box.firstChild.tagName !== 'IMG') {
+						box.innerHTML = '<img>\n\t\t\t\t\t<input name="2chaptcha_value" maxlength="6" type="text">\n\t\t\t\t\t<input name="captcha_type" value="2chaptcha" type="hidden">\n\t\t\t\t\t<input name="2chaptcha_id" type="hidden">';
+
+						var _ref104 = [].concat(_toConsumableArray(box.children)),
+						    img = _ref104[0],
+						    inp = _ref104[1];
+
+						img.onclick = function () {
+							return _this76.updateCaptcha(cap);
+						};
+						inp.tabIndex = 999;
+						cap.textEl = inp;
+					} else {
+						box.innerHTML = '<div id="captcha-widget-main"></div>\n\t\t\t\t\t<input name="captcha_type" value="invisible_recaptcha" type="hidden">';
 					}
-					return this.updateCaptcha(cap);
+					return null;
 				}
 			}, {
 				key: 'updateCaptcha',
 				value: function updateCaptcha(cap) {
-					var type = void 0;
-					try {
-						type = JSON.parse(locStorage.store).other.captcha_provider || '2chaptcha';
-					} catch (e) {
-						type = '2chaptcha';
-					}
-					var url = cap.textEl ? '/api/captcha/' + type + '/id?board=' + this.b + '&thread=' + pr.tNum : '/api/captcha/invisible_recaptcha/id';
+					var url = Cfg.altCaptcha ? '/api/captcha/2chaptcha/id?board=' + this.b + '&thread=' + pr.tNum : '/api/captcha/invisible_recaptcha/id';
 					return cap.updateHelper(url, function (xhr) {
 						var box = $q('.captcha-box', cap.parentEl);
 						var data = xhr.responseText;
@@ -19773,6 +19983,12 @@ true, true];
 										$script('grecaptcha.reset(deCapWidget);\n\t\t\t\t\t\t\t\tgrecaptcha.execute(deCapWidget);');
 									}
 									break;
+								} else if (data.type === '2chaptcha') {
+									var img = box.firstChild;
+									img.src = '';
+									img.src = '/api/captcha/2chaptcha/image/' + data.id;
+									box.lastChild.value = data.id;
+									break;
 								}
 							default:
 								box.innerHTML = data;
@@ -19787,7 +20003,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return '#ABU-alert-wait, .ABU-refmap, .box[onclick="ToggleSage()"], .fa-media-icon,\n\t\t\t\t\timg[alt="webm file"], .kupi-passcode-suka, .logo + hr, .media-expand-button,\n\t\t\t\t\t#media-thumbnail, .message-byte-len, .nav-arrows, .news, .norm-reply, .postform-hr,\n\t\t\t\t\t.postpanel > :not(img), .posts > hr, .prerekl-hr, .reflink::before, .thread-nav,\n\t\t\t\t\t.toolbar-area, .top-user-boards + hr { display: none !important; }\n\t\t\t\t.captcha-image > img { cursor: pointer; }\n\t\t\t\t#de-txt-panel { font-size: 16px !important; }\n\t\t\t\t.mess-post { display: block; }\n\t\t\t\t.oekaki-height, .oekaki-width { width: 36px !important; }\n\t\t\t\t.post.reply .post-message { max-height: initial !important; }\n\t\t\t\t.tmp_postform { width: auto; }\n\t\t\t\t.de-win-inpost { position: static !important; }\n\t\t\t\t' + (Cfg.expandTrunc ? '.expand-large-comment,\n\t\t\t\t\tdiv[id^="shrinked-post"] { display: none !important; }\n\t\t\t\t\tdiv[id^="original-post"] { display: block !important; }' : '') + '\n\t\t\t\t' + (Cfg.delImgNames ? '.filesize { display: inline !important; }\n\t\t\t\t\t.file-attr { margin-bottom: 1px; }' : '') + '\n\t\t\t\t' + (Cfg.expandImgs ? '#fullscreen-container { display: none !important; }' : '') + '\n\t\t\t\t' + (Cfg.txtBtnsLoc ? '.message-sticker-btn, .message-sticker-preview {\n\t\t\t\t\tbottom: 25px !important; }' : '');
+					return '#ABU-alert-wait, .ABU-refmap, .box[onclick="ToggleSage()"], .fa-media-icon,\n\t\t\t\t\timg[alt="webm file"], .kupi-passcode-suka, .logo + hr, .media-expand-button,\n\t\t\t\t\t#media-thumbnail, .message-byte-len, .nav-arrows, .news, .norm-reply, .postform-hr,\n\t\t\t\t\t.postpanel > :not(img), .posts > hr, .prerekl-hr, .reflink::before, .thread-nav,\n\t\t\t\t\t.toolbar-area, .top-user-boards + hr { display: none !important; }\n\t\t\t\t.captcha-box > img { display: block; width: 221px; cursor: pointer; }\n\t\t\t\t#de-txt-panel { font-size: 16px !important; }\n\t\t\t\t.mess-post { display: block; }\n\t\t\t\t.oekaki-height, .oekaki-width { width: 36px !important; }\n\t\t\t\t.post.reply .post-message { max-height: initial !important; }\n\t\t\t\t.tmp_postform { width: auto; }\n\t\t\t\t.de-win-inpost { position: static !important; }\n\t\t\t\t' + (Cfg.expandTrunc ? '.expand-large-comment,\n\t\t\t\t\tdiv[id^="shrinked-post"] { display: none !important; }\n\t\t\t\t\tdiv[id^="original-post"] { display: block !important; }' : '') + '\n\t\t\t\t' + (Cfg.delImgNames ? '.filesize { display: inline !important; }\n\t\t\t\t\t.file-attr { margin-bottom: 1px; }' : '') + '\n\t\t\t\t' + (Cfg.expandImgs ? '#fullscreen-container { display: none !important; }' : '') + '\n\t\t\t\t' + (Cfg.txtBtnsLoc ? '.message-sticker-btn, .message-sticker-preview {\n\t\t\t\t\tbottom: 25px !important; }' : '');
 				}
 			}, {
 				key: 'lastPage',
@@ -19817,43 +20033,132 @@ true, true];
 			function Tinyboard(prot, dm) {
 				_classCallCheck(this, Tinyboard);
 
-				var _this75 = _possibleConstructorReturn(this, (Tinyboard.__proto__ || Object.getPrototypeOf(Tinyboard)).call(this, prot, dm));
+				var _this77 = _possibleConstructorReturn(this, (Tinyboard.__proto__ || Object.getPrototypeOf(Tinyboard)).call(this, prot, dm));
 
-				_this75.tiny = true;
+				_this77.cReply = 'post reply';
+				_this77.qClosed = '.fa-lock';
+				_this77.qDForm = 'form[name*="postcontrols"]';
+				_this77.qForm = 'form[name="post"]';
+				_this77.qFormPassw = 'input[name="password"]';
+				_this77.qFormRedir = null;
+				_this77.qImgInfo = '.fileinfo';
+				_this77.qOmitted = '.omitted';
+				_this77.qPages = '.pages';
+				_this77.qPostHeader = '.intro';
+				_this77.qPostMsg = '.body';
+				_this77.qPostName = '.name';
+				_this77.qPostRef = '.post_no + a';
+				_this77.qPostSubj = '.subject';
+				_this77.qPostTrip = '.trip';
+				_this77.qTrunc = '.toolong';
 
-				_this75.cReply = 'post reply';
-				_this75.qClosed = '.fa-lock';
-				_this75.qDForm = 'form[name*="postcontrols"]';
-				_this75.qForm = 'form[name="post"]';
-				_this75.qFormPassw = 'input[name="password"]';
-				_this75.qFormRedir = null;
-				_this75.qImgInfo = '.fileinfo';
-				_this75.qOmitted = '.omitted';
-				_this75.qPages = '.pages';
-				_this75.qPostHeader = '.intro';
-				_this75.qPostMsg = '.body';
-				_this75.qPostName = '.name';
-				_this75.qPostRef = '.post_no + a';
-				_this75.qPostSubj = '.subject';
-				_this75.qPostTrip = '.trip';
-				_this75.qTrunc = '.toolong';
+				_this77.firstPage = 1;
+				_this77.formParent = 'thread';
+				_this77.formTd = 'th';
+				_this77.hasCatalog = true;
+				_this77.jsonSubmit = true;
+				_this77.timePattern = 'nn+dd+yy++w++hh+ii+ss';
 
-				_this75.firstPage = 1;
-				_this75.formParent = 'thread';
-				_this75.hasCatalog = true;
-				_this75.jsonSubmit = true;
-				_this75.timePattern = 'nn+dd+yy++w++hh+ii+ss';
-
-				_this75._qTable = '.post.reply';
-				return _this75;
+				_this77._origInputs = null;
+				_this77._qTable = '.post.reply';
+				return _this77;
 			}
 
 			_createClass(Tinyboard, [{
+				key: 'changeReplyMode',
+				value: function () {
+					var _ref105 = _asyncToGenerator( regeneratorRuntime.mark(function _callee17(form, tNum) {
+						var _this78 = this;
+
+						var pageInp, query, errFn;
+						return regeneratorRuntime.wrap(function _callee17$(_context22) {
+							while (1) {
+								switch (_context22.prev = _context22.next) {
+									case 0:
+										if (!(!this._origInputs && !$q('input[name="hash"]', form))) {
+											_context22.next = 5;
+											break;
+										}
+
+										pr.subm.value = Lng.reply[lang];
+										pageInp = $q('input[name="page"]', form);
+
+										if (tNum) {
+											$del(pageInp);
+										} else if (!pageInp) {
+											form.insertAdjacentHTML('beforeend', '<input name="page" value="1" type="hidden">');
+										}
+										return _context22.abrupt('return');
+
+									case 5:
+										query = 'div[style="display:none"], input[style="display:none"], ' + 'span[style="display:none"], textarea[style="display:none"], ' + 'input[type="hidden"]:not(.de-input-hidden)';
+
+										if ($q('input[name="thread"]', form)) {
+											_context22.next = 11;
+											break;
+										}
+
+										this._origInputs = [doc.createElement('div'), pr.subm.value];
+										$each($Q(query, form), function (el) {
+											return _this78._origInputs[0].appendChild(el);
+										});
+										_context22.next = 17;
+										break;
+
+									case 11:
+										if (tNum) {
+											_context22.next = 17;
+											break;
+										}
+
+										pr.subm.value = this._origInputs[1];
+										$each($Q(query, form), $del);
+										form.insertAdjacentHTML('beforeend', this._origInputs[0].innerHTML);
+										this._origInputs = null;
+										return _context22.abrupt('return');
+
+									case 17:
+										errFn = function errFn() {
+											$popup('load-form', Lng.errFormLoad[lang]);
+											pr.closeReply();
+										};
+
+										$popup('load-form', Lng.loading[lang], true);
+										_context22.next = 21;
+										return ajaxLoad(aib.getThrUrl(this.b, tNum), false).then(function (loadedDoc) {
+											var loadedForm = $q(_this78.qForm, loadedDoc);
+											if (!loadedForm) {
+												errFn();
+												return;
+											}
+											pr.subm.value = $q(_this78.qFormSubm, loadedDoc).value;
+											$each($Q(query, form), $del);
+											$each($Q(query, loadedForm), function (el) {
+												return form.appendChild(doc.adoptNode(el));
+											});
+											closePopup('load-form');
+										}, errFn);
+
+									case 21:
+									case 'end':
+										return _context22.stop();
+								}
+							}
+						}, _callee17, this);
+					}));
+
+					function changeReplyMode(_x72, _x73) {
+						return _ref105.apply(this, arguments);
+					}
+
+					return changeReplyMode;
+				}()
+			}, {
 				key: 'fixVideo',
 				value: function fixVideo(isPost, data) {
-					var videos = [],
-					    els = $Q('.video-container, #ytplayer', isPost ? data.el : data);
-					for (var i = 0, len = els.length; i < len; ++i) {
+					var videos = [];
+					var els = $Q('.video-container, #ytplayer', isPost ? data.el : data);
+					for (var i = 0, _len13 = els.length; i < _len13; ++i) {
 						var el = els[i];
 						videos.push([isPost ? data : this.getPostOfEl(el), el.id === 'ytplayer' ? el.src.match(Videos.ytReg) : ['', el.getAttribute('data-video')], true]);
 						$del(el);
@@ -19886,10 +20191,25 @@ true, true];
 					$script('window.FormData = void 0');
 					var form = $q('form[name="post"]');
 					if (form) {
-						form.insertAdjacentHTML('beforeend', '<input name="json_response" value="1" type="hidden">');
+						form.insertAdjacentHTML('beforeend', '<input class="de-input-hidden" name="json_response" value="1" type="hidden">');
 					}
+					$each($Q('br.clear'), function (el) {
+						var hr = el.nextElementSibling;
+						if (hr && hr.tagName === 'HR') {
+							$after(el.parentNode, hr);
+						}
+						$del(el);
+					});
 					return false;
 				}
+			}, {
+				key: 'isAjaxStatusOK',
+				value: function isAjaxStatusOK(status) {
+					return status === 200 || status === 400;
+				}
+			}, {
+				key: 'updateSubmitBtn',
+				value: function updateSubmitBtn() {}
 			}, {
 				key: 'qImgNameLink',
 				get: function get() {
@@ -19898,7 +20218,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.banner, ' + (this.t ? '' : '.de-btn-rep,') + ' .hide-thread-link, .mentioned,\n\t\t\t\t\t.post-hover { display: none !important; }\n\t\t\t\tdiv.post.reply:not(.de-entry):not(.de-cfg-tab):not(.de-win-body) {\n\t\t\t\t\tfloat: left !important; clear: left; display: block; }';
+					return '.banner, .hide-thread-link, .mentioned,\n\t\t\t\t\t.post-hover { display: none !important; }\n\t\t\t\tdiv.post.reply:not(.de-entry):not(.de-cfg-tab):not(.de-win-body) {\n\t\t\t\t\tfloat: left !important; clear: left; display: block; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -19918,23 +20238,28 @@ true, true];
 			function Vichan(prot, dm) {
 				_classCallCheck(this, Vichan);
 
-				var _this76 = _possibleConstructorReturn(this, (Vichan.__proto__ || Object.getPrototypeOf(Vichan)).call(this, prot, dm));
+				var _this79 = _possibleConstructorReturn(this, (Vichan.__proto__ || Object.getPrototypeOf(Vichan)).call(this, prot, dm));
 
-				_this76.qDelPassw = '#password';
-				_this76.qPostImg = '.post-image[alt]';
+				_this79.qDelPassw = '#password';
+				_this79.qPostImg = '.post-image[alt]:not(.deleted)';
 
-				_this76.multiFile = true;
-				return _this76;
+				_this79.multiFile = true;
+				return _this79;
 			}
 
 			_createClass(Vichan, [{
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i50 = 0; _i50 < 5; ++_i50) {
-						str += '<div' + (_i50 ? ' style="display: none;"' : '') + '><input type="file" name="file' + (_i50 ? _i50 + 1 : '') + '"></div>';
+					for (var i = 0; i < 5; ++i) {
+						str += '<div' + (i ? ' style="display: none;"' : '') + '><input type="file" name="file' + (i ? i + 1 : '') + '"></div>';
 					}
 					el.innerHTML = str;
+				}
+			}, {
+				key: 'fixHTMLHelper',
+				value: function fixHTMLHelper(str) {
+					return str.replace(/"\/player\.php\?v=([^&]+)&[^"]+"/g, '"$1"');
 				}
 			}, {
 				key: 'init',
@@ -19953,19 +20278,12 @@ true, true];
 					if (textarea) {
 						textarea.removeAttribute('id');
 					}
-					var el = $q('#upload > td > input:not([name="file"])');
-					if (el) {
-						$q(this.qForm).appendChild(el);
-					}
-					$each($Q('.file[href^="/player.php?v="]'), function (link) {
-						link.href = $q('.fileinfo > a', link.parentNode).href;
-					});
 					return false;
 				}
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Vichan.prototype.__proto__ || Object.getPrototypeOf(Vichan.prototype), 'css', this) + '.boardlist { position: static !important; }\n\t\t\t\tbody { padding: 0 5px !important; }\n\t\t\t\t.fileinfo { width: 250px; }\n\t\t\t\t.multifile { width: auto !important; }\n\t\t\t\t#expand-all-images, #expand-all-images + .unimportant, .fileinfo > .unimportant + span,\n\t\t\t\t\t.fileinfo > .unimportant + span + span, .post-btn, small { display: none !important; }';
+					return _get(Vichan.prototype.__proto__ || Object.getPrototypeOf(Vichan.prototype), 'css', this) + '\n\t\t\t\t#expand-all-images, #expand-all-images + .unimportant, .fileinfo > span[style*="nowrap;"],\n\t\t\t\t\t.post-btn, small { display: none !important; }\n\t\t\t\tbody { padding: 0 5px !important; }\n\t\t\t\t.boardlist { position: static !important; }\n\t\t\t\t.fileinfo { width: 250px; }\n\t\t\t\t.multifile { width: auto !important; }';
 				}
 			}]);
 
@@ -19980,16 +20298,16 @@ true, true];
 			function Kusaba(prot, dm) {
 				_classCallCheck(this, Kusaba);
 
-				var _this77 = _possibleConstructorReturn(this, (Kusaba.__proto__ || Object.getPrototypeOf(Kusaba)).call(this, prot, dm));
+				var _this80 = _possibleConstructorReturn(this, (Kusaba.__proto__ || Object.getPrototypeOf(Kusaba)).call(this, prot, dm));
 
-				_this77.kus = true;
+				_this80.kus = true;
 
-				_this77.qError = 'h1, h2, div[style*="1.25em"]';
-				_this77.qFormRedir = 'input[name="redirecttothread"][value="1"]';
+				_this80.qError = 'h1, h2, div[style*="1.25em"]';
+				_this80.qFormRedir = 'input[name="redirecttothread"][value="1"]';
 
-				_this77.formParent = 'replythread';
-				_this77.markupBB = true;
-				return _this77;
+				_this80.formParent = 'replythread';
+				_this80.markupBB = true;
+				return _this80;
 			}
 
 			_createClass(Kusaba, [{
@@ -20029,13 +20347,13 @@ true, true];
 			function TinyIB(prot, dm) {
 				_classCallCheck(this, TinyIB);
 
-				var _this78 = _possibleConstructorReturn(this, (TinyIB.__proto__ || Object.getPrototypeOf(TinyIB)).call(this, prot, dm));
+				var _this81 = _possibleConstructorReturn(this, (TinyIB.__proto__ || Object.getPrototypeOf(TinyIB)).call(this, prot, dm));
 
-				_this78.tinyib = true;
+				_this81.tinyib = true;
 
-				_this78.qError = 'body[align=center] div, div[style="margin-top: 50px;"]';
-				_this78.qPostMsg = '.message';
-				return _this78;
+				_this81.qError = 'body[align=center] div, div[style="margin-top: 50px;"]';
+				_this81.qPostMsg = '.message';
+				return _this81;
 			}
 
 			_createClass(TinyIB, [{
@@ -20068,31 +20386,347 @@ true, true];
 
 		ibEngines.push(['form[action$="imgboard.php?delete"]', TinyIB]);
 
+		var LynxChan = function (_BaseBoard5) {
+			_inherits(LynxChan, _BaseBoard5);
 
-		var _0chanHk = function (_BaseBoard5) {
-			_inherits(_0chanHk, _BaseBoard5);
+			function LynxChan(prot, dm) {
+				_classCallCheck(this, LynxChan);
+
+				var _this82 = _possibleConstructorReturn(this, (LynxChan.__proto__ || Object.getPrototypeOf(LynxChan)).call(this, prot, dm));
+
+				_this82.cReply = 'innerPost';
+				_this82.qDForm = 'form[action$="contentActions.js"]';
+				_this82.qError = '#errorLabel, #labelMessage';
+				_this82.qForm = '.form-post';
+				_this82.qFormPassw = 'input[name="password"]';
+				_this82.qFormRules = '.form-post > .small';
+				_this82.qFormSubm = '#formButton';
+				_this82.qImgInfo = '.uploadDetails';
+				_this82.qOmitted = '.labelOmission';
+				_this82.qOPost = '.innerOP';
+				_this82.qPages = '#divPages';
+				_this82.qPostHeader = '.postInfo, .de-post-btns';
+				_this82.qPostImg = '.imgLink > img, img[src*="/.media/"]';
+				_this82.qPostMsg = '.divMessage';
+				_this82.qPostRef = '.linkQuote';
+				_this82.qRPost = '.innerPost';
+				_this82.qTrunc = '.contentOmissionIndicator';
+
+				_this82.firstPage = 1;
+				_this82.formParent = 'threadId';
+				_this82.formTd = 'th';
+				_this82.hasCatalog = true;
+				_this82.jsonSubmit = true;
+				_this82.multiFile = true;
+
+				_this82._qTable = '.divPosts';
+				return _this82;
+			}
+
+			_createClass(LynxChan, [{
+				key: 'changeReplyMode',
+				value: function changeReplyMode(form, tNum) {
+					var action = form.getAttribute('action');
+					form.setAttribute('action', tNum ? action.replace('newThread', 'replyThread') : action.replace('replyThread', 'newThread'));
+				}
+			}, {
+				key: 'fixFileInputs',
+				value: function fixFileInputs(el) {
+					var str = '><input name="files" type="file"></div>';
+					el.innerHTML = '<div' + str + ('<div style="display: none;"' + str).repeat(+$id('labelMaxFiles').textContent - 1);
+				}
+			}, {
+				key: 'getCapParent',
+				value: function getCapParent(el) {
+					return $id('captchaDiv');
+				}
+			}, {
+				key: 'getImgRealName',
+				value: function getImgRealName(wrap) {
+					return $q('.originalNameLink', wrap).textContent;
+				}
+			}, {
+				key: 'getImgSrcLink',
+				value: function getImgSrcLink(img) {
+					var el = img.parentNode;
+					return el.tagName === 'A' ? el : $q('.originalNameLink', el.parentNode);
+				}
+			}, {
+				key: 'getImgWrap',
+				value: function getImgWrap(img) {
+					return $parent(img, 'FIGURE');
+				}
+			}, {
+				key: 'getPageUrl',
+				value: function getPageUrl(b, p) {
+					return fixBrd(b) + (p > 1 ? p + this.docExt : 'index.html');
+				}
+			}, {
+				key: 'getPNum',
+				value: function getPNum(post) {
+					return +$q('.deletionCheckBox', post).name.split('-')[2];
+				}
+			}, {
+				key: 'getPostWrap',
+				value: function getPostWrap(el, isOp) {
+					return isOp ? el : el.parentNode;
+				}
+			}, {
+				key: 'getSubmitData',
+				value: function getSubmitData(json) {
+					return {
+						error: json.status === 'error' ? json.data : null,
+						postNum: json.status === 'ok' ? +json.data : null
+					};
+				}
+			}, {
+				key: 'getTNum',
+				value: function getTNum(op) {
+					return +$q('.deletionCheckBox', op).name.split('-')[1];
+				}
+			}, {
+				key: 'init',
+				value: function init() {
+					$script('if("autoRefresh" in window) clearInterval(refreshTimer);');
+					if (!$q(this.qForm + ' td')) {
+						var table = $aBegin($q(this.qForm), '<table><tbody></tbody></table>').firstChild;
+						var _els4 = $Q('#fieldName, #fieldEmail, #fieldSubject, #fieldMessage, ' + '#fieldPostingPassword, #divUpload');
+						for (var i = 0, _len14 = _els4.length; i < _len14; ++i) {
+							var td = $bEnd(table, '<tr><th></th><td></td></tr>').lastChild;
+							td.appendChild(_els4[i]);
+						}
+					}
+					return false;
+				}
+			}, {
+				key: 'isAjaxStatusOK',
+				value: function isAjaxStatusOK(status) {
+					return status === 200 || status === 400 || status === 500;
+				}
+			}, {
+				key: 'sendHTML5Post',
+				value: function () {
+					var _ref106 = _asyncToGenerator( regeneratorRuntime.mark(function _callee20(form, data, needProgress, hasFiles) {
+						var _this83 = this;
+
+						var getBase64, getCookies, dataObj, files, i, _len16, file, cookieObj, ajaxParams, xhr;
+
+						return regeneratorRuntime.wrap(function _callee20$(_context25) {
+							while (1) {
+								switch (_context25.prev = _context25.next) {
+									case 0:
+										getBase64 = function () {
+											var _ref107 = _asyncToGenerator( regeneratorRuntime.mark(function _callee18(file) {
+												return regeneratorRuntime.wrap(function _callee18$(_context23) {
+													while (1) {
+														switch (_context23.prev = _context23.next) {
+															case 0:
+																return _context23.abrupt('return', new Promise(function (resolve, reject) {
+																	var reader = new FileReader();
+																	reader.readAsDataURL(file);
+																	reader.onload = function () {
+																		return resolve(reader.result);
+																	};
+																	reader.onerror = function (error) {
+																		return reject(error);
+																	};
+																}));
+
+															case 1:
+															case 'end':
+																return _context23.stop();
+														}
+													}
+												}, _callee18, _this83);
+											}));
+
+											return function getBase64(_x78) {
+												return _ref107.apply(this, arguments);
+											};
+										}();
+
+										getCookies = function getCookies() {
+											var obj = {};
+											var cookies = document.cookie.split(';');
+											for (var i = 0, _len15 = cookies.length; i < _len15; ++i) {
+												var parts = cookies[i].split('=');
+												obj[parts.shift().trim()] = decodeURI(parts.join('='));
+											}
+											return obj;
+										};
+
+										dataObj = { files: [] };
+										files = [];
+
+										data.forEach(function () {
+											var _ref108 = _asyncToGenerator( regeneratorRuntime.mark(function _callee19(value, key) {
+												return regeneratorRuntime.wrap(function _callee19$(_context24) {
+													while (1) {
+														switch (_context24.prev = _context24.next) {
+															case 0:
+																if (key !== 'files') {
+																	dataObj[key] = value;
+																} else {
+																	files.push(value);
+																}
+
+															case 1:
+															case 'end':
+																return _context24.stop();
+														}
+													}
+												}, _callee19, _this83);
+											}));
+
+											return function (_x79, _x80) {
+												return _ref108.apply(this, arguments);
+											};
+										}());
+										i = 0, _len16 = files.length;
+
+									case 6:
+										if (!(i < _len16)) {
+											_context25.next = 21;
+											break;
+										}
+
+										file = files[i];
+
+										if (!file.type) {
+											_context25.next = 18;
+											break;
+										}
+
+										_context25.t0 = dataObj.files;
+										_context25.t1 = 'data:' + file.type + ';base64,';
+										_context25.next = 13;
+										return getBase64(file).then(function (data) {
+											return data.split(',')[1];
+										});
+
+									case 13:
+										_context25.t2 = _context25.sent;
+										_context25.t3 = _context25.t1 + _context25.t2;
+										_context25.t4 = file.name;
+										_context25.t5 = {
+											content: _context25.t3,
+											name: _context25.t4,
+											spoiler: false
+										};
+
+										_context25.t0.push.call(_context25.t0, _context25.t5);
+
+									case 18:
+										++i;
+										_context25.next = 6;
+										break;
+
+									case 21:
+										cookieObj = getCookies();
+										ajaxParams = {
+											data: JSON.stringify({
+												captchaId: cookieObj.captchaid,
+												bypassId: cookieObj.bypass,
+												parameters: dataObj,
+												auth: { login: cookieObj.login, hash: cookieObj.hash }
+											}),
+											headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+											method: 'POST'
+										};
+
+										if (needProgress && hasFiles) {
+											ajaxParams.onprogress = getUploadFunc();
+										}
+										_context25.prev = 24;
+										_context25.next = 27;
+										return $ajax('/.api/' + form.action.split('/').pop().replace('.js', ''), ajaxParams);
+
+									case 27:
+										xhr = _context25.sent;
+										return _context25.abrupt('return', xhr.responseText);
+
+									case 31:
+										_context25.prev = 31;
+										_context25.t6 = _context25['catch'](24);
+										return _context25.abrupt('return', Promise.reject(_context25.t6));
+
+									case 34:
+									case 'end':
+										return _context25.stop();
+								}
+							}
+						}, _callee20, this, [[24, 31]]);
+					}));
+
+					function sendHTML5Post(_x74, _x75, _x76, _x77) {
+						return _ref106.apply(this, arguments);
+					}
+
+					return sendHTML5Post;
+				}()
+			}, {
+				key: 'updateCaptcha',
+				value: function updateCaptcha() {
+					$script('reloadCaptcha();');
+					return null;
+				}
+			}, {
+				key: 'updateSubmitBtn',
+				value: function updateSubmitBtn(el) {
+					el.textContent = Lng.reply[lang];
+				}
+			}, {
+				key: 'qImgNameLink',
+				get: function get() {
+					return '.originalNameLink';
+				}
+			}, {
+				key: 'qThread',
+				get: function get() {
+					return '.opCell';
+				}
+			}, {
+				key: 'css',
+				get: function get() {
+					return '.de-video-link + div[style="display: inline;"] > .embedButton, .de-parea > hr,\n\t\t\t\t\t.divRefresh, #jsButton, .hideButton, .nameLink, #newPostFieldset, .panelBacklinks,\n\t\t\t\t\tbody > div[style^="display: inline;"] { display: none !important; }\n\t\t\t\t.divPosts { margin: 0 0; }\n\t\t\t\t#formButton { display: initial !important; }\n\t\t\t\t.form-post button, .form-post input, .form-post img { width: initial; }';
+				}
+			}, {
+				key: 'markupTags',
+				get: function get() {
+					return ["'''", "''", '__', '~~', '**', '[code'];
+				}
+			}]);
+
+			return LynxChan;
+		}(BaseBoard);
+
+		ibEngines.push(['form[action$="contentActions.js"]', LynxChan]);
+
+
+		var _0chanHk = function (_BaseBoard6) {
+			_inherits(_0chanHk, _BaseBoard6);
 
 			function _0chanHk(prot, dm) {
 				_classCallCheck(this, _0chanHk);
 
-				var _this79 = _possibleConstructorReturn(this, (_0chanHk.__proto__ || Object.getPrototypeOf(_0chanHk)).call(this, prot, dm));
+				var _this84 = _possibleConstructorReturn(this, (_0chanHk.__proto__ || Object.getPrototypeOf(_0chanHk)).call(this, prot, dm));
 
-				_this79.cReply = 'block post';
-				_this79.qDForm = '#content > div > .threads-scroll-spy + div, .threads > div:first-of-type';
-				_this79.qForm = '.reply-form';
-				_this79.qImgInfo = 'figcaption';
-				_this79.qOmitted = 'div[style="margin-left: 25px; font-weight: bold;"]';
-				_this79.qOPost = '.post-op';
-				_this79.qPostHeader = '.post-header';
-				_this79.qPostImg = '.post-img-thumbnail';
-				_this79.qPostMsg = '.post-body-message';
-				_this79.qPostRef = '.post-id';
-				_this79.qRPost = '.block.post:not(.post-op)';
+				_this84.cReply = 'block post';
+				_this84.qDForm = '#content > div > .threads-scroll-spy + div, .threads > div:first-of-type';
+				_this84.qForm = '.reply-form';
+				_this84.qImgInfo = 'figcaption';
+				_this84.qOmitted = 'div[style="margin-left: 25px; font-weight: bold;"]';
+				_this84.qOPost = '.post-op';
+				_this84.qPostHeader = '.post-header';
+				_this84.qPostImg = '.post-img-thumbnail';
+				_this84.qPostMsg = '.post-body-message';
+				_this84.qPostRef = '.post-id';
+				_this84.qRPost = '.block.post:not(.post-op)';
 
-				_this79.docExt = '';
-				_this79.JsonBuilder = _0chanPostsBuilder;
-				_this79.res = '';
-				return _this79;
+				_this84.docExt = '';
+				_this84.JsonBuilder = _0chanPostsBuilder;
+				_this84.res = '';
+				return _this84;
 			}
 
 			_createClass(_0chanHk, [{
@@ -20135,23 +20769,24 @@ true, true];
 				value: function observeContent(checkDomains, dataPromise) {
 					var initObserver = new MutationObserver(function (mutations) {
 						var el = mutations[0].addedNodes[0];
-						if (el && el.id === 'app') {
-							initObserver.disconnect();
-							doc.defaultView.addEventListener('message', function (_ref101) {
-								var data = _ref101.data;
-
-								if (data !== '0chan-content-done') {
-									return;
-								}
-								if (updater) {
-									updater.disable();
-								}
-								DelForm.tNums = new Set();
-								$each($Q('#de-css, #de-css-dynamic, #de-css-user, #de-svg-icons, #de-thr-navpanel', doc), $del);
-								runMain(checkDomains, dataPromise);
-							});
-							$script('window.app.$bus.on(\'refreshContentDone\',\n\t\t\t\t\t\t() => document.defaultView.postMessage(\'0chan-content-done\', \'*\'))');
+						if (!el || el.id !== 'app') {
+							return;
 						}
+						initObserver.disconnect();
+						doc.defaultView.addEventListener('message', function (_ref109) {
+							var data = _ref109.data;
+
+							if (data !== '0chan-content-done') {
+								return;
+							}
+							if (updater) {
+								updater.disableUpdater();
+							}
+							DelForm.tNums = new Set();
+							$each($Q('#de-css, #de-css-dynamic, #de-css-user, #de-svg-icons, #de-thr-navpanel'), $del);
+							runMain(checkDomains, dataPromise);
+						});
+						$script('window.app.$bus.on(\'refreshContentDone\',\n\t\t\t\t\t() => document.defaultView.postMessage(\'0chan-content-done\', \'*\'))');
 					});
 					initObserver.observe(docBody, { childList: true });
 				}
@@ -20192,12 +20827,12 @@ true, true];
 			function _02chSu(prot, dm) {
 				_classCallCheck(this, _02chSu);
 
-				var _this80 = _possibleConstructorReturn(this, (_02chSu.__proto__ || Object.getPrototypeOf(_02chSu)).call(this, prot, dm));
+				var _this85 = _possibleConstructorReturn(this, (_02chSu.__proto__ || Object.getPrototypeOf(_02chSu)).call(this, prot, dm));
 
-				_this80.hasCatalog = true;
+				_this85.hasCatalog = true;
 
-				_this80._capUpdPromise = null;
-				return _this80;
+				_this85._capUpdPromise = null;
+				return _this85;
 			}
 
 			_createClass(_02chSu, [{
@@ -20217,26 +20852,26 @@ true, true];
 
 		ibDomains['02ch.su'] = _02chSu;
 
-		var _2chan = function (_BaseBoard6) {
-			_inherits(_2chan, _BaseBoard6);
+		var _2chan = function (_BaseBoard7) {
+			_inherits(_2chan, _BaseBoard7);
 
 			function _2chan(prot, dm) {
 				_classCallCheck(this, _2chan);
 
-				var _this81 = _possibleConstructorReturn(this, (_2chan.__proto__ || Object.getPrototypeOf(_2chan)).call(this, prot, dm));
+				var _this86 = _possibleConstructorReturn(this, (_2chan.__proto__ || Object.getPrototypeOf(_2chan)).call(this, prot, dm));
 
-				_this81.qDForm = 'form:not([enctype])';
-				_this81.qForm = 'form[enctype]';
-				_this81.qFormRedir = null;
-				_this81.qFormRules = '.chui';
-				_this81.qOmitted = 'font[color="#707070"]';
-				_this81.qPostImg = 'a[href$=".jpg"] > img, a[href$=".png"] > img, a[href$=".gif"] > img';
-				_this81.qPostRef = '.del';
-				_this81.qRPost = 'td:nth-child(2)';
+				_this86.qDForm = 'form:not([enctype])';
+				_this86.qForm = 'form[enctype]';
+				_this86.qFormRedir = null;
+				_this86.qFormRules = '.chui';
+				_this86.qOmitted = 'font[color="#707070"]';
+				_this86.qPostImg = 'a[href$=".jpg"] > img, a[href$=".png"] > img, a[href$=".gif"] > img';
+				_this86.qPostRef = '.del';
+				_this86.qRPost = 'td:nth-child(2)';
 
-				_this81.docExt = '.htm';
-				_this81.formParent = 'resto';
-				return _this81;
+				_this86.docExt = '.htm';
+				_this86.formParent = 'resto';
+				return _this86;
 			}
 
 			_createClass(_2chan, [{
@@ -20290,18 +20925,18 @@ true, true];
 
 		ibDomains['2chan.net'] = _2chan;
 
-		var _2chRip = function (_BaseBoard7) {
-			_inherits(_2chRip, _BaseBoard7);
+		var _2chRip = function (_BaseBoard8) {
+			_inherits(_2chRip, _BaseBoard8);
 
 			function _2chRip(prot, dm) {
 				_classCallCheck(this, _2chRip);
 
-				var _this82 = _possibleConstructorReturn(this, (_2chRip.__proto__ || Object.getPrototypeOf(_2chRip)).call(this, prot, dm));
+				var _this87 = _possibleConstructorReturn(this, (_2chRip.__proto__ || Object.getPrototypeOf(_2chRip)).call(this, prot, dm));
 
-				_this82.ru = true;
+				_this87.ru = true;
 
-				_this82._capUpdPromise = null;
-				return _this82;
+				_this87._capUpdPromise = null;
+				return _this87;
 			}
 
 			_createClass(_2chRip, [{
@@ -20317,8 +20952,9 @@ true, true];
 			}, {
 				key: 'updateCaptcha',
 				value: function updateCaptcha(cap) {
-					return cap.updateHelper('/cgi/captcha?task=get_id', function (xhr) {
-						var id = xhr.responseText;
+					return cap.updateHelper('/cgi/captcha?task=get_id', function (_ref110) {
+						var id = _ref110.responseText;
+
 						$id('imgcaptcha').src = '/cgi/captcha?task=get_image&id=' + id;
 						$id('captchaid').value = id;
 					});
@@ -20331,25 +20967,25 @@ true, true];
 		ibDomains['2ch.rip'] = _2chRip;
 		ibDomains['dva-ch.com'] = _2chRip;
 
-		var _2chRu = function (_BaseBoard8) {
-			_inherits(_2chRu, _BaseBoard8);
+		var _2chRu = function (_BaseBoard9) {
+			_inherits(_2chRu, _BaseBoard9);
 
 			function _2chRu(prot, dm) {
 				_classCallCheck(this, _2chRu);
 
-				var _this83 = _possibleConstructorReturn(this, (_2chRu.__proto__ || Object.getPrototypeOf(_2chRu)).call(this, prot, dm));
+				var _this88 = _possibleConstructorReturn(this, (_2chRu.__proto__ || Object.getPrototypeOf(_2chRu)).call(this, prot, dm));
 
-				_this83.qPages = 'table[border="1"] td > a:last-of-type';
+				_this88.qPages = 'table[border="1"] td > a:last-of-type';
 
-				_this83.docExt = '.html';
-				_this83.hasPicWrap = true;
-				_this83.jsonSubmit = true;
-				_this83.markupBB = true;
-				_this83.multiFile = true;
-				_this83.ru = true;
+				_this88.docExt = '.html';
+				_this88.hasPicWrap = true;
+				_this88.jsonSubmit = true;
+				_this88.markupBB = true;
+				_this88.multiFile = true;
+				_this88.ru = true;
 
-				_this83._qTable = 'table:not(.postfiles)';
-				return _this83;
+				_this88._qTable = 'table:not(.postfiles)';
+				return _this88;
 			}
 
 			_createClass(_2chRu, [{
@@ -20376,18 +21012,19 @@ true, true];
 			}, {
 				key: 'getOmitted',
 				value: function getOmitted(el, len) {
-					var txt;
+					var txt = void 0;
 					return el && (txt = el.textContent) ? +(txt.match(/\d+/) || [0])[0] - len : 1;
 				}
 			}, {
 				key: 'getPageUrl',
 				value: function getPageUrl(b, p) {
-					return fixBrd(b) + (p > 0 ? p : 0) + '.memhtml';
+					return '' + fixBrd(b) + (p > 0 ? p : 0) + '.memhtml';
 				}
 			}, {
 				key: 'getSubmitData',
 				value: function getSubmitData(json) {
-					var error, postNum;
+					var error = null;
+					var postNum = null;
 					if (json.post) {
 						postNum = +json.post;
 					} else {
@@ -20401,13 +21038,13 @@ true, true];
 			}, {
 				key: 'init',
 				value: function init() {
-					var el = $q('#postform input[type="button"]');
-					if (el) {
-						$replace(el, '<input type="submit" value="Отправить">');
+					var btnEl = $q('#postform input[type="button"]');
+					if (btnEl) {
+						$replace(btnEl, '<input type="submit" value="Отправить">');
 					}
-					el = $q(this.qDForm);
-					$each($Q('input[type="hidden"]', el), $del);
-					el.appendChild($q('.userdelete'));
+					var dFormEl = $q(this.qDForm);
+					$each($Q('input[type="hidden"]', dFormEl), $del);
+					dFormEl.appendChild($q('.userdelete'));
 					return false;
 				}
 			}, {
@@ -20440,18 +21077,18 @@ true, true];
 			function _410chanOrg(prot, dm) {
 				_classCallCheck(this, _410chanOrg);
 
-				var _this84 = _possibleConstructorReturn(this, (_410chanOrg.__proto__ || Object.getPrototypeOf(_410chanOrg)).call(this, prot, dm));
+				var _this89 = _possibleConstructorReturn(this, (_410chanOrg.__proto__ || Object.getPrototypeOf(_410chanOrg)).call(this, prot, dm));
 
-				_this84.qFormRedir = 'input#noko';
-				_this84.qPages = '.pgstbl > table > tbody > tr > td:nth-child(2)';
+				_this89.qFormRedir = 'input#noko';
+				_this89.qPages = '.pgstbl > table > tbody > tr > td:nth-child(2)';
 
-				_this84.ru = true;
-				_this84.hasCatalog = true;
-				_this84.markupBB = false;
-				_this84.timePattern = 'dd+nn+yyyy++w++hh+ii+ss';
+				_this89.ru = true;
+				_this89.hasCatalog = true;
+				_this89.markupBB = false;
+				_this89.timePattern = 'dd+nn+yyyy++w++hh+ii+ss';
 
-				_this84._capUpdPromise = null;
-				return _this84;
+				_this89._capUpdPromise = null;
+				return _this89;
 			}
 
 			_createClass(_410chanOrg, [{
@@ -20464,8 +21101,8 @@ true, true];
 							if (backBtn) {
 								var modBtn = $q('a[accesskey="m"]', el);
 								$after(backBtn.parentElement, backBtn);
-								[modBtn.previousSibling, modBtn, modBtn.nextSibling].forEach(function (elm) {
-									return $after(backBtn.lastChild, elm);
+								[modBtn.previousSibling, modBtn, modBtn.nextSibling].forEach(function (el) {
+									return $after(backBtn.lastChild, el);
 								});
 							}
 						} catch (e) {}
@@ -20492,7 +21129,7 @@ true, true];
 			}, {
 				key: 'updateCaptcha',
 				value: function updateCaptcha(cap) {
-					var _this85 = this;
+					var _this90 = this;
 
 					return cap.updateHelper('/api_adaptive.php?board=' + this.b, function (xhr) {
 						if (xhr.responseText === '1') {
@@ -20500,14 +21137,14 @@ true, true];
 							setTimeout(function () {
 								return cap.textEl.value = 'проезд оплачен';
 							}, 0);
-						} else {
-							cap.textEl.disabled = false;
-							cap.textEl.value = '';
-							var img = $q('img', cap.parentEl);
-							var src = img.getAttribute('src');
-							img.src = '';
-							img.src = _this85.getCaptchaSrc(src);
+							return;
 						}
+						cap.textEl.disabled = false;
+						cap.textEl.value = '';
+						var img = $q('img', cap.parentEl);
+						var src = img.getAttribute('src');
+						img.src = '';
+						img.src = _this90.getCaptchaSrc(src);
 					});
 				}
 			}, {
@@ -20518,7 +21155,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(_410chanOrg.prototype.__proto__ || Object.getPrototypeOf(_410chanOrg.prototype), 'css', this) + 'body { margin: 0 }\n\t\t\t\t#resizer { display: none; }\n\t\t\t\t.topmenu { position: static; }\n\t\t\t\t.de-thr-hid { display: inherit; }\n\t\t\t\tform > span { margin-top: 5px; }\n\t\t\t\tform > .de-thread-buttons { float: left; } ';
+					return _get(_410chanOrg.prototype.__proto__ || Object.getPrototypeOf(_410chanOrg.prototype), 'css', this) + '\n\t\t\t\t#resizer { display: none; }\n\t\t\t\tbody { margin: 0 }\n\t\t\t\tform > span { margin-top: 5px; }\n\t\t\t\tform > .de-thread-buttons { float: left; }\n\t\t\t\t.de-thr-hid { display: inherit; }\n\t\t\t\t.topmenu { position: static; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -20532,45 +21169,46 @@ true, true];
 
 		ibDomains['410chan.org'] = _410chanOrg;
 
-		var _4chanOrg = function (_BaseBoard9) {
-			_inherits(_4chanOrg, _BaseBoard9);
+		var _4chanOrg = function (_BaseBoard10) {
+			_inherits(_4chanOrg, _BaseBoard10);
 
 			function _4chanOrg(prot, dm) {
 				_classCallCheck(this, _4chanOrg);
 
-				var _this86 = _possibleConstructorReturn(this, (_4chanOrg.__proto__ || Object.getPrototypeOf(_4chanOrg)).call(this, prot, dm));
+				var _this91 = _possibleConstructorReturn(this, (_4chanOrg.__proto__ || Object.getPrototypeOf(_4chanOrg)).call(this, prot, dm));
 
-				_this86.fch = true;
+				_this91.fch = true;
 
-				_this86.cReply = 'post reply';
-				_this86.qBan = 'strong[style="color: red;"]';
-				_this86.qClosed = '.archivedIcon';
-				_this86.qDelBut = '.deleteform > input[type="submit"]';
-				_this86.qError = '#errmsg';
-				_this86.qForm = 'form[name="post"]';
-				_this86.qFormRedir = null;
-				_this86.qImgInfo = '.fileText';
-				_this86.qOmitted = '.summary.desktop';
-				_this86.qOPost = '.op';
-				_this86.qPages = '.pagelist > .pages:not(.cataloglink) > a:last-of-type';
-				_this86.qPostHeader = '.postInfo';
-				_this86.qPostImg = '.fileThumb > img:not(.fileDeletedRes)';
-				_this86.qPostName = '.name';
-				_this86.qPostRef = '.postInfo > .postNum';
-				_this86.qPostSubj = '.subject';
+				_this91.cReply = 'post reply';
+				_this91.qBan = 'strong[style="color: red;"]';
+				_this91.qClosed = '.archivedIcon';
+				_this91.qDelBut = '.deleteform > input[type="submit"]';
+				_this91.qError = '#errmsg';
+				_this91.qForm = 'form[name="post"]';
+				_this91.qFormRedir = null;
+				_this91.qImgInfo = '.fileText';
+				_this91.qOmitted = '.summary.desktop';
+				_this91.qOPost = '.op';
+				_this91.qPages = '.pagelist > .pages:not(.cataloglink) > a:last-of-type';
+				_this91.qPostHeader = '.postInfo';
+				_this91.qPostImg = '.fileThumb > img:not(.fileDeletedRes)';
+				_this91.qPostName = '.name';
+				_this91.qPostRef = '.postInfo > .postNum';
+				_this91.qPostSubj = '.subject';
 
-				_this86.anchor = '#p';
-				_this86.docExt = '';
-				_this86.firstPage = 1;
-				_this86.formParent = 'resto';
-				_this86.hasCatalog = true;
-				_this86.hasTextLinks = true;
-				_this86.JsonBuilder = _4chanPostsBuilder;
-				_this86.res = 'thread/';
-				_this86.timePattern = 'nn+dd+yy+w+hh+ii-?s?s?';
+				_this91.anchor = '#p';
+				_this91.docExt = '';
+				_this91.firstPage = 1;
+				_this91.formParent = 'resto';
+				_this91.hasAltCaptcha = true;
+				_this91.hasCatalog = true;
+				_this91.hasTextLinks = true;
+				_this91.JsonBuilder = _4chanPostsBuilder;
+				_this91.res = 'thread/';
+				_this91.timePattern = 'nn+dd+yy+w+hh+ii-?s?s?';
 
-				_this86._qTable = '.replyContainer';
-				return _this86;
+				_this91._qTable = '.replyContainer';
+				return _this91;
 			}
 
 			_createClass(_4chanOrg, [{
@@ -20617,9 +21255,9 @@ true, true];
 			}, {
 				key: 'getSubmitData',
 				value: function getSubmitData(data) {
-					var error = null,
-					    postNum = null,
-					    errEl = $q('#errmsg', data);
+					var error = null;
+					var postNum = null;
+					var errEl = $q('#errmsg', data);
 					if (errEl) {
 						error = errEl.textContent;
 					} else {
@@ -20658,7 +21296,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return '.backlink, #blotter, .extButton, hr.desktop, .navLinks, .postMenuBtn,\n\t\t\t\t\t#togglePostFormLink { display: none !important; }\n\t\t\t\t#bottomReportBtn { display: initial !important; }\n\t\t\t\t.postForm { display: table !important; width: auto !important; }\n\t\t\t\ttextarea { margin-right: 0 !important; }\n\t\t\t\t' + (Cfg.widePosts ? '.sideArrows { display: none; }' : '');
+					return '.backlink, #blotter, .extButton, hr.desktop, .navLinks, .postMenuBtn,\n\t\t\t\t\t#togglePostFormLink { display: none !important; }\n\t\t\t\t#bottomReportBtn { display: initial !important; }\n\t\t\t\t#g-recaptcha { height: initial; }\n\t\t\t\t.postForm { display: table !important; width: auto !important; }\n\t\t\t\ttextarea { margin-right: 0 !important; }\n\t\t\t\t' + (Cfg.widePosts ? '.sideArrows { display: none; }' : '');
 				}
 			}, {
 				key: 'markupTags',
@@ -20672,33 +21310,14 @@ true, true];
 					var tr = $id('captchaFormPart');
 					if (tr) {
 						var capClick = $bEnd(docBody, '<div onclick="initRecaptcha();"></div>');
-						var altCapClick = $bEnd(docBody, '<div onclick="QR.initCaptchaAlt();"></div>');
-						var waitForReload = function waitForReload() {
-							return setTimeout(function () {
-								var input = $id('recaptcha_response_field');
-								if (input) {
-									input.tabIndex = 5;
-								} else {
-									waitForReload();
-								}
-							}, 1e3);
-						};
 						value = function value() {
-							if (!Cfg.cap4chanAlt || !pr.tNum) {
-								$replace($q('#g-recaptcha, #qrCaptchaContainerAlt'), '<div id="g-recaptcha"></div>');
+							if (Cfg.altCaptcha) {
+								$id('g-recaptcha').innerHTML = $q('noscript', tr).innerHTML;
+							} else {
+								$replace($id('g-recaptcha'), '<div id="g-recaptcha"></div>');
 								capClick.click();
-								tr.removeAttribute('onclick');
-								return null;
 							}
-							var container = $id('qrCaptchaContainerAlt');
-							if (container) {
-								container.click();
-								return null;
-							}
-							$replace($id('g-recaptcha'), '<div id="qrCaptchaContainerAlt"></div>');
-							altCapClick.click();
-							tr.setAttribute('onclick', "if(event.target.tagName !== 'INPUT') Recaptcha.reload();");
-							waitForReload();
+							tr.removeAttribute('onclick');
 							return null;
 						};
 					}
@@ -20718,18 +21337,18 @@ true, true];
 			function _8chNet(prot, dm) {
 				_classCallCheck(this, _8chNet);
 
-				var _this87 = _possibleConstructorReturn(this, (_8chNet.__proto__ || Object.getPrototypeOf(_8chNet)).call(this, prot, dm));
+				var _this92 = _possibleConstructorReturn(this, (_8chNet.__proto__ || Object.getPrototypeOf(_8chNet)).call(this, prot, dm));
 
-				_this87._8ch = true;
+				_this92._8ch = true;
 
-				_this87._capUpdPromise = null;
-				return _this87;
+				_this92._capUpdPromise = null;
+				return _this92;
 			}
 
 			_createClass(_8chNet, [{
 				key: 'initCaptcha',
 				value: function initCaptcha(cap) {
-					$q('td', cap.parentEl).innerHTML = '<input placeholder="' + Lng.cap[lang] + '" class="captcha_text" type="text" ' + 'name="captcha_text" size="25" maxlength="8" autocomplete="off">' + '<input class="captcha_cookie" name="captcha_cookie" type="hidden">' + '<div class="captcha_html"></div>';
+					$q('td', cap.parentEl).innerHTML = '<input placeholder="' + Lng.cap[lang] + '" class="captcha_text' + '" type="text" name="captcha_text" size="25" maxlength="8" autocomplete="off">\n\t\t\t\t<input class="captcha_cookie de-input-hidden" name="captcha_cookie" type="hidden">\n\t\t\t\t<div class="captcha_html"></div>';
 					cap.textEl = $q('.captcha_text', cap.parentEl);
 					return this.updateCaptcha(cap, true);
 				}
@@ -20749,7 +21368,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(_8chNet.prototype.__proto__ || Object.getPrototypeOf(_8chNet.prototype), 'css', this) + '#post-moderation-fields { display: initial !important; }';
+					return _get(_8chNet.prototype.__proto__ || Object.getPrototypeOf(_8chNet.prototype), 'css', this) + '\n\t\t\t\tinput.delete, #post-moderation-fields { display: initial !important; }';
 				}
 			}]);
 
@@ -20765,12 +21384,12 @@ true, true];
 			function _55chan(prot, dm) {
 				_classCallCheck(this, _55chan);
 
-				var _this88 = _possibleConstructorReturn(this, (_55chan.__proto__ || Object.getPrototypeOf(_55chan)).call(this, prot, dm));
+				var _this93 = _possibleConstructorReturn(this, (_55chan.__proto__ || Object.getPrototypeOf(_55chan)).call(this, prot, dm));
 
-				_this88._8ch = null;
+				_this93._8ch = null;
 
-				_this88.qFormRules = '.regras';
-				return _this88;
+				_this93.qFormRules = '.regras';
+				return _this93;
 			}
 
 			_createClass(_55chan, [{
@@ -20785,8 +21404,8 @@ true, true];
 
 		ibDomains['55chan.org'] = _55chan;
 
-		var _7chanOrg = function (_BaseBoard10) {
-			_inherits(_7chanOrg, _BaseBoard10);
+		var _7chanOrg = function (_BaseBoard11) {
+			_inherits(_7chanOrg, _BaseBoard11);
 
 			function _7chanOrg() {
 				_classCallCheck(this, _7chanOrg);
@@ -20806,26 +21425,26 @@ true, true];
 
 		ibDomains['7chan.org'] = _7chanOrg;
 
-		var Arhivach = function (_BaseBoard11) {
-			_inherits(Arhivach, _BaseBoard11);
+		var Arhivach = function (_BaseBoard12) {
+			_inherits(Arhivach, _BaseBoard12);
 
 			function Arhivach(prot, dm) {
 				_classCallCheck(this, Arhivach);
 
-				var _this90 = _possibleConstructorReturn(this, (Arhivach.__proto__ || Object.getPrototypeOf(Arhivach)).call(this, prot, dm));
+				var _this95 = _possibleConstructorReturn(this, (Arhivach.__proto__ || Object.getPrototypeOf(Arhivach)).call(this, prot, dm));
 
-				_this90.cReply = 'post';
-				_this90.qDForm = 'body > .container-fluid';
-				_this90.qPostHeader = '.post_head';
-				_this90.qPostImg = '.post_image > img';
-				_this90.qPostMsg = '.post_comment_body';
-				_this90.qPostRef = '.post_id, .post_head > b';
-				_this90.qPostSubj = '.post_subject';
-				_this90.qRPost = '.post:not(:first-child):not([postid=""])';
+				_this95.cReply = 'post';
+				_this95.qDForm = 'body > .container-fluid';
+				_this95.qPostHeader = '.post_head';
+				_this95.qPostImg = '.post_image > img';
+				_this95.qPostMsg = '.post_comment_body';
+				_this95.qPostRef = '.post_id, .post_head > b';
+				_this95.qPostSubj = '.post_subject';
+				_this95.qRPost = '.post:not(:first-child):not([postid=""])';
 
-				_this90.docExt = '';
-				_this90.res = 'thread/';
-				return _this90;
+				_this95.docExt = '';
+				_this95.res = 'thread/';
+				return _this95;
 			}
 
 			_createClass(Arhivach, [{
@@ -20833,9 +21452,9 @@ true, true];
 				value: function fixHTML(data, isForm) {
 					var el = _get(Arhivach.prototype.__proto__ || Object.getPrototypeOf(Arhivach.prototype), 'fixHTML', this).call(this, data, isForm);
 					try {
-						var _els4 = $Q('.expand_image', el);
-						for (var _i51 = 0, tLen = _els4.length; _i51 < tLen; ++_i51) {
-							_els4[_i51].href = _els4[_i51].getAttribute('onclick').match(/http:\/[^']+/)[0];
+						var _els5 = $Q('.expand_image', el);
+						for (var i = 0, tLen = _els5.length; i < tLen; ++i) {
+							_els5[i].href = _els5[i].getAttribute('onclick').match(/http:\/[^']+/)[0];
 						}
 					} catch (e) {}
 					return el;
@@ -20882,7 +21501,7 @@ true, true];
 					defaultCfg.ajaxUpdThr = 0;
 					setTimeout(function () {
 						var delPosts = $Q('.post[postid=""]');
-						for (var i = 0, len = delPosts.length; i < len; ++i) {
+						for (var i = 0, _len17 = delPosts.length; i < _len17; ++i) {
 							try {
 								var post = pByNum.get(+$q('blockquote', delPosts[i]).getAttribute('id').substring(1));
 								if (post) {
@@ -20929,12 +21548,12 @@ true, true];
 			function Brchan(prot, dm) {
 				_classCallCheck(this, Brchan);
 
-				var _this91 = _possibleConstructorReturn(this, (Brchan.__proto__ || Object.getPrototypeOf(Brchan)).call(this, prot, dm));
+				var _this96 = _possibleConstructorReturn(this, (Brchan.__proto__ || Object.getPrototypeOf(Brchan)).call(this, prot, dm));
 
-				_this91.qPostTrip = '.poster_id';
+				_this96.qPostTrip = '.poster_id';
 
-				_this91.markupBB = true;
-				return _this91;
+				_this96.markupBB = true;
+				return _this96;
 			}
 
 			_createClass(Brchan, [{
@@ -20993,7 +21612,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Lolifox.prototype.__proto__ || Object.getPrototypeOf(Lolifox.prototype), 'css', this) + ((Cfg.noSpoilers ? 'span.spoiler, span.spoiler:hover { ' + (Cfg.noSpoilers === 1 ? 'color: #F5F5F5 !important; background-color: #888 !important' : 'color: inherit !important') + '; transition: none !important; }' : '') + '\n\t\t\t#thread-interactions { display: none; }\n\t\t\t.reflink::after { content: "" !important; }');
+					return _get(Lolifox.prototype.__proto__ || Object.getPrototypeOf(Lolifox.prototype), 'css', this) + '\r\n\t' + (Cfg.noSpoilers ? 'span.spoiler, span.spoiler:hover { ' + (Cfg.noSpoilers === 1 ? 'color: #F5F5F5 !important; background-color: #888 !important' : 'color: inherit !important') + '; transition: none !important; }' : '') + '\n\t\t\t\t#thread-interactions { display: none; }\n\t\t\t\t.reflink::after { content: "" !important; }';
 				}
 			}]);
 
@@ -21009,10 +21628,10 @@ true, true];
 			function Diochan(prot, dm) {
 				_classCallCheck(this, Diochan);
 
-				var _this93 = _possibleConstructorReturn(this, (Diochan.__proto__ || Object.getPrototypeOf(Diochan)).call(this, prot, dm));
+				var _this98 = _possibleConstructorReturn(this, (Diochan.__proto__ || Object.getPrototypeOf(Diochan)).call(this, prot, dm));
 
-				_this93.multiFile = true;
-				return _this93;
+				_this98.multiFile = true;
+				return _this98;
 			}
 
 			_createClass(Diochan, [{
@@ -21025,7 +21644,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Diochan.prototype.__proto__ || Object.getPrototypeOf(Diochan.prototype), 'css', this) + '.resize, .postblock { display: none; }';
+					return _get(Diochan.prototype.__proto__ || Object.getPrototypeOf(Diochan.prototype), 'css', this) + '\n\t\t\t\t.resize, .postblock { display: none; }';
 				}
 			}]);
 
@@ -21034,47 +21653,47 @@ true, true];
 
 		ibDomains['diochan.com'] = Diochan;
 
-		var Dobrochan = function (_BaseBoard12) {
-			_inherits(Dobrochan, _BaseBoard12);
+		var Dobrochan = function (_BaseBoard13) {
+			_inherits(Dobrochan, _BaseBoard13);
 
 			function Dobrochan(prot, dm) {
 				_classCallCheck(this, Dobrochan);
 
-				var _this94 = _possibleConstructorReturn(this, (Dobrochan.__proto__ || Object.getPrototypeOf(Dobrochan)).call(this, prot, dm));
+				var _this99 = _possibleConstructorReturn(this, (Dobrochan.__proto__ || Object.getPrototypeOf(Dobrochan)).call(this, prot, dm));
 
-				_this94.dobr = true;
+				_this99.dobr = true;
 
-				_this94.qClosed = 'img[src="/images/locked.png"]';
-				_this94.qDForm = 'form[action*="delete"]';
-				_this94.qError = '.post-error, h2';
-				_this94.qFormRedir = 'select[name="goto"]';
-				_this94.qImgInfo = '.fileinfo';
-				_this94.qOmitted = '.abbrev > span:last-of-type';
-				_this94.qPages = '.pages > tbody > tr > td';
-				_this94.qPostMsg = '.postbody';
-				_this94.qPostSubj = '.replytitle';
-				_this94.qTrunc = '.abbrev > span:first-of-type';
+				_this99.qClosed = 'img[src="/images/locked.png"]';
+				_this99.qDForm = 'form[action*="delete"]';
+				_this99.qError = '.post-error, h2';
+				_this99.qFormRedir = 'select[name="goto"]';
+				_this99.qImgInfo = '.fileinfo';
+				_this99.qOmitted = '.abbrev > span:last-of-type';
+				_this99.qPages = '.pages > tbody > tr > td';
+				_this99.qPostMsg = '.postbody';
+				_this99.qPostSubj = '.replytitle';
+				_this99.qTrunc = '.abbrev > span:first-of-type';
 
-				_this94.anchor = '#i';
-				_this94.formParent = 'thread_id';
-				_this94.hasPicWrap = true;
-				_this94.JsonBuilder = DobrochanPostsBuilder;
-				_this94.multiFile = true;
-				_this94.ru = true;
-				_this94.timePattern = 'dd+m+?+?+?+?+?+yyyy++w++hh+ii-?s?s?';
-				return _this94;
+				_this99.anchor = '#i';
+				_this99.formParent = 'thread_id';
+				_this99.hasPicWrap = true;
+				_this99.JsonBuilder = DobrochanPostsBuilder;
+				_this99.multiFile = true;
+				_this99.ru = true;
+				_this99.timePattern = 'dd+m+?+?+?+?+?+yyyy++w++hh+ii-?s?s?';
+				return _this99;
 			}
 
 			_createClass(Dobrochan, [{
-				key: 'delTruncMsg',
-				value: function delTruncMsg(post, el, isInit) {
+				key: 'deleteTruncMsg',
+				value: function deleteTruncMsg(post, el, isInit) {
 					[el.previousSibling, el.nextSibling, el].forEach($del);
 					if (isInit) {
 						$replace(post.msg.firstElementChild, $q('.alternate > div', post.el));
 					} else {
 						var sRunner = new SpellsRunner();
 						post.updateMsg($q('.alternate > div', post.el), sRunner);
-						sRunner.end();
+						sRunner.endSpells();
 					}
 				}
 			}, {
@@ -21086,8 +21705,8 @@ true, true];
 			}, {
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
-					$each($Q('input[type="file"]', el), function (input) {
-						return input.removeAttribute('onchange');
+					$each($Q('input[type="file"]', el), function (el) {
+						return el.removeAttribute('onchange');
 					});
 					el.firstElementChild.value = 1;
 				}
@@ -21201,32 +21820,69 @@ true, true];
 		ibDomains['dobrochan.org'] = Dobrochan;
 		ibDomains['dobrochan.ru'] = Dobrochan;
 
-		var Ernstchan = function (_BaseBoard13) {
-			_inherits(Ernstchan, _BaseBoard13);
+		var EndChan = function (_LynxChan) {
+			_inherits(EndChan, _LynxChan);
+
+			function EndChan(prot, dm) {
+				_classCallCheck(this, EndChan);
+
+				var _this100 = _possibleConstructorReturn(this, (EndChan.__proto__ || Object.getPrototypeOf(EndChan)).call(this, prot, dm));
+
+				_this100.qTrunc = '.contentOmissionIndicator > p';
+				return _this100;
+			}
+
+			_createClass(EndChan, [{
+				key: 'init',
+				value: function init() {
+					_get(EndChan.prototype.__proto__ || Object.getPrototypeOf(EndChan.prototype), 'init', this).call(this);
+					$each($Q('.imgLink > img[src^="/.youtube/"]'), function (el) {
+						return $del($parent(el, 'FIGURE'));
+					});
+					$each($Q('.youtube_wrapper'), function (el) {
+						var src = $q('a', el).href;
+						$del($bBegin(el, '<a href="' + src + '">' + src + '</a>').nextSibling);
+					});
+					return false;
+				}
+			}, {
+				key: 'css',
+				get: function get() {
+					return _get(EndChan.prototype.__proto__ || Object.getPrototypeOf(EndChan.prototype), 'css', this) + '\n\t\t\t\t.bottomNav, .delLink, #expandAll, .hidePost, .hideThread, .linkLast50,\n\t\t\t\t\t.linkPreview, #modeBanner, .watchButton { display: none !important; }\n\t\t\t\t.de-cfg-label { display: initial !important; }\n\t\t\t\t#de-main, .de-pview { font-size: 75%; }';
+				}
+			}]);
+
+			return EndChan;
+		}(LynxChan);
+
+		ibDomains['endchan.xyz'] = EndChan;
+
+		var Ernstchan = function (_BaseBoard14) {
+			_inherits(Ernstchan, _BaseBoard14);
 
 			function Ernstchan(prot, dm) {
 				_classCallCheck(this, Ernstchan);
 
-				var _this95 = _possibleConstructorReturn(this, (Ernstchan.__proto__ || Object.getPrototypeOf(Ernstchan)).call(this, prot, dm));
+				var _this101 = _possibleConstructorReturn(this, (Ernstchan.__proto__ || Object.getPrototypeOf(Ernstchan)).call(this, prot, dm));
 
-				_this95.cReply = 'post';
-				_this95.qError = '.error';
-				_this95.qFormRedir = 'input[name="gb2"][value="thread"]';
-				_this95.qOPost = '.thread_OP';
-				_this95.qPages = '.pagelist > li:nth-last-child(2)';
-				_this95.qPostHeader = '.post_head';
-				_this95.qPostMsg = '.text';
-				_this95.qPostSubj = '.subject';
-				_this95.qPostTrip = '.tripcode';
-				_this95.qRPost = '.thread_reply';
-				_this95.qTrunc = '.tldr';
+				_this101.cReply = 'post';
+				_this101.qError = '.error';
+				_this101.qFormRedir = 'input[name="gb2"][value="thread"]';
+				_this101.qOPost = '.thread_OP';
+				_this101.qPages = '.pagelist > li:nth-last-child(2)';
+				_this101.qPostHeader = '.post_head';
+				_this101.qPostMsg = '.text';
+				_this101.qPostSubj = '.subject';
+				_this101.qPostTrip = '.tripcode';
+				_this101.qRPost = '.thread_reply';
+				_this101.qTrunc = '.tldr';
 
-				_this95.docExt = '';
-				_this95.firstPage = 1;
-				_this95.markupBB = true;
-				_this95.multiFile = true;
-				_this95.res = 'thread/';
-				return _this95;
+				_this101.docExt = '';
+				_this101.firstPage = 1;
+				_this101.markupBB = true;
+				_this101.multiFile = true;
+				_this101.res = 'thread/';
+				return _this101;
 			}
 
 			_createClass(Ernstchan, [{
@@ -21275,18 +21931,18 @@ true, true];
 
 		ibDomains['ernstchan.com'] = Ernstchan;
 
-		var Iichan = function (_BaseBoard14) {
-			_inherits(Iichan, _BaseBoard14);
+		var Iichan = function (_BaseBoard15) {
+			_inherits(Iichan, _BaseBoard15);
 
 			function Iichan(prot, dm) {
 				_classCallCheck(this, Iichan);
 
-				var _this96 = _possibleConstructorReturn(this, (Iichan.__proto__ || Object.getPrototypeOf(Iichan)).call(this, prot, dm));
+				var _this102 = _possibleConstructorReturn(this, (Iichan.__proto__ || Object.getPrototypeOf(Iichan)).call(this, prot, dm));
 
-				_this96.iichan = true;
+				_this102.iichan = true;
 
-				_this96.hasCatalog = true;
-				return _this96;
+				_this102.hasCatalog = true;
+				return _this102;
 			}
 
 			_createClass(Iichan, [{
@@ -21338,41 +21994,39 @@ true, true];
 
 		ibDomains['iichan.hk'] = Iichan;
 
-		var Krautchan = function (_BaseBoard15) {
-			_inherits(Krautchan, _BaseBoard15);
+		var Krautchan = function (_BaseBoard16) {
+			_inherits(Krautchan, _BaseBoard16);
 
 			function Krautchan(prot, dm) {
 				_classCallCheck(this, Krautchan);
 
-				var _this97 = _possibleConstructorReturn(this, (Krautchan.__proto__ || Object.getPrototypeOf(Krautchan)).call(this, prot, dm));
+				var _this103 = _possibleConstructorReturn(this, (Krautchan.__proto__ || Object.getPrototypeOf(Krautchan)).call(this, prot, dm));
 
-				_this97.krau = true;
+				_this103.cReply = 'postreply';
+				_this103.qBan = '.ban_mark';
+				_this103.qClosed = 'img[src="/images/locked.gif"]';
+				_this103.qDForm = 'form[action*="delete"]';
+				_this103.qError = '.message_text';
+				_this103.qFormRedir = 'input#forward_thread';
+				_this103.qFormRules = '#rules_row';
+				_this103.qImgInfo = '.fileinfo';
+				_this103.qOmitted = '.omittedinfo';
+				_this103.qPages = 'table[border="1"] > tbody > tr > td > a:nth-last-child(2) + a';
+				_this103.qPostHeader = '.postheader';
+				_this103.qPostImg = 'img[id^="thumbnail_"]';
+				_this103.qPostRef = '.postnumber';
+				_this103.qPostSubj = '.postsubject';
+				_this103.qRPost = '.postreply';
+				_this103.qTrunc = 'p[id^="post_truncated"]';
 
-				_this97.cReply = 'postreply';
-				_this97.qBan = '.ban_mark';
-				_this97.qClosed = 'img[src="/images/locked.gif"]';
-				_this97.qDForm = 'form[action*="delete"]';
-				_this97.qError = '.message_text';
-				_this97.qFormRedir = 'input#forward_thread';
-				_this97.qFormRules = '#rules_row';
-				_this97.qImgInfo = '.fileinfo';
-				_this97.qOmitted = '.omittedinfo';
-				_this97.qPages = 'table[border="1"] > tbody > tr > td > a:nth-last-child(2) + a';
-				_this97.qPostHeader = '.postheader';
-				_this97.qPostImg = 'img[id^="thumbnail_"]';
-				_this97.qPostRef = '.postnumber';
-				_this97.qPostSubj = '.postsubject';
-				_this97.qRPost = '.postreply';
-				_this97.qTrunc = 'p[id^="post_truncated"]';
-
-				_this97.hasCatalog = true;
-				_this97.hasPicWrap = true;
-				_this97.hasTextLinks = true;
-				_this97.markupBB = true;
-				_this97.multiFile = true;
-				_this97.res = 'thread-';
-				_this97.timePattern = 'yyyy+nn+dd+hh+ii+ss+--?-?-?-?-?';
-				return _this97;
+				_this103.hasCatalog = true;
+				_this103.hasPicWrap = true;
+				_this103.hasTextLinks = true;
+				_this103.markupBB = true;
+				_this103.multiFile = true;
+				_this103.res = 'thread-';
+				_this103.timePattern = 'yyyy+nn+dd+hh+ii+ss+--?-?-?-?-?';
+				return _this103;
 			}
 
 			_createClass(Krautchan, [{
@@ -21384,8 +22038,8 @@ true, true];
 				key: 'fixFileInputs',
 				value: function fixFileInputs(el) {
 					var str = '';
-					for (var _i52 = 0; _i52 < 4; ++_i52) {
-						str += '<div' + (_i52 ? ' style="display: none;"' : '') + '>' + ('<input type="file" name="file_' + _i52 + '" tabindex="7"></div>');
+					for (var i = 0; i < 4; ++i) {
+						str += '<div' + (i ? ' style="display: none;"' : '') + '>' + ('<input type="file" name="file_' + i + '" tabindex="7"></div>');
 					}
 					el.innerHTML = str;
 					el.removeAttribute('id');
@@ -21421,8 +22075,8 @@ true, true];
 				value: function initCaptcha(cap) {
 					cap.hasCaptcha = false;
 					var scripts = $Q('script:not([src])', doc);
-					for (var _i53 = 0, _len11 = scripts.length; _i53 < _len11; ++_i53) {
-						var m = scripts[_i53].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
+					for (var i = 0, _len18 = scripts.length; i < _len18; ++i) {
+						var m = scripts[i].textContent.match(/var boardRequiresCaptcha = ([a-z]+);/);
 						if (m) {
 							if (m[1] === 'true') {
 								cap.hasCaptcha = true;
@@ -21435,8 +22089,8 @@ true, true];
 			}, {
 				key: 'insertYtPlayer',
 				value: function insertYtPlayer(msg, playerHtml) {
-					var pMsg = msg.parentNode,
-					    prev = pMsg.previousElementSibling;
+					var pMsg = msg.parentNode;
+					var prev = pMsg.previousElementSibling;
 					return $bBegin(prev.hasAttribute('style') ? prev : pMsg, playerHtml);
 				}
 			}, {
@@ -21458,19 +22112,19 @@ true, true];
 					var cookie = doc.cookie;
 
 					if (cookie.includes('desuchan.session')) {
-						for (var _iterator37 = cookie.split(';'), _isArray37 = Array.isArray(_iterator37), _i54 = 0, _iterator37 = _isArray37 ? _iterator37 : _iterator37[Symbol.iterator]();;) {
-							var _ref102;
+						for (var _iterator37 = cookie.split(';'), _isArray37 = Array.isArray(_iterator37), _i49 = 0, _iterator37 = _isArray37 ? _iterator37 : _iterator37[Symbol.iterator]();;) {
+							var _ref111;
 
 							if (_isArray37) {
-								if (_i54 >= _iterator37.length) break;
-								_ref102 = _iterator37[_i54++];
+								if (_i49 >= _iterator37.length) break;
+								_ref111 = _iterator37[_i49++];
 							} else {
-								_i54 = _iterator37.next();
-								if (_i54.done) break;
-								_ref102 = _i54.value;
+								_i49 = _iterator37.next();
+								if (_i49.done) break;
+								_ref111 = _i49.value;
 							}
 
-							var c = _ref102;
+							var c = _ref111;
 
 							var m = c.match(/^\s*desuchan\.session=(.*)$/);
 							if (m) {
@@ -21534,13 +22188,18 @@ true, true];
 			function Kropyvach(prot, dm) {
 				_classCallCheck(this, Kropyvach);
 
-				var _this98 = _possibleConstructorReturn(this, (Kropyvach.__proto__ || Object.getPrototypeOf(Kropyvach)).call(this, prot, dm));
+				var _this104 = _possibleConstructorReturn(this, (Kropyvach.__proto__ || Object.getPrototypeOf(Kropyvach)).call(this, prot, dm));
 
-				_this98.markupBB = true;
-				return _this98;
+				_this104.markupBB = true;
+				return _this104;
 			}
 
 			_createClass(Kropyvach, [{
+				key: 'css',
+				get: function get() {
+					return _get(Kropyvach.prototype.__proto__ || Object.getPrototypeOf(Kropyvach.prototype), 'css', this) + (this.t ? '' : '\r\n.de-btn-rep { display: none !important; }');
+				}
+			}, {
 				key: 'markupTags',
 				get: function get() {
 					return ['b', 'i', 'u', 's', 'spoiler', 'code'];
@@ -21558,10 +22217,10 @@ true, true];
 			function Lainchan(prot, dm) {
 				_classCallCheck(this, Lainchan);
 
-				var _this99 = _possibleConstructorReturn(this, (Lainchan.__proto__ || Object.getPrototypeOf(Lainchan)).call(this, prot, dm));
+				var _this105 = _possibleConstructorReturn(this, (Lainchan.__proto__ || Object.getPrototypeOf(Lainchan)).call(this, prot, dm));
 
-				_this99.qOPost = '.op';
-				return _this99;
+				_this105.qOPost = '.op';
+				return _this105;
 			}
 
 			_createClass(Lainchan, [{
@@ -21576,7 +22235,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Lainchan.prototype.__proto__ || Object.getPrototypeOf(Lainchan.prototype), 'css', this) + '.sidearrows { display: none !important; }\n\t\t\t\t.bar { position: static; }';
+					return _get(Lainchan.prototype.__proto__ || Object.getPrototypeOf(Lainchan.prototype), 'css', this) + '\n\t\t\t\t.sidearrows { display: none !important; }\n\t\t\t\t.bar { position: static; }';
 				}
 			}]);
 
@@ -21597,7 +22256,7 @@ true, true];
 			_createClass(Niuchan, [{
 				key: 'css',
 				get: function get() {
-					return _get(Niuchan.prototype.__proto__ || Object.getPrototypeOf(Niuchan.prototype), 'css', this) + '.replybacklinks, .resize { display: none; }';
+					return _get(Niuchan.prototype.__proto__ || Object.getPrototypeOf(Niuchan.prototype), 'css', this) + '\n\t\t\t\t.replybacklinks, .resize { display: none; }';
 				}
 			}]);
 
@@ -21606,8 +22265,8 @@ true, true];
 
 		ibDomains['niuchan.org'] = Niuchan;
 
-		var Nowere = function (_BaseBoard16) {
-			_inherits(Nowere, _BaseBoard16);
+		var Nowere = function (_BaseBoard17) {
+			_inherits(Nowere, _BaseBoard17);
 
 			function Nowere() {
 				_classCallCheck(this, Nowere);
@@ -21633,22 +22292,22 @@ true, true];
 
 		ibDomains['nowere.net'] = Nowere;
 
-		var Ponyach = function (_BaseBoard17) {
-			_inherits(Ponyach, _BaseBoard17);
+		var Ponyach = function (_BaseBoard18) {
+			_inherits(Ponyach, _BaseBoard18);
 
 			function Ponyach(prot, dm) {
 				_classCallCheck(this, Ponyach);
 
-				var _this102 = _possibleConstructorReturn(this, (Ponyach.__proto__ || Object.getPrototypeOf(Ponyach)).call(this, prot, dm));
+				var _this108 = _possibleConstructorReturn(this, (Ponyach.__proto__ || Object.getPrototypeOf(Ponyach)).call(this, prot, dm));
 
-				_this102.qBan = 'font[color="#FF0000"]';
-				_this102.qImgInfo = '.filesize[style="display: inline;"]';
+				_this108.qBan = 'font[color="#FF0000"]';
+				_this108.qImgInfo = '.filesize[style="display: inline;"]';
 
-				_this102.formParent = 'replythread';
-				_this102.jsonSubmit = true;
-				_this102.multiFile = true;
-				_this102.pony = true;
-				return _this102;
+				_this108.formParent = 'replythread';
+				_this108.jsonSubmit = true;
+				_this108.multiFile = true;
+				_this108.pony = true;
+				return _this108;
 			}
 
 			_createClass(Ponyach, [{
@@ -21711,10 +22370,12 @@ true, true];
 			function Ponychan(prot, dm) {
 				_classCallCheck(this, Ponychan);
 
-				var _this103 = _possibleConstructorReturn(this, (Ponychan.__proto__ || Object.getPrototypeOf(Ponychan)).call(this, prot, dm));
+				var _this109 = _possibleConstructorReturn(this, (Ponychan.__proto__ || Object.getPrototypeOf(Ponychan)).call(this, prot, dm));
 
-				_this103.qOPost = '.opContainer';
-				return _this103;
+				_this109.qOPost = '.opContainer';
+
+				_this109.jsonSubmit = false;
+				return _this109;
 			}
 
 			_createClass(Ponychan, [{
@@ -21727,14 +22388,14 @@ true, true];
 				value: function init() {
 					_get(Ponychan.prototype.__proto__ || Object.getPrototypeOf(Ponychan.prototype), 'init', this).call(this);
 					$each($Q('img[data-mature-src]'), function (el) {
-						el.src = el.getAttribute('data-mature-src');
+						return el.src = el.getAttribute('data-mature-src');
 					});
 					return false;
 				}
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Ponychan.prototype.__proto__ || Object.getPrototypeOf(Ponychan.prototype), 'css', this) + '.mature_thread { display: block !important; }\n\t\t\t\t.mature_warning { display: none; }';
+					return _get(Ponychan.prototype.__proto__ || Object.getPrototypeOf(Ponychan.prototype), 'css', this) + '\n\t\t\t\t.mature_thread { display: block !important; }\n\t\t\t\t.mature_warning { display: none; }';
 				}
 			}]);
 
@@ -21749,18 +22410,18 @@ true, true];
 			function Synch(prot, dm) {
 				_classCallCheck(this, Synch);
 
-				var _this104 = _possibleConstructorReturn(this, (Synch.__proto__ || Object.getPrototypeOf(Synch)).call(this, prot, dm));
+				var _this110 = _possibleConstructorReturn(this, (Synch.__proto__ || Object.getPrototypeOf(Synch)).call(this, prot, dm));
 
-				_this104.qImgInfo = '.unimportant';
+				_this110.qImgInfo = '.unimportant';
 
-				_this104.markupBB = true;
-				return _this104;
+				_this110.markupBB = true;
+				return _this110;
 			}
 
 			_createClass(Synch, [{
 				key: 'init',
 				value: function init() {
-					var val = '{"simpleNavbar":true}';
+					var val = '{ "simpleNavbar": true }';
 					if (locStorage.settings !== val) {
 						locStorage.settings = val;
 						window.location.reload();
@@ -21780,7 +22441,7 @@ true, true];
 			}, {
 				key: 'css',
 				get: function get() {
-					return _get(Synch.prototype.__proto__ || Object.getPrototypeOf(Synch.prototype), 'css', this) + '.fa-sort { display: none; }\n\t\t\t\ttime::after { content: none; }';
+					return _get(Synch.prototype.__proto__ || Object.getPrototypeOf(Synch.prototype), 'css', this) + '\n\t\t\t\t.fa-sort { display: none; }\n\t\t\t\ttime::after { content: none; }';
 				}
 			}, {
 				key: 'markupTags',
@@ -21801,10 +22462,10 @@ true, true];
 		if (checkDomains) {
 			if (!dm) {
 				var ibKeys = Object.keys(ibDomains);
-				var _i55 = ibKeys.length;
+				var i = ibKeys.length;
 				var host = window.location.hostname.toLowerCase();
-				while (_i55--) {
-					dm = ibKeys[_i55];
+				while (i--) {
+					dm = ibKeys[i];
 					if (host === dm || host.endsWith('.' + dm)) {
 						return new ibDomains[dm](prot, dm);
 					}
@@ -21813,16 +22474,18 @@ true, true];
 				return new ibDomains[dm](prot, dm);
 			}
 		}
-		dm = window.location.hostname;
+		if (!dm) {
+			dm = window.location.hostname;
+		}
 		if (!dm) {
 			return null;
 		}
 		dm = dm.match(/(?:(?:[^.]+\.)(?=org\.|net\.|com\.))?[^.]+\.[^.]+$|^\d+\.\d+\.\d+\.\d+$|localhost/)[0];
 		if (checkEngines) {
-			for (var i = ibEngines.length - 1; i >= 0; --i) {
-				var _ibEngines$i = _slicedToArray(ibEngines[i], 2),
-				    path = _ibEngines$i[0],
-				    Ctor = _ibEngines$i[1];
+			for (var _i50 = ibEngines.length - 1; _i50 >= 0; --_i50) {
+				var _ibEngines$_i = _slicedToArray(ibEngines[_i50], 2),
+				    path = _ibEngines$_i[0],
+				    Ctor = _ibEngines$_i[1];
 
 				if ($q(path, doc)) {
 					return new Ctor(prot, dm);
@@ -21835,8 +22498,8 @@ true, true];
 
 
 	var DollchanAPI = {
-		init: function init() {
-			var _this105 = this;
+		initAPI: function initAPI() {
+			var _this111 = this;
 
 			this.hasListeners = false;
 			if (!('MessageChannel' in window)) {
@@ -21847,11 +22510,11 @@ true, true];
 			this.port.onmessage = this._handleMessage;
 			this.activeListeners = new Set();
 			var port = channel.port2;
-			doc.defaultView.addEventListener('message', function (_ref103) {
-				var data = _ref103.data;
+			doc.defaultView.addEventListener('message', function (_ref112) {
+				var data = _ref112.data;
 
 				if (data === 'de-request-api-message') {
-					_this105.hasListeners = true;
+					_this111.hasListeners = true;
 					document.defaultView.postMessage('de-answer-api-message', '*', [port]);
 				}
 			});
@@ -21864,8 +22527,8 @@ true, true];
 				this.port.postMessage({ name: name, data: data });
 			}
 		},
-		_handleMessage: function _handleMessage(_ref104) {
-			var arg = _ref104.data;
+		_handleMessage: function _handleMessage(_ref113) {
+			var arg = _ref113.data;
 
 			if (!arg || !arg.name) {
 				return;
@@ -21878,19 +22541,19 @@ true, true];
 				case 'registerapi':
 					if (data) {
 						rv = {};
-						for (var _iterator38 = data, _isArray38 = Array.isArray(_iterator38), _i56 = 0, _iterator38 = _isArray38 ? _iterator38 : _iterator38[Symbol.iterator]();;) {
-							var _ref105;
+						for (var _iterator38 = data, _isArray38 = Array.isArray(_iterator38), _i51 = 0, _iterator38 = _isArray38 ? _iterator38 : _iterator38[Symbol.iterator]();;) {
+							var _ref114;
 
 							if (_isArray38) {
-								if (_i56 >= _iterator38.length) break;
-								_ref105 = _iterator38[_i56++];
+								if (_i51 >= _iterator38.length) break;
+								_ref114 = _iterator38[_i51++];
 							} else {
-								_i56 = _iterator38.next();
-								if (_i56.done) break;
-								_ref105 = _i56.value;
+								_i51 = _iterator38.next();
+								if (_i51.done) break;
+								_ref114 = _i51.value;
 							}
 
-							var aName = _ref105;
+							var aName = _ref114;
 
 							rv[aName] = DollchanAPI._register(aName.toLowerCase());
 						}
@@ -21916,19 +22579,21 @@ true, true];
 
 	function checkForUpdates(isManual, lastUpdateTime) {
 		if (!isManual) {
-			if (Date.now() - +lastUpdateTime < [1, 2, 7, 14, 30][Cfg.scrUpdIntrv] * 1000 * 60 * 60 * 24) {
+			if (Date.now() - +lastUpdateTime < [0, 1, 2, 7, 14, 30][Cfg.updDollchan] * 1e3 * 60 * 60 * 24) {
 				return Promise.reject();
 			}
 		}
-		return $ajax(gitRaw + 'src/modules/Wrap.js', { 'Content-Type': 'text/plain' }, false).then(function (xhr) {
-			var v = xhr.responseText.match(/const version = '([0-9.]+)';/);
+		return $ajax(gitRaw + 'src/modules/Wrap.js', { 'Content-Type': 'text/plain' }, false).then(function (_ref115) {
+			var responseText = _ref115.responseText;
+
+			var v = responseText.match(/const version = '([0-9.]+)';/);
 			var remoteVer = v && v[1] ? v[1].split('.') : null;
 			if (remoteVer) {
 				var currentVer = version.split('.');
 				var src = '' + gitRaw + (nav.isESNext ? 'src/' : '') + 'Dollchan_Extension_Tools.' + (nav.isESNext ? 'es6.' : '') + 'user.js';
 				saveCfgObj('lastUpd', Date.now());
 				var link = '<a style="color: blue; font-weight: bold;" href="' + src + '">';
-				for (var i = 0, _len12 = Math.max(currentVer.length, remoteVer.length); i < _len12; ++i) {
+				for (var i = 0, _len19 = Math.max(currentVer.length, remoteVer.length); i < _len19; ++i) {
 					if ((+remoteVer[i] || 0) > (+currentVer[i] || 0)) {
 						return '' + link + Lng.updAvail[lang].replace('%s', v[1]) + '</a>';
 					} else if ((+remoteVer[i] || 0) < (+currentVer[i] || 0)) {
@@ -21936,7 +22601,7 @@ true, true];
 					}
 				}
 				if (isManual) {
-					var c = xhr.responseText.match(/const commit = '([0-9abcdef]+)';/)[1];
+					var c = responseText.match(/const commit = '([0-9abcdef]+)';/)[1];
 					var vc = version + '.' + c;
 					return c === commit ? Lng.haveLatestCommit[lang].replace('%s', vc) : Lng.haveLatestStable[lang].replace('%s', version) + '\n' + Lng.newCommitsAvail[lang].replace('%s', '' + link + vc + '</a>');
 				}
@@ -21955,15 +22620,15 @@ true, true];
 			if (!localData) {
 				Cfg.stats.view++;
 				saveCfgObj(aib.dm, Cfg);
-				Thread.first.el.insertAdjacentHTML('afterend', '<div class="de-thread-buttons">' + '<span class="de-thread-updater">[<a class="de-abtn" href="#"></a>' + '<span id="de-updater-count" style="display: none;"></span>]</span>' + (aib.mak ? '[<a class="de-abtn" href="#" onclick="UnbanShow();">Реквест разбана</a>]' : '') + '</div>');
+				Thread.first.el.insertAdjacentHTML('afterend', '<div class="de-thread-buttons">\n\t\t\t\t<span class="de-thread-updater">[<a class="de-abtn" href="#"></a>' + ('<span id="de-updater-count" style="display: none;"></span>]</span>\n\t\t\t\t' + (aib.mak ? '[<a class="de-abtn" href="#" onclick="UnbanShow();">Реквест разбана</a>]' : '') + '\n\t\t\t</div>'));
 			}
 		} else {
-			navPanel.init();
+			thrNavPanel.initThrNav();
 		}
 		if (!localData) {
 			updater = initThreadUpdater(doc.title, aib.t && Cfg.ajaxUpdThr && !aib.isArchived);
 			if (aib.t) {
-				Thread.first.el.nextSibling.firstChild.firstElementChild.addEventListener('click', updater.forceLoad);
+				$q('.de-thread-updater > .de-abtn').addEventListener('click', updater.forceLoad);
 			}
 		}
 	}
@@ -21979,18 +22644,19 @@ true, true];
 			return;
 		}
 		setTimeout(function () {
-			var val = +sesStorage['de-scroll-' + aib.b + aib.t];
+			var id = 'de-scroll-' + aib.b + aib.t;
+			var val = +sesStorage[id];
 			if (val) {
 				scrollTo(0, val);
-				sesStorage.removeItem('de-scroll-' + aib.b + aib.t);
-			} else {
-				var post = void 0,
-				    num = void 0;
-				var hash = window.location.hash;
+				sesStorage.removeItem(id);
+				return;
+			}
+			var post = void 0,
+			    num = void 0;
+			var hash = window.location.hash;
 
-				if (hash && (num = hash.match(/#[ip]?(\d+)$/)) && (num = +num[1]) && (post = pByNum.get(num)) && !post.isOp) {
-					post.selectAndScrollTo();
-				}
+			if (hash && (num = hash.match(/#[ip]?(\d+)$/)) && (num = +num[1]) && (post = pByNum.get(num)) && !post.isOp) {
+				post.selectAndScrollTo();
 			}
 		}, 0);
 	}
@@ -21998,7 +22664,7 @@ true, true];
 
 
 	function addSVGIcons() {
-		docBody.insertAdjacentHTML('beforeend', '\n\t<div id="de-svg-icons" style="height: 0; width: 0; position: fixed;">\n\t<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n\t<defs>\n\t\t<linearGradient id="de-btn-back-gradient" x1="50%" y1="0%" y2="100%" x2="50%">\n\t\t\t<stop offset="0%" stop-color="#A0A0A0"/>\n\t\t\t<stop offset="50%" stop-color="#505050"/>\n\t\t\t<stop offset="100%" stop-color="#A0A0A0"/>\n\t\t</linearGradient>\n\t</defs>\n\n\t<!-- POST ICONS -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-back">\n\t\t<path class="de-post-btns-back" d="M4 1q-3 0,-3 3v8q0 3,3 3h8q3 0,3 -3v-8q0 -3,-3-3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-hide">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<line class="de-svg-stroke" stroke-width="2.5" x1="4.5" y1="11.5" x2="11.5" y2="4.5"/>\n\t\t<line class="de-svg-stroke" stroke-width="2.5" x1="11.5" y1="11.5" x2="4.5" y2="4.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-unhide">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="8" y1="4" x2="8" y2="12"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="4" y1="8" x2="12" y2="8"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-rep">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M5 11c0 .8.6 1.2 1.3.7l5-3c.6-.4.6-1 0-1.5l-5-3C5.6 4 5 4.3 5 5v6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-expthr">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M4.5 6L8 3l3.5 3H9.25v4h2.25L8 13 4.5 10h2.25V6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-fav">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M8 3l1.5 3 3.5.5-2.5 2.2 1 3.8-3.5-2-3.5 2 1-3.8L3 6.5 6.5 6 8 3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-stick">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M5 5h6v6H5z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-sage">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M4 9h8l-4 4.5zM6 3h4v1h-4zM6 5h4v1h-4zM6 7h4v1h-4z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-src">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<circle class="de-svg-stroke" cx="7" cy="7" r="2.5" stroke-width="2"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="9" y1="9" x2="12" y2="12"/>\n\t</symbol>\n\n\t<!-- WINDOW ICONS -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-win-arrow">\n\t\t<path class="de-svg-stroke" stroke-width="3.5" d="M8 13V6"/>\n\t\t<path class="de-svg-fill"  d="M3.5 7h9L8 2.5 3.5 7z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-win-close">\n\t\t<path class="de-svg-stroke" stroke-width="2.5" d="M3.5 3.5l9 9m-9 0l9-9"/>\n\t</symbol>\n\n\t<!-- NAVIGATION PANEL ICONS -->\n\t<symbol viewBox="0 0 7 7" id="de-symbol-nav-arrow">\n\t\t<path class="de-svg-fill" d="M6 3.5L2 0v7z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 24 24" id="de-symbol-nav-up">\n\t\t<path class="de-svg-stroke" stroke-width="3" stroke-miterlimit="10" d="M3 22.5l9-9 9 9M3 13.5l9-9 9 9"/>\n\t</symbol>\n\t<symbol viewBox="0 0 24 24" id="de-symbol-nav-down">\n\t\t<path class="de-svg-stroke" stroke-width="3" stroke-miterlimit="10" d="M3 11.5l9 9 9-9M3 2.5l9 9 9-9"/>\n\t</symbol>\n\n\t<!-- MAIN PANEL -->\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-logo">\n\t\t<path class="de-svg-fill" d="M22 5h-10v16h4v-14h6z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M22 20.5H12c-2.8 0-5.7 0-5.7-4s2.8-4 5.7-4H21"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-cfg">\n\t\t<circle class="de-svg-stroke" stroke-width="3" cx="12.5" cy="12.5" r="6"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 6.5v-3M18.5 12.5h3M12.5 18.5v3M6.5 12.5h-3M16.7 8.3L19 6M16.7 16.7L19 19M8.3 16.7L6 19M8.3 8.3L6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-hid">\n\t\t<path class="de-svg-stroke" stroke-width="4" d="M6 19L19 6M6 6l13 13"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-fav">\n\t\t<path class="de-svg-fill" d="M12.5 3.5l2.5 6 6.5.5-5 4.2 2 6.8-6-4-6 4 2-6.8-5-4.2 6.5-.5 2.5-6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-vid">\n\t\t<path class="de-svg-fill" d="M12.5 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm-1 13c-1.3 1-2.5.2-2.5-1.4V9.4C9 7.8 10.2 7 11.6 8l5.3 3c1.3.8 1.3 2.2 0 3l-5.4 3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-refresh">\n\t\t<path class="de-svg-fill" d="M14 4v4.3a4.5 4.5 0 1 1-3 0V4a8.5 8.5 0 1 0 3 0z"/>\n\t\t<path class="de-svg-fill" d="M13 11V4h7"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-arrow">\n\t\t<path class="de-svg-stroke" stroke-width="5" d="M4 12.5h12"/>\n\t\t<path class="de-svg-fill" d="M14 19V6l7 6.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-expimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M8 12.5h9"/>\n\t\t<path class="de-svg-fill" d="M10 8v9l-5-4.5M15 17V8l5 4.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-maskimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" d="M5 20L20 5M5 15.5L15.5 5M5 11l6-6M20 9.5L9.5 20M20 14l-6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-preimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 17V9"/>\n\t\t<path class="de-svg-fill" d="M8 15h9l-4.5 5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-savethr">\n\t\t<path class="de-svg-fill" d="M18 4h-1v6H8V4H6C5 4 4 5 4 6v13c0 1 1 2 2 2h13c1 0 2-1 2-2V7l-3-3zM6 20v-8h13v8H6z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M13.5 9V4"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-upd">\n\t\t<circle cx="12.5" cy="10.8" r="4"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" stroke-linejoin="round" d="M4.5 12q8-10,16 0q-8 10,-16 0z"/>\n\t\t<path class="de-svg-stroke" d="M11 7L9.8 5M14 7l1.2-2M11 17l-1.2 2m4.2-2l1.2 2M7 8.5L5.3 6.8M7 15.5l-1.7 1.7M18 8.5l1.7-1.7M18 15.5l1.7 1.7"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-audio-off">\n\t\t<path class="de-svg-fill" d="M13 21V4L8 9H4v7h4l5 5z"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M15 9.5l6 6m0-6l-6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-audio-on">\n\t\t<path class="de-svg-fill" d="M13 21V4L8 9H4v7h4z"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M15.5 7.5c1.7 3.3 1.7 6.7 0 10m3-12.5c3 5 3 10 0 15"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-catalog">\n\t\t<path class="de-svg-fill" d="M5 5h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zM9 5h3v3H9zM5 9h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zM9 9h3v3H9zm-4 4h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zm-4 0h3v3H9zm-4 4h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zm-4 0h3v3H9z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-enable">\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 4v8"/>\n\t\t<path class="de-svg-fill" d="M16 4.8v4a5 5 0 0 1-3.5 8.7A5 5 0 0 1 9 9V4.7a8.5 8.5 0 1 0 7 0z"/>\n\t</symbol>\n\n\t<!-- MARKUP BUTTONS -->\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-back">\n\t\t<path class="de-markup-back" stroke-width="2" d="M6 1q-5 0,-5 5v10q0 5,5 5h11q5 0,5 -5v-10q0 -5,-5-5z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-bold">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="5.5" y="17" style="font-family: sans-serif; font-size: 17px; font-weight: 800;">B</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-italic">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="8" y="17" style="font-family: sans-serif; font-size: 17px; font-weight: 600; font-style: italic;">i</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-under">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="6" y="15" width="20" style="font-family: sans-serif; font-size: 17px; font-weight: 600;">u</text>\n\t\t<path stroke="#444" stroke-width="1.5" d="M6 17H17.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-strike">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="17" style="font-family: sans-serif; font-size: 22px; font-weight: 600; font-style: italic;">s</text>\n\t\t<path stroke="#444" d="M4 11H19"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-spoil">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<path stroke="#666" stroke-width="10" d="M4 11H19"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-code">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="5" y="17" style="font-family: \'Lucida Console\', monospace; font-size: 18px; font-weight: 600;">C</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-sup">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="15" style="font-family: sans-serif; font-size: 16px; font-weight: 600;">x</text>\n\t\t<text x="14" y="10" style="font-family: sans-serif; font-size: 8px; font-weight: 600;">2</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-sub">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="15" style="font-family: sans-serif; font-size: 16px; font-weight: 600;">x</text>\n\t\t<text x="14" y="17" style="font-family: sans-serif; font-size: 8px; font-weight: 600;">2</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-quote">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="6" y="18" style="font-family: sans-serif; font-size: 20px; font-weight: 600;">&gt;</text>\n\t</symbol>\n\n\t<!-- OTHER -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-wait">\n\t\t<circle fill="#929087" cx="8" cy="2" r="2"/>\n\t\t<circle fill="#C5C2BA" cx="8" cy="14" r="2"/>\n\t\t<circle fill="#ACAAA0" cx="2" cy="8" r="2"/>\n\t\t<circle fill="#79766C" cx="14" cy="8" r="2"/>\n\t\t<circle fill="#D2CFC6" cx="12.25" cy="12.25" r="2"/>\n\t\t<circle fill="#9F9C93" cx="3.75" cy="3.75" r="2"/>\n\t\t<circle fill="#B9B6AE" cx="3.75" cy="12.25" r="2"/>\n\t\t<circle fill="#868379" cx="12.25" cy="3.75" r="2"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-closed">\n\t\t<image display="inline" width="16" height="16" xlink:href="data:image/gif;base64,R0lGODlhEAAQAKIAAP3rqPPOd+y6V+WmN+Dg4M7OzmZmZv///yH5BAEAAAcALAAAAAAQABAAAANCeLrWvZARUqqJkjiLj9FMcWHf6IldGZqM4zqRAcw0zXpAoO/6LfeNnS8XcAhjAIHSoFwim0wockCtUodWq+/1UiQAADs="/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-unavail">\n\t\t<circle class="de-svg-stroke" fill="none" stroke-width="2" cx="8" cy="8" r="5"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M4 4l8 8"/>\n\t</symbol>\n\t</svg>\n\t</div>');
+		docBody.insertAdjacentHTML('beforeend', '\n\t<div id="de-svg-icons" style="height: 0; width: 0; position: fixed;">\n\t<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n\t<defs>\n\t\t<linearGradient id="de-btn-back-gradient" x1="50%" y1="0%" y2="100%" x2="50%">\n\t\t\t<stop offset="0%" stop-color="#A0A0A0"/>\n\t\t\t<stop offset="50%" stop-color="#505050"/>\n\t\t\t<stop offset="100%" stop-color="#A0A0A0"/>\n\t\t</linearGradient>\n\t</defs>\n\n\t<!-- POST ICONS -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-back">\n\t\t<path class="de-post-btns-back" d="M4 1q-3 0,-3 3v8q0 3,3 3h8q3 0,3 -3v-8q0 -3,-3-3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-hide">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<line class="de-svg-stroke" stroke-width="2.5" x1="4.5" y1="11.5" x2="11.5" y2="4.5"/>\n\t\t<line class="de-svg-stroke" stroke-width="2.5" x1="11.5" y1="11.5" x2="4.5" y2="4.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-unhide">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="8" y1="4" x2="8" y2="12"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="4" y1="8" x2="12" y2="8"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-rep">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M5 11c0 .8.6 1.2 1.3.7l5-3c.6-.4.6-1 0-1.5l-5-3C5.6 4 5 4.3 5 5v6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-expthr">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M4.5 6L8 3l3.5 3H9.25v4h2.25L8 13 4.5 10h2.25V6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-fav">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M8 3l1.5 3 3.5.5-2.5 2.2 1 3.8-3.5-2-3.5 2 1-3.8L3 6.5 6.5 6 8 3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-stick">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M5 5h6v6H5z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-sage">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<path class="de-svg-fill" d="M4 9h8l-4 4.5zM6 3h4v1h-4zM6 5h4v1h-4zM6 7h4v1h-4z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-post-src">\n\t\t<use class="de-post-btns-back" xlink:href="#de-symbol-post-back"/>\n\t\t<circle class="de-svg-stroke" cx="7" cy="7" r="2.5" stroke-width="2"/>\n\t\t<line class="de-svg-stroke" stroke-width="2" x1="9" y1="9" x2="12" y2="12"/>\n\t</symbol>\n\n\t<!-- WINDOW ICONS -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-win-arrow">\n\t\t<path class="de-svg-stroke" stroke-width="3.5" d="M8 13V6"/>\n\t\t<path class="de-svg-fill"  d="M3.5 7h9L8 2.5 3.5 7z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-win-close">\n\t\t<path class="de-svg-stroke" stroke-width="2.5" d="M3.5 3.5l9 9m-9 0l9-9"/>\n\t</symbol>\n\n\t<!-- THREAD NAVIGATION ICONS -->\n\t<symbol viewBox="0 0 7 7" id="de-symbol-thr-nav-arrow">\n\t\t<path class="de-svg-fill" d="M6 3.5L2 0v7z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 24 24" id="de-symbol-thr-nav-up">\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M3 22.5l9-9 9 9M3 13.5l9-9 9 9"/>\n\t</symbol>\n\t<symbol viewBox="0 0 24 24" id="de-symbol-thr-nav-down">\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M3 11.5l9 9 9-9M3 2.5l9 9 9-9"/>\n\t</symbol>\n\n\t<!-- IMAGE BUTTON ICONS -->\n\t<symbol viewBox="0 0 32 32" id="de-symbol-img-btn-arrow">\n\t\t<path class="de-svg-stroke" stroke-width="8" d="M0 16h20"/>\n\t\t<path class="de-svg-stroke" stroke-width="9" d="M13 3l16 16M13 29l16-16"/>\n\t</symbol>\n\t<symbol viewBox="0 0 32 32" id="de-symbol-img-btn-circle-arrow">\n\t\t<path class="de-svg-fill" d="m31 20c-0.6 4.5-3.7 8.6-8 10.5-2 1.25-5 1.6-7.7 1.5l-1.7-0.15c-2.5-0.6-5-1.7-7-3.5-4.3-3.6-6-10-4-15 1.6-4.55 6-8.1 11-9 1.2-0.25 2.45-0.3 3.7-0.25l0.6-4.1h0.1c2.1 2.7 4.15 5.34 6.3 8-2.8 2-5.6 4.1-8.4 6 0.2-1.4 0.4-2.7 0.56-4.1-2.5-0.025-5.1 1.1-6.6 3.1-2.5 2.75-2.5 7.1-0.13 10 1.8 2.5 5.25 3.6 8.4 3 2.156-0.3 4.1-1.6 5.3-3.4 0.8-1 1.1-2.25 1.5-3.4 2 0.25 3.9592 0.5 7 0.8l0.1-0.05z"></path>\n\t</symbol>\n\t<symbol viewBox="0 0 32 32" id="de-symbol-img-btn-auto">\n\t\t<path class="de-svg-fill" d="M13.2 26.6c-3.1 2.4-5.9.5-5.9-3.3V8.7c0-3.8 2.8-5.6 6.1-3.3l12.5 7.1c3.1 1.9 3.1 5.2 0 7.1 0-.1-12.7 7-12.7 7z"/>\n\t</symbol>\n\n\t<!-- MAIN PANEL -->\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-logo">\n\t\t<path class="de-svg-fill" d="M22 5h-10v16h4v-14h6z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M22 20.5H12c-2.8 0-5.7 0-5.7-4s2.8-4 5.7-4H21"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-cfg">\n\t\t<circle class="de-svg-stroke" stroke-width="3" cx="12.5" cy="12.5" r="6"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 6.5v-3M18.5 12.5h3M12.5 18.5v3M6.5 12.5h-3M16.7 8.3L19 6M16.7 16.7L19 19M8.3 16.7L6 19M8.3 8.3L6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-hid">\n\t\t<path class="de-svg-stroke" stroke-width="4" d="M6 19L19 6M6 6l13 13"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-fav">\n\t\t<path class="de-svg-fill" d="M12.5 3.5l2.5 6 6.5.5-5 4.2 2 6.8-6-4-6 4 2-6.8-5-4.2 6.5-.5 2.5-6z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-vid">\n\t\t<path class="de-svg-fill" d="M12.5 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm-1 13c-1.3 1-2.5.2-2.5-1.4V9.4C9 7.8 10.2 7 11.6 8l5.3 3c1.3.8 1.3 2.2 0 3l-5.4 3z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-refresh">\n\t\t<path class="de-svg-fill" d="M14 4v4.3a4.5 4.5 0 1 1-3 0V4a8.5 8.5 0 1 0 3 0z"/>\n\t\t<path class="de-svg-fill" d="M13 11V4h7"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-arrow">\n\t\t<path class="de-svg-stroke" stroke-width="5" d="M4 12.5h12"/>\n\t\t<path class="de-svg-fill" d="M14 19V6l7 6.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-expimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M8 12.5h9"/>\n\t\t<path class="de-svg-fill" d="M10 8v9l-5-4.5M15 17V8l5 4.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-maskimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" d="M5 20L20 5M5 15.5L15.5 5M5 11l6-6M20 9.5L9.5 20M20 14l-6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-preimg">\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M20 18c0 1-1 2-2 2H7c-1 0-2-1-2-2V7c0-1 1-2 2-2h11c1 0 2 1 2 2v11z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 17V9"/>\n\t\t<path class="de-svg-fill" d="M8 15h9l-4.5 5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-savethr">\n\t\t<path class="de-svg-fill" d="M18 4h-1v6H8V4H6C5 4 4 5 4 6v13c0 1 1 2 2 2h13c1 0 2-1 2-2V7l-3-3zM6 20v-8h13v8H6z"/>\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M13.5 9V4"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-upd">\n\t\t<circle cx="12.5" cy="10.8" r="4"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" stroke-linejoin="round" d="M4.5 12q8-10,16 0q-8 10,-16 0z"/>\n\t\t<path class="de-svg-stroke" d="M11 7L9.8 5M14 7l1.2-2M11 17l-1.2 2m4.2-2l1.2 2M7 8.5L5.3 6.8M7 15.5l-1.7 1.7M18 8.5l1.7-1.7M18 15.5l1.7 1.7"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-audio-off">\n\t\t<path class="de-svg-fill" d="M13 21V4L8 9H4v7h4l5 5z"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M15 9.5l6 6m0-6l-6 6"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-audio-on">\n\t\t<path class="de-svg-fill" d="M13 21V4L8 9H4v7h4z"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M15.5 7.5c1.7 3.3 1.7 6.7 0 10m3-12.5c3 5 3 10 0 15"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-catalog">\n\t\t<path class="de-svg-fill" d="M5 5h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zM9 5h3v3H9zM5 9h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zM9 9h3v3H9zm-4 4h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zm-4 0h3v3H9zm-4 4h3v3H5zm12 0h3v3h-3zm-4 0h3v3h-3zm-4 0h3v3H9z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 25 25" id="de-symbol-panel-enable">\n\t\t<path class="de-svg-stroke" stroke-width="3" d="M12.5 4v8"/>\n\t\t<path class="de-svg-fill" d="M16 4.8v4a5 5 0 0 1-3.5 8.7A5 5 0 0 1 9 9V4.7a8.5 8.5 0 1 0 7 0z"/>\n\t</symbol>\n\n\t<!-- MARKUP BUTTONS -->\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-back">\n\t\t<path class="de-markup-back" stroke-width="2" d="M6 1q-5 0,-5 5v10q0 5,5 5h11q5 0,5 -5v-10q0 -5,-5-5z"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-bold">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="5.5" y="17" style="font-family: sans-serif; font-size: 17px; font-weight: 800;">B</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-italic">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="8" y="17" style="font-family: sans-serif; font-size: 17px; font-weight: 600; font-style: italic;">i</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-under">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="6" y="15" width="20" style="font-family: sans-serif; font-size: 17px; font-weight: 600;">u</text>\n\t\t<path stroke="#444" stroke-width="1.5" d="M6 17H17.5"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-strike">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="17" style="font-family: sans-serif; font-size: 22px; font-weight: 600; font-style: italic;">s</text>\n\t\t<path stroke="#444" d="M4 11H19"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-spoil">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<path stroke="#666" stroke-width="10" d="M4 11H19"/>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-code">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="5" y="17" style="font-family: \'Lucida Console\', monospace; font-size: 18px; font-weight: 600;">C</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-sup">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="15" style="font-family: sans-serif; font-size: 16px; font-weight: 600;">x</text>\n\t\t<text x="14" y="10" style="font-family: sans-serif; font-size: 8px; font-weight: 600;">2</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-sub">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="4" y="15" style="font-family: sans-serif; font-size: 16px; font-weight: 600;">x</text>\n\t\t<text x="14" y="17" style="font-family: sans-serif; font-size: 8px; font-weight: 600;">2</text>\n\t</symbol>\n\t<symbol viewBox="0 0 23 22" id="de-symbol-markup-quote">\n\t\t<use xlink:href="#de-symbol-markup-back"/>\n\t\t<text x="6" y="18" style="font-family: sans-serif; font-size: 20px; font-weight: 600;">&gt;</text>\n\t</symbol>\n\n\t<!-- OTHER -->\n\t<symbol viewBox="0 0 16 16" id="de-symbol-wait">\n\t\t<circle fill="#929087" cx="8" cy="2" r="2"/>\n\t\t<circle fill="#C5C2BA" cx="8" cy="14" r="2"/>\n\t\t<circle fill="#ACAAA0" cx="2" cy="8" r="2"/>\n\t\t<circle fill="#79766C" cx="14" cy="8" r="2"/>\n\t\t<circle fill="#D2CFC6" cx="12.25" cy="12.25" r="2"/>\n\t\t<circle fill="#9F9C93" cx="3.75" cy="3.75" r="2"/>\n\t\t<circle fill="#B9B6AE" cx="3.75" cy="12.25" r="2"/>\n\t\t<circle fill="#868379" cx="12.25" cy="3.75" r="2"/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-closed">\n\t\t<image display="inline" width="16" height="16" xlink:href="data:image/gif;base64,R0lGODlhEAAQAKIAAP3rqPPOd+y6V+WmN+Dg4M7OzmZmZv///yH5BAEAAAcALAAAAAAQABAAAANCeLrWvZARUqqJkjiLj9FMcWHf6IldGZqM4zqRAcw0zXpAoO/6LfeNnS8XcAhjAIHSoFwim0wockCtUodWq+/1UiQAADs="/>\n\t</symbol>\n\t<symbol viewBox="0 0 16 16" id="de-symbol-unavail">\n\t\t<circle class="de-svg-stroke" fill="none" stroke-width="2" cx="8" cy="8" r="5"/>\n\t\t<path class="de-svg-stroke" stroke-width="2" d="M4 4l8 8"/>\n\t</symbol>\n\t</svg>\n\t</div>');
 	}
 
 
@@ -22006,91 +22672,39 @@ true, true];
 
 	function scriptCSS() {
 		var cont = function cont(id, src) {
-			return id + ('::before { content: ""; display: inline-block; vertical-align: -3px; padding: 16px 16px 0 0; margin-right: 4px; background: url(' + src + ') no-repeat center; background-size: contain; }');
+			return id + '::before { content: ""; display: inline-block; vertical-align: -3px; padding: 16px 16px 0 0; margin-right: 4px; background: url(' + src + ') no-repeat center; background-size: contain; }';
 		};
 		var gif = function gif(id, src) {
-			return id + (' { background-image: url(data:image/gif;base64,' + src + '); background-repeat: no-repeat; background-position: center; }');
+			return id + ' { background-image: url(data:image/gif;base64,' + src + '); background-repeat: no-repeat; background-position: center; }';
 		};
 
-		var p = void 0,
-		    x = '#de-panel { position: fixed; right: 0; bottom: 0; z-index: 9999; border-radius: 15px 0 0 0; cursor: default; display: flex; min-height: 25px; color: #F5F5F5; }\n\t#de-panel-logo { flex: none; margin: auto 3px auto 0; cursor: pointer; }\n\t#de-panel-buttons { flex: 0 1 auto; display: flex; flex-flow: row wrap; align-items: center; padding: 0 0 0 2px; margin: 0; border-left: 1px solid #616b86; }\n\t.de-panel-button { display: block; flex: none; margin: 0 1px; padding: 0; transition: all .3s ease; }\n\ta.de-panel-button, a.de-panel-button:hover { color: inherit !important; }\n\t.de-panel-svg, #de-panel-logo, .de-panel-logo-svg, .de-panel-button { width: 25px; height: 25px; }\n\t#de-panel-goback { transform: rotate(180deg); will-change: transform; }\n\t#de-panel-godown { transform: rotate(90deg); will-change: transform; }\n\t#de-panel-goup { transform: rotate(-90deg); will-change: transform; }\n\t#de-panel-upd-on { fill: #32ff32; }\n\t#de-panel-upd-warn { fill: #fff441; }\n\t#de-panel-upd-off { fill: #ff3232; }\n\t#de-panel-audio-on > .de-panel-svg > .de-use-audio-off, #de-panel-audio-off > .de-panel-svg > .de-use-audio-on { display: none; }\n\t#de-panel-info { display: flex; flex: none; padding: 0 6px; margin-left: 2px; border-left: 1px solid #616b86; font: 18px serif; }\n\t#de-panel-info-icount::before, #de-panel-info-acount:not(:empty)::before { content: "/"; }\n\t.de-svg-stroke { stroke: currentColor; fill: none; }\n\t.de-svg-fill { stroke: none; fill: currentColor; }\n\tuse { fill: inherit; pointer-events: none; }';
-
-		switch (Cfg.scriptStyle) {
-			case 0:
-				x += '#de-panel, .de-win-head { background: linear-gradient(to bottom, #7b849b, #616b86 8%, #3a414f 52%, rgba(0,0,0,0) 52%), linear-gradient(to bottom, rgba(0,0,0,0) 48%, #121212 52%, #1f2740 100%); }';
-				break;
-			case 1:
-				x += '#de-panel, .de-win-head { background: linear-gradient(to bottom, #4b90df, #3d77be 20%, #376cb0 28%, #295591 52%, rgba(0,0,0,0) 52%), linear-gradient(to bottom, rgba(0,0,0,0) 48%, #183d77 52%, #1f4485 72%, #264c90 80%, #325f9e 100%); }\n\t\t\t#de-panel-buttons, #de-panel-info { border-color: #8fbbed; }';
-				break;
-			case 2:
-				x += '#de-panel, .de-win-head { background-color: #777; }\n\t\t\t#de-panel-buttons, #de-panel-info { border-color: #ccc; }\n\t\t\t.de-panel-svg:hover { border: 2px solid #444; border-radius: 5px; box-sizing: border-box; transition: none; }';
-				break;
-			case 3:
-				x += '#de-panel, .de-win-head { background-color: rgba(0,20,80,.72); }';
-				break;
-			case 4:
-				x += '#de-panel, .de-win-head { background: none; background-color: #333; border-radius: 0 !important; }\n\t\t\t#de-win-reply.de-win { border-radius: 0 !important; }\n\t\t\t#de-panel-buttons, #de-panel-info { border-color: #666; }';
-		}
-		if (Cfg.scriptStyle === 2) {
-			x += '.de-panel-svg:hover { border: 2px solid #444; border-radius: 5px; box-sizing: border-box; transition: none; }';
-		} else {
-			x += '.de-panel-button:hover { background-color: rgba(255,255,255,.15); box-shadow: 0 0 3px rgba(143,187,237,.5); }';
-		}
+		var x = '\n\t/* Main panel */\n\t#de-panel { position: fixed; right: 0; bottom: 0; z-index: 9999; border-radius: 15px 0 0 0; cursor: default; display: flex; min-height: 25px; color: #F5F5F5; }\n\t#de-panel-logo { flex: none; margin: auto 3px auto 0; cursor: pointer; }\n\t#de-panel-buttons { flex: 0 1 auto; display: flex; flex-flow: row wrap; align-items: center; padding: 0 0 0 2px; margin: 0; border-left: 1px solid #616b86; }\n\t.de-panel-button { display: block; flex: none; margin: 0 1px; padding: 0; transition: all .3s ease; }\n\ta.de-panel-button, a.de-panel-button:hover { color: inherit !important; }\n\t.de-panel-svg, #de-panel-logo, .de-panel-logo-svg, .de-panel-button { width: 25px; height: 25px; }\n\t#de-panel-goback { transform: rotate(180deg); will-change: transform; }\n\t#de-panel-godown { transform: rotate(90deg); will-change: transform; }\n\t#de-panel-goup { transform: rotate(-90deg); will-change: transform; }\n\t#de-panel-upd-on { fill: #32ff32; }\n\t#de-panel-upd-warn { fill: #fff441; }\n\t#de-panel-upd-off { fill: #ff3232; }\n\t#de-panel-audio-on > .de-panel-svg > .de-use-audio-off, #de-panel-audio-off > .de-panel-svg > .de-use-audio-on { display: none; }\n\t#de-panel-info { display: flex; flex: none; padding: 0 6px; margin-left: 2px; border-left: 1px solid #616b86; font: 18px serif; }\n\t#de-panel-info-icount::before, #de-panel-info-acount:not(:empty)::before { content: "/"; }\n\t.de-svg-fill { stroke: none; fill: currentColor; }\n\t.de-svg-stroke { stroke: currentColor; fill: none; }\n\tuse { fill: inherit; pointer-events: none; }\n\n\t/* Panel theme */\n\t' + [
+		'.de-img-btn, #de-panel, .de-win-head { background: linear-gradient(to bottom, #7b849b, #616b86 8%, #3a414f 52%, rgba(0,0,0,0) 52%), linear-gradient(to bottom, rgba(0,0,0,0) 48%, #121212 52%, #1f2740 100%); }',
+		'.de-img-btn, #de-panel, .de-win-head { background: linear-gradient(to bottom, #4b90df, #3d77be 20%, #376cb0 28%, #295591 52%, rgba(0,0,0,0) 52%), linear-gradient(to bottom, rgba(0,0,0,0) 48%, #183d77 52%, #1f4485 72%, #264c90 80%, #325f9e 100%); }\n\t\t#de-panel-buttons, #de-panel-info { border-color: #8fbbed; }',
+		'.de-img-btn, #de-panel, .de-win-head { background-color: #777; }\n\t\t#de-panel-buttons, #de-panel-info { border-color: #ccc; }\n\t\t.de-panel-svg:hover { border: 2px solid #444; border-radius: 5px; box-sizing: border-box; transition: none; }',
+		'.de-img-btn, #de-panel, .de-win-head { background-color: rgba(0,20,80,.72); }',
+		'.de-img-btn, #de-panel, .de-win-head { background: none; background-color: #333; border-radius: 0 !important; }\n\t\t#de-win-reply.de-win { border-radius: 0 !important; }\n\t\t#de-panel-buttons, #de-panel-info { border-color: #666; }'][Cfg.scriptStyle] + '\n\t' + (Cfg.scriptStyle === 2 ? '.de-panel-svg:hover { border: 2px solid #444; border-radius: 5px; box-sizing: border-box; transition: none; }' : '.de-panel-button:hover { background-color: rgba(255,255,255,.15); box-shadow: 0 0 3px rgba(143,187,237,.5); }') + '\r\n';
 
 		if (Cfg.disabled) {
 			$css(x).id = 'de-css';
 			return;
 		}
 
-		x += '.de-win .de-btn-toggle { transform: rotate(180deg); }\n\t.de-resizer { position: absolute; }\n\t.de-resizer-bottom { height: 6px; bottom: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-resizer-left { width: 6px; top: 0px; bottom: 0px; left: -3px; cursor: ew-resize; }\n\t.de-resizer-right { width: 6px; top: 0px; bottom: 0px; right: -3px; cursor: ew-resize; }\n\t.de-resizer-top { height: 6px; top: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-win > .de-win-head { cursor: move; }\n\t.de-win-buttons { position: absolute; right: 0; margin: 0 2px 0 0; font-size: 0; cursor: pointer; }\n\t.de-win-buttons > svg { transition: background .3s ease, box-shadow .3s ease; }\n\t.de-win-buttons > svg:hover { background-color: rgba(255,255,255,.2); box-shadow: 0 0 2px rgba(255,255,255,.4); }\n\t.de-win-inpost > .de-win-head > .de-win-buttons > svg:hover { background-color: rgba(64,64,64,.15); box-shadow: 0 0 2px rgba(64,64,64,.3); }\n\t#de-win-cfg { width: 355px; }\n\t#de-win-cfg, #de-win-fav, #de-win-hid, #de-win-vid { position: fixed; max-height: 92%; overflow-x: hidden; overflow-y: auto; }\n\t#de-win-cfg > .de-win-body { float: none; display: block; width: auto; min-width: 0; max-width: 100% !important; padding: 0; margin: 0 !important; border: none; }\n\t#de-win-fav > .de-win-body, #de-win-hid > .de-win-body, #de-win-vid > .de-win-body { padding: 9px; border: 1px solid gray; }\n\t#de-win-hid { max-width: 60%; }\n\t#de-win-vid > .de-win-body { display: flex; flex-direction: column; align-items: center; }\n\t#de-win-vid .de-entry { white-space: normal; }\n\t.de-win-head { position: relative; padding: 2px; border-radius: 10px 10px 0 0; color: #F5F5F5; font: bold 14px/16px arial; text-align: center; cursor: default; }' + (
-
-		'.de-block { display: block; }\n\t#de-btn-spell-add { margin-left: auto; }\n\t#de-cfg-bar { display: flex; margin: 0; padding: 0; }\n\t.de-cfg-body { min-height: 328px; padding: 9px 7px 7px; margin-top: -1px; font: 13px/15px arial !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-cfg-body, #de-cfg-buttons { border: 1px solid #183d77; border-top: none; }\n\t.de-cfg-button { padding: 0 ' + (nav.isFirefox ? '2' : '4') + 'px !important; margin: 0 4px; height: 21px; font: 12px arial !important; }\n\t#de-cfg-buttons { display: flex; align-items: center; padding: 3px; }\n\t#de-cfg-buttons > label { flex: 1 0 auto; }\n\t.de-cfg-chkbox { ' + (nav.isPresto ? '' : 'vertical-align: -1px !important; ') + 'margin: 2px 1px !important; }\n\t.de-cfg-depend { padding-left: 17px; }\n\t.de-cfg-inptxt { width: auto; padding: 0 2px !important; margin: 1px 4px 1px 0 !important; font: 13px arial !important; }\n\t.de-cfg-label { padding: 0; margin: 0; }\n\t.de-cfg-select { padding: 0 2px; margin: 1px 0; font: 13px arial !important; }\n\t.de-cfg-tab { flex: 1 0 auto; display: block !important; margin: 0 !important; float: none !important; width: auto !important; min-width: 0 !important; padding: 4px 0 !important; box-shadow: none !important; border: 1px solid #444 !important; border-radius: 4px 4px 0 0 !important; opacity: 1; font: bold 12px arial; text-align: center; cursor: default; background-image: linear-gradient(to bottom, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab:hover { background-image: linear-gradient(to top, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab[selected], .de-cfg-tab[selected]:hover { background-image: none !important; border-bottom: none !important; }\n\t.de-cfg-tab::' + (nav.isFirefox ? '-moz-' : '') + 'selection { background: transparent; }\n\t.de-cfg-unvis { display: none; }\n\t#de-info-log, #de-info-stats { width: 100%; padding: 0px 7px; }\n\t#de-info-log { overflow-y: auto; border-left: 1px solid grey; }\n\t.de-info-name { flex: 1 0 auto; }\n\t.de-info-row { display: flex; }\n\t#de-info-table { display: flex; height: 267px; }\n\t.de-spell-btn { padding: 0 4px; }\n\t#de-spell-editor { display: flex; align-items: stretch; height: 235px; padding: 2px 0; }\n\t#de-spell-panel { display: flex; }\n\t#de-spell-txt { padding: 2px !important; margin: 0; width: 100%; min-width: 0; border: none !important; outline: none !important; font: 12px courier new; ' + (nav.isPresto ? '' : 'resize: none !important; ') + '}\n\t#de-spell-rowmeter { padding: 2px 3px 0 0; overflow: hidden; min-width: 2em; background-color: #616b86; text-align: right; color: #fff; font: 12px courier new; }');
-
-		switch (Cfg.scriptStyle) {
-			case 0:
-				x += '#de-cfg-bar { background-color: #1f2740; }\n\t\t\t.de-cfg-tab { border-color: #121421 !important; }';
-				break;
-			case 1:
-				x += '#de-cfg-bar { background-color: #325f9e; }\n\t\t\t.de-cfg-tab { border-color: #183d77 !important; }';
-				break;
-			case 2:
-				x += '#de-cfg-bar, #de-spell-rowmeter { background-color: #777; }\n\t\t\t.de-cfg-body, #de-cfg-buttons { border-color: #444; }';
-				break;
-			case 3:
-				x += '#de-cfg-bar { background-color: rgba(0,20,80,.72); }\n\t\t\t.de-cfg-tab { border-color: #001450 !important; }';
-				break;
-			case 4:
-				x += '#de-cfg-bar { background-color: #222; }\n\t\t\t.de-cfg-body, #de-cfg-buttons { border-color: #666; }';
-		}
-
-		x += '.de-post-btns { margin-left: 4px; }\n\t.de-post-btns-back { fill: inherit; stroke: none; }\n\t.de-post-note:not(:empty) { color: inherit; margin: 0 4px; vertical-align: 1px; font: italic bold 12px serif; }\n\t.de-thread-note { font-style: italic; }\n\t.de-btn-hide > .de-btn-unhide-use, .de-btn-unhide > .de-btn-hide-use, .de-btn-hide-user > .de-btn-unhide-use, .de-btn-unhide-user > .de-btn-hide-use { display: none; }\n\t.de-btn-clear, .de-btn-close, .de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user, .de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-sage, .de-btn-src, .de-btn-stick, .de-btn-stick-on, .de-btn-toggle { margin: 0 2px -3px 0 !important; cursor: pointer; width: 16px; height: 16px; }\n\t' + (!pr.form && !pr.oeForm ? '.de-btn-rep { display: none; }' : '') +
-
-		cont('.de-src-google', 'https://google.com/favicon.ico') + cont('.de-src-yandex', 'https://yandex.ru/favicon.ico') + cont('.de-src-tineye', 'https://tineye.com/favicon.ico') + cont('.de-src-saucenao', 'https://saucenao.com/favicon.ico') + cont('.de-src-iqdb', '//iqdb.org/favicon.ico') + cont('.de-src-whatanime', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAMAAADarb8dAAAAWlBMVEX////29fbT1NOOj44dGx0SEhIHCAfX2NfQ0NDBwcGztLOwsbA7Ozs4ODgeHh7/2Nf/1dTMsbGpkZGWZWRyRUQ8NTYoIyMZAAAAAAAGBASBaGeBZ2Z2XVtmTUw2fryxAAAAGHRSTlP+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v4W3wyUAAAAZElEQVQI152OSQ6AMBRCadU6zxN1uP81/Y2NSY0r2fBgA+BL/wrbWEcewEqrrHa5zpSuCJMC0IY0WiA1iJW4ikkPYCFeUlQKFASTKI8SyTc8s8sc/rBDvwbF1LVjUJzbftjv6xfbkBHGT8GSnQAAAABJRU5ErkJggg==') + (
-
-		'.de-post-counter::after, .de-post-counter-pview, .de-post-deleted::after { margin: 0 4px 0 2px; vertical-align: 1px;  font: bold 11px tahoma; cursor: default; }\n\t.de-post-counter::after { counter-increment: de-cnt 1; content: counter(de-cnt); color: #4f7942; }\n\t.de-post-counter-pview { color: #4f7942; }\n\t.de-post-deleted::after { content: "' + Lng.deleted[lang] + '"; color: #727579; }') +
-
-		'#de-txt-panel { display: block; font-weight: bold; cursor: pointer; }\n\t#de-txt-panel > div { display: inline-block; }\n\t#de-txt-panel > div > svg { width: 23px; height: 22px; margin: 0 2px; }\n\t.de-markup-back { fill: #f0f0f0; stroke: #808080; }';
+		x += '\n\t/* Windows */\n\t.de-win .de-btn-toggle { transform: rotate(180deg); }\n\t.de-resizer { position: absolute; }\n\t.de-resizer-bottom { height: 6px; bottom: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-resizer-left { width: 6px; top: 0px; bottom: 0px; left: -3px; cursor: ew-resize; }\n\t.de-resizer-right { width: 6px; top: 0px; bottom: 0px; right: -3px; cursor: ew-resize; }\n\t.de-resizer-top { height: 6px; top: -3px; left: 0; right: 0; cursor: ns-resize; }\n\t.de-win > .de-win-head { cursor: move; }\n\t.de-win-buttons { position: absolute; right: 0; margin: 0 2px 0 0; font-size: 0; cursor: pointer; }\n\t.de-win-buttons > svg { transition: background .3s ease, box-shadow .3s ease; }\n\t.de-win-buttons > svg:hover { background-color: rgba(255,255,255,.2); box-shadow: 0 0 2px rgba(255,255,255,.4); }\n\t.de-win-inpost > .de-win-head > .de-win-buttons > svg:hover { background-color: rgba(64,64,64,.15); box-shadow: 0 0 2px rgba(64,64,64,.3); }\n\t#de-win-cfg { width: 355px; }\n\t#de-win-cfg, #de-win-fav, #de-win-hid, #de-win-vid { position: fixed; max-height: 92%; overflow-x: hidden; overflow-y: auto; }\n\t#de-win-cfg > .de-win-body { float: none; display: block; width: auto; min-width: 0; max-width: 100% !important; padding: 0; margin: 0 !important; border: none; }\n\t#de-win-fav > .de-win-body, #de-win-hid > .de-win-body, #de-win-vid > .de-win-body { padding: 9px; border: 1px solid gray; }\n\t#de-win-hid { max-width: 60%; }\n\t#de-win-vid > .de-win-body { display: flex; flex-direction: column; align-items: center; }\n\t#de-win-vid .de-entry { white-space: normal; }\n\t.de-win-head { position: relative; padding: 2px; border-radius: 10px 10px 0 0; color: #F5F5F5; font: bold 14px/16px arial; text-align: center; cursor: default; }\n\n\t/* Settings window */\n\t.de-block { display: block; }\n\t#de-btn-spell-add { margin-left: auto; }\n\t#de-cfg-bar { display: flex; margin: 0; padding: 0; }\n\t.de-cfg-body { min-height: 328px; padding: 9px 7px 7px; margin-top: -1px; font: 13px/15px arial !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-cfg-body, #de-cfg-buttons { border: 1px solid #183d77; border-top: none; }\n\t.de-cfg-button { padding: 0 ' + (nav.isFirefox ? '2' : '4') + 'px !important; margin: 0 4px; height: 21px; font: 12px arial !important; }\n\t#de-cfg-buttons { display: flex; align-items: center; padding: 3px; }\n\t#de-cfg-buttons > label { flex: 1 0 auto; }\n\t.de-cfg-chkbox { ' + (nav.isPresto ? '' : 'vertical-align: -1px !important; ') + 'margin: 2px 1px !important; }\n\t.de-cfg-depend { padding-left: 17px; }\n\t#de-cfg-info { display: flex; flex-direction: column; }\n\t.de-cfg-inptxt { width: auto; padding: 0 2px !important; margin: 1px 4px 1px 0 !important; font: 13px arial !important; }\n\t.de-cfg-label { padding: 0; margin: 0; }\n\t.de-cfg-select { padding: 0 2px; margin: 1px 0; font: 13px arial !important; }\n\t.de-cfg-tab { flex: 1 0 auto; display: block !important; margin: 0 !important; float: none !important; width: auto !important; min-width: 0 !important; padding: 4px 0 !important; box-shadow: none !important; border: 1px solid #444 !important; border-radius: 4px 4px 0 0 !important; opacity: 1; font: bold 12px arial; text-align: center; cursor: default; background-image: linear-gradient(to bottom, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab:hover { background-image: linear-gradient(to top, rgba(132,132,132,.35) 0%, rgba(79,79,79,.35) 50%, rgba(40,40,40,.35) 50%, rgba(80,80,80,.35) 100%) !important; }\n\t.de-cfg-tab[selected], .de-cfg-tab[selected]:hover { background-image: none !important; border-bottom: none !important; }\n\t.de-cfg-tab::' + (nav.isFirefox ? '-moz-' : '') + 'selection { background: transparent; }\n\t.de-cfg-unvis { display: none !important; }\n\t#de-info-log, #de-info-stats { width: 100%; padding: 0px 7px; }\n\t#de-info-log { overflow-y: auto; border-left: 1px solid grey; }\n\t.de-info-name { flex: 1 0 auto; }\n\t.de-info-row { display: flex; }\n\t#de-info-table { display: flex; flex: 1 0 auto; }\n\t.de-spell-btn { padding: 0 4px; }\n\t#de-spell-editor { display: flex; align-items: stretch; height: 235px; padding: 2px 0; }\n\t#de-spell-panel { display: flex; }\n\t#de-spell-txt { padding: 2px !important; margin: 0; width: 100%; min-width: 0; border: none !important; outline: none !important; font: 12px courier new; ' + (nav.isPresto ? '' : 'resize: none !important; ') + '}\n\t#de-spell-rowmeter { padding: 2px 3px 0 0; overflow: hidden; min-width: 2em; background-color: #616b86; text-align: right; color: #fff; font: 12px courier new; }\n\n\t/* Settings window theme */\n\t' + [
+		'#de-cfg-bar { background-color: #1f2740; }\n\t\t.de-cfg-tab { border-color: #121421 !important; }',
+		'#de-cfg-bar { background-color: #325f9e; }\n\t\t.de-cfg-tab { border-color: #183d77 !important; }',
+		'#de-cfg-bar, #de-spell-rowmeter { background-color: #777; }\n\t\t.de-cfg-body, #de-cfg-buttons { border-color: #444; }',
+		'#de-cfg-bar { background-color: rgba(0,20,80,.72); }\n\t\t.de-cfg-tab { border-color: #001450 !important; }',
+		'#de-cfg-bar { background-color: #222; }\n\t\t.de-cfg-body, #de-cfg-buttons { border-color: #666; }'][Cfg.scriptStyle] + '\n\n\t/* Favorites window */\n\t.de-fav-del > #de-fav-buttons, #de-fav-delbuttons, .de-fav-header-switch, .de-fav-switch, .de-fav-inf-icon:not(.de-fav-closed):not(.de-fav-unavail):not(.de-fav-wait), .de-fav-closed > .de-fav-unavail-use, .de-fav-closed > .de-fav-wait-use, .de-fav-unavail > .de-fav-closed-use, .de-fav-unavail > .de-fav-wait-use, .de-fav-wait > .de-fav-closed-use, .de-fav-wait > .de-fav-unavail-use, .de-fav-entries-hide { display: none; }\n\t.de-fav-del > #de-fav-delbuttons { display: block !important; }\n\t.de-fav-del .de-fav-header-switch, .de-fav-del .de-fav-switch { display: block !important; margin: 2px 0 2px 4px !important; flex: none; }\n\t.de-fav-header { display: flex; margin-top: 0; margin-bottom: 0; padding: 1px 0; cursor: pointer; }\n\t.de-fav-header-btn { flex: 1 0 auto; font-size: 85%; color: inherit; text-align: right; opacity: 0.6; }\n\t.de-fav-header-link { margin-left: 4px; color: inherit; font-weight: bold; font-size: 14px; text-decoration: none; outline: none; }\n\t.de-fav-inf { flex: none; padding: 0 4px 0 10px; font: bold 14px serif; cursor: default; }\n\t.de-fav-inf-icon, .de-fav-inf-iwrap  { width: 16px; height: 16px; }\n\t.de-fav-inf-icon { margin-bottom: -3px; }\n\t.de-fav-inf-new { color: #424f79; }\n\t.de-fav-inf-new::after { content: " +"; }\n\t.de-fav-inf-old { color: #4f7942; }\n\t.de-fav-inf-you { padding: 0 4px; margin-right: 4px; border-radius: 3px; color: #fff; background-color: #424f79; opacity: 0.65; }\n\t.de-fav-entries { border-top: 1px solid rgba(80,80,80,.3); }\n\t.de-entry { display: flex !important; align-items: center; float: none !important; padding: 0 !important; margin: 2px 0 !important; border: none !important; font-size: 14px; overflow: hidden !important; white-space: nowrap; }\n\t.de-entry-title { flex: auto; padding-left: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n\t.de-fav-link { flex: none; margin-left: 4px; text-decoration: none; border: none; }\n\t.de-fav-table-unfold > .de-fold-block > .de-fav-entries { display: initial !important; }\n\t.de-fav-unavail { color: #cf4436; }\n\t.de-fold-block { border: 1px solid rgba(120,120,120,.8); border-radius: 2px; }\n\t.de-fold-block:not(:first-child) { border-top: none; }\n\n\t/* Post panel */\n\t.de-post-btns { margin-left: 4px; }\n\t.de-post-btns-back { fill: inherit; stroke: none; }\n\t.de-post-note:not(:empty) { color: inherit; margin: 0 4px; vertical-align: 1px; font: italic bold 12px serif; }\n\t.de-thread-note { font-style: italic; }\n\t.de-btn-hide > .de-btn-unhide-use, .de-btn-unhide > .de-btn-hide-use, .de-btn-hide-user > .de-btn-unhide-use, .de-btn-unhide-user > .de-btn-hide-use { display: none; }\n\t.de-btn-clear, .de-btn-close, .de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user, .de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-sage, .de-btn-src, .de-btn-stick, .de-btn-stick-on, .de-btn-toggle { margin: 0 2px -3px 0 !important; cursor: pointer; width: 16px; height: 16px; }' + (!pr.form && !pr.oeForm ? '.de-btn-rep { display: none; }' : '') + '\n\n\t/* Sauce buttons */\n\t' + cont('.de-src-google', 'https://google.com/favicon.ico') + '\n\t' + cont('.de-src-yandex', 'https://yandex.ru/favicon.ico') + '\n\t' + cont('.de-src-tineye', 'https://tineye.com/favicon.ico') + '\n\t' + cont('.de-src-saucenao', 'https://saucenao.com/favicon.ico') + '\n\t' + cont('.de-src-iqdb', '//iqdb.org/favicon.ico') + '\n\t' + cont('.de-src-whatanime', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAPCAMAAADarb8dAAAAWlBMVEX////29fbT1NOOj44dGx0SEhIHCAfX2NfQ0NDBwcGztLOwsbA7Ozs4ODgeHh7/2Nf/1dTMsbGpkZGWZWRyRUQ8NTYoIyMZAAAAAAAGBASBaGeBZ2Z2XVtmTUw2fryxAAAAGHRSTlP+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v4W3wyUAAAAZElEQVQI152OSQ6AMBRCadU6zxN1uP81/Y2NSY0r2fBgA+BL/wrbWEcewEqrrHa5zpSuCJMC0IY0WiA1iJW4ikkPYCFeUlQKFASTKI8SyTc8s8sc/rBDvwbF1LVjUJzbftjv6xfbkBHGT8GSnQAAAABJRU5ErkJggg==') + '\n\n\t/* Posts counter */\n\t.de-post-counter::after, .de-post-counter-pview, .de-post-deleted::after { margin: 0 4px 0 2px; vertical-align: 1px;  font: bold 11px tahoma; cursor: default; }\n\t.de-post-counter::after { counter-increment: de-cnt 1; content: counter(de-cnt); color: #4f7942; }\n\t.de-post-counter-pview { color: #4f7942; }\n\t.de-post-deleted::after { content: "' + Lng.deleted[lang] + '"; color: #727579; }\n\n\t/* Text markup buttons */\n\t#de-txt-panel { display: block; font-weight: bold; cursor: pointer; }\n\t#de-txt-panel > div { display: inline-block; }\n\t#de-txt-panel > div > svg { width: 23px; height: 22px; margin: 0 2px; }\n\t.de-markup-back { fill: #f0f0f0; stroke: #808080; }\r\n';
 
 		if ('animation' in docBody.style) {
-			x += '@keyframes de-open { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }\n\t\t@keyframes de-close { 0% { transform: translateY(0); } 100% { transform: translateY(-100%); } }\n\t\t@keyframes de-blink {\n\t\t\t0%, 100% { transform: translateX(0); }\n\t\t\t10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }\n\t\t\t20%, 40%, 60%, 80% { transform: translateX(10px); }\n\t\t}\n\t\t@keyframes de-post-open-tl { from { transform: translate(-50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-bl { from { transform: translate(-50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-tr { from { transform: translate(50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-br { from { transform: translate(50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-tl { to { transform: translate(-50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-bl { to { transform: translate(-50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-tr { to { transform: translate(50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-br { to { transform: translate(50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-new { from { transform: translate(0,-50%) scaleY(0); opacity: 0; } }\n\t\t@keyframes de-win-open { from { transform: translate(0,50%) scaleY(0); opacity: 0; } }\n\t\t@keyframes de-win-close { to { transform: translate(0,50%) scaleY(0); opacity: 0; } }\n\t\t.de-pview-anim { animation-duration: .2s; animation-timing-function: ease-in-out; animation-fill-mode: both; }\n\t\t.de-open { animation: de-open .15s ease-out both; }\n\t\t.de-close { animation: de-close .15s ease-in both; }\n\t\t.de-blink { animation: de-blink .7s ease-in-out both; }\n\t\t.de-post-new { animation: de-post-new .2s ease-out both; }\n\t\t.de-win-open { animation: de-win-open .2s ease-out backwards; }\n\t\t.de-win-close { animation: de-win-close .2s ease-in both; }';
+			x += '\n\t\t/* Show/hide animation */\n\t\t@keyframes de-open { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }\n\t\t@keyframes de-close { 0% { transform: translateY(0); } 100% { transform: translateY(-100%); } }\n\t\t@keyframes de-blink {\n\t\t\t0%, 100% { transform: translateX(0); }\n\t\t\t10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }\n\t\t\t20%, 40%, 60%, 80% { transform: translateX(10px); }\n\t\t}\n\t\t@keyframes de-post-open-tl { from { transform: translate(-50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-bl { from { transform: translate(-50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-tr { from { transform: translate(50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-open-br { from { transform: translate(50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-tl { to { transform: translate(-50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-bl { to { transform: translate(-50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-tr { to { transform: translate(50%,-50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-close-br { to { transform: translate(50%,50%) scale(0); opacity: 0; } }\n\t\t@keyframes de-post-new { from { transform: translate(0,-50%) scaleY(0); opacity: 0; } }\n\t\t@keyframes de-win-open { from { transform: translate(0,50%) scaleY(0); opacity: 0; } }\n\t\t@keyframes de-win-close { to { transform: translate(0,50%) scaleY(0); opacity: 0; } }\n\t\t.de-pview-anim { animation-duration: .2s; animation-timing-function: ease-in-out; animation-fill-mode: both; }\n\t\t.de-open { animation: de-open .15s ease-out both; }\n\t\t.de-close { animation: de-close .15s ease-in both; }\n\t\t.de-blink { animation: de-blink .7s ease-in-out both; }\n\t\t.de-post-new { animation: de-post-new .2s ease-out both; }\n\t\t.de-win-open { animation: de-win-open .2s ease-out backwards; }\n\t\t.de-win-close { animation: de-win-close .2s ease-in both; }\r\n';
 		} else {
 			Cfg.animation = 0;
 		}
 
-		p = Math.max(Cfg.minImgSize || 0, 50);
-		x += '.de-img-pre, .de-fullimg { display: block; border: none; outline: none; cursor: pointer; image-orientation: from-image; }\n\t.de-img-pre { max-width: 200px; max-height: 200px; }\n\t.de-fullimg-after { clear: left; }\n\t.de-fullimg-center { position: fixed; margin: 0 !important; z-index: 9999; background-color: #ccc; border: 1px solid black !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-fullimg-info { text-align: center; }\n\t.de-fullimg-load { position: absolute; z-index: 2; width: 50px; height: 50px; top: 50%; left: 50%; margin: -25px; }\n\t.de-fullimg-src { float: none !important; display: inline-block; padding: 2px 4px; margin: 2px 0 2px -1px; background: rgba(64,64,64,.8); font: bold 12px tahoma; color: #fff  !important; text-decoration: none; outline: none; }\n\t.de-fullimg-src:hover { color: #fff !important; background: rgba(64,64,64,.6); }\n\t' + (nav.firefoxVer > 57 ? '.de-fullimg-video { position: relative; }\n\t\t.de-fullimg-video::before { content: "X"; color: #fff; background-color: rgba(64, 64, 64, 0.8); text-align: center; width: 20px; height: 20px; position: absolute; right: 0; font: bold 14px tahoma; cursor:pointer; }' : '') + '\n\t.de-fullimg-wrap-center, .de-fullimg-wrap-center > .de-fullimg, .de-fullimg-wrap-link { width: inherit; height: inherit; }\n\t.de-fullimg-wrap-inpost { min-width: ' + p + 'px; min-height: ' + p + 'px; float: left; ' + (aib.multiFile ? '' : 'margin: 2px 5px; -moz-box-sizing: border-box; box-sizing: border-box; ') + ' }\n\t.de-fullimg-wrap-nosize > .de-fullimg { opacity: .3; }\n\t#de-img-btn-next, #de-img-btn-prev { position: fixed; top: 50%; z-index: 10000; height: 36px; width: 36px; margin-top: -18px; background-repeat: no-repeat; background-position: center; background-color: black; cursor: pointer; }\n\t#de-img-btn-next { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJPjI8JkO1vlpzS0YvzhUdX/nigR2ZgSJ6IqY5Uy5UwJK/l/eI6A9etP1N8grQhUbg5RlLKAJD4DAJ3uCX1isU4s6xZ9PR1iY7j5nZibixgBQA7); right: 0; border-radius: 10px 0 0 10px; }\n\t#de-img-btn-prev { background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAAPDw8P///yH5BAEAAAEALAAAAAAgACAAQAJOjI8JkO24ooxPzYvzfJrWf3Rg2JUYVI4qea1g6zZmPLvmDeM6Y4mxU/v1eEKOpziUIA1BW+rXXEVVu6o1dQ1mNcnTckp7In3LAKyMchUAADs=); left: 0; border-radius: 0 10px 10px 0; }' +
-
-		cont('.de-video-link.de-ytube', 'https://youtube.com/favicon.ico') + cont('.de-video-link.de-vimeo', 'https://vimeo.com/favicon.ico') + cont('.de-img-arch', 'data:image/gif;base64,R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + cont('.de-img-audio', 'data:image/gif;base64,R0lGODlhEAAQAKIAAGya4wFLukKG4oq3802i7Bqy9P///wAAACH5BAEAAAYALAAAAAAQABAAQANBaLrcHsMN4QQYhE01OoCcQIyOYQGooKpV1GwNuAwAa9RkqTPpWqGj0YTSELg0RIYM+TjOkgba0sOaAEbGBW7HTQAAOw==') + '.de-current::after { content: " \u25CF"; }\n\t.de-img-arch, .de-img-audio { margin-left: 4px; color: inherit; text-decoration: none; font-weight: bold; }\n\t.de-mp3 { margin: 5px 20px; }\n\t.de-video-obj { margin: 5px 20px; white-space: nowrap; }\n\t.de-video-obj-inline { display: inline-block; }\n\t#de-video-btn-resize { padding: 0 14px 8px 0; margin: 0 8px; border: 2px solid; border-radius: 2px; }\n\t#de-video-btn-hide, #de-video-btn-prev { margin-left: auto; }\n\t#de-video-buttons { display: flex; margin-bottom: 2px; align-items: center; width: 100%; line-height: 16px; }\n\t.de-video-expanded { width: 854px !important; height: 480px !important; }\n\t#de-video-list { padding: 0 0 4px; overflow-y: auto; width: 100%; }\n\t.de-video-refpost { margin: 0 3px; text-decoration: none; cursor: pointer; }\n\t.de-video-resizer::after { content: "\u2795"; margin: 0 -15px 0 3px; vertical-align: 6px; color: #000; font-size: 12px; cursor: pointer; }\n\t.de-video-player, .de-video-thumb { width: 100%; height: 100%; }\n\ta.de-video-player { display: inline-block; position: relative; border-spacing: 0; border: none; }\n\ta.de-video-player::after { content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAWCAQAAACMYb/JAAAArklEQVR4AYXSr05CYRjA4cPGxjRosTijdvNJzmD1CrwAvQWugASNwGg0MoErOIVCPCMx0hmBMaAA4mPX8/2rT/i+9/1lPu0M3MtCN1OAvS+NEFkDmHqoJwcAbHzUkb9n7C5FqLynCAzdpAhLrynCRc9VnEDpKUWYpUmZIlt5nBQeY889amvGPj33HBvdt45WbAELeWyNP/qu/8dwBrDyVp9UBRi5DYXZdTLxEs77F5bCVAHlDJ1UAAAAAElFTkSuQmCC"); position: absolute;top: 50%; left: 50%; padding: 12px 24px; margin: -22px 0 0 -32px; background-color: rgba(255,0,0,.4); border-radius: 8px; line-height: 0; }\n\ta.de-video-player:hover::after { background-color: rgba(255,0,0,.7); }\n\t.de-video-title[de-time]::after { content: " [" attr(de-time) "]"; color: red; }\n\t.de-vocaroo > embed { display: inline-block; }\n\tvideo { background: black; }' + (
-
-		'.de-file { display: inline-block; vertical-align: top; margin: 1px; height: ' + (p = aib.multiFile ? 90 : 130) + 'px; width: ' + p + 'px; text-align: center; }\n\t.de-file, .de-file-txt-input { background-color: rgba(96,96,96,.15); border: 1px dashed grey; }\n\t.de-file > .de-file-img { display: table; width: 100%; height: 100%; cursor: pointer; }\n\t.de-file > .de-file-img > div { display: table-cell; vertical-align: middle; }\n\t.de-file > .de-file-utils { display: none; height: 16px; margin-top: -18px; padding: 1px 0; background: rgba(64,64,64,.6); position: relative; }\n\t.de-file > .de-file-utils > .de-file-rarmsg { color: #fff; }\n\t#de-file-area { border-spacing: 0; margin-top: 1px; width: 275px; min-width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }\n\t.de-file-drag { background: rgba(96,96,96,.8); border: 1px solid grey; opacity: .7; }\n\t.de-file:hover:not(.de-file-drag) > .de-file-utils { display: block !important; }\n\timg.de-file-img, video.de-file-img { max-width: ' + (p - 4) + 'px; max-height: ' + (p - 4) + 'px; }\n\t.de-file-input { max-width: 300px; }\n\t.de-file-input + .de-file-utils { margin-left: 4px; }\n\t.de-file-off > .de-file-img > div::after { content: "' + Lng.dropFileHere[lang] + '"; display: block; width: 80px; margin: 0 auto; font: 11px arial; opacity: .8; white-space: initial; }\n\t.de-file-rarmsg { margin: 0 2px; vertical-align: 4px; font: bold 11px tahoma; cursor: default; }\n\t.de-file-btn-del, .de-file-btn-rar, .de-file-btn-txt { display: inline-block; margin: 0 1px; padding: 0 16px 16px 0; cursor: pointer; }\n\t.de-file-spoil, .de-file-rate { background-color: #fff; border: 1px dotted darkcyan; cursor: pointer; display: inline-block; -webkit-user-select: none; user-select: none; border-radius: 3px; }\n\t.de-file-spoil { padding: 0 12px 12px 0; margin: 0 1px; }\n\t.de-file-spoil.de-active { background-color: darkcyan; border: 1px inset aliceblue; }\n\t.de-file-spoil.de-active:before { content: "!"; color: white; position: absolute; font: 12px "Times"; font-weight: bold; padding: 0 4px; }\n\t.de-file-rate { font: 11px sans; padding: 7px 17px; position: relative; }\n\t.de-file-rate:before { content: "\u25B2" attr(title); position: absolute; left: 0; top: 0; font-size: 10px; line-height: 14.5px; }\n\t.de-file-rate > ul { position: absolute; list-style: outside none none; padding: 0; margin: 0; bottom: 100%; border: 1px outset; visibility: hidden; }\n\t.de-file-rate.de-active > ul { visibility: visible; left: -15%; right: -15%; background-color: #fff; }\n\t.de-file-rate > ul > * { display: list-item; text-align: center; } .de-file-rate > ul > *:hover { background-color: rgba(96,96,96,.15); }\n\t.de-file-txt-add { font-weight: bold; width: 21px; padding: 0 !important; }\n\t.de-file-txt-input { padding: 2px; font: 12px/16px sans-serif; }\n\t.de-file-txt-drop { cursor: pointer; position: absolute; left: 0; right: 0; top: -3px; bottom: -3px; z-index: 1; }\n\t.de-file-txt-wrap { position: relative; }\n\t.de-file-utils { display: inline-block; float: none; vertical-align: -2px; }') + gif('.de-file-btn-del', 'R0lGODlhEAAQALMOAP8zAMopAJMAAP/M//+DIP8pAP86Av9MDP9sFP9zHv9aC/9gFf9+HJsAAP///wAAACH5BAEAAA4ALAAAAAAQABAAAARU0MlJKw3B4hrGyFP3hQNBjE5nooLJMF/3msIkJAmCeDpeU4LFQkFUCH8VwWHJRHIM0CiIMwBYryhS4XotZDuFLUAg6LLC1l/5imykgW+gU0K22C0RADs=') + gif('.de-file-btn-rar', 'R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + gif('.de-file-btn-txt', 'R0lGODlhEAAQAJEAACyr4e/19////wAAACH5BAEAAAIALAAAAAAQABAAAAIrlI+pwK3WokMyBEmjxbBeLgEbKFrmyXTn+nXaF7nNGMslZ9NpFu4L/ggeCgA7') + (
-
-		'.de-parea { text-align: center; }\n\t.de-parea-btn-close::after { content: "' + Lng.hideForm[lang] + '"; }\n\t.de-parea-btn-thr::after { content: "' + Lng.makeThr[lang] + '"; }\n\t.de-parea-btn-reply::after { content: "' + Lng.makeReply[lang] + '"; }\n\t#de-pform > form { padding: 0; margin: 0; border: none; }\n\t#de-pform input[type="text"], #de-pform input[type="file"] { width: 200px; }\n\t#de-resizer-text { display: inline-block !important; float: none !important; padding: 5px; margin: ' + (nav.isPresto ? '-2px -10px' : '0 0 -2px -10px') + '; vertical-align: bottom; border-bottom: 2px solid #666; border-right: 2px solid #666; cursor: se-resize; }\n\t.de-win-inpost { float: none; clear: left; display: inline-block; width: auto; padding: 3px; margin: 2px 0; }\n\t.de-win-inpost > .de-resizer { display: none; }\n\t.de-win-inpost > .de-win-head { background: none; color: inherit; }\n\t#de-win-reply { width: auto !important; min-width: 0; padding: 0 !important; border: none !important; }\n\t#de-win-reply.de-win { position: fixed !important; padding: 0 !important; margin: 0 !important; border-radius: 10px 10px 0 0; }\n\t#de-win-reply.de-win > .de-win-body { padding: 2px 2px 0 1px; border: 1px solid gray; }\n\t#de-win-reply.de-win .de-textarea { min-width: 98% !important; resize: none !important; }\n\t#de-win-reply.de-win #de-resizer-text { display: none !important; }\n\t#de-sagebtn { margin: 4px !important; vertical-align: top; cursor: pointer; }\n\t.de-textarea { display: inline-block; padding: 3px !important; min-width: 275px !important; min-height: 90px !important; resize: both; transition: none !important; }') +
-
-		'.de-fav-del > #de-fav-buttons { display: none; }\n\t.de-fav-del > #de-fav-delbuttons { display: block !important; }\n\t.de-fav-del .de-fav-header-switch, .de-fav-del .de-fav-switch { display: block !important; margin: 2px 0 2px 4px !important; flex: none; }\n\t#de-fav-delbuttons { display: none; }\n\t.de-fav-header-switch, .de-fav-switch { display: none; }\n\t.de-fav-header { margin-top: 0; margin-bottom: 0; padding: 1px 0; display: flex; }\n\t.de-fav-entries { border-top: 1px solid rgba(80,80,80,.3); }\n\t.de-fav-header-link { margin-left: 4px; color: inherit; font-weight: bold; font-size: 14px; flex: auto; text-decoration: none; outline: none; }\n\t.de-entry { display: flex !important; align-items: center; float: none !important; padding: 0 !important; margin: 2px 0 !important; border: none !important; font-size: 14px; overflow: hidden !important; white-space: nowrap; }\n\t.de-fav-link { flex: none; margin-left: 4px; text-decoration: none; border: none; }\n\t.de-entry-title { flex: auto; padding-left: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n\t.de-fav-inf { flex: none; padding: 0 4px 0 10px; font: bold 14px serif; cursor: default; }\n\t.de-fav-inf-icon, .de-fav-inf-iwrap  { width: 16px; height: 16px; }\n\t.de-fav-inf-icon { margin-bottom: -3px; }\n\t.de-fav-inf-icon:not(.de-fav-closed):not(.de-fav-unavail):not(.de-fav-wait), .de-fav-closed > .de-fav-unavail-use, .de-fav-closed > .de-fav-wait-use, .de-fav-unavail > .de-fav-closed-use, .de-fav-unavail > .de-fav-wait-use, .de-fav-wait > .de-fav-closed-use, .de-fav-wait > .de-fav-unavail-use { display: none; }\n\t.de-fav-inf-new { color: #424f79; }\n\t.de-fav-inf-new::after { content: " +"; }\n\t.de-fav-inf-old { color: #4f7942; }\n\t.de-fav-inf-you { padding: 0 4px; margin-right: 4px; border-radius: 3px; color: #fff; background-color: #424f79; opacity: 0.65; }\n\t.de-fav-unavail { color: #cf4436; }\n\t.de-fold-block { border: 1px solid rgba(120,120,120,.8); border-radius: 2px; }\n\t.de-fold-block:not(:first-child) { border-top: none; }' +
-
-		'#de-thr-navpanel { color: #F5F5F5; height: 98px; width: 41px; position: fixed; top: 50%; left: 0px; padding: 0; margin: -49px 0 0; background: #777; border: 1px solid #525252; border-left: none; border-radius: 0 5px 5px 0; cursor: pointer; z-index: 1000; }\n\t.de-thr-navpanel-hidden { opacity: .7; margin-left: -34px !important; }\n\t#de-thr-navarrow { display: none; position: absolute; top: 50%; left: 34px; transform: translateY(-50%); width: 7px; height: 7px; }\n\t.de-thr-navpanel-hidden > #de-thr-navarrow { display: initial; }\n\t#de-thr-navup { padding: 12px 9px 13px 8px; border-radius: 0 5px 0 0; }\n\t#de-thr-navdown { padding: 13px 9px 12px 8px; border-radius: 0 0 5px 0; }\n\t#de-thr-navup, #de-thr-navdown { width: 41px; height: 49px; -moz-box-sizing: border-box; box-sizing: border-box; }\n\t:not(.de-thr-navpanel-hidden) > #de-thr-navup:hover, :not(.de-thr-navpanel-hidden) > #de-thr-navdown:hover { background: #555; }' + (
-
-		'@keyframes de-wait-anim { to { transform: rotate(360deg); } }\n\t.de-wait, .de-fav-wait , .de-fullimg-load { animation: de-wait-anim 1s linear infinite; }\n\t.de-wait { margin: 0 2px -3px 0 !important; width: 16px; height: 16px; }\n\t.de-abtn { text-decoration: none !important; outline: none; }\n\t#de-wrapper-popup { overflow-x: hidden !important; overflow-y: auto !important; -moz-box-sizing: border-box; box-sizing: border-box; max-height: 100vh; position: fixed; right: 0; top: 0; z-index: 9999; font: 14px arial; cursor: default; }\n\t.de-popup { overflow: visible !important; clear: both !important; width: auto !important; min-width: 0pt !important; padding: 8px !important; margin: 1px !important; border: 1px solid grey !important; display: block !important; float: right !important; max-width: initial !important; }\n\t.de-popup-btn { display: inline-block; vertical-align: top; color: green; cursor: pointer; line-height: 1.15; }\n\t.de-popup-msg { display: inline-block; white-space: pre-wrap; }\n\t.de-button { flex: none; padding: 0 ' + (nav.isFirefox ? 2 : 4) + 'px !important; margin: 1px 2px; height: 24px; font: 13px arial; }\n\t.de-editor { display: block; font: 12px courier new; width: 619px; height: 337px; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; }\n\t.de-hidden { float: left; overflow: hidden !important; margin: 0 !important; padding: 0 !important; border: none !important; width: 0 !important; height: 0 !important; display: inline !important; }\n\t.de-input-key { padding: 0 2px !important; margin: 0 !important; font: 13px/15px arial !important; }\n\t.de-link-parent { outline: 1px dotted !important; }\n\t.de-link-pview { font-weight: bold; }\n\t.de-link-ref { text-decoration: none; }\n\t.de-list { padding-top: 4px; }\n\t.de-list::before { content: "\u25CF"; margin-right: 4px; }\n\t.de-menu { padding: 0 !important; margin: 0 !important; width: auto !important; min-width: 0 !important; z-index: 9999; border: 1px solid grey !important; }\n\t.de-menu-item { display: block; padding: 3px 10px; color: inherit; text-decoration: none; font: 13px arial; white-space: nowrap; cursor: pointer; }\n\t.de-menu-item:hover { background-color: #222; color: #fff; }\n\t.de-omitted { color: grey; }\n\t.de-omitted::before { content: "' + Lng.postsOmitted[lang] + '"; }\n\t.de-post-hiddencontent { display: none !important; }\n\t.de-pview { position: absolute; width: auto; min-width: 0; z-index: 9999; border: 1px solid grey !important; margin: 0 !important; display: block !important; }\n\t.de-pview-info { padding: 3px 6px !important; }\n\t.de-ref-op::after { content: " (OP)"; }\n\t.de-ref-del::after { content: " (Del)"; }\n\t.de-refmap { margin: 10px 4px 4px 4px; font-size: 75%; font-style: italic; }\n\t.de-refmap::before { content: "' + Lng.replies[lang] + ' "; }\n\t.de-refcomma:last-child { display: none; }\n\t.de-replies-hide::after { content: "' + Lng.hidePosts[lang] + '"; }\n\t.de-replies-show::after { content: "' + Lng.showPosts[lang] + '"; }\n\t.de-thread-buttons { clear: left; margin-top: 5px; }\n\t.de-thread-collapse > a::after { content: "' + Lng.collapseThr[lang] + '"; }\n\t.de-thread-updater > a::after { content: "' + Lng.getNewPosts[lang] + '"; }\n\t#de-updater-count::before { content: ": "; }\n\t.de-viewed { color: #747488 !important; }\n\tform > hr { clear: both }');
+		var p = Math.max(Cfg.minImgSize || 0, 50);
+		x += '\n\t/* Full images */\n\t.de-img-embed, .de-fullimg { display: block; border: none; outline: none; cursor: pointer; image-orientation: from-image; }\n\t.de-img-embed { max-width: 200px; max-height: 200px; }\n\t.de-fullimg-after { clear: left; }\n\t.de-fullimg-center { position: fixed; margin: 0 !important; z-index: 9999; background-color: #ccc; border: 1px solid black !important; box-sizing: content-box; -moz-box-sizing: content-box; }\n\t.de-fullimg-info { text-align: center; }\n\t.de-fullimg-load { position: absolute; z-index: 2; width: 50px; height: 50px; top: 50%; left: 50%; margin: -25px; }\n\t.de-fullimg-src { float: none !important; display: inline-block; padding: 2px 4px; margin: 2px 0 2px -1px; background: rgba(64,64,64,.8); font: bold 12px tahoma; color: #fff  !important; text-decoration: none; outline: none; }\n\t.de-fullimg-src:hover { color: #fff !important; background: rgba(64,64,64,.6); }' + (nav.firefoxVer > 59 ? '.de-fullimg-video { position: relative; }\n\t\t.de-fullimg-video::before { content: "X"; color: #fff; background-color: rgba(64, 64, 64, 0.8); text-align: center; width: 20px; height: 20px; position: absolute; right: 0; font: bold 14px tahoma; cursor:pointer; }' : '') + '\n\t.de-fullimg-wrap-center, .de-fullimg-wrap-center > .de-fullimg, .de-fullimg-wrap-link { width: inherit; height: inherit; }\n\t.de-fullimg-wrap-inpost { min-width: ' + p + 'px; min-height: ' + p + 'px; float: left; ' + (aib.multiFile ? '' : 'margin: 2px 5px; -moz-box-sizing: border-box; box-sizing: border-box; ') + ' }\n\t.de-fullimg-wrap-nosize > .de-fullimg { opacity: .3; }\n\t.de-img-btn { position: fixed; top: 50%; z-index: 10000; height: 36px; width: 36px; border-radius: 10px 0 0 10px; color: #f0f0f0; cursor: pointer; }\n\t.de-img-btn > svg { height: 32px; width: 32px; margin: 2px; }\n\t#de-img-btn-auto { right: 0; margin-top: 20px; }\n\t.de-img-btn-auto-on { color: #ffe100; }\n\t#de-img-btn-next { right: 0; margin-top: -18px; }\n\t.de-img-btn-none { display: none; }\n\t#de-img-btn-prev { left: 0; margin-top: -18px; transform: scaleX(-1); }\n\n\t/* Embedders */\n\t' + cont('.de-video-link.de-ytube', 'https://youtube.com/favicon.ico') + '\n\t' + cont('.de-video-link.de-vimeo', 'https://vimeo.com/favicon.ico') + '\n\t' + cont('.de-img-arch', 'data:image/gif;base64,R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + '\n\t' + cont('.de-img-audio', 'data:image/gif;base64,R0lGODlhEAAQAKIAAGya4wFLukKG4oq3802i7Bqy9P///wAAACH5BAEAAAYALAAAAAAQABAAQANBaLrcHsMN4QQYhE01OoCcQIyOYQGooKpV1GwNuAwAa9RkqTPpWqGj0YTSELg0RIYM+TjOkgba0sOaAEbGBW7HTQAAOw==') + '\n\t.de-current::after { content: " \u25CF"; }\n\t.de-img-arch, .de-img-audio { margin-left: 4px; color: inherit; text-decoration: none; font-weight: bold; }\n\t.de-mp3 { margin: 5px 20px; }\n\t.de-video-obj { margin: 5px 20px; white-space: nowrap; }\n\t.de-video-obj-inline { display: inline-block; }\n\t#de-video-btn-resize { padding: 0 14px 8px 0; margin: 0 8px; border: 2px solid; border-radius: 2px; }\n\t#de-video-btn-hide, #de-video-btn-prev { margin-left: auto; }\n\t#de-video-buttons { display: flex; margin-bottom: 2px; align-items: center; width: 100%; line-height: 16px; }\n\t#de-video-buttons > a:not(:hover) { color: inherit; }\n\t.de-video-expanded { width: 854px !important; height: 480px !important; }\n\t#de-video-list { padding: 0 0 4px; overflow-y: auto; width: 100%; }\n\t.de-video-refpost { margin: 0 3px; color: inherit; text-decoration: none; cursor: pointer; }\n\t.de-video-resizer::after { content: "\u2795"; margin: 0 -15px 0 3px; vertical-align: 6px; color: #000; font-size: 12px; cursor: pointer; }\n\t.de-video-player, .de-video-thumb { width: 100%; height: 100%; }\n\ta.de-video-player { display: inline-block; position: relative; border-spacing: 0; border: none; }\n\ta.de-video-player::after { content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAWCAQAAACMYb/JAAAArklEQVR4AYXSr05CYRjA4cPGxjRosTijdvNJzmD1CrwAvQWugASNwGg0MoErOIVCPCMx0hmBMaAA4mPX8/2rT/i+9/1lPu0M3MtCN1OAvS+NEFkDmHqoJwcAbHzUkb9n7C5FqLynCAzdpAhLrynCRc9VnEDpKUWYpUmZIlt5nBQeY889amvGPj33HBvdt45WbAELeWyNP/qu/8dwBrDyVp9UBRi5DYXZdTLxEs77F5bCVAHlDJ1UAAAAAElFTkSuQmCC"); position: absolute;top: 50%; left: 50%; padding: 12px 24px; margin: -22px 0 0 -32px; background-color: rgba(255,0,0,.4); border-radius: 8px; line-height: 0; }\n\ta.de-video-player:hover::after { background-color: rgba(255,0,0,.7); }\n\t.de-video-title[de-time]::after { content: " [" attr(de-time) "]"; color: red; }\n\t.de-vocaroo > embed { display: inline-block; }\n\tvideo { background: black; }\n\n\t/* File inputs */\n\t.de-file { display: inline-block; vertical-align: top; margin: 1px; height: ' + (p = aib.multiFile ? 90 : 130) + 'px; width: ' + p + 'px; text-align: center; }\n\t.de-file, .de-file-txt-input { background-color: rgba(96,96,96,.15); border: 1px dashed grey; }\n\t.de-file > .de-file-img { display: table; width: 100%; height: 100%; cursor: pointer; }\n\t.de-file > .de-file-img > div { display: table-cell; vertical-align: middle; }\n\t.de-file > .de-file-utils { display: none; height: 16px; margin-top: -18px; padding: 1px 0; background: rgba(64,64,64,.6); position: relative; }\n\t.de-file > .de-file-utils > .de-file-rarmsg { color: #fff; }\n\t#de-file-area { border-spacing: 0; margin-top: 1px; width: 275px; min-width: 100%; max-width: 100%; overflow-x: auto; overflow-y: hidden; white-space: nowrap; }\n\t.de-file-drag { background: rgba(96,96,96,.8); border: 1px solid grey; opacity: .7; }\n\t.de-file:hover:not(.de-file-drag) > .de-file-utils { display: block !important; }\n\timg.de-file-img, video.de-file-img { max-width: ' + (p - 4) + 'px; max-height: ' + (p - 4) + 'px; }\n\t.de-file-input { max-width: 300px; }\n\t.de-file-input + .de-file-utils { margin-left: 4px; }\n\t.de-file-off > .de-file-img > div::after { content: "' + Lng.dropFileHere[lang] + '"; display: block; width: 80px; margin: 0 auto; font: 11px arial; opacity: .8; white-space: initial; }\n\t.de-file-rarmsg { margin: 0 2px; vertical-align: 4px; font: bold 11px tahoma; cursor: default; }\n\t.de-file-btn-del, .de-file-btn-rar, .de-file-btn-txt { display: inline-block; margin: 0 1px; padding: 0 16px 16px 0; cursor: pointer; }\n\t.de-file-spoil, .de-file-rate { background-color: #fff; border: 1px dotted darkcyan; cursor: pointer; display: inline-block; -webkit-user-select: none; user-select: none; border-radius: 3px; }\n\t.de-file-spoil { padding: 0 12px 12px 0; margin: 0 1px; }\n\t.de-file-spoil.de-active { background-color: darkcyan; border: 1px inset aliceblue; }\n\t.de-file-spoil.de-active:before { content: "!"; color: white; position: absolute; font: 12px "Times"; font-weight: bold; padding: 0 4px; }\n\t.de-file-rate { font: 11px sans; padding: 7px 17px; position: relative; }\n\t.de-file-rate:before { content: "\u25B2" attr(title); position: absolute; left: 0; top: 0; font-size: 10px; line-height: 14.5px; }\n\t.de-file-rate > ul { position: absolute; list-style: outside none none; padding: 0; margin: 0; bottom: 100%; border: 1px outset; visibility: hidden; }\n\t.de-file-rate.de-active > ul { visibility: visible; left: -15%; right: -15%; background-color: #fff; }\n\t.de-file-rate > ul > * { display: list-item; text-align: center; } .de-file-rate > ul > *:hover { background-color: rgba(96,96,96,.15); }\n\t.de-file-txt-add { font-weight: bold; width: 21px; padding: 0 !important; }\n\t.de-file-txt-input { padding: 2px; font: 12px/16px sans-serif; }\n\t.de-file-txt-drop { cursor: pointer; position: absolute; left: 0; right: 0; top: -3px; bottom: -3px; z-index: 1; }\n\t.de-file-txt-wrap { position: relative; }\n\t.de-file-utils { display: inline-block; float: none; vertical-align: -2px; }\n\t' + gif('.de-file-btn-del', 'R0lGODlhEAAQALMOAP8zAMopAJMAAP/M//+DIP8pAP86Av9MDP9sFP9zHv9aC/9gFf9+HJsAAP///wAAACH5BAEAAA4ALAAAAAAQABAAAARU0MlJKw3B4hrGyFP3hQNBjE5nooLJMF/3msIkJAmCeDpeU4LFQkFUCH8VwWHJRHIM0CiIMwBYryhS4XotZDuFLUAg6LLC1l/5imykgW+gU0K22C0RADs=') + '\n\t' + gif('.de-file-btn-rar', 'R0lGODlhEAAQALMAAF82SsxdwQMEP6+zzRA872NmZQesBylPHYBBHP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAQARTMMlJaxqjiL2L51sGjCOCkGiBGWyLtC0KmPIoqUOg78i+ZwOCUOgpDIW3g3KJWC4t0ElBRqtdMr6AKRsA1qYy3JGgMR4xGpAAoRYkVDDWKx6NRgAAOw==') + '\n\t' + gif('.de-file-btn-txt', 'R0lGODlhEAAQAJEAACyr4e/19////wAAACH5BAEAAAIALAAAAAAQABAAAAIrlI+pwK3WokMyBEmjxbBeLgEbKFrmyXTn+nXaF7nNGMslZ9NpFu4L/ggeCgA7') + '\n\n\t/* Reply form */\n\t.de-parea { text-align: center; }\n\t.de-parea-btn-close::after { content: "' + Lng.hideForm[lang] + '"; }\n\t.de-parea-btn-thr::after { content: "' + Lng.makeThr[lang] + '"; }\n\t.de-parea-btn-reply::after { content: "' + Lng.makeReply[lang] + '"; }\n\t#de-pform > form { padding: 0; margin: 0; border: none; }\n\t#de-pform input[type="text"], #de-pform input[type="file"] { width: 200px; }\n\t#de-resizer-text { display: inline-block !important; float: none !important; padding: 5px; margin: ' + (nav.isPresto ? '-2px -10px' : '0 0 -2px -10px') + '; border-bottom: 2px solid #666; border-right: 2px solid #666; cursor: se-resize; }\n\t.de-win-inpost { float: none; clear: left; display: inline-block; width: auto; padding: 3px; margin: 2px 0; }\n\t.de-win-inpost > .de-resizer { display: none; }\n\t.de-win-inpost > .de-win-head { background: none; color: inherit; }\n\t#de-win-reply { width: auto !important; min-width: 0; padding: 0 !important; border: none !important; }\n\t#de-win-reply.de-win { position: fixed !important; padding: 0 !important; margin: 0 !important; border-radius: 10px 10px 0 0; }\n\t#de-win-reply.de-win > .de-win-body { padding: 2px 2px 0 1px; border: 1px solid gray; }\n\t#de-win-reply.de-win .de-textarea { min-width: 98% !important; resize: none !important; }\n\t#de-win-reply.de-win #de-resizer-text { display: none !important; }\n\t#de-sagebtn { margin: 4px !important; vertical-align: top; cursor: pointer; }\n\t.de-textarea { display: inline-block; padding: 3px !important; min-width: 275px !important; min-height: 90px !important; resize: both; transition: none !important; }\n\n\t/* Thread navigation */\n\t#de-thr-navarrow { display: none; position: absolute; top: 50%; left: 34px; transform: translateY(-50%); width: 7px; height: 7px; }\n\t#de-thr-navpanel { color: #F5F5F5; height: 98px; width: 41px; position: fixed; top: 50%; left: 0px; padding: 0; margin: -49px 0 0; background: #777; border: 1px solid #525252; border-left: none; border-radius: 0 5px 5px 0; cursor: pointer; z-index: 1000; }\n\t.de-thr-navpanel-hidden { opacity: .7; margin-left: -34px !important; }\n\t.de-thr-navpanel-hidden > #de-thr-navarrow { display: initial; }\n\t#de-thr-navup { padding: 12px 9px 13px 8px; border-radius: 0 5px 0 0; }\n\t#de-thr-navdown { padding: 13px 9px 12px 8px; border-radius: 0 0 5px 0; }\n\t#de-thr-navup, #de-thr-navdown { width: 41px; height: 49px; -moz-box-sizing: border-box; box-sizing: border-box; }\n\t:not(.de-thr-navpanel-hidden) > #de-thr-navup:hover, :not(.de-thr-navpanel-hidden) > #de-thr-navdown:hover { background: #555; }\n\n\t/* Other */\n\t.de-abtn { text-decoration: none !important; outline: none; }\n\t.de-button { flex: none; padding: 0 ' + (nav.isFirefox ? 2 : 4) + 'px !important; margin: 1px 2px; height: 24px; font: 13px arial; }\n\t.de-editor { display: block; font: 12px courier new; width: 619px; height: 337px; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; }\n\t.de-hidden { float: left; overflow: hidden !important; margin: 0 !important; padding: 0 !important; border: none !important; width: 0 !important; height: 0 !important; display: inline !important; }\n\t.de-input-key { padding: 0 2px !important; margin: 0 !important; font: 13px/15px arial !important; }\n\t.de-link-parent { outline: 1px dotted !important; }\n\t.de-link-pview { font-weight: bold; }\n\t.de-link-ref { text-decoration: none; }\n\t.de-list { padding-top: 4px; }\n\t.de-list::before { content: "\u25CF"; margin-right: 4px; }\n\t.de-menu { padding: 0 !important; margin: 0 !important; width: auto !important; min-width: 0 !important; z-index: 9999; border: 1px solid grey !important; }\n\t.de-menu-item { display: block; padding: 3px 10px; color: inherit; text-decoration: none; font: 13px arial; white-space: nowrap; cursor: pointer; }\n\t.de-menu-item:hover { background-color: #222; color: #fff; }\n\t.de-omitted { color: grey; }\n\t.de-omitted::before { content: "' + Lng.postsOmitted[lang] + '"; }\n\t.de-popup { overflow: visible !important; clear: both !important; width: auto !important; min-width: 0pt !important; padding: 8px !important; margin: 1px !important; border: 1px solid grey !important; display: block !important; float: right !important; max-width: initial !important; }\n\t.de-popup-btn { display: inline-block; vertical-align: top; color: green; cursor: pointer; line-height: 1.15; }\n\t.de-popup-msg { display: inline-block; white-space: pre-wrap; }\n\t.de-post-hiddencontent { display: none !important; }\n\t.de-pview { position: absolute; width: auto; min-width: 0; z-index: 9999; border: 1px solid grey !important; margin: 0 !important; display: block !important; }\n\t.de-pview-info { padding: 3px 6px !important; }\n\t.de-ref-del::after { content: " (Del)"; }\n\t.de-ref-op::after { content: " (OP)"; }\n\t.de-refcomma:last-child { display: none; }\n\t.de-refmap { margin: 10px 4px 4px 4px; font-size: 75%; font-style: italic; }\n\t.de-refmap::before { content: "' + Lng.replies[lang] + ' "; }\n\t.de-replies-hide::after { content: "' + Lng.hidePosts[lang] + '"; }\n\t.de-replies-show::after { content: "' + Lng.showPosts[lang] + '"; }\n\t.de-thread-buttons { clear: left; margin-top: 5px; }\n\t.de-thread-collapse > a::after { content: "' + Lng.collapseThr[lang] + '"; }\n\t.de-thread-updater > a::after { content: "' + Lng.getNewPosts[lang] + '"; }\n\t#de-updater-count::before { content: ": "; }\n\t.de-viewed { color: #747488 !important; }\n\t.de-wait, .de-fav-wait , .de-fullimg-load { animation: de-wait-anim 1s linear infinite; }\n\t.de-wait { margin: 0 2px -3px 0 !important; width: 16px; height: 16px; }\n\t#de-wrapper-popup { overflow-x: hidden !important; overflow-y: auto !important; -moz-box-sizing: border-box; box-sizing: border-box; max-height: 100vh; position: fixed; right: 0; top: 0; z-index: 9999; font: 14px arial; cursor: default; }\n\t@keyframes de-wait-anim { to { transform: rotate(360deg); } }\n\tform > hr { clear: both }';
 
 		$css(x).id = 'de-css';
 		$css('').id = 'de-css-dynamic';
@@ -22099,8 +22713,9 @@ true, true];
 	}
 
 	function updateCSS() {
-		var str = '.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.isPresto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + '; }\n\t.de-selected, .de-error-input { ' + (nav.isPresto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + '; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.isPresto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + '; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user,\n\t\t.de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick,\n\t\t.de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.isPresto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t.de-fullimg-wrap-inpost > .de-fullimg { width: ' + (Cfg.resizeImgs ? '100%' : 'auto') + '; }\n\t' + (Cfg.maskImgs ? aib.qPostImg + (', .de-img-pre, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; }\n\t\t' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-pre:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }') : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.' + aib.cReply.replace(/\s/, '.') + ':not(.de-pview) { float: none; width: 99.9%; margin-left: 0; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input, .rating_select { display: inline !important; } .de-file-rate { display: none !important; }') + '\n\t' + (Cfg.addSageBtn ? '' : '#de-sagebtn, ') + '\n\t' + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + '\n\t' + (Cfg.imgNavBtns ? '' : '#de-img-btn-next, #de-img-btn-prev, ') + '\n\t' + (Cfg.imgInfoLink ? '' : '.de-fullimg-info, ') + '\n\t' + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + '\n\t' + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + '\n\t' + (Cfg.panelCounter ? '' : '#de-panel-info, ') + '\n\t' + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + '\n\t' + (Cfg.showHideBtn ? '' : '.de-btn-hide, ') + '\n\t' + (Cfg.showRepBtn ? '' : '.de-btn-rep, ') + '\n\t' + (Cfg.updThrBtns || aib.t ? '' : '.de-thread-updater, ') + '\n\t' + (Cfg.ajaxPosting ? '' : '.de-file-btn-rar, .de-file-btn-txt, ') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-txt-wrap, .de-file-btn-txt, ') + '\n\t' + (aib.kus || !aib.multiFile && Cfg.fileInputs === 2 ? '' : '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ') + '\n\t\tbody > hr, .postarea, small[id^="rfmap"], .theader { display: none !important; }';
-		$id('de-css-dynamic').textContent = str + '\n' + aib.css;
+		var x = '\n\t.de-video-obj { width: ' + Cfg.YTubeWidth + 'px; height: ' + Cfg.YTubeHeigh + 'px; }\n\t.de-new-post { ' + (nav.isPresto ? 'border-left: 4px solid rgba(107,134,97,.7); border-right: 4px solid rgba(107,134,97,.7)' : 'box-shadow: 6px 0 2px -2px rgba(107,134,97,.8), -6px 0 2px -2px rgba(107,134,97,.8)') + ' !important; }\n\t.de-selected, .de-error-input { ' + (nav.isPresto ? 'border-left: 4px solid rgba(220,0,0,.7); border-right: 4px solid rgba(220,0,0,.7)' : 'box-shadow: 6px 0 2px -2px rgba(220,0,0,.8), -6px 0 2px -2px rgba(220,0,0,.8)') + ' !important; }\n\t' + (Cfg.markMyPosts ? '.de-mypost { ' + (nav.isPresto ? 'border-left: 4px solid rgba(97,107,134,.7); border-right: 4px solid rgba(97,107,134,.7)' : 'box-shadow: 6px 0 2px -2px rgba(97,107,134,.8), -6px 0 2px -2px rgba(97,107,134,.8)') + ' !important; }\n\t\t.de-mypost .de-post-counter::after { content: counter(de-cnt) " (You)"; }\n\t\t.de-mypost .de-post-deleted::after { content: "' + Lng.deleted[lang] + ' (You)"; }' : '') + '\n\t' + (Cfg.markMyLinks ? '.de-ref-my::after { content: " (You)"; }\n\t\t.de-ref-del.de-ref-my::after { content: " (Del)(You)"; }\n\t\t.de-ref-op.de-ref-my::after { content: " (OP)(You)"; }' : '') + '\n\t' + (Cfg.postBtnsCSS === 0 ? '.de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep, .de-btn-hide, .de-btn-unhide, .de-btn-src { fill: rgba(0,0,0,0); color: currentColor; }\n\t\t.de-btn-fav-sel, .de-btn-stick-on, .de-btn-sage, .de-btn-hide-user, .de-btn-unhide-user { fill: rgba(0,0,0,0); color: #F00; }' : '.de-btn-hide, .de-btn-unhide, .de-btn-src, .de-btn-sage, .de-btn-fav, .de-btn-stick, .de-btn-expthr, .de-btn-rep { color: #F5F5F5; }\n\t\t.de-btn-hide-user { color: #BFFFBF; }\n\t\t.de-btn-unhide-user { color: #FFBFBF; }\n\t\t.de-btn-fav-sel { color: #FFE100; }\n\t\t.de-btn-stick-on { color: #BFFFBF; }\n\t\t.de-btn-sage { fill: #4B4B4B; }\n\t\t.de-btn-expthr, .de-btn-fav, .de-btn-fav-sel, .de-btn-hide, .de-btn-hide-user,\n\t\t.de-btn-unhide, .de-btn-unhide-user, .de-btn-rep, .de-btn-src, .de-btn-stick,\n\t\t.de-btn-stick-on { fill: ' + (Cfg.postBtnsCSS === 1 && !nav.isPresto ? 'url(#de-btn-back-gradient)' : Cfg.postBtnsBack) + '; }') + '\n\t' + (Cfg.hideReplies || Cfg.updThrBtns ? '.de-thread-buttons::before { content: ">> "; }' : '') + '\n\t.de-fullimg-wrap-inpost > .de-fullimg { width: ' + (Cfg.resizeImgs ? '100%' : 'auto') + '; }\n\t' + (Cfg.maskImgs ? aib.qPostImg + ', .de-img-embed, .de-video-obj { opacity: ' + Cfg.maskVisib / 100 + ' !important; }\n\t\t' + aib.qPostImg.split(', ').join(':hover, ') + ':hover, .de-img-embed:hover, .de-video-obj:hover { opacity: 1 !important; }\n\t\t.de-video-obj:not(.de-video-obj-inline) { clear: both; }' : '') + '\n\t' + (Cfg.delImgNames ? '.de-img-name { text-transform: capitalize; text-decoration: none; }' : '') + '\n\t' + (Cfg.widePosts ? '.de-reply { float: none; width: 99.9%; margin-left: 0; }' : '') + '\n\t' + (Cfg.strikeHidd ? '.de-link-hid { text-decoration: line-through !important; }' : '') + '\n\t' + (Cfg.noSpoilers === 1 ? '.spoiler, s { color: #F5F5F5 !important; background-color: #888 !important; }\n\t\t.spoiler > a, s > a:not(:hover) { color: #F5F5F5 !important; background-color: #888 !important; }' : Cfg.noSpoilers === 2 ? '.spoiler, s { color: inherit !important; }\n\t\t\t.spoiler > a, s > a:not(:hover) { color: inherit !important; }' : '') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-input, .rating_select { display: inline !important; } .de-file-rate { display: none !important; }') + '\n\t' + (Cfg.addSageBtn ? '' : '#de-sagebtn, ') + '\n\t' + (Cfg.delHiddPost === 1 || Cfg.delHiddPost === 3 ? '.de-thr-hid, .de-thr-hid + div + hr, .de-thr-hid + div + br, .de-thr-hid + div + br + hr, .de-thr-hid + div + div + hr, ' : '') + '\n\t' + (Cfg.imgNavBtns ? '' : '.de-img-btn, ') + '\n\t' + (Cfg.imgInfoLink ? '' : '.de-fullimg-info, ') + '\n\t' + (Cfg.noPostNames ? aib.qPostName + ', ' + aib.qPostTrip + ', ' : '') + '\n\t' + (Cfg.noBoardRule ? aib.qFormRules + ', ' : '') + '\n\t' + (Cfg.panelCounter ? '' : '#de-panel-info, ') + '\n\t' + (Cfg.removeHidd ? '.de-link-ref.de-link-hid, .de-link-ref.de-link-hid + .de-refcomma, ' : '') + '\n\t' + (Cfg.showHideBtn ? '' : '.de-btn-hide, ') + '\n\t' + (Cfg.showRepBtn ? '' : '.de-btn-rep, ') + '\n\t' + (Cfg.updThrBtns || aib.t ? '' : '.de-thread-updater, ') + '\n\t' + (Cfg.ajaxPosting ? '' : '.de-file-btn-rar, .de-file-btn-txt, ') + '\n\t' + (Cfg.fileInputs ? '' : '.de-file-txt-wrap, .de-file-btn-txt, ') + '\n\t' + (aib.kus || !aib.multiFile && Cfg.fileInputs === 2 ? '' : '#de-pform form > table > tbody > tr > td:not([colspan]):first-child, #de-pform form > table > tbody > tr > th:first-child, ') + 'body > hr, .postarea, .theader { display: none !important; }\r\n';
+
+		$id('de-css-dynamic').textContent = (x + aib.css).replace(/[\r\n\t]+/g, '\r\n\t');
 		$id('de-css-user').textContent = Cfg.userCSS ? Cfg.userCSSTxt : '';
 	}if (/^(?:about|chrome|opera|res):$/i.test(window.location.protocol)) {
 		return;
@@ -22108,31 +22723,31 @@ true, true];
 	if (doc.readyState !== 'loading') {
 		needScroll = false;
 		runMain(true, null);
-	} else {
-		var dataPromise = null;
-		if (aib = getImageBoard(true, false)) {
-			if (!checkStorage()) {
-				return;
-			}
-			initNavFuncs();
-			dataPromise = readData();
-		}
-		needScroll = true;
-		doc.addEventListener('onwheel' in doc.defaultView ? 'wheel' : 'mousewheel', function wFunc(e) {
-			needScroll = false;
-			doc.removeEventListener(e.type, wFunc);
-		});
-		doc.addEventListener('DOMContentLoaded', function () {
-			return runMain(false, dataPromise);
-		});
+		return;
 	}
+	var dataPromise = null;
+	if (aib = getImageBoard(true, false)) {
+		if (!checkStorage()) {
+			return;
+		}
+		initNavFuncs();
+		dataPromise = readData();
+	}
+	needScroll = true;
+	doc.addEventListener('onwheel' in doc.defaultView ? 'wheel' : 'mousewheel', function wFunc(e) {
+		needScroll = false;
+		doc.removeEventListener(e.type, wFunc);
+	});
+	doc.addEventListener('DOMContentLoaded', function () {
+		return runMain(false, dataPromise);
+	});
 
 })(window.opera && window.opera.scriptStorage, window.FormData, function (x, y) {
 	return window.scrollTo(x, y);
 },
 (typeof localData === 'undefined' ? 'undefined' : _typeof(localData)) === 'object' ? localData : null);
 
-},{}],124:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 'use strict';
 
 require('core-js/fn/array/from');
@@ -22151,5 +22766,5 @@ require('core-js/fn/symbol');
 require('core-js/fn/weak-map');
 require('regenerator-runtime/runtime');
 
-},{"core-js/fn/array/from":1,"core-js/fn/array/iterator":2,"core-js/fn/map":3,"core-js/fn/math/clz32":4,"core-js/fn/number/max-safe-integer":5,"core-js/fn/object/assign":6,"core-js/fn/promise":7,"core-js/fn/set":8,"core-js/fn/string/ends-with":9,"core-js/fn/string/includes":10,"core-js/fn/string/repeat":11,"core-js/fn/string/starts-with":12,"core-js/fn/symbol":13,"core-js/fn/weak-map":14,"regenerator-runtime/runtime":122}]},{},[124,123]);
+},{"core-js/fn/array/from":1,"core-js/fn/array/iterator":2,"core-js/fn/map":3,"core-js/fn/math/clz32":4,"core-js/fn/number/max-safe-integer":5,"core-js/fn/object/assign":6,"core-js/fn/promise":7,"core-js/fn/set":8,"core-js/fn/string/ends-with":9,"core-js/fn/string/includes":10,"core-js/fn/string/repeat":11,"core-js/fn/string/starts-with":12,"core-js/fn/symbol":13,"core-js/fn/weak-map":14,"regenerator-runtime/runtime":134}]},{},[136,135]);
 })(null);

@@ -1390,7 +1390,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	var _DerpBtn = _z.setup('a', { class: 'de-menu-item de-src-derpibooru', target: '_blank', text: 'Поиск по Derpibooru', onclick: derpSearch });
 	function derpSearch(e) {
 		var reverse_token = localStorage.getItem('reverse_token') || 'y6GoECgRb541VTJPH7g0kR1owGee9KEi3KdCuBUiQ/3GBUb1aQdYjJNbApZdeZUA8o3WBPSOVy7ZHRj+/46uuw==';
-		var _DerpForm = document.body.appendChild( _z.setup('form', {
+		var _DerpForm = document.body.firstElementChild.appendChild( _z.setup('form', {
 		  'accept-charset': 'UTF-8',
 		   enctype : 'multipart/form-data',
 		   action  : '//derpibooru.org/search/reverse',
