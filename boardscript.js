@@ -18097,24 +18097,6 @@ true, true];
 				var _post4 = post,
 				    count = _post4.count;
 
-				if (aib.pony) {
-					var res = [];
-					var c = 0,
-					    p = this.op,
-					    n = pBuilder._op;
-					if (!aib.t) {
-						p = p.nextNotDeleted, c = p ? p.count - 1 : post.count, n = pBuilder._posts[c];
-					}
-					while (p && n) {
-						if (n.getAttribute('data-lastmodified') !== p.el.getAttribute('data-lastmodified')) {
-							var parent = p.wrap.parentNode;
-							parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
-							res.push(p.num);
-						}
-						c = p.count, p = p.nextNotDeleted, n = pBuilder._posts[c];
-					}
-					res.length && DollchanAPI.notify('newpost', res);
-				}
 				if (count !== 0 && (aib.dobr || count > len || pBuilder.getPNum(count - 1) !== post.num)) {
 					post = this.op.nextNotDeleted;
 					var i = post.count - 1;
@@ -18145,14 +18127,14 @@ true, true];
 							cnt++;
 							i++;
 						} while (pBuilder.getPNum(i) < num);
-						var _res = this._importPosts(prev, pBuilder, i - cnt, i, maybeVParser, maybeSpells);
-						newPosts += _res[0];
-						this.pcount += _res[0];
-						newVisPosts += _res[1];
-						$after(prev.wrap, _res[2]);
-						_res[3].next = post;
-						post.prev = _res[3];
-						DollchanAPI.notify('newpost', _res[4]);
+						var res = this._importPosts(prev, pBuilder, i - cnt, i, maybeVParser, maybeSpells);
+						newPosts += res[0];
+						this.pcount += res[0];
+						newVisPosts += res[1];
+						$after(prev.wrap, res[2]);
+						res[3].next = post;
+						post.prev = res[3];
+						DollchanAPI.notify('newpost', res[4]);
 						for (var temp = post; temp; temp = temp.nextInThread) {
 							temp.count += cnt;
 						}
@@ -18172,12 +18154,12 @@ true, true];
 					}
 				}
 				if (len + 1 > this.pcount) {
-					var _res2 = this._importPosts(this.last, pBuilder, this.lastNotDeleted.count, len, maybeVParser, maybeSpells);
-					newPosts += _res2[0];
-					newVisPosts += _res2[1];
-					this.el.appendChild(_res2[2]);
-					this.last = _res2[3];
-					DollchanAPI.notify('newpost', _res2[4]);
+					var _res = this._importPosts(this.last, pBuilder, this.lastNotDeleted.count, len, maybeVParser, maybeSpells);
+					newPosts += _res[0];
+					newVisPosts += _res[1];
+					this.el.appendChild(_res[2]);
+					this.last = _res[3];
+					DollchanAPI.notify('newpost', _res[4]);
 					this.pcount = len + 1;
 				}
 				updateFavorites(this.op.num, [this.pcount, this.last.num], 'update');
@@ -18186,6 +18168,24 @@ true, true];
 				}
 				if (maybeSpells.hasValue) {
 					maybeSpells.value.endSpells();
+				}
+				if (aib.pony) {
+					var _res2 = [];
+					var c = 0,
+					    p = this.op,
+					    n = pBuilder._op;
+					if (!aib.t) {
+						p = p.nextNotDeleted, c = p ? p.count - 1 : post.count, n = pBuilder._posts[c];
+					}
+					while (p && n) {
+						if (n.getAttribute('data-lastmodified') !== p.el.getAttribute('data-lastmodified')) {
+							var parent = p.wrap.parentNode;
+							parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
+							_res2.push(p.num);
+						}
+						c = p.count, p = p.nextNotDeleted, n = pBuilder._posts[c];
+					}
+					_res2.length && DollchanAPI.notify('newpost', _res2);
 				}
 				return [newPosts, newVisPosts];
 			}
