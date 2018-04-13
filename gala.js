@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.0.2
+	: version 4.1.5
 	© magicode
 */
 var _z = _z();
@@ -20,11 +20,9 @@ if (MAIN_SETTINGS === null) {
 		'snowStorm_freeze': 0,
 		'fixedHeader_enable': 0,
 		'UploadRating_default': '',
-		'show_de-thread-buttons': 0,
+		'show_de-thr-buttons': 0,
 		'show_doubledash': 0,
-		'hide_file_multi': 0,
 		'hide_roleplay'  : 0,
-		'ctrlenoff': 0,
 		'keymarks' : 1,
 		'cm_image': 0,
 		'cm_video': 1,
@@ -33,34 +31,89 @@ if (MAIN_SETTINGS === null) {
 	}
 	
 	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
+} else if ('show_de-thread-buttons' in MAIN_SETTINGS) {
+	MAIN_SETTINGS['show_de-thr-buttons'] = MAIN_SETTINGS['show_de-thread-buttons'];
+	delete MAIN_SETTINGS['show_de-thread-buttons'];
+	delete MAIN_SETTINGS['hide_file_multi'];
+	delete MAIN_SETTINGS['ctrlenoff'];
+	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 }
 // уведомления о новых тредах и постах
 var DATA_NOTS = JSON.parse(localStorage.getItem('data_nots')) || { init: true };
 // распознавание тач-ориентированных устройств
-var IS_TOUCH_DEVICE = 'dast_enable' in MAIN_SETTINGS ? MAIN_SETTINGS['dast_enable'] : 'ontouchstart' in window;
+const IS_TOUCH_DEVICE = 'dast_enable' in MAIN_SETTINGS ? MAIN_SETTINGS['dast_enable'] : 'ontouchstart' in window;
 
-var LOCATION_PATH = parseBoardURL(location.href); // то find { board: w, thread: n, page: n, etc }
+const LOCATION_PATH = parseBoardURL(location.href); // то find { board: w, thread: n, page: n, etc }
 
-var PONY_RATE = { 9: 'S', 10: 'C', 11: 'A', '': 'N' };
+const PONY_RATE = { 9: 'S', 10: 'C', 11: 'A', '': 'N' };
 
-var VALID_FILE_TYPES = /video\/webm|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
+const VALID_FILE_TYPES = /video\/webm|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
 
-var MAX_FILE = {
-	SIZE: {
-		default: 30000000, // b, and other else
-		'r34': 30582912,
-		'd': 20000000,
-		get: function(b) { return b in this ? this[b] : this.default }
-	},
-	COUNT: {
-		default: 5, // b, r34 and other else
-		'test': 20,
-		'd': 2,
-		get: function(b) { return b in this ? this[b] : this.default }
+class MAX_POTENTIAL {
+	constructor(values) {
+		Object.assign(this, values);
+	}
+	get(b) {
+		return b in this ? this[b] : this.default;
 	}
 }
+
+const MAX_FILE_SIZE  = new MAX_POTENTIAL({ default: 30000000, 'r34': 30582912, 'd': 20000000 });
+const MAX_FILE_COUNT = new MAX_POTENTIAL({ default: 5, 'test': 20, 'd': 2 });
+
 // этот стиль лучше бы перенести в глобальный css
-var EXT_STYLE = _z.setup('style', { text: '#tellwhohide { font-size: small; margin-top: 1em; } #tellwhohide > * { display: inline-block; padding: 0 4px;  border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; } #tellwhohide > *:hover { text-decoration: none; } .post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; } .post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; } .post-menu-item:hover { background-color: #222; color: #fff; } .textbutton { cursor: pointer; text-decoration: none; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } .filesize, .file-booru { font-size: .8em; } .file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; } .file-area + .file-area-empty { display: block!important; } #file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; } #file_error > .e-msg { color: brown; padding: 4px 8px; } .idb-selected { margin: 1px; border: 4px solid #5c0; } .modal { z-index: 100!important; } .de-pview { z-index: 98!important; } .pre-sample { display: inline-block; width: 120px; height: 120px; text-align: center; float: left; margin: 2px 5px; } .file-booru:before { content: attr(rate) attr(title); width: 500px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; vertical-align: middle; display: inline-block; } #dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; } .modal-btn { width: 16px; height: 16px; display: inline-block; margin-left: 6px; } .de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; } .de-rpiStub { width: 90px; height: 90px; margin: 1px; } .modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; } .post-files > .filesize { margin-left: 10px; } .de-file:after { content: "\xA0"; white-space: pre-line; } .de-rpiStub:before { content: "R:\xA0"; } .de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }'});
+const EXT_STYLE = _z.setup('style', { text:`
+	#dbaskkey ~ *, .de-rpiStub + *, [hidden] { display: none!important; }
+	#tellwhohide { font-size: small; margin-top: 1em; }
+	#tellwhohide > * { display: inline-block; padding: 0 4px; border: 1px solid; cursor: default; margin: 0 4px 2px 0; border-radius: 3px; }
+	#tellwhohide > *:hover { text-decoration: none; }
+	.filesize, .file-booru { font-size: .8em; }
+	.post-files > .filesize { margin-left: 10px; }
+	.post-menu { list-style: outside none none; padding: 0; z-index: 9999; border: 1px solid grey; position: absolute; }
+	.post-menu-item { padding: 3px 10px; font: 13px arial; white-space: nowrap; cursor: pointer; }
+	.post-menu-item:hover { background-color: #222; color: #fff; }
+	.textbutton {
+		cursor: pointer;
+		text-decoration: none;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	.file-area-empty + .file-area-empty, .file-area-empty ~ .file-area-empty, .file-booru > *:not(.modal-btn) { display: none; }
+	.file-area + .file-area-empty { display: block!important; }
+	#file_error { position: absolute; left: 0; bottom: 0; background-color: rgba(0,0,0,.3); width: 100%; }
+	#file_error > .e-msg { color: brown; padding: 4px 8px; }
+	.idb-selected { margin: 1px; border: 4px solid #5c0; }
+	.modal { z-index: 100!important; }
+	.de-pview { z-index: 98!important; }
+	.pre-sample {
+		display: inline-block;
+		width: 120px;
+		height: 120px;
+		text-align: center;
+		float: left;
+		margin: 2px 5px;
+	}
+	.file-booru:before {
+		content: attr(rate) attr(title);
+		width: 500px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		vertical-align: middle;
+		display: inline-block;
+	}
+	.modal-btn { width: 16px; height: 16px; display: inline-block; margin-left: 6px; }
+	.de-rpiStub + * + .de-file, .de-rpiStub { display: inline-block!important; }
+	.de-rpiStub { width: 90px; height: 90px; margin: 1px; }
+	.modal-btn, .pre-sample, .de-rpiStub { background: transparent no-repeat top center / 100%; }
+	.de-file:after { content: "\xA0"; white-space: pre-line; }
+	.de-rpiStub:before { content: "R:\xA0"; }
+	.de-rpiStub:before, .de-rpiStub:after { font-size: .8em; color: white; }
+	.hmref { content: "(HIDDEN)"; display: inline!important; opacity: 0.7; }
+`});
 
 Object.defineProperty(window, 'isCaptchaNeeded', {
 	value: function(/* no, yes */) {
@@ -71,11 +124,16 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	}
 });
 
-!(function() {
-	// это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам (кроме тех что выносим принудительно через window.funct = )
+//затычки --X
+window.handleFileSelect = window.submitPostform = function() {return 0;}
+
+window.ku_boardspath = location.origin;
+// X-- затычки
+
+(() => {/* это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам */
 	
 	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, recapt2,
-		trashObj = {parentNode:'stb',fn:function(){}}, de_rpiChange = trashObj.fn;
+		trashObj = {parentNode:'0',fn:function(){}}, de_rpiChange = trashObj.fn;
 	
 	var _BlobStor = [];
 	var _SHA512   = [];
@@ -102,16 +160,13 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	// проверяем включена ли кукла в настройках
 	if (MAIN_SETTINGS['dollchanScript_enable']) {
 		
-		// загружаем настройки куклы
-		var DESU_Config = localStorage.getItem('DESU_Config');
+		// загружаем настройки куклы, если настроек нет, значит требуется первичная инициализация
+		if (localStorage.getItem('DESU_Config') === null) {
 		
-		// если настроек нет, значит требуется первичная инициализация
-		if (DESU_Config === null) {
-		
-			DESU_Config = {};
+			const DESU_Config = {};
 		
 			// создаем наши параметры по умолчанию (сюда можно дописывать любой параметр из возможных, кукла их подхватывает)
-			var deParams = {
+			const deParams = {
 				captchaLang: 1,
 				replyWinDrag: 1,
 				replyWinX: 'right: 0',
@@ -130,15 +185,15 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 				addMP3: 0
 			}
 			// подгон плавающей формы по ширине (ширина текстового поля + примерный размер отступов по краям)
-			if (window.innerWidth <= deParams.textaWidth + 40) {
-				deParams.textaWidth = window.innerWidth - 40;
+			if (innerWidth <= deParams.textaWidth + 40) {
+				deParams.textaWidth = innerWidth - 40;
 			} else
-				deParams.replyWinX = 'left: '+ Math.floor((window.innerWidth - deParams.textaWidth) / 2 * 100) / 100 +'px';
+				deParams.replyWinX = 'left: '+ Math.floor((innerWidth - deParams.textaWidth) / 2 * 100) / 100 +'px';
 			// подгон плавающей формы по высоте (высота текстового поля + примерно еще столько же занимают прочие поля вверху и внизу)
-			if (window.innerHeight <= deParams.textaHeight * 2) {
+			if (innerHeight <= deParams.textaHeight * 2) {
 				deParams.textaHeight = 100;
 			} else
-				deParams.replyWinY = 'top: '+ Math.floor((window.innerHeight - deParams.textaHeight) / 2 * 100) / 100 +'px';
+				deParams.replyWinY = 'top: '+ Math.floor((innerHeight - deParams.textaHeight) / 2 * 100) / 100 +'px';
 			// настройки куклы привязаны к хосту
 			DESU_Config[location.host] = deParams;
 			// записываем наш конфиг в локальное хранилище
@@ -153,7 +208,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
 		         однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
 		*/
-				$DOMReady(function() {
+				$DOMReady(() => {
 					// регестрируем функции в API куклоскрипта
 					window.postMessage('de-request-api-message', '*');
 					
@@ -186,26 +241,10 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		}));
 	} else {
 		// действия которые с включенной куклой делать не требуется
-		$DOMReady(function() {
-			// check highlight
-			if (location.hash) {
-				var reply = document.getElementById('reply'+ location.hash.substring(1));
-				if (reply) {
-					reply.scrollIntoView({ block: 'start', behavior: 'smooth' });
-					if (!reply.classList.contains('oppost')) {
-						reply.classList.add('highlight');
-					}
-				}
-			}
+		$DOMReady(() => {
 			// вставляем имя пользователя и адресс почты в поля формы
 			if ('postform' in document.forms) {
 				postform = document.forms.postform;
-				
-				postform.elements['message'].onkeydown = function(e) {
-					if (!MAIN_SETTINGS['ctrlenoff'] && (e.keyCode == 10 || e.keyCode == 13) && (e.ctrlKey || e.altKey)) {
-						postform.submit();
-					}
-				}
 				postform.elements['upload-image-1'].parentNode.append( passcode_up, dbpic_vi );
 				// добавляем поле редактирования
 				postform.elements['msgbox'].parentNode.appendChild(
@@ -384,27 +423,28 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 			style : 'position: fixed; top: 0; left: 0; background-color: #fefefe; width: 100%; height: 100%; z-index: 999999;',
 			html  : '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>'}) );
 		// загружаем дополнительные модули
-		for (var j = 0, len = MAIN_SETTINGS['require_modules'].length; j < len; j++) {
-			var module = document.head.appendChild(document.createElement('script'));
-				module.src = '/lib/javascript/modules/'+ MAIN_SETTINGS['require_modules'][j] +'.user.js';
-				module.type = 'application/javascript';
-		}
-		$DOMReady(function() {
+		MAIN_SETTINGS['require_modules'].forEach(name => {
+			document.head.appendChild(
+				_z.setup('script', { type: 'application/javascript', src: '/lib/javascript/modules/'+ name +'.user.js' }));
+		});
+		$DOMReady(() => {
 			// устанавливаем выбранный пользователем стиль
 			document.selectedStyleSheetSet = (localStorage.getItem('main_style') || 'Photon');
-			// переделываем панель стилей
-			var styles_panel = $(document.getElementById('settings-styles')).draggable({
+			// обрабатываем панель стилей
+			used_style = $(document.getElementById('settings-styles'))
+				.draggable({
 					snap: '#snapper, .droppable',
 					snapMode: 'both',
-					snapTolerance: 50 })[0];
-			if (styles_panel) {
-				used_style = styles_panel.querySelector('a[href="#'+ document.selectedStyleSheetSet +'"]') || trashObj;
+					snapTolerance: 50 })
+				.bind('click', setStylesheet)
+				.find('a[href="#'+ document.selectedStyleSheetSet +'"]')[0];
+			
+			if (used_style) {
 				used_style.className = 'used-style';
 				used_style.parentNode.className = 'list-item-checked';
-				styles_panel.addEventListener('click', setStylesheet, false);
 			}
 			
-			// обрабатываем верхнюю понель
+			// обрабатываем верхнюю панель
 			var fixed_header = document.getElementsByClassName('fixed-header-placeholder')[0];
 			if (fixed_header) {
 				var logo0 = document.getElementsByClassName('logo')[0];
@@ -425,7 +465,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 					}
 				})();
 			}
-		}, function() {
+		}, () => {
 			// убираем заглушку
 			document.documentElement.removeChild(whitescreen);
 		});
@@ -433,13 +473,10 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	
 	// создаем динамически изменяемый стиль
 	var apply_msg = '#settings-main:before { content: "требуется перезагрузка"; display: block; text-align: center; color: brown; font-size: small; }',
-		inline_style = EXT_STYLE.appendChild(document.createTextNode(
-'.hempty { display: none!important; } .hmref { content: "(HIDDEN)"; display: inline!important; opacity: 0.7; } .doubledash { display: '+
-			(MAIN_SETTINGS['show_doubledash'] ? 'inline' : 'none') +'!important; } .de-thread-buttons { display: '+
-			(MAIN_SETTINGS['show_de-thread-buttons'] ? 'inline' : 'none') +'!important; float: left; } .roleplay { display: '+
-			(MAIN_SETTINGS['hide_roleplay'] ? 'none' : 'inline') +'!important; } .file ~ .file { display: '+
-			(MAIN_SETTINGS['hide_file_multi'] ? 'none!important; } .clearancent > blockquote { clear: right!important; }' : 'inline!important; }')
-		));
+		inline_style = EXT_STYLE.appendChild(document.createTextNode('.hempty'+
+			(MAIN_SETTINGS['hide_roleplay']       ? ', .roleplay' : '') +' { display: none!important; } .doubledash { display: '+
+			(MAIN_SETTINGS['show_doubledash']     ? 'inline' : 'none' ) +'!important } .de-thr-buttons '+
+			(MAIN_SETTINGS['show_de-thr-buttons'] ? '+ br ' : ''      ) +'{ display: none!important; }'));
 	
 	var markup_buttons = _z.setup('span', { html: (
 		'<span class="markup-button" gmk="b" title="Жирный">'+
@@ -466,7 +503,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 			'<input value="#D" type="button"><a href="#">#D</a></span>'+
 		'<span class="markup-button quote" gmk=">" title="Цитировать">'+
 			'<input value=">" type="button"><a href="#">&gt;</a></span>'
-		)}, { click: deMarkupButtons });
+	)}, { click: deMarkupButtons });
 	
 	// добавляем свой код через DollchanAPI
 	window.addEventListener('message', function(e) {
@@ -494,9 +531,9 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 							setCookie('name', postform.elements['name'].value, 2e4, '.'+ location.host);
 						}
 						// check captcha needed
-						isCaptchaNeeded(function() {
+						isCaptchaNeeded(() => {
 							postform.elements['go'].disabled = recapt2.hidden = false;
-						}, function() {
+						}, () => {
 							postform.elements['go'].disabled = recapt2.hidden = true;
 							renderCaptcha(
 								recapt2, function(pass) {
@@ -551,8 +588,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		}
 	});
 	
-	// кроссбраузерный аналог $(document).ready()
-	$DOMReady(function onDocReadyHandler() {
+	$DOMReady(() => {
 		// скрываем неугодных
 		MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
 		MAIN_SETTINGS['userposts_hide'].length && EXT_STYLE.append(
@@ -564,15 +600,13 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 			snowStormToggle();
 		}
 		// запуск обновления счетчиков
-		var brd_link = document.querySelectorAll('*[id^="board_link_"]'),
-			not_sets_html = '';
+		var not_sets_html = '';
 			
 		_Count.online = document.getElementById('online') || trashObj;
-		_Count.speed = document.getElementById('speed') || trashObj;
+		_Count.speed  = document.getElementById('speed')  || trashObj;
 		
-		for (var i = 0; i < brd_link.length; i++) {
-			var p = brd_link[i].id.substring(11).split('_'),
-				position = p[0], desk = p[1];
+		for (let blnk of document.querySelectorAll('*[id^="board_link_"]')) {
+			let [position, desk] = blnk.id.substring(11).split('_');
 			if (!(desk in _Count.__m)) {
 				_Count.__m[desk] = {};
 				if (!/changelog|mail|info/.test(desk)) {
@@ -580,7 +614,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 						desk +'" type="checkbox" '+ (desk in DATA_NOTS && DATA_NOTS[desk].mute ? 'checked': '') +'></label>\n';
 				}
 			}
-			_Count.__m[desk][position] = brd_link[i];
+			_Count.__m[desk][position] = blnk;
 		}; updateCounter();
 		
 		// переделываем панель настроек
@@ -589,7 +623,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 				snapMode: 'both',
 				snapTolerance: 50 })[0];
 		if (settings_panel) {
-			// (это ▼ лучше собирать здесь, а со страницы document.write и прочий лишний код убрать)
+			// собираем панель настроек
 			settings_panel.innerHTML = '<div class="settings-section">'+
 				'<div class="options-cell">'+
 					'<p class="menu-head">Спойлеры и рейтинги</p>'+
@@ -600,11 +634,13 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 							'<option value="10">[C]</option>'+
 							'<option value="11">[A]</option>'+
 						'</select>'+
-					'<br>'+
-					'<label class="menu-checkboxes"><input class="set-cookie" name="show_spoiler_9" type="checkbox">Показывать [S]</label>'+
-					'<label class="menu-checkboxes"><input class="set-cookie" name="show_spoiler_10" type="checkbox">Показывать [C]</label>'+
-					'<label class="menu-checkboxes"><input class="set-cookie" name="show_spoiler_11" type="checkbox">Показывать [A]</label><br>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="hide_roleplay" type="checkbox">Скрывать тег rp</label>'+
+					'<br>Раскрывать:'+
+					'<div class="menu-group">'+
+						'<label class="group-cell"><span>[S]</span><input class="set-cookie" name="show_spoiler_9" type="checkbox"></label>'+
+						'<label class="group-cell"><span>[C]</span><input class="set-cookie" name="show_spoiler_10" type="checkbox"></label>'+
+						'<label class="group-cell"><span>[A]</span><input class="set-cookie" name="show_spoiler_11" type="checkbox"></label>'+
+					'</div><br>'+
+					'<label class="menu-checkboxes"><input class="set-cookie" name="onepicman" type="checkbox">По одной картинке в постах</label>'+
 				'</div>'+
 			'</div>'+
 			'<div class="settings-section">'+
@@ -613,7 +649,6 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 					'<label class="menu-checkboxes"><input class="set-module" name="mepr" type="checkbox">Предосмотр постов</label>'+
 					'<label class="menu-checkboxes"><input class="set-module" name="coma" type="checkbox">Цветные отметки</label>'+
 					'<label class="menu-checkboxes"><input class="set-module" name="typo" type="checkbox">«Оттипографичивание» текста</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="show_doubledash" type="checkbox">Олдскул стрелки слева у постов</label>'+
 				'</div>'+
 			'</div>'+
 			'<div class="settings-section">'+
@@ -632,7 +667,6 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 					'<p class="menu-head">Остальное</p>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="dollchanScript_enable" type="checkbox">Использовать встроенный Dollchan Script</label>'+
 					(MAIN_SETTINGS['dollchanScript_enable'] ? '' :
-					'<label class="menu-checkboxes"><input class="set-local" name="ctrlenoff" type="checkbox">Отключить отправку по ctrl+enter</label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="ponymapoff" type="checkbox">Убрать «ответы»</label>') +
 					'<label class="menu-checkboxes"><input class="set-local" name="keymarks" type="checkbox"><span title="'+
 						'—[ по выделенному тексту в любом месте экрана ]—\n'+
@@ -648,8 +682,9 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 						'( &quot; &middot; берет выделенный текст в скобки/кавычки\n'+
 						'{[]} &middot; автокомплит работающий внутри тега [code]">Горячие клавиши разметки</span></label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="galaform" type="checkbox"><span title="Если вас (как и меня) чем то не устраивает кукловая">Альтернативная форма ответа</span></label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="hide_file_multi" type="checkbox">Не показывать 2-5 картинки в постах</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="show_de-thread-buttons" type="checkbox">Включить кнопку получения новых постов</label>'+
+					'<label class="menu-checkboxes"><input class="set-local" name="hide_roleplay" type="checkbox">Скрывать тег [rp]</label>'+
+					'<label class="menu-checkboxes"><input class="set-local" name="show_doubledash" type="checkbox">Олдскул стрелки слева у постов</label>'+
+					'<label class="menu-checkboxes"><input class="set-local" name="show_de-thr-buttons" type="checkbox">Включить кнопку получения новых постов</label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="fixedHeader_enable" type="checkbox">Зафиксировать хедер</label>'+
 					'<label class="menu-checkboxes"><input class="set-local" name="snowStorm_enable" type="checkbox">Включить снег'+
 					'<span style="font-style: italic; font-size: 75%; margin-left: 10px;">|<input class="set-local" name="snowStorm_freeze" type="checkbox">Всегда Вкл. |</span></label>'+
@@ -688,15 +723,14 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 							e.stopPropagation();
 					}
 				};
-				
-			for (var i = 0, len = MAIN_SETTINGS['userposts_hide'].length; i < len; i++) {
-				var a = ublacklist.appendChild(document.createElement('a'));
-					a.textContent = MAIN_SETTINGS['userposts_hide'][i];
-			}
+			
+			MAIN_SETTINGS['userposts_hide'].forEach(name => {
+				ublacklist.appendChild( document.createElement('a') ).textContent = name;
+			});
 			
 			settings_panel.querySelector('input[name="userposts_hide"]').addEventListener('input', function(e) {
 				clearTimeout(e.target.timer_id);
-				e.target.timer_id = setTimeout(function() {
+				e.target.timer_id = setTimeout(() => {
 					var match = e.target.value.match(/\(([^)]+)/g),
 						len = match ? match.length : 0;
 					for (var i = 0; i < len; i++) {
@@ -704,7 +738,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 						if (!!uname && MAIN_SETTINGS['userposts_hide'].indexOf(uname) == -1) {
 							MAIN_SETTINGS['userposts_hide'].push(uname);
 							hideUserPosts(uname);
-							ublacklist.appendChild(document.createElement('a')).textContent = uname;
+							ublacklist.appendChild( document.createElement('a') ).textContent = uname;
 							localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 						}
 					}
@@ -740,14 +774,14 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 			}
 			
 			// уточняем максимальный размер файла на доске
-			MAX_FILE.SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
+			MAX_FILE_SIZE[postform.elements['board'].value] = Number(postform.elements['MAX_FILE_SIZE'].value);
 			
 			for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
 				
-				var md5      = postform.elements['md5-'+ i];
-				var passcode = postform.elements['md5passcode-'+ i];
-				var upload   = postform.elements['upload-image-'+ i];
-				var rating   = postform.elements['upload-rating-'+ i];
+				let md5      = postform.elements['md5-'+ i];
+				let passcode = postform.elements['md5passcode-'+ i];
+				let upload   = postform.elements['upload-image-'+ i];
+				let rating   = postform.elements['upload-rating-'+ i];
 				
 				_FileArea[i] = upload.parentNode;
 				_DelBtn[i]   = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton', text: '\n[X]' }, { click: cleanInputs });
@@ -762,7 +796,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 				}
 			}
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
-			MAX_FILE.COUNT[postform.elements['board'].value] = i - 1;
+			MAX_FILE_COUNT[postform.elements['board'].value] = i - 1;
 			
 			// отслеживание изменений в DOM
 			var _throbsv = 'MessageChannel' in window ? '' : ', body > form[action="/board.php"] *[id^="thread"]',
@@ -907,7 +941,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 				
 			var dbSEARCH = document.getElementById('dbsearch');
 				dbSEARCH.oninput = function(e) {
-					this.value = this.value.toLowerCase().replace(/[фФ]/, 'a').replace(/[иИ]/, 'b').replace(/[сС]/, 'c').replace(/[вВ]/, 'd').replace(/[уУ]/, 'e').replace(/[аА]/, 'f').replace(/[пП]/, 'g').replace(/[рР]/, 'h').replace(/[шШ]/, 'i').replace(/[оО]/, 'j').replace(/[лЛ]/, 'k').replace(/[дДжЖ]/, 'l').replace(/[ьЬбБ]/, 'm').replace(/[тТ]/, 'n').replace(/[щЩ]/, 'o').replace(/[зЗхХ]/, 'p').replace(/[йЙ]/, 'q').replace(/[кК]/, 'r').replace(/[ыЫ]/, 's').replace(/[еЕ]/, 't').replace(/[гГ]/, 'u').replace(/[мМ]/, 'v').replace(/[цЦ]/, 'w').replace(/[чЧ]/, 'x').replace(/[нН]/, 'y').replace(/[яЯ]/, 'z').replace(/[;\[\]{}',\.\/`ъЪЭэ]/,'');
+					this.value = this.value.replace(/[фФ]/, 'a').replace(/[иИ]/, 'b').replace(/[сС]/, 'c').replace(/[вВ]/, 'd').replace(/[уУ]/, 'e').replace(/[аА]/, 'f').replace(/[пП]/, 'g').replace(/[рР]/, 'h').replace(/[шШ]/, 'i').replace(/[оО]/, 'j').replace(/[лЛ]/, 'k').replace(/[дДжЖ]/, 'l').replace(/[ьЬбБ]/, 'm').replace(/[тТ]/, 'n').replace(/[щЩ]/, 'o').replace(/[зЗхХ]/, 'p').replace(/[йЙ]/, 'q').replace(/[кК]/, 'r').replace(/[ыЫ]/, 's').replace(/[еЕ]/, 't').replace(/[гГ]/, 'u').replace(/[мМ]/, 'v').replace(/[цЦ]/, 'w').replace(/[чЧ]/, 'x').replace(/[нН]/, 'y').replace(/[яЯ]/, 'z').replace(/[;\[\]{}',\.\/`ъЪЭэ]/,'');
 					$(dbPAGE).hide('slow');
 					dbPAGE.value = 1;
 					updatesq();
@@ -934,11 +968,11 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 			var dbNEXT = document.querySelector('.modal__next');
 				dbNEXT.onclick = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); };
 			
-			recapt2 = document.getElementById('recapt-2')
+			recapt2 = document.getElementById('recapt-2');
 			
-			isCaptchaNeeded(function() {
+			isCaptchaNeeded(() => {
 				postform.elements['go'].disabled = false;
-			}, function() {
+			}, () => {
 				postform.elements['go'].disabled = true;
 				renderCaptcha(
 					recapt2, function(pass) {
@@ -1054,7 +1088,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 	function fileBinaryCheck(file, n, resolve, reject, smax) {
 		if (!VALID_FILE_TYPES.test(file.type)) {
 			reject('Неподдерживаемый формат\n<br>\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
-		} else if (file.size > (smax = MAX_FILE.SIZE.get(postform.elements['board']))) {
+		} else if (file.size > (smax = MAX_FILE_SIZE.get(postform.elements['board']))) {
 			reject('Слишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
 		} else {
 			var reader = new FileReader();
@@ -1211,18 +1245,15 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 					break;
 				case 'show':
 					inline_style.textContent = inline_style.textContent.replace(
-						new RegExp('.'+ keyW[1] +' { display: \\w+'), '.'+ keyW[1] +' { display: '+ (MAIN_SETTINGS[name] ? 'inline' : 'none'));
+						new RegExp('(\\.'+ keyW[1] +')\\s[^}]+'), '$1'+ (
+						keyW[1] == 'de-thr-buttons' ? `${ MAIN_SETTINGS[name] ? ' + br' : '' } { display: none!important; ` :
+						                              ` { display: ${ MAIN_SETTINGS[name] ? 'inline' : 'none' }!important; `));
 					break;
 				case 'hide':
-					inline_style.textContent = inline_style.textContent.replace(
-						new RegExp('.'+ keyW[1] +' { display: \\w+'), '.'+ keyW[1] +' { display: '+ (MAIN_SETTINGS[name] ? 'none' : 'inline'));
-					if (keyW[1] === 'file') {
-						if (MAIN_SETTINGS['hide_file_multi']) {
-							inline_style.textContent += '.clearancent > blockquote { clear: right!important; }';
-						} else
-							inline_style.textContent = inline_style.textContent.replace('.clearancent > blockquote { clear: right!important; }', '');
-					}
-				case 'ctrlenoff': case 'keymarks': case '!':
+					inline_style.textContent = MAIN_SETTINGS[name] ?
+						inline_style.textContent.replace('.hempty', `.hempty, .${ keyW[1] }`) :
+						inline_style.textContent.replace(`, .${ keyW[1] }`, '');
+				case 'keymarks': case '!':
 					break;
 				default:
 					// вывод сообщения о необходимости перезагрузки с отслеживанием изменений
@@ -1424,178 +1455,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 		};
 	}
 	
-})(function() {
-	
-	//затычки --X
-	window.handleFileSelect = window.submitPostform = function() {return 0;}
-
-	window.ku_boardspath = location.origin;
-	// X-- затычки
-	
-	// полифил для реализации selectedStyleSheetSet - родного метода для переключения html5 стилей link[rel="stylesheet alternate"]
-	if (!('selectedStyleSheetSet' in document)) {
-		Object.defineProperty(document, 'selectedStyleSheetSet', {
-			configurable: true,
-			set: function(key) {
-				var links = this.head.querySelectorAll('link[title]'),
-					length = links.length, sSheets = new Array(length);
-				for (var i = 0; i < length; i++) {
-					sSheets[i] = links[i].title;
-					sSheets[links[i].title] = links[i];
-					links[i].disabled = true;
-				}
-				sSheets[''] = {};
-				if (key in sSheets) {
-					sSheets[(sSheets._def_ = key)].disabled = false;
-				} else
-					sSheets._def_ = '';
-				Object.defineProperties(this, {
-					'styleSheetSet': {
-						enumerable: true,
-						value: sSheets },
-					'selectedStyleSheetSet': {
-						configurable: false,
-						enumerable: true,
-						set: function(name) {
-							this.styleSheetSet[ this.styleSheetSet._def_ ].disabled = true;
-							if (name in this.styleSheetSet) {
-								this.styleSheetSet[(this.styleSheetSet._def_ = name)].disabled = false;
-							} else 
-								this.styleSheetSet._def_ = '';
-						}, get: function() {
-							return this.styleSheetSet._def_;
-						}
-					}
-				});
-			}
-		});
-	}
-	// полифил c упрощенной реализацией classList
-	if (!('classList' in Element.prototype)) {
-		Object.defineProperty(Element.prototype, 'classList', {
-			configurable: false,
-			enumerable: true,
-			get: function() {
-				var classList = this.className.split(' '), elem = this;
-					classList.add = function(/* classes */) {
-						for (var c = 0, len = arguments.length; c < len; c++) {
-							if (classList.indexOf(arguments[c]) == -1)
-								classList.push(arguments[c]);
-						}
-						elem.className = classList.join(' ');
-					}
-					classList.remove = function(/* classes */) {
-						for (var c = 0, len = arguments.length; c < len; c++) {
-							var index = classList.indexOf(arguments[c])
-								index != -1 && classList.splice(index, 1);
-						}
-						elem.className = classList.join(' ');
-					}
-					classList.toggle = function(c) {
-						var index = classList.indexOf(c);
-							index != -1 ? classList.splice(index, 1) : classList.push(c);
-						elem.className = classList.join(' ');
-					}
-					classList.contains = function(c) {
-						return classList.indexOf(c) !== -1;
-					}
-				return classList;
-			}
-		});
-	}
-	// полифилы для отмены действий по событию
-	if (!('preventDefault' in Event.prototype)) {
-		Event.prototype.preventDefault = function() {
-			this.returnValue = false;
-		};
-	}
-	if (!('stopPropagation' in Event.prototype)) {
-		Event.prototype.stopPropagation = function() {
-			this.cancelBubble = true;
-		};
-	}
-	if (!Element.prototype.append) {
-		Element.prototype.append = Document.prototype.append = DocumentFragment.prototype.append = function() {
-			for (var i = 0, arg = arguments; i < arg.length; i++) {
-				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-				this.appendChild( node );
-			}
-		};
-	}
-	if (!Element.prototype.prepend) {
-		Element.prototype.prepend = Document.prototype.prepend = DocumentFragment.prototype.prepend = function() {
-			for (var i = 0, arg = arguments; i < arg.length; i++) {
-				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-				this.insertBefore( node, this.childNodes[i] );
-			}
-		};
-	}
-	if (!Element.prototype.before) {
-		Element.prototype.before = function() {
-			for (var i = 0, arg = arguments; i < arg.length; i++) {
-				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-				this.parentNode.insertBefore( node, this );
-			}
-		};
-	}
-	if (!Element.prototype.after) {
-		Element.prototype.after = function() {
-			for (var i = 0, arg = arguments; i < arg.length; i++) {
-				var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-				this.parentNode.insertBefore( node, this.nextSibling );
-			}
-		};
-	}
-	if (!String.prototype.includes) {
-		String.prototype.includes = function() {
-			return String.prototype.indexOf.apply(this, arguments) >= 0;
-		};
-	}
-	if (!Array.prototype.includes) {
-		Array.prototype.includes = function(searchElement /*, fromIndex*/) {
-			if (this == null) throw new TypeError('Array.prototype.includes called on null or undefined');
-		
-			var O = Object(this);
-			var len = parseInt(O.length, 10) || 0;
-			if (len === 0) {
-				return false;
-			}
-			var n = parseInt(arguments[1], 10) || 0;
-			var k;
-			if (n >= 0) {
-				k = n;
-			} else {
-				k = len + n;
-				if (k < 0) {k = 0;}
-			}
-			var currentElement;
-			while (k < len) {
-				currentElement = O[k];
-				if (searchElement === currentElement ||
-					(searchElement !== searchElement && currentElement !== currentElement)) { // NaN !== NaN
-						return true;
-					}
-					k++;
-			}
-			return false;
-		};
-	}
-	if (!NodeList.prototype.forEach) {
-		NodeList.prototype.forEach = function(fun) {
-			Array.prototype.slice.call(this, 0).forEach(fun);
-		}
-	}
-	if (!('hidden' in HTMLElement.prototype)) {
-		Object.defineProperty(HTMLElement.prototype, 'hidden', {
-			get: function () {
-				return this.hasAttribute('hidden');
-			},
-			set: function (value) {
-				this[(value ? 'set' : 'remove') +'Attribute']('hidden', '');
-			}
-		})
-	}
-}());
+})();
 
 function getCookie(name) {
 	var out = decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*'+ encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&') +'\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || 0;
@@ -1802,14 +1662,14 @@ function hashString(str) {
 	var hash = 5381,
 		i    = str.length;
 		
-	while(i) {
+	while (i) {
 		hash = (hash * 33) ^ str.charCodeAt(--i);
 	}
 	return hash >>> 0;
 }
 function renderCaptcha(place, reCallback) {
 	if (typeof window.grecaptcha === 'undefined') {
-		setTimeout(function(){ renderCaptcha(place, reCallback) }, 2000);
+		setTimeout(() => renderCaptcha(place, reCallback), 2000);
 	} else
 		grecaptcha.render(place, {
 			'sitekey' : '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
@@ -3298,7 +3158,7 @@ var Gala = (function() {
 		Object.defineProperties(tempForm, {
 			MAX_FILES_LIMIT: {
 				get: function() {
-					return this.files.length >= MAX_FILE.COUNT.get(this.elements['board'].value);
+					return this.files.length >= MAX_FILE_COUNT.get(this.elements['board'].value);
 				}
 			}
 		})
@@ -3410,7 +3270,7 @@ var Gala = (function() {
 	}
 	
 	function isFileValid(blob, desk) {
-		var o = true, s = MAX_FILE.SIZE.get(desk);
+		var o = true, s = MAX_FILE_SIZE.get(desk);
 		if (blob.size > s) {
 			o = false;
 			alertify.error('Максимальный размер файла на этой доске = '+ bytesMagnitude(s));
@@ -3721,7 +3581,7 @@ var Gala = (function() {
 							if (!thread_id) {
 								location.href = location.origin +'/'+ desk +'/res/'+ data.id +'.html';
 							} else {
-								var buttons_path = '#thread'+ thread_id + desk +' + .de-thread-buttons .de-abtn';
+								var buttons_path = '#thread'+ thread_id + desk +' + .de-thr-buttons .de-thr-updater-link';
 								document.querySelectorAll(buttons_path +', '+ buttons_path.replace('+', '>')).forEach(function(abtn) {
 									abtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
 								});

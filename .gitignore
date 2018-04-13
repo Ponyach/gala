@@ -1,7 +1,4 @@
-*.node
-*.pid
-*.swp
-.build
-.lock*
 .DS_Store
+node_modules
+package-lock.json
 Dollchan-Extension-Tools*
