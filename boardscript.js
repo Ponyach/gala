@@ -13516,17 +13516,16 @@ class Thread {
 			var c = 0, p = this.op, n = pBuilder._op;
 			while (p && n) {
 				if (n.getAttribute('data-num') - p.num) {
+					c++;
+				} else {
+					if (n.getAttribute('data-lastmodified') != p.el.getAttribute('data-lastmodified')) {
+						let parent = p.wrap.parentNode;
+							parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
+						res.push(p.num);
+					}
 					c = p.count,
-					n = pBuilder._posts[c];
-					continue;
+					p = p.nextNotDeleted;
 				}
-				if (n.getAttribute('data-lastmodified') != p.el.getAttribute('data-lastmodified')) {
-					let parent = p.wrap.parentNode;
-						parent.replaceChild(this._updatePost(p, n, maybeVParser, maybeSpells).wrap, p.wrap);
-					res.push(p.num);
-				}
-				c = p.count,
-				p = p.nextNotDeleted,
 				n = pBuilder._posts[c];
 			}
 			res.length && DollchanAPI.notify('newpost', res);
