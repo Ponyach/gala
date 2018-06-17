@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.1.5
+	: version 4.1.8
 	© magicode
 */
 var _z = _z();
@@ -47,7 +47,7 @@ const LOCATION_PATH = parseBoardURL(location.href); // то find { board: w, thr
 
 const PONY_RATE = { 9: 'S', 10: 'C', 11: 'A', '': 'N' };
 
-const VALID_FILE_TYPES = /video\/webm|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
+const VALID_FILE_TYPES = /audio\/(?:ogg|mpeg)|video\/(?:webm|mp4|ogg)|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
 
 class MAX_POTENTIAL {
 	constructor(values) {
@@ -474,7 +474,7 @@ window.ku_boardspath = location.origin;
 	// создаем динамически изменяемый стиль
 	var apply_msg = '#settings-main:before { content: "требуется перезагрузка"; display: block; text-align: center; color: brown; font-size: small; }',
 		inline_style = EXT_STYLE.appendChild(document.createTextNode('.hempty'+
-			(MAIN_SETTINGS['hide_roleplay']       ? ', .roleplay' : '') +' { display: none!important; } .doubledash { display: '+
+			(MAIN_SETTINGS['hide_roleplay']       ? ', rp, .roleplay' : '') +' { display: none!important; } .doubledash { display: '+
 			(MAIN_SETTINGS['show_doubledash']     ? 'inline' : 'none' ) +'!important } .de-thr-buttons '+
 			(MAIN_SETTINGS['show_de-thr-buttons'] ? '+ br ' : ''      ) +'{ display: none!important; }'));
 	
@@ -548,26 +548,34 @@ window.ku_boardspath = location.origin;
 						var i = 0, n = 1;
 						var de_btn_del = document.getElementsByClassName('de-file-btn-del')
 						var dePostproc = function(file, k, j) {
+							
+							const parent = de_btn_del[j].parentNode.parentNode;
+							
 							fileBinaryCheck(file, k, trashObj.fn, function(msg) {
+								
 								_FileArea[k].className = 'file-area-empty';
+								
 								postform.elements['md5passcode-'+ k].value = '';
-								postform.elements['md5-'+ k].value = '';
-								var int = setInterval(function() {
-									var c = de_btn_del[j].parentNode.parentNode.querySelector('.de-file-txt-input, img.de-file-img');
-									if (c.value || c.src) {
+								postform.elements['md5-'+         k].value = '';
+								
+								var int = setInterval(() => {
+									const { src, value } = parent.querySelector('.de-file-txt-input, img.de-file-img');
+									
+									if (src || value) {
 										de_btn_del[j].dispatchEvent(
 											new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
 										); clearInterval(int);
 									}
 								}, 200);
 								alertify.error(msg);
-							})
+							});
 						}
 						do {
-							if (!result[i])
+							if (!result[i]) {
 								_DelBtn[n].click();
-							else if (isBlobDifferent(_BlobStor[i], result[i]))
-								dePostproc(result[i], n, i)
+							} else if (isBlobDifferent(_BlobStor[i], result[i])) {
+								dePostproc(result[i], n, i);
+							}
 							n++; i++;
 						} while (i < result.length);
 						
@@ -1509,52 +1517,53 @@ function showPostMenu(/* target, pid */) {
 //reader need this function and onclick elements on thumbs
 function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_width, thumb_height */) {
 	
-	var box_image = new Image;
-	var box_video = _z.setup('video', { id: 'v-play', controls: true });
-		box_video.style = box_image.style = 'border-radius: 3px; border-width: 0px; position: absolute; display: inline-block;';
-	
 	var onWinResize, layer = _z.setup('div', {
 		style : 'position: fixed; bottom: 0; top: 0; right: 0; left: 0; background-color: rgba(17,17,17,.9); z-index: 99999;',
-		html  : '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><span></span></div>'
+		html  : '<div style="position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;"><img style="border-radius: 3px; border-width: 0px; position: absolute; display: inline-block;" /></div>'
 	},{ click : function(e) {
-		if (e.target.id !== 'v-play') {
-			this.remove();
-			box_image.src = box_video.src = '';
-			window.removeEventListener('resize', onWinResize, false);
-		}
-	}});
+		this.remove();
+		box_image.src = '';
+		window.removeEventListener('resize', onWinResize, false);
+	}}), box_image = layer.firstElementChild.firstElementChild;
 	
 	var f = 'innerWidth' in window ? 'window.inner': document.documentElement ? 'document.documentElement.client' : 'document.body.client',
 		getWasp = new Function('return { width: '+ f +'Width, height: '+ f +'Height }');
 	
 	!(expandImage = function(evt, src, thumb, oW, oH, tW, tH) {
+		
 		evt.preventDefault();
 		
-		var ctx = /\.webm$/.test(src) ? box_video : box_image;
-			ctx.src = src;
-		
-		calcScale(ctx, oW, oH);
-		
-		window.addEventListener('resize', (onWinResize = function() {
-			calcScale(ctx, oW, oH)
-		}), false);
-		
-		document.body.appendChild(layer).firstElementChild.replaceChild(
-			ctx, layer.firstElementChild.firstElementChild
-		);
+		if (/\.(?:webm|mp4|mp3|ogg)$/.test(src)) {
+			if (!Gala.mediaFrame['Video'].src.includes(src)) {
+				Gala.mediaFrame['Video'].src    = src;
+				Gala.mediaFrame['Video'].poster = thumb;
+				Gala.mediaFrame['Video'].id     = 'video_'+ evt.target.parentNode.id;
+			}
+			Gala.mediaFrame.loadFrame(Gala.mediaFrame['Video']);
+		} else {
+			
+			box_image.src = src;
+			calcScale(box_image, oW, oH);
+			
+			window.addEventListener('resize', (onWinResize = () => {
+				calcScale(box_image, oW, oH)
+			}), false);
+			
+			document.body.appendChild(layer);
+		}
 	}).apply(this, arguments);
 	
 	function calcScale(i, s, n) {
 		var r, w = getWasp();
 		if (w.width / w.height < s / n) {
 			r = w.width * 0.85;
-			r > s && ('high-res' == i.className || i.style.maxWidth) ? (i.width = s, i.height = n)  : (i.height = n * (r / s), i.width = r);
+			r > s && ('high-res' == i.className || i.style.maxWidth ) ? (i.width = s, i.height = n) : (i.height = n * (r / s), i.width  = r);
 		} else {
 			r = 0.85 * w.height;
-			r > n && ('high-res' == i.className || i.style.maxHeight) ? (i.width = s, i.height = n)  : (i.width = s * (r / n), i.height = r);
+			r > n && ('high-res' == i.className || i.style.maxHeight) ? (i.width = s, i.height = n) : (i.width  = s * (r / n), i.height = r);
 		}
-		i.style.left = (0 - i.width / 2) +'px';
-		i.style.top = (0 - i.height / 2) +'px';
+		i.style.left = (0 - i.width  / 2) +'px';
+		i.style.top  = (0 - i.height / 2) +'px';
 	}
 }
 
@@ -2632,7 +2641,7 @@ var Gala = (function() {
 				} else if (
 					(c = KeyChars.quots.indexOf(key)) != -1 &&
 					(_inTA ? select : window.getSelection().toString()).length > 0) {
-						key === '@' ? $this.textMark('• ', '\n• ', 'ql') :
+						key === '@' ? $this.textMark('* ', '\n* ', 'ql') :
 						              $this.textMark(key +' ', '\n'+ key +' ', 'ql');
 				} else
 					exit = false;
@@ -3309,6 +3318,7 @@ var Gala = (function() {
 		fnode['upload_name'] = file.name;
 		
 		switch (type[0]) {
+			case 'audio':
 			case 'video':
 				gview = _z.setup('video', {'src': blobURL, 'muted': true, 'class': 'file-gview',
 					'onloadedmetadata': function() {
@@ -3638,7 +3648,7 @@ var Gala = (function() {
 	
 	if (MAIN_SETTINGS.galaform) {
 		_GalaForm = makeGalaForm(MAIN_SETTINGS.galaform);
-		isCaptchaNeeded(null, function(){ _GalaForm.captcha_needed() });
+		isCaptchaNeeded(null, () => { _GalaForm.captcha_needed() });
 	}
 	
 	function handlePostNode(pst) {
@@ -3691,16 +3701,16 @@ var Gala = (function() {
 	$DOMReady(function(e) {
 		if ('postform' in document.forms && _GalaForm) {
 			
-			var globalform_area = _z.setup('div', {
+			const globalform_area = _z.setup('div', {
 				class: 'gala-globalform-area',
 				html: '<div>[<a class="gala-globalform-open"></a>]</div><div style="text-align: left; display: none;"></div><hr>'
 			});
 			
-			var postarea = _z.setup(document.querySelector('.postarea'), { style: 'display:block!important;' });
-			postarea && postarea.after( globalform_area );
+			const postarea = _z.setup(document.querySelector('.postarea'), { style: 'display: block!important;' });
+			      postarea && postarea.after( globalform_area );
 			
-			var delform = (document.forms.delform || document.querySelector('form[de-form]'))
-			delform && delform.after( globalform_area.cloneNode(true) );
+			const delform = (document.forms.delform || document.querySelector('form[de-form]'));
+			      delform && delform.after( globalform_area.cloneNode(true) );
 			
 			document.body.appendChild(
 				_z.setup('div', { style: 'height: 0; width: 0; position: fixed;', html: 
@@ -3739,6 +3749,7 @@ var Gala = (function() {
 		document.body.appendChild( dynamicCSS );
 	});
 	return {
+		mediaFrame: _Container,
 		handleLinks: handleLinks
 	}
 })(); /* ===> end <=== */
