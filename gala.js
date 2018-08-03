@@ -2,7 +2,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.1.8
+	: version 4.2.0
 	© magicode
 */
 var _z = _z();
@@ -13,29 +13,23 @@ var MAIN_SETTINGS = JSON.parse(localStorage.getItem('main_settings'));
 if (MAIN_SETTINGS === null) {
 	// общие настройки по умолчанию
 	MAIN_SETTINGS = {
-		'require_modules': [],
-		'userposts_hide': [],
-		'dollchanScript_enable': 1,
-		'snowStorm_enable': 0,
-		'snowStorm_freeze': 0,
-		'fixedHeader_enable': 0,
-		'UploadRating_default': '',
-		'show_de-thr-buttons': 0,
-		'show_doubledash': 0,
-		'hide_roleplay'  : 0,
-		'keymarks' : 1,
-		'cm_image': 0,
-		'cm_video': 1,
-		'cm_audio': 1,
-		'cm_docs': 1
+		'require_modules'      : [],
+		'userposts_hide'       : [],
+		'dollchanScript_enable': true,
+		'snowStorm_enable'     : false,
+		'snowStorm_freeze'     : false,
+		'fixedHeader_enable'   : false,
+		'UploadRating_default' : '',
+		'show_de-thr-buttons'  : false,
+		'show_doubledash'      : false,
+		'hide_roleplay'        : false,
+		'keymarks'             : true,
+		'cm_image'             : false,
+		'cm_video'             : true,
+		'cm_audio'             : true,
+		'cm_docs'              : true
 	}
 	
-	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
-} else if ('show_de-thread-buttons' in MAIN_SETTINGS) {
-	MAIN_SETTINGS['show_de-thr-buttons'] = MAIN_SETTINGS['show_de-thread-buttons'];
-	delete MAIN_SETTINGS['show_de-thread-buttons'];
-	delete MAIN_SETTINGS['hide_file_multi'];
-	delete MAIN_SETTINGS['ctrlenoff'];
 	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 }
 // уведомления о новых тредах и постах
@@ -167,22 +161,18 @@ window.ku_boardspath = location.origin;
 		
 			// создаем наши параметры по умолчанию (сюда можно дописывать любой параметр из возможных, кукла их подхватывает)
 			const deParams = {
-				captchaLang: 1,
-				replyWinDrag: 1,
-				replyWinX: 'right: 0',
-				replyWinY: 'top: 0',
-				textaWidth: 500,
-				textaHeight: 240,
-				updThrDelay: 20,
-				webmVolume: 50,
-				linksOut: 300,
-				postSameImg: 0,
-				removeEXIF: 0,
-				spacedQuote: 0,
-				favOnReply: 0,
-				txtBtnsLoc: 0,
-				updScript: 0,
-				addMP3: 0
+				replyWinDrag : 1,
+				replyWinX    : 'right: 0',
+				replyWinY    : 'top: 0',
+				textaWidth   : 500,
+				textaHeight  : 240,
+				updThrDelay  : 20,
+				linksOut     : 300,
+				postSameImg  : 0,
+				removeEXIF   : 0,
+				spacedQuote  : 0,
+				updDollchan  : 0,
+				addMP3       : 0
 			}
 			// подгон плавающей формы по ширине (ширина текстового поля + примерный размер отступов по краям)
 			if (innerWidth <= deParams.textaWidth + 40) {
@@ -197,6 +187,12 @@ window.ku_boardspath = location.origin;
 			// настройки куклы привязаны к хосту
 			DESU_Config[location.host] = deParams;
 			// записываем наш конфиг в локальное хранилище
+			localStorage.setItem('DESU_Config', JSON.stringify(DESU_Config));
+		}
+		else if (localStorage.getItem('DESU_Config').includes('updScript')) {
+			const DESU_Config = JSON.parse(localStorage.getItem('DESU_Config'));
+			delete DESU_Config[location.host]['updScript'];
+			DESU_Config[location.host]['updDollchan'] = 0;
 			localStorage.setItem('DESU_Config', JSON.stringify(DESU_Config));
 		}
 		// собираем куклоскрипт  ~  добавляем на страницу
@@ -551,7 +547,7 @@ window.ku_boardspath = location.origin;
 							
 							const parent = de_btn_del[j].parentNode.parentNode;
 							
-							fileBinaryCheck(file, k, trashObj.fn, function(msg) {
+							fileBinaryCheck(file, postform.elements['board'].value, addFileHash.bind(null, k, false), function(msg) {
 								
 								_FileArea[k].className = 'file-area-empty';
 								
@@ -559,9 +555,9 @@ window.ku_boardspath = location.origin;
 								postform.elements['md5-'+         k].value = '';
 								
 								var int = setInterval(() => {
-									const { src, value } = parent.querySelector('.de-file-txt-input, img.de-file-img');
+									const fi = parent.querySelector('.de-file-txt-input, img.de-file-img');
 									
-									if (src || value) {
+									if ( 'src' in fi || 'value' in fi ) {
 										de_btn_del[j].dispatchEvent(
 											new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
 										); clearInterval(int);
@@ -837,15 +833,15 @@ window.ku_boardspath = location.origin;
 			});
 		
 			window.handleFileSelect = function(n) {
-				var target = postform.elements['upload-image-'+ n],
-					file = target.files[0];
-				
-				fileBinaryCheck(file, n, function() {
-					target.parentNode.insertBefore(_DelBtn[n], target);
-				}, function(msg) {
-					_DelBtn[n].click();
-					alertify.error(msg);
-				});
+				fileBinaryCheck(
+					target.files[0],
+					postform.elements['board'].value,
+					addFileHash.bind(null, n, true),
+					function(msg) {
+						_DelBtn[n].click();
+						alertify.error(msg);
+					}
+				);
 			};
 			window.submitPostform = function() {
 				// убираем поле для детекта отправки через кукловский ctrl+enter
@@ -1093,42 +1089,24 @@ window.ku_boardspath = location.origin;
 		this.remove();
 	}
 	
-	function fileBinaryCheck(file, n, resolve, reject, smax) {
-		if (!VALID_FILE_TYPES.test(file.type)) {
-			reject('Неподдерживаемый формат\n<br>\n['+ file.name.substring(file.name.lastIndexOf('.') + 1) +' => jpeg, webm, png, gif]');
-		} else if (file.size > (smax = MAX_FILE_SIZE.get(postform.elements['board']))) {
-			reject('Слишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((smax / 1024 / 1024).toFixed(2)) +' MB]');
+	function addFileHash(n, add_btn, md5) {
+		var target   = postform.elements['upload-image-'+ n];
+		var passcode = postform.elements['md5passcode-' + n],
+			cix = _SHA512.indexOf(passcode.value);
+			cix !== -1 && _SHA512.splice(cix, 1);
+		
+		if (_SHA512.indexOf(md5) !== -1) {
+			alertify.error('Уже добавлен точно такой же файл');
+			_DelBtn[n].click();
 		} else {
-			var reader = new FileReader();
-				reader.onload = function() {
-					if (this.readyState == FileReader.DONE) {
-						var filestring = this.result,
-							stringLength = filestring.length - 1;
-						
-						while (!isNaN( filestring.charAt(stringLength) )) { // is number
-							stringLength--;
-						}
-					
-						var passcode = postform.elements['md5passcode-'+ n],
-							md5 = rstr2hex(rstr_md5(filestring.substring(0, stringLength))),
-							cix = _SHA512.indexOf(passcode.value);
-							cix !== -1 && _SHA512.splice(cix, 1);
-							
-						if (_SHA512.indexOf(md5) !== -1) {
-							reject('Уже добавлен точно такой же файл');
-						} else {
-							// always send sha512 of file for passcode records
-							$GET('/chkmd5.php?x='+ md5, function() {
-								postform.elements['md5-'+ n].value = this.responseText == 'true' ? md5 : '';
-							});
-							// field will be sent only if user have cookie with real passcode
-							_FileArea[n].className = 'file-area';
-							_SHA512.push((passcode.value = md5));
-							resolve(md5);
-						}
-					}
-				}
-				reader.readAsBinaryString(file);
+			// always send sha512 of file for passcode records
+			$GET('/chkmd5.php?x='+ md5, function() {
+				postform.elements['md5-'+ n].value = this.responseText == true ? md5 : '';
+			});
+			// field will be sent only if user have cookie with real passcode
+			_FileArea[n].className = 'file-area';
+			_SHA512.push((passcode.value = md5));
+			add_btn && target.parentNode.insertBefore(_DelBtn[n], target);
 		}
 	}
 	
@@ -1203,7 +1181,7 @@ window.ku_boardspath = location.origin;
 					localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 					break;
 				case 'set-local':
-					MAIN_SETTINGS[name] = (_Input.type === 'checkbox' ? _Input.checked + 0 : _Input.value);
+					MAIN_SETTINGS[name] = (_Input.type === 'checkbox' ? _Input.checked : _Input.value);
 					localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 					keyW = name.split('_');
 			}
@@ -1614,7 +1592,35 @@ function _PonyRateHiglight(el, val) {
 		/\s?PONY_rate-(?:\w*)|$/, ' PONY_rate-'+ PONY_RATE[val]
 	);
 }
-
+function fileBinaryCheck(file, desk, resolve, reject, max_size) {
+	if (!VALID_FILE_TYPES.test(file.type)) {
+		reject(file.name +'\n<br>\n<br>\nНеподдерживаемый формат\n<br>\n['+ file.type.substring(file.type.indexOf('/') + 1) +' => jpeg, png, gif, webm, mp4, ogg, mp3]');
+	}
+	else if ((max_size = MAX_FILE_SIZE.get(desk)) < file.size) {
+		reject(file.name +'\n<br>\n<br>\nСлишком большой файл\n<br>\n['+ ((file.size / 1024 / 1024).toFixed(2)) +'/'+ ((max_size / 1024 / 1024).toFixed(2)) +' MB]');
+	}
+	else {
+		const reader = new FileReader;
+		reader.onload = function() {
+			if (this.readyState == FileReader.DONE) {
+				let filestring = this.result;
+				let stringLength = filestring.length;
+				let i = 1;
+				let lastChar = filestring.charAt(stringLength - i);
+				if (!isNaN(lastChar)) { // is number
+					do {
+						i++;
+						lastChar = filestring.charAt(stringLength - i);
+					} while (!isNaN(lastChar));
+					filestring = filestring.substring(0, stringLength - i);
+				}
+				resolve( rstr2hex(rstr_md5(filestring)) );
+			}
+		}
+		reader.readAsBinaryString(file);
+		return true;
+	}
+}
 function isBlobDifferent($blob, _blob) {
 	if (!$blob)
 		return true;
@@ -2843,32 +2849,27 @@ var Gala = (function() {
 							trip = el.querySelector('.postertrip') && getCookie('name');
 						getDataResponse(location.origin +'/get_raw_post.php?b='+ res.board +'&p='+ res.post, function(data) {
 							switch (data.status) {
-								case 2:
-									alertify.alert(data.error);
+								case 0:
+								case 1:
+									(_EditForm || (_EditForm = makeGalaForm(null))).clear_all();
+									_EditForm.children['gala-error-msg'].textContent = data.error;
+									_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
+									_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
+									_EditForm.elements['board'].value = res.board;
+									_EditForm.elements['replythread'].value = res.thread;
+									_EditForm.elements['editpost'].value = res.post;
+									_EditForm.elements['message'].value = data.raw_message;
+									_EditForm.elements['subject'].value = data.subject;
+									_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
+									_EditForm.elements['em'].value = data.email;
+									_EditForm.querySelector('.sagearrow').classList[data.email === 'sage' ? 'remove' : 'add']('inactive');
+									if (data.files) {
+										_EditForm.add_md5(data.files);
+									}
+									el.prepend( _EditForm );
 									break;
 								default:
-									if (!('raw_message' in data)) {
-										alertify.alert('Нельзя редактировать чужой пост.');
-									} else {
-										(_EditForm || (_EditForm = makeGalaForm(null))).clear_all();
-										el.querySelectorAll('.fs_'+ res.post).forEach(function(fs, n) {
-											_EditForm.get_url_file(
-												encodeURI(fs.querySelector('a[href^="/'+ res.board +'/src/"]').href), 
-												(/R\:\s*\[(\w)\]/i.exec(fs.textContent) || {1:'N'})[1], n);
-										});
-										_EditForm.children['gala-error-msg'].textContent = data.error;
-										_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
-										_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
-										_EditForm.elements['board'].value = res.board;
-										_EditForm.elements['replythread'].value = res.thread;
-										_EditForm.elements['editpost'].value = res.post;
-										_EditForm.elements['message'].value = data.raw_message;
-										_EditForm.elements['subject'].value = data.subject;
-										_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
-										_EditForm.elements['em'].value = data.email;
-										_EditForm.querySelector('.sagearrow').classList[data.email === 'sage' ? 'remove' : 'add']('inactive');
-										el.prepend( _EditForm );
-									}
+									alertify.alert(data.error);
 							}
 						});
 					}
@@ -2944,123 +2945,6 @@ var Gala = (function() {
 		btn.parentNode.nextElementSibling.style['display'] = 'none';
 	}
 	
-	var Base64String = {
-		encodings:'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
-		_toUint6: function (nChr) {
-			return nChr > 64 && nChr < 91 ?
-				nChr - 65 : nChr > 96 && nChr < 123 ?
-				nChr - 71 : nChr > 47 && nChr < 58 ?
-				nChr + 4 : nChr === 43 ?
-				62 : nChr === 47 ?
-				63 : 0;
-		},
-		decode: function (sBase64, nBlocksSize) {
-			var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ''),
-				nInLen  = sB64Enc.length,
-				nOutLen = nBlocksSize ? Math.ceil(
-					(nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2,
-				taBytes = new Uint8Array(nOutLen);
-			for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
-				nMod4 = nInIdx & 3;
-				nUint24 |= this._toUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
-				if (nMod4 === 3 || nInLen - nInIdx === 1) {
-					for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
-						taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
-					}
-					nUint24 = 0;
-				}
-			}
-			return taBytes;
-		},
-		encode: function (raw) {
-			var base64 = ''
-			var bytes = new Uint8Array(raw)
-			var byteLength = bytes.byteLength
-			var byteRemainder = byteLength % 3
-			var mainLength = byteLength - byteRemainder
-			var a, b, c, d, chunk;
-			// Main loop deals with bytes in chunks of 3
-			for (var i = 0; i < mainLength; i = i + 3) {
-				// Combine the three bytes into a single integer
-				chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2]
-				// Use bitmasks to extract 6-bit segments from the triplet
-				a = (chunk & 16515072) >> 18 // 16515072 = (2^6 - 1) << 18
-				b = (chunk & 258048) >> 12 // 258048 = (2^6 - 1) << 12
-				c = (chunk & 4032) >> 6 // 4032 = (2^6 - 1) << 6
-				d = chunk & 63 // 63 = 2^6 - 1
-				// Convert the raw binary segments to the appropriate ASCII encoding
-				base64 += this.encodings[a] + this.encodings[b] + this.encodings[c] + this.encodings[d]
-			}// Deal with the remaining bytes and padding
-			if (byteRemainder == 1) {
-				chunk = bytes[mainLength]
-				a = (chunk & 252) >> 2 // 252 = (2^6 - 1) << 2
-				// Set the 4 least significant bits to zero
-				b = (chunk & 3) << 4 // 3 = 2^2 - 1
-				base64 += this.encodings[a] + this.encodings[b] + '=='
-			} else if (byteRemainder == 2) {
-				chunk = (bytes[mainLength] << 8) | bytes[mainLength + 1]
-				a = (chunk & 64512) >> 10 // 16128 = (2^6 - 1) << 8
-				b = (chunk & 1008) >> 4 // 1008 = (2^6 - 1) << 4
-				// Set the 2 least significant bits to zero
-				c = (chunk & 15) << 2 // 15 = 2^4 - 1
-				base64 += this.encodings[a] + this.encodings[b] + this.encodings[c] + '='
-			}
-			return base64
-		}
-	}
-	
-	function jpegStripExtra(binary/*, typeout*/) {
-		// Create 8-bit unsigned array
-		var array = [];
-		for (var i = 0; i < binary.length; i++) {
-			array.push(binary.charCodeAt(i));
-		}
-		var orig = new Uint8Array(array),
-			outData = new ArrayBuffer(orig.byteLength),
-			output = new Uint8Array(outData);
-		var posO = 2,
-			posT = 2;
-		output[0] = orig[0];
-		output[1] = orig[1];
-		while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
-			if (orig[posO] === 0xFF && orig[posO + 1] === 0xFE) {
-				posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
-			} else if (orig[posO] === 0xFF && (orig[posO + 1] >> 4) === 0xE) {
-				posO += 2 + orig[posO + 2] * 256 + orig[posO + 3];
-			} else if (orig[posO] === 0xFF && orig[posO + 1] === 0xDA) {
-				var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
-				for (var i = 0; i < l; i++) {
-					output[posT++] = orig[posO++];
-				}
-				while (!(orig[posO] === 0xFF && orig[posO + 1] === 0xD9) && posO <= orig.byteLength) {
-					output[posT++] = orig[posO++];
-				}
-			} else {
-				var l = (2 + orig[posO + 2] * 256 + orig[posO + 3]);
-				for (var i = 0; i < l; i++) {
-					output[posT++] = orig[posO++];
-				}
-			}
-		}
-		output[posT] = orig[posO];
-		output[posT + 1] = orig[posO + 1];
-		output = new Uint8Array(outData, 0, posT + 2);
-		return (arguments[1] == 'Blob' ? new Blob([output], { type: 'image/jpeg' }) :
-				arguments[1] == 'dataURL' ? 'data:image/jpeg;base64,'+ Base64String.encode(output) : output);
-	}
-	
-	function convertToBinaryString(uint8) {
-		var binaryString = '';
-		if (typeof TextDecoder !== 'undefined') {
-			binaryString = new TextDecoder('x-user-defined').decode(uint8);
-		} else {
-			for (var i = 0, len = uint8.byteLength; i < len; i++) {
-				binaryString += String.fromCharCode(uint8[i]);
-			}
-		}
-		return binaryString;
-	}
-	
 	function bytesMagnitude(bytes) {
 		return (bytes < 1024 ? bytes +' B' :
 				bytes < 1024 * 1024 ? (bytes / 1024).toFixed(2) +' KB' :
@@ -3071,7 +2955,7 @@ var Gala = (function() {
 	var RATING_VALUE = { S: 9, C: 10, A: 11, N: '' };
 	
 	function makeGalaForm(formPosition) {
-		var tempForm  = _z.setup('form', { class: (formPosition == 1 ? 'reply gala-freestyle' : 'reply'), action: '/board.php?json=1', enctype: 'multipart/form-data',
+		var tempForm  = _z.setup('form', { class: (formPosition == 1 ? 'reply gala-freestyle' : 'reply'), action: '/board.php?json=1&strip_exif=', enctype: 'multipart/form-data',
 			id: 'gala-'+ (formPosition == null ? 'edit' : 'reply') +'-form', style: 'display: table-row-group;'+ (formPosition == 1 ? ' left: 35%; top: 35%;' : ''), 
 			html: '<input name="board" value="'+ LOCATION_PATH.board +'" type="hidden"><input name="replythread" value="'+ LOCATION_PATH.thread +'" type="hidden">'+
 					'<div id="gala-error-msg"></div>'+
@@ -3164,13 +3048,6 @@ var Gala = (function() {
 			_z.setup(tempForm.elements['name'   ], { value: (galaSafe['name'   ] || '')}, { input: safeValue });
 			_z.setup(tempForm.elements['message'], { value: (galaSafe['message'] || '')}, { input: safeValue });
 		}
-		Object.defineProperties(tempForm, {
-			MAX_FILES_LIMIT: {
-				get: function() {
-					return this.files.length >= MAX_FILE_COUNT.get(this.elements['board'].value);
-				}
-			}
-		})
 		
 		tempForm['FileArea'] = _z.setup(tempForm.querySelector('.file-area'), null, {
 			'dragover': function(e) {
@@ -3199,28 +3076,70 @@ var Gala = (function() {
 			dynamicCSS.textContent = dynamicCSS.textContent.replace(tempForm['FileArea'].transfer_info, '');
 		}
 		tempForm.add_files = function addGFiles(data) {
-			if (this.MAX_FILES_LIMIT)
-				return;
-			try {
-				var files = data.files,
-					fileURL = data.getData ? data.getData(data.effectAllowed === 'copyLink' ? 'Text' : 'URL') : null,
-					defaultR = this.elements['default_file_rating'].value;
-				if (files.length === 0 && fileURL) {
-					this.get_url_file(fileURL, defaultR);
-				} else {
-					for (var i = 0; i < files.length && !this.MAX_FILES_LIMIT; i++) {
-						var FiD = files[i].type +';'+ files[i].size;
-						if (FiD in this.files || !isFileValid(files[i], this.elements['board'].value))
-							continue;
+			
+			var files  =  data.files,
+			   length  =  files.length,
+			  fileURL  =  data.getData ? data.getData(data.effectAllowed === 'copyLink' ? 'Text' : 'URL') : null,
+			     desk  =  this.elements['board'].value,
+			    limit  =  MAX_FILE_COUNT.get( desk ) - this.files.length,
+			 defaultR  =  this.elements['default_file_rating'].value;
+			
+			if ( ! length && fileURL) {
+				limit > 0 && this.get_url_file(fileURL);
+			}
+			else {
+				for (var i = 0; i < length && i < limit; i++) {
+					
+					let file = files[i];
+					let FiD  = file.type +';'+ file.size;
+					
+					if (FiD in this.files) {
+						limit += (length > limit);
+						continue;
+					} 
+					
+					let fnode = VALID_FILE_TYPES.test(file.type) ? makeGalaFile(file, FiD, defaultR) : '';
+					
+					if (fileBinaryCheck(file, desk, md5 => { fnode.md5 = md5 }, MSG => { alertify.error(MSG) })) {
+						
 						this.files.push(
-							(this.files[FiD] = makeGalaFile(files[i], FiD, defaultR))
+							(this.files[FiD] = this['FileArea'].appendChild(fnode))
 						);
 						this['FileArea'].classList.add('hold');
-						this['FileArea'].appendChild(this.files[FiD]);
+					}
+					else if (length > limit) {
+						limit++;
 					}
 				}
-			} catch(log) {
-				console.error(log);
+			}
+		}
+		tempForm.add_md5 = function addMD5(data) {
+			
+			const LIMIT  = MAX_FILE_COUNT.get( this.elements['board'].value ) - this.files.length;
+			const length = data.length;
+			
+			for (var i = 0; i < length && i < LIMIT; i++) {
+				
+				let md5   = data[i].md5;
+				let R     = data[i].rating || '';
+				let fnode = _z.setup('div', {
+					id   : 'gala-file_'+ md5,
+					class: 'file-gox',
+					html : '<span class="file-remove"></span><img class="file-gview" src="'+ data[i].thumb +'" title="'+ data[i].info +'"><div class="file-cover-label '+ PONY_RATE[R] +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'
+				}, {
+					click : localGFclick
+				});
+				
+				fnode.exist       = true;
+				fnode.md5         = md5;
+				fnode.rating      = R;
+				fnode.upload_name = data[i].name;
+				
+				this.files.push(
+					(this.files[md5] = fnode)
+				);
+				this['FileArea'].classList.add('hold');
+				this['FileArea'].appendChild(fnode);
 			}
 		}
 		tempForm.clear_all = function() {
@@ -3241,36 +3160,23 @@ var Gala = (function() {
 			this.elements['submit_this_form'].className = 'call-captcha-widget';
 			this.elements['submit_this_form'].value = 'Капча';
 		}
-		tempForm.get_url_file = function httpGFile(fileURL, rating, idx) {
-			if (this.MAX_FILES_LIMIT)
-				return;
-			getDataBinary('Blob', fileURL, function(blob, f_url) {
-				try {
-					var FiD = blob.type +';'+ blob.size;
-					if (!(FiD in this.files) && !this.MAX_FILES_LIMIT && isFileValid(blob, this.elements['board'].value)) {
-						blob.name = getPageName(f_url);
-						this.files.push(
-							(this.files[FiD] = makeGalaFile(blob, FiD, rating))
-						);
-						this['FileArea'].classList.add('hold');
-						switch (typeof idx) {
-							case 'number':
-								var gox = this['FileArea'].querySelectorAll('.file-gox');
-								if (gox[idx]) {
-									this['FileArea'].insertBefore(this.files[FiD], gox[idx]);
-									break;
-								}
-							default:
-								this['FileArea'].appendChild(this.files[FiD]);
-						}
-					}
-				} catch(log) {
-					console.error(log);
-				}
-			}.bind(this));
+		tempForm.get_url_file = function httpGFile(fileURL) {
+			getDataBinary('Blob', fileURL, (blob, f_url) => {
+				blob.name = getPageName(f_url);
+				tempForm.add_files({ files: [blob] });
+			});
 		}
 		
 		return tempForm;
+	}
+	
+	function localGFclick(e) {
+		switch (e.target.classList[0]) {
+			case 'file-cover':
+				var fR = e.target.classList[1];
+				this.rating = RATING_VALUE[fR];
+				e.target.parentNode.parentNode.className = 'file-cover-label '+ fR;
+		}
 	}
 	
 	function localGFChanges(e) {
@@ -3278,18 +3184,6 @@ var Gala = (function() {
 		localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
 	}
 	
-	function isFileValid(blob, desk) {
-		var o = true, s = MAX_FILE_SIZE.get(desk);
-		if (blob.size > s) {
-			o = false;
-			alertify.error('Максимальный размер файла на этой доске = '+ bytesMagnitude(s));
-		}
-		if (!VALID_FILE_TYPES.test(blob.type)) {
-			o = false;
-			alertify.error('Неподдерживаемый формат файла ('+ blob.type +')');
-		}
-		return o;
-	}
 	function itemsPlurality(count) {
 		var i = count.toString(),
 			l = i[i.length - 1];
@@ -3298,24 +3192,22 @@ var Gala = (function() {
 	
 	function makeGalaFile(file, FiD, R) {
 		
-		var gview, fnode;
-		var type = file.type.split('/');
-		var size = bytesMagnitude(file.size);
+		var gview, hash;
+		var type    = file.type.split('/');
+		var size    = bytesMagnitude(file.size);
 		var blobURL = (window.URL || window.webkitURL).createObjectURL(file);
 		
-		fnode = _z.setup('div', {id: 'gala-file_'+ FiD, class: 'file-gox', html: '<span class="file-remove"></span><div class="file-cover-label '+ (R || 'N') +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'}, {
-			click: function(e) {
-				switch (e.target.classList[0]) {
-					case 'file-cover':
-						var fR = e.target.classList[1];
-						this.rating = RATING_VALUE[fR];
-						e.target.parentNode.parentNode.className = 'file-cover-label '+ fR;
-				}
-			}
+		var fnode = _z.setup('div', {
+			id   : 'gala-file_'+ FiD,
+			class: 'file-gox',
+			html : '<span class="file-remove"></span><div class="file-cover-label '+ (R || 'N') +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'
+		}, {
+			click: localGFclick
 		});
-		fnode['blob'] = file;
-		fnode['rating'] = (RATING_VALUE[R] || '');
-		fnode['upload_name'] = file.name;
+		
+		fnode.blob        = file;
+		fnode.rating      = (RATING_VALUE[R] || '');
+		fnode.upload_name = file.name;
 		
 		switch (type[0]) {
 			case 'audio':
@@ -3324,7 +3216,7 @@ var Gala = (function() {
 					'onloadedmetadata': function() {
 						var sec = Math.floor(this.duration) % 60;
 						var min = Math.floor(this.duration / 60);
-						this.title = type[1].toUpperCase() +', '+ this.videoWidth +'×'+ this.videoHeight +', '+ min+':'+sec  +', '+ size;
+						this.title = type[1].toUpperCase() +', '+ this.videoWidth +'×'+ this.videoHeight +', '+ min +':'+ sec +', '+ size;
 					}
 				});
 				gview.onmouseover = gview.onmouseout = function(e) {
@@ -3355,39 +3247,16 @@ var Gala = (function() {
 		}
 		fnode.insertBefore(gview, fnode.lastElementChild);
 		
-		var reader = new FileReader();
-			reader.onload = function() {
-				if (this.readyState !== FileReader['DONE'])
-					return;
-				if (type[1] === 'jpeg') {
-					fnode.dataStriped = jpegStripExtra(this.result);
-				}
-				if (typeof rstr_md5 === 'function') {
-					var filestring = this.result,
-						stringLength = filestring.length - 1;
-					
-					while (!isNaN( filestring.charAt(stringLength) )) { // is number
-						stringLength--;
-					}
-					
-					fnode.md5 = rstr2hex(rstr_md5(filestring.substring(0, stringLength)));
-					//always send sha512 of file for passcode records
-					//field will be sent only if user have cookie with real passcode
-					getDataResponse(location.origin +'/chkmd5.php?x='+ fnode.md5, function(y) {
-						if (!(fnode.exist = !!y) && fnode.dataStriped) {
-							var striped = convertToBinaryString(fnode.dataStriped),
-								strip_md5 = rstr2hex(rstr_md5(striped));
-							getDataResponse(location.origin +'/chkmd5.php?x='+ strip_md5, function(_y) {
-								if (!!_y) {
-									fnode.exist = true;
-									fnode.md5 = strip_md5;
-								}
-							});
-						}
-					});
-				}
+		Object.defineProperty(fnode, 'md5', {
+			get: (   ) => hash,
+			set: (md5) => {
+				//always send sha512 of file for passcode records
+				//field will be sent only if user have cookie with real passcode
+				getDataResponse(location.origin +'/chkmd5.php?x='+ (hash = md5), (y) => {
+					fnode.exist = y;
+				});
 			}
-			reader.readAsBinaryString(file);
+		});
 		
 		return fnode;
 	}
@@ -3543,8 +3412,6 @@ var Gala = (function() {
 					exists[i] = form.files[i];
 					continue;
 				}
-				if (form.elements['remove_jpeg_exif'].checked && form.files[i].blob.type == 'image/jpeg')
-					form.files[i].blob = new Blob([form.files[i].dataStriped], { type: 'image/jpeg' });
 				if (form.elements['clear_files_name'].checked)
 					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
 				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
@@ -3639,7 +3506,7 @@ var Gala = (function() {
 							form.elements['submit_this_form'].value = 'Отправить';
 					}
 				};
-				postReq.open('POST', form.action, true);
+				postReq.open('POST', form.action + Number (form.elements['remove_jpeg_exif'].checked), true);
 				postReq.send(formData);
 		} catch(log) {
 			console.error(log)
