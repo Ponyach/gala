@@ -127,7 +127,7 @@ window.ku_boardspath = location.origin;
 (() => {/* это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам */
 	
 	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, recapt2,
-		trashObj = {parentNode:'0',fn:function(){}}, de_rpiChange = trashObj.fn;
+		trashObj = {parentNode:'0',fn:()=>{}}, de_rpiChange = trashObj.fn;
 	
 	var _BlobStor = [];
 	var _SHA512   = [];
@@ -210,26 +210,28 @@ window.ku_boardspath = location.origin;
 					
 					var dbTHMB  = {},
 						deFiles = document.getElementsByClassName('de-file'),
-						deWHead = document.getElementsByClassName('de-win-head')[0];
+						deWHead = document.querySelector('.de-win-head');
 					
+					if (deWHead) {
 						deWHead.prepend( passcode_up, dbpic_vi );
 						
-					EXT_STYLE.append(
-						'.modal-btn[for="modal-1"] { left: 20px; position: absolute; }'+
-						'.modal-btn[for="modal-2"] { left: 0; position: absolute; }' );
-						
-					de_rpiChange = function(k, src, title, rate) {
-						if (deFiles.length > 0) {
-							if (!dbTHMB[k]) {
-								dbTHMB[k] = document.createElement('div');
+						EXT_STYLE.append(
+							'.modal-btn[for="modal-1"] { left: 20px; position: absolute; }'+
+							'.modal-btn[for="modal-2"] { left: 0; position: absolute; }' );
+							
+						de_rpiChange = function(k, src, title, rate) {
+							if (deFiles.length > 0) {
+								if (!dbTHMB[k]) {
+									dbTHMB[k] = document.createElement('div');
+								}
+								if (src) {
+									dbTHMB[k].style['background-image'] = 'url('+ src +')';
+									dbTHMB[k].title = title;
+									dbTHMB[k].className = 'de-rpiStub '+ PONY_RATE[rate];
+									deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
+								} else
+									dbTHMB[k].remove();
 							}
-							if (src) {
-								dbTHMB[k].style['background-image'] = 'url('+ src +')';
-								dbTHMB[k].title = title;
-								dbTHMB[k].className = 'de-rpiStub '+ PONY_RATE[rate];
-								deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
-							} else
-								dbTHMB[k].remove();
 						}
 					}
 				});
@@ -537,8 +539,6 @@ window.ku_boardspath = location.origin;
 									postform.elements['g-recaptcha-response'].value = pass || '';
 								});
 						});
-						// создаем поле для детекта отправки через кукловский ctrl+enter после отправки поста
-						postform.elements['dollchan_send'].value = 1;
 						break;
 					case 'filechange':
 						var i = 0, n = 1;
@@ -769,6 +769,7 @@ window.ku_boardspath = location.origin;
 			
 			postform = document.forms.postform;
 			postform.elements['msgbox'].textMark = galamarK;
+			postform.elements['dollchan_send'].value = +postform.elements['msgbox'].classList.contains('de-textarea');
 			
 			if ('name' in postform.elements) {
 				postform.elements['name'].value = getCookie('name') || '';
@@ -834,7 +835,7 @@ window.ku_boardspath = location.origin;
 		
 			window.handleFileSelect = function(n) {
 				fileBinaryCheck(
-					target.files[0],
+					postform.elements['upload-image-'+ n].files[0],
 					postform.elements['board'].value,
 					addFileHash.bind(null, n, true),
 					function(msg) {
@@ -844,8 +845,14 @@ window.ku_boardspath = location.origin;
 				);
 			};
 			window.submitPostform = function() {
-				// убираем поле для детекта отправки через кукловский ctrl+enter
-				postform.elements['dollchan_send'].value = 0;
+				// очищаем перед отправкой поля с файлами
+				if (1 != postform.elements['dollchan_send'].value) {
+					for (var n = 1, length = MAX_FILE_COUNT.get(postform.elements['board'].value); n <= length; n++) {
+						if (postform.elements['md5-'+ n].value) {
+							postform.elements['upload-image-'+ n].value = '';
+						}
+					}
+				};
 				postform.elements['fake_go'].dispatchEvent(
 					new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
 				);
@@ -2974,7 +2981,7 @@ var Gala = (function() {
 								'<label title="Убирать имена файлов">'+
 									'<input id="clear_files_name" type="checkbox" hidden><span class="feckbox">имена</span>'+
 								'</label>'+
-								'<label title="Удалять данные Exif из JPEG">'+
+								'<label title="Удалять лишние данные картинок">'+
 									'<input id="remove_jpeg_exif" type="checkbox" hidden><span class="feckbox">EXIF</span>'+
 								'</label>'+
 								'<label title="Рейтинг картинок по умолчанию">'+
@@ -3391,35 +3398,27 @@ var Gala = (function() {
 		try { e.preventDefault();
 			var form = e.target;
 			var flen = e.target.files.length;
-			if (!flen && !form.elements['message'].value) {
+			if (!flen && !form.elements['message'].value.trim()) {
 				form.children['gala-error-msg'].textContent = content_error;
 				form.children['gala-error-msg'].style['background-color'] = '#E04000';
 				return;
 			}
-			var i, n, exists = {};
 			var desk = form.elements['board'].value;
 			var thread_id = form.elements['replythread'].value;
 			var formData = new FormData();
-			for (i = form.elements.length; i > 0;) {
-				 i--;
-				if (!form.elements[i].name) {
+			for (var i = 0, elen = form.elements.length; i < elen; i++) {
+				if ( ! form.elements[i].name) {
 					continue;
 				}
 				formData.append(form.elements[i].name, form.elements[i].value);
 			}
-			for (n = 1; i < flen; i++) {
+			for (var i = 0, n = 1; i < flen; i++, n++) {
 				if (form.files[i].exist) {
-					exists[i] = form.files[i];
-					continue;
+					formData.append('md5-'+ n, form.files[i].md5);
+					form.files[i].blob = new Blob;
 				}
-				if (form.elements['clear_files_name'].checked)
-					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
-				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
-				formData.append('upload-rating-'+ (n++), form.files[i].rating);
-			}
-			for (var k in exists) {
-				formData.append('md5-'+ n, exists[k].md5);
-				formData.append('upload-rating-'+ (n++), exists[k].rating);
+				formData.append('upload[]', form.files[i].blob, (form.elements['clear_files_name'].checked ? '' : form.files[i].upload_name));
+				formData.append('upload-rating-'+ n, form.files[i].rating);
 			}
 			
 			form.elements['submit_this_form'].disabled = true;
