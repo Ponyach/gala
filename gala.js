@@ -3417,7 +3417,9 @@ var Gala = (function() {
 					formData.append('md5-'+ n, form.files[i].md5);
 					form.files[i].blob = new Blob;
 				}
-				formData.append('upload[]', form.files[i].blob, (form.elements['clear_files_name'].checked ? '' : form.files[i].upload_name));
+				if (form.elements['clear_files_name'].checked)
+					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
+				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
 				formData.append('upload-rating-'+ n, form.files[i].rating);
 			}
 			
