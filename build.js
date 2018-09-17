@@ -61,7 +61,7 @@ if (program.compatible) {
 		__pieceOf = (code) => uglify.minify(code, {
 			compress: { booleans: false },
 			output: {
-				max_line_len: 255,
+				//max_line_len: 255,
 				comments: 'all',
 				ast: false
 			}
@@ -125,7 +125,7 @@ for (let name of program.args) {
 			fileSystem.writeFile(output, head + uglify.minify(buf.toString('utf8'), {
 				compress: { booleans: false },
 				output: {
-					max_line_len: 255,
+					//max_line_len: 255,
 					comments: false,
 					ast: false
 				}
