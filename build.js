@@ -1,14 +1,13 @@
 
 const possibles = [
-  /* 0: */  'gala',
-  /* 1: */  'boardscript',
-  /* +2: */ 'dast', 'mepr', 'coma', 'sure', 'moco', 'typo', 'wrwr'
+    /*    0    */ /* 1 */ /* 2 */ /* 3 */ /* 4 */ /* 5 */ /* 6 */ /* 7 */ /* 8 */
+   'boardscript', 'gala', 'mepr', 'coma', 'dast', 'sure', 'moco', 'typo', 'wrwr'
 ];
 
-const program   = require('commander');
+const program = require('commander');
 
 program
-	.version('1.0.0')
+	.version('1.1.2')
 	.option('-M, --min', 'enable code minify.')
 	.option('-C, --compatible', 'enable ES6->ES5 code transformation.')
 	.option('-U, --userscript', 'build UserScript.')
@@ -27,95 +26,127 @@ console.log(`
 
 	}).parse(process.argv);
 
-var patern = program.min ? '.min' : '';
+var __pieceOf = (code) => code;
 
 const startTime  = Date.now();
 const fileSystem = require('fs');
-const babylon    = require('babylon');
-const browserify = require('browserify');
 const babel      = require('babel-core');
 const Readable   = require('stream').Readable;
-const presets    = [['env', {
-	uglify : program.min
-}]];
+const uglify     = require('uglify-js');
+const options    = {
+	comments: true,
+	compact: false
+}
 
-//program.min && presets.push(require('babel-preset-minify'))
-
-for (let arg of program.args) {
+if (program.compatible) {
+	options.plugins = [
+		'transform-es2015-arrow-functions',
+		'transform-es2015-block-scoping', [
+		'transform-es2015-classes', { loose: true }],
+		'transform-es2015-computed-properties',
+		'transform-es2015-destructuring', [
+		'transform-es2015-for-of', { loose: true, assumeArray: true }],
+		'transform-es2015-literals',
+		'transform-es2015-shorthand-properties',
+		'transform-es2015-parameters',
+		'transform-es2015-spread', [
+		'transform-es2015-template-literals', { loose: true }],
+		'transform-es2015-typeof-symbol',
+		'transform-es2015-unicode-regex'
+	];
 	
-	let word = possibles.indexOf(arg);
-	
-	if (word + 1) {
-		
-		if (word > 1) {
-			__buildModules(arg).then(result => {
-			
-				var { code, map, ast } = babel.transformFromAst(babylon.parse(result, {
-					allowReturnOutsideFunction: true,
-					useBuiltIns: true
-				}), result, { presets });
-			
-				if (program.userscript) {
-					code = babel.transformFileSync(arg +'.meta.js').code +'\n'+ code;
-					patern = '.user';
-				}
-			
-				fileSystem.writeFile('build/'+ arg + patern +'.js', code, err => {
-				// => [Error: EISDIR: illegal operation on a directory, open <directory>]
-					if (err) {
-						throw err;
-					}
-					console.log("The file was saved!");
-				});
-			});
-			
-		} else {
-			
-			let { code, ast } = babel.transformFileSync(
-				arg +'.js', {
-				comments : false,
-				compact  : false,
-				presets
-			});
-			
-			let comment = ast.comments[0].value;
-			let name    = '../ponyach/lib/javascript/'+ arg + patern +'.js';
-			
-			if (word) {
-				
-				let head = '';
-				let k    = 0;
-				
-				do {
-				         comment  = ast.comments[k++].value;
-				         head    += `//${comment}\n`;
-				} while (comment != ' ==/UserScript==');
-				
-				fileSystem.writeFile(name, head, err => { if (err) throw err; });
-				
-				const readin = new Readable;
-				readin.push(code);      // transplited code text-string
-				readin.push(null);      // indicates end-of-code basically - the end of the stream
-				
-				const writeout = browserify([arg +'-polyfills.js', readin]).bundle();
-				writeout.pipe( fileSystem.createWriteStream(name, { flags: 'a' }) );
-				writeout.on('end', () => console.info(`\`${arg}\` build finished at ${ Date.now() - startTime }ms`));
-				
-			} else {
-				
-				fileSystem.writeFile(name, '/*'+ comment +'*/\n'+ babel.transformFileSync(
-					arg +'-polyfills.js', {
-					comments : false,
-					compact  : program.min
-				}).code +'\n'+ code, err => {
-				// => [Error: EISDIR: illegal operation on a directory, open <directory>]
-					if (err) {
-						throw err;
-					}
-					console.info(`\`${arg}\` build finished at ${ Date.now() - startTime }ms`);
-				});
+	if (program.min) {
+		options.comments = false;
+		options.compact = true;
+		__pieceOf = (code) => uglify.minify(code, {
+			compress: { booleans: false },
+			output: {
+				max_line_len: 255,
+				comments: 'all',
+				ast: false
 			}
-		}
+		}).code;
+	}
+}
+else if (program.min) {
+	options.plugins = [
+		'minify-constant-folding',
+		'minify-dead-code-elimination',
+		'minify-flip-comparisons',
+		'minify-guarded-expressions',
+		'minify-mangle-names',
+		'minify-simplify',
+		'transform-member-expression-literals',
+		'transform-merge-sibling-variables',
+		'transform-property-literals'
+	];
+	options.comments = false;
+	options.compact = true;
+}
+
+for (let name of program.args) {
+	
+	const word = possibles.indexOf(name);
+	
+	if (word === -1)
+		continue;
+	
+	let output = `../ponyach/lib/javascript/${name}.js`;
+	//let output = `build/${name}.js`;
+	
+	if (word === 0) {
+		
+		const browserify = require('browserify');
+		
+		let { code, ast } = babel.transformFileSync(
+			name +'.js', {
+			comments: false,
+			compact : true,
+			presets : ['env']
+		});
+		
+		let comment = '';
+		let head = '';
+		let k = 0;
+		
+		do {
+		         comment  = ast.comments[k++].value;
+		         head    += `//${comment}\n`;
+		} while (comment != ' ==/UserScript==');
+		
+		const readin = new Readable;
+		readin.push(code);      // transplited code text-string
+		readin.push(null);      // indicates end-of-code basically - the end of the stream
+		
+		browserify([name +'-polyfills.js', readin]).bundle((err, buf) => {
+			
+			if (err) throw err;
+			
+			fileSystem.writeFile(output, head + uglify.minify(buf.toString('utf8'), {
+				compress: { booleans: false },
+				output: {
+					max_line_len: 255,
+					comments: false,
+					ast: false
+				}
+			}).code, err => {
+				// => [Error: EISDIR: illegal operation on a directory, open <directory>]
+				if (err) throw err;
+				
+				console.info(`\`${name}\` build finished at ${ Date.now() - startTime }ms`) });
+		});
+	} else {
+		
+		__buildModules(name).then(code => {
+			
+			fileSystem.writeFile(output, code, err => {
+			// => [Error: EISDIR: illegal operation on a directory, open <directory>]
+				if (err) {
+					throw err;
+				}
+				console.info(`\`${name}\` build finished at ${ Date.now() - startTime }ms`);
+			});
+		});
 	}
 }
 
@@ -123,26 +154,25 @@ function __buildModules(name) {
 	
 	return new Promise((resolve, reject) => {
 		
-		var { code, map, ast } = babel.transformFileSync(
-			'modules/'+ name +'.js', {
-			comments: false,
-			compact: false
-		});
-		
-		if (ast.comments.length && ast.comments[0].value.substring(0, 7) === '@import') {
-			let depends = ast.comments[0].value.substring(7).trim().split(', ');
+		let { code, ast } = babel.transformFileSync(name +'.js', options);
 			
-			Promise.all(depends.map(__buildModules)).then(results => {
-				resolve(results.join('') + code);
+		let depends = 0 in ast.comments ? ast.comments[0].value : '';
+		let head = 1 in ast.comments ? ast.comments[1].value : 'start '+ name.replace('modules/','') +' block code ===>';
+		
+		if (depends.substr(0, 7) === '@import') {
+			code = options.compact ? `\n/* ${head.replace(/\t/g,' ')} */\n`+__pieceOf(code) +'\n': code.replace('//'+depends,'');
+			depends = depends.substr(7).trim().split(/\s*,\s*/);
+			
+			Promise.all(depends.map(js => __buildModules('modules/'+ js))).then(results => {
+				resolve(results.join('\n') + code +'/* <==== end === */\n');
 			});
 		} else {
-			resolve(code);
+			resolve((options.compact ? `\n/* ${depends.replace(/\t/g, ' ')} */\n`+__pieceOf(code) +'\n' : code) +'/* <==== end === */\n');
 		}
 	});
 }
 
 /*
-
 require('https').get({
 	hostname : 'cdn.polyfill.io',
 	agent    : false,
@@ -183,6 +213,4 @@ require('https').get({
 		});
 	});
 });
-
 */
-

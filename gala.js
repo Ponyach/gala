@@ -1,45 +1,55 @@
+//@import Polyfill, Crypt, SpelzZ, Gala
+
 /* 
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.2.0
+	: version 4.4.0
 	© magicode
 */
-var _z = _z();
 
-// основные настройки пользователя
-var MAIN_SETTINGS = JSON.parse(localStorage.getItem('main_settings'));
-
-if (MAIN_SETTINGS === null) {
-	// общие настройки по умолчанию
-	MAIN_SETTINGS = {
-		'require_modules'      : [],
-		'userposts_hide'       : [],
-		'dollchanScript_enable': true,
-		'snowStorm_enable'     : false,
-		'snowStorm_freeze'     : false,
-		'fixedHeader_enable'   : false,
-		'UploadRating_default' : '',
-		'show_de-thr-buttons'  : false,
-		'show_doubledash'      : false,
-		'hide_roleplay'        : false,
-		'keymarks'             : true,
-		'cm_image'             : false,
-		'cm_video'             : true,
-		'cm_audio'             : true,
-		'cm_docs'              : true
+const MAIN_SETTINGS = ((main) => {
+	// основные настройки пользователя
+	if (main === null) {
+		
+		localStorage.setItem('main_settings', JSON.stringify(
+		// общие настройки по умолчанию
+		main = {
+			'require_modules'      : ['mepr'],
+			'userposts_hide'       : [],
+			'dollchanScript_enable': true,
+			'snowStorm_enable'     : false,
+			'snowStorm_freeze'     : false,
+			'fixedHeader_enable'   : false,
+			'UploadRating_default' : '',
+			'show_de-thr-buttons'  : false,
+			'show_doubledash'      : false,
+			'hide_coma-colormark'  : false,
+			'hide_roleplay'        : false,
+			'keymarks'             : true,
+			'cm_image'             : false,
+			'cm_video'             : true,
+			'cm_audio'             : true,
+			'cm_docs'              : true
+		}));
+		
+		return main;
 	}
+	return JSON.parse(main);
 	
-	localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
+})(localStorage.getItem('main_settings'));
+
+if (!('hide_coma-colormark' in MAIN_SETTINGS)) {
+	MAIN_SETTINGS['hide_coma-colormark'] = false;
+	MAIN_SETTINGS['require_modules'].indexOf('mepr') == -1 && MAIN_SETTINGS['require_modules'].push('mepr');
 }
-// уведомления о новых тредах и постах
-var DATA_NOTS = JSON.parse(localStorage.getItem('data_nots')) || { init: true };
+
 // распознавание тач-ориентированных устройств
 const IS_TOUCH_DEVICE = 'dast_enable' in MAIN_SETTINGS ? MAIN_SETTINGS['dast_enable'] : 'ontouchstart' in window;
 
 const LOCATION_PATH = parseBoardURL(location.href); // то find { board: w, thread: n, page: n, etc }
 
-const PONY_RATE = { 9: 'S', 10: 'C', 11: 'A', '': 'N' };
+const PONY_RATE = ['N',,,,,,,,,'S','C','A'];
 
 const VALID_FILE_TYPES = /audio\/(?:ogg|mpeg)|video\/(?:webm|mp4|ogg)|image\/(?:jpeg|jpg|png|gif)/i // for the /regexp/.test(file_mime)
 
@@ -54,6 +64,117 @@ class MAX_POTENTIAL {
 
 const MAX_FILE_SIZE  = new MAX_POTENTIAL({ default: 30000000, 'r34': 30582912, 'd': 20000000 });
 const MAX_FILE_COUNT = new MAX_POTENTIAL({ default: 5, 'test': 20, 'd': 2 });
+// мусорный объект
+const NULL = { fn: () => void 0, parentNode: '' };
+
+// уведомления о новых тредах и постах
+const N0TS = ((n0ts, $tim) => {
+	
+	if (n0ts === null) {
+		n0ts = { init: true };
+	} else {
+		n0ts = JSON.parse(n0ts);
+	}
+	
+	return {
+		DATA   : n0ts,
+		links  : {},
+		online : '',
+		speed  : '',
+		assign : function(name, props) {
+			if (name in n0ts) {
+				const { posts, threads, mute } = Object.assign(Object.create(n0ts[name]), props);
+				this.update(name, posts, threads, mute);
+			}
+		},
+		startWatch: function() {
+			
+			clearInterval ($tim);
+			
+			let oldData, $this = this;
+			
+			const _watch = ({ target: {response} }) => {
+				
+				if (response !== oldData) {
+					
+					response = (oldData = response).split(';');
+					
+					$this.online.textContent = response[0];
+					$this.speed.textContent  = response[1];
+					
+					for (let data of response.splice(2)) {
+						
+						let [name, posts, threads] = data.split(/=|:/g);
+						
+						posts   = Number (posts);
+						threads = Number (threads);
+						
+						if (n0ts.init) {
+							n0ts[name] = name == 'changelog' ? threads : { posts, threads, mute };
+						}
+						else if (name == 'changelog') {
+							if ( name === LOCATION_PATH.board) {
+								n0ts[name] = threads;
+							}
+							else if (name in $this.links) {
+								if (threads > (n0ts[name] || (n0ts[name] = 0))) {
+									for (let pos in $this.links[name]) {
+										$this.links[name][pos].title       = 'изменений:'+ (threads - n0ts[name]);
+										$this.links[name][pos].textContent = 'Чейнжлог+';
+									}
+								}
+							}
+						}
+						else if (name in $this.links) {
+							
+							if (!n0ts[name])
+								n0ts[name] = { posts, threads, mute: false };
+							
+							$this.update( name, posts, threads, n0ts[name].mute);
+						}
+					}
+					delete n0ts.init;
+					localStorage.setItem('data_nots', JSON.stringify(n0ts));
+				}
+			}
+			
+			$GET('/info.php?x=1', _watch);
+			
+			$tim = setInterval ($GET.bind(null, '/info.php?x=1', _watch), 40000);
+			
+			/*$GET('/messages.php?m=list', function() {
+				document.getElementById("messages").innerHTML = this.responseText;
+			});*/
+		},
+		update: function(name, posts, threads, mute = false) {
+			
+			let title = this.links[name].title;
+			let display_name = name;
+			
+			if (name == LOCATION_PATH.board || mute) {
+				n0ts[name].posts   = posts;
+				n0ts[name].threads = threads;
+			} else {
+				title = Object.values(this.links[name])[1].title;
+				if (n0ts[name].posts < posts) {
+					display_name += '+';
+					title = 'новых постов: '+ (posts - n0ts[name].posts);
+				}
+				if (n0ts[name].threads < threads) {
+					display_name = name +'*';
+					title += ', новых тредов: '+ (threads - n0ts[name].threads);
+				}
+			}
+			
+			n0ts[name].mute = mute;
+			
+			for (let pos in this.links[name]) {
+				this.links[name][pos].title       = title;
+				this.links[name][pos].textContent = display_name;
+			}
+		}
+	}
+})(localStorage.getItem('data_nots'));
 
 // этот стиль лучше бы перенести в глобальный css
 const EXT_STYLE = _z.setup('style', { text:`
@@ -111,46 +232,35 @@ const EXT_STYLE = _z.setup('style', { text:`
 
 Object.defineProperty(window, 'isCaptchaNeeded', {
 	value: function(/* no, yes */) {
-		var exec = arguments;
-		$GET('/recaptchav2.php?c=isnd', function() {
-			(exec = exec[this.responseText]) instanceof Function && exec();
+		let exec = arguments;
+		$GET('/recaptchav2.php?c=isnd', ({ target: {response} }) => {
+			(exec = exec[response]) instanceof Function && exec();
 		});
 	}
 });
 
 //затычки --X
-window.handleFileSelect = window.submitPostform = function() {return 0;}
+window.handleFileSelect = window.submitPostform = window._PonyRateHiglight = () => void 0;
 
 window.ku_boardspath = location.origin;
 // X-- затычки
 
+const G4LA = new Gala;
+
 (() => {/* это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам */
 	
-	var toggleHeaderOnTop, used_style, postform, old_response, passcode_refresh, _PONY, _HiP = [], t_int = 15, recapt2,
-		trashObj = {parentNode:'0',fn:()=>{}}, de_rpiChange = trashObj.fn;
+	var toggleHeaderOnTop, used_style, postform, passcode_refresh, _PONY, _HiP = [], recapt2, de_rpiChange = NULL.fn;
 	
-	var _BlobStor = [];
-	var _SHA512   = [];
-	var _DelBtn   = {};
-	var _FileArea = {};
+	const _File = {
+		blob   : [],
+		rating : [],
+		MD5    : [],
+		DelBtn : {},
+		Area   : {}
+	}
 	
-	var _Count = {
-		__m: {}, origTitle: {},
-		set: function(desk, display_name, title) {
-			var _m = this.__m[desk];
-			for (var key in _m) {
-				_m[key].textContent = display_name;
-				_m[key].title = title;
-			}
-		},
-		get: function(desk, prop) {
-			var _m = this.__m[desk];
-			for (var key in _m) {
-				return _m[key][prop];
-			}
-		}
-	};
-		
+	EXT_STYLE.append( Gala.style );
+	
 	// проверяем включена ли кукла в настройках
 	if (MAIN_SETTINGS['dollchanScript_enable']) {
 		
@@ -198,7 +308,7 @@ window.ku_boardspath = location.origin;
 		// собираем куклоскрипт  ~  добавляем на страницу
 		document.head.appendChild( _z.setup('script', {
 			type : 'text/javascript',
-			src  : window.boardscript_ver }, {
+			src  : _VER_.BOARDSCRIPT }, {
 			load : function(e) {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
@@ -423,7 +533,7 @@ window.ku_boardspath = location.origin;
 		// загружаем дополнительные модули
 		MAIN_SETTINGS['require_modules'].forEach(name => {
 			document.head.appendChild(
-				_z.setup('script', { type: 'application/javascript', src: '/lib/javascript/modules/'+ name +'.user.js' }));
+				_z.setup('script', { type: 'application/javascript', src: '/lib/javascript/modules/'+ name +'.js' }));
 		});
 		$DOMReady(() => {
 			// устанавливаем выбранный пользователем стиль
@@ -472,7 +582,8 @@ window.ku_boardspath = location.origin;
 	// создаем динамически изменяемый стиль
 	var apply_msg = '#settings-main:before { content: "требуется перезагрузка"; display: block; text-align: center; color: brown; font-size: small; }',
 		inline_style = EXT_STYLE.appendChild(document.createTextNode('.hempty'+
-			(MAIN_SETTINGS['hide_roleplay']       ? ', rp, .roleplay' : '') +' { display: none!important; } .doubledash { display: '+
+			(MAIN_SETTINGS['hide_coma-colormark'] ? ', .coma-colormark' : '') +
+			(MAIN_SETTINGS['hide_roleplay']       ? ', rp, .roleplay'   : '') +' { display: none!important; } .doubledash { display: '+
 			(MAIN_SETTINGS['show_doubledash']     ? 'inline' : 'none' ) +'!important } .de-thr-buttons '+
 			(MAIN_SETTINGS['show_de-thr-buttons'] ? '+ br ' : ''      ) +'{ display: none!important; }'));
 	
@@ -503,92 +614,110 @@ window.ku_boardspath = location.origin;
 			'<input value=">" type="button"><a href="#">&gt;</a></span>'
 	)}, { click: deMarkupButtons });
 	
-	// добавляем свой код через DollchanAPI
-	window.addEventListener('message', function(e) {
-		if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
-			this.removeEventListener('message', arguments.callee, false);
-			this.handleFileSelect = this.scrollHighlight = trashObj.fn;
-			e.ports[0].onmessage = function(deApi) {
-				var result = deApi.data.data;
-				switch (deApi.data.name) {
-					case 'submitform':
-						if (result.success) {
-							// clear db file samples
-							$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
-							// reset file inputs
-							for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
-								postform.elements['md5-'+ i].value = '';
-								postform.elements['md5passcode-'+ i].value = '';
-								postform.elements['upload-image-'+ i].value = '';
-								'upload-rating-'+ i in postform.elements && (
-									postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
-								_FileArea[i].className = 'file-area-empty';
-							}
-							_SHA512 = new Array(0);
-							passcode_refresh && passcode_refresh();
-							setCookie('name', postform.elements['name'].value, 2e4, '.'+ location.host);
-						}
-						// check captcha needed
-						isCaptchaNeeded(() => {
-							postform.elements['go'].disabled = recapt2.hidden = false;
-						}, () => {
-							postform.elements['go'].disabled = recapt2.hidden = true;
-							renderCaptcha(
-								recapt2, function(pass) {
-									postform.elements['go'].disabled = !pass;
-									postform.elements['g-recaptcha-response'].value = pass || '';
-								});
-						});
+	_z.setup(window, null, {
+		keypress: keyMarks,
+		click: G4LA,
+		storage: function(e){
+			if (e.storageArea == this.localStorage) {
+				switch (e.key) {
+					case 'main_settings':
+						Object.assign(MAIN_SETTINGS, JSON.parse(e.newValue));
 						break;
-					case 'filechange':
-						var i = 0, n = 1;
-						var de_btn_del = document.getElementsByClassName('de-file-btn-del')
-						var dePostproc = function(file, k, j) {
-							
-							const parent = de_btn_del[j].parentNode.parentNode;
-							
-							fileBinaryCheck(file, postform.elements['board'].value, addFileHash.bind(null, k, false), function(msg) {
-								
-								_FileArea[k].className = 'file-area-empty';
-								
-								postform.elements['md5passcode-'+ k].value = '';
-								postform.elements['md5-'+         k].value = '';
-								
-								var int = setInterval(() => {
-									const fi = parent.querySelector('.de-file-txt-input, img.de-file-img');
-									
-									if ( 'src' in fi || 'value' in fi ) {
-										de_btn_del[j].dispatchEvent(
-											new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
-										); clearInterval(int);
-									}
-								}, 200);
-								alertify.error(msg);
-							});
-						}
-						do {
-							if (!result[i]) {
-								_DelBtn[n].click();
-							} else if (isBlobDifferent(_BlobStor[i], result[i])) {
-								dePostproc(result[i], n, i);
+					case 'data_nots':
+						var newVal = JSON.parse(e.newValue);
+						for (var name in newVal) {
+							if (N0TS.DATA[name].mute != newVal[name].mute) {
+								N0TS.assign(name, { mute: newVal[name].mute });
+								_z.setup(document.querySelector('.mute-nots[name="'+name+'"]'), { checked: newVal[name].mute });
 							}
-							n++; i++;
-						} while (i < result.length);
-						
-						_BlobStor = result//.slice(0);
-						//mepr.files = mrFiles = result;
+						}
 						break;
-					case 'newpost':
-						_PONY && _PONY.genRefmap();
-						MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
-						document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
-							detail: result.map(function(num) { return document.getElementById('reply'+ num) })
-						}));
-					/* case '...': */
+					case 'de-myposts':
+						Gala.myPostsMap = JSON.parse(e.newValue);
+						break;
 				}
-			};
-			// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
-			e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost', 'filechange'] });
+			}
+		},
+		// добавляем свой код через DollchanAPI
+		message: function(e) {
+			if (e.ports && e.ports.length === 1 && e.data === 'de-answer-api-message') {
+				this.removeEventListener('message', arguments.callee, false);
+				this.handleFileSelect = this.scrollHighlight = this.expandImage = NULL.fn;
+				this._PonyRateHiglight = (el, rel) => {
+					const value = PONY_RATE[ Number (rel.value) ];
+					_File.rating[rel.id.substr(-1) - 1] = value;
+					initMepr(_File.rating);
+					el.className = el.className.replace(/\s?PONY_rate-(?:\w*)|$/, ' PONY_rate-'+ value);
+				}
+				e.ports[0].onmessage = function(deApi) {
+					var result = deApi.data.data;
+					switch (deApi.data.name) {
+						case 'submitform':
+							if (result.success) {
+								// clear db file samples
+								$forEachClass('pre-sample', function(sl){ sl.dispatchEvent(new Event('dblclick')) });
+								// reset file inputs
+								for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
+									postform.elements['md5-'+ i].value = '';
+									postform.elements['md5passcode-'+ i].value = '';
+									postform.elements['upload-image-'+ i].value = '';
+									'upload-rating-'+ i in postform.elements && (
+										postform.elements['upload-rating-'+ i].value = MAIN_SETTINGS['UploadRating_default']);
+									_File.Area[i].className = 'file-area-empty';
+								}
+								_File.MD5 = new Array(0);
+								passcode_refresh && passcode_refresh();
+								setCookie('name', postform.elements['name'].value, 2e4, '.'+ location.host);
+							}
+							// check captcha needed
+							isCaptchaNeeded(() => {
+								postform.elements['go'].disabled = recapt2.hidden = false;
+							}, () => {
+								postform.elements['go'].disabled = recapt2.hidden = true;
+								renderCaptcha(
+									recapt2, function(pass) {
+										postform.elements['go'].disabled = !pass;
+										postform.elements['g-recaptcha-response'].value = pass || '';
+									});
+							});
+							break;
+						case 'filechange':
+							var dePostproc = (file, k, j) => {
+								
+								fileBinaryCheck(file, postform.elements['board'].value, addFileHash.bind(null, k, false), (msg) => {
+									
+									_File.Area[k].className = 'file-area-empty';
+									
+									postform.elements['md5passcode-'+ k].value = '';
+									postform.elements['md5-'+         k].value = '';
+									
+									e.ports[0].postMessage({ name: 'de-file-del', data: j });
+									alertify.error(msg);
+								});
+							}
+							for (var i = 0; i < _File.blob.length;) {
+								if (!result[i]) {
+									_File.DelBtn[i + 1].click();
+								} else if (isBlobDifferent(_File.blob[i], result[i])) {
+									dePostproc((_File.blob[i] = result[i]), i + 1, i);
+								}
+								i++;
+							}
+							for (; i < result.length; i++) {
+								dePostproc((_File.blob[i] = result[i]), i + 1, i);
+							}
+							initMepr(_File.rating, _File.blob);
+							break;
+						case 'newpost':
+							_PONY && _PONY.genRefmap();
+							MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
+							result.forEach( num => { G4LA.handlePosts(document.getElementById('reply'+ num)) });
+						/* case '...': */
+					}
+				};
+				// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
+				e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost', 'filechange'] });
+			}
 		}
 	});
 	
@@ -605,21 +734,26 @@ window.ku_boardspath = location.origin;
 		}
 		// запуск обновления счетчиков
 		var not_sets_html = '';
-			
-		_Count.online = document.getElementById('online') || trashObj;
-		_Count.speed  = document.getElementById('speed')  || trashObj;
 		
-		for (let blnk of document.querySelectorAll('*[id^="board_link_"]')) {
-			let [position, desk] = blnk.id.substring(11).split('_');
-			if (!(desk in _Count.__m)) {
-				_Count.__m[desk] = {};
-				if (!/changelog|mail|info/.test(desk)) {
-					not_sets_html += '<label class="group-cell"><div>/'+ desk +'/</div><input class="mute-nots" name="'+
-						desk +'" type="checkbox" '+ (desk in DATA_NOTS && DATA_NOTS[desk].mute ? 'checked': '') +'></label>\n';
+		for (let board_link of document.querySelectorAll('*[id^="board_link_"]')) {
+			
+			let [,,position, name] = board_link.id.split('_');
+			
+			if (!(name in N0TS.links)) {
+				N0TS.links[name] = {
+					title: board_link.title
+				};
+				if (!/changelog|mail|info/.test(name)) {
+					not_sets_html += '<label class="group-cell"><div>/'+ name +'/</div><input class="mute-nots" name="'+
+						name +'" type="checkbox" '+ (name in N0TS.DATA && N0TS.DATA[name].mute ? 'checked': '') +'></label>\n';
 				}
 			}
-			_Count.__m[desk][position] = blnk;
-		}; updateCounter();
+			N0TS.links[name][position] = board_link;
+		}
+		
+		N0TS.online = document.getElementById('online') || NULL;
+		N0TS.speed  = document.getElementById('speed')  || NULL;
+		N0TS.startWatch();
 		
 		// переделываем панель настроек
 		var settings_panel = $(document.getElementById('settings-main')).draggable({
@@ -628,77 +762,77 @@ window.ku_boardspath = location.origin;
 				snapTolerance: 50 })[0];
 		if (settings_panel) {
 			// собираем панель настроек
-			settings_panel.innerHTML = '<div class="settings-section">'+
-				'<div class="options-cell">'+
-					'<p class="menu-head">Спойлеры и рейтинги</p>'+
-					'<br>Рейтинг по умолчанию:'+
-						'<select class="set-local" name="UploadRating_default">'+
-							'<option value=""></option>'+
-							'<option value="9">[S]</option>'+
-							'<option value="10">[C]</option>'+
-							'<option value="11">[A]</option>'+
-						'</select>'+
-					'<br>Раскрывать:'+
-					'<div class="menu-group">'+
-						'<label class="group-cell"><span>[S]</span><input class="set-cookie" name="show_spoiler_9" type="checkbox"></label>'+
-						'<label class="group-cell"><span>[C]</span><input class="set-cookie" name="show_spoiler_10" type="checkbox"></label>'+
-						'<label class="group-cell"><span>[A]</span><input class="set-cookie" name="show_spoiler_11" type="checkbox"></label>'+
-					'</div><br>'+
-					'<label class="menu-checkboxes"><input class="set-cookie" name="onepicman" type="checkbox">По одной картинке в постах</label>'+
-				'</div>'+
-			'</div>'+
-			'<div class="settings-section">'+
-				'<div class="options-cell">'+
-					'<p class="menu-head">Модификации</p>'+
-					'<label class="menu-checkboxes"><input class="set-module" name="mepr" type="checkbox">Предосмотр постов</label>'+
-					'<label class="menu-checkboxes"><input class="set-module" name="coma" type="checkbox">Цветные отметки</label>'+
-					'<label class="menu-checkboxes"><input class="set-module" name="typo" type="checkbox">«Оттипографичивание» текста</label>'+
-				'</div>'+
-			'</div>'+
-			'<div class="settings-section">'+
-				'<div class="options-cell">'+
-					'<p class="menu-head" title="Если ссылка не содержит имени файла, то следует его добавить к ней через hash # тэг\nhttps://rocld.com/abcd => https://rocld.com/abcd#хорошая_песня.mp3">Ссылки на файлы</p>'+
-					'<div class="menu-group">'+
-						'<label class="group-cell"><div>Картинки</div><input class="set-local" name="cm_image" type="checkbox"></label>'+
-						'<label class="group-cell"><div>Видео</div><input class="set-local" name="cm_video" type="checkbox"></label>'+
-						'<label class="group-cell"><div>Музыка</div><input class="set-local" name="cm_audio" type="checkbox"></label>'+
-						'<label class="group-cell"><div>Документы</div><input class="set-local" name="cm_docs" type="checkbox"></label>'+
-					'</div>'+
-				'</div>'+
-			'</div>'+
-			'<div class="settings-section">'+
-				'<div class="options-cell">'+
-					'<p class="menu-head">Остальное</p>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="dollchanScript_enable" type="checkbox">Использовать встроенный Dollchan Script</label>'+
-					(MAIN_SETTINGS['dollchanScript_enable'] ? '' :
-					'<label class="menu-checkboxes"><input class="set-local" name="ponymapoff" type="checkbox">Убрать «ответы»</label>') +
-					'<label class="menu-checkboxes"><input class="set-local" name="keymarks" type="checkbox"><span title="'+
-						'—[ по выделенному тексту в любом месте экрана ]—\n'+
-						'&gt; (Цитата) \n'+
-						'@ (Список) \n\n'+
-						'—[ по выделенному тексту в текстовом поле ]—\n'+
-						'% (Однострочный спойлер)\n'+
-						'* (Курсив | ** Жирный)\n'+
-						'^ (Зачеркнутый)\n'+
-						'! (Выделенный текст)\n\n'+
-						'# (Ролл) &middot; по выделенным цифрам в текстовом поле\n'+
-						'&#92; &middot; экранирование тегов в выделенном тексте\n'+
-						'( &quot; &middot; берет выделенный текст в скобки/кавычки\n'+
-						'{[]} &middot; автокомплит работающий внутри тега [code]">Горячие клавиши разметки</span></label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="galaform" type="checkbox"><span title="Если вас (как и меня) чем то не устраивает кукловая">Альтернативная форма ответа</span></label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="hide_roleplay" type="checkbox">Скрывать тег [rp]</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="show_doubledash" type="checkbox">Олдскул стрелки слева у постов</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="show_de-thr-buttons" type="checkbox">Включить кнопку получения новых постов</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="fixedHeader_enable" type="checkbox">Зафиксировать хедер</label>'+
-					'<label class="menu-checkboxes"><input class="set-local" name="snowStorm_enable" type="checkbox">Включить снег'+
-					'<span style="font-style: italic; font-size: 75%; margin-left: 10px;">|<input class="set-local" name="snowStorm_freeze" type="checkbox">Всегда Вкл. |</span></label>'+
-					'<p>Скрывать уведомления о новых постах/тредах</p>'+
-					'<div class="menu-group">'+ not_sets_html +'</div><br>'+
-					'<div>Скрытие по имени</div>'+
-					'<input class="no-reload" name="userposts_hide" placeholder="Введите (имена) в скобках (через) (пробелы)" style="width: 98%;" type="text"><br>'+
-					'<div id="tellwhohide"></div>'+
-				'</div>'+
-			'</div>';
+			settings_panel.innerHTML = `
+<div class="settings-section">
+	<div class="options-cell">
+		<p class="menu-head">Спойлеры и рейтинги</p>
+		<br>Рейтинг по умолчанию:
+			<select class="set-local" name="UploadRating_default">
+				<option value=""></option>
+				<option value="9">[S]</option>
+				<option value="10">[C]</option>
+				<option value="11">[A]</option>
+			</select>
+		<br>Раскрывать:
+		<div class="menu-group">
+			<label class="group-cell"><span>[S]</span><input class="set-cookie" name="show_spoiler_9" type="checkbox"></label>
+			<label class="group-cell"><span>[C]</span><input class="set-cookie" name="show_spoiler_10" type="checkbox"></label>
+			<label class="group-cell"><span>[A]</span><input class="set-cookie" name="show_spoiler_11" type="checkbox"></label>
+		</div><br>
+		<label class="menu-checkboxes"><input class="set-cookie" name="onepicman" type="checkbox">По одной картинке в постах</label>
+	</div>
+</div>
+<div class="settings-section">
+	<div class="options-cell">
+		<p class="menu-head">Модификации</p>
+		<label class="menu-checkboxes"><input class="set-local" name="galaform" type="checkbox"><span title="Если вас (как и меня) чем то не устраивает кукловая">Альтернативная форма ответа</span></label>
+		<label class="menu-checkboxes"><input class="set-module" name="mepr" type="checkbox">Предосмотр постов</label>
+		<label class="menu-checkboxes"><input class="set-module" name="typo" type="checkbox">«Оттипографичивание» текста</label>
+		<label class="menu-checkboxes"><input class="set-local" name="snowStorm_enable" type="checkbox">Снег на экране
+		<span style="font-style: italic; font-size: 75%; margin-left: 10px;">|<input class="set-local" name="snowStorm_freeze" type="checkbox">Всегда активен |</span></label>
+	</div>
+</div>
+<div class="settings-section">
+	<div class="options-cell">
+		<p class="menu-head" title="Если ссылка не содержит имени файла, то следует его добавить к ней через hash # тэг\nhttps://rocld.com/abcd => https://rocld.com/abcd#хорошая_песня.mp3">Ссылки на файлы</p>
+		<div class="menu-group">
+			<label class="group-cell"><div>Картинки</div><input class="set-local" name="cm_image" type="checkbox"></label>
+			<label class="group-cell"><div>Видео</div><input class="set-local" name="cm_video" type="checkbox"></label>
+			<label class="group-cell"><div>Музыка</div><input class="set-local" name="cm_audio" type="checkbox"></label>
+			<label class="group-cell"><div>Документы</div><input class="set-local" name="cm_docs" type="checkbox"></label>
+		</div>
+	</div>
+</div>
+<div class="settings-section">
+	<div class="options-cell">
+		<p class="menu-head">Остальное</p>
+		<label class="menu-checkboxes"><input class="set-local" name="dollchanScript_enable" type="checkbox">Использовать встроенный Dollchan Script</label>
+		${ MAIN_SETTINGS['dollchanScript_enable'] ? '' : '<label class="menu-checkboxes"><input class="set-local" name="ponymapoff" type="checkbox">Убрать «ответы»</label>' }
+		<label class="menu-checkboxes"><input class="set-local" name="keymarks" type="checkbox"><span title="${
+			'—[ по выделенному тексту в любом месте экрана ]—\n'+
+			'&gt; (Цитата) \n'+
+			'@ (Список) \n\n'+
+			'—[ по выделенному тексту в текстовом поле ]—\n'+
+			'% (Однострочный спойлер)\n'+
+			'* (Курсив | ** Жирный)\n'+
+			'^ (Зачеркнутый)\n'+
+			'! (Выделенный текст)\n\n'+
+			'# (Ролл) &middot; по выделенным цифрам в текстовом поле\n'+
+			'&#92; &middot; экранирование тегов в выделенном тексте\n'+
+			'( &quot; &middot; берет выделенный текст в скобки/кавычки\n'+
+			'{[]} &middot; автокомплит работающий внутри тега [code]'}">Горячие клавиши разметки</span></label>
+		<label class="menu-checkboxes"><input class="set-local" name="hide_coma-colormark" type="checkbox">Убрать цветные метки</label>
+		<label class="menu-checkboxes"><input class="set-local" name="hide_roleplay" type="checkbox">Скрывать тег [rp]</label>
+		<label class="menu-checkboxes"><input class="set-local" name="show_doubledash" type="checkbox">Олдскул стрелки слева у постов</label>
+		<label class="menu-checkboxes"><input class="set-local" name="show_de-thr-buttons" type="checkbox">Показывать кнопку получения новых постов</label>
+		<label class="menu-checkboxes"><input class="set-local" name="fixedHeader_enable" type="checkbox">Зафиксировать хедер</label>
+		<p>Скрывать уведомления о новых постах/тредах</p>
+		<div class="menu-group">${ not_sets_html }</div><br>
+		<div>Скрытие по имени</div>
+		<input class="no-reload" name="userposts_hide" placeholder="Введите (имена) в скобках (через) (пробелы)" style="width: 98%;" type="text"><br>
+		<div id="tellwhohide"></div>
+	</div>
+</div>`;
 			// обработка инпатов
 			settings_panel.querySelectorAll('.set-cookie').forEach(function(el) {
 				el.checked = getCookie(el.name);
@@ -783,26 +917,29 @@ window.ku_boardspath = location.origin;
 			
 			for (var i = 1; 'upload-image-'+ i in postform.elements; i++) {
 				
-				let md5      = postform.elements['md5-'+ i];
-				let passcode = postform.elements['md5passcode-'+ i];
-				let upload   = postform.elements['upload-image-'+ i];
+				let md5      = postform.elements['md5-'          + i];
+				let passcode = postform.elements['md5passcode-'  + i];
+				let upload   = postform.elements['upload-image-' + i];
 				let rating   = postform.elements['upload-rating-'+ i];
 				
-				_FileArea[i] = upload.parentNode;
-				_DelBtn[i]   = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton', text: '\n[X]' }, { click: cleanInputs });
+				_File.Area[i]   = upload.parentNode;
+				_File.DelBtn[i] = _z.setup('a', { id: 'clear-file-'+ i, class: 'textbutton', text: '\n[X]' }, { click: cleanInputs });
 				
 				if (upload.files.length) {
-					_FileArea[i].className = 'file-area';
-					_SHA512.push(passcode.value);
-					upload.parentNode.insertBefore(_DelBtn[i], upload);
+					_File.Area[i].className = 'file-area';
+					_File.MD5.push(passcode.value);
+					_File.blob.push(upload.files[0]);
+					upload.parentNode.insertBefore(_File.DelBtn[i], upload);
 				} else {
-					_FileArea[i].className = 'file-area-empty';
+					_File.Area[i].className = 'file-area-empty';
 					passcode.value = md5.value = '';
 				}
+				_File.rating.push(PONY_RATE[ Number (rating.value) ]);
 			}
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE_COUNT[postform.elements['board'].value] = i - 1;
-			
+			// init modules
+			G4LA.init(); initMepr();
 			// отслеживание изменений в DOM
 			var _throbsv = 'MessageChannel' in window ? '' : ', body > form[action="/board.php"] *[id^="thread"]',
 				observer = new MutationObserver(function(mutations) {
@@ -821,25 +958,23 @@ window.ku_boardspath = location.origin;
 						if (/psttable|oppost|de-pview/.test(nodes[0].className)) {
 							_PONY && _PONY.genRefmap();
 							MAIN_SETTINGS['userposts_hide'].forEach(hideUserPosts);
-							document.dispatchEvent(new CustomEvent('hasNewPostsComing', {
-								detail: nodes
-							}));
+							nodes.forEach(G4LA.handlePosts);
 						}
 					}
 				});
 			});
-		
+			
 			document.querySelectorAll('body, body > form[action="/board.php"]'+ _throbsv).forEach(function(target) {
 				observer.observe(target, { childList: true });
 			});
-		
+			
 			window.handleFileSelect = function(n) {
 				fileBinaryCheck(
-					postform.elements['upload-image-'+ n].files[0],
+					( _File.blob[ n - 1 ] = postform.elements['upload-image-'+ n].files[0] ),
 					postform.elements['board'].value,
 					addFileHash.bind(null, n, true),
-					function(msg) {
-						_DelBtn[n].click();
+					msg => {
+						_File.DelBtn[n].click();
 						alertify.error(msg);
 					}
 				);
@@ -1087,33 +1222,33 @@ window.ku_boardspath = location.origin;
 		var k = this.id.slice(-1),
 			r = postform.elements['upload-rating-'+ k];
 			r && (r.value = MAIN_SETTINGS['UploadRating_default']);
-		var x = _SHA512.indexOf(postform.elements['md5passcode-'+ k].value);
-			x !== -1 && _SHA512.splice(x, 1);
-		_FileArea[k].className = 'file-area-empty';
+		var x = _File.MD5.indexOf(postform.elements['md5passcode-'+ k].value);
+			x !== -1 && _File.MD5.splice(x, 1);
+		delete _File.blob[ k - 1 ];
+		_File.Area[k].className = 'file-area-empty';
 		postform.elements['md5passcode-'+ k].value = '';
 		postform.elements['upload-image-'+ k].value = '';
 		postform.elements['md5-'+ k].value = '';
 		this.remove();
 	}
 	
-	function addFileHash(n, add_btn, md5) {
+	function addFileHash(n, add_btn, md5, reject) {
 		var target   = postform.elements['upload-image-'+ n];
-		var passcode = postform.elements['md5passcode-' + n],
-			cix = _SHA512.indexOf(passcode.value);
-			cix !== -1 && _SHA512.splice(cix, 1);
+		var passcode = postform.elements['md5passcode-' + n];
+		var cix      =    _File.MD5.indexOf(passcode.value);
+		    cix !== -1 && _File.MD5.splice(cix, 1);
 		
-		if (_SHA512.indexOf(md5) !== -1) {
-			alertify.error('Уже добавлен точно такой же файл');
-			_DelBtn[n].click();
+		if (_File.MD5.indexOf(md5) !== -1) {
+			reject('Уже добавлен точно такой же файл');
 		} else {
 			// always send sha512 of file for passcode records
-			$GET('/chkmd5.php?x='+ md5, function() {
-				postform.elements['md5-'+ n].value = this.responseText == true ? md5 : '';
+			$GET('/chkmd5.php?x='+ md5, ({ target: {response} }) => {
+				postform.elements['md5-'+ n].value = !response ? '' : md5;
 			});
 			// field will be sent only if user have cookie with real passcode
-			_FileArea[n].className = 'file-area';
-			_SHA512.push((passcode.value = md5));
-			add_btn && target.parentNode.insertBefore(_DelBtn[n], target);
+			_File.Area[n].className = 'file-area';
+			_File.MD5.push((passcode.value = md5));
+			add_btn && target.parentNode.insertBefore(_File.DelBtn[n], target);
 		}
 	}
 	
@@ -1135,12 +1270,12 @@ window.ku_boardspath = location.origin;
 				prepreview.id = _p_ +'-prefile-'+ n;
 				rating && (prepreview.innerHTML = '<select class="rating_select">'+ rating.innerHTML +'</select>');
 			}
-		
+			
 			if (rating) {
 				prepreview.firstElementChild.value = rating.value = _Rn = MAIN_SETTINGS['UploadRating_default'];
 				prepreview.firstElementChild.onchange = function() {
 					file_slot.setAttribute('rate', 'R: '+ this.selectedOptions[0].textContent +'\n');
-					de_rpiChange(n, img_selected.src, title, (rating.value = this.value));
+					de_rpiChange(n, img_selected.src, title, Number (rating.value = this.value));
 				}
 				file_slot.setAttribute('rate', 'R: '+ rating.selectedOptions[0].textContent +'\n');
 			}
@@ -1168,13 +1303,11 @@ window.ku_boardspath = location.origin;
 		try {
 			var _Input = e.target, keyW = '', name = e.target.name;
 			switch (_Input.className) {
+				case 'mute-nots':
+					N0TS.assign(name, { mute: _Input.checked });
+					localStorage.setItem('data_nots', JSON.stringify(N0TS.DATA));
 				case 'no-reload':
 					keyW = '!';
-					break;
-				case 'mute-nots':
-					(DATA_NOTS[name] || (DATA_NOTS[name] = { posts: 0, threads: 0, mute: 0 })).mute = (_Input.checked + 0);
-					localStorage.setItem('data_nots', JSON.stringify(DATA_NOTS));
-					keyW = _Input.checked ? ['muteNots'] : '!';
 					break;
 				case 'set-cookie':
 					setCookie(name, (_Input.type === 'checkbox' ? _Input.checked : _Input.value), 2e4);
@@ -1200,7 +1333,7 @@ window.ku_boardspath = location.origin;
 							lnk.className = _class_;
 							lnk.textContent = lnk._text_;
 						});
-						document.querySelectorAll('.post-body > blockquote a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)').forEach(Gala.handleLinks);
+						document.querySelectorAll('.post-body > blockquote a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)').forEach(G4LA.handleLinks);
 					} else {
 						document.querySelectorAll('.cm-button[id^="'+ keyW[1] +'lnk_"]').forEach(function(lnk) {
 							lnk.className = 'cm-link';
@@ -1218,7 +1351,7 @@ window.ku_boardspath = location.origin;
 							(dF.classList[0] === 'de-file' ? dF : (dF = dF.querySelector('.de-file-txt-input') || dF)) &&
 							!dF.classList.contains('de-file-off')
 						) {
-							_PonyRateHiglight(dF, _Input.value);
+							_PonyRateHiglight(dF, _Input);
 						}
 					});
 					break;
@@ -1227,14 +1360,9 @@ window.ku_boardspath = location.origin;
 					break;
 				case 'snowStorm':
 					if (keyW[1] === 'freeze') {
-						(snowStorm || trashObj).freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
+						(snowStorm || NULL).freezeOnBlur = MAIN_SETTINGS['snowStorm_freeze'];
 					} else
 						snowStormToggle();
-					break;
-				case 'muteNots':
-					_Count.set(name,
-						_Count.get(name, 'textContent').replace(/\+|\*/, ''),
-						_Count.origTitle[name]);
 					break;
 				case 'show':
 					inline_style.textContent = inline_style.textContent.replace(
@@ -1310,76 +1438,6 @@ window.ku_boardspath = location.origin;
 				event.preventDefault();
 		}
 	}
-	
-	function updateCounter() {
-		$GET('/info.php?x=1', function() {
-			if (this.readyState !== 4)
-				return;
-			if (this.status === 200 && this.responseText && this.responseText !== old_response) {
-				try {
-					var res = this.responseText.split(';');
-						
-					_Count.online.textContent = res[0];
-					_Count.speed.textContent = res[1];
-					
-					for (var i = 0, arr = res.splice(2), len = arr.length; i < len; i++) {
-						var data = arr[i].split(/=|:/g),
-							name = display_name = data[0];
-						
-						if (DATA_NOTS.init) {
-							DATA_NOTS[name] = name == 'changelog' ? Number(data[2]) : { posts: Number(data[1]), threads: Number(data[2]), mute: 0 }
-						} else
-						if (name == 'changelog') {
-							var changes = Number(data[2]);
-							DATA_NOTS[name] = LOCATION_PATH.board === 'changelog' ? changes : (DATA_NOTS[name] || 0);
-							if (changes > DATA_NOTS[name]) {
-								_Count.set(name, 'Чейнжлог+', 'изменений:'+ (changes - DATA_NOTS[name]));
-							}
-							continue;
-						} else {
-							if (!(name in _Count.__m) || (DATA_NOTS[name] || (DATA_NOTS[name] = { posts: 0, threads: 0, mute: 0 })).mute)
-								continue;
-								
-							var posts = Number(data[1]);
-							var threads = Number(data[2]);
-							var title = _Count.origTitle[name] || (_Count.origTitle[name] = _Count.get(name, 'title'));
-						
-							if (name == LOCATION_PATH.board) {
-								DATA_NOTS[name].posts = posts;
-								DATA_NOTS[name].threads = threads;
-							} else {
-								if (DATA_NOTS[name].posts < posts) {
-									display_name += '+';
-									title = 'новых постов: '+ (posts - DATA_NOTS[name].posts);
-								}
-								if (DATA_NOTS[name].threads < threads) {
-									display_name = name +'*';
-									title += ', новых тредов: '+ (threads - DATA_NOTS[name].threads);
-								}
-								_Count.set(name, display_name, title);
-							}
-						}
-					}
-					delete DATA_NOTS['init'];
-					localStorage.setItem('data_nots', JSON.stringify(DATA_NOTS));
-					
-					t_int = 15;
-					old_response = this.responseText;
-					
-				} catch(trace) {
-					console.error(trace)
-				}
-			} else if (t_int < 180) {
-				t_int += 15;
-			}
-			setTimeout(updateCounter, t_int * 1000);
-		}, 'readystatechange');
-		/*
-		$GET('/messages.php?m=list', function() {
-			$("#messages").html(this.responseText);
-		});*/
-	}
-	
 	function deMarkupButtons(e, tag) {
 		if ((tag = e.target.parentNode.getAttribute('gmk'))) {
 			e.preventDefault();
@@ -1448,6 +1506,50 @@ window.ku_boardspath = location.origin;
 		};
 	}
 	
+	function initMepr() {
+		if (typeof Mepr === 'function') {
+			
+			const mepr = new Mepr;
+			
+			let _stumb, mepr_button = postform.elements['namebox'].parentNode.appendChild( _z.setup('a', {
+			     class: 'mepr-button', href: 'javascript:void(0)', text: '(Предпросмотр)', style: 'float: right; font: italic 1em serif;'
+			}, { click: (e, name = 'add') => {
+				if (e.target.classList.toggle('active')) {
+					mepr.render({
+						mailto  : postform.elements['em'].value ,
+						name    : postform.elements['name'].value || 'Аноним' ,
+						subject : postform.elements['subject'].value ,
+						raw_post: postform.elements['message'].value ,
+						ratings : _File.rating, files: _File.blob
+					});
+					initMepr = (rate, blob) => mepr.updateThumbs(rate, blob);
+					document.body.appendChild( mepr.viewBox );
+				} else {
+					name = 'remove';
+					initMepr = NULL.fn;
+					mepr.viewBox.remove();
+				}
+				postform[name +'EventListener']('change', updatePreview);
+				postform[name +'EventListener']('input', slowPreviewed);
+			}}));
+			
+			const updatePreview = ({ target: {name,value} }) => {
+				if (name in mepr) {
+					mepr[name] = value;
+				} else if (/upload-rating-\d/.test(name)) {
+					_File.rating[ name.substr(-1) - 1 ] = PONY_RATE[ Number (value) ];
+					mepr.updateThumbs(_File.rating);
+				} else if (name === 'upload[]') {
+					mepr.updateThumbs(_File.rating, _File.blob);
+				}
+			}
+			const slowPreviewed = (e) => {
+				_stumb = setTimeout (updatePreview.bind(clearTimeout (_stumb), e), 300);
+			}
+			EXT_STYLE.append(Mepr.style);
+		}
+		initMepr = NULL.fn;
+	}
 })();
 
 function getCookie(name) {
@@ -1519,12 +1621,12 @@ function expandImage(/* event, img_src, img_thumb, img_width, img_height, thumb_
 		evt.preventDefault();
 		
 		if (/\.(?:webm|mp4|mp3|ogg)$/.test(src)) {
-			if (!Gala.mediaFrame['Video'].src.includes(src)) {
-				Gala.mediaFrame['Video'].src    = src;
-				Gala.mediaFrame['Video'].poster = thumb;
-				Gala.mediaFrame['Video'].id     = 'video_'+ evt.target.parentNode.id;
+			if (!G4LA['Video'].src.includes(src)) {
+				G4LA['Video'].src    = src;
+				G4LA['Video'].poster = thumb;
+				G4LA['Video'].id     = 'video_'+ evt.target.parentNode.id;
 			}
-			Gala.mediaFrame.loadFrame(Gala.mediaFrame['Video']);
+			G4LA.loadFrame(G4LA['Video']);
 		} else {
 			
 			box_image.src = src;
@@ -1594,11 +1696,6 @@ window.insertText = new Function('evt', 'txt', 'evt.preventDefault();\
       msgbox.value += txt + " ";')
 );
 
-function _PonyRateHiglight(el, val) {
-	el.className = el.className.replace(
-		/\s?PONY_rate-(?:\w*)|$/, ' PONY_rate-'+ PONY_RATE[val]
-	);
-}
 function fileBinaryCheck(file, desk, resolve, reject, max_size) {
 	if (!VALID_FILE_TYPES.test(file.type)) {
 		reject(file.name +'\n<br>\n<br>\nНеподдерживаемый формат\n<br>\n['+ file.type.substring(file.type.indexOf('/') + 1) +' => jpeg, png, gif, webm, mp4, ogg, mp3]');
@@ -1610,18 +1707,12 @@ function fileBinaryCheck(file, desk, resolve, reject, max_size) {
 		const reader = new FileReader;
 		reader.onload = function() {
 			if (this.readyState == FileReader.DONE) {
-				let filestring = this.result;
-				let stringLength = filestring.length;
-				let i = 1;
-				let lastChar = filestring.charAt(stringLength - i);
-				if (!isNaN(lastChar)) { // is number
-					do {
-						i++;
-						lastChar = filestring.charAt(stringLength - i);
-					} while (!isNaN(lastChar));
-					filestring = filestring.substring(0, stringLength - i);
+				let rawstring = this.result;
+				let length    = this.result.length;
+				while (!isNaN( rawstring.charAt(length - 1) )) { // is number
+					length--;
 				}
-				resolve( rstr2hex(rstr_md5(filestring)) );
+				resolve( Crypt.MD5(rawstring.substr(0, length), false), reject );
 			}
 		}
 		reader.readAsBinaryString(file);
@@ -1703,9 +1794,9 @@ function renderCaptcha(place, reCallback) {
 
 // аналог jQuery.get()
 function $GET(URL, Fn) {
-	var xmlHttp = new XMLHttpRequest();
+	var xmlHttp = new XMLHttpRequest;
 		xmlHttp.open('GET', URL, true);
-		xmlHttp['on'+ (arguments[2] || 'load')] = Fn;
+		xmlHttp.onload = Fn;
 		xmlHttp.send(null);
 }
 
@@ -1779,7 +1870,7 @@ function galamarK(tgOpen, tgClose, tgClass) {
 			pins = (arguments[3] || start === end);
 	}
 	this.value = val.substring(0, start) + markedText + val.substring(end);
-	this.dispatchEvent(new InputEvent('input'));
+	this.dispatchEvent(new InputEvent('input', { bubbles: true }));
 	if (wins) {
 		this.selectionStart = this.selectionEnd = this.value.length;
 	} else {
@@ -1795,7 +1886,6 @@ function galamarK(tgOpen, tgClose, tgClass) {
 		return new RegExp('^(\\s*)(.*?)(\\s*)$', (gmi || ''))
 	}
 }
-
 function getDataResponse(uri, Fn) {
 	var xhReq = new XMLHttpRequest;
 	xhReq.open('GET', uri, true);
@@ -1837,1787 +1927,77 @@ function getDataBinary(TYPE, Source, Fn) {
 	}
 }
 
-/* SpelzZ - a lightweight Node Work Tool */
-function _z() {
-	function __for_each(arr, Fn) {
-		Array.prototype.slice.call((typeof arr === 'string' ? document.querySelectorAll(arr) : arr), 0).forEach(Fn);
-	}
-	function __node_build(el, _Attrs, _Events) {
-		if (el) {
-			if (typeof el === 'string') {
-				el = document.createElement(el);
-			}
-			if (_Attrs) {
-				for (var key in _Attrs) {
-					_Attrs[key] === undefined ? el.removeAttribute(key) :
-					key === 'html' ? el.innerHTML   = _Attrs[key] :
-					key === 'text' ? el.textContent = _Attrs[key] :
-					key in el    && (el[key]        = _Attrs[key] ) == _Attrs[key]
-					             &&  el[key]       == _Attrs[key] || el.setAttribute(key, _Attrs[key]);
-				}
-			}
-			if (_Events) {
-				if ('remove' in _Events) {
-					for (var type in _Events['remove']) {
-						if (_Events['remove'][type].forEach) {
-							_Events['remove'][type].forEach(function(fn) {
-								el.removeEventListener(type, fn, false);
-							});
-						} else {
-							el.removeEventListener(type, _Events['remove'][type], false);
-						}
-					}
-					delete _Events['remove'];
-				}
-				for (var type in _Events) {
-					el.addEventListener(type, _Events[type], false);
-				}
-			}
-		}
-		return el;
-	}
-	function __find_node(el, Fn) {
-		var pat, tun;
-		if (typeof Fn === 'string') {
-			var pat = Fn;
-			Fn = function() {
-				return el.querySelector(pat);
-			}
-		}
-		while (el) {
-			if ((tun = Fn(el))) {
-				return (tun instanceof Element ? tun : el);
-			}
-			if ((el = el.parentNode) === document.documentElement) {
-				return null;
-			}
-		}
-	}
-	// apply prefixed event handlers
-	function __prefixed_listener(fun, type, callback) {
-		document[fun +'EventListener'](type.toLowerCase(), callback, false);
-		document[fun +'EventListener']('webkit'+ type, callback, false);
-		document[fun +'EventListener']('moz'+ type, callback, false);
-		document[fun +'EventListener']('MS'+ type, callback, false);
-	}
-	return {
-		each : __for_each,
-		setup: __node_build,
-		route: __find_node,
-		documentListener: {
-			add: __prefixed_listener.bind(null, 'add'),
-			rm: __prefixed_listener.bind(null, 'rm')
-		},
-		replace: function(elems, nodes /* to replace with */) {
-			if (elems && nodes) {
-				elems = typeof elems === 'string' ? document.querySelectorAll(elems) : elems instanceof Element ? [elems] : elems;
-				nodes = nodes instanceof Element ? [nodes] : nodes;
-				for (var i = 0, k = nodes.length - 1; i < elems.length; i++) {
-					elems[i].parentNode.replaceChild((nodes[i] || nodes[k].cloneNode(true)), elems[i]);
-				}
-			}
-		},
-		remove: function(/* elements to remove */) {
-			if (arguments[0]) {
-				var elems = arguments[0];
-				var funct = function(child) { child.parentNode.removeChild(child) };
-				elems instanceof Element ? funct(elems) : __for_each(elems, funct);
-			}
-		}
-	}
-} /* ===> end <=== */
-
-/* ---{ Soundcloud Player Engine (Custom build) }--- */
-var SCPurePlayer = (function() {
-	
-	var SC = {
-		'APIKey': 'htuiRd1JP11Ww0X72T1C3g',
-		'Volume': 1.0,
-		'Tracks': {},
-		'Object': {}
-	}
-	
-	var _handler = 'ontouchstart' in window ? {
-		start: 'touchstart',
-		move: 'touchmove',
-		end: 'touchend',
-		getCoords: function(e) {
-			return (e.touches.length === 1 ? { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY } : null);
-		}
-	} : {
-		start: 'mousedown',
-		move: 'mousemove',
-		end: 'mouseup',
-		getCoords: function(e) {
-			return (e.button === 0 ? { x: e.clientX, y: e.clientY } : null);
-		}
-	};
-	
-	var _Current_ = {
-		
-		TrackLoaded: null,
-		SelectTrack: null,
-		PlayerNode : null,
-		AudioDevice: createAudioDevice(),
-		/* Complex */
-		set 'Player Volume' (vol) {
-			this.AudioDevice.volume = vol;
-			this.PlayerNode['_volume_'].firstElementChild.style['width'] = (vol * 100) +'%';
-		},
-		get 'Player Volume' () {
-			return this.PlayerNode['_volume_'].firstElementChild.style['width'];
-		},
-		
-		set 'Track Duration' (sec) {
-			this.TrackLoaded.duration = sec;
-			this.PlayerNode['_duration_'].textContent = (sec = timeCalc(sec));
-			this.SelectTrack['_duration_'].textContent = sec;
-		},
-		get 'Track Duration' () {
-			return this.SelectTrack['_duration_'].textContent;
-		},
-		
-		set 'Track Progress' (sec) {
-			this.PlayerNode['_position_'].textContent = timeCalc(sec);
-			this.PlayerNode['_progress_'].style['width'] = (sec / this.TrackLoaded.duration * 100) +'%';
-		},
-		get 'Track Progress' () {
-			return this.PlayerNode['_progress_'].style['width'];
-		},
-		
-		set 'Track Buffered' (buf) {
-			this.PlayerNode['_buffer_'].style['width'] = buf +'%';
-		},
-		get 'Track Buffered' () {
-			return this.PlayerNode['_buffer_'].style['width'];
-		},
-		
-		connect: function(player_node, track_node) {
+const KeyChars = {
+	code: ['{', '[', '(', '\'', '"'],
+	edoc: ['}', ']', ')', '\'', '"'],
+	symbs: ['"', '^', '*', '(', '\\', '!', '#', '%'],
+	doubs: ['"', '^', '*', ')', '\\', '!!', '##', '%%'],
+	quots: ['@', '>'],
+	complex: 0
+}
+function keyMarks(e) {
+	try {
+		var _inTA = e.target.id === 'galatext' || e.target.id === 'msgbox';
+		var $this = _inTA ? e.target : document.querySelectorAll('#gala-reply-form #galatext, #postform #msgbox')[0];
+		if ($this && MAIN_SETTINGS.keymarks) {
+			var key    = e.key || String.fromCharCode(e.charCode);
+			var start  = $this.selectionStart;
+			var end    = $this.selectionEnd;
+			var val    = $this.value;
+			var uchar  = $this.value.substring($this.selectionStart - 1, $this.selectionStart);
+			var fpage  = $this.value.substring(0, $this.selectionStart);
+			var select = $this.value.substring($this.selectionStart, $this.selectionEnd);
+			var exit   = true, c;
 			
-			if (player_node && player_node !== this.PlayerNode) {
-				if (this.PlayerNode) {
-					this.PlayerNode[ '_volume_' ]['on'+_handler.start] = null;
-					this.PlayerNode['_waveform_']['on'+_handler.start] = null;
-				}
-				this.PlayerNode = ('_trackslist_' in player_node ? player_node : catchKeyElements('player', player_node));
-				this.PlayerNode[ '_volume_' ]['on'+_handler.start] = barChanger;
-				this.PlayerNode['_waveform_']['on'+_handler.start] = barChanger;
-				this['Player Volume'] = SC.Volume;
-			}
-			
-			if (!track_node) {
-				track_node = this.PlayerNode.querySelector('.sc-track.active') || this.PlayerNode['_trackslist_'].firstElementChild;
-			}
-				
-			if (track_node && track_node !== this.SelectTrack) {
-				(this.PlayerNode.querySelector('.sc-track.active') || {}).className = 'sc-track';
-				track_node.className = 'sc-track active';
-				
-				this.SelectTrack = ('_duration_' in track_node ? track_node : catchKeyElements('track', track_node));
-				this.TrackLoaded = SC['Tracks'][track_node.id.split('_')[2]];
-				
-				this['Track Progress'] = 0;
-				this['Track Buffered'] = 0;
-				
-				updateTrackInfo(this.PlayerNode, this.TrackLoaded);
-				this['AudioDevice'].src = this.TrackLoaded.stream_url + (this.TrackLoaded.stream_url.indexOf('?') >= 0 ? '&' : '?') +'consumer_key='+ SC.APIKey;
-				this['AudioDevice'].play();
-			}
-		}
-	}
-	
-	function $getTracks(url, callback, errorback) {
-		if (!url || typeof callback !== 'function') {
-			return;
-		}
-		var protocol = (location.protocol === 'https:' ? 'https:' : 'http:'),
-			resolve = protocol +'//api.soundcloud.com/resolve?url=',
-			apiUrl = url.replace(/^https?:/, protocol),
-			params = 'format=json&consumer_key='+ SC.APIKey,
-			$bound = function(data) {
-				if (data.error)
-					return errorback(data.error);
-				if (data) {
-					if (data.tracks) {
-						// log('data.tracks', data.tracks);
-						callback(data.tracks);
-					} else if (Array.isArray(data)) {
-						callback(data);
-					} else if (data.duration){
-						// a secret link fix, till the SC API returns permalink with secret on secret response
-						data.permalink_url = url;
-						// if track, add to player
-						callback([data]);
-					} else if (data.creator || data.username) {
-						// get user or group tracks, or favorites
-						getDataResponse(data.uri + (data.username && url.indexOf('favorites') >= 0 ? '/favorites' : '/tracks') +'?'+ params, $bound);
-					}
-				}
-			}
-		// check if it's already a resolved api url
-		if ((/api\.soundcloud\.com/).test(url)) {
-			apiUrl += '?' + params;
-		} else {
-			apiUrl = resolve + apiUrl + '&' + params;
-		}
-		getDataResponse(apiUrl, $bound);
-	}
-	function _scCreateGroup(links) {
-		var hash = genGroupId(),
-			node = createPlayerDOM(hash, links.length),
-			ibx  = links.length, exp, i;
-		
-		for (i = 0; i < links.length; i++) {
-			exp = { hash: hash, node: node, it: i };
-			
-			$getTracks(links[i].href, function(tracks) {
-				var tNode  = createTrackDOM(tracks[0], this.hash),
-					tChild = this.node['_trackslist_'].children['ft_'+ this.hash +'_'+ this.it];
-				
-				this.node['_trackslist_'].replaceChild(tNode, tChild); ibx--;
-				
-				if (this.it == 0 || !this.node['_trackslist_'].querySelector('.active') && ibx == 0) {
-					updateTrackInfo(this.node, tracks[0]);
-					tNode.className += ' active';
-				}
-				
-				for (var n = 1; n < tracks.length; n++) {
-					tChild = tNode.nextSibling;
-					tNode  = createTrackDOM(tracks[n], this.hash);
-					this.node['_trackslist_'].insertBefore(tNode, tChild);
-				}
-			}.bind(exp), function(error) {
-				ibx--;
-				this.node['_trackslist_'].children['ft_'+ this.hash +'_'+ this.it].remove();
-				if (ibx == 0) {
-					if (this.node['_trackslist_'].children.length == 0) {
-						this.node.removeAttribute('id');
-					} else if (!
-						this.node['_trackslist_'].querySelector('.active')) {
-						var tNode = this.node['_trackslist_'].firstElementChild;
-						updateTrackInfo(this.node, SC['Tracks'][tNode.id.split('_')[2]]);
-						tNode.className += ' active';
-					}
-				}
-			}.bind(exp));
-		}
-		
-		return node;
-	}
-	
-	function _scCreate(link) {
-		var hash = genGroupId(),
-			node = createPlayerDOM(hash),
-			exp = { hash: hash, node: node };
-		
-		$getTracks(link.href, function(tracks){
-			var _$ = this;
-			tracks.forEach(function(track, j) {
-				var tNode = createTrackDOM(track, _$.hash);
-				
-				_$.node['_trackslist_'].insertBefore(tNode, _$.node['_trackslist_'].childNodes[j]);
-				
-				if (j == 0) {
-					updateTrackInfo(_$.node, track);
-					tNode.className += ' active';
-				}
-			});
-		}.bind(exp), function(error) {
-			this.node.removeAttribute('id');
-		}.bind(exp));
-		
-		return node;
-	}
-	function onEnd(e) {
-		 var play_next;
-		if ((play_next = _Current_.SelectTrack.nextElementSibling)) {
-			_Current_.connect(null, play_next);
-		} else {
-			_Current_.PlayerNode['_button_'].className = 'sc-play';
-			_Current_.PlayerNode['_button_'].textContent = 'Play';
-			_Current_.PlayerNode.className = 'sc-player';
-			_Current_.SelectTrack.className = 'sc-track';
-			_Current_.PlayerNode['_trackslist_'].children[0].className = 'sc-track active';
-			if ((play_next = _Current_.PlayerNode.nextElementSibling) &&
-				 play_next.className.substring(0, 9) === 'sc-player') {
-					_Current_.connect(play_next);
-			}
-		}
-	}
-	function onTimeUpdate(e) {
-		_Current_['Track Progress'] = e.target.currentTime;
-	}
-	function onBufferLoad(e) {
-		if (_Current_['Track Buffered'] !== '100%') {
-			_Current_['Track Buffered'] = this.bytesPercent;
-		}
-	}
-	function onPlayerAction(e) {
-		for (var i = 0, el = document.querySelectorAll(
-			'.sc-pause, .sc-player.played, .sc-player.paused'
-		); i < el.length; i++) {
-			if (el[i].className === 'sc-pause') {
-				el[i].className   = 'sc-play';
-				el[i].textContent = 'Play'   ;
-			} else {
-				el[i].className = 'sc-player';
-			}
-		}
-		var ype = (e.type === 'play' ? 'ause' : 'lay')
-		_Current_.PlayerNode['_button_'].className   = 'sc-p'+ ype;
-		_Current_.PlayerNode['_button_'].textContent = 'P'   + ype;
-		_Current_.PlayerNode.className = 'sc-player '+ e.type + (e.type === 'play' ? 'ed' : 'd');
-	}
-	function barChanger(e) {
-		var coords = _handler.getCoords(e);
-		if (!coords) {
-			return;
-		}
-		e.preventDefault();
-		
-		var barMove, barEnd, seek, maxs, vol;
-		var rect = this.getBoundingClientRect(),
-			x = (coords.x - rect.left) / ('width' in rect ? rect.width : (rect.width = rect.right - rect.left));
-			
-		if (this === _Current_.PlayerNode['_waveform_']) {
-			maxs = _Current_.TrackLoaded.duration;
-			seek = x > 1 ? maxs : x < 0 ? 0 : Math.floor(maxs * x * 1000000) / 1000000;
-			barMove = function(eM) {
-				maxs = _Current_.TrackLoaded.duration;
-				x = (_handler.getCoords(eM).x - rect.left) / rect.width;
-				seek = x > 1 ? maxs : x < 0 ? 0 : Math.floor(maxs * x * 1000000) / 1000000;
-				_Current_['AudioDevice'].ontimeupdate = null;
-				_Current_['Track Progress'] = seek;
-			}
-			barEnd = function(eE) {
-				_Current_['Track Progress'] = seek;
-				_Current_['AudioDevice'].currentTime  = seek;
-				_Current_['AudioDevice'].ontimeupdate = onTimeUpdate;
-				window.removeEventListener(_handler.move, barMove, false);
-				window.removeEventListener(eE.type, barEnd, false);
-			}
-		} else if (this === _Current_.PlayerNode['_volume_']) {
-			vol = x > 1 ? 1 : x < 0 ? 0 : Math.round(x * 10) / 10;
-			barMove = function(eM) {
-				x = (_handler.getCoords(eM).x - rect.left) / rect.width;
-				vol = x > 1 ? 1 : x < 0 ? 0 : Math.round(x * 10) / 10;
-				_Current_['Player Volume'] = SC.Volume = vol;
-			}
-			barEnd = function(eE) {
-				_Current_['Player Volume'] = SC.Volume = vol;
-				window.removeEventListener(_handler.move, barMove, false);
-				window.removeEventListener(eE.type, barEnd, false);
-			}
-		}
-		window.addEventListener(_handler.move, barMove, false);
-		window.addEventListener(_handler.end, barEnd, false);
-	}
-	
-	function createAudioDevice(url) {
-		var audio, html5, flash;
-		if (typeof HTMLAudioElement !== 'undefined') {
-			audio = new Audio();
-			html5 = audio.canPlayType && (/maybe|probably/).test(audio.canPlayType('audio/mpeg'));
-		}
-		if (!html5) {
-			audio = document.createElement('object');
-			audio.id     = 'scPlayerEngine';
-			audio.height = 1;
-			audio.width  = 1;
-			audio.type   = 'application/x-shockwave-flash';
-			audio.data   = '/lib/javascript/player_mp3_js.swf';
-			audio.innerHTML = '<param name="movie" value="/lib/javascript/player_mp3_js.swf" /><param name="AllowScriptAccess" value="always" /><param name="FlashVars" value="listener=flashBack2343191116fr_scEngine&interval=500" />';
-			
-			flash = (window['flashBack2343191116fr_scEngine'] = new Object());
-			flash.onInit = function() {
-				Object.defineProperties(audio, {
-					play        : { value: function()    {
-						flash.status = 'process';
-						this.SetVariable('method:play', '');
-						this.SetVariable('enabled', 'true');
-						onPlayerAction({type: 'play'}); }},
-					pause       : { value: function()    {
-						flash.status = 'waiting';
-						this.SetVariable('method:pause', '');
-						onPlayerAction({type: 'pause'}); }},
-					src         : { get: function()    { return this.url },
-								    set: function(url) { this.SetVariable('method:setUrl', url) }},
-					ended       : { get: function()    { return flash.status === 'ended' }},
-					playing     : { get: function()    { return JSON.parse(flash.isPlaying); }},
-					duration    : { get: function()    { return Number(flash.duration) / 1000 || 0 }},
-					currentTime : { get: function()    { return Number(flash.position) / 1000 || 0 },
-								    set: function(rel) { this.SetVariable('method:setPosition', (rel * 1000)) }},
-					volume      : { get: function()    { return Number(flash.volume) / 100 },
-								    set: function(vol) { this.SetVariable('method:setVolume', (vol * 100)) }},
-					ontimeupdate: { set: function(fn)  { flash.onTimeUpdate = fn || function(){} }}
-				});
-				audio['volume'] = SC.Volume;
-				this.position = 0;
-			};
-			flash.onTimeUpdate = onTimeUpdate;
-			flash.onBufferLoad = onBufferLoad;
-			flash.onUpdate = function() {
-				switch (this.status) {
-					case 'process':
-						this.onTimeUpdate({target: audio});
-						if (this.position == '0' && this.isPlaying == 'false') {
-							this.status = 'ended';
-							onEnd();
-						}
-					case 'waiting':
-						this.onBufferLoad();
-				}
-			};
-		} else {
-			Object.defineProperties(audio, {
-				bytesPercent: { get: function()    { return ((this.buffered.length && this.buffered.end(0)) / this.duration) * 100; }}
-			});
-			audio['volume'] = SC.Volume;
-			audio['onplay'] = audio['onpause'] = onPlayerAction;
-			audio['onended'] = onEnd;
-			audio['ontimeupdate'] = onTimeUpdate;
-			audio.addEventListener('timeupdate', onBufferLoad, false);
-			audio['onprogress'] = onBufferLoad;
-			audio['onloadedmetadata'] = function(e) {
-				if (_Current_.TrackLoaded.duration !== this.duration) {
-					_Current_['Track Duration'] = this.duration;
-				}
-			};
-		}
-		return audio;
-	}
-	function createTrackDOM(track, hash) {
-		SC['Tracks'][track.id] = track;
-		var li = document.createElement('li');
-			li.id = 'sc-t_'+ hash +'_'+ track.id;
-			li.className = 'sc-track';
-			li.appendChild((
-				li['_title_'] = document.createElement('a')));
-				li['_title_'].href = track.permalink_url;
-				li['_title_'].className = 'sc-track-title';
-				li['_title_'].textContent = track.title;
-			li.appendChild((
-				li['_duration_'] = document.createElement('span')));
-				li['_duration_'].className = 'sc-track-duration';
-				li['_duration_'].textContent = timeCalc((track.duration /= 1000));
-		return  li;
-	}
-	function _li(h, l) {
-		var li ='', i;
-		for (i = 0; i < l; i++)
-			li += '<span id="ft_'+h+'_'+i+'"></span>';
-		return li;
-	}
-	function createPlayerDOM(hash, len) {
-		var div = document.createElement('div');
-			div.className = 'sc-player loading';
-			div.innerHTML = '<ol class="sc-artwork-list"></ol>\n'+
-				'<div class="sc-info"><h3></h3><h4></h4><p></p><a class="sc-download">—=&gt;Download&lt;=—</a>\n'+
-				'	<div class="sc-info-close">X</div>\n'+
-				'</div>\n'+
-				'<div class="sc-controls">\n'+
-				'	<div class="sc-play">Play</div>\n'+
-				'</div>\n'+
-				'<ol class="sc-trackslist">'+ _li(hash, len) +'</ol>\n'+
-				'<div class="sc-info-toggle">Info</div>\n'+
-				'<div class="sc-time-indicators">\n'+
-				'	<span class="sc-position"></span>&nbsp;|&nbsp;<span class="sc-duration"></span>\n'+
-				'</div>\n'+
-				'<div class="sc-scrubber">\n'+
-				'	<div class="sc-volume-slider">\n'+
-				'		<span class="sc-volume-status" style="width: '+ (SC.Volume * 100) +'%;"></span>\n'+
-				'	</div>\n'+
-				'	<div class="sc-time-span">\n'+
-				'		<div class="sc-buffer"></div>\n'+
-				'		<div class="sc-played"></div>\n'+
-				'		<div class="sc-waveform-container"></div>\n'+
-				'	</div>\n'+
-				'</div>';
-		if (hash) {
-			div.id = 'sc-obj_'+ hash;
-		}
-		return catchKeyElements('player', div);
-	}
-	
-	function catchKeyElements(name, _CN_) {
-		switch(name) {
-			case 'player':
-				_CN_['_artwork_']    = _CN_.querySelector('.sc-artwork-list');
-				_CN_['_info_']       = _CN_.querySelector('.sc-info');
-				_CN_['_button_']     = _CN_.querySelector('.sc-controls').firstElementChild;
-				_CN_['_trackslist_'] = _CN_.querySelector('.sc-trackslist');
-				_CN_['_volume_']     = _CN_.querySelector('.sc-volume-slider');
-				_CN_['_waveform_']   = _CN_.querySelector('.sc-waveform-container');
-				_CN_['_buffer_']     = _CN_.querySelector('.sc-buffer');
-				_CN_['_progress_']   = _CN_.querySelector('.sc-played');
-				_CN_['_duration_']   = _CN_.querySelector('.sc-duration');
-				_CN_['_position_']   = _CN_.querySelector('.sc-position');
-				break;
-			case 'track':
-				_CN_['_duration_']   = _CN_.querySelector('.sc-track-duration');
-				_CN_['_title_']      = _CN_.querySelector('.sc-track-title');
-		}
-		
-		return _CN_;
-	}
-	
-	function updateTrackInfo(node, track) {
-		var artwork = track.artwork_url || track.user.avatar_url;
-		if (artwork && !/\/(?:default_avatar_|avatars-000044695144-c5ssgx-)/.test(artwork)) {
-			var img = node['_artwork_'].firstElementChild || document.createElement('img');
-			if (node['_artwork_'].clientWidth > 100) {
-				var s = findBestMatch([200, 250, 300, 500], node['_artwork_'].clientWidth);
-				artwork = artwork.replace('-large', '-t'+ s +'x'+ s +'')
-			}
-			img.src = artwork;
-			node['_artwork_'].appendChild(img);
-		}
-		node['_info_'].children[0].innerHTML = '<a href="' + track.permalink_url +'">' + track.title + '</a>';
-		node['_info_'].children[1].innerHTML = 'by <a href="' + track.user.permalink_url +'">' + track.user.username + '</a>';
-		node['_info_'].children[2].innerHTML = (track.description || 'no Description');
-		node['_info_'].children[3].href = track.download_url +'?consumer_key='+ SC.APIKey;
-		node['_info_'].children[3].hidden = !track.downloadable;
-		// update the track duration in the progress bar
-		node['_duration_'].textContent = timeCalc(track.duration);
-		node['_position_'].textContent = '00.00';
-		// put the waveform into the progress bar
-		var wave = node['_waveform_'].firstElementChild || document.createElement('img');
-			wave.src = track.waveform_url;
-		node['_waveform_'].appendChild(wave);
-	}
-	
-	function findBestMatch(list, toMatch) {
-		var item, i = 0, len = list.length;
-		while (i < len && (item = list[i]) < toMatch)
-			i++;
-		return item;
-	}
-	function timeCalc(secn) {
-		var s, m, h;
-			s = Math.floor(secn) % 60;
-			m = Math.floor(secn / 60) % 60;
-			h = Math.floor(secn / (60 * 60));
-			
-		return (h > 0 ? h +'.' : '') + (m < 10 && m > -1 ? '0'+ m : m) +'.'+ (s < 10 && s > -1 ? '0'+ s : s);
-	}
-	function genGroupId() {
-		var n = Math.round(Math.random() * 12345679);
-		while (n in SC['Object']) n++;
-		return (SC['Object'][n] = n);
-	}
-	
-	return {
-		io: _Current_,
-		create: _scCreate,
-		createGroup: _scCreateGroup
-	}
-})(); /* ===> end <=== */
-	
-	EXT_STYLE.appendChild(document.createTextNode('.de-src-iqdb:after, #de-txt-panel:after { content:""; -webkit-animation: init 1s linear 2; animation: init 1s linear 2; }\
-\
-.greenmk:not(.inactive):before { content: "✓ "; color: green; }\
-.feckbox { font-size: small; margin-right: 5px; font-variant-caps: all-petite-caps; } input:checked + .feckbox { text-decoration: line-through; }\
-.dropbox { position: absolute; z-index: 1; height: 100%; top: 0px; left: 0px; background-color: rgba(0,0,0,.5); border: 2px dashed white; width: 100px; text-align: center; color: white; border-radius: 4px; }\
-.greenmk, .dropdown-menu li, .dropdown-arrow { -webkit-touch-callout:none; -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; }\
-.file-area, .dropdown-toggle, .text-line-ic, #gala-replytitle { position: relative; }\
-#gala-replytitle, .gala-globalform-area { text-align: center; }\
-\
-.files-add { bottom: 0; position: absolute; background-color: rgba(0,0,0,.1); border-radius: 5px; text-align: center; height: 20px; width: 25px; cursor: pointer; }\
-.files-params { display: none; text-align: center; max-width: 100px; } .file-area.hold > .files-params { display: block; }\
-.file-gox { margin-right: 4px; margin-top: 4px; position: relative; width: 100px; }\
-.file-gview { max-width: 100px; max-height: 100px; margin: 0 auto; display: block; }\
-.file-cover-label, .file-remove { position: absolute; cursor: default; text-align: center; font-size: 10px; } .file-remove:hover { opacity: 1;}\
-.file-remove { background-color: black; border-radius: 100%; width: 14px; height: 14px; top: 2px; left: 2px; color: white; } .file-remove:before { content: "×"; }\
-.file-cover-label { bottom: 2px; right: 0; } .file-cover-label:after { font-weight: bold; border-radius: 7px; padding: 1px 5px; color: white; margin: 0 6px; } .file-cover-label.N:after { content: "[\xA0]"; }\
-.file-cover-select, .dropdown-menu { padding-left: 0; list-style: outside none none; } .file-cover-select { display: none; background-color: #fefefe; margin: 0; } .active > .file-cover-select { display: inherit; }\
-.file-cover { padding: 0 10px; cursor: default; } .S:after { content: "[S]"; } .C:after { content: "[C]"; } .A:after { content: "[A]"; } .file-cover.N { padding-top: 13px; } .file-cover:hover { color: #fff!important; }\
-.file-cover-label.S:after,.file-cover.S:hover, .de-rpiStub.S:before, .de-rpiStub.S:after { background-color: #8C60B1; }\
-.file-cover-label.C:after,.file-cover.C:hover, .de-rpiStub.C:before, .de-rpiStub.C:after { background-color: #E65278; }\
-.file-cover-label.A:after,.file-cover.A:hover, .de-rpiStub.A:before, .de-rpiStub.A:after { background-color: #3B60AE; }\
-.file-cover-label.N:after,.file-cover.N:hover { background-color: #777; }\
-\
-select#default_file_rating { background: none; border: none; color: inherit; -webkit-appearance: none; -moz-appearance: none; text-overflow: ""; } select#default_file_rating > option { background-color: #fefefe; }\
-option.rating-N:checked, option.rating-N:hover { box-shadow: 0 0 0 99px #777 inset; } option.rating-N { color: transparent; }\
-option.rating-C:checked, option.rating-C:hover, .PONY_rate-C { box-shadow: 0 0 0 99px #E65278 inset; }\
-option.rating-S:checked, option.rating-S:hover, .PONY_rate-S { box-shadow: 0 0 0 99px #8C60B1 inset; }\
-option.rating-A:checked, option.rating-A:hover, .PONY_rate-A { box-shadow: 0 0 0 99px #3B60AE inset; }\
-\
-.dropdown-toggle.ins-act:before { content: " ▲ "; padding: 0 5px 15px; border-radius: 4px 4px 0 0; line-height: 1.6; }\
-.ins-act:before, .dropdown-menu { font-size: 14px; line-height: 1.8; color: #eee; position: absolute; z-index: 1000; border: 1px solid #222; box-shadow: 0 6px 12px rgba(0,0,0,.2); background-clip: padding-box; background-color: #222; border-radius: 4px; left: 0; }\
-.dropdown-menu { border-radius: 0 0 4px 4px; line-height: 1.8; min-width: 160px; display: none; margin: 0; } .ins-act > .dropdown-menu { display: list-item; }\
-.dropdown-menu li { padding-left: 10px; color: white; text-shadow: none; } .dropdown-menu li:hover { background: #555; -moz-user-select: none; transition: #6363CE .2s ease,color .2s ease; }\
-\
-.gala-freestyle { position: fixed; z-index: 9999; } .gala-globalform-area .gala-freestyle { position: inherit; } .gala-globalform-area #gala-replytitle, .greenmk { display: none; }\
-.gala-globalform-area .greenmk { display: block; } .gala-globalform-area #gala-reply-form { background: transparent!important; box-shadow: none!important; border: none!important; }\
-.gala-globalform-close:before { content: "Убрать форму"; cursor: pointer; } .gala-globalform-open:before { content: "Раскрыть форму"; cursor: pointer; }\
-#galatext { resize: both; font-size: 14px; }\
-.text-line-ic, .text-line-ic > * { vertical-align: middle; } .text-line-ic > input[type="text"] { min-width: 240px; }\
-.text-line-ic > input[name="subject"] { margin-left: 8px; } #submit_this_form { margin-left: -10px; font-variant: small-caps; }\
-#submit_this_form:disabled:hover, #submit_this_form:disabled { color: inherit!important; background: transparent!important; left: 0; }\
-#gala-error-msg { text-align: center; color: white; }\
-#gala-replytitle > .filetitle { font-variant: small-caps; font-size: small; vertical-align: super; }\
-.pin-buttons { position: absolute; left: 0; } .inverted, .gala-freestyle .toggleform { transform: rotate(180deg); }\
-.ls-de-svg { margin: 0 2px -3px; cursor: pointer; width: 16px; height: 16px; }\
-.sagearrow { position: absolute; right: 1px; bottom: 3px; } .inactive, .file-remove { opacity: .4; }\
-\
-.buttons-style-standart > .markup-button > *:not(input), .buttons-style-text > .markup-button >  *:not(a) { display: none; }\
-.markup-button > a{ font-size:13px; text-decoration: none; }\
-.buttons-style-text > .markup-button:not(.quote):after, .sep:after{ content:"\xA0|\xA0"; cursor: default; opacity: .3; }\
-\
-.gmark-btn, .new-thr-chx{ cursor: pointer; } .gmark-btn, .sep { display: table-cell; }\
-.gmark-btn.bold:before{ content: "жирн"; } .bold { font-weight: bold; }\
-.gmark-btn.italic:before{ content: "курс"; } .italic { font-style: italic; }\
-.gmark-btn.underline:before{ content: "подч"; } .underline { text-decoration: underline; }\
-.gmark-btn.strike:before{ content: "зач"; } .strike { text-decoration: line-through; }\
-.gmark-btn.sup:after{ content: "верхн"; } .sup{ font-variant: super; } .gmark-btn.sup:before{ content:"∧"; font-variant: normal; }\
-.gmark-btn.sub:after{ content: "нижн"; } .sub{ font-variant: sub; } .gmark-btn.sub:before{ content:"∨"; font-variant: normal; }\
-.gmark-btn.spoiler:before{ content: "спой"; }\
-.gmark-btn.rcv:before{ content: "важн"; }\
-.gmark-btn.code:before{ content: "{код}"; font-family: monospace; }\
-.gmark-btn.dice:before{ content: "1d2 = ?"; font-variant: normal; }\
-.gmark-btn.rp:before{ content: "роле"; }\
-.gmark-btn.unkfunc0:before{ content: "> цит"; }\
-\
-.reply .mediacontent, .reply .de-video-obj, .reply .imagecontent, .reply > .post-files > .file, .embedmedia { float: left; }\
-.mediacontent ~ blockquote, .de-video-obj ~ blockquote, .imagecontent ~ blockquote, .clearancent > blockquote { clear: both; }\
-\
-span[de-bb]{ position: absolute; visibility: hidden; } input, textarea { outline: none; }\
-.mv-frame { position: absolute; background-color: rgba(0,0,0,.7); color: white; cursor: pointer; width: 40px; line-height: 40px; text-align: center; border-radius: 0 0 10px 0; opacity: .5;} .mv-frame:hover { opacity: 1; } .mv-frame.to-win:before { content: "[ ↑ ]"; } .mv-frame.to-post:before { content: "[ ↓ ]"; }\
-.de-src-derpibooru:before { content:""; padding-right: 16px; margin-right: 4px; background: url(/test/src/140903588031.png) center / contain no-repeat; }\
-.hidup{ top:-9999px!important; } .hidout, #gala-edit-form ~ * { display: none!important; }\
-.mediacontent > .video-container { display: inline-block; background-color: #212121; margin: 0 9px; margin-bottom: 5px;  max-height: 360px; max-width: 480px; }\
-.document-container{ overflow: auto; resize: both; background-color:#fefefe; }\
-.content-window{ position: fixed; left: 0; top: 0; z-index: 2999; }\
-#content-frame { position: absolute; top: 10%; left: 0; right: 0; bottom: 20%; z-index:3000; max-width: 100%; }\
-#content-frame > * { left: 0; right: 0; margin: auto; box-shadow: 5px 5px 10px rgba(0,0,0,.4); position: absolute; }\
-#content-frame > .gdoc-container { top: -9%; bottom: -19%; margin: auto 10%; background-color:#D1D1D1; }\
-#content-frame > .video-container { max-height: 100%; max-width: 100%; background-color: #212121; }\
-#shadow-box{ position: absolute; background-color: rgba(33,33,33,.8); z-index: 2999; }\
-#close-content-window, #show-content-window{ transition: .5s ease; opacity: .4; width: 29px; height: 29px; cursor: pointer; top: 20px; z-index: 3000; }\
-#close-content-window { right: 20px; position: absolute; background-image: url(/test/src/141665751261.png); }\
-#show-content-window  { right: 52%;  position: fixed;    background-image: url(/test/src/141667895174.png); border-radius: 100%; box-shadow: 0 1px 0 rgba(0,0,0,.4), -1px 1px 0 rgba(0,0,0,.4); }\
-#close-content-window:hover, #show-content-window:hover { opacity: .8; }\
-.ta-inact::-moz-selection{ background: rgba(99,99,99,.3); } .ta-inact::selection{ background: rgba(99,99,99,.3); }\
-.document-container > iframe, .document > iframe, .full-size, #shadow-box, .content-window{ width:100%; height:100%; }\
-.audio-container { display: block; }\
-.image-attach{ display: inline-block; border: medium none; cursor: pointer; margin: 2px 20px; } .image-attach:not(.expanded){ max-width: 290px; max-height: 290px; } .image-attach.expanded{ max-width: 100%px; max-height: auto; }\
-.cm-button{ text-decoration: none; background: transparent left / 16px no-repeat; } .cm-button:before{ content:""; margin-left: 20px;}\
-.cm-pastebin{ font: 12px monospace; padding: 2px 0; background-image: url(/test/src/140593041526.png); }\
-.cm-image{ background-image: url(/test/src/140896790568.png); } .cm-image:before{ content: "Expand: "; } .cm-image.attached:before{ content: "Unexpand: "; }\
-.cm-play{ background-image: url(/test/src/139981404639.png); } .cm-play:before{ content: "Play: "; }\
-.cm-stop{ background-image: url(/test/src/148214537312/7673443634.png); } .cm-stop:before{ content: "Stop: "; }\
-@keyframes init{ 50% {opacity:0} } @-webkit-keyframes init{ 50% {opacity:0} }'));
-
-/* ---{ Gala ponyach.ru Extension }--- */
-var Gala = (function() {
-	
-	var _EmbedField = localStorage.getItem('EmbedField') || 0;
-	var _Container, _EditForm, _GalaForm;
-	
-	_Container = {
-		zIndex: 1,
-		Audio: _z.setup('audio', { class: 'audio-container', controls: true}),
-		Video: _z.setup('video', { class: 'video-container', controls: true}),
-		OVERLAY: _z.setup('div', { class: 'content-window hidup', html: '<div id="shadow-box"></div><label id="close-content-window"></label><div id="content-frame"></div>'}, {
-			'click': function(e) {
-				switch (e.target.id) {
-					case 'close-content-window':
-						_z.remove([this, _Container['Marker']]);
-						_z.remove(this.lastElementChild.childNodes);
-						break;
-					case 'content-frame':
-					case 'shadow-box':
-						this.classList.add('hidup');
-						_Container['Marker'].classList.remove('hidout');
-				}
-			}, 'mousedown': function(e) {
-				if (e.target.className.indexOf('-container') >= 0) {
-					_Container.zIndex++;
-					e.target.style['z-index'] = _Container.zIndex;
-				}
-			}
-		}),
-		Marker: _z.setup('label', {'id': 'show-content-window', 'class': 'hidout'}, {
-			'click': function(e) {
-				_Container['OVERLAY'].classList.remove('hidup');
-				this.classList.add('hidout');
-			}
-		}),
-		loadFrame: function(frame) {
-			var exist = this['OVERLAY'].lastElementChild.children[frame.id];
-			if (!this['OVERLAY'].parentNode)
-				document.body.append( this['OVERLAY'], this['Marker'] );
-			if (!exist) {
-				if ((exist = this['OVERLAY'].lastElementChild.querySelector('.'+ frame.className))) {
-					this['OVERLAY'].lastElementChild.replaceChild(frame, exist);
+			if (_inTA && isInsideATag(fpage, '[code]', '[/code]')) {
+				if ((c = KeyChars.code.indexOf(key)) != -1) {
+					$this.textMark(KeyChars.code[c], KeyChars.edoc[c], 'mdwn');
+					KeyChars.complex = -1;
 				} else {
-					this.zIndex++;
-					frame.style['z-index'] = this.zIndex;
-					this['OVERLAY'].lastElementChild.appendChild(frame);
-				}
-			} else {
-				this.zIndex++;
-				frame.style['z-index'] = this.zIndex;
-			}
-			this['Marker'].classList.add('hidout');
-			this['OVERLAY'].classList.remove('hidup');
-		}
-	}
-	
-	function jumpCont(node, name, cont) {
-		do {
-			if (node.tagName === 'BLOCKQUOTE') {
-				if (!(cont = node.parentNode.querySelector('.'+ name))) {
-					cont = _z.setup('span', {'class': name});
-					switch (name) {
-						case 'mediacontent':
-							node.before( cont );
+					switch (e.keyCode * KeyChars.complex) {
+						case 9:
+						case -9:
+							$this.textMark('   ', '\n   ', 'ql');
 							break;
-						case 'imagecontent':
-							node.parentNode.prepend( cont );
-					}
-				}
-				return cont;
-			}
-		} while (
-			(node = node.parentNode)
-		);
-	}
-	
-	//-- Get Page name from Url
-	function getPageName(url) {
-		var a = url.split('/'), p = a.pop();
-		return decodeURIComponent((!p ? a.pop() : p));
-	}
-	//-- Get File name from Url
-	function getFileName(url) {
-		var m = /(?:\/|#|\?|&)(([^?\/#&]*)\.\w\w\w\w?)$/.exec(url);
-		return decodeURIComponent(m && m[2] ? m[1] : url.split('/').pop());
-	}
-	
-	var KeyChars = {
-		code: ['{', '[', '(', '\'', '"'],
-		edoc: ['}', ']', ')', '\'', '"'],
-		symbs: ['"', '^', '*', '(', '\\', '!', '#', '%'],
-		doubs: ['"', '^', '*', ')', '\\', '!!', '##', '%%'],
-		quots: ['@', '>'],
-		complex: 0
-	}
-	function keyMarks(e) {
-		try {
-			var _inTA = e.target.id === 'galatext' || e.target.id === 'msgbox';
-			var $this = _inTA ? e.target : document.querySelectorAll('#gala-reply-form #galatext, #postform #msgbox')[0];
-			if ($this && MAIN_SETTINGS.keymarks) {
-				var key    = e.key || String.fromCharCode(e.charCode);
-				var start  = $this.selectionStart;
-				var end    = $this.selectionEnd;
-				var val    = $this.value;
-				var uchar  = $this.value.substring($this.selectionStart - 1, $this.selectionStart);
-				var fpage  = $this.value.substring(0, $this.selectionStart);
-				var select = $this.value.substring($this.selectionStart, $this.selectionEnd);
-				var exit   = true, c;
-				
-				if (_inTA && isInsideATag(fpage, '[code]', '[/code]')) {
-					if ((c = KeyChars.code.indexOf(key)) != -1) {
-						$this.textMark(KeyChars.code[c], KeyChars.edoc[c], 'mdwn');
-						KeyChars.complex = -1;
-					} else {
-						switch (e.keyCode * KeyChars.complex) {
-							case 9:
-							case -9:
-								$this.textMark('   ', '\n   ', 'ql');
-								break;
-							case -8:
-								var offset = start - 1;
-								$this.value = val.slice(0, offset) + val.slice(end + 1);
-								$this.setSelectionRange(offset, offset);
-								break;
-							case -13:
-								var ls = fpage.split('\n'),
-									pan = (new RegExp('(?:^|\\n)([\\s]*)'+ uchar, '').exec(ls[ls.length - 1])|| { 1:'' })[1],
-									fc = '\n   ' + pan, sc = '\n' + pan,
-									offset = start + fc.length - 1;
-								
-								$this.value = fpage + fc + sc + val.substring(end);
-								$this.setSelectionRange(offset, offset);
-								break;
-							default:
-								exit = false;
-						}
-						KeyChars.complex = 1;
-					}
-				} else if (_inTA && select.length > 0 && (c = KeyChars.symbs.indexOf(key)) != -1) {
-					$this.textMark(
-						(key === '(' ?  key  : KeyChars.doubs[c]), KeyChars.doubs[c], (
-						 key === '#' ? 'dice':
-						 key === '\\'? 'scrn': 'mdwn'));
-				} else if (
-					(c = KeyChars.quots.indexOf(key)) != -1 &&
-					(_inTA ? select : window.getSelection().toString()).length > 0) {
-						key === '@' ? $this.textMark('* ', '\n* ', 'ql') :
-						              $this.textMark(key +' ', '\n'+ key +' ', 'ql');
-				} else
-					exit = false;
-				if (exit)
-					return e.preventDefault();
-			}
-			if (_inTA && e.keyCode != 8 && $this.classList.contains('ta-inact')) {
-				$this.setSelectionRange($this.selectionEnd, $this.selectionEnd);
-				$this.classList.remove('ta-inact');
-			}
-		} catch(trace) {
-			console.error(trace);
-		}
-	}
-	
-	var DF = ['pdf', 'txt', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'xps', 'rtf'];
-	var AF = ['opus', 'wav', 'm4a', 'm4r', 'aac', 'ogg', 'mp3'];
-	var VF = ['webm', 'ogv', 'ogm', 'mp4', 'm4v'];
-	var IF = ['jpeg', 'jpg', 'png', 'svg', 'gif'];
-	
-	function handleLinks(a) {
-		var f_ext, m_id;
-		if (a.host === 'soundcloud.com' && /\/[\w_-]+/.test(a.pathname)) {
-			if (a.nextElementSibling.tagName === 'BR')
-				a.nextElementSibling.remove();
-			a.remove();
-		} else
-		if (a.host === 'bandcamp.com' && (m_id = /album=([\w_-]+)/.exec(a.pathname))) {
-			var cont = jumpCont(a, 'mediacontent');
-			if (!cont['bandcamp-'+ m_id[1]]) {
-				cont.appendChild(_z.setup('iframe', {
-					id: 'bandcamp-'+ m_id[1], width: 400, height: 290, frameborder: 0, class: 'embedmedia', seamless: true,
-					src: '//bandcamp.com/EmbeddedPlayer/'+ m_id[0] +'/size=large/bgcol=fefefe/linkcol=inherit/artwork=small/transparent=true/'}));
-			}
-			if (a.nextElementSibling.tagName === 'BR')
-				a.nextElementSibling.remove();
-			a.remove();
-		} else
-		if (a.host === 'pastebin.com' && (m_id = /\/([\w_-]+)/.exec(a.pathname))) {
-			_z.setup(a, { class: 'cm-button cm-pastebin', id: 'PBlnk_'+ m_id[1], text: 'PASTEBIN: '+ m_id[1], rel: 'nofollow' });
-		} else
-		if (IF.includes((f_ext = a.href.split('.').pop()))) {
-			if (MAIN_SETTINGS['cm_image']) {
-				var _fn = function(e) {
-					var hash = hashString(a.href.replace(/^https?:\/\//, '')),
-						name = getFileName(a.href);
-					e.target.onerror = IF['Image'] = e.target.onload =  null;
-					_z.setup(a, { class: 'cm-button cm-image', id: 'imagelnk_'+ hash, rel: 'nofollow', text: name,
-						title: f_ext.toUpperCase() +', '+ e.target.naturalWidth +'x'+ e.target.naturalHeight });
-					a.wImage = _z.setup(e.target, { class: 'image-attach', id: 'image_'+ hash, alt: name, onclick: 'this.classList.toggle(\'expanded\')'});
-				},
-				_img = (IF['Image'] || _z.setup('img', {'onerror': function(e) {IF['Image'] = e.target;}}));
-				_img.onload = _fn;
-				_img.src = a.href;
-			}
-		} else
-		if (VF.includes(f_ext)) {
-			MAIN_SETTINGS['cm_video'] && testMedia((VF['Video'] || (VF['Video'] = document.createElement('video'))), a);
-		} else
-		if (AF.includes(f_ext)) {
-			MAIN_SETTINGS['cm_audio'] && testMedia((AF['Audio'] || (AF['Audio'] = new Audio())), a);
-		} else
-		if (DF.includes(f_ext)) {
-			MAIN_SETTINGS['cm_docs'] && _z.setup(a, { class: 'cm-button cm-pastebin', text: 'Document: '+ getFileName(a.href),
-				id: 'docslnk_'+ hashString(a.href.replace(/^https?:\/\//, '')), rel: 'nofollow' });
-		}
-	}
-	function testMedia(media, el) {
-		(media['_test_'] || (media['_test_'] = [])).push(el);
-		if (media.oncanplay == null) {
-			media.oncanplay = _onCanplayHandle;
-			media.onerror = _onUnsupportedHandle;
-			media.src = el.href;
-		}
-	}
-	function _onCanplayHandle(e) {
-		var $t = e.target;
-		_z.setup($t['_test_'][0], {class: 'cm-button cm-play', id: $t.tagName.toLowerCase() +'lnk_'+ hashString($t.src.replace(/^https?:\/\//, '')), rel: 'nofollow', text: getFileName($t.src)});
-		_onUnsupportedHandle(e);
-	}
-	function _onUnsupportedHandle(e) {
-		var $t = e.target;
-		delete $t['_test_'][0];
-		$t['_test_'].splice(0, 1);
-		
-		if (!$t['_test_'][0]) {
-			$t.oncanplay = $t.onerror = null;
-			$t.src = '';
-		} else {
-			$t.src = $t['_test_'][0].href;
-		}
-	}
-	function cmButtonHandler(e) {
-		if (e.button != 0 || !e.target.className || !e.target.classList)
-			return;
-		try {
-			var $btn = e.target;
-			switch (e.target.classList[0]) {
-				case 'cm-button':
-					var $Id = $btn.id.split('_');
-					switch ($Id[0]) {
-						case 'PBlnk':
-							if (!$btn._container) {
-								$btn._container = $btn.nextElementSibling.id === 'document_'+ $Id[1] ? $btn.nextElementSibling : _z.setup('div', {
-									html: '<span class="mv-frame to-win"></span><iframe frameborder="0" src="//pastebin.com/embed_iframe.php?i='+ $Id[1] +'">',
-									class: 'document-container', id: 'document_'+ $Id[1] });
-							}
-							if ($btn._container.inwin) {
-								_Container.loadFrame($btn._container);
-							} else if ($btn.nextElementSibling === $btn._container) {
-								$btn._container.remove();
-							} else
-								$btn.after( $btn._container );
+						case -8:
+							var offset = start - 1;
+							$this.value = val.slice(0, offset) + val.slice(end + 1);
+							$this.setSelectionRange(offset, offset);
 							break;
-						case 'audiolnk':
-							_z.each('.cm-stop', function($cm) { $cm.className = 'cm-button cm-play'; })
-							if ($btn.nextElementSibling && $btn.nextElementSibling.id === 'audio_'+ $Id[1]) {
-								$btn.nextElementSibling.remove();
-							} else {
-								$btn.className = 'cm-button cm-stop';
-								$btn.after( _Container['Audio'] );
-								_Container['Audio'].id = 'audio_'+ $Id[1];
-								_Container['Audio'].src = $btn.href;
-								_Container['Audio'].play();
-							}
-							break;
-						case 'imagelnk':
-							var $icont = jumpCont($btn, 'imagecontent'),
-								$image = $icont.querySelector('#image_'+ $Id[1]);
-							if (!$btn.wImage)
-								$btn.wImage = ($image || _z.setup(e.target, { class: 'image-attach thumb', id: 'image_'+ $Id[1],
-									alt: $btn.textContent, onclick: 'this.classList.toggle(\'full-size\')'}));
-							if ($image) {
-								$image.remove();
-								$btn.classList.remove('attached');
-							} else {
-								$icont.appendChild($btn.wImage);
-								$btn.classList.add('attached');
-							}
-							break;
-						case 'docslnk':
-							if (!_Container['GDoc']) {
-								_Container['GDoc'] = _z.setup('div', { class: 'gdoc-container',
-									html: '<iframe frameborder="0" scrolling="auto" width="100%" height="100%">'});
-							}
-							if (_Container['GDoc'].id !== 'gdoc_'+ $Id[1]) {
-								_Container['GDoc'].firstElementChild.src = '//docs.google.com/gview?embedded=true&url='+ $btn.href;
-								_Container['GDoc'].id = 'gdoc_'+ $Id[1]
-							}
-							_Container.loadFrame(_Container['GDoc']);
-							break;
-						case 'videolnk':
-							if (_Container['Video'].src !== $btn.href)
-								_Container['Video'].src = $btn.href;
-							if (_EmbedField === 0) {
-								_Container.loadFrame(_z.setup(_Container['Video'], { id: 'video_'+ $Id[1] }));
-							} else {
-								var $pcont = jumpCont($btn, 'mediacontent'),
-									$video = $pcont.querySelector('#video_'+ $Id[1]);
-								if ($video) {
-									$btn.className = 'cm-button cm-play';
-									$video.remove();
-								} else {
-									$btn.className = 'cm-button cm-stop';
-									$video = _z.setup(_Container['Video'], { id: 'video_'+ $Id[1] });
-									$pcont.appendChild($video);
-									$video.play();
-								}
-							}
-					}
-					break;
-				case 'mv-frame':
-					if (!e.target.parentNode.inwin) {
-						e.target.className = 'mv-frame to-post';
-						_Container.loadFrame(e.target.parentNode);
-						if(!e.target.parentNode.style['width'] && !e.target.parentNode.style['height']) {
-							e.target.parentNode.style['width']  = '60%';
-							e.target.parentNode.style['height'] = '85%';
-						}
-					} else {
-						var pblnk = document.getElementById('PBlnk_'+ e.target.parentNode.id.split('_')[1]);
-						pblnk && pblnk.after( e.target.parentNode );
-						e.target.className = 'mv-frame to-win';
-						_Container['Marker'].classList.remove('hidout');
-						_Container['OVERLAY'].classList.add('hidup');
-					}
-					e.target.parentNode.inwin = e.target.classList[1] === 'to-post';
-					break;
-				case 'show-irc':
-					_z.each('.irc-reflink-from-'+ $btn.parentNode.getAttribute('data-num'), function(irc) {
-						irc.style['display'] = (irc.style['display'] == 'inline' ? 'none' : 'inline');
-					});
-					break;
-				case 'edit-post':
-					var pid = $btn.parentNode.getAttribute('data-num'),
-						el  = document.getElementById('reply'+ pid) || document.getElementById('thread'+ pid + LOCATION_PATH.board);
-					if (el) {
-						var res  = parseBoardURL(el.querySelector('.reflink a').href),
-							trip = el.querySelector('.postertrip') && getCookie('name');
-						getDataResponse(location.origin +'/get_raw_post.php?b='+ res.board +'&p='+ res.post, function(data) {
-							switch (data.status) {
-								case 0:
-								case 1:
-									(_EditForm || (_EditForm = makeGalaForm(null))).clear_all();
-									_EditForm.children['gala-error-msg'].textContent = data.error;
-									_EditForm.children['gala-error-msg'].style['background-color'] = data.status == 0 ? '#04A13D' : '#E04000';
-									_EditForm.children['gala-replytitle'].lastElementChild.textContent = 'пост №.'+ res.post;
-									_EditForm.elements['board'].value = res.board;
-									_EditForm.elements['replythread'].value = res.thread;
-									_EditForm.elements['editpost'].value = res.post;
-									_EditForm.elements['message'].value = data.raw_message;
-									_EditForm.elements['subject'].value = data.subject;
-									_EditForm.elements['name'].value = trip && trip.substring(0, data.name.length) === data.name ? trip : data.name;
-									_EditForm.elements['em'].value = data.email;
-									_EditForm.querySelector('.sagearrow').classList[data.email === 'sage' ? 'remove' : 'add']('inactive');
-									if (data.files) {
-										_EditForm.add_md5(data.files);
-									}
-									el.prepend( _EditForm );
-									break;
-								default:
-									alertify.alert(data.error);
-							}
-						});
-					}
-					break;
-				case 'gala-globalform-close':
-					globalBtReset($btn);
-					break;
-				case 'gala-globalform-open':
-					_z.each('.gala-globalform-close', globalBtReset);
-					$btn.className = 'gala-globalform-close';
-					$btn.parentNode.nextElementSibling.style['display'] = 'inline-block';
-					$btn.parentNode.nextElementSibling.appendChild(_GalaForm);
-					break;
-				case 'de-btn-rep':
-					if (!_GalaForm)
-						break;
-				case 'rep-use1':
-				case 'gcall-write-reply':
-					_z.route(e.target, function(rp) {
-						if ( /reply\d+/.test(rp.id) ) {
-							var res = parseBoardURL(rp.querySelector('.reflink a').href);
-							_GalaForm.elements['board'].value = res.board;
-							_GalaForm.elements['replythread'].value = res.thread;
-							_GalaForm.elements['message'].textMark('>>'+ (res.post || res.thread), '\r\n', 'ijct');
-							_GalaForm.children['gala-replytitle'].lastElementChild.textContent = (document.querySelector('#reply'+ res.thread +
-								' .filetitle') || { textContent: '(без названия) №.'+ res.thread }).textContent;
-						}
-						if (rp.classList.contains('psttable') || rp.classList.contains('oppost') ||
-							rp.classList.contains('de-pview') && (rp = rp.lastElementChild)) {
-							rp.after( _GalaForm );
-							return true;
-						}
-						return false;
-					});
-					break;
-				case 'sc-download':
-					window.open(e.target.href, '_blank', 'width=400,height=200');
-					break;
-				case 'sc-info-toggle':
-					e.target.parentNode.children[1].classList.add('active');
-					break;
-				case 'sc-info-close':
-					e.target.parentNode.classList.remove('active');
-					break;
-				case 'sc-track-duration':
-				case 'sc-track-title':
-					$btn = e.target.parentNode;
-				case 'sc-track':
-					SCPurePlayer.io.connect($btn.parentNode.parentNode, $btn);
-					break;
-				case 'sc-play':
-					var $player = e.target.parentNode.parentNode;
-					if (!$player.id)
-						break;
-					SCPurePlayer.io.connect($player);
-				case 'sc-pause':
-					SCPurePlayer.io['AudioDevice'][e.target.classList[0].slice(3)]();
-					break;
-				default:
-					if (e.target.classList.contains('ta-inact')) {
-						e.target.classList.remove('ta-inact');
-					}
-					return;
-			}
-			e.preventDefault();
-		} catch(trace) {
-			console.error(trace);
-		}
-	}
-	
-	function globalBtReset(btn) {
-		btn.className = 'gala-globalform-open';
-		btn.parentNode.nextElementSibling.style['display'] = 'none';
-	}
-	
-	function bytesMagnitude(bytes) {
-		return (bytes < 1024 ? bytes +' B' :
-				bytes < 1024 * 1024 ? (bytes / 1024).toFixed(2) +' KB' :
-				bytes < 1024 * 1024 * 1024 ? (bytes / 1024 / 1024).toFixed(2) +' MB' :
-											(bytes / 1024 / 1024 / 1024).toFixed(2) +' GB');
-	}
-	
-	var RATING_VALUE = { S: 9, C: 10, A: 11, N: '' };
-	
-	function makeGalaForm(formPosition) {
-		var tempForm  = _z.setup('form', { class: (formPosition == 1 ? 'reply gala-freestyle' : 'reply'), action: '/board.php?json=1&strip_exif=', enctype: 'multipart/form-data',
-			id: 'gala-'+ (formPosition == null ? 'edit' : 'reply') +'-form', style: 'display: table-row-group;'+ (formPosition == 1 ? ' left: 35%; top: 35%;' : ''), 
-			html: '<input name="board" value="'+ LOCATION_PATH.board +'" type="hidden"><input name="replythread" value="'+ LOCATION_PATH.thread +'" type="hidden">'+
-					'<div id="gala-error-msg"></div>'+
-					'<div id="gala-replytitle">'+
-						'<span class="pin-buttons" title="Сделать перетаскиваемым окном">'+
-							'<svg class="closeform ls-de-svg"><use xlink:href="#de-symbol-win-close"></use></svg>'+
-							(formPosition == null ? '<input name="editpost" value="" type="hidden">' : '<svg class="toggleform ls-de-svg"><use xlink:href="#de-symbol-win-arrow"></use></svg>') +
-						'</span>'+
-						'<span class="filetitle"></span>'+
-					'</div>'+
-					'<div class="new-thr'+ (LOCATION_PATH.thread ? '-chx inactive' : '') +' greenmk">Новый тред в /'+ LOCATION_PATH.board +'/</div>'+
-					'<div style="display: table-row-group;">'+
-						'<div class="file-area" style="display: table-cell;">'+
-							'<div class="dropbox" style="visibility: hidden;"></div>'+
-							'<div class="files-params">'+
-								'<label title="Убирать имена файлов">'+
-									'<input id="clear_files_name" type="checkbox" hidden><span class="feckbox">имена</span>'+
-								'</label>'+
-								'<label title="Удалять лишние данные картинок">'+
-									'<input id="remove_jpeg_exif" type="checkbox" hidden><span class="feckbox">EXIF</span>'+
-								'</label>'+
-								'<label title="Рейтинг картинок по умолчанию">'+
-									'<select id="default_file_rating"><option class="rating-N">N</option><option class="rating-A">A</option><option class="rating-C">C</option><option class="rating-S">S</option></select>'+
-								'</label>'+
-							'</div>'+
-							'<label class="files-add">'+
-								'<div>+</div><input id="dumb_file_field" multiple type="file" hidden>'+
-							'</label>'+
-						'</div>'+
-						'<div style="display: table-cell;">'+
-							'<div style="display: table-row;">'+
-								'<span class="text-line-ic">'+
-									'<input name="name" placeholder="Имя" maxlength="75" type="text">'+
-									'<input name="em" placeholder="E-mail" maxlength="75" type="text" hidden>'+
-									'<svg class="sagearrow de-btn-sage inactive"><use class="sage-use1" xlink:href="#de-symbol-post-sage"></use></svg>'+
-								'</span>'+
-								'<span class="text-line-ic">'+
-									'<input name="subject" placeholder="Тема" maxlength="75" type="text">'+
-									'<input id="submit_this_form" value="Отправить" type="submit">'+
-								'</span>'+
-							'</div>'+
-							'<div style="display: table-row;">'+
-								'<div style="display: table; margin: auto; text-align: center; font-variant: small-caps; font-size: 13px; padding: 5px 0;">'+
-									'<span class="gmark-btn bold" title="Альтернатива/Хоткей: **"></span><span class="sep"></span>'+
-									'<span class="gmark-btn italic" title="Альтернатива/Хоткей: *"></span><span class="sep"></span>'+
-									'<span class="gmark-btn underline" title=""></span><span class="sep"></span>'+
-									'<span class="gmark-btn strike" title="Альтернатива/Хоткей: ^"></span><span class="sep"></span>'+
-									'<span class="gmark-btn spoiler" title="Альтернатива/Хоткей: %%"></span><span class="sep"></span>'+
-									'<span class="gmark-btn code" title="Код"></span><span class="sep"></span>'+
-									'<span class="gmark-btn rp" title="Ролеплей"></span><span class="sep"></span>'+
-									'<span class="gmark-btn sup" title="Верхний индекс"></span><span class="sep"></span>'+
-									'<span class="gmark-btn sub" title="Нижний индекс"></span><span class="sep"></span>'+
-									'<span class="gmark-btn rcv" title="Альтернатива/Хоткей: !!"></span><span class="sep"></span>'+
-									'<span class="gmark-btn dice" title="#dice"></span><span class="sep"></span>'+
-									'<span class="gmark-btn unkfunc0" title="Цитировать"></span>'+
-								'</div>'+
-							'</div>'+
-							'<textarea id="galatext" style="display: table-row; width: 100%;" placeholder="Текст поста" name="message" rows="14" accesskey="m"></textarea>'+
-						'</div><textarea name="g-recaptcha-response" hidden></textarea>'+
-					'</div>', onmousedown: (formPosition == 1 ? mousedownGFlistener : null)}, {
-			submit: submitGFlistener,
-			click: clickGFlistener
-		});
-		
-		tempForm.files = new Array(0);
-		
-		tempForm.elements['dumb_file_field'].onchange = function(e){ tempForm.add_files(e.target) };
-		tempForm.elements['message'].textMark = galamarK;
-		
-		if (formPosition != null) {
-			var galaSafe  = JSON.parse(sessionStorage.getItem('GalaSafe')) || {},
-				safeValue = function(e) {
-					var name = e.target.name;
-					galaSafe[name] = e.target.value;
-					clearTimeout(e.target.safe_timer);
-					e.target.safe_timer = setTimeout(function() {
-						sessionStorage.setItem('GalaSafe',  JSON.stringify(galaSafe));
-					}, 800);
-				}
-			
-			_z.setup(tempForm.elements['default_file_rating'], { value: (galaSafe['default_file_rating'] || 'N') },
-				{ change: function(e) {
-					galaSafe['default_file_rating'] = e.target.value;
-					sessionStorage.setItem('GalaSafe', JSON.stringify(galaSafe));
-				}});
-			
-			_z.setup(tempForm.elements['clear_files_name'], { checked: MAIN_SETTINGS['clear_files_name'] }, { change: localGFChanges });
-			_z.setup(tempForm.elements['remove_jpeg_exif'], { checked: MAIN_SETTINGS['remove_jpeg_exif'] }, { change: localGFChanges });
-			
-			_z.setup(tempForm.elements['name'   ], { value: (galaSafe['name'   ] || '')}, { input: safeValue });
-			_z.setup(tempForm.elements['message'], { value: (galaSafe['message'] || '')}, { input: safeValue });
-		}
-		
-		tempForm['FileArea'] = _z.setup(tempForm.querySelector('.file-area'), null, {
-			'dragover': function(e) {
-				clearTimeout(this.leave_timer);
-				this.style['min-width'] = '100px';
-				this.firstElementChild.style['visibility'] = 'visible';
-				e.preventDefault();
-			},
-			'dragenter': function(e) {
-				var items = e.dataTransfer.mozItemCount || e.dataTransfer.items.length;
-				this.transfer_info = '.dropbox:before { content: "добавить '+ itemsPlurality(items) +'"; }';
-				dynamicCSS.textContent += this.transfer_info;
-			},
-			'dragleave': function(e) {
-				this.leave_timer = setTimeout(closeDBOX, 80);
-			},
-			'drop': function(e) {
-				tempForm.add_files(e.dataTransfer);
-				closeDBOX();
-				e.preventDefault();
-			}
-		});
-		function closeDBOX() {
-			tempForm['FileArea'].style['min-width'] = 'auto';
-			tempForm['FileArea'].firstElementChild.style['visibility'] = 'hidden';
-			dynamicCSS.textContent = dynamicCSS.textContent.replace(tempForm['FileArea'].transfer_info, '');
-		}
-		tempForm.add_files = function addGFiles(data) {
-			
-			var files  =  data.files,
-			   length  =  files.length,
-			  fileURL  =  data.getData ? data.getData(data.effectAllowed === 'copyLink' ? 'Text' : 'URL') : null,
-			     desk  =  this.elements['board'].value,
-			    limit  =  MAX_FILE_COUNT.get( desk ) - this.files.length,
-			 defaultR  =  this.elements['default_file_rating'].value;
-			
-			if ( ! length && fileURL) {
-				limit > 0 && this.get_url_file(fileURL);
-			}
-			else {
-				for (var i = 0; i < length && i < limit; i++) {
-					
-					let file = files[i];
-					let FiD  = file.type +';'+ file.size;
-					
-					if (FiD in this.files) {
-						limit += (length > limit);
-						continue;
-					} 
-					
-					let fnode = VALID_FILE_TYPES.test(file.type) ? makeGalaFile(file, FiD, defaultR) : '';
-					
-					if (fileBinaryCheck(file, desk, md5 => { fnode.md5 = md5 }, MSG => { alertify.error(MSG) })) {
-						
-						this.files.push(
-							(this.files[FiD] = this['FileArea'].appendChild(fnode))
-						);
-						this['FileArea'].classList.add('hold');
-					}
-					else if (length > limit) {
-						limit++;
-					}
-				}
-			}
-		}
-		tempForm.add_md5 = function addMD5(data) {
-			
-			const LIMIT  = MAX_FILE_COUNT.get( this.elements['board'].value ) - this.files.length;
-			const length = data.length;
-			
-			for (var i = 0; i < length && i < LIMIT; i++) {
-				
-				let md5   = data[i].md5;
-				let R     = data[i].rating || '';
-				let fnode = _z.setup('div', {
-					id   : 'gala-file_'+ md5,
-					class: 'file-gox',
-					html : '<span class="file-remove"></span><img class="file-gview" src="'+ data[i].thumb +'" title="'+ data[i].info +'"><div class="file-cover-label '+ PONY_RATE[R] +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'
-				}, {
-					click : localGFclick
-				});
-				
-				fnode.exist       = true;
-				fnode.md5         = md5;
-				fnode.rating      = R;
-				fnode.upload_name = data[i].name;
-				
-				this.files.push(
-					(this.files[md5] = fnode)
-				);
-				this['FileArea'].classList.add('hold');
-				this['FileArea'].appendChild(fnode);
-			}
-		}
-		tempForm.clear_all = function() {
-			this.elements['g-recaptcha-response'].value = '';
-			this.children['gala-error-msg'].textContent = '';
-			this.elements['subject'].value = '';
-			this.elements['message'].value = '';
-			this.elements['message'].dispatchEvent(new InputEvent('input'));
-			this['FileArea'].classList.remove('hold');
-			this.files.splice(0, this.files.length);
-			for (var key in this.files) {
-				this.files[key].remove();
-				delete this.files[key];
-			}
-		}
-		tempForm.captcha_needed = function() {
-			this.elements['submit_this_form'].type = 'button';
-			this.elements['submit_this_form'].className = 'call-captcha-widget';
-			this.elements['submit_this_form'].value = 'Капча';
-		}
-		tempForm.get_url_file = function httpGFile(fileURL) {
-			getDataBinary('Blob', fileURL, (blob, f_url) => {
-				blob.name = getPageName(f_url);
-				tempForm.add_files({ files: [blob] });
-			});
-		}
-		
-		return tempForm;
-	}
-	
-	function localGFclick(e) {
-		switch (e.target.classList[0]) {
-			case 'file-cover':
-				var fR = e.target.classList[1];
-				this.rating = RATING_VALUE[fR];
-				e.target.parentNode.parentNode.className = 'file-cover-label '+ fR;
-		}
-	}
-	
-	function localGFChanges(e) {
-		MAIN_SETTINGS[e.target.id] = (0 + e.target.checked);
-		localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
-	}
-	
-	function itemsPlurality(count) {
-		var i = count.toString(),
-			l = i[i.length - 1];
-		return i +' файл'+ (l == 1 ? '' : l < 5 ? 'а' : 'ов');
-	}
-	
-	function makeGalaFile(file, FiD, R) {
-		
-		var gview, hash;
-		var type    = file.type.split('/');
-		var size    = bytesMagnitude(file.size);
-		var blobURL = (window.URL || window.webkitURL).createObjectURL(file);
-		
-		var fnode = _z.setup('div', {
-			id   : 'gala-file_'+ FiD,
-			class: 'file-gox',
-			html : '<span class="file-remove"></span><div class="file-cover-label '+ (R || 'N') +'"><ul class="file-cover-select"><li class="file-cover S"></li><li class="file-cover C"></li><li class="file-cover A"></li><li class="file-cover N"></li></ul></div>'
-		}, {
-			click: localGFclick
-		});
-		
-		fnode.blob        = file;
-		fnode.rating      = (RATING_VALUE[R] || '');
-		fnode.upload_name = file.name;
-		
-		switch (type[0]) {
-			case 'audio':
-			case 'video':
-				gview = _z.setup('video', {'src': blobURL, 'muted': true, 'class': 'file-gview',
-					'onloadedmetadata': function() {
-						var sec = Math.floor(this.duration) % 60;
-						var min = Math.floor(this.duration / 60);
-						this.title = type[1].toUpperCase() +', '+ this.videoWidth +'×'+ this.videoHeight +', '+ min +':'+ sec +', '+ size;
-					}
-				});
-				gview.onmouseover = gview.onmouseout = function(e) {
-					this[ e.type == 'mouseover' ? 'play' : 'pause' ]();
-				}
-				break;
-			case 'image':
-				gview = _z.setup('img', {'src': blobURL, 'class': 'file-gview', 'style': 'visibility: hidden',
-					'onload': function() {
-						this.title = type[1].toUpperCase() +', '+ this.naturalWidth +'×'+ this.naturalHeight +', '+ size;
-						this.onload = null;
-						
-						if (type[1] === 'gif') {
-							var canvas = _z.setup('canvas', {'width': this.width, 'height': this.height}),
-								ctx = canvas.getContext('2d');
-								ctx.drawImage(this, 0, 0, this.naturalWidth, this.naturalHeight, 0, 0, this.width, this.height);
-								
-							this['ld_mouseover'] = blobURL;
-							this['ld_mouseout' ] = this.src = canvas.toDataURL('image/png');
+						case -13:
+							var ls = fpage.split('\n'),
+								pan = (new RegExp('(?:^|\\n)([\\s]*)'+ uchar, '').exec(ls[ls.length - 1])|| { 1:'' })[1],
+								fc = '\n   ' + pan, sc = '\n' + pan,
+								offset = start + fc.length - 1;
 							
-							this.onmouseout = this.onmouseover = function(e) {
-								this.src = this['ld_'+ e.type];
-							}
-						}
-						this.style['visibility'] = 'visible';
-					}
-				});
-		}
-		fnode.insertBefore(gview, fnode.lastElementChild);
-		
-		Object.defineProperty(fnode, 'md5', {
-			get: (   ) => hash,
-			set: (md5) => {
-				//always send sha512 of file for passcode records
-				//field will be sent only if user have cookie with real passcode
-				getDataResponse(location.origin +'/chkmd5.php?x='+ (hash = md5), (y) => {
-					fnode.exist = y;
-				});
-			}
-		});
-		
-		return fnode;
-	}
-	
-	function mousedownGFlistener(e) {
-		if (e.button != 0 || ['INPUT', 'SELECT', 'TEXTAREA', 'IMG'].includes(e.target.tagName))
-			return;
-		e.preventDefault();
-		
-		var $this = this;
-		var coords = this.getBoundingClientRect();
-		var shiftX = e.pageX - (coords.left + pageXOffset);
-		var shiftY = e.pageY - (coords.top + pageYOffset);
-		var $fn = function(e) {
-			$this.style['left'] = (e.clientX - shiftX) +'px';
-			$this.style['top']  = (e.clientY - shiftY) +'px';
-		}
-		var $rm = function(e) {
-			window.removeEventListener('mousemove', $fn, false);
-			window.removeEventListener('mouseup', $rm, false);
-		}
-		window.addEventListener('mousemove', $fn, false);
-		window.addEventListener('mouseup', $rm, false);
-	}
-	function clickGFlistener(e) {
-		if (e.button != 0 || !e.target.className || !e.target.classList)
-			return;
-		var $btn = e.target;
-		switch (e.target.classList[0]) {
-			case 'sage-use1':
-				$btn = e.target.parentNode;
-			case 'sagearrow':
-				$btn.classList.toggle('inactive');
-				this.elements['em'].value = $btn.classList.contains('inactive') ? '' : 'sage';
-				break;
-			case 'closeform':
-				this.remove();
-				break;
-			case 'toggleform':
-				if (this.classList.contains('gala-freestyle')) {
-					this.onmousedown = null;
-					MAIN_SETTINGS['galaform'] = 2;
-				} else {
-					var coords = this.getBoundingClientRect();
-					this.style['left'] = coords.left +'px';
-					this.style['top' ] = coords.top  +'px';
-					this.onmousedown = mousedownGFlistener;
-					MAIN_SETTINGS['galaform'] = 1;
-				}
-				this.classList.toggle('gala-freestyle');
-				localStorage.setItem('main_settings', JSON.stringify(MAIN_SETTINGS));
-				break;
-			case 'gmark-btn':
-				var tag = e.target.classList[1],
-					gTA = this.elements['message'];
-				switch (tag) {
-					case 'spoiler':
-					case 'code':
-						var o = '['+ tag +']', c = '[/'+ tag +']',
-							s = gTA.value.substring(0, gTA.selectionStart);
-						if (!isInsideATag(s, o, c)) {
-							gTA.textMark(o, c, 'html', true);
-						} else if (tag === 'spoiler') {
-							gTA.textMark('%%', '%%', 'mdwn');
-						} else if (tag === 'code') {
-							gTA.textMark('   ', '\n   ', 'ql');
-						}
-						break;
-					case 'unkfunc0':
-						gTA.textMark('>', '\n>', 'ql');
-						break;
-					case 'dice':
-						gTA.textMark('##', '##', 'dice');
-						break;
-					case 'rcv':
-						gTA.textMark('!!', '!!', 'mdwn');
-						break;
-					case 'underline':
-					case 'italic':
-					case 'strike':
-					case 'bold':
-						tag = tag[0];
-					default:
-						gTA.textMark('['+tag+']', '[/'+tag+']', 'html');
-				}
-				break;
-			case 'ta-inact':
-				e.target.classList.remove('ta-inact');
-				break;
-			case 'call-captcha-widget':
-				var $t = this, callback = function(token) {
-					if (token == undefined) {
-						$t.captcha_needed();
-					} else {
-						$t.elements['submit_this_form'].type = 'submit';
-						$t.elements['submit_this_form'].className = 'send-form';
-						$t.elements['submit_this_form'].value = 'Отправить';
-						$t.elements['g-recaptcha-response'].value = token;
-					}
-				}
-				alertify.alert('<div id="catcha-widget-'+ this.id +'" style="text-align: center;"></div>');
-				grecaptcha.render('catcha-widget-'+ this.id, {
-					'sitekey': '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
-					'expired-callback': callback,
-					'callback': callback,
-					'theme': 'light'
-				});
-				break;
-			case 'new-thr-chx':
-				e.target.classList.toggle('inactive');
-				this.elements['replythread'].value = (e.target.classList.contains('inactive') ? LOCATION_PATH.thread : 0);
-				break;
-			case 'file-cover-label':
-				e.target.classList.toggle('active');
-				break;
-			case 'file-remove':
-				var FiD = e.target.parentNode.id.split('_')[1],
-					idx = this.files.indexOf(this.files[FiD]);
-				this.files[FiD].remove();
-				delete this.files[FiD];
-				this.files.splice(idx, 1);
-				if (this.files.length == 0)
-					this['FileArea'].classList.remove('hold');
-		}
-	}
-	
-	var dynamicCSS = _z.setup('style', { id: 'gala_dynamic_css' });
-	var content_error = 'Нельзя отправлять сообщения без файлов и текста.';
-	var myPostsMap = JSON.parse(localStorage.getItem('de-myposts')) || {};
-	
-	function submitGFlistener(e) {
-		try { e.preventDefault();
-			var form = e.target;
-			var flen = e.target.files.length;
-			if (!flen && !form.elements['message'].value.trim()) {
-				form.children['gala-error-msg'].textContent = content_error;
-				form.children['gala-error-msg'].style['background-color'] = '#E04000';
-				return;
-			}
-			var desk = form.elements['board'].value;
-			var thread_id = form.elements['replythread'].value;
-			var formData = new FormData();
-			for (var i = 0, elen = form.elements.length; i < elen; i++) {
-				if ( ! form.elements[i].name) {
-					continue;
-				}
-				formData.append(form.elements[i].name, form.elements[i].value);
-			}
-			for (var i = 0, n = 1; i < flen; i++, n++) {
-				if (form.files[i].exist) {
-					formData.append('md5-'+ n, form.files[i].md5);
-					form.files[i].blob = new Blob;
-				}
-				if (form.elements['clear_files_name'].checked)
-					form.files[i].upload_name = ' '+ form.files[i].upload_name.slice(form.files[i].upload_name.lastIndexOf('.'));
-				formData.append('upload[]', form.files[i].blob, form.files[i].upload_name);
-				formData.append('upload-rating-'+ n, form.files[i].rating);
-			}
-			
-			form.elements['submit_this_form'].disabled = true;
-			form.elements['submit_this_form'].value = 'Отправка 0%';
-			
-			var postReq = new XMLHttpRequest();
-				postReq.upload.onprogress = function(e) {
-					form.elements['submit_this_form'].value = 'Отправка '+ Math.round((e.loaded / e.total * 100)) +'%';
-				}
-				postReq.onreadystatechange = function() {
-					if (this.readyState !== 4)
-						return;
-					var msg_error = '';
-					if (this.status === 200) {
-						var data = (function(json, o) {
-							try {
-								o = /<meta http-equiv=\"\w+\" content=\"\d+;url=\/\w+\/\">/.test(json) ? {error:content_error} : JSON.parse(json);
-							} catch (g) {
-								o = { error: json };
-							}
-							return o;
-						})(this.responseText);
-						if (data.error === null) {
-							
-							form.remove();
-							form.clear_all();
-							
-							if (!(desk in myPostsMap))
-								myPostsMap[desk] = {};
-							myPostsMap[desk][data.id] = [Date.now(), Number(thread_id || data.id), true];
-							localStorage.setItem('de-myposts', JSON.stringify(myPostsMap));
-							setCookie('name', form.elements['name'].value, 2e4, '.'+ location.host);
-							dynamicCSS.appendChild(document.createTextNode('.post-body a[href$="#'+ data.id +
-								'"]:after{content:" (You)";} .de-ref-op[href$="#'+ data.id +'"]:after{content:" (OP)(You)";}'));
-							
-							if (!thread_id) {
-								location.href = location.origin +'/'+ desk +'/res/'+ data.id +'.html';
-							} else {
-								var buttons_path = '#thread'+ thread_id + desk +' + .de-thr-buttons .de-thr-updater-link';
-								document.querySelectorAll(buttons_path +', '+ buttons_path.replace('+', '>')).forEach(function(abtn) {
-									abtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-								});
-							}
-						} else {
-							msg_error = data.error;
-						}
-					} else {
-						msg_error = this.status +' '+ this.statusText;
-					}
-					
-					if (/Я запретила тебе отправлять сообщения\!/.test(msg_error)) {
-						var banMSG = new DOMParser().parseFromString(data.error, 'text/html').body.firstElementChild;
-						form.children['gala-error-msg'].innerHTML = '';
-						form.children['gala-error-msg'].style['background-color'] = '#1E2E3E';
-						form.children['gala-error-msg'].appendChild(banMSG).style = 'width: 650px; font-size: 90%;';
-						form.elements['submit_this_form'].disabled = false;
-						form.elements['submit_this_form'].value = 'Отправить';
-						return;
-					}
-					
-					form.children['gala-error-msg'].style['background-color'] = '#E04000';
-					form.children['gala-error-msg'].textContent = msg_error;
-					
-					switch (msg_error) {
-						case 'Ты отправляешь сообщения слишком быстро':
-							form.elements['submit_this_form'].value = 'Ждите 7';
-							var t = 6, timr = setInterval(function(){
-								if (t == 0) {
-									clearInterval(timr);
-									form.elements['submit_this_form'].disabled = false;
-									form.elements['submit_this_form'].value = 'Отправить';
-									form.children['gala-error-msg'].textContent = 'Теперь можно отправлять';
-									form.children['gala-error-msg'].style['background-color'] = '#04A13D';
-								} else
-									form.elements['submit_this_form'].value = 'Ждите '+ (t--);
-							}, 1050);
-							break;
-						case 'Введен неправильный код подтверждения':
-							form.elements['submit_this_form'].disabled = false;
-							form.captcha_needed();
+							$this.value = fpage + fc + sc + val.substring(end);
+							$this.setSelectionRange(offset, offset);
 							break;
 						default:
-							form.elements['submit_this_form'].disabled = false;
-							form.elements['submit_this_form'].value = 'Отправить';
+							exit = false;
 					}
-				};
-				postReq.open('POST', form.action + Number (form.elements['remove_jpeg_exif'].checked), true);
-				postReq.send(formData);
-		} catch(log) {
-			console.error(log)
-		}
-	}
-	
-	if (MAIN_SETTINGS.galaform) {
-		_GalaForm = makeGalaForm(MAIN_SETTINGS.galaform);
-		isCaptchaNeeded(null, () => { _GalaForm.captcha_needed() });
-	}
-	
-	function handlePostNode(pst) {
-		
-		var reply = /reply\d+/.test(pst.id) ? pst : pst.querySelector('.pstnode > *[id^="reply"]');
-		
-		if (reply && reply.getAttribute('handled') !== 'ok') {
-			var bquot = reply.querySelector('.post-body > blockquote');
-			var pid = reply.getAttribute('data-num');
-			if (myPostsMap[LOCATION_PATH.board] && pid in myPostsMap[LOCATION_PATH.board]) {
-				reply.classList.add('de-mypost');
-			}
-			if (_GalaForm) {
-				reply.querySelector('.extrabtns').previousSibling.before( _z.setup('a', {
-					html: '<svg class="gcall-write-reply rep-arrow-svg"><use class="rep-use1" xlink:href="#gala-rep-arrow"></use></svg>'}));
-			}
-			var sclnks = bquot.querySelectorAll('a[href^="https://soundcloud.com/"], a[href^="http://soundcloud.com/"]');
-			if (sclnks.length > 0) {
-				jumpCont(bquot, 'mediacontent').appendChild(SCPurePlayer.createGroup(sclnks));
-			}
-			bquot.querySelectorAll('a[href*="//"]:not(.cm-link):not(.cm-button):not(.irc-reflink)').forEach(handleLinks);
-			reply.setAttribute('handled', 'ok');
-		}
-	}
-	
-	_z.setup(window, null, {
-		'keypress': keyMarks,
-		'storage': function(e){
-			if (e.storageArea == this.localStorage) {
-				switch (e.key) {
-					case 'main_settings':
-						MAIN_SETTINGS = JSON.parse(e.newValue);
-						break;
-					case 'data_nots':
-						DATA_NOTS = JSON.parse(e.newValue);
-						break;
-					case 'de-myposts':
-						myPostsMap = JSON.parse(e.newValue);
-						break;
+					KeyChars.complex = 1;
 				}
-			}
-		},
-		'click': cmButtonHandler
-	});
-	_z.setup(document, null, {
-		'hasNewPostsComing': function(e) {
-			e.detail.forEach(handlePostNode);
+			} else if (_inTA && select.length > 0 && (c = KeyChars.symbs.indexOf(key)) != -1) {
+				$this.textMark(
+					(key === '(' ?  key  : KeyChars.doubs[c]), KeyChars.doubs[c], (
+					 key === '#' ? 'dice':
+					 key === '\\'? 'scrn': 'mdwn'));
+			} else if (
+				(c = KeyChars.quots.indexOf(key)) != -1 &&
+				(_inTA ? select : window.getSelection().toString()).length > 0) {
+					key === '@' ? $this.textMark('* ', '\n* ', 'ql') :
+					              $this.textMark(key +' ', '\n'+ key +' ', 'ql');
+			} else
+				exit = false;
+			if (exit)
+				return e.preventDefault();
 		}
-	});
-	$DOMReady(function(e) {
-		if ('postform' in document.forms && _GalaForm) {
-			
-			const globalform_area = _z.setup('div', {
-				class: 'gala-globalform-area',
-				html: '<div>[<a class="gala-globalform-open"></a>]</div><div style="text-align: left; display: none;"></div><hr>'
-			});
-			
-			const postarea = _z.setup(document.querySelector('.postarea'), { style: 'display: block!important;' });
-			      postarea && postarea.after( globalform_area );
-			
-			const delform = (document.forms.delform || document.querySelector('form[de-form]'));
-			      delform && delform.after( globalform_area.cloneNode(true) );
-			
-			document.body.appendChild(
-				_z.setup('div', { style: 'height: 0; width: 0; position: fixed;', html: 
-					'<style>.de-parea, #de-main > hr, .postarea > #postform, .de-btn-rep { display: none; } .de-svg-back { fill: inherit; stroke: none; } .de-svg-fill { stroke: none; fill: currentColor; } .de-svg-stroke { stroke: currentColor; fill: none; } .de-btn-sage { margin: 0 2px -3px; cursor: pointer; width: 12px; height: 16px; } .rep-arrow-svg{ margin: 0 2px -4px 3px; cursor: pointer; width: 20px; height: 16px; }</style>'+
-					'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'+
-					'<defs></defs>'+
-					'<symbol viewBox="0 0 16 16" id="de-symbol-post-back">'+
-						'<path class="de-svg-back" d="M4 1q-3 0,-3 3v8q0 3,3 3h8q3 0,3 -3v-8q0 -3,-3-3z"></path>'+
-					'</symbol>'+
-					'<symbol viewBox="0 0 16 10" id="gala-rep-arrow">'+
-						'<path class="de-svg-fill" d="M7,4 L0,8 L1.7,4 L0,0 L7,4 Z"></path>'+
-						'<path class="de-svg-fill" d="M14,4 L7,8 L8.7,4 L7,0 L14,4 Z"></path>'+
-					'</symbol>'+
-					'<symbol viewBox="0 0 16 16" id="de-symbol-post-sage">'+
-						'<path class="de-svg-fill" d="M3,.003 C5.5,-.003 8.4,-.003 11.2,.003 C11.1,.5 11.03,1.005 11,1.5 C8.3,1.5 5.6,1.5 3,1.5 C3,1.002 3,.5 3,.003 C3,.003 3,.5 3,.003 L3,.003 L3,.003 Z"></path>'+
-						'<path class="de-svg-fill" d="M3.1,3 C6,3 8.2,3 11,3 C11,3.4 10.5,4 10.4,4.4 C8.1,4.4 6,4.4 3.4,4.4 C3.3,4 3,3.4 3.1,3 C3.1,3 3.2,3.4 3.1,3 L3.1,3 L3.1,3 Z"></path>'+
-						'<path class="de-svg-fill" d="M4,6 C6,6 8,6 10.2,6 C10,7 10,8 10,9 C11,9 12.5,8.5 14,8 C11.6,11.1 9.3,14 7,16.2 C4.6,14 2.3,11.1 -.1,8.5 C1.3,8.5 3,8.5 4.1,8.5 C4,7.6 4,7 4,6 C4,6 4,7 4,6 L4,6 L4,6 Z"></path>'+
-					'</symbol>'+
-					'<symbol viewBox="0 0 16 16" id="de-symbol-win-arrow">'+
-						'<path class="de-svg-stroke" stroke-width="3.5" d="M8 13V6"></path>'+
-						'<path class="de-svg-fill" d="M3.5 7h9L8 2.5 3.5 7z"></path>'+
-					'</symbol>'+
-					'<symbol viewBox="0 0 16 16" id="de-symbol-win-close">'+
-						'<path class="de-svg-stroke" stroke-width="2.5" d="M3.5 3.5l9 9m-9 0l9-9"></path>'+
-					'</symbol>'+
-					'</svg>'}));
+		if (_inTA && e.keyCode != 8 && $this.classList.contains('ta-inact')) {
+			$this.setSelectionRange($this.selectionEnd, $this.selectionEnd);
+			$this.classList.remove('ta-inact');
 		}
-		if (SCPurePlayer.io['AudioDevice'].tagName === 'OBJECT') {
-			document.body.appendChild( _z.setup('span', {
-					class: 'sc-engine-container',
-					style: 'position: absolute; left: -9000px;'
-				})
-			).appendChild( SCPurePlayer.io['AudioDevice'] );
-		}
-		_z.each('.psttable *[id^="reply"], .oppost[id^="reply"]', handlePostNode);
-		document.body.appendChild( dynamicCSS );
-	});
-	return {
-		mediaFrame: _Container,
-		handleLinks: handleLinks
+	} catch(trace) {
+		console.error(trace);
 	}
-})(); /* ===> end <=== */
+}

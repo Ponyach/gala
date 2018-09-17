@@ -1,3 +1,36 @@
+/* ---{ custom polyfills }--- */
+if (!Element.prototype.append) {
+	Element.prototype.append = Document.prototype.append = DocumentFragment.prototype.append = function() {
+		for (var i = 0, arg = arguments; i < arg.length; i++) {
+			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+			this.appendChild( node );
+		}
+	};
+}
+if (!Element.prototype.prepend) {
+	Element.prototype.prepend = Document.prototype.prepend = DocumentFragment.prototype.prepend = function() {
+		for (var i = 0, arg = arguments; i < arg.length; i++) {
+			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+			this.insertBefore( node, this.childNodes[i] );
+		}
+	};
+}
+if (!Element.prototype.before) {
+	Element.prototype.before = function() {
+		for (var i = 0, arg = arguments; i < arg.length; i++) {
+			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+			this.parentNode.insertBefore( node, this );
+		}
+	};
+}
+if (!Element.prototype.after) {
+	Element.prototype.after = function() {
+		for (var i = 0, arg = arguments; i < arg.length; i++) {
+			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
+			this.parentNode.insertBefore( node, this.nextSibling );
+		}
+	};
+}
 // полифил для реализации selectedStyleSheetSet - родного метода для переключения html5 стилей link[rel="stylesheet alternate"]
 if (!('selectedStyleSheetSet' in document)) {
 	Object.defineProperty(document, 'selectedStyleSheetSet', {
@@ -61,6 +94,7 @@ if (!('classList' in Element.prototype)) {
 					var index = classList.indexOf(c);
 						index != -1 ? classList.splice(index, 1) : classList.push(c);
 					elem.className = classList.join(' ');
+					return index == -1;
 				}
 				classList.contains = function(c) {
 					return classList.indexOf(c) !== -1;
@@ -78,38 +112,6 @@ if (!('preventDefault' in Event.prototype)) {
 if (!('stopPropagation' in Event.prototype)) {
 	Event.prototype.stopPropagation = function() {
 		this.cancelBubble = true;
-	};
-}
-if (!Element.prototype.append) {
-	Element.prototype.append = Document.prototype.append = DocumentFragment.prototype.append = function() {
-		for (var i = 0, arg = arguments; i < arg.length; i++) {
-			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-			this.appendChild( node );
-		}
-	};
-}
-if (!Element.prototype.prepend) {
-	Element.prototype.prepend = Document.prototype.prepend = DocumentFragment.prototype.prepend = function() {
-		for (var i = 0, arg = arguments; i < arg.length; i++) {
-			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-			this.insertBefore( node, this.childNodes[i] );
-		}
-	};
-}
-if (!Element.prototype.before) {
-	Element.prototype.before = function() {
-		for (var i = 0, arg = arguments; i < arg.length; i++) {
-			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-			this.parentNode.insertBefore( node, this );
-		}
-	};
-}
-if (!Element.prototype.after) {
-	Element.prototype.after = function() {
-		for (var i = 0, arg = arguments; i < arg.length; i++) {
-			var node = typeof arg[i] === 'string' ? document.createTextNode(arg[i]) : arg[i];
-			this.parentNode.insertBefore( node, this.nextSibling );
-		}
 	};
 }
 if (!String.prototype.includes) {
