@@ -940,7 +940,7 @@ const G4LA = new Gala;
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE_COUNT[postform.elements['board'].value] = i - 1;
 			// init modules
-			Gala.init();
+			G4LA.init();
 			// отслеживание изменений в DOM
 			var _throbsv = 'MessageChannel' in window ? '' : ', body > form[action="/board.php"] *[id^="thread"]',
 				observer = new MutationObserver(function(mutations) {
