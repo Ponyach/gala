@@ -779,7 +779,7 @@ const Gala = (() => {
 				this.remove();
 				break;
 			case 'toggleform':
-				if (this.classList.toggle('gala-freestyle')) {
+				if (!this.classList.toggle('gala-freestyle')) {
 					this.onmousedown = null;
 					MAIN_SETTINGS['galaform'] = 2;
 				} else {
@@ -988,7 +988,6 @@ const Gala = (() => {
 	
 	_Constructor.prototype.init = function() {
 		if (this['_GalaForm']) {
-			this['_GalaForm'].init();
 			
 			const globalform_area = _z.setup('div', {
 				class: 'gala-globalform-area',

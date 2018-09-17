@@ -61,7 +61,7 @@ if (program.compatible) {
 		__pieceOf = (code) => uglify.minify(code, {
 			compress: { booleans: false },
 			output: {
-				//max_line_len: 255,
+				max_line_len: 255,
 				comments: 'all',
 				ast: false
 			}
@@ -91,7 +91,7 @@ for (let name of program.args) {
 	if (word === -1)
 		continue;
 	
-	let output = `../ponyach/lib/javascript/${name}.js`;
+	let output = `../ponyach/lib/javascript/${ (word > 1 ? 'modules/' : '') + name }.js`;
 	//let output = `build/${name}.js`;
 	
 	if (word === 0) {
@@ -122,14 +122,7 @@ for (let name of program.args) {
 			
 			if (err) throw err;
 			
-			fileSystem.writeFile(output, head + uglify.minify(buf.toString('utf8'), {
-				compress: { booleans: false },
-				output: {
-					//max_line_len: 255,
-					comments: false,
-					ast: false
-				}
-			}).code, err => {
+			fileSystem.writeFile(output, head + __pieceOf(buf.toString('utf8')) +'\n', err => {
 				// => [Error: EISDIR: illegal operation on a directory, open <directory>]
 				if (err) throw err;
 				

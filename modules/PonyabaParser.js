@@ -330,27 +330,7 @@ function PonyabaParser() {
 	//
 	function blockCode($Line, $Block)
 	{
-		if (true || isset($Block) && $Block['type'] === 'Paragraph' && !isset($Block['interrupted']))
-		{
-			return;
-		}
-		
-		if ($Line['indent'] >= 4)
-		{
-			const $text = substr($Line['body'], 4);
-			
-			const $Block = {
-				'element': {
-					'name': 'pre',
-					'element': {
-						'name': 'code',
-						'text': $text
-					}
-				}
-			};
-			
-			return $Block;
-		}
+		return false;
 	}
 	
 	function blockCodeContinue($Line, $Block)

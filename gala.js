@@ -308,7 +308,7 @@ const G4LA = new Gala;
 		// собираем куклоскрипт  ~  добавляем на страницу
 		document.head.appendChild( _z.setup('script', {
 			type : 'text/javascript',
-			src  : _VER_.BOARDSCRIPT }, {
+			src  : _VER_.boardscript }, {
 			load : function(e) {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
@@ -532,8 +532,9 @@ const G4LA = new Gala;
 			html  : '<p style="position: absolute; width: 100px; height: 50px; top: 50%; left: 50%; margin-left: -50px; margin-top: -25px;">Загружаюсь...</p>'}) );
 		// загружаем дополнительные модули
 		MAIN_SETTINGS['require_modules'].forEach(name => {
-			document.head.appendChild(
-				_z.setup('script', { type: 'application/javascript', src: '/lib/javascript/modules/'+ name +'.js' }));
+			name in _VER_ && document.head.appendChild( _z.setup('script', { type: 'application/javascript', src: _VER_[name] }, {
+				load: () => { if (name === 'mepr') { G4LA._GalaForm && G4LA._GalaForm.init(); $DOMReady(initMepr); } }
+			}));
 		});
 		$DOMReady(() => {
 			// устанавливаем выбранный пользователем стиль
@@ -939,7 +940,7 @@ const G4LA = new Gala;
 			// вносим уточнение о максимально возможном колличестве файлов для одного поста на этой доске
 			MAX_FILE_COUNT[postform.elements['board'].value] = i - 1;
 			// init modules
-			G4LA.init(); initMepr();
+			Gala.init();
 			// отслеживание изменений в DOM
 			var _throbsv = 'MessageChannel' in window ? '' : ', body > form[action="/board.php"] *[id^="thread"]',
 				observer = new MutationObserver(function(mutations) {
