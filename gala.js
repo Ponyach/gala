@@ -4,7 +4,7 @@
 	«Gala the Boardscript»
 	: Special for Ponyach imageboard
 	: Code Repositiry https://github.com/Ponyach/gala
-	: version 4.4.0
+	: version 4.4.6
 	© magicode
 */
 
@@ -240,7 +240,7 @@ Object.defineProperty(window, 'isCaptchaNeeded', {
 });
 
 //затычки --X
-window.handleFileSelect = window.submitPostform = window._PonyRateHiglight = () => void 0;
+window.handleFileSelect = window._PonyRateHiglight = () => void 0;
 
 window.ku_boardspath = location.origin;
 // X-- затычки
@@ -249,7 +249,7 @@ const G4LA = new Gala;
 
 (() => {/* это изолированное пространство, функции и переменные которые здесь указываем не будут видны левым скриптам */
 	
-	var toggleHeaderOnTop, used_style, postform, passcode_refresh, _PONY, _HiP = [], recapt2, de_rpiChange = NULL.fn;
+	var toggleHeaderOnTop, used_style, postform, passcode_refresh, _PONY, _HiP = [], de_rpiChange = NULL.fn;
 	
 	const _File = {
 		blob   : [],
@@ -264,52 +264,11 @@ const G4LA = new Gala;
 	// проверяем включена ли кукла в настройках
 	if (MAIN_SETTINGS['dollchanScript_enable']) {
 		
-		// загружаем настройки куклы, если настроек нет, значит требуется первичная инициализация
-		if (localStorage.getItem('DESU_Config') === null) {
-		
-			const DESU_Config = {};
-		
-			// создаем наши параметры по умолчанию (сюда можно дописывать любой параметр из возможных, кукла их подхватывает)
-			const deParams = {
-				replyWinDrag : 1,
-				replyWinX    : 'right: 0',
-				replyWinY    : 'top: 0',
-				textaWidth   : 500,
-				textaHeight  : 240,
-				updThrDelay  : 20,
-				linksOut     : 300,
-				postSameImg  : 0,
-				removeEXIF   : 0,
-				spacedQuote  : 0,
-				updDollchan  : 0,
-				addMP3       : 0
-			}
-			// подгон плавающей формы по ширине (ширина текстового поля + примерный размер отступов по краям)
-			if (innerWidth <= deParams.textaWidth + 40) {
-				deParams.textaWidth = innerWidth - 40;
-			} else
-				deParams.replyWinX = 'left: '+ Math.floor((innerWidth - deParams.textaWidth) / 2 * 100) / 100 +'px';
-			// подгон плавающей формы по высоте (высота текстового поля + примерно еще столько же занимают прочие поля вверху и внизу)
-			if (innerHeight <= deParams.textaHeight * 2) {
-				deParams.textaHeight = 100;
-			} else
-				deParams.replyWinY = 'top: '+ Math.floor((innerHeight - deParams.textaHeight) / 2 * 100) / 100 +'px';
-			// настройки куклы привязаны к хосту
-			DESU_Config[location.host] = deParams;
-			// записываем наш конфиг в локальное хранилище
-			localStorage.setItem('DESU_Config', JSON.stringify(DESU_Config));
-		}
-		else if (localStorage.getItem('DESU_Config').includes('updScript')) {
-			const DESU_Config = JSON.parse(localStorage.getItem('DESU_Config'));
-			delete DESU_Config[location.host]['updScript'];
-			DESU_Config[location.host]['updDollchan'] = 0;
-			localStorage.setItem('DESU_Config', JSON.stringify(DESU_Config));
-		}
 		// собираем куклоскрипт  ~  добавляем на страницу
 		document.head.appendChild( _z.setup('script', {
 			type : 'text/javascript',
 			src  : _VER_.boardscript }, {
-			load : function(e) {
+			load : (e) => {
 		/* Сюда можно поместить то, что необходимо выполнить после загрузки куклы.
 		  @note: следует помнить что кукла работает асинхронными методами и срабатывание этого события не значит что она уже полностью отработала,
 		         однако все обработчики (напр. $DOMReady) которые мы здесь укажем, уже гарантированно будут добавлены и запущены после кукловых.
@@ -317,33 +276,6 @@ const G4LA = new Gala;
 				$DOMReady(() => {
 					// регестрируем функции в API куклоскрипта
 					window.postMessage('de-request-api-message', '*');
-					
-					var dbTHMB  = {},
-						deFiles = document.getElementsByClassName('de-file'),
-						deWHead = document.querySelector('.de-win-head');
-					
-					if (deWHead) {
-						deWHead.prepend( passcode_up, dbpic_vi );
-						
-						EXT_STYLE.append(
-							'.modal-btn[for="modal-1"] { left: 20px; position: absolute; }'+
-							'.modal-btn[for="modal-2"] { left: 0; position: absolute; }' );
-							
-						de_rpiChange = function(k, src, title, rate) {
-							if (deFiles.length > 0) {
-								if (!dbTHMB[k]) {
-									dbTHMB[k] = document.createElement('div');
-								}
-								if (src) {
-									dbTHMB[k].style['background-image'] = 'url('+ src +')';
-									dbTHMB[k].title = title;
-									dbTHMB[k].className = 'de-rpiStub '+ PONY_RATE[rate];
-									deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
-								} else
-									dbTHMB[k].remove();
-							}
-						}
-					}
 				});
 			}
 		}));
@@ -671,16 +603,10 @@ const G4LA = new Gala;
 								setCookie('name', postform.elements['name'].value, 2e4, '.'+ location.host);
 							}
 							// check captcha needed
-							isCaptchaNeeded(() => {
-								postform.elements['go'].disabled = recapt2.hidden = false;
-							}, () => {
-								postform.elements['go'].disabled = recapt2.hidden = true;
-								renderCaptcha(
-									recapt2, function(pass) {
-										postform.elements['go'].disabled = !pass;
-										postform.elements['g-recaptcha-response'].value = pass || '';
-									});
-							});
+							isCaptchaNeeded(
+								captchaAsk.bind(null, postform.elements['go'], false),
+								captchaAsk.bind(null, postform.elements['go'], true)
+							);
 							break;
 						case 'filechange':
 							var dePostproc = (file, k, j) => {
@@ -718,6 +644,33 @@ const G4LA = new Gala;
 				};
 				// список доступных API функций: https://github.com/SthephanShinkufag/Dollchan-Extension-Tools/wiki/dollchan-api#Список-api
 				e.ports[0].postMessage({ name: 'registerapi', data: ['submitform', 'newpost', 'filechange'] });
+				
+				var dbTHMB  = {},
+					deFiles = document.getElementsByClassName('de-file'),
+					deWHead = document.querySelector('.de-win-head');
+				
+				if (deWHead) {
+					deWHead.prepend( passcode_up, dbpic_vi );
+					
+					EXT_STYLE.append(
+						'.modal-btn[for="modal-1"] { left: 20px; position: absolute; }'+
+						'.modal-btn[for="modal-2"] { left: 0; position: absolute; }' );
+						
+					de_rpiChange = function(k, src, title, rate) {
+						if (deFiles.length > 0) {
+							if (!dbTHMB[k]) {
+								dbTHMB[k] = document.createElement('div');
+							}
+							if (src) {
+								dbTHMB[k].style['background-image'] = 'url('+ src +')';
+								dbTHMB[k].title = title;
+								dbTHMB[k].className = 'de-rpiStub '+ PONY_RATE[rate];
+								deFiles[k - 1].parentNode.insertBefore(dbTHMB[k], deFiles[k - 1]);
+							} else
+								dbTHMB[k].remove();
+						}
+					}
+				}
 			}
 		}
 	});
@@ -980,19 +933,6 @@ const G4LA = new Gala;
 					}
 				);
 			};
-			window.submitPostform = function() {
-				// очищаем перед отправкой поля с файлами
-				if (1 != postform.elements['dollchan_send'].value) {
-					for (var n = 1, length = MAX_FILE_COUNT.get(postform.elements['board'].value); n <= length; n++) {
-						if (postform.elements['md5-'+ n].value) {
-							postform.elements['upload-image-'+ n].value = '';
-						}
-					}
-				};
-				postform.elements['fake_go'].dispatchEvent(
-					new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
-				);
-			}
 			
 			// grab free file slots
 			var fileSlots = postform.getElementsByClassName('file-area-empty');
@@ -1115,18 +1055,10 @@ const G4LA = new Gala;
 			var dbNEXT = document.querySelector('.modal__next');
 				dbNEXT.onclick = function() { dbPAGE.value = Math.min(dbPAGE.pagesCount, dbPAGE.valueAsNumber + 1); updatesq(); };
 			
-			recapt2 = document.getElementById('recapt-2');
-			
-			isCaptchaNeeded(() => {
-				postform.elements['go'].disabled = false;
-			}, () => {
-				postform.elements['go'].disabled = true;
-				renderCaptcha(
-					recapt2, function(pass) {
-						postform.elements['go'].disabled = !pass;
-						postform.elements['g-recaptcha-response'].value = pass || '';
-					});
-			});
+			isCaptchaNeeded(
+				captchaAsk.bind(null, postform.elements['go'], false),
+				captchaAsk.bind(null, postform.elements['go'], true)
+			);
 		}
 		// animation listener events
 		_z.documentListener.add('AnimationStart', function (event) {
@@ -1781,18 +1713,35 @@ function hashString(str) {
 	}
 	return hash >>> 0;
 }
-function renderCaptcha(place, reCallback) {
-	if (typeof window.grecaptcha === 'undefined') {
-		setTimeout(() => renderCaptcha(place, reCallback), 2000);
-	} else
-		grecaptcha.render(place, {
-			'sitekey' : '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
-			'expired-callback': reCallback,
-			'theme'   : 'light',
-			'callback': reCallback
-		});
+function captchaAsk(go, ask) {
+	go[ (ask ? 'set' : 'remove') +'Attribute']('captcha-ask', '');
+	go.value = ask ? 'Капча' : 'Отправить';
 }
-
+function submitPostform() {
+	if (this.hasAttribute('captcha-ask')) {
+		alertify.alert('<div id="catcha-widget-'+ this.form.id +'" style="text-align: center;"></div>');
+		return grecaptcha.render('catcha-widget-'+ this.form.id, {
+			'sitekey': '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
+			'theme': 'light',
+			'expired-callback': captchaAsk.bind(null, this, true),
+			'callback': function(token) {
+				captchaAsk(this, false);
+				this.form.elements['g-recaptcha-response'].value = token;
+			}.bind(this)
+		});
+	}
+	// очищаем перед отправкой поля с файлами
+	if (1 != this.form.elements['dollchan_send'].value) {
+		for (let n = 1, length = MAX_FILE_COUNT.get(this.form.elements['board'].value); n <= length; n++) {
+			if (this.form.elements['md5-'+ n].value) {
+				this.form.elements['upload-image-'+ n].value = '';
+			}
+		}
+	};
+	this.form.elements['fake_go'].dispatchEvent(
+		new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
+	);
+}
 // аналог jQuery.get()
 function $GET(URL, Fn) {
 	var xmlHttp = new XMLHttpRequest;

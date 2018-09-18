@@ -7,7 +7,7 @@ const possibles = [
 const program = require('commander');
 
 program
-	.version('1.1.2')
+	.version('1.1.3')
 	.option('-M, --min', 'enable code minify.')
 	.option('-C, --compatible', 'enable ES6->ES5 code transformation.')
 	.option('-U, --userscript', 'build UserScript.')
@@ -130,7 +130,7 @@ for (let name of program.args) {
 		});
 	} else {
 		
-		__buildModules(name).then(code => {
+		__buildModules(name, true).then(code => {
 			
 			fileSystem.writeFile(output, code, err => {
 			// => [Error: EISDIR: illegal operation on a directory, open <directory>]
@@ -143,21 +143,27 @@ for (let name of program.args) {
 	}
 }
 
-function __buildModules(name) {
+function __buildModules(name, top) {
 	
 	return new Promise((resolve, reject) => {
 		
 		let { code, ast } = babel.transformFileSync(name +'.js', options);
-			
+		
 		let depends = 0 in ast.comments ? ast.comments[0].value : '';
 		let head = 1 in ast.comments ? ast.comments[1].value : 'start '+ name.replace('modules/','') +' block code ===>';
 		
 		if (depends.substr(0, 7) === '@import') {
-			code = options.compact ? `\n/* ${head.replace(/\t/g,' ')} */\n`+__pieceOf(code) +'\n': code.replace('//'+depends,'');
+			if (top) {
+				head = `/*${head}*/\n\n`;
+				code = options.compact ? '\n' +__pieceOf(code) +'\n' : code.replace(`//${depends}\n`,'').replace(head,'');
+			} else {
+				code = options.compact ? `\n/* ${head.replace(/\t/g,' ')} */\n` +__pieceOf(code) +'\n': code.replace(`//${depends}\n`,'');
+				head = '';
+			}
 			depends = depends.substr(7).trim().split(/\s*,\s*/);
 			
 			Promise.all(depends.map(js => __buildModules('modules/'+ js))).then(results => {
-				resolve(results.join('\n') + code +'/* <==== end === */\n');
+				resolve(head + results.join('\n') + code +'/* <==== end === */\n');
 			});
 		} else {
 			resolve((options.compact ? `\n/* ${depends.replace(/\t/g, ' ')} */\n`+__pieceOf(code) +'\n' : code) +'/* <==== end === */\n');

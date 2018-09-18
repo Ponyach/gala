@@ -1,5 +1,12 @@
 //@import PonyabaParser
 
+/* 
+	«Предпросмотр для отправляемых сообщений»
+	: Code Repositiry https://github.com/Ponyach/gala
+	: version 2.0.0
+	© magicode
+*/
+
 const Mepr = (m_count => {
 	
 	const _VERSION_ = '2.0';
