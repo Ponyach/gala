@@ -138,9 +138,9 @@ const N0TS = ((n0ts, $tim) => {
 				}
 			}
 			
-			$GET('/info.php?allboards', _watch);
+			$GET('/info.php?allboard', _watch);
 			
-			$tim = setInterval ($GET.bind(null, '/info.php?allboards', _watch), 40000);
+			$tim = setInterval ($GET.bind(null, '/info.php?allboard', _watch), 40000);
 			
 			/*$GET('/messages.php?m=list', function() {
 				document.getElementById("messages").innerHTML = this.responseText;
