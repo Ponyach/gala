@@ -138,9 +138,9 @@ const N0TS = ((n0ts, $tim) => {
 				}
 			}
 			
-			$GET('/info.php?x=1', _watch);
+			$GET('/info.php?allboards', _watch);
 			
-			$tim = setInterval ($GET.bind(null, '/info.php?x=1', _watch), 40000);
+			$tim = setInterval ($GET.bind(null, '/info.php?allboards', _watch), 40000);
 			
 			/*$GET('/messages.php?m=list', function() {
 				document.getElementById("messages").innerHTML = this.responseText;
@@ -1175,7 +1175,7 @@ const G4LA = new Gala;
 			reject('Уже добавлен точно такой же файл');
 		} else {
 			// always send sha512 of file for passcode records
-			$GET('/chkmd5.php?x='+ md5, ({ target: {response} }) => {
+			$GET('/info.php?file_md5='+ md5, ({ target: {response} }) => {
 				postform.elements['md5-'+ n].value = !response ? '' : md5;
 			});
 			// field will be sent only if user have cookie with real passcode
@@ -1717,28 +1717,28 @@ function captchaAsk(go, ask) {
 	go[ (ask ? 'set' : 'remove') +'Attribute']('captcha-ask', '');
 	go.value = ask ? 'Капча' : 'Отправить';
 }
-function submitPostform() {
-	if (this.hasAttribute('captcha-ask')) {
-		alertify.alert('<div id="catcha-widget-'+ this.form.id +'" style="text-align: center;"></div>');
-		return grecaptcha.render('catcha-widget-'+ this.form.id, {
+function submitPostform(e) {
+	if (e.target.hasAttribute('captcha-ask')) {
+		alertify.alert('<div id="catcha-widget-'+ e.target.form.id +'" style="text-align: center;"></div>');
+		return grecaptcha.render('catcha-widget-'+ e.target.form.id, {
 			'sitekey': '6Lfp8AYUAAAAABmsvywGiiNyAIkpymMeZPvLUj30',
 			'theme': 'light',
-			'expired-callback': captchaAsk.bind(null, this, true),
+			'expired-callback': captchaAsk.bind(null, e.target, true),
 			'callback': function(token) {
-				captchaAsk(this, false);
-				this.form.elements['g-recaptcha-response'].value = token;
-			}.bind(this)
+				captchaAsk(e.target, false);
+				e.target.form.elements['g-recaptcha-response'].value = token;
+			}
 		});
 	}
 	// очищаем перед отправкой поля с файлами
-	if (1 != this.form.elements['dollchan_send'].value) {
-		for (let n = 1, length = MAX_FILE_COUNT.get(this.form.elements['board'].value); n <= length; n++) {
-			if (this.form.elements['md5-'+ n].value) {
-				this.form.elements['upload-image-'+ n].value = '';
+	if (1 != e.target.form.elements['dollchan_send'].value) {
+		for (let n = 1, length = MAX_FILE_COUNT.get(e.target.form.elements['board'].value); n <= length; n++) {
+			if (e.target.form.elements['md5-'+ n].value) {
+				e.target.form.elements['upload-image-'+ n].value = '';
 			}
 		}
 	};
-	this.form.elements['fake_go'].dispatchEvent(
+	e.target.form.elements['fake_go'].dispatchEvent(
 		new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
 	);
 }

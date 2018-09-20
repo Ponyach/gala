@@ -736,7 +736,7 @@ const Gala = (() => {
 			set: (md5) => {
 				//always send sha512 of file for passcode records
 				//field will be sent only if user have cookie with real passcode
-				$GET('/chkmd5.php?x='+ (hash = md5), ({ target: {response} }) => {
+				$GET('/info.php?file_md5='+ (hash = md5), ({ target: {response} }) => {
 					fnode.exist = !!response;
 				});
 			}
